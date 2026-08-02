@@ -42,7 +42,7 @@ SHA-256 hashes are retained in
 
 - Python 3.10 or later;
 - a local checkout of BRANCHSNV v0.1.0a1 or a source-identical release;
-- internet access for downloading the public SNPPar inputs used by Experiment 03;
+- internet access for downloading the public [SNPPar](https://github.com/d-j-e/SNPPar) inputs used by Experiment 03;
 - GNU `time` for peak-memory measurement in Experiment 04;
 - Matplotlib only for regenerating the scalability figures.
 
