@@ -80,7 +80,7 @@ README.
 | Material | Handling |
 |---|---|
 | BRANCHSNV production source | Read-only local checkout; source-file SHA-256 hashes are recorded in the result metadata |
-| SNPPar comparison inputs | Downloaded from `d-j-e/SNPPar_test`; every file must match a prespecified SHA-256 checksum |
+| SNPPar comparison inputs | Downloaded from `[d-j-e/SNPPar_test](https://github.com/d-j-e/SNPPar_test)`; every file must match a prespecified SHA-256 checksum |
 | Scalability inputs | Generated deterministically; the committed manifest records every expected file hash |
 | AK3 alignment and tree | Not redistributed in this snapshot; expected SHA-256 hashes are recorded and the exact files remain to be placed in a permanent archive |
 | Canonical outputs | Committed under `results/` with aggregate SHA-256 checksums |
