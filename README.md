@@ -111,6 +111,33 @@ permanent DOI, and the exact checksum-matched AK3 alignment and tree should be p
 in an appropriate public archive. Those identifiers should then be added to the
 manuscript Data Summary and `CITATION.cff`.
 
+## Funding and affiliation
+
+<p align="center">
+  <a href="https://www.genomics-aotearoa.org.nz/">
+    <img
+      src="assets/genomics-aotearoa-logo.png"
+      alt="Genomics Aotearoa"
+      height="80">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.phfscience.nz/">
+    <img
+      src="assets/phf-science-logo.png"
+      alt="PHF Science"
+      height="80">
+  </a>
+</p>
+
+<p align="center">
+  Development of BRANCHSNV was supported by
+  <strong>Genomics Aotearoa</strong> and undertaken at
+  <strong>Public Health and Forensic Science (PHF Science),
+  Aotearoa New Zealand</strong>.
+</p>
+
+BRANCHSNV was developed and is maintained by [Rhys White](https://github.com/RhysWhite).
+
 ## Citation and licence
 
 Citation metadata are provided in [`CITATION.cff`](CITATION.cff). The validation code
