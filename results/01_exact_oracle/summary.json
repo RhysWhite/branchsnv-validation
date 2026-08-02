@@ -1,0 +1,22 @@
+{
+  "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+  "branchsnv_version": "0.1.0a1",
+  "canonical_alphabet": "ACGT",
+  "description": "Independent exhaustive comparison of BRANCHSNV equal-cost unordered-state parsimony reconstruction against brute-force enumeration.",
+  "exact_agreement": true,
+  "experiment": "01_exact_oracle",
+  "full_alphabet": "ACGTRYSWKMBDHVN?-",
+  "generated_per_non_small_case": 5000,
+  "schema_version": 1,
+  "seed": "branchsnv-publication-validation-20260731",
+  "status_counts": {
+    "change_state_ambiguous": 814,
+    "no_change": 85558,
+    "placement_ambiguous": 38904,
+    "unambiguous_change": 3605
+  },
+  "topology_cases": 7,
+  "total_comparisons": 128881,
+  "total_mismatches": 0,
+  "validation_script_sha256": "efc588dca94048394f4d5bfa7d223110b5d753f6e9112cdb89f6f34b9f324472"
+}

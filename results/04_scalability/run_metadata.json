@@ -1,0 +1,59 @@
+{
+  "branchsnv_source_files_sha256": {
+    "src/branchsnv/__init__.py": "c27dcb2f2780c531d78ebf3c5fdba9e5ab7168d272fff5709e740a8e5dae2376",
+    "src/branchsnv/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/branchsnv/analysis.py": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+    "src/branchsnv/cli.py": "35a86be1cc6dc8a992d85d641bba7aa7e6b61c22b5a50593b2c8ec46531a4039",
+    "src/branchsnv/errors.py": "d6643a54f6e316e6fa8a347903e57c427ef4faf594135209802dda230b362442",
+    "src/branchsnv/models.py": "50532de239bd5c1805ac8b068d37407174c6d45e0a0e29d63af9476ec1502e50",
+    "src/branchsnv/newick.py": "542c7424820cd49b6d7cac8d0ecbd6a576a4ed4ad08a58c752fba4a287f2a5e9",
+    "src/branchsnv/nexus.py": "16d2b30d8e206f60b6e0557fd219513d374c993182dd8816a204bdc6d383db90",
+    "src/branchsnv/parsimony.py": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+    "src/branchsnv/provenance.py": "a66d95fd1699e1c5e728689f5c3ebf109c4a474f96dffa4cce82a3163d32f8a7",
+    "src/branchsnv/util.py": "77731f7c6bc63c1a5a6df11462c287315596afc6330c6a42e0ec00a6f9bde611",
+    "src/branchsnv/validation.py": "a2b0cceda09f33fa57146886c19c7f4b88df8a5e586313135389ce7c6aa85d28",
+    "src/branchsnv/writing.py": "e6925c0286e3db252b731ece519488c67d2572c68f33037ef2c919c7499dcd11"
+  },
+  "branchsnv_version": "0.1.0a1",
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "design": {
+    "focal_clade_fraction": "approximately one quarter of taxa",
+    "patterns": "deterministic 20-site cycle covering focal, recurrent, mixed, ambiguous, missing, and gap-containing states",
+    "site_counts": [
+      1000,
+      5000,
+      10000,
+      25000,
+      50000,
+      100000
+    ],
+    "site_scaling_ntax": 250,
+    "taxon_counts": [
+      50,
+      100,
+      250,
+      500,
+      1000,
+      2000
+    ],
+    "taxon_scaling_nchar": 10000
+  },
+  "environment": {
+    "PYTHONHASHSEED": "0"
+  },
+  "experiment": "04_scalability",
+  "gnu_time": "time (GNU Time) UNKNOWN",
+  "input_manifest_sha256": "ba8326e312321a46e4244703336662756b58ded8dc5244a8c6f82fffde026a67",
+  "logical_cpus_visible": 5,
+  "machine": "x86_64",
+  "memory_total_bytes_visible": 6367956992,
+  "notes": [
+    "Each invocation was a fresh Python process and included parsing, validation, analysis, and output generation.",
+    "Scaling configurations used mode=both; all three modes were compared on t500_s10000.",
+    "BRANCHSNV is single-process; visible logical CPU count describes the environment, not parallel execution."
+  ],
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "python": "3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]",
+  "repetitions": 3,
+  "run_order_seed": 20260731
+}

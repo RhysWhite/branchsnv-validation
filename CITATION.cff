@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the associated BRANCHSNV article and this archived validation release."
+title: "BRANCHSNV publication validation"
+type: dataset
+authors:
+  - family-names: "White"
+    given-names: "Rhys T."
+    orcid: "https://orcid.org/0000-0001-6620-758X"
+version: 0.1.0a1
+license: MIT
+repository-code: "https://github.com/RhysWhite/branchsnv-validation"
+abstract: >-
+  Reproducible oracle, deliberate-fault, empirical-dataset and scalability
+  experiments supporting the validation of BRANCHSNV.
+keywords:
+  - phylogenetics
+  - bacterial genomics
+  - software validation
+  - single-nucleotide variant
+  - reproducible research

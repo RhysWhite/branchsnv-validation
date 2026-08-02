@@ -1,0 +1,151 @@
+{
+  "ak3_comparison": {
+    "mrsa_360": {
+      "dataset_id": "ak3_mrsa_360",
+      "exact_position_and_direction": 23,
+      "published_only": 0,
+      "published_snv_events": 23,
+      "reversed_direction": 0,
+      "shared_positions": 23,
+      "working_output_only": 0,
+      "working_output_snv_events": 23
+    },
+    "mrsa_published_indel_outside_scope": {
+      "change": "ATTGTTGTTTTGC>A",
+      "position": 1465812,
+      "type": "deletion"
+    },
+    "primary_mrsa_reproduction_passed": true,
+    "publication": "White et al. Microbial Genomics 2025;11:001452; DOI 10.1099/mgen.0.001452",
+    "raw_input_rerun": {
+      "alignment_sha256": "40c49b026c52e04530ecbbee7044567ac3355eccf7adda42a7d96bf977df9014",
+      "performed": false,
+      "reason": "Exact checksum-matched AK3 alignment and tree were not supplied.",
+      "tree_sha256": "18322b2808baf621d09dd5292027205e68a0f207d7be44f043bd044d0d314bd0"
+    },
+    "sapi_385": {
+      "dataset_id": "ak3_sapi_385",
+      "exact_position_and_direction": 0,
+      "published_only": 0,
+      "published_snv_events": 14,
+      "reversed_direction": 14,
+      "shared_positions": 14,
+      "working_output_only": 1,
+      "working_output_snv_events": 15
+    },
+    "sapi_published_indel_outside_scope": {
+      "change": "G>GATTCAT",
+      "position": 1051023,
+      "type": "insertion"
+    },
+    "sapi_version_difference_unresolved": true
+  },
+  "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+  "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+  "branchsnv_version": "0.1.0a1",
+  "description": "All-edge comparison with published SNPPar bacterial datasets and comparison of committed AK3 working-data outputs with published branch tables.",
+  "experiment": "03_published_datasets",
+  "overall_pass": true,
+  "public_comparison": {
+    "datasets": [
+      {
+        "branchsnv_change_state_ambiguous_edge_sites": 0,
+        "branchsnv_only_unambiguous": 0,
+        "branchsnv_placement_ambiguous_edge_sites": 34,
+        "branchsnv_unambiguous_events": 365,
+        "chromosome": "CP014805",
+        "converted_nexus_sha256": "ca528fe466bff112e089ee9d86bd887d880e0ba6341c4a7f0562bf9f266017c7",
+        "dataset_id": "elizabethkingia",
+        "direction_differences": 0,
+        "exact_edge_comparisons": 134,
+        "exact_unambiguous_matches": 365,
+        "method_difference_edge_comparisons": 4,
+        "non_root_edges": 138,
+        "organism": "Elizabethkingia anophelis",
+        "snppar_events": 382,
+        "snppar_only_events": 17,
+        "snppar_only_supported_as_branchsnv_placement_ambiguous": 17,
+        "taxa": 70,
+        "variable_sites": 374
+      },
+      {
+        "branchsnv_change_state_ambiguous_edge_sites": 0,
+        "branchsnv_only_unambiguous": 0,
+        "branchsnv_placement_ambiguous_edge_sites": 55,
+        "branchsnv_unambiguous_events": 307,
+        "chromosome": "chromosome 1",
+        "converted_nexus_sha256": "2efd74025ec06a2d8600c7a05904ff024c874b037c8354fbc3e830a97f256bee",
+        "dataset_id": "burkholderia_chr1",
+        "direction_differences": 0,
+        "exact_edge_comparisons": 215,
+        "exact_unambiguous_matches": 307,
+        "method_difference_edge_comparisons": 11,
+        "non_root_edges": 226,
+        "organism": "Burkholderia dolosa",
+        "snppar_events": 333,
+        "snppar_only_events": 26,
+        "snppar_only_supported_as_branchsnv_placement_ambiguous": 26,
+        "taxa": 114,
+        "variable_sites": 299
+      },
+      {
+        "branchsnv_change_state_ambiguous_edge_sites": 0,
+        "branchsnv_only_unambiguous": 0,
+        "branchsnv_placement_ambiguous_edge_sites": 39,
+        "branchsnv_unambiguous_events": 152,
+        "chromosome": "chromosome 2",
+        "converted_nexus_sha256": "a56ae8a1c71f1e11626477a70707d2fb61f3969e7dab4c342f99748ffaa24f21",
+        "dataset_id": "burkholderia_chr2",
+        "direction_differences": 0,
+        "exact_edge_comparisons": 214,
+        "exact_unambiguous_matches": 152,
+        "method_difference_edge_comparisons": 12,
+        "non_root_edges": 226,
+        "organism": "Burkholderia dolosa",
+        "snppar_events": 167,
+        "snppar_only_events": 15,
+        "snppar_only_supported_as_branchsnv_placement_ambiguous": 15,
+        "taxa": 114,
+        "variable_sites": 153
+      },
+      {
+        "branchsnv_change_state_ambiguous_edge_sites": 0,
+        "branchsnv_only_unambiguous": 0,
+        "branchsnv_placement_ambiguous_edge_sites": 30,
+        "branchsnv_unambiguous_events": 53,
+        "chromosome": "chromosome 3",
+        "converted_nexus_sha256": "9e595006f08981513c10c6e419724e888441148ff8f0c17481119685e012d430",
+        "dataset_id": "burkholderia_chr3",
+        "direction_differences": 0,
+        "exact_edge_comparisons": 220,
+        "exact_unambiguous_matches": 53,
+        "method_difference_edge_comparisons": 6,
+        "non_root_edges": 226,
+        "organism": "Burkholderia dolosa",
+        "snppar_events": 61,
+        "snppar_only_events": 8,
+        "snppar_only_supported_as_branchsnv_placement_ambiguous": 8,
+        "taxa": 114,
+        "variable_sites": 59
+      }
+    ],
+    "passed": true,
+    "totals": {
+      "branch_matrix_comparisons": 816,
+      "branchsnv_only_unambiguous": 0,
+      "branchsnv_unambiguous_events": 877,
+      "datasets": 4,
+      "direction_differences": 0,
+      "exact_edge_comparisons": 783,
+      "exact_unambiguous_matches": 877,
+      "method_difference_edge_comparisons": 33,
+      "organisms": 2,
+      "snppar_events": 943,
+      "snppar_only_events": 66,
+      "snppar_only_supported_as_branchsnv_placement_ambiguous": 66
+    }
+  },
+  "publication_archive_blocker": "The exact checksum-matched AK3 alignment and tree still require public archiving.",
+  "schema_version": 1,
+  "validation_script_sha256": "3c638a8afd6fc6e09da1ab9c0f14419b9743886df6075f83210743735a0270a8"
+}

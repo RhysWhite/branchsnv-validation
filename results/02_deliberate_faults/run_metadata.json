@@ -1,0 +1,11 @@
+{
+  "completed_utc": "2026-07-31T03:44:17.871148+00:00",
+  "elapsed_seconds": 10.414198,
+  "experiment": "02_deliberate_faults",
+  "machine": "x86_64",
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "processor": "",
+  "python_implementation": "CPython",
+  "python_version": "3.13.5",
+  "started_utc": "2026-07-31T03:44:07.455968+00:00"
+}
