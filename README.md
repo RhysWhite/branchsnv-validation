@@ -1,3 +1,11 @@
+<p align="center">
+  <img
+    src="assets/BRANCHSNV_logo.png"
+    alt="BRANCHSNV — Exact branch-level SNV interrogation from a rooted tree and alignment"
+    width="1000"
+  >
+</p>
+
 # BRANCHSNV publication validation
 
 Reproducible experiments supporting the evaluation of
