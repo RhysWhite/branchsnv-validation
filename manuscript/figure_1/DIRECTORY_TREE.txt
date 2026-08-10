@@ -1,0 +1,14 @@
+branchsnv-validation/
+└── manuscript/
+    └── figure_1/
+        ├── README.md
+        ├── CODE_WALKTHROUGH.md
+        ├── DIRECTORY_TREE.txt
+        ├── requirements.txt
+        ├── make_figure_1.py
+        ├── make_figure_1_exact.py
+        ├── Figure_1_CellPress_final.pdf
+        ├── Figure_1_CellPress_final_editable.svg
+        ├── Figure_1_CellPress_final_preview_600dpi.png
+        ├── Figure_1_CellPress_final_1000dpi.tiff
+        └── Figure_1_CellPress_final_1000dpi_RGB.tiff
