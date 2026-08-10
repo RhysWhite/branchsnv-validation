@@ -1,16 +1,10 @@
 #!/usr/bin/env python3
-"""Compare BRANCHSNV with published bacterial branch-mutation results.
+"""Compare BRANCHSNV with published SNPPar bacterial branch-mutation results.
 
-This experiment has two components:
-
-1. Re-analyse the public SNPPar Elizabethkingia anophelis and Burkholderia
-   dolosa example datasets using BRANCHSNV, map every non-root edge by its exact
-   descendant-tip set, and compare every branch-level substitution reported by
-   SNPPar with BRANCHSNV's all-optima equal-cost parsimony classification.
-2. Compare the committed BRANCHSNV AK3 working-data outputs with Tables 2 and 3
-   of White et al. (Microbial Genomics 2025;11:001452). The exact AK3 alignment
-   and tree can optionally be supplied to repeat the checksum-gated raw-data
-   analysis before the table comparison.
+The public Elizabethkingia anophelis and Burkholderia dolosa example datasets
+are re-analysed using BRANCHSNV. Every non-root edge is mapped by its exact
+descendant-tip set, and every branch-level substitution reported by SNPPar is
+compared with BRANCHSNV's all-optima equal-cost parsimony classification.
 
 The production BRANCHSNV source is imported read-only and is never modified.
 """
@@ -23,7 +17,6 @@ import hashlib
 import json
 import os
 import platform
-import subprocess
 import sys
 import tempfile
 import time
@@ -156,27 +149,6 @@ DATASETS = (
 )
 
 
-AK3_MRSA_PUBLISHED = (
-    (99286, "T>C"), (237606, "G>T"), (268432, "A>G"), (297655, "C>A"),
-    (541577, "C>T"), (643271, "A>G"), (728512, "T>C"), (1032205, "C>A"),
-    (1067855, "C>T"), (1167367, "A>C"), (1193138, "A>T"), (1217440, "A>G"),
-    (1435784, "G>C"), (1680288, "T>G"), (1751961, "T>C"), (1800235, "A>T"),
-    (1837199, "G>A"), (2122507, "C>T"), (2144733, "C>T"), (2266325, "G>A"),
-    (2310728, "C>T"), (2537681, "C>T"), (2777570, "C>T"),
-)
-AK3_MRSA_PUBLISHED_INDEL = (1465812, "ATTGTTGTTTTGC>A", "deletion")
-AK3_SAPI_PUBLISHED = (
-    (408, "G>A"), (148318, "A>C"), (470837, "C>A"), (738146, "A>G"),
-    (849992, "T>C"), (1248573, "T>C"), (1413986, "A>G"), (1542411, "C>T"),
-    (1557108, "C>A"), (1682364, "C>T"), (2201553, "A>G"), (2556045, "T>G"),
-    (2577011, "C>T"), (2722031, "G>A"),
-)
-AK3_SAPI_PUBLISHED_INDEL = (1051023, "G>GATTCAT", "insertion")
-AK3_ALIGNMENT_NAME = "396_MRSA_AK3(1).nex"
-AK3_TREE_NAME = "Cluster_1_396genomes_refsa230905_barcode06_ML_Flitered_BS.nwk"
-AK3_ALIGNMENT_SHA256 = "40c49b026c52e04530ecbbee7044567ac3355eccf7adda42a7d96bf977df9014"
-AK3_TREE_SHA256 = "18322b2808baf621d09dd5292027205e68a0f207d7be44f043bd044d0d314bd0"
-
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
@@ -244,115 +216,12 @@ def read_events(path: Path) -> dict[str, set[tuple[int, str]]]:
     return events
 
 
-def read_result_events(path: Path) -> dict[int, str]:
-    values: dict[int, str] = {}
-    with path.open("r", encoding="utf-8-sig", newline="") as handle:
-        for row in csv.DictReader(handle, delimiter="\t"):
-            position = int(row["position"])
-            if position in values:
-                raise ValueError(f"Duplicate result position in {path}: {position}")
-            values[position] = row["change"]
-    return values
-
-
-def compare_ak3_table(
-    dataset_id: str,
-    published: tuple[tuple[int, str], ...],
-    observed_path: Path,
-) -> tuple[dict[str, Any], list[tuple[Any, ...]]]:
-    observed = read_result_events(observed_path)
-    published_map = dict(published)
-    all_positions = sorted(set(observed) | set(published_map))
-    rows: list[tuple[Any, ...]] = []
-    exact = 0
-    reversed_direction = 0
-    published_only = 0
-    observed_only = 0
-    for position in all_positions:
-        pub = published_map.get(position, "")
-        obs = observed.get(position, "")
-        if pub and obs:
-            if pub == obs:
-                status = "exact"
-                exact += 1
-            elif ">" in pub and obs == ">".join(reversed(pub.split(">"))):
-                status = "reversed_direction"
-                reversed_direction += 1
-            else:
-                status = "direction_or_state_difference"
-        elif pub:
-            status = "published_only"
-            published_only += 1
-        else:
-            status = "working_output_only"
-            observed_only += 1
-        rows.append((dataset_id, position, pub, obs, status))
-    summary = {
-        "dataset_id": dataset_id,
-        "published_snv_events": len(published_map),
-        "working_output_snv_events": len(observed),
-        "shared_positions": len(set(observed) & set(published_map)),
-        "exact_position_and_direction": exact,
-        "reversed_direction": reversed_direction,
-        "published_only": published_only,
-        "working_output_only": observed_only,
-    }
-    return summary, rows
-
-
-def maybe_rerun_ak3(branchsnv_root: Path, ak3_input_dir: Path | None) -> dict[str, Any]:
-    status: dict[str, Any] = {
-        "performed": False,
-        "alignment_sha256": AK3_ALIGNMENT_SHA256,
-        "tree_sha256": AK3_TREE_SHA256,
-    }
-    if ak3_input_dir is None:
-        status["reason"] = "Exact checksum-matched AK3 alignment and tree were not supplied."
-        return status
-    alignment = ak3_input_dir / AK3_ALIGNMENT_NAME
-    tree = ak3_input_dir / AK3_TREE_NAME
-    if not alignment.is_file() or not tree.is_file():
-        raise FileNotFoundError(
-            f"AK3 input directory must contain {AK3_ALIGNMENT_NAME!r} and {AK3_TREE_NAME!r}"
-        )
-    observed_alignment_hash = sha256_file(alignment)
-    observed_tree_hash = sha256_file(tree)
-    if observed_alignment_hash != AK3_ALIGNMENT_SHA256:
-        raise ValueError(f"AK3 alignment checksum mismatch: {observed_alignment_hash}")
-    if observed_tree_hash != AK3_TREE_SHA256:
-        raise ValueError(f"AK3 tree checksum mismatch: {observed_tree_hash}")
-    script = branchsnv_root / "validation" / "ak3" / "run_validation.sh"
-    completed = subprocess.run(
-        ["bash", str(script), str(alignment), str(tree)],
-        cwd=branchsnv_root,
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    status.update(
-        {
-            "performed": True,
-            "returncode": completed.returncode,
-            "stdout": completed.stdout,
-            "stderr": completed.stderr,
-            "passed": completed.returncode == 0,
-        }
-    )
-    if completed.returncode != 0:
-        raise RuntimeError("AK3 checksum-gated validation failed; see run metadata")
-    return status
-
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--branchsnv-root", required=True, type=Path)
     parser.add_argument("--public-input-dir", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
-    parser.add_argument(
-        "--ak3-input-dir",
-        type=Path,
-        help="Optional directory containing the exact checksum-matched AK3 alignment and tree.",
-    )
     return parser.parse_args()
 
 
@@ -659,19 +528,6 @@ def main() -> int:
     write_tsv(output_dir / "event_comparison.tsv", event_fields, event_rows)
     write_tsv(output_dir / "placement_ambiguous_snppar_events.tsv", event_fields, ambiguous_rows)
 
-    ak3_expected = branchsnv_root / "validation" / "ak3" / "expected"
-    mrsa_path = ak3_expected / "mrsa_360_results.tsv"
-    sapi_path = ak3_expected / "sapi_385_results.tsv"
-    if not mrsa_path.is_file() or not sapi_path.is_file():
-        raise FileNotFoundError("BRANCHSNV checkout lacks committed AK3 expected outputs")
-    ak3_mrsa, mrsa_rows = compare_ak3_table("ak3_mrsa_360", AK3_MRSA_PUBLISHED, mrsa_path)
-    ak3_sapi, sapi_rows = compare_ak3_table("ak3_sapi_385", AK3_SAPI_PUBLISHED, sapi_path)
-    write_tsv(
-        output_dir / "ak3_table_comparison.tsv",
-        ["dataset_id", "position", "published_change", "working_output_change", "comparison"],
-        mrsa_rows + sapi_rows,
-    )
-    ak3_rerun = maybe_rerun_ak3(branchsnv_root, args.ak3_input_dir.resolve() if args.ak3_input_dir else None)
 
     public_totals = {
         "datasets": len(dataset_summaries),
@@ -706,20 +562,12 @@ def main() -> int:
         and public_totals["snppar_only_events"]
         == public_totals["snppar_only_supported_as_branchsnv_placement_ambiguous"]
     )
-    ak3_mrsa_pass = (
-        ak3_mrsa["exact_position_and_direction"] == len(AK3_MRSA_PUBLISHED)
-        and ak3_mrsa["working_output_only"] == 0
-        and ak3_mrsa["published_only"] == 0
-    )
 
     elapsed = time.perf_counter() - start
     summary = {
         "schema_version": 1,
         "experiment": "03_published_datasets",
-        "description": (
-            "All-edge comparison with published SNPPar bacterial datasets and comparison of "
-            "committed AK3 working-data outputs with published branch tables."
-        ),
+        "description": "All-edge comparison with published SNPPar bacterial datasets.",
         "branchsnv_version": branchsnv.__version__,
         "branchsnv_analysis_sha256": sha256_file(source_root / "branchsnv" / "analysis.py"),
         "branchsnv_parsimony_sha256": sha256_file(source_root / "branchsnv" / "parsimony.py"),
@@ -729,29 +577,7 @@ def main() -> int:
             "datasets": dataset_summaries,
             "totals": public_totals,
         },
-        "ak3_comparison": {
-            "publication": "White et al. Microbial Genomics 2025;11:001452; DOI 10.1099/mgen.0.001452",
-            "mrsa_360": ak3_mrsa,
-            "mrsa_published_indel_outside_scope": {
-                "position": AK3_MRSA_PUBLISHED_INDEL[0],
-                "change": AK3_MRSA_PUBLISHED_INDEL[1],
-                "type": AK3_MRSA_PUBLISHED_INDEL[2],
-            },
-            "sapi_385": ak3_sapi,
-            "sapi_published_indel_outside_scope": {
-                "position": AK3_SAPI_PUBLISHED_INDEL[0],
-                "change": AK3_SAPI_PUBLISHED_INDEL[1],
-                "type": AK3_SAPI_PUBLISHED_INDEL[2],
-            },
-            "primary_mrsa_reproduction_passed": ak3_mrsa_pass,
-            "sapi_version_difference_unresolved": True,
-            "raw_input_rerun": ak3_rerun,
-        },
-        "overall_pass": public_pass and ak3_mrsa_pass,
-        "publication_archive_blocker": (
-            None if ak3_rerun.get("performed") else
-            "The exact checksum-matched AK3 alignment and tree still require public archiving."
-        ),
+        "overall_pass": public_pass,
     }
     (output_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
@@ -781,10 +607,6 @@ def main() -> int:
     print(f"BRANCHSNV unambiguous events: {public_totals['branchsnv_unambiguous_events']:,}")
     print(f"Exact SNPPar matches: {public_totals['exact_unambiguous_matches']:,}")
     print(f"SNPPar-only, placement-ambiguous events: {public_totals['snppar_only_events']:,}")
-    print(
-        f"AK3 MRSA published SNVs: {ak3_mrsa['exact_position_and_direction']}/"
-        f"{ak3_mrsa['published_snv_events']} exact"
-    )
     print("PASS" if summary["overall_pass"] else "FAIL")
     return 0 if summary["overall_pass"] else 1
 

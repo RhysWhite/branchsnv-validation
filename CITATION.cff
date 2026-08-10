@@ -10,7 +10,8 @@ version: 0.1.0a1
 license: MIT
 repository-code: "https://github.com/RhysWhite/branchsnv-validation"
 abstract: >-
-  Reproducible oracle, deliberate-fault, empirical-dataset and scalability
+  Reproducible exhaustive-oracle, deliberate-fault, SNPPar concordance,
+  published focal-branch, complete-phylogeny empirical and scalability
   experiments supporting the validation of BRANCHSNV.
 keywords:
   - phylogenetics

@@ -1,0 +1,82 @@
+{
+  "branchsnv_version": "0.1.0a1",
+  "datasets": [
+    {
+      "all_fixed_exclusive": true,
+      "all_unambiguous_change": true,
+      "branch_id": "b_1a230667657c1c18b48aa9d9816988da7f07eafef96c49f9e045d333850fb303",
+      "dataset": "ak3",
+      "descendant_count": 360,
+      "doi": "10.1099/mgen.0.001452",
+      "exact_position_direction": 23,
+      "passed": true,
+      "published_snvs": 23,
+      "reported_snvs": 23,
+      "stdout": "Selected b_1a230667657c1c18 (360 descendants); reported 23 of 10481 sites."
+    },
+    {
+      "all_fixed_exclusive": true,
+      "all_unambiguous_change": true,
+      "branch_id": "b_1e8ab945aaeeae178f226f47ad1b8e4f461909060b314752c56a2a5a4e2877a6",
+      "dataset": "st97",
+      "descendant_count": 2,
+      "doi": "10.1099/mgen.0.001273",
+      "exact_position_direction": 10,
+      "passed": true,
+      "published_snvs": 10,
+      "reported_snvs": 10,
+      "stdout": "Selected b_1e8ab945aaeeae17 (2 descendants); reported 10 of 4651 sites."
+    },
+    {
+      "all_fixed_exclusive": true,
+      "all_unambiguous_change": true,
+      "branch_id": "b_a797967895347a3fd1a07cfc0c768b5dcd688926e7d450dfca878ff8d80c74e8",
+      "dataset": "oxa48",
+      "descendant_count": 39,
+      "doi": "10.1016/j.drup.2025.101327",
+      "exact_position_direction": 13,
+      "passed": true,
+      "published_snvs": 13,
+      "reported_snvs": 13,
+      "stdout": "Selected b_a797967895347a3f (39 descendants); reported 13 of 266 sites."
+    }
+  ],
+  "experiment": "05_published_focal_branches",
+  "input_transformations": [
+    {
+      "dataset": "oxa48",
+      "input_sha256": "60940e7fca31849396ed070f79299055a762f4b5192dd18918fb84f300deda9b",
+      "operation": "rename alignment taxon label REF to 18AR0845",
+      "output_sha256": "5f601d36cd30843d56d42744d711ca54cce5169289eb423e1252a40c502cd683"
+    }
+  ],
+  "notes": {
+    "oxa48": "The alignment taxon label REF denotes reference isolate 18AR0845; this experiment performs and records the deterministic REF\u219218AR0845 taxon-label normalization required for exact tree/alignment correspondence.",
+    "st97": "The publication isolate 23MR1425 is represented as REF in the working matrix/tree; the focal descendants are REF and 23MR1427."
+  },
+  "overall_pass": true,
+  "published_non_snv_events_outside_scope": {
+    "ak3": {
+      "change": "ATTGTTGTTTTGC>A",
+      "position": 1465812,
+      "type": "deletion"
+    },
+    "oxa48": {
+      "change": "A>AAACCTGC",
+      "position": 4871038,
+      "type": "insertion"
+    },
+    "st97": {
+      "change": "CA>C",
+      "position": 1249340,
+      "type": "deletion"
+    }
+  },
+  "schema_version": 1,
+  "totals": {
+    "all_fixed_exclusive": true,
+    "all_unambiguous_change": true,
+    "exact_position_direction": 46,
+    "published_snvs": 46
+  }
+}

@@ -1,49 +1,8 @@
 {
-  "ak3_comparison": {
-    "mrsa_360": {
-      "dataset_id": "ak3_mrsa_360",
-      "exact_position_and_direction": 23,
-      "published_only": 0,
-      "published_snv_events": 23,
-      "reversed_direction": 0,
-      "shared_positions": 23,
-      "working_output_only": 0,
-      "working_output_snv_events": 23
-    },
-    "mrsa_published_indel_outside_scope": {
-      "change": "ATTGTTGTTTTGC>A",
-      "position": 1465812,
-      "type": "deletion"
-    },
-    "primary_mrsa_reproduction_passed": true,
-    "publication": "White et al. Microbial Genomics 2025;11:001452; DOI 10.1099/mgen.0.001452",
-    "raw_input_rerun": {
-      "alignment_sha256": "40c49b026c52e04530ecbbee7044567ac3355eccf7adda42a7d96bf977df9014",
-      "performed": false,
-      "reason": "Exact checksum-matched AK3 alignment and tree were not supplied.",
-      "tree_sha256": "18322b2808baf621d09dd5292027205e68a0f207d7be44f043bd044d0d314bd0"
-    },
-    "sapi_385": {
-      "dataset_id": "ak3_sapi_385",
-      "exact_position_and_direction": 0,
-      "published_only": 0,
-      "published_snv_events": 14,
-      "reversed_direction": 14,
-      "shared_positions": 14,
-      "working_output_only": 1,
-      "working_output_snv_events": 15
-    },
-    "sapi_published_indel_outside_scope": {
-      "change": "G>GATTCAT",
-      "position": 1051023,
-      "type": "insertion"
-    },
-    "sapi_version_difference_unresolved": true
-  },
   "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
   "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
   "branchsnv_version": "0.1.0a1",
-  "description": "All-edge comparison with published SNPPar bacterial datasets and comparison of committed AK3 working-data outputs with published branch tables.",
+  "description": "All-edge comparison with published SNPPar bacterial datasets.",
   "experiment": "03_published_datasets",
   "overall_pass": true,
   "public_comparison": {
@@ -145,7 +104,6 @@
       "snppar_only_supported_as_branchsnv_placement_ambiguous": 66
     }
   },
-  "publication_archive_blocker": "The exact checksum-matched AK3 alignment and tree still require public archiving.",
   "schema_version": 1,
-  "validation_script_sha256": "3c638a8afd6fc6e09da1ab9c0f14419b9743886df6075f83210743735a0270a8"
+  "validation_script_sha256": "cc397ba99a4b934b85d713203fa617721f4ee5eccd0a1c490a4db5f347c3d049"
 }

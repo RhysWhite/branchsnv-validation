@@ -1,0 +1,72 @@
+{
+  "branch": {
+    "branch_id": "b_1e8ab945aaeeae178f226f47ad1b8e4f461909060b314752c56a2a5a4e2877a6",
+    "descendant_count": 2,
+    "descendant_taxa_sha256": "1e8ab945aaeeae178f226f47ad1b8e4f461909060b314752c56a2a5a4e2877a6",
+    "selection": {
+      "method": "exact_descendant_file",
+      "sha256": "1e8ab945aaeeae178f226f47ad1b8e4f461909060b314752c56a2a5a4e2877a6",
+      "source": "st97_2.txt"
+    },
+    "short_id": "b_1e8ab945aaeeae17"
+  },
+  "inputs": {
+    "alignment": {
+      "format": "transposed_nexus",
+      "gap_symbol": ".",
+      "missing_symbol": "?",
+      "name": "st97_alignment.nex",
+      "nchar": 4651,
+      "ntax": 103,
+      "sha256": "3e7a631c2780e1aeb7f6d3b600f2d7a08742b2351eb22edbd10a3ca0b3ca591c"
+    },
+    "tree": {
+      "format": "newick",
+      "name": "st97_tree.nwk",
+      "sha256": "7f71657597b9dd62db8c93570c0afd251e5677c3657b1654e71b58a2a15949ad",
+      "tips": 103
+    }
+  },
+  "outputs": {
+    "branch_members": {
+      "name": "st97_members.txt",
+      "sha256": "1e8ab945aaeeae178f226f47ad1b8e4f461909060b314752c56a2a5a4e2877a6"
+    },
+    "results_tsv": {
+      "name": "st97_results.tsv",
+      "sha256": "cea6e65b1bb10de2a8cd3810a5ed390adb83bd466523b9f5e155c29c7c1dc84c"
+    }
+  },
+  "parameters": {
+    "fixed_exclusive_descendant_call_rate": 1.0,
+    "fixed_exclusive_outside_call_rate": 1.0,
+    "gap_treatment": "unknown_state",
+    "include_ambiguous_parsimony_sites": true,
+    "missing_treatment": "unknown_state",
+    "mode": "both",
+    "state_cost_model": "unordered_equal_cost"
+  },
+  "results": {
+    "fixed_exclusive_sites": 10,
+    "parsimony": {
+      "change_state_ambiguous": 0,
+      "no_change": 4641,
+      "placement_ambiguous": 0,
+      "unambiguous_change": 10
+    },
+    "reported_sites": 10,
+    "sites_examined": 4651
+  },
+  "rooting": {
+    "method": "outgroup",
+    "outgroup": [
+      "ERR4911723"
+    ]
+  },
+  "schema_version": 1,
+  "tool": {
+    "name": "BRANCHSNV",
+    "version": "0.1.0a1"
+  },
+  "warnings": []
+}

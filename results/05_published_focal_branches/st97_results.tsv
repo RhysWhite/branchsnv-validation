@@ -1,0 +1,11 @@
+site_id	reference	position	input_row	parent_states	child_states	possible_pairs	change	parsimony_status	fixed_within_clade	exclusive_to_clade	descendant_state	descendant_total	descendant_callable	descendant_state_count	outside_total	outside_callable	outside_same_state_count	parsimony_score	selection_reason
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_223985	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	223985	350	C	T	C>T	C>T	unambiguous_change	true	true	T	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_581603	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	581603	957	T	G	T>G	T>G	unambiguous_change	true	true	G	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_692084	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	692084	1124	C	T	C>T	C>T	unambiguous_change	true	true	T	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_1389986	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	1389986	2301	C	T	C>T	C>T	unambiguous_change	true	true	T	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_1516856	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	1516856	2516	C	A	C>A	C>A	unambiguous_change	true	true	A	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_2039493	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	2039493	3366	T	A	T>A	T>A	unambiguous_change	true	true	A	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_2165308	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	2165308	3579	T	C	T>C	T>C	unambiguous_change	true	true	C	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_2402921	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	2402921	4016	A	G	A>G	A>G	unambiguous_change	true	true	G	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_2620177	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	2620177	4423	T	C	T>C	T>C	unambiguous_change	true	true	C	2	2	2	101	101	0	1	both
+contig_1_pilon_pilon_pilon_pilon_pilon_pilon_2648091	contig_1_pilon_pilon_pilon_pilon_pilon_pilon	2648091	4464	G	T	G>T	G>T	unambiguous_change	true	true	T	2	2	2	101	101	0	1	both

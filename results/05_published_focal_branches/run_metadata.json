@@ -1,0 +1,13 @@
+{
+  "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+  "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+  "branchsnv_version": "0.1.0a1",
+  "completed_utc": "2026-08-10T02:05:04.309540+00:00",
+  "elapsed_seconds": 10.969871,
+  "exit_status": "PASS",
+  "experiment": "05_published_focal_branches",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "python_version": "3.13.5",
+  "started_utc": "2026-08-10T02:04:53.339698+00:00",
+  "validation_script_sha256": "3d704f8e94fe0e99a958faa7ef212c10e388ba07cda49fc425d2d4faa89bf116"
+}

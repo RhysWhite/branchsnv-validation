@@ -1,0 +1,75 @@
+{
+  "branch": {
+    "branch_id": "b_a797967895347a3fd1a07cfc0c768b5dcd688926e7d450dfca878ff8d80c74e8",
+    "descendant_count": 39,
+    "descendant_taxa_sha256": "a797967895347a3fd1a07cfc0c768b5dcd688926e7d450dfca878ff8d80c74e8",
+    "selection": {
+      "method": "exact_descendant_file",
+      "sha256": "a797967895347a3fd1a07cfc0c768b5dcd688926e7d450dfca878ff8d80c74e8",
+      "source": "oxa48_39.txt"
+    },
+    "short_id": "b_a797967895347a3f"
+  },
+  "inputs": {
+    "alignment": {
+      "format": "transposed_nexus",
+      "gap_symbol": ".",
+      "missing_symbol": "?",
+      "name": "oxa48_alignment_ref18AR0845.nex",
+      "nchar": 266,
+      "ntax": 47,
+      "sha256": "5f601d36cd30843d56d42744d711ca54cce5169289eb423e1252a40c502cd683"
+    },
+    "tree": {
+      "format": "newick",
+      "name": "oxa48_tree.nwk",
+      "sha256": "fb1895907fbbff4cb2e74d7ad564c12e9b80d07f5800b6007618dcb3b82f2540",
+      "tips": 47
+    }
+  },
+  "outputs": {
+    "branch_members": {
+      "name": "oxa48_members.txt",
+      "sha256": "a797967895347a3fd1a07cfc0c768b5dcd688926e7d450dfca878ff8d80c74e8"
+    },
+    "results_tsv": {
+      "name": "oxa48_results.tsv",
+      "sha256": "cc06476dd4f401322e89c805e347fa0d5ad781143a6f43fab9150caff38ac641"
+    }
+  },
+  "parameters": {
+    "fixed_exclusive_descendant_call_rate": 1.0,
+    "fixed_exclusive_outside_call_rate": 1.0,
+    "gap_treatment": "unknown_state",
+    "include_ambiguous_parsimony_sites": true,
+    "missing_treatment": "unknown_state",
+    "mode": "both",
+    "state_cost_model": "unordered_equal_cost"
+  },
+  "results": {
+    "fixed_exclusive_sites": 13,
+    "parsimony": {
+      "change_state_ambiguous": 0,
+      "no_change": 253,
+      "placement_ambiguous": 0,
+      "unambiguous_change": 13
+    },
+    "reported_sites": 13,
+    "sites_examined": 266
+  },
+  "rooting": {
+    "method": "outgroup",
+    "outgroup": [
+      "ERR1791000",
+      "ERR1791001",
+      "ERR1791004",
+      "ERR1852604"
+    ]
+  },
+  "schema_version": 1,
+  "tool": {
+    "name": "BRANCHSNV",
+    "version": "0.1.0a1"
+  },
+  "warnings": []
+}

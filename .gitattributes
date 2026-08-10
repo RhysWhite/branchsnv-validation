@@ -1,0 +1,2 @@
+inputs/empirical/*.nex binary
+results/06_empirical_cross_classification/informative_events.tsv whitespace=-trailing-space

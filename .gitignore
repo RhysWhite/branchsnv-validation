@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+reproduced_results/
+public_inputs/
+experiments/04_scalability/inputs/
+.DS_Store

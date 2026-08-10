@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -lt 1 || $# -gt 3 ]]; then
-  echo "Usage: $0 /path/to/branchsnv [public-input-dir] [ak3-input-dir]" >&2
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+  echo "Usage: $0 /path/to/branchsnv [public-input-dir]" >&2
   exit 2
 fi
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 BRANCHSNV_ROOT=$1
 PUBLIC_INPUT_DIR=${2:-"$ROOT/public_inputs/03_published_datasets"}
-AK3_INPUT_DIR=${3:-}
 OUTPUT_ROOT=${BRANCHSNV_VALIDATION_OUTPUT_ROOT:-"$ROOT/reproduced_results"}
 BENCHMARK_REPETITIONS=${BRANCHSNV_BENCHMARK_REPETITIONS:-3}
+EMPIRICAL_INPUT_DIR="$ROOT/inputs/empirical"
 
 mkdir -p "$OUTPUT_ROOT"
 
@@ -26,15 +26,10 @@ python "$ROOT/experiments/02_deliberate_faults/run.py" \
 python "$ROOT/experiments/03_published_datasets/download_public_inputs.py" \
   --output-dir "$PUBLIC_INPUT_DIR"
 
-EXP3_ARGS=(
-  --branchsnv-root "$BRANCHSNV_ROOT"
-  --public-input-dir "$PUBLIC_INPUT_DIR"
+python "$ROOT/experiments/03_published_datasets/run.py" \
+  --branchsnv-root "$BRANCHSNV_ROOT" \
+  --public-input-dir "$PUBLIC_INPUT_DIR" \
   --output-dir "$OUTPUT_ROOT/03_published_datasets"
-)
-if [[ -n "$AK3_INPUT_DIR" ]]; then
-  EXP3_ARGS+=(--ak3-input-dir "$AK3_INPUT_DIR")
-fi
-python "$ROOT/experiments/03_published_datasets/run.py" "${EXP3_ARGS[@]}"
 
 python "$ROOT/experiments/04_scalability/generate_inputs.py" \
   --output-root "$ROOT/experiments/04_scalability/inputs"
@@ -56,3 +51,21 @@ if python -c 'import matplotlib' >/dev/null 2>&1; then
 else
   echo "Matplotlib is unavailable; Experiment 04 figures were not regenerated." >&2
 fi
+
+python "$ROOT/experiments/05_published_focal_branches/run.py" \
+  --branchsnv-root "$BRANCHSNV_ROOT" \
+  --input-dir "$EMPIRICAL_INPUT_DIR" \
+  --output-dir "$OUTPUT_ROOT/05_published_focal_branches"
+
+python "$ROOT/experiments/06_empirical_cross_classification/run.py" \
+  --branchsnv-root "$BRANCHSNV_ROOT" \
+  --input-dir "$EMPIRICAL_INPUT_DIR" \
+  --output-dir "$OUTPUT_ROOT/06_empirical_cross_classification"
+
+python "$ROOT/experiments/06_empirical_cross_classification/production_qc.py" \
+  --branchsnv-root "$BRANCHSNV_ROOT" \
+  --input-dir "$EMPIRICAL_INPUT_DIR" \
+  --analysis-results-dir "$OUTPUT_ROOT/06_empirical_cross_classification"
+
+python "$ROOT/experiments/06_empirical_cross_classification/verify.py" \
+  --results-dir "$OUTPUT_ROOT/06_empirical_cross_classification"
