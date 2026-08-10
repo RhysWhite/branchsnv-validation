@@ -2,7 +2,7 @@
 
 This directory contains the locked Figure 1 artwork, the exact Python/Matplotlib code used to generate it, a repository-portable copy of the same plotting code, and a plain-English code walkthrough.
 
-The figure is intended for the BRANCHSNV manuscript prepared for *Cell Genomics*. The artwork deliberately follows a parsimonious visual logic: one branch, one site, two distinct analytical questions, complete retention of equal-cost focal-edge solutions, and the minimum set of safeguards needed to make the branch-level result auditable.
+The figure is intended for the BRANCHSNV manuscript. The artwork deliberately follows a parsimonious visual logic: one branch, one site, two distinct analytical questions, complete retention of equal-cost focal-edge solutions, and the minimum set of safeguards needed to make the branch-level result auditable.
 
 ## Final figure
 
