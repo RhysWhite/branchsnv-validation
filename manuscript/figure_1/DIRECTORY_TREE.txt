@@ -1,0 +1,12 @@
+branchsnv-validation/
+└── manuscript/
+    └── figure_1/
+        ├── README.md
+        ├── CODE_WALKTHROUGH.md
+        ├── make_figure_1.py
+        ├── requirements.txt
+        ├── Figure_1.pdf
+        ├── Figure_1_editable.svg
+        ├── Figure_1_preview_600dpi.png
+        ├── Figure_1_1000dpi.tiff
+        └── Figure_1_1000dpi_RGB.tiff
