@@ -27,6 +27,17 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def branchsnv_version(branchsnv_source: Path) -> str:
+    init_path = branchsnv_source / "src" / "branchsnv" / "__init__.py"
+    text = init_path.read_text(encoding="utf-8")
+    match = re.search(r'__version__\s*=\s*["\']([^"\']+)["\']', text)
+    if not match:
+        raise ValueError(
+            f"Unable to read BRANCHSNV version from production source: {init_path}"
+        )
+    return match.group(1)
+
+
 def cpu_model() -> str:
     try:
         text = Path("/proc/cpuinfo").read_text(encoding="utf-8")
@@ -193,7 +204,7 @@ def main() -> None:
     source_hashes = {str(path.relative_to(args.branchsnv_source)): sha256(path) for path in source_files}
     metadata = {
         "experiment": "04_scalability",
-        "branchsnv_version": "0.1.0a1",
+        "branchsnv_version": branchsnv_version(args.branchsnv_source),
         "branchsnv_source_root": str(args.branchsnv_source),
         "branchsnv_source_files_sha256": source_hashes,
         "input_manifest_sha256": sha256(manifest_path),

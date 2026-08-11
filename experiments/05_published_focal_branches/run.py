@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce published focal-branch SNV lists with BRANCHSNV v0.1.0a1."""
+"""Reproduce published focal-branch SNV lists with a supplied BRANCHSNV checkout."""
 from __future__ import annotations
 import argparse, csv, hashlib, json, os, platform, subprocess, sys, tempfile, time
 from datetime import datetime, timezone
