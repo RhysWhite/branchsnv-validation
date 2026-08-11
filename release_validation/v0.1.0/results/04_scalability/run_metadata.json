@@ -1,0 +1,62 @@
+{
+  "branchsnv_source_files_sha256": {
+    "src/branchsnv/__init__.py": "2ea45d69421adfb2cb18a123cf6303248f8a2cf7cb2303c71fb44d79150c56f6",
+    "src/branchsnv/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/branchsnv/analysis.py": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+    "src/branchsnv/cli.py": "2f531d1b441e2f2db9c1904dc44f97ef40bc551fd7d8fd32d8529cb3ef826702",
+    "src/branchsnv/errors.py": "d6643a54f6e316e6fa8a347903e57c427ef4faf594135209802dda230b362442",
+    "src/branchsnv/models.py": "50532de239bd5c1805ac8b068d37407174c6d45e0a0e29d63af9476ec1502e50",
+    "src/branchsnv/newick.py": "36f3dec80272df3d13e275a8a18991c6e62143de8a92a148564e012b84e22b76",
+    "src/branchsnv/nexus.py": "5a7c671908091f2bcd2d0936522e4648508819060ddf2758665f434e12ddb778",
+    "src/branchsnv/parsimony.py": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+    "src/branchsnv/provenance.py": "a66d95fd1699e1c5e728689f5c3ebf109c4a474f96dffa4cce82a3163d32f8a7",
+    "src/branchsnv/util.py": "77731f7c6bc63c1a5a6df11462c287315596afc6330c6a42e0ec00a6f9bde611",
+    "src/branchsnv/validation.py": "a2b0cceda09f33fa57146886c19c7f4b88df8a5e586313135389ce7c6aa85d28",
+    "src/branchsnv/writing.py": "fcf68b7dcdffde67505f1a17fae98bd04dbf7000baf3694412eb39f6079acc98"
+  },
+  "branchsnv_source_root": "/home/rwhite/github/branchsnv/branchsnv",
+  "branchsnv_version": "0.1.0",
+  "cpu_model": "Intel(R) Xeon(R) Gold 6244 CPU @ 3.60GHz",
+  "design": {
+    "focal_clade_fraction": "approximately one quarter of taxa",
+    "patterns": "deterministic 20-site cycle covering focal, recurrent, mixed, ambiguous, missing, and gap-containing states",
+    "site_counts": [
+      1000,
+      5000,
+      10000,
+      25000,
+      50000,
+      100000
+    ],
+    "site_scaling_ntax": 250,
+    "taxon_counts": [
+      50,
+      100,
+      250,
+      500,
+      1000,
+      2000
+    ],
+    "taxon_scaling_nchar": 10000
+  },
+  "environment": {
+    "PYTHONHASHSEED": "0",
+    "PYTHONPATH": "/home/rwhite/github/branchsnv/branchsnv/src"
+  },
+  "experiment": "04_scalability",
+  "gnu_time": "time (GNU Time) 1.10",
+  "input_manifest_sha256": "ba8326e312321a46e4244703336662756b58ded8dc5244a8c6f82fffde026a67",
+  "logical_cpus_visible": 64,
+  "machine": "x86_64",
+  "memory_total_bytes_visible": 3245232807936,
+  "notes": [
+    "Each invocation was a fresh Python process and included parsing, validation, analysis, and output generation.",
+    "Scaling configurations used mode=both; all three modes were compared on t500_s10000.",
+    "BRANCHSNV is single-process; visible logical CPU count describes the environment, not parallel execution."
+  ],
+  "platform": "Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "python": "3.13.15 | packaged by conda-forge | (main, Aug 10 2026, 13:05:01) [GCC 14.4.0]",
+  "python_executable": "/home/rwhite/.conda/envs/branchsnv-validation/bin/python",
+  "repetitions": 3,
+  "run_order_seed": 20260731
+}

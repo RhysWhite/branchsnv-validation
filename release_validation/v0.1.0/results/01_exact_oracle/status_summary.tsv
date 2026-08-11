@@ -1,0 +1,5 @@
+status	comparisons
+no_change	85558
+unambiguous_change	3605
+change_state_ambiguous	814
+placement_ambiguous	38904

@@ -1,0 +1,423 @@
+{
+  "all_faults_detected": true,
+  "branchsnv_version": "0.1.0",
+  "deterministic_seed": "branchsnv-publication-validation-20260731",
+  "experiment": "02_deliberate_faults",
+  "faults": [
+    {
+      "category": "ancestral reconstruction",
+      "challenges": 128881,
+      "compared_fields": "score, possible state pairs, classification",
+      "detected": true,
+      "differentiating_challenges": 43323,
+      "fault": "Report child-to-parent state orientation on the selected edge.",
+      "fault_id": "reverse_parent_child",
+      "first_witness": {
+        "challenge": "balanced5_internal:canonical_exhaustive:ACCAA",
+        "details": {
+          "focal_descendants": [
+            "A",
+            "B"
+          ],
+          "pattern": "ACCAA",
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": {
+          "possible_pairs": [
+            "A>C"
+          ],
+          "score": 1,
+          "status": "unambiguous_change"
+        },
+        "faulted": {
+          "possible_pairs": [
+            "C>A"
+          ],
+          "score": 1,
+          "status": "unambiguous_change"
+        }
+      },
+      "validation_principle": "A rooted edge must be reported in the parent-to-child direction."
+    },
+    {
+      "category": "ancestral reconstruction",
+      "challenges": 15625,
+      "compared_fields": "possible state pairs, classification",
+      "detected": true,
+      "differentiating_challenges": 10418,
+      "fault": "Infer one parent and child state from side-specific majority states.",
+      "fault_id": "majority_instead_of_parsimony",
+      "first_witness": {
+        "challenge": "balanced5_internal:canonical_exhaustive:AAACC",
+        "details": {
+          "focal_descendants": [
+            "A",
+            "B"
+          ],
+          "pattern": "AAACC",
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": {
+          "possible_pairs": [
+            "A>A"
+          ],
+          "score": 1,
+          "status": "no_change"
+        },
+        "faulted": {
+          "possible_pairs": [
+            "C>A"
+          ],
+          "score": 1,
+          "status": "unambiguous_change"
+        }
+      },
+      "validation_principle": "Local majority states cannot replace complete-tree parsimony reconstruction."
+    },
+    {
+      "category": "state handling",
+      "challenges": 625,
+      "compared_fields": "score, possible state pairs, classification",
+      "detected": true,
+      "differentiating_challenges": 369,
+      "fault": "Treat the alignment gap character as a fifth evolutionary state.",
+      "fault_id": "gap_as_fifth_state",
+      "first_witness": {
+        "challenge": "small4_ambiguity_exhaustive:gap_challenge:AAA-",
+        "details": {
+          "focal_descendants": [
+            "B",
+            "C"
+          ],
+          "pattern": "AAA-",
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C"
+          ],
+          "topology": "(O,(A,(B,C)));"
+        },
+        "expected": {
+          "possible_pairs": [
+            "A>A"
+          ],
+          "score": 0,
+          "status": "no_change"
+        },
+        "faulted": {
+          "possible_pairs": [
+            "A>A"
+          ],
+          "score": 1,
+          "status": "no_change"
+        }
+      },
+      "validation_principle": "Configured gap and missing symbols must be treated as unknown nucleotide states."
+    },
+    {
+      "category": "ancestral reconstruction",
+      "challenges": 128881,
+      "compared_fields": "possible state pairs, classification",
+      "detected": true,
+      "differentiating_challenges": 63271,
+      "fault": "Retain only the lexicographically first optimal state pair.",
+      "fault_id": "retain_one_optimum",
+      "first_witness": {
+        "challenge": "balanced5_internal:canonical_exhaustive:AACCC",
+        "details": {
+          "focal_descendants": [
+            "A",
+            "B"
+          ],
+          "pattern": "AACCC",
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": {
+          "possible_pairs": [
+            "A>A",
+            "C>C"
+          ],
+          "score": 2,
+          "status": "no_change"
+        },
+        "faulted": {
+          "possible_pairs": [
+            "A>A"
+          ],
+          "score": 2,
+          "status": "no_change"
+        }
+      },
+      "validation_principle": "Every focal-edge state pair occurring among global optima must be retained."
+    },
+    {
+      "category": "branch selection",
+      "challenges": 1024,
+      "compared_fields": "score, possible state pairs, classification",
+      "detected": true,
+      "differentiating_challenges": 576,
+      "fault": "Analyse the sibling clade rather than the requested focal clade.",
+      "fault_id": "opposite_branch_side",
+      "first_witness": {
+        "challenge": "balanced5:AB_requested_CD_analysed:AAACC",
+        "details": {
+          "faulted_descendants": [
+            "C",
+            "D"
+          ],
+          "pattern": "AAACC",
+          "requested_descendants": [
+            "A",
+            "B"
+          ],
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": {
+          "possible_pairs": [
+            "A>A"
+          ],
+          "score": 1,
+          "status": "no_change"
+        },
+        "faulted": {
+          "possible_pairs": [
+            "A>C"
+          ],
+          "score": 1,
+          "status": "unambiguous_change"
+        }
+      },
+      "validation_principle": "The exact requested descendant set must determine the analysed edge."
+    },
+    {
+      "category": "rooting",
+      "challenges": 4,
+      "compared_fields": "branch-selection outcome",
+      "detected": true,
+      "differentiating_challenges": 4,
+      "fault": "Use the Newick's existing root instead of the requested outgroup root.",
+      "fault_id": "ignore_outgroup_rooting",
+      "first_witness": {
+        "challenge": "rooting_case_1",
+        "details": {
+          "newick": "((O,(C,D)),(A,B));",
+          "outgroup": [
+            "O"
+          ],
+          "requested_descendants": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "expected": {
+          "descendants": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "outcome": "selected"
+        },
+        "faulted": {
+          "error": "Requested tips do not form exactly one rooted clade. Their MRCA also contains: O.",
+          "outcome": "rejected"
+        }
+      },
+      "validation_principle": "Branch membership and direction must be resolved after the requested rooting operation."
+    },
+    {
+      "category": "branch selection",
+      "challenges": 3,
+      "compared_fields": "branch-selection outcome and selected descendants",
+      "detected": true,
+      "differentiating_challenges": 3,
+      "fault": "Silently replace an exact descendant request with its MRCA branch.",
+      "fault_id": "accept_mrca_superset",
+      "first_witness": {
+        "challenge": "balanced5_internal:requested=A,C",
+        "details": {
+          "mrca_descendants": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "requested_descendants": [
+            "A",
+            "C"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": {
+          "error_class": "SelectionError",
+          "outcome": "rejected"
+        },
+        "faulted": {
+          "descendants": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "outcome": "selected"
+        }
+      },
+      "validation_principle": "Exact descendant selection must reject requests whose MRCA contains additional tips."
+    },
+    {
+      "category": "input mapping",
+      "challenges": 1024,
+      "compared_fields": "score, possible state pairs, classification",
+      "detected": true,
+      "differentiating_challenges": 636,
+      "fault": "Map tree tips to alignment columns by position rather than taxon label.",
+      "fault_id": "match_taxa_by_column_order",
+      "first_witness": {
+        "challenge": "permuted_alignment:AAACC",
+        "details": {
+          "alignment_pattern": "CAACA",
+          "alignment_taxon_order": [
+            "C",
+            "O",
+            "B",
+            "D",
+            "A"
+          ],
+          "biological_pattern_in_case_order": "AAACC",
+          "focal_descendants": [
+            "A",
+            "B"
+          ],
+          "topology": "(O,((A,B),(C,D)));",
+          "tree_tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "expected": {
+          "possible_pairs": [
+            "A>A"
+          ],
+          "score": 1,
+          "status": "no_change"
+        },
+        "faulted": {
+          "possible_pairs": [
+            "A>A",
+            "C>A"
+          ],
+          "score": 2,
+          "status": "placement_ambiguous"
+        }
+      },
+      "validation_principle": "Tree and alignment taxa must be joined by exact names, independent of column order."
+    },
+    {
+      "category": "site classification",
+      "challenges": 3125,
+      "compared_fields": "fixed-exclusive classification",
+      "detected": true,
+      "differentiating_challenges": 148,
+      "fault": "Call a fixed-exclusive marker when outside taxa are missing but none observed share the state.",
+      "fault_id": "allow_missing_outside_exclusive",
+      "first_witness": {
+        "challenge": "fixed_exclusive_missing:ACCA?",
+        "details": {
+          "focal_descendants": [
+            "A",
+            "B"
+          ],
+          "pattern": "ACCA?",
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": false,
+        "faulted": true
+      },
+      "validation_principle": "Strict exclusivity requires every descendant and outside taxon to be callable."
+    },
+    {
+      "category": "site classification",
+      "challenges": 1024,
+      "compared_fields": "fixed-exclusive classification",
+      "detected": true,
+      "differentiating_challenges": 168,
+      "fault": "Classify every unambiguous reconstructed branch change as fixed-exclusive.",
+      "fault_id": "equate_change_with_exclusive",
+      "first_witness": {
+        "challenge": "definition_conflation:ACAAC",
+        "details": {
+          "focal_descendants": [
+            "A"
+          ],
+          "parsimony_status": "unambiguous_change",
+          "pattern": "ACAAC",
+          "tip_order": [
+            "O",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "topology": "(O,((A,B),(C,D)));"
+        },
+        "expected": false,
+        "faulted": true
+      },
+      "validation_principle": "Fixed-exclusive markers and reconstructed substitutions are distinct definitions."
+    }
+  ],
+  "faults_detected": 10,
+  "faults_evaluated": 10,
+  "generated_patterns_per_larger_topology": 5000,
+  "schema_version": 1,
+  "source_sha256": {
+    "branchsnv_analysis": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+    "branchsnv_newick": "36f3dec80272df3d13e275a8a18991c6e62143de8a92a148564e012b84e22b76",
+    "branchsnv_parsimony": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+    "experiment_01_oracle": "efc588dca94048394f4d5bfa7d223110b5d753f6e9112cdb89f6f34b9f324472",
+    "experiment_02_runner": "551f3ac3c238119b68064b8b0dd8f369edf5bbad4b2ac5b8a4c8dbbe818f8868"
+  },
+  "total_challenges": 280216,
+  "total_differentiating_challenges": 118916
+}

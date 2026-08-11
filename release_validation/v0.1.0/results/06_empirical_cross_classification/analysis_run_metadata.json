@@ -1,0 +1,16 @@
+{
+  "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+  "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+  "branchsnv_version": "0.1.0",
+  "completed_utc": "2026-08-11T15:53:42.306125+00:00",
+  "cpu_count": 64,
+  "elapsed_seconds": 3.459034,
+  "exit_status": "PASS",
+  "experiment": "06_empirical_cross_classification_analysis",
+  "machine": "x86_64",
+  "platform": "Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "processor": "x86_64",
+  "python_version": "3.13.15",
+  "started_utc": "2026-08-11T15:53:38.847108+00:00",
+  "validation_script_sha256": "a5594c00cf466942d397b1ebb1ac3b81d1e3794eb9ef9f60b5167a36536642cd"
+}

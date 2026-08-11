@@ -1,0 +1,72 @@
+{
+  "branch": {
+    "branch_id": "b_1a230667657c1c18b48aa9d9816988da7f07eafef96c49f9e045d333850fb303",
+    "descendant_count": 360,
+    "descendant_taxa_sha256": "1a230667657c1c18b48aa9d9816988da7f07eafef96c49f9e045d333850fb303",
+    "selection": {
+      "method": "exact_descendant_file",
+      "sha256": "1a230667657c1c18b48aa9d9816988da7f07eafef96c49f9e045d333850fb303",
+      "source": "ak3_360.txt"
+    },
+    "short_id": "b_1a230667657c1c18"
+  },
+  "inputs": {
+    "alignment": {
+      "format": "transposed_nexus",
+      "gap_symbol": ".",
+      "missing_symbol": "?",
+      "name": "ak3_alignment.nex",
+      "nchar": 10481,
+      "ntax": 396,
+      "sha256": "40c49b026c52e04530ecbbee7044567ac3355eccf7adda42a7d96bf977df9014"
+    },
+    "tree": {
+      "format": "newick",
+      "name": "ak3_tree.nwk",
+      "sha256": "18322b2808baf621d09dd5292027205e68a0f207d7be44f043bd044d0d314bd0",
+      "tips": 396
+    }
+  },
+  "outputs": {
+    "branch_members": {
+      "name": "ak3_members.txt",
+      "sha256": "1a230667657c1c18b48aa9d9816988da7f07eafef96c49f9e045d333850fb303"
+    },
+    "results_tsv": {
+      "name": "ak3_results.tsv",
+      "sha256": "576ca86177f833976ceb1d7feeb56753d564d20c6b1b8fc421d2abd6b145cd0f"
+    }
+  },
+  "parameters": {
+    "fixed_exclusive_descendant_call_rate": 1.0,
+    "fixed_exclusive_outside_call_rate": 1.0,
+    "gap_treatment": "unknown_state",
+    "include_ambiguous_parsimony_sites": true,
+    "missing_treatment": "unknown_state",
+    "mode": "both",
+    "state_cost_model": "unordered_equal_cost"
+  },
+  "results": {
+    "fixed_exclusive_sites": 23,
+    "parsimony": {
+      "change_state_ambiguous": 0,
+      "no_change": 10458,
+      "placement_ambiguous": 0,
+      "unambiguous_change": 23
+    },
+    "reported_sites": 23,
+    "sites_examined": 10481
+  },
+  "rooting": {
+    "method": "outgroup",
+    "outgroup": [
+      "SRR13968194"
+    ]
+  },
+  "schema_version": 1,
+  "tool": {
+    "name": "BRANCHSNV",
+    "version": "0.1.0"
+  },
+  "warnings": []
+}

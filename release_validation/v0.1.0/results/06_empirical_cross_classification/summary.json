@@ -1,0 +1,69 @@
+{
+  "analysis": {
+    "datasets": 5,
+    "expected_dataset_totals_match": true,
+    "expected_global_totals_match": true,
+    "expected_mechanisms_match": true,
+    "expected_root_sensitivity_match": true,
+    "experiment": "06_empirical_cross_classification_analysis",
+    "input_transformations": [
+      {
+        "dataset": "oxa48",
+        "operation": "analysis-only taxon-label normalization REF\u219218AR0845 before tree/alignment matching"
+      }
+    ],
+    "nonexclusivity_mechanisms": {
+      "derived_state_outside": 645,
+      "descendant_not_fixed": 30
+    },
+    "overall_pass": true,
+    "production_source": {
+      "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+      "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+      "branchsnv_version": "0.1.0"
+    },
+    "root_adjacent_sensitivity": {
+      "fixed_plus_placement": 703,
+      "informative": 740,
+      "not_fixed_plus_placement": 37
+    },
+    "schema_version": 1,
+    "software": {
+      "numba": "0.65.1",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3"
+    },
+    "three_dataset_snapshot": {
+      "branch_rows": 1086,
+      "informative_records_including_root_adjacent": 15875
+    },
+    "totals": {
+      "both": 30817,
+      "branch_site_comparisons": 16073690,
+      "eligible_non_root_adjacent_branches": 1804,
+      "informative": 31644,
+      "outside_intersection": 827,
+      "placement_ambiguous": 152,
+      "taxa": 912,
+      "unambiguous_not_fixed": 675,
+      "variable_sites": 31457
+    }
+  },
+  "experiment": "06_empirical_cross_classification",
+  "headline_totals_match": true,
+  "overall_pass": true,
+  "production_qc": {
+    "accelerated_event_table_sha256": "e63e8166b4f423e8eca25567fe24135c27a1b0bad453befc561ac5bc97ca4efd",
+    "branch_site_analyses": 64236,
+    "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+    "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+    "discrepancies": 0,
+    "exact_records": 1617,
+    "experiment": "06_empirical_cross_classification_production_qc",
+    "informative_records": 1617,
+    "passed": true,
+    "schema_version": 1,
+    "selected_branches": 8
+  },
+  "schema_version": 1
+}
