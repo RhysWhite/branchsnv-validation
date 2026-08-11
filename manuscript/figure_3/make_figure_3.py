@@ -443,15 +443,9 @@ Arial is requested first in the Matplotlib font stack. Arial is not installed in
 """
     (outdir / "README.md").write_text(readme)
 
-    walkthrough = """# Figure 3 code walkthrough
-
-`make_figure_3.py` reads the committed experiment 06 tables and the committed Clade A tree/alignment, then renders both figure panels with Matplotlib.
-
-Panel A uses a vertical summary layout to avoid narrow-box text wrapping at final print size. The 95.56%/4.44% discordance bar is proportional; the small 4.44% category is labelled externally rather than visually enlarged.
-
-Panel B uses the actual 14-tip pruned Clade A phylogram containing the five observed G states at `AP009378.1_4301132`. Horizontal distances are cumulative branch lengths from the supplied Newick tree. The four-descendant focal clade is blue, the independent outside terminal G occurrence is orange, and ancestral T tips remain open black circles.
-"""
-    (outdir / "CODE_WALKTHROUGH.md").write_text(walkthrough)
+    # CODE_WALKTHROUGH.md is maintained as a separate, human-readable
+    # line-by-line companion to this script. It is deliberately not rewritten
+    # here so a rerender cannot replace the detailed explanatory document.
 
     (outdir / "DIRECTORY_TREE.txt").write_text("""BRANCHSNV validation repository
 |

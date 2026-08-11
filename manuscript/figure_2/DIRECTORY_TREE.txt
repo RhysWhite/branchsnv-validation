@@ -1,0 +1,21 @@
+BRANCHSNV validation repository
+|
+|-- results/
+|   |-- 01_exact_oracle/summary.json
+|   |-- 02_deliberate_faults/summary.json
+|   |-- 03_published_datasets/summary.json
+|   |-- 04_scalability/summary.json
+|   `-- 05_published_focal_branches/summary.json
+|
+`-- manuscript/
+    `-- figure_2/
+        |-- CODE_WALKTHROUGH.md
+        |-- DIRECTORY_TREE.txt
+        |-- Figure_2.pdf
+        |-- Figure_2_1000dpi.tiff
+        |-- Figure_2_1000dpi_RGB.tiff
+        |-- Figure_2_editable.svg
+        |-- Figure_2_preview_600dpi.png
+        |-- README.md
+        |-- make_figure_2.py
+        `-- requirements.txt

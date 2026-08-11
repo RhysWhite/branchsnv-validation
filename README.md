@@ -9,7 +9,7 @@ Reproducible validation, empirical analyses and benchmarks supporting
 separate from the production software so that independent or deliberately incorrect
 implementations cannot alter the production code being tested.
 
-The committed publication snapshot evaluates **BRANCHSNV v0.1.0a1**.
+The committed publication snapshot evaluates **BRANCHSNV v0.1.0a1**. Production-source SHA-256 hashes are recorded in the canonical run metadata so the validated analytical source is identifiable independently of later documentation-only repository commits.
 
 ## Validation summary
 
@@ -28,6 +28,7 @@ The committed publication snapshot evaluates **BRANCHSNV v0.1.0a1**.
 experiments/       Validation, empirical-analysis and benchmark code
 inputs/empirical/  Exact checksum-gated inputs for Experiments 05 and 06
 results/           Canonical publication result snapshot
+manuscript/        Reproducible manuscript Figure 1–4 packages
 assets/            Repository artwork
 ```
 
@@ -45,13 +46,13 @@ Requirements:
 - internet access only for retrieving the public SNPPar inputs in Experiment 03;
 - GNU `time` for Experiment 04;
 - NumPy 2.3.5, pandas 2.2.3 and Numba 0.65.1 for Experiment 06;
-- Matplotlib only for regenerating benchmark plots.
+- Matplotlib, Pillow, pandas and Biopython for regenerating the manuscript figure packages.
 
 For the manuscript environment:
 
 ```bash
 python -m pip install -r requirements-analysis.txt
-python -m pip install -r requirements-figures.txt   # optional plots
+python -m pip install -r requirements-figures.txt   # optional manuscript figures
 ```
 
 Place the production and validation repositories beside one another and run:
@@ -64,6 +65,13 @@ bash run_completed_experiments.sh ../branchsnv
 Reruns are written to `reproduced_results/` by default. Experiment 04 is a benchmark,
 so its timings and peak-memory measurements are environment-specific; deterministic
 analytical outputs should reproduce exactly.
+
+
+## Manuscript figure packages
+
+The `manuscript/` directory contains repository-portable production packages for Figures 1–4. Each package includes the plotting script, vector and high-resolution raster artwork, a README describing data provenance, locked rendering requirements, and a line-by-line code walkthrough. Figure 2 is generated directly from the committed Experiment 01–05 summary files; Figure 3 reads the committed empirical cross-classification results and Clade A tree/alignment; Figure 4 reads the committed run-level scalability measurements.
+
+The snapshot verifier also checks that every source line in each figure script is represented by the matching source line in its code walkthrough, preventing a rerendering or later edit from silently leaving the explanatory documentation out of sync.
 
 ## Empirical input provenance
 

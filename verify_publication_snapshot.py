@@ -42,6 +42,109 @@ def check_manifest(manifest: Path, base: Path) -> list[str]:
     return failures
 
 
+
+def check_figure_walkthrough(figure_dir: Path) -> list[str]:
+    """Verify that every plotting-script line is reproduced exactly in its walkthrough."""
+    failures: list[str] = []
+    scripts = sorted(figure_dir.glob("make_figure_*.py"))
+    if len(scripts) != 1:
+        failures.append(
+            f"{figure_dir.relative_to(ROOT)}: expected exactly one make_figure_*.py script; found {len(scripts)}"
+        )
+        return failures
+
+    walkthrough = figure_dir / "CODE_WALKTHROUGH.md"
+    if not walkthrough.is_file():
+        failures.append(f"missing: {walkthrough.relative_to(ROOT)}")
+        return failures
+
+    source_lines = scripts[0].read_text(encoding="utf-8").splitlines()
+    walk_lines = walkthrough.read_text(encoding="utf-8").splitlines()
+    mapped: dict[int, str] = {}
+
+    index = 0
+    while index < len(walk_lines):
+        raw = walk_lines[index].strip()
+        if raw.startswith("### Line "):
+            try:
+                line_no = int(raw.removeprefix("### Line "))
+            except ValueError:
+                failures.append(
+                    f"{walkthrough.relative_to(ROOT)}: malformed line heading {walk_lines[index]!r}"
+                )
+                index += 1
+                continue
+
+            fence_index = index + 1
+            while fence_index < len(walk_lines):
+                fence = walk_lines[fence_index].strip()
+                if fence in {"```python", "````python"}:
+                    break
+                if walk_lines[fence_index].strip().startswith("### Line "):
+                    break
+                fence_index += 1
+
+            if fence_index >= len(walk_lines) or walk_lines[fence_index].strip() not in {"```python", "````python"}:
+                failures.append(
+                    f"{walkthrough.relative_to(ROOT)}: no Python code block after Line {line_no}"
+                )
+                index += 1
+                continue
+
+            fence = walk_lines[fence_index].strip()
+            closing = "````" if fence == "````python" else "```"
+            code_index = fence_index + 1
+            code: list[str] = []
+            while code_index < len(walk_lines) and walk_lines[code_index].strip() != closing:
+                code.append(walk_lines[code_index])
+                code_index += 1
+            if code_index >= len(walk_lines):
+                failures.append(
+                    f"{walkthrough.relative_to(ROOT)}: unterminated code block after Line {line_no}"
+                )
+                index += 1
+                continue
+            mapped[line_no] = "\n".join(code)
+            index = code_index
+        index += 1
+
+    expected_numbers = list(range(1, len(source_lines) + 1))
+    observed_numbers = sorted(mapped)
+    if observed_numbers != expected_numbers:
+        missing = sorted(set(expected_numbers) - set(observed_numbers))
+        extra = sorted(set(observed_numbers) - set(expected_numbers))
+        failures.append(
+            f"{walkthrough.relative_to(ROOT)}: line mapping incomplete; missing={missing[:10]} extra={extra[:10]}"
+        )
+
+    for line_no, source in enumerate(source_lines, 1):
+        observed = mapped.get(line_no)
+        if observed is not None and observed != source:
+            failures.append(
+                f"{walkthrough.relative_to(ROOT)}: Line {line_no} does not match {scripts[0].name}"
+            )
+
+    required = {
+        "README.md",
+        "CODE_WALKTHROUGH.md",
+        "DIRECTORY_TREE.txt",
+        "requirements.txt",
+        scripts[0].name,
+    }
+    stem = figure_dir.name.replace("figure_", "Figure_")
+    required.update({
+        f"{stem}.pdf",
+        f"{stem}_editable.svg",
+        f"{stem}_preview_600dpi.png",
+        f"{stem}_1000dpi.tiff",
+        f"{stem}_1000dpi_RGB.tiff",
+    })
+    for name in sorted(required):
+        if not (figure_dir / name).is_file():
+            failures.append(f"missing: {(figure_dir / name).relative_to(ROOT)}")
+
+    return failures
+
 def load_summary(name: str) -> dict:
     path = ROOT / "results" / name / "summary.json"
     return json.loads(path.read_text(encoding="utf-8"))
@@ -57,6 +160,8 @@ def main() -> int:
 
     failures.extend(check_manifest(ROOT / "inputs" / "empirical" / "checksums.sha256", ROOT / "inputs" / "empirical"))
     failures.extend(check_manifest(ROOT / "results" / "checksums.sha256", ROOT))
+    for figure_no in range(1, 5):
+        failures.extend(check_figure_walkthrough(ROOT / "manuscript" / f"figure_{figure_no}"))
 
     s1 = load_summary("01_exact_oracle")
     require(s1.get("exact_agreement") is True, "Experiment 01 exact_agreement is not true", failures)
@@ -158,6 +263,7 @@ def main() -> int:
     print("- empirical input checksums: verified")
     print("- committed result checksums: verified")
     print("- Experiments 01–06 headline claims: verified")
+    print("- manuscript Figure 1–4 packages and code walkthroughs: verified")
     print("- BRANCHSNV analytical version: 0.1.0a1")
     return 0
 
