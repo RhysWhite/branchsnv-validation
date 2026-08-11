@@ -62,9 +62,20 @@ cd branchsnv-validation
 bash run_completed_experiments.sh ../branchsnv
 ```
 
-Reruns are written to `reproduced_results/` by default. Experiment 04 is a benchmark,
-so its timings and peak-memory measurements are environment-specific; deterministic
-analytical outputs should reproduce exactly.
+Reruns are written to `reproduced_results/` by default. The runner refuses to reuse a
+non-empty output directory or write into the committed canonical `results/` tree, and it
+finishes by verifying the newly generated results against the supplied BRANCHSNV source.
+A successful full run therefore ends with `REPRODUCED RESULTS: PASS`. Experiment 04 is a
+benchmark, so its timings and peak-memory measurements are environment-specific; its run
+count, completion status, source identity and deterministic input manifest are verified.
+
+To verify an already completed rerun directly:
+
+```bash
+python verify_reproduced_results.py \
+  --results-dir reproduced_results \
+  --branchsnv-root ../branchsnv
+```
 
 
 ## Manuscript figure packages

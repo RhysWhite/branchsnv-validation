@@ -13,7 +13,64 @@ OUTPUT_ROOT=${BRANCHSNV_VALIDATION_OUTPUT_ROOT:-"$ROOT/reproduced_results"}
 BENCHMARK_REPETITIONS=${BRANCHSNV_BENCHMARK_REPETITIONS:-3}
 EMPIRICAL_INPUT_DIR="$ROOT/inputs/empirical"
 
-mkdir -p "$OUTPUT_ROOT"
+# Exclude per-user site packages so the active validation environment is authoritative.
+export PYTHONNOUSERSITE=1
+
+OUTPUT_ROOT=$(python - "$OUTPUT_ROOT" "$ROOT" <<'PY'
+from pathlib import Path
+import sys
+
+output = Path(sys.argv[1]).expanduser().resolve()
+root = Path(sys.argv[2]).resolve()
+canonical = (root / "results").resolve()
+try:
+    output.relative_to(canonical)
+except ValueError:
+    pass
+else:
+    raise SystemExit(f"Refusing to write reproduced results into canonical snapshot tree: {output}")
+
+if output.is_relative_to(root):
+    allowed = (root / "reproduced_results").resolve()
+    try:
+        output.relative_to(allowed)
+    except ValueError:
+        raise SystemExit(
+            "Validation outputs inside the repository must be under "
+            f"{allowed}; got {output}"
+        )
+print(output)
+PY
+)
+
+if [[ -e "$OUTPUT_ROOT" ]]; then
+  if [[ ! -d "$OUTPUT_ROOT" ]]; then
+    echo "Validation output path exists and is not a directory: $OUTPUT_ROOT" >&2
+    exit 2
+  fi
+  if [[ -n "$(find "$OUTPUT_ROOT" -mindepth 1 -maxdepth 1 -print -quit)" ]]; then
+    echo "Refusing to reuse non-empty validation output directory: $OUTPUT_ROOT" >&2
+    echo "Remove it explicitly or set BRANCHSNV_VALIDATION_OUTPUT_ROOT to a new directory." >&2
+    exit 2
+  fi
+else
+  mkdir -p "$OUTPUT_ROOT"
+fi
+
+python - <<'PY'
+import sys
+import numba
+import numpy
+import pandas
+
+expected = {"numpy": "2.3.5", "pandas": "2.2.3", "numba": "0.65.1"}
+observed = {"numpy": numpy.__version__, "pandas": pandas.__version__, "numba": numba.__version__}
+if observed != expected:
+    raise SystemExit(f"Locked Experiment 06 dependency versions required: expected {expected}, observed {observed}")
+if sys.version_info < (3, 10):
+    raise SystemExit(f"Python 3.10 or later is required; observed {sys.version.split()[0]}")
+print(f"Validation environment: Python {sys.version.split()[0]}; NumPy {numpy.__version__}; pandas {pandas.__version__}; Numba {numba.__version__}")
+PY
 
 python "$ROOT/experiments/01_exact_oracle/run.py" \
   --branchsnv-root "$BRANCHSNV_ROOT" \
@@ -69,3 +126,8 @@ python "$ROOT/experiments/06_empirical_cross_classification/production_qc.py" \
 
 python "$ROOT/experiments/06_empirical_cross_classification/verify.py" \
   --results-dir "$OUTPUT_ROOT/06_empirical_cross_classification"
+
+python "$ROOT/verify_reproduced_results.py" \
+  --results-dir "$OUTPUT_ROOT" \
+  --branchsnv-root "$BRANCHSNV_ROOT" \
+  --benchmark-repetitions "$BENCHMARK_REPETITIONS"

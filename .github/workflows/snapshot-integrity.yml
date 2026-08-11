@@ -13,6 +13,12 @@ jobs:
         with:
           python-version: '3.13'
       - name: Compile validation scripts
-        run: python -m compileall -q experiments verify_publication_snapshot.py
+        run: python -m compileall -q experiments verify_publication_snapshot.py verify_reproduced_results.py
       - name: Verify committed publication snapshot
         run: python verify_publication_snapshot.py
+      - name: Exercise reproduced-results verifier on committed analytical snapshot
+        run: >-
+          python verify_reproduced_results.py
+          --results-dir results
+          --expected-version 0.1.0a1
+          --benchmark-repetitions 3
