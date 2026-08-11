@@ -13,7 +13,12 @@ jobs:
         with:
           python-version: '3.13'
       - name: Compile validation scripts
-        run: python -m compileall -q experiments verify_publication_snapshot.py verify_reproduced_results.py
+        run: >-
+          python -m compileall -q
+          experiments
+          verify_publication_snapshot.py
+          verify_reproduced_results.py
+          verify_release_validation_record.py
       - name: Verify committed publication snapshot
         run: python verify_publication_snapshot.py
       - name: Exercise reproduced-results verifier on committed analytical snapshot
@@ -22,3 +27,14 @@ jobs:
           --results-dir results
           --expected-version 0.1.0a1
           --benchmark-repetitions 3
+      - name: Verify stable v0.1.0 release-validation record
+        run: |
+          python verify_release_validation_record.py \
+            --record-dir release_validation/v0.1.0 \
+            --expected-version 0.1.0 \
+            --expected-production-commit 71b055bdbd8e00ee63afda136b88892aee0062f8 \
+            --expected-validation-framework-commit cfb07389191540ca57c9e822b254c279ab903f36
+          python verify_reproduced_results.py \
+            --results-dir release_validation/v0.1.0/results \
+            --expected-version 0.1.0 \
+            --benchmark-repetitions 3
