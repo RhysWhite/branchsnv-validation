@@ -1,0 +1,14 @@
+BRANCHSNV validation repository
+|
+`-- manuscript/
+    `-- figure_3/
+        |-- CODE_WALKTHROUGH.md
+        |-- DIRECTORY_TREE.txt
+        |-- Figure_3.pdf
+        |-- Figure_3_1000dpi.tiff
+        |-- Figure_3_1000dpi_RGB.tiff
+        |-- Figure_3_editable.svg
+        |-- Figure_3_preview_600dpi.png
+        |-- README.md
+        |-- make_figure_3.py
+        `-- requirements.txt
