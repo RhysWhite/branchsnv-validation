@@ -1,0 +1,4 @@
+# Locked Figure 4 render environment used for the publication package.
+# Python 3.13.5
+matplotlib==3.10.8
+Pillow==12.3.0

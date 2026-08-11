@@ -1,0 +1,33 @@
+BRANCHSNV validation repository
+|
+|-- experiments/
+|   `-- 04_scalability/
+|       |-- README.md
+|       |-- generate_inputs.py
+|       |-- run.py
+|       |-- summarize_models.py
+|       `-- plot_results.py
+|
+|-- results/
+|   `-- 04_scalability/
+|       |-- raw_runs.tsv                 <- run-level source used by Figure 4
+|       |-- benchmark_summary.tsv
+|       |-- scaling_models.tsv
+|       |-- summary.json
+|       `-- run_metadata.json
+|
+`-- manuscript/
+    `-- figure_4/
+        |-- CODE_WALKTHROUGH.md
+        |-- DIRECTORY_TREE.txt
+        |-- Figure_4.pdf
+        |-- Figure_4_1000dpi.tiff
+        |-- Figure_4_1000dpi_RGB.tiff
+        |-- Figure_4_editable.svg
+        |-- Figure_4_preview_600dpi.png
+        |-- README.md
+        |-- make_figure_4.py
+        `-- requirements.txt
+
+The benchmark experiment and measurements are retained once, under experiments/ and
+results/. The manuscript/figure_4 directory contains only the publication rendering layer.
