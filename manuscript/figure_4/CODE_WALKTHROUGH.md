@@ -14,7 +14,7 @@ The script reads the committed run-level benchmark measurements, checks that eve
 - `ax.plot(...)`, `ax.scatter(...)`, and `ax.text(...)` draw lines, points, and text in a Matplotlib axes.
 - Indentation is part of Python syntax: lines shifted to the right belong to the block immediately above them.
 
-The important scientific distinction is that fixed configuration lists define **which committed benchmark runs belong in the figure**; the measured wall-time and memory values themselves are read from `results/04_scalability/raw_runs.tsv`.
+The important scientific distinction is that fixed configuration lists define **which committed benchmark runs belong in the figure**; the measured wall-time and memory values themselves are read from `release_validation/v0.1.0/results/04_scalability/raw_runs.tsv`.
 
 ## Line-by-line explanation
 
@@ -49,23 +49,23 @@ Continues the current Python statement or supplies a parameter/value used by the
 ### Line 5
 
 ```python
-only turns the committed run-level measurements in results/04_scalability/raw_runs.tsv
+only turns the committed stable-release measurements in
 ```
-Continues the current Python statement or supplies a parameter/value used by the surrounding operation.
+States that the publication figure uses the committed stable-release benchmark measurements.
 
 ### Line 6
 
 ```python
-into the publication figure. It deliberately does not regenerate benchmark inputs or
+release_validation/v0.1.0/results/04_scalability/raw_runs.tsv into the publication figure.
 ```
-Continues the current Python statement or supplies a parameter/value used by the surrounding operation.
+Identifies the archived BRANCHSNV v0.1.0 run-level benchmark table used to generate the publication figure.
 
 ### Line 7
 
 ```python
-rerun BRANCHSNV.
+It deliberately does not regenerate benchmark inputs or rerun BRANCHSNV.
 ```
-Continues the current Python statement or supplies a parameter/value used by the surrounding operation.
+Clarifies that this plotting script does not regenerate benchmark inputs or rerun BRANCHSNV.
 
 ### Line 8
 
@@ -1806,16 +1806,16 @@ Blank line used only to separate logical blocks and make the script easier to re
 ### Line 256
 
 ```python
-    ax.set_xticks(xs)
+    ax.set_xticks([x for x in xs if x not in ({100} if max(xs) <= 2000 else {5000})])
 ```
-Places x-axis ticks exactly at the measured taxon or site counts.
+Places x-axis ticks at the measured taxon or site counts while omitting the crowded 100-taxon tick in panels A-B and 5,000-site tick in panels C-D. The corresponding measured data points remain plotted.
 
 ### Line 257
 
 ```python
-    ax.set_xticklabels([f"{int(x):,}" for x in xs], rotation=45, ha="right")
+    ax.set_xticklabels([f"{int(x):,}" for x in xs if x not in ({100} if max(xs) <= 2000 else {5000})], rotation=45, ha="right")
 ```
-Formats the numeric x-axis labels with thousands separators and rotates them to avoid collisions.
+Formats the displayed numeric x-axis labels with thousands separators and rotates them to improve readability.
 
 ### Line 258
 
@@ -2128,9 +2128,9 @@ Moves two directory levels upward to locate the validation repository root.
 ### Line 302
 
 ```python
-    raw_runs = repo_root / "results" / "04_scalability" / "raw_runs.tsv"
+    raw_runs = repo_root / "release_validation" / "v0.1.0" / "results" / "04_scalability" / "raw_runs.tsv"
 ```
-Constructs the repository-relative path to the committed run-level benchmark measurements.
+Constructs the repository-relative path to the archived stable-release run-level benchmark measurements.
 
 ### Line 303
 

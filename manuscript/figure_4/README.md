@@ -2,7 +2,7 @@
 
 This directory contains the final Figure 4 artwork and the repository-portable Python/Matplotlib script used to generate it from the committed BRANCHSNV scalability measurements.
 
-The benchmark experiment itself remains under `experiments/04_scalability/`. This manuscript directory does **not** duplicate or rerun the experiment: `make_figure_4.py` reads the committed run-level measurements from `results/04_scalability/raw_runs.tsv`, checks that the expected three measured runs are present for every plotted configuration, calculates the descriptive summaries and linear fits, and writes the publication artwork.
+The benchmark experiment itself remains under `experiments/04_scalability/`. This manuscript directory does **not** duplicate or rerun the experiment: `make_figure_4.py` reads the archived stable-release run-level measurements from `release_validation/v0.1.0/results/04_scalability/raw_runs.tsv`, checks that the expected three measured runs are present for every plotted configuration, calculates the descriptive summaries and linear fits, and writes the publication artwork.
 
 ## Final figure
 
@@ -16,11 +16,11 @@ The benchmark experiment itself remains under `experiments/04_scalability/`. Thi
 
 | File | Purpose | SHA-256 |
 |---|---|---|
-| `Figure_4.pdf` | Vector PDF suitable for manuscript submission and production. | `eea2905ad3dff84674dc1718195cfd62c10bc5f36286537e912a84863f579066` |
-| `Figure_4_editable.svg` | Editable vector source. | `3ac45fde1bee0677126a4b518046141db8cc0e79d0f717fa7f96212d44c4fd16` |
-| `Figure_4_preview_600dpi.png` | GitHub/README preview. | `7c10c2e86e839c8c6cd83888aa7503a4347c0f688439a5764e4118dce5cb2b14` |
-| `Figure_4_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by Matplotlib. | `98a29d3b4af141c77590876d5c3d15c6d497b4de99820d12034e7c2b3bc35725` |
-| `Figure_4_1000dpi_RGB.tiff` | Explicit RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `79769021d792a60d328f13eeef8deba17ed890a2a5231e4410a5ed5c0e721fbd` |
+| `Figure_4.pdf` | Vector PDF suitable for manuscript submission and production. | `dd0a8d76525630270042cca21f29da78d8308fc9e6468fb4f1ce5d395d3ddd2f` |
+| `Figure_4_editable.svg` | Editable vector source. | `b9d633a06c1b14dba2b36ef02879c0ea6ea637b97531cb986b9c6092eef702a0` |
+| `Figure_4_preview_600dpi.png` | GitHub/README preview. | `2192699bbd11641943800d65ee73dd6ea7b25ded8261a6e8fe649dd2347aed50` |
+| `Figure_4_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by Matplotlib. | `6aa1983c9b41e15a70c8456d11401ac12cf92b92a0ac55827e944ae71aeacd01` |
+| `Figure_4_1000dpi_RGB.tiff` | Explicit RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `9dbc7c645b82a07e850c62d451ad0ea79c90ff88922d8562d8c3c585bec22f46` |
 | `make_figure_4.py` | Exact repository-portable script used to generate the final figure files. | - |
 | `CODE_WALKTHROUGH.md` | Plain-English explanation of the data checks, calculations, plotting, and export code. | - |
 | `DIRECTORY_TREE.txt` | Shows where the figure package sits relative to its experimental inputs. | - |
@@ -31,9 +31,14 @@ The benchmark experiment itself remains under `experiments/04_scalability/`. Thi
 The locked render used:
 
 ```text
-Python 3.13.5
+Python 3.13.15
 Matplotlib 3.10.8
 Pillow 12.3.0
+Arimo static TTFs from Google Fonts Arimo commit 4a6255f269916ae7ad3fc2706b0935e7621396b8
+Arimo-Regular.ttf SHA-256: 41b22bc8f0b51f932825d37bc55b5eb6ba67dfe599a626e4aff2b43b624f9f8c
+Arimo-Bold.ttf SHA-256: d7a8b187cf8444d4cfee102e8eae9e3043682fd5106d5d33ed677fe268a0e2ba
+Arimo-Italic.ttf SHA-256: ffdf690e4357a392e4edcc3df0b3adb0302920f75e54f2e6eec355afbe7edcba
+Arimo-BoldItalic.ttf SHA-256: 77c967d49d4ef4a63c39fbcd1e27892102e503e35a20983cb058430c4f268b34
 ```
 
 From the repository root:
@@ -51,7 +56,7 @@ python make_figure_4.py
 The script expects:
 
 ```text
-results/04_scalability/raw_runs.tsv
+release_validation/v0.1.0/results/04_scalability/raw_runs.tsv
 ```
 
 and writes all five final artwork files beside itself.
@@ -68,7 +73,7 @@ experiments/04_scalability/
     plot_results.py
             |
             v
-results/04_scalability/
+release_validation/v0.1.0/results/04_scalability/
     raw_runs.tsv
     benchmark_summary.tsv
     scaling_models.tsv
@@ -87,7 +92,7 @@ manuscript/figure_4/
     Figure_4_1000dpi_RGB.tiff
 ```
 
-`make_figure_4.py` uses `raw_runs.tsv` as the source of truth so the individual measured invocations shown in the figure are directly traceable to the committed benchmark output. It recalculates medians, observed minima/maxima, and the four descriptive linear fits from those run-level values rather than embedding summary numbers in the plotting code.
+`make_figure_4.py` uses the stable-release `raw_runs.tsv` as the source of truth so the individual measured invocations shown in the figure are directly traceable to the archived BRANCHSNV v0.1.0 benchmark output. It recalculates medians, observed minima/maxima, and the four descriptive linear fits from those run-level values rather than embedding summary numbers in the plotting code.
 
 The expected benchmark design is:
 
@@ -122,7 +127,7 @@ The locked render uses **Arimo**, matching the existing Figure 1 package, becaus
 
 If the figure is edited:
 
-1. retain `results/04_scalability/raw_runs.tsv` as the source of the plotted benchmark values;
+1. retain `release_validation/v0.1.0/results/04_scalability/raw_runs.tsv` as the source of the plotted benchmark values;
 2. do not replace the three measured run points with synthetic jittered values - only their horizontal display positions are jittered;
 3. re-check that all 13 unique configuration-mode combinations contain three runs;
 4. confirm that the four calculated R-squared values still match the committed benchmark summaries;

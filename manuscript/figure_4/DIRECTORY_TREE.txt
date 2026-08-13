@@ -10,11 +10,21 @@ BRANCHSNV validation repository
 |
 |-- results/
 |   `-- 04_scalability/
-|       |-- raw_runs.tsv                 <- run-level source used by Figure 4
+|       |-- raw_runs.tsv                 <- historical publication-snapshot measurements
 |       |-- benchmark_summary.tsv
 |       |-- scaling_models.tsv
 |       |-- summary.json
 |       `-- run_metadata.json
+|
+|-- release_validation/
+|   `-- v0.1.0/
+|       `-- results/
+|           `-- 04_scalability/
+|               |-- raw_runs.tsv         <- stable-release source used by Figure 4
+|               |-- benchmark_summary.tsv
+|               |-- scaling_models.tsv
+|               |-- summary.json
+|               `-- run_metadata.json
 |
 `-- manuscript/
     `-- figure_4/
@@ -29,5 +39,7 @@ BRANCHSNV validation repository
         |-- make_figure_4.py
         `-- requirements.txt
 
-The benchmark experiment and measurements are retained once, under experiments/ and
-results/. The manuscript/figure_4 directory contains only the publication rendering layer.
+The benchmark experiment remains under experiments/. Historical publication-snapshot
+measurements are preserved under results/, while the archived stable BRANCHSNV v0.1.0
+measurements used by Figure 4 are retained under release_validation/v0.1.0/. The
+manuscript/figure_4 directory contains only the publication rendering layer.

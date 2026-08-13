@@ -2,9 +2,9 @@
 """Generate manuscript Figure 4 from committed BRANCHSNV scalability runs.
 
 The benchmark experiment itself lives in experiments/04_scalability/. This script
-only turns the committed run-level measurements in results/04_scalability/raw_runs.tsv
-into the publication figure. It deliberately does not regenerate benchmark inputs or
-rerun BRANCHSNV.
+only turns the committed stable-release measurements in
+release_validation/v0.1.0/results/04_scalability/raw_runs.tsv into the publication figure.
+It deliberately does not regenerate benchmark inputs or rerun BRANCHSNV.
 """
 
 from __future__ import annotations
@@ -253,8 +253,8 @@ def draw_scaling_panel(
     ax.plot(fit_x, fit_y, color=FIT_GREY, linewidth=0.85,
             linestyle=(0, (3, 3)), zorder=1)
 
-    ax.set_xticks(xs)
-    ax.set_xticklabels([f"{int(x):,}" for x in xs], rotation=45, ha="right")
+    ax.set_xticks([x for x in xs if x not in ({100} if max(xs) <= 2000 else {5000})])
+    ax.set_xticklabels([f"{int(x):,}" for x in xs if x not in ({100} if max(xs) <= 2000 else {5000})], rotation=45, ha="right")
     ax.tick_params(axis="x", labelsize=5.8)
     ax.margins(x=0.05, y=0.08)
     ax.text(0.98, 0.035, rf"$R^2$ = {format_r2(r2)}", transform=ax.transAxes,
@@ -299,7 +299,7 @@ def draw_mode_panel(
 def main() -> None:
     figure_dir = Path(__file__).resolve().parent
     repo_root = figure_dir.parents[1]
-    raw_runs = repo_root / "results" / "04_scalability" / "raw_runs.tsv"
+    raw_runs = repo_root / "release_validation" / "v0.1.0" / "results" / "04_scalability" / "raw_runs.tsv"
 
     if not raw_runs.exists():
         raise FileNotFoundError(
