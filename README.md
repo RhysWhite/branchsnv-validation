@@ -9,7 +9,7 @@ Reproducible validation, empirical analyses and benchmarks supporting
 separate from the production software so that independent or deliberately incorrect
 implementations cannot alter the production code being tested.
 
-The committed publication snapshot evaluates **BRANCHSNV v0.1.0a1**. Production-source SHA-256 hashes are recorded in the canonical run metadata so the validated analytical source is identifiable independently of later documentation-only repository commits.
+The committed publication snapshot was generated with **BRANCHSNV v0.1.0a1**. A separate stable-release validation record confirms **BRANCHSNV v0.1.0**. Production-source SHA-256 hashes are recorded in the canonical run metadata so the validated analytical source is identifiable independently of later documentation-only repository commits.
 
 ## Validation summary
 
