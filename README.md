@@ -122,8 +122,8 @@ phylogenies.
 
 ## Archiving
 
-The final manuscript-associated GitHub release should be archived in an immutable
-repository such as Zenodo and its DOI added to `CITATION.cff` and the manuscript.
+The manuscript-associated BRANCHSNV publication-validation release v0.1.0 is
+permanently archived at https://doi.org/10.5281/zenodo.21919067.
 
 ## Citation and licence
 
