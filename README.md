@@ -11,6 +11,10 @@ implementations cannot alter the production code being tested.
 
 The committed publication snapshot was generated with **BRANCHSNV v0.1.0a1**. A separate stable-release validation record confirms **BRANCHSNV v0.1.0**. Production-source SHA-256 hashes are recorded in the canonical run metadata so the validated analytical source is identifiable independently of later documentation-only repository commits.
 
+**Production software:** [GitHub](https://github.com/RhysWhite/branchsnv) · [PyPI](https://pypi.org/project/branchsnv/) · [Documentation](https://branchsnv.readthedocs.io/en/latest/) · [bio.tools](https://bio.tools/branchsnv) · [Zenodo](https://doi.org/10.5281/zenodo.21919038)
+
+**Validation archive:** [Zenodo](https://doi.org/10.5281/zenodo.21919067)
+
 ## Validation summary
 
 | Experiment | Primary result |
@@ -124,6 +128,9 @@ phylogenies.
 
 The manuscript-associated BRANCHSNV publication-validation release v0.1.0 is
 permanently archived at https://doi.org/10.5281/zenodo.21919067.
+
+The corresponding production BRANCHSNV software release is archived separately at
+https://doi.org/10.5281/zenodo.21919038.
 
 ## Citation and licence
 
