@@ -35,7 +35,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -297,50 +297,347 @@ def retrieve_pubmed(
     email: str,
     user_agent: str,
 ) -> tuple[list[dict], dict]:
+    """Retrieve one PubMed query, partitioning by EDAT above 10,000 hits.
+
+    EDAT is used only as a deterministic transport partition. The scientific
+    query expression is never modified.
+    """
 
     qid = query["query_id"]
+    scientific_term = query["pubmed_query"]
+    max_esearch_ids = 10000
 
-    params = {
-        "db": "pubmed",
-        "term": query["pubmed_query"],
-        "retmode": "json",
-        "retmax": 10000,
-        "tool": "branchsnv_validation",
-        "email": email,
-    }
+    # Broad transport envelope only. Equality with the original unbounded
+    # count is required before partitioned retrieval can proceed.
+    envelope_start = date(1000, 1, 1)
+    envelope_end = date(3000, 12, 31)
 
-    url = build_url(PUBMED_ESEARCH, params)
+    response_files = 0
 
-    search = fetch_json(
-        url,
-        headers={"User-Agent": user_agent},
-        delay=0.36,
-        raw_path=raw_root / "pubmed" / f"{qid}_esearch.json",
+    def fetch_esearch(
+        *,
+        raw_name: str,
+        mindate: date | None = None,
+        maxdate: date | None = None,
+        count_only: bool = False,
+    ) -> tuple[int, list[str]]:
+        nonlocal response_files
+
+        if (mindate is None) != (maxdate is None):
+            raise RuntimeError(
+                f"{qid}: PubMed EDAT bounds must be supplied together"
+            )
+
+        params: dict[str, str | int] = {
+            "db": "pubmed",
+            "term": scientific_term,
+            "retmode": "json",
+            "retmax": 0 if count_only else max_esearch_ids,
+            "tool": "branchsnv_validation",
+            "email": email,
+        }
+
+        if count_only:
+            params["rettype"] = "count"
+
+        if mindate is not None and maxdate is not None:
+            params["datetype"] = "edat"
+            params["mindate"] = mindate.strftime("%Y/%m/%d")
+            params["maxdate"] = maxdate.strftime("%Y/%m/%d")
+
+        url = build_url(PUBMED_ESEARCH, params)
+
+        payload = fetch_json(
+            url,
+            headers={"User-Agent": user_agent},
+            delay=0.36,
+            raw_path=raw_root / "pubmed" / raw_name,
+        )
+
+        response_files += 1
+
+        result = payload.get("esearchresult", {})
+        reported_count = int(result.get("count", 0))
+        ids = [str(x) for x in result.get("idlist", [])]
+
+        if count_only:
+            if ids:
+                raise RuntimeError(
+                    f"{qid}: count-only PubMed ESearch unexpectedly "
+                    f"returned {len(ids)} IDs"
+                )
+            return reported_count, []
+
+        if reported_count <= max_esearch_ids:
+            if len(ids) != reported_count:
+                raise RuntimeError(
+                    f"{qid}: PubMed reported {reported_count} records "
+                    f"but returned {len(ids)} IDs"
+                )
+        else:
+            # ESearch can expose only the first 10,000 PubMed UIDs.
+            if len(ids) > max_esearch_ids:
+                raise RuntimeError(
+                    f"{qid}: PubMed returned more than "
+                    f"{max_esearch_ids} IDs in one ESearch response"
+                )
+
+        return reported_count, ids
+
+    # --------------------------------------------------------
+    # Original unmodified search.
+    # --------------------------------------------------------
+
+    reported, initial_ids = fetch_esearch(
+        raw_name=f"{qid}_esearch.json",
     )
 
-    result = search.get("esearchresult", {})
-    reported = int(result.get("count", 0))
-    ids = [str(x) for x in result.get("idlist", [])]
+    partition_metadata: dict | None = None
 
-    if reported > 10000:
-        raise RuntimeError(
-            f"{qid}: PubMed returned {reported:,} records. "
-            "This exceeds the PubMed ESearch 10,000-record retrieval limit. "
-            "The query must be prespecifically subdivided before continuing."
+    if reported <= max_esearch_ids:
+        ids = initial_ids
+
+    else:
+        # ----------------------------------------------------
+        # Verify that the broad EDAT envelope is lossless.
+        # ----------------------------------------------------
+
+        envelope_count, _ = fetch_esearch(
+            raw_name=f"{qid}_edat_envelope_count.json",
+            mindate=envelope_start,
+            maxdate=envelope_end,
+            count_only=True,
         )
+
+        if envelope_count != reported:
+            raise RuntimeError(
+                f"{qid}: unbounded PubMed count is {reported:,}, "
+                f"but EDAT envelope "
+                f"{envelope_start.isoformat()}.."
+                f"{envelope_end.isoformat()} contains "
+                f"{envelope_count:,}. "
+                "Partition envelope is not lossless."
+            )
+
+        nodes: list[dict] = []
+        leaves: list[dict] = []
+
+        def interval_label(start_date: date, end_date: date) -> str:
+            return (
+                f"{start_date.strftime('%Y%m%d')}_"
+                f"{end_date.strftime('%Y%m%d')}"
+            )
+
+        def retrieve_interval(
+            start_date: date,
+            end_date: date,
+            interval_count: int,
+            *,
+            depth: int,
+        ) -> list[str]:
+            """Recursively retrieve one inclusive EDAT interval."""
+
+            if start_date > end_date:
+                raise RuntimeError(
+                    f"{qid}: invalid EDAT interval "
+                    f"{start_date}..{end_date}"
+                )
+
+            node = {
+                "start": start_date.isoformat(),
+                "end": end_date.isoformat(),
+                "count": interval_count,
+                "depth": depth,
+                "terminal": interval_count <= max_esearch_ids,
+            }
+            nodes.append(node)
+
+            if interval_count <= max_esearch_ids:
+                label = interval_label(start_date, end_date)
+
+                leaf_reported, leaf_ids = fetch_esearch(
+                    raw_name=f"{qid}_edat_{label}_esearch.json",
+                    mindate=start_date,
+                    maxdate=end_date,
+                    count_only=False,
+                )
+
+                if leaf_reported != interval_count:
+                    raise RuntimeError(
+                        f"{qid}: EDAT leaf {start_date}..{end_date} "
+                        f"was counted as {interval_count:,} records "
+                        f"but retrieval reported {leaf_reported:,}"
+                    )
+
+                if len(leaf_ids) != interval_count:
+                    raise RuntimeError(
+                        f"{qid}: EDAT leaf {start_date}..{end_date} "
+                        f"expected {interval_count:,} IDs but returned "
+                        f"{len(leaf_ids):,}"
+                    )
+
+                leaves.append({
+                    "start": start_date.isoformat(),
+                    "end": end_date.isoformat(),
+                    "count": interval_count,
+                })
+
+                return leaf_ids
+
+            if start_date == end_date:
+                raise RuntimeError(
+                    f"{qid}: single-day EDAT interval "
+                    f"{start_date.isoformat()} contains "
+                    f"{interval_count:,} records, exceeding the "
+                    f"{max_esearch_ids:,}-record ESearch limit"
+                )
+
+            midpoint = start_date + (
+                (end_date - start_date) // 2
+            )
+
+            left_start = start_date
+            left_end = midpoint
+            right_start = midpoint + timedelta(days=1)
+            right_end = end_date
+
+            left_label = interval_label(left_start, left_end)
+            right_label = interval_label(right_start, right_end)
+
+            left_count, _ = fetch_esearch(
+                raw_name=f"{qid}_edat_{left_label}_count.json",
+                mindate=left_start,
+                maxdate=left_end,
+                count_only=True,
+            )
+
+            right_count, _ = fetch_esearch(
+                raw_name=f"{qid}_edat_{right_label}_count.json",
+                mindate=right_start,
+                maxdate=right_end,
+                count_only=True,
+            )
+
+            if left_count + right_count != interval_count:
+                raise RuntimeError(
+                    f"{qid}: EDAT child counts do not reconcile for "
+                    f"{start_date}..{end_date}: "
+                    f"{left_count:,} + {right_count:,} != "
+                    f"{interval_count:,}"
+                )
+
+            left_ids = retrieve_interval(
+                left_start,
+                left_end,
+                left_count,
+                depth=depth + 1,
+            )
+
+            right_ids = retrieve_interval(
+                right_start,
+                right_end,
+                right_count,
+                depth=depth + 1,
+            )
+
+            return left_ids + right_ids
+
+        ids = retrieve_interval(
+            envelope_start,
+            envelope_end,
+            envelope_count,
+            depth=0,
+        )
+
+        leaf_count_sum = sum(
+            int(leaf["count"])
+            for leaf in leaves
+        )
+
+        if leaf_count_sum != reported:
+            raise RuntimeError(
+                f"{qid}: terminal EDAT counts sum to "
+                f"{leaf_count_sum:,}, expected {reported:,}"
+            )
+
+        if len(ids) != reported:
+            raise RuntimeError(
+                f"{qid}: partition retrieval returned "
+                f"{len(ids):,} PMIDs, expected {reported:,}"
+            )
+
+        unique_ids = set(ids)
+
+        if len(unique_ids) != reported:
+            duplicate_count = len(ids) - len(unique_ids)
+            raise RuntimeError(
+                f"{qid}: partition retrieval contains "
+                f"{duplicate_count:,} duplicate PMID occurrence(s); "
+                "non-overlapping EDAT intervals must be disjoint"
+            )
+
+        partition_metadata = {
+            "schema_version": 1,
+            "query_id": qid,
+            "partition_field": "edat",
+            "scientific_query_modified": False,
+            "unbounded_reported_count": reported,
+            "envelope": {
+                "start": envelope_start.isoformat(),
+                "end": envelope_end.isoformat(),
+                "reported_count": envelope_count,
+            },
+            "max_ids_per_esearch": max_esearch_ids,
+            "node_count": len(nodes),
+            "leaf_count": len(leaves),
+            "terminal_count_sum": leaf_count_sum,
+            "retrieved_pmid_count": len(ids),
+            "unique_pmid_count": len(unique_ids),
+            "nodes": nodes,
+            "leaves": leaves,
+        }
+
+        partition_path = (
+            raw_root
+            / "pubmed"
+            / f"{qid}_edat_partition_metadata.json"
+        )
+
+        partition_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with partition_path.open("w", encoding="utf-8") as fh:
+            json.dump(
+                partition_metadata,
+                fh,
+                indent=2,
+                sort_keys=True,
+            )
+            fh.write("\n")
+
+    # Sorting makes downstream output independent of partition traversal.
+    ids = sorted(ids, key=int)
 
     if len(ids) != reported:
         raise RuntimeError(
-            f"{qid}: PubMed reported {reported} records but returned "
-            f"{len(ids)} IDs."
+            f"{qid}: final PubMed PMID count is {len(ids):,}; "
+            f"expected {reported:,}"
         )
 
-    ids = sorted(ids, key=int)
+    if len(set(ids)) != reported:
+        raise RuntimeError(
+            f"{qid}: final PubMed PMID set is not unique"
+        )
+
+    # --------------------------------------------------------
+    # Retrieve summaries exactly as before.
+    # --------------------------------------------------------
 
     candidates: list[dict] = []
-    response_files = 1
 
-    for batch_number, start in enumerate(range(0, len(ids), 200), start=1):
+    for batch_number, start in enumerate(
+        range(0, len(ids), 200),
+        start=1,
+    ):
         batch = ids[start:start + 200]
 
         params = {
@@ -393,6 +690,12 @@ def retrieve_pubmed(
                 "source_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
             })
 
+    if len(candidates) != reported:
+        raise RuntimeError(
+            f"{qid}: PubMed candidate count is "
+            f"{len(candidates):,}; expected {reported:,}"
+        )
+
     return candidates, {
         "source": "pubmed",
         "query_id": qid,
@@ -402,6 +705,7 @@ def retrieve_pubmed(
         "response_files": response_files,
         "complete": reported == len(candidates),
     }
+
 
 
 def retrieve_openalex(
