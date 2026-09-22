@@ -506,3 +506,36 @@ The failed execution is retained under
 The retriever, citation protocol, anchors, search corpus, and scientific
 criteria are unchanged. A subsequent production attempt is permitted after
 exporting the existing shell variable to the child-process environment.
+
+## Amendment 16 — Wave 0 Attempt 02 malformed credential failure
+
+**Timing:** recorded immediately after production Wave 0 Attempt 02 and before
+any subsequent citation retrieval.
+
+After Attempt 01 established that `OPENALEX_API_KEY` had not been exported,
+the existing non-empty shell variable was exported and Attempt 02 was started.
+
+Attempt 02 failed during construction of the OpenAlex HTTP Authorization
+header with `ValueError: Invalid header value`.
+
+The contemporaneously preserved traceback records that the rejected header
+value began with `Bearer echo` and contained carriage-return-delimited shell
+command text including `export OPENALEX_API_KEY`. This establishes that the
+exported value was malformed rather than a valid single-line API credential.
+
+A later audit found that `OPENALEX_API_KEY` was no longer populated. That later
+environment state is not used to reconstruct the historical value; the failure
+classification relies on the contemporaneous execution log.
+
+The exception occurred in `http.client.putheader()` before HTTP transmission.
+The audited production output contains zero result files and no usable citation
+response or citation record was observed.
+
+The failed execution and partial-output inventory are retained under
+`audit/citation_wave_0_attempt_02_invalid_credential/`.
+
+No retrieval implementation, citation source, anchor, scientific criterion,
+search expression, or stopping rule was changed.
+
+A subsequent production attempt is permitted only after supplying the actual
+OpenAlex API key as a valid single-line environment credential.
