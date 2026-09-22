@@ -10,28 +10,29 @@ The figure is intentionally parsimonious: one branch, one site, two distinct ana
 
 ## Figure legend
 
-**Figure 1. Conceptual design of BRANCHSNV.** **(A)** A single nucleotide site is evaluated on an explicitly rooted phylogeny with a user-defined focal edge identified by its complete descendant set. In the illustrative example, all focal descendants carry G, while G also occurs in a sampled taxon outside the focal clade. **(B)** BRANCHSNV evaluates strict clade exclusivity and focal-edge substitution independently. Because G occurs outside the focal clade, the site is not fixed-exclusive. Under unordered equal-cost Sankoff parsimony, all globally minimum-change reconstructions support A→G on the focal edge, so the focal-edge substitution is classified as unambiguous. **(C)** BRANCHSNV retains the complete set, P*, of optimal parent-child nucleotide-state pairs on the focal edge. A single changing pair is reported as an unambiguous change; multiple changing pairs as state ambiguity; a mixture of changing and non-changing pairs as placement ambiguity; and exclusively non-changing pairs as no change. BRANCHSNV therefore retains reconstruction uncertainty rather than resolving equal-cost ties arbitrarily. The design safeguards shown below the panels make rooting, branch identity, taxon correspondence, optimal-solution retention, and analysis provenance explicit.
+**Figure 1. Conceptual design of BRANCHSNV.** **(A)** A single nucleotide site is evaluated on an explicitly rooted phylogeny with a user-defined focal edge identified by its complete descendant set. In the illustrative example, all focal descendants carry G, while G also occurs in a sampled taxon outside the focal clade. **(B)** BRANCHSNV evaluates strict clade exclusivity and focal-edge substitution independently. Because G occurs outside the focal clade, the site is not fixed-exclusive. Under unordered equal-cost Sankoff parsimony, all globally minimum-change reconstructions support A→G on the focal edge, so the focal-edge substitution is classified as unambiguous. **(C)** BRANCHSNV retains all optimal parent-child nucleotide-state pairs on the focal edge. A single changing pair is reported as an unambiguous change; multiple changing pairs as state ambiguity; a mixture of changing and non-changing pairs as placement ambiguity; and exclusively non-changing pairs as no change. BRANCHSNV therefore retains reconstruction uncertainty rather than resolving equal-cost ties arbitrarily. The design safeguards shown below the panels make rooting, branch identity, taxon correspondence, optimal-solution retention, and analysis provenance explicit.
 
 ## Directory contents
 
 | File | Purpose | SHA-256 |
 |---|---|---|
-| `Figure_1.pdf` | Vector PDF suitable for manuscript submission and production. | `2b1f82aaaf224d491999f8c768860ebb6833ad014d7d5cc425b64c3115a3cc8e` |
-| `Figure_1_editable.svg` | Editable vector source. | `3f3be47938f059b10bfe071741f63ce583cbd7cd5051d05d050ccb998be7bde5` |
-| `Figure_1_preview_600dpi.png` | GitHub/README preview. | `807fe8918f846671a4e9ebc0d3e184d65daf26dd3ad150701bd9955695c9ec16` |
-| `Figure_1_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by the plotting script. | `4707f4b94526f539d1bc9e7d9aa634108f29a577e89528c0018139c8844e4237` |
-| `Figure_1_1000dpi_RGB.tiff` | RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `8f75e0b6e53a49eb9097fb76ebd1354318cb8c956b4d9c5ce92467c3dded443f` |
+| `Figure_1.pdf` | Vector PDF suitable for manuscript submission and production. | `3120521ba4053aabd08b883dde673c6d95dea3b5d11bffb6136ff4aee74c64ef` |
+| `Figure_1_editable.svg` | Editable vector source. | `afcc11df780919d18370bd320fdb01bb9f637f224ec8a6a8d6d19020ebc28a66` |
+| `Figure_1_preview_600dpi.png` | GitHub/README preview. | `81603ab43a5c67bd0f09e795f7af9afb0438b23dc3e6b2d28774679fe490d006` |
+| `Figure_1_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by the plotting script. | `ab2136c751c565d9b6ef336b9e6dfbb361740e475e91f2ba80f0575234325d4d` |
+| `Figure_1_1000dpi_RGB.tiff` | RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `be66a65a27546dcc7f29b9bce83d32204382176ce57d0113936c74c349ab8918` |
 | `make_figure_1.py` | Exact script used to generate the final figure files in this directory. | — |
 | `CODE_WALKTHROUGH.md` | Plain-English explanation of the script, line by line. | — |
-| `requirements.txt` | Python package version used for the locked render. | — |
+| `requirements.txt` | Python package versions used for the locked render and production conversion. | — |
 
 ## Reproducing the figure
 
-The locked render used:
+The revised locked render and RGB production conversion used:
 
 ```text
-Python 3.13.5
+Python 3.13.15
 Matplotlib 3.10.8
+Pillow 12.3.0
 ```
 
 From this directory, run:
@@ -40,7 +41,7 @@ From this directory, run:
 python make_figure_1.py
 ```
 
-The script writes the PDF, SVG, PNG, and TIFF outputs into the same directory.
+The script writes the PDF, SVG, PNG, and RGBA TIFF outputs into the same directory. The separate RGB production TIFF is generated from the RGBA TIFF by flattening transparency onto a white background with Pillow.
 
 ## Figure specifications
 
@@ -84,7 +85,7 @@ G is therefore **not fixed-exclusive**, because G is also present outside the fo
 For the illustrated rooted topology, unordered equal-cost Sankoff parsimony has a complete optimal focal-edge parent-child pair set of:
 
 ```text
-P* = {A→G}
+A→G only
 ```
 
 The focal-edge substitution is therefore unambiguous even though the derived G state is not clade-exclusive. This is the conceptual distinction BRANCHSNV is designed to preserve.

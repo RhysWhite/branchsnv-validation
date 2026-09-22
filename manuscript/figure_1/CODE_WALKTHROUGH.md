@@ -1083,9 +1083,9 @@ Labels the right endpoint as the child state.
 ### Line 153
 
 ```python
-axB2.text(0.50, 0.55, "all global optima", fontsize=5.9, color=GREY, ha="center")
+axB2.text(0.50, 0.55, "all optimal reconstructions", fontsize=5.9, color=GREY, ha="center")
 ```
-Adds `all global optima` above the endpoint relationship.
+Adds `all optimal reconstructions` above the endpoint relationship.
 
 ### Line 154
 
@@ -1167,9 +1167,9 @@ Continues the appearance and alignment settings for the drawing command started 
 ### Line 165
 
 ```python
-axB2.text(0.00, 0.005, r"$P^\ast=\{A\rightarrow G\}$", fontsize=6.2,
+axB2.text(0.00, 0.005, "Only optimal focal-edge pair: A→G", fontsize=6.2,
 ```
-Begins the mathematical notation for the complete focal-edge pair set, P* = {A→G}.
+Adds the plain-language statement `Only optimal focal-edge pair: A→G`.
 
 ### Line 166
 
@@ -1244,9 +1244,9 @@ Human-readable comment: Column headers — no floating divider above them.
 ### Line 176
 
 ```python
-axChead.text(0.00, 0.72, "Optimal pair set", fontsize=5.9, color=GREY,
+axChead.text(0.00, 0.72, "Optimal parent→child pair(s)", fontsize=5.9, color=GREY,
 ```
-Adds the left table header `Optimal pair set`.
+Adds the left table header `Optimal parent→child pair(s)`.
 
 ### Line 177
 
@@ -1314,28 +1314,28 @@ Starts the list of four illustrative reconstruction classes.
 ### Line 186
 
 ```python
-    (r"$P^\ast=\{A\rightarrow G\}$", "Unambiguous change", BLUE),
+    ("A→G only", "Unambiguous change", BLUE),
 ```
 Defines the unambiguous-change example: only A→G is optimal.
 
 ### Line 187
 
 ```python
-    (r"$P^\ast=\{A\rightarrow G,\ C\rightarrow G\}$", "State ambiguity", ORANGE),
+    ("A→G or C→G", "State ambiguity", ORANGE),
 ```
 Defines the state-ambiguity example: A→G and C→G are both optimal and both imply a change.
 
 ### Line 188
 
 ```python
-    (r"$P^\ast=\{A\rightarrow G,\ G\rightarrow G\}$", "Placement ambiguity", PURPLE),
+    ("A→G or G→G", "Placement ambiguity", PURPLE),
 ```
 Defines the placement-ambiguity example: A→G and G→G are both optimal, so the change may or may not lie on the focal edge.
 
 ### Line 189
 
 ```python
-    (r"$P^\ast=\{G\rightarrow G\}$", "No change", GREY),
+    ("G→G only", "No change", GREY),
 ```
 Defines the no-change example: only G→G is optimal.
 
@@ -1716,4 +1716,4 @@ Text wording, output filenames, and colours can be changed without changing the 
 
 ## What must be re-checked if changed
 
-The topology coordinates and the nine nucleotide states in Panel A jointly define the scientific example. If the tree topology or any of the states are changed, independently re-check that the complete optimal focal-edge pair set is still `P* = {A→G}` before using the revised figure.
+The topology coordinates and the nine nucleotide states in Panel A jointly define the scientific example. If the tree topology or any of the states are changed, independently re-check that the only optimal focal-edge pair is still `A→G` before using the revised figure.

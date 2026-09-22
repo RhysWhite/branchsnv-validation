@@ -150,7 +150,7 @@ axB2.text(0.00, 0.74, "Substitution on the focal edge?", fontsize=8.2,
           fontweight="bold", color=INK, va="top")
 axB2.text(0.26, 0.46, "parent", fontsize=5.9, color=GREY, ha="center")
 axB2.text(0.74, 0.46, "child", fontsize=5.9, color=GREY, ha="center")
-axB2.text(0.50, 0.55, "all global optima", fontsize=5.9, color=GREY, ha="center")
+axB2.text(0.50, 0.55, "all optimal reconstructions", fontsize=5.9, color=GREY, ha="center")
 for x, state, edge in [(0.26, "A", ORANGE), (0.74, "G", BLUE)]:
     axB2.add_patch(Circle((x, 0.31), 0.055, ec=edge, fc="white", lw=1.0))
     axB2.text(x, 0.31, state, fontsize=7.2, fontweight="bold",
@@ -162,7 +162,7 @@ axB2.text(0.00, 0.06, "YES", fontsize=13.0, fontweight="bold",
           color=ORANGE, va="bottom")
 axB2.text(0.23, 0.085, "unambiguous A→G", fontsize=6.9, fontweight="bold",
           color=INK, va="bottom")
-axB2.text(0.00, 0.005, r"$P^\ast=\{A\rightarrow G\}$", fontsize=6.2,
+axB2.text(0.00, 0.005, "Only optimal focal-edge pair: A→G", fontsize=6.2,
           color=GREY, va="bottom")
 
 # ======================================================
@@ -173,7 +173,7 @@ fig.text(0.095, 0.292, "Retain all optimal focal-edge solutions",
          fontsize=8.6, fontweight="bold", color=INK, va="top")
 
 # Column headers — no floating divider above them
-axChead.text(0.00, 0.72, "Optimal pair set", fontsize=5.9, color=GREY,
+axChead.text(0.00, 0.72, "Optimal parent→child pair(s)", fontsize=5.9, color=GREY,
              va="center", ha="left")
 axChead.text(0.49, 0.72, "BRANCHSNV reports", fontsize=5.9, color=GREY,
              va="center", ha="left")
@@ -183,10 +183,10 @@ axChead.plot([0.00, 0.84], [0.28, 0.28], color=LIGHT, lw=0.6)
 
 # Table rows
 rows = [
-    (r"$P^\ast=\{A\rightarrow G\}$", "Unambiguous change", BLUE),
-    (r"$P^\ast=\{A\rightarrow G,\ C\rightarrow G\}$", "State ambiguity", ORANGE),
-    (r"$P^\ast=\{A\rightarrow G,\ G\rightarrow G\}$", "Placement ambiguity", PURPLE),
-    (r"$P^\ast=\{G\rightarrow G\}$", "No change", GREY),
+    ("A→G only", "Unambiguous change", BLUE),
+    ("A→G or C→G", "State ambiguity", ORANGE),
+    ("A→G or G→G", "Placement ambiguity", PURPLE),
+    ("G→G only", "No change", GREY),
 ]
 ysC = [0.87, 0.61, 0.35, 0.09]
 for i, (lhs, rhs, c) in enumerate(rows):
