@@ -1,0 +1,9 @@
+wave	anchor_id	tool	confirmed_role	canonical_identifier_type	canonical_identifier	canonical_title	canonical_year	anchor_evidence	anchor_origin	retrieval_status
+0	W0A01	CLASSICO/Evidente	direct	doi	10.1093/bioadv/vbac075	Evidente—a visual analytics tool for data enrichment in SNP-based phylogenetic trees	2022	E01	frozen_initial_anchor_screen	pending
+0	W0A02	SNPPar	direct	doi	10.1099/mgen.0.000694	SNPPar: identifying convergent evolution and other homoplasies from microbial whole-genome alignments	2021	E02	frozen_initial_anchor_screen	pending
+0	W0A03	SubRecon	direct	doi	10.1093/bioinformatics/bty101	SubRecon: ancestral reconstruction of amino acid substitutions along a branch in a phylogeny	2018	E03	frozen_initial_anchor_screen	pending
+0	W0A04	TreeTime	direct	doi	10.1093/ve/vex042	TreeTime: Maximum-likelihood phylodynamic analysis	2018	E04;E05	frozen_initial_anchor_screen	pending
+0	W0A05	FastML	near_direct	doi	10.1093/nar/gks498	FastML: a web server for probabilistic reconstruction of ancestral sequences	2012	E06	frozen_initial_anchor_screen	pending
+0	W0A06	kSNP3.0	near_direct	doi	10.1093/bioinformatics/btv271	kSNP3.0: SNP detection and phylogenetic analysis of genomes without genome alignment or reference genome	2015	E07	frozen_initial_anchor_screen	pending
+0	W0A07	PAML	near_direct	doi	10.1093/molbev/msm088	PAML 4: phylogenetic analysis by maximum likelihood	2007	E08	frozen_initial_anchor_screen	pending
+0	W0A08	PastML	near_direct	doi	10.1093/molbev/msz131	A Fast Likelihood Method to Reconstruct and Visualize Ancestral Scenarios	2019	E09	frozen_initial_anchor_screen	pending

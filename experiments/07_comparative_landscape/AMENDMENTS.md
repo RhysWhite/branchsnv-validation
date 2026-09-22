@@ -327,3 +327,38 @@ These endpoints are frozen in
 
 Results of this validation will not be used to modify the primary search
 corpus.
+
+## Amendment 10 — iterative dual-source citation chaining
+
+**Timing:** frozen after source-backed initial citation-anchor screening and
+search-parameter validation planning, but before retrieval of any backward or
+forward citation neighbourhood.
+
+Citation chaining is operationalized as iterative bidirectional graph
+traversal rather than a single citation hop.
+
+Every eligible direct/near-direct method discovered during a completed wave
+becomes a next-wave anchor once its canonical primary publication has been
+established. Newly discovered anchors are not expanded within the wave in which
+they are found.
+
+Chaining continues until a complete wave yields zero new eligible
+direct/near-direct methods requiring expansion.
+
+To reduce dependence on a single citation graph, citation edges are retrieved
+from both OpenAlex Works and OpenCitations Index v2. Their union defines the
+citation discovery set and source provenance is retained for every edge.
+
+No citation-count, publication-date, language, publication-type, software-name,
+title-keyword, or abstract-keyword filter is applied before record screening.
+
+A wave cannot be declared complete while citation retrieval, record screening,
+candidate-method assessment, or canonical-anchor determination remains
+unfinished.
+
+Citation chaining cannot alter the already-frozen formal or high-recall search
+expressions. Search misses identified during chaining are retained for the
+prespecified final completeness and miss analysis.
+
+The complete operational rules are frozen in
+`CITATION_CHAINING_PROTOCOL.md`.
