@@ -452,3 +452,31 @@ screening criterion, or stopping rule.
 
 No production citation API request had occurred when this correction was
 specified.
+
+## Amendment 14 — resolution of OpenAlex credential static-check false positive
+
+**Timing:** recorded after credential hardening and its subsequent read-only
+audit, but before any production citation API request.
+
+An auxiliary static check intended to verify removal of the OpenAlex API key
+from request URLs searched the complete Python source for the literal substring
+`api_key=`. It reported a failure because normal Python keyword-argument syntax
+in the internal call `api_key=api_key` contains the same substring.
+
+A read-only AST and runtime audit demonstrated that this was a false positive:
+
+1. neither OpenAlex URL-construction function accepts an API-key argument;
+2. no `build_url()` parameter dictionary contains an `api_key` key;
+3. the key is supplied to OpenAlex requests through HTTP `Authorization`
+   headers;
+4. runtime-generated OpenAlex URLs contain no API-key parameter; and
+5. the frozen offline retrieval regression suite remains fully passing.
+
+The credential-handling implementation itself therefore required no further
+change.
+
+The audit is retained under
+`audit/openalex_credential_static_check/`.
+
+No production citation retrieval had occurred when this resolution was
+recorded.
