@@ -258,3 +258,33 @@ No identity status, eligibility criterion, landscape decision, analytical
 role, bibliographic anchor, screening note, or citation-chain decision was
 modified. All nine candidates remain completely unscreened and all
 citation-chain anchor decisions remain `pending`.
+
+## Amendment 08 — direct and near-direct role rubric
+
+**Timing:** frozen before any of the nine citation-anchor candidates received
+a final human-confirmed identity, software-landscape eligibility decision,
+evidence-supported analytical role, canonical publication anchor, or
+citation-chain decision.
+
+The original protocol distinguishes direct and near-direct methods but did not
+operationally define the boundary between those labels.
+
+The role distinction is therefore frozen against the analytical endpoints,
+rather than against particular tool identities.
+
+A method is `direct` when its documented first-class output includes either
+(1) clade-exclusive/fixed sequence-state classification or (2) sequence-state
+change/substitution assigned to a phylogenetic branch or edge.
+
+A method is `near_direct` when it provides closely related ancestral-state,
+ancestral-sequence, node-associated SNP, or phylogenetic-state output from
+which such an endpoint could be derived, but does not itself document the
+endpoint as a first-class output.
+
+The complete rule is retained in `CITATION_ANCHOR_ROLE_RUBRIC.md`.
+
+Seed-registry roles remain provenance only. They do not determine the final
+evidence-supported role.
+
+This clarification changes no search result, seed-recovery result, eligibility
+criterion, capability result, benchmark decision, or citation-chain decision.

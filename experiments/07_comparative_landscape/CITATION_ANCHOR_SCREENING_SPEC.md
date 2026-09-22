@@ -122,6 +122,11 @@ whether the documented analytical purpose supports:
 - `other_landscape_role`
 - `not_established`
 
+These values are operationally defined in the separately frozen
+`CITATION_ANCHOR_ROLE_RUBRIC.md`. Role assignment is based on documented
+output semantics relative to the prespecified BRANCHSNV comparison endpoints,
+not on the seed-registry label.
+
 This stage does not assign quantitative benchmark eligibility.
 
 ## 8. Canonical publication anchor
