@@ -539,3 +539,31 @@ search expression, or stopping rule was changed.
 
 A subsequent production attempt is permitted only after supplying the actual
 OpenAlex API key as a valid single-line environment credential.
+
+## Amendment 17 — Wave 0 Attempt 03 incomplete HTTP response
+
+**Timing:** recorded immediately after Wave 0 production Attempt 03 and before
+any retry, reconciliation, citation screening, or scientific use of its
+partial output.
+
+Attempt 03 successfully reached OpenAlex and OpenCitations and retrieved
+multiple raw citation responses. It later failed while reading the
+OpenCitations forward-citation response for Wave 0 anchor W0A07 (PAML).
+
+Python raised `http.client.IncompleteRead`: 139,129 bytes had been received and
+4,673,415 additional bytes were expected from the response body.
+
+The corresponding OpenCitations forward-count request had completed, but the
+forward citation-data response was not written because `response.read()` did
+not complete. Wave 0 anchor W0A08 had not yet started.
+
+All successfully written raw responses were validated and preserved
+byte-for-byte in the Attempt 03 audit. The partial retrieval is explicitly
+excluded from screening and scientific analysis.
+
+This failure exposes a transport-robustness gap in the retriever:
+`http.client.IncompleteRead` was not among its retryable exceptions.
+
+Any subsequent implementation change may add retry handling for this transport
+exception but may not alter citation sources, anchors, filters, search
+expressions, screening criteria, or the saturation stopping rule.
