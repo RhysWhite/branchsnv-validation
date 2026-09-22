@@ -112,3 +112,56 @@ accordingly.
 No formal record screening, software-landscape inclusion/exclusion decisions,
 capability classification, or benchmark selection had been performed before
 this amendment.
+
+## Amendment 04 — PubMed retrieval partitioning above 10,000 records
+
+**Timing:** after failed high-recall retrieval Attempt 03 and before any
+screening, eligibility assessment, capability classification, or benchmark
+selection.
+
+The frozen high-recall retrieval implementation failed closed on PubMed query
+HR05 because PubMed reported 12,654 matching records. The implementation
+allowed a maximum of 10,000 PubMed ESearch identifiers per query, consistent
+with the PubMed ESearch retrieval ceiling.
+
+This failure does not motivate any change to the scientific search expression.
+The five high-recall concept queries therefore remain unchanged.
+
+To permit complete retrieval of a PubMed query returning more than 10,000
+records, the PubMed retrieval implementation will be amended to partition the
+result set deterministically by PubMed Entry Date (EDAT).
+
+The amended behaviour will be:
+
+1. execute the original unmodified PubMed query and record its reported count;
+2. if the reported count is <=10,000, retain the existing retrieval behaviour;
+3. if the reported count is >10,000, retain the original query expression and
+   recursively subdivide retrieval using `datetype=edat` with non-overlapping
+   `mindate` and `maxdate` intervals;
+4. bisect date intervals deterministically until every terminal interval
+   reports <=10,000 records;
+5. retrieve all PMIDs from every terminal interval;
+6. require the sum of terminal interval counts to equal the count reported by
+   the original unpartitioned query;
+7. require the number of retrieved PMIDs and the number of unique PMIDs both
+   to equal that original reported count;
+8. fail closed if a single-day EDAT interval still exceeds 10,000 records, if
+   interval counts do not reconcile, if duplicate PMIDs occur across
+   non-overlapping intervals, or if any PubMed summary record is missing; and
+9. retain the partition responses and partition metadata in the raw retrieval
+   archive for audit.
+
+EDAT is used only as a retrieval partition and is not an additional scientific
+eligibility or search criterion. The original Title/Abstract query remains
+unchanged.
+
+A broad EDAT envelope will be used for partitioning. Before record retrieval,
+the count within that envelope must equal the count from the original
+unbounded query. If it does not, retrieval will stop rather than silently
+exclude records.
+
+The previously frozen OpenAlex and bio.tools retrieval implementations are
+unchanged.
+
+No records from failed Attempt 03 were screened or used for inclusion,
+exclusion, capability classification, or benchmark selection.
