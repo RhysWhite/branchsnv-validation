@@ -1,0 +1,60 @@
+[Q01] PubMed
+[Q01] OpenAlex
+[Q01] bio.tools
+[Q02] PubMed
+[Q02] OpenAlex
+[Q02] bio.tools
+[Q03] PubMed
+[Q03] OpenAlex
+[Q03] bio.tools
+[Q04] PubMed
+[Q04] OpenAlex
+[Q04] bio.tools
+[Q05] PubMed
+[Q05] OpenAlex
+[Q05] bio.tools
+[Q06] PubMed
+[Q06] OpenAlex
+[Q06] bio.tools
+[Q07] PubMed
+[Q07] OpenAlex
+[Q07] bio.tools
+[Q08] PubMed
+[Q08] OpenAlex
+[Q08] bio.tools
+[Q09] PubMed
+[Q09] OpenAlex
+[Q09] bio.tools
+[Q10] PubMed
+[Q10] OpenAlex
+[Q10] bio.tools
+[Q11] PubMed
+[Q11] OpenAlex
+[Q11] bio.tools
+[Q12] PubMed
+[Q12] OpenAlex
+[Q12] bio.tools
+[Q13] PubMed
+[Q13] OpenAlex
+[Q13] bio.tools
+[Q14] PubMed
+[Q14] OpenAlex
+[Q14] bio.tools
+[Q15] PubMed
+[Q15] OpenAlex
+[Q15] bio.tools
+[Q16] PubMed
+[Q16] OpenAlex
+[Q16] bio.tools
+[Q17] PubMed
+[Q17] OpenAlex
+[Q17] bio.tools
+[Q18] PubMed
+[Q18] OpenAlex
+[Q18] bio.tools
+
+PASS | formal search retrieval complete
+candidate rows     = 3,108
+deduplicated rows  = 2,204
+source/query pulls = 54
+output             = /home/rwhite/github/branchsnv-validation/results/07_comparative_landscape/formal_search
