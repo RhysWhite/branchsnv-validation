@@ -1,0 +1,15 @@
+dedup_key	conflict_pmids	doi_values	pubmed_source_record_ids	pubmed_pmids	openalex_pmids	candidate_rows	pubmed_rows	openalex_rows	biotools_rows	search_stages	classification
+doi:10.1007/s004360050655	10207368;10540950	10.1007/s004360050655	10540950	10540950	10207368	3	1	2	0	high_recall	pubmed_openalex_disagreement
+doi:10.1016/j.gene.2019.100021	32550550;34530996	10.1016/j.gene.2019.100021	32550550;34530996	32550550;34530996	32550550	4	2	2	0	high_recall	multiple_pubmed_records
+doi:10.1038/nmicrobiol.2015.23	27127642;27572160	10.1038/nmicrobiol.2015.23	27127642;27572160	27127642;27572160	27127642	3	2	1	0	high_recall	multiple_pubmed_records
+doi:10.1073/pnas.2515274123	40791396;41980105	10.1073/pnas.2515274123	41980105	41980105	40791396	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1093/gbe/evz101	31028697;31114863	10.1093/gbe/evz101	31114863	31114863	31028697	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1093/infdis/jiae040	38530917;39052729	10.1093/infdis/jiae040	39052729	39052729	38530917	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1093/infdis/jiag218	41282739;41999581	10.1093/infdis/jiag218	41999581	41999581	41282739	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1093/molbev/msag100	41332553;42142336	10.1093/molbev/msag100	42142336	42142336	41332553	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1093/molbev/msag218	42395561;42626984	10.1093/molbev/msag218	42626984	42626984	42395561	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1101/gr.280372.124	41292631;41991327	10.1101/gr.280372.124	41991327	41991327	41292631	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1128/mbio.01198-26	40777387;42328860	10.1128/mbio.01198-26	42328860	42328860	40777387	3	1	2	0	high_recall	pubmed_openalex_disagreement
+doi:10.1186/s13059-026-04073-3	40654615;41981679	10.1186/s13059-026-04073-3	41981679	41981679	40654615	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.1371/journal.pgen.1011957	42146426;42224293	10.1371/journal.pgen.1011957	42224293	42224293	42146426	2	1	1	0	high_recall	pubmed_openalex_disagreement
+doi:10.21203/rs.3.rs-6926809/v1	40671951;40678224	10.21203/rs.3.rs-6926809/v1	40678224	40678224	40671951	4	2	2	0	formal;high_recall	pubmed_openalex_disagreement
