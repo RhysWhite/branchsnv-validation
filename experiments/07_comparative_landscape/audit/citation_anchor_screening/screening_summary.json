@@ -1,0 +1,29 @@
+{
+  "anchor_tools": [
+    "CLASSICO/Evidente",
+    "SNPPar",
+    "SubRecon",
+    "TreeTime",
+    "FastML",
+    "kSNP3.0",
+    "PAML",
+    "PastML"
+  ],
+  "benchmark_eligibility_assessed": false,
+  "candidate_rows": 9,
+  "citation_chain_retrieval_performed": false,
+  "confirmed_role_counts": {
+    "direct": 4,
+    "near_direct": 4,
+    "not_established": 1
+  },
+  "evidence_ledger_sha256": "6cb84d75afb7193f88a1220d6882d56372517f71daa1c41a8f6a66e3557cafd7",
+  "initial_citation_chain_anchors": 8,
+  "non_anchor_tools": [
+    "IQ-TREE 2"
+  ],
+  "schema_version": 1,
+  "screening_table_sha256": "1b0736cf30a4fbea9ca29d19846eb7ff8280a92c5f0e5a40d3d89527adb0b506",
+  "search_retuned": false,
+  "status": "COMPLETE"
+}
