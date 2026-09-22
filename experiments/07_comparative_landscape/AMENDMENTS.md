@@ -203,3 +203,39 @@ diagnostic is retained unchanged.
 
 Search retuning remains prohibited. Candidate matches remain pending human
 confirmation.
+
+## Amendment 06 — citation-chain anchor screening
+
+**Timing:** frozen after completion of merged-universe seed-name recovery and
+before human confirmation of candidate matches, software-landscape screening
+of candidate anchors, primary-anchor selection, or any backward/forward
+citation retrieval.
+
+The original protocol specifies backward and forward citation chaining from
+**included direct and near-direct methods**. Candidate-name recovery alone does
+not establish either inclusion or analytical role.
+
+To operationalize that requirement without selecting tools ad hoc, initial
+anchor screening is restricted to all prespecified seed tools that:
+
+1. were assigned `direct_candidate` or `near_direct_candidate` before the
+   formal search; and
+2. were recovered by candidate-name matching in the frozen merged search
+   universe.
+
+Exactly nine seed tools meet this mechanical rule.
+
+Each is evaluated using the already-frozen software-landscape eligibility
+criteria and primary/official evidence. Tool identity, landscape inclusion,
+direct/near-direct role, and canonical primary publication must all be
+established before a tool may become a citation-chain anchor.
+
+Candidate name matches may be rejected as false positives. A failure to become
+a citation-chain anchor does not by itself exclude a tool from the software
+landscape.
+
+No citation retrieval occurs until the nine-row anchor-screening table has been
+completed and frozen.
+
+This operationalization does not modify the completed search strategies or
+permit search retuning.
