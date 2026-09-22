@@ -1,0 +1,36 @@
+{
+  "candidate_evidence_rows": 101,
+  "candidate_name_recovery": 23,
+  "capability_classification_performed": false,
+  "eligibility_decisions_made": false,
+  "formal_stage_recovery": 8,
+  "high_recall_only_recovery": 15,
+  "high_recall_stage_recovery": 21,
+  "human_confirmation": "pending",
+  "not_recovered_by_name": 8,
+  "production_execution_commit": "a0d97c38245345a7528144149601e4175849a4de",
+  "production_execution_script_sha256": "fcf05e61bbaa5d3e39396ba4f383cc2b83ff00effb23b82b1dad0d2e77d3a737",
+  "production_output_regenerated_after_execution": false,
+  "result_file_sha256": {
+    "checksums.sha256": "501712222c713e66e36050497708759729f75e70c72df3a290c30b3665a17892",
+    "seed_recovery_candidate_matches.tsv": "ca68f701903bfac4e142fc9f1abc62fa6dcb795bacff44fe1a34ace0e3f65875",
+    "seed_recovery_diagnostic.json": "9e48603ea8ad95df9a95fc12fc5dfc71bb339cb9d0e7c3b45f78f63dbc64bb1f",
+    "seed_recovery_summary.tsv": "f567dbf104573cb385c5b5a8aa6abd4b7c6c169ee4ee6797d0c9c2bc3bbbe47f"
+  },
+  "schema_version": 1,
+  "screening_performed": false,
+  "search_retuning_permitted": false,
+  "seed_tools": 31,
+  "status": "FROZEN",
+  "unrecovered_seed_tools": [
+    "Clade-O-Matic",
+    "ClonalFrameML",
+    "ETE 3",
+    "FastTree",
+    "PHYLIP DNAPARS",
+    "SPANDx",
+    "Snippy",
+    "TB-Profiler"
+  ],
+  "validation_amendment_commit": "0872d4b98f941c33748c2131c518e94654559c95"
+}
