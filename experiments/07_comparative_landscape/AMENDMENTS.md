@@ -426,3 +426,29 @@ citation-chaining stopping rule.
 
 No production citation result had been observed when this hardening was
 specified.
+
+## Amendment 13 — OpenAlex credential handling
+
+**Timing:** recorded after freezing and independently hardening the
+citation-wave retrieval implementation, but before any production citation
+API request.
+
+A pre-production credential-safety review identified that the initial
+citation retriever supplied `OPENALEX_API_KEY` as an OpenAlex URL query
+parameter. Although successful response files did not serialize request URLs,
+a terminal request exception could include the URL in console output and
+therefore risk exposing the credential.
+
+The OpenAlex API key is therefore moved from the request URL to the HTTP
+`Authorization: Bearer` header, matching the credential-handling pattern
+already used by the frozen Experiment 07 OpenAlex database-search retrievers.
+
+Offline tests require that the credential is absent from generated URLs and
+present in the request header.
+
+This change affects authentication transport only. It changes no API source,
+query, citation edge, anchor, count reconciliation, scientific filter,
+screening criterion, or stopping rule.
+
+No production citation API request had occurred when this correction was
+specified.

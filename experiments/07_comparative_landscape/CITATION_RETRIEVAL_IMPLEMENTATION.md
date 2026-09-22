@@ -44,12 +44,14 @@ endpoint returns 404, retrieval fails closed.
 
 ## Credentials
 
-`OPENALEX_API_KEY` is required for production execution.
+`OPENALEX_API_KEY` is required for production execution and is supplied only
+through the HTTP `Authorization` header. It is not placed in request URLs.
 
-`OPENCITATIONS_ACCESS_TOKEN` is optional and, when present, is sent in the
-authorization header.
+`OPENCITATIONS_ACCESS_TOKEN` is optional and, when present, is supplied only
+through the HTTP authorization header.
 
-Credential values are never serialized to result files.
+Credential values are never serialized to result files or intentionally
+included in logged request URLs.
 
 ## Completeness
 

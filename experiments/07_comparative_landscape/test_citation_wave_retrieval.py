@@ -198,7 +198,6 @@ for bad in [
 
 single_url = mod.openalex_single_url(
     "10.1093/ve/vex042",
-    "SECRET",
 )
 
 assert (
@@ -206,13 +205,16 @@ assert (
     in single_url
 )
 
-assert "api_key=SECRET" in single_url
+assert "SECRET" not in single_url
+assert "api_key" not in single_url
 
 forward_url = mod.openalex_forward_url(
     "https://openalex.org/W123",
     "*",
-    "SECRET",
 )
+
+assert "SECRET" not in forward_url
+assert "api_key" not in forward_url
 
 assert "cites%3AW123" in forward_url
 assert "cursor=%2A" in forward_url
@@ -297,6 +299,13 @@ class FakeOpenAlex:
         retries=5,
     ):
         self.calls += 1
+
+        assert "SECRET" not in url
+        assert "api_key" not in url
+        assert headers.get(
+            "Authorization"
+        ) == "Bearer SECRET"
+
         raw_path.parent.mkdir(
             parents=True,
             exist_ok=True,
@@ -734,6 +743,8 @@ print("PASS | identifier normalisation")
 print("PASS | OpenCitations PID parsing")
 print("PASS | OpenCitations payload-shape validation")
 print("PASS | API request construction")
+print("PASS | OpenAlex credential absent from request URLs")
+print("PASS | OpenAlex credential supplied by Authorization header")
 print("PASS | synthetic OpenAlex backward retrieval")
 print("PASS | synthetic OpenAlex cursor pagination")
 print("PASS | synthetic OpenCitations backward retrieval")

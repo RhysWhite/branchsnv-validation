@@ -541,7 +541,6 @@ def write_tsv(
 
 def openalex_single_url(
     doi: str,
-    api_key: str,
 ) -> str:
     external_id = urllib.parse.quote(
         f"doi:{normalise_doi(doi)}",
@@ -552,7 +551,6 @@ def openalex_single_url(
         f"{OPENALEX_ROOT}/works/{external_id}",
         {
             "select": OPENALEX_SELECT_SINGLE,
-            "api_key": api_key,
         },
     )
 
@@ -560,7 +558,6 @@ def openalex_single_url(
 def openalex_forward_url(
     work_id: str,
     cursor: str,
-    api_key: str,
 ) -> str:
     work_id = normalise_openalex_id(
         work_id
@@ -573,7 +570,6 @@ def openalex_forward_url(
             "per-page": 100,
             "cursor": cursor,
             "select": OPENALEX_SELECT_LIST,
-            "api_key": api_key,
         },
     )
 
@@ -694,11 +690,12 @@ def retrieve_openalex(
         work = fetcher(
             openalex_single_url(
                 doi,
-                api_key,
             ),
             headers={
+                "Authorization":
+                    f"Bearer {api_key}",
                 "User-Agent":
-                    "branchsnv-validation/experiment07"
+                    "branchsnv-validation/experiment07",
             },
             raw_path=resolution_path,
             delay=0.12,
@@ -892,11 +889,12 @@ def retrieve_openalex(
             openalex_forward_url(
                 work_id,
                 cursor,
-                api_key,
             ),
             headers={
+                "Authorization":
+                    f"Bearer {api_key}",
                 "User-Agent":
-                    "branchsnv-validation/experiment07"
+                    "branchsnv-validation/experiment07",
             },
             raw_path=page_path,
             delay=0.12,
