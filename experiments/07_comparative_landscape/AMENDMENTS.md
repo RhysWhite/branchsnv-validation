@@ -71,3 +71,44 @@ query without executing it against the search index.
 The OpenAlex retrieval implementation is also changed from the classic
 `/works?search=` interface to the API-root `?oql=` interface with cursor
 pagination. No PubMed or bio.tools search definition is changed.
+
+## Amendment 03 — Generic high-recall search expansion
+
+**Timing:** after completion of the frozen seed-recovery diagnostic and before
+formal eligibility screening, capability classification, or benchmark
+selection.
+
+The pre-search seed registry contained 14 tools classified prospectively as
+direct, near-direct, or diagnostic-panel comparator candidates. A deterministic
+name-recovery diagnostic, whose implementation was committed before execution,
+found candidate name matches for 4 of these 14 tools (28.6%).
+
+Candidate name recovery is not equivalent to confirmed tool recovery, and the
+diagnostic was not used to make inclusion or exclusion decisions. However, the
+low recovery demonstrated that the original exact-phrase-oriented search had
+insufficient sensitivity to serve as the sole discovery mechanism for the
+comparative software landscape.
+
+A single supplementary high-recall search expansion will therefore be
+performed before formal screening.
+
+The expansion will:
+
+1. use generic analytical concepts rather than software or author names;
+2. retain title/abstract restriction for bibliographic databases;
+3. broaden vocabulary for clade/lineage markers, branch-event reconstruction,
+   ancestral reconstruction, phylogenetic genotyping, and recurrent/homoplasic
+   variation;
+4. be defined and committed before its retrieval results are observed; and
+5. be merged with the previously frozen formal corpus without deleting
+   provenance from either search stage.
+
+The expansion will be performed once. Search terms will not subsequently be
+retuned to maximise recovery of the seed registry. Any known relevant methods
+not retrieved after this generic expansion will instead be handled through the
+already-prespecified backward/forward citation-chaining stage and documented
+accordingly.
+
+No formal record screening, software-landscape inclusion/exclusion decisions,
+capability classification, or benchmark selection had been performed before
+this amendment.

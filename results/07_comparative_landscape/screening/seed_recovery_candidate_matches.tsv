@@ -1,0 +1,30 @@
+seed_tool	matched_aliases	source	query_id	query_family	source_record_id	entity_type	title_or_name	year	doi	pmid	source_url
+BioHansel	BioHansel	biotools	Q03	clade_marker	biohansel	software_registry	BioHansel		10.1101/2020.01.10.902056		https://bio.tools/biohansel
+BioHansel	BioHansel	biotools	Q10	genotyping	biohansel	software_registry	BioHansel		10.1101/2020.01.10.902056		https://bio.tools/biohansel
+BioHansel	BioHansel	openalex	Q03	clade_marker	W2999739138	publication	Rapid and accurate SNP genotyping of clonal bacterial pathogens with BioHansel	2020	10.1101/2020.01.10.902056		https://openalex.org/W2999739138
+BioHansel	BioHansel	openalex	Q10	genotyping	W3200050118	publication	Rapid and accurate SNP genotyping of clonal bacterial pathogens with BioHansel	2021	10.1099/mgen.0.000651	34554082	https://openalex.org/W3200050118
+BRANCHSNV	BRANCHSNV	biotools	Q11	ancestral_reconstruction	branchsnv	software_registry	BRANCHSNV				https://bio.tools/branchsnv
+BRANCHSNV	BRANCHSNV	biotools	Q12	ancestral_reconstruction	branchsnv	software_registry	BRANCHSNV				https://bio.tools/branchsnv
+BRANCHSNV	BRANCHSNV	biotools	Q15	branch_mapping	branchsnv	software_registry	BRANCHSNV				https://bio.tools/branchsnv
+CanSNPer	CanSNPer	biotools	Q03	clade_marker	cansnper	software_registry	CanSNPer		10.1093/bioinformatics/btu113	24574113	https://bio.tools/cansnper
+FastML	FastML	biotools	Q12	ancestral_reconstruction	fastml	software_registry	FastML		10.1093/nar/gks498	22661579	https://bio.tools/fastml
+FastML	FastML	openalex	Q12	ancestral_reconstruction	W2144606496	publication	FastML: a web server for probabilistic reconstruction of ancestral sequences	2012	10.1093/nar/gks498	22661579	https://openalex.org/W2144606496
+FastML	FastML	pubmed	Q12	ancestral_reconstruction	22661579	publication	FastML: a web server for probabilistic reconstruction of ancestral sequences.	2012	10.1093/nar/gks498	22661579	https://pubmed.ncbi.nlm.nih.gov/22661579/
+Gubbins	Gubbins	biotools	Q12	ancestral_reconstruction	gubbins	software_registry	Gubbins		10.1093/nar/gku1196	25414349	https://bio.tools/gubbins
+HomoplasyFinder	HomoplasyFinder	openalex	Q16	homoplasy	W2913512063	publication	HomoplasyFinder: a simple tool to identify homoplasies on a phylogeny	2019	10.1099/mgen.0.000245	30663960	https://openalex.org/W2913512063
+HomoplasyFinder	HomoplasyFinder	pubmed	Q16	homoplasy	30663960	publication	HomoplasyFinder: a simple tool to identify homoplasies on a phylogeny.	2019	10.1099/mgen.0.000245	30663960	https://pubmed.ncbi.nlm.nih.gov/30663960/
+phangorn	phangorn	openalex	Q12	ancestral_reconstruction	W7208959525	publication	Ancestral sequence reconstruction with phangorn (Version 1.7-0)	2012			https://openalex.org/W7208959525
+SNPPar	SNPPar	biotools	Q01	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q02	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q04	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q05	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q06	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q08	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q11	ancestral_reconstruction	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q12	ancestral_reconstruction	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q16	homoplasy	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	biotools	Q18	clade_marker	snppar	software_registry	SNPPar		10.1101/2020.07.08.194480		https://bio.tools/snppar
+SNPPar	SNPPar	openalex	Q11	ancestral_reconstruction	W3041660225	publication	SNPPar: identifying convergent evolution and other homoplasies from microbial whole-genome alignments	2020	10.1101/2020.07.08.194480		https://openalex.org/W3041660225
+SNPPar	SNPPar	openalex	Q11	ancestral_reconstruction	W4225492844	publication	SNPPar: identifying convergent evolution and other homoplasies from microbial whole-genome alignments	2021	10.1099/mgen.0.000694	34874243	https://openalex.org/W4225492844
+SNPPar	SNPPar	pubmed	Q11	ancestral_reconstruction	34874243	publication	SNPPar: identifying convergent evolution and other homoplasies from microbial whole-genome alignments.	2021	10.1099/mgen.0.000694	34874243	https://pubmed.ncbi.nlm.nih.gov/34874243/
+SNPPar	SNPPar	pubmed	Q16	homoplasy	34874243	publication	SNPPar: identifying convergent evolution and other homoplasies from microbial whole-genome alignments.	2021	10.1099/mgen.0.000694	34874243	https://pubmed.ncbi.nlm.nih.gov/34874243/

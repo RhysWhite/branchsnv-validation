@@ -1,0 +1,32 @@
+seed_tool	seed_category	seed_comparison_role	aliases_tested	candidate_match_rows	unique_candidate_records	automatic_status	human_confirmation
+BRANCHSNV	focal-edge interpretation	reference	BRANCHSNV	3	1	candidate_match_found	pending
+CLASSICO/Evidente	clade-specific SNP discovery	direct_candidate	CLASSICO;Evidente	0	0	not_recovered_by_name	pending
+Clade-O-Matic	canonical SNP / typing-scheme discovery	direct_candidate	Clade-O-Matic;Cladeomatic	0	0	not_recovered_by_name	pending
+SNPPar	branch mutation mapping / homoplasy	direct_candidate	SNPPar	14	4	candidate_match_found	pending
+TreeTime	ancestral sequence reconstruction / mutation mapping	direct_candidate	TreeTime	0	0	not_recovered_by_name	pending
+PastML	ancestral-state reconstruction	near_direct_candidate	PastML	0	0	not_recovered_by_name	pending
+FastML	ancestral sequence reconstruction	near_direct_candidate	FastML	3	3	candidate_match_found	pending
+IQ-TREE 2	phylogenetic inference / ancestral reconstruction	near_direct_candidate	IQ-TREE 2;IQ-TREE	0	0	not_recovered_by_name	pending
+HomoplasyFinder	homoplasy detection	diagnostic_panel_candidate	HomoplasyFinder	2	2	candidate_match_found	pending
+phangorn	general parsimony / phylogenetics	diagnostic_panel_candidate	phangorn	1	1	candidate_match_found	pending
+PAUP*	general parsimony / phylogenetics	diagnostic_panel_candidate	PAUP*	0	0	not_recovered_by_name	pending
+PHYLIP DNAPARS	nucleotide parsimony	diagnostic_panel_candidate	DNAPARS;PHYLIP DNAPARS	0	0	not_recovered_by_name	pending
+BioHansel	hierarchical SNP genotyping	context	BioHansel	4	3	candidate_match_found	pending
+CanSNPer	canonical SNP genotyping	context	CanSNPer	1	1	candidate_match_found	pending
+KvarQ	SNP-marker genotyping	context	KvarQ	0	0	not_recovered_by_name	pending
+GenoTyphi	SNP lineage scheme / genotyping	context	GenoTyphi	0	0	not_recovered_by_name	pending
+TB-Profiler	SNP-barcode lineage typing	context	TB-Profiler	0	0	not_recovered_by_name	pending
+fastlin	SNP-barcode lineage typing	context	fastlin	0	0	not_recovered_by_name	pending
+SKA	split-kmer analysis / genotyping	context	SKA	0	0	not_recovered_by_name	pending
+SPANDx	variant calling / phylogenomics	upstream	SPANDx	0	0	not_recovered_by_name	pending
+Snippy	variant calling / core SNP phylogeny	upstream	Snippy	0	0	not_recovered_by_name	pending
+SNVPhyl	variant calling / phylogenomics	upstream	SNVPhyl	0	0	not_recovered_by_name	pending
+vSNP	variant calling / phylogenomics	upstream	vSNP	0	0	not_recovered_by_name	pending
+Gubbins	recombination detection	upstream	Gubbins	1	1	candidate_match_found	pending
+ClonalFrameML	recombination inference	upstream	ClonalFrameML	0	0	not_recovered_by_name	pending
+RAxML	phylogeny inference	upstream	RAxML	0	0	not_recovered_by_name	pending
+FastTree	phylogeny inference	upstream	FastTree;FastTree 2	0	0	not_recovered_by_name	pending
+ETE 3	tree manipulation / analysis	infrastructure	ETE 3;ETE3	0	0	not_recovered_by_name	pending
+SubRecon	single-branch ancestral substitution reconstruction	direct_candidate	SubRecon	0	0	not_recovered_by_name	pending
+kSNP3.0	SNP discovery / phylogeny / node-associated SNP mapping	near_direct_candidate	kSNP3.0;kSNP3;kSNP	0	0	not_recovered_by_name	pending
+PAML	model-based ancestral sequence reconstruction	near_direct_candidate	PAML	0	0	not_recovered_by_name	pending

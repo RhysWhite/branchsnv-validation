@@ -1,0 +1,30 @@
+{
+  "capability_classification_performed": false,
+  "diagnostic": "pre_screening_seed_name_recovery",
+  "interpretation": "Sensitivity diagnostic only; candidate name recovery is not equivalent to confirmed tool recovery or software-landscape eligibility.",
+  "priority_not_recovered": [
+    "CLASSICO/Evidente",
+    "Clade-O-Matic",
+    "TreeTime",
+    "PastML",
+    "IQ-TREE 2",
+    "PAUP*",
+    "PHYLIP DNAPARS",
+    "SubRecon",
+    "kSNP3.0",
+    "PAML"
+  ],
+  "priority_recovered": [
+    "SNPPar",
+    "FastML",
+    "HomoplasyFinder",
+    "phangorn"
+  ],
+  "priority_recovery_fraction": 0.2857142857142857,
+  "priority_tools_candidate_name_recovered": 4,
+  "priority_tools_not_recovered_by_name": 10,
+  "priority_tools_total": 14,
+  "schema_version": 1,
+  "screening_decisions_made": false,
+  "seed_tools_total": 31
+}
