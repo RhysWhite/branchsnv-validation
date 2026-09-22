@@ -4,3 +4,6 @@ reproduced_results/
 public_inputs/
 experiments/04_scalability/inputs/
 .DS_Store
+
+# Experiment 07 large raw search archives (archived externally at release)
+results/07_comparative_landscape/archive/*.tar.gz
