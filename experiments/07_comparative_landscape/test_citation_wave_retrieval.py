@@ -10,7 +10,9 @@ from __future__ import annotations
 import importlib.util
 import http.client
 import json
+import re
 import tempfile
+import urllib.parse
 
 from pathlib import Path
 from unittest.mock import patch
@@ -570,6 +572,49 @@ class FakeOpenAlex:
 
 
 class FakeOpenCitations:
+    @staticmethod
+    def filtered_rows(
+        url,
+        rows,
+    ):
+        query = urllib.parse.parse_qs(
+            urllib.parse.urlparse(
+                url
+            ).query
+        )
+
+        filters = query.get(
+            "filter",
+            [],
+        )
+
+        if len(filters) != 1:
+            raise AssertionError(
+                f"expected one OCI filter: {url}"
+            )
+
+        value = filters[0]
+
+        if not value.startswith(
+            "oci:"
+        ):
+            raise AssertionError(
+                f"unexpected filter field: {value}"
+            )
+
+        pattern = value[
+            len("oci:"):
+        ]
+
+        return [
+            row
+            for row in rows
+            if re.fullmatch(
+                pattern,
+                row["oci"],
+            )
+        ]
+
     def __call__(
         self,
         url,
@@ -599,7 +644,7 @@ class FakeOpenCitations:
             ]
 
         elif "/references/" in url:
-            payload = [
+            rows = [
                 {
                     "oci": "1-2",
                     "citing":
@@ -612,21 +657,29 @@ class FakeOpenCitations:
                 }
             ]
 
+            payload = self.filtered_rows(
+                url,
+                rows,
+            )
+
         elif "/citations/" in url:
-            payload = [
-                [
-                    {
-                        "oci": "3-1",
-                        "citing":
-                            "omid:br/3 "
-                            "doi:10.5000/citer "
-                            "pmid:500",
-                        "cited":
-                            "omid:br/1 "
-                            "doi:10.1000/test",
-                    }
-                ]
+            rows = [
+                {
+                    "oci": "3-1",
+                    "citing":
+                        "omid:br/3 "
+                        "doi:10.5000/citer "
+                        "pmid:500",
+                    "cited":
+                        "omid:br/1 "
+                        "doi:10.1000/test",
+                }
             ]
+
+            payload = self.filtered_rows(
+                url,
+                rows,
+            )
 
         else:
             raise AssertionError(
@@ -701,6 +754,7 @@ with tempfile.TemporaryDirectory() as td:
         oc_edges,
         oc_neighbours,
         oc_status,
+        oc_partitions,
     ) = mod.retrieve_opencitations(
         anchor,
         wave=0,
@@ -719,6 +773,47 @@ with tempfile.TemporaryDirectory() as td:
         len(oc_neighbours),
         2,
         "OpenCitations neighbour count",
+    )
+
+    assert_equal(
+        len(oc_partitions),
+        20,
+        "OpenCitations root partition leaf count",
+    )
+
+    assert_equal(
+        sorted(
+            {
+                row["direction"]
+                for row in oc_partitions
+            }
+        ),
+        [
+            "backward",
+            "forward",
+        ],
+        "OpenCitations partition directions",
+    )
+
+    assert_equal(
+        {
+            edge["oci"]:
+                edge["raw_file"]
+            for edge in oc_edges
+        },
+        {
+            "1-2":
+                "raw/opencitations/W0TEST/"
+                "backward_partitions/"
+                "depth_00/"
+                "digits_01_suffix_2.json",
+            "3-1":
+                "raw/opencitations/W0TEST/"
+                "forward_partitions/"
+                "depth_00/"
+                "digits_01_suffix_3.json",
+        },
+        "OpenCitations leaf raw provenance",
     )
 
     assert_equal(
@@ -843,15 +938,51 @@ class BadOpenCitationsCount:
             ]
 
         elif "/references/" in url:
-            payload = [
-                {
-                    "oci": "1-2",
-                    "citing":
-                        "doi:10.1000/test",
-                    "cited":
-                        "doi:10.4000/ref",
-                }
+            query = urllib.parse.parse_qs(
+                urllib.parse.urlparse(
+                    url
+                ).query
+            )
+
+            filters = query.get(
+                "filter",
+                [],
+            )
+
+            if len(filters) != 1:
+                raise AssertionError(
+                    "partition filter missing"
+                )
+
+            value = filters[0]
+
+            if not value.startswith(
+                "oci:"
+            ):
+                raise AssertionError(
+                    "unexpected partition field"
+                )
+
+            pattern = value[
+                len("oci:"):
             ]
+
+            row = {
+                "oci": "1-2",
+                "citing":
+                    "doi:10.1000/test",
+                "cited":
+                    "doi:10.4000/ref",
+            }
+
+            payload = (
+                [row]
+                if re.fullmatch(
+                    pattern,
+                    row["oci"],
+                )
+                else []
+            )
 
         else:
             raise AssertionError(
@@ -877,7 +1008,10 @@ with tempfile.TemporaryDirectory() as td:
             fetcher=BadOpenCitationsCount(),
         )
     except RuntimeError as exc:
-        assert "reported 2, retrieved 1" in str(exc)
+        assert (
+            "reported 2, retrieved 1 unique OCI rows"
+            in str(exc)
+        )
     else:
         raise AssertionError(
             "OpenCitations count mismatch "
@@ -923,6 +1057,8 @@ print("PASS | synthetic OpenAlex backward retrieval")
 print("PASS | synthetic OpenAlex cursor pagination")
 print("PASS | synthetic OpenCitations backward retrieval")
 print("PASS | synthetic OpenCitations forward retrieval")
+print("PASS | synthetic OpenCitations root OCI partitioning")
+print("PASS | OpenCitations edge raw-file leaf provenance")
 print("PASS | complete source-direction matrix validation")
 print("PASS | OpenAlex count mismatch fails closed")
 print("PASS | OpenCitations independent count mismatch fails closed")

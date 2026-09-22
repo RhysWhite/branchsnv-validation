@@ -86,6 +86,50 @@ citation response.
 If all retry attempts fail, retrieval terminates and the wave remains
 incomplete.
 
+## Deterministic OpenCitations OCI partitioning
+
+For every OpenCitations source-direction operation, the independent
+`citation-count` or `reference-count` request is performed first.
+
+If that count is zero, the operation terminates as `resolved_zero_edges`
+without issuing citation-data partition requests.
+
+For every positive count, citation-data retrieval uses the frozen deterministic
+OCI partition specification rather than an unfiltered whole-response request.
+
+The root consists of ten regular-expression filters over the terminal decimal
+digit of the variable OCI component:
+
+- citing OCI component for forward citations;
+- cited OCI component for backward references.
+
+Every successful leaf response is validated before acceptance:
+
+- every row must contain an OCI;
+- every OCI must satisfy `^[0-9]+-[0-9]+$`;
+- every OCI must belong to the leaf regex that retrieved it.
+
+After all leaves complete, OCI identity is globally reconciled for that
+anchor × source × direction operation. Duplicate OCIs are fatal, and the
+number of unique OCIs must equal the independent count exactly.
+
+If a filtered non-exact leaf exhausts the bounded request retry policy with
+`http.client.IncompleteRead` as its cause, it is replaced deterministically by
+an exact-number child followed by ten next-terminal-digit children.
+
+No other exhausted exception class silently triggers partition subdivision.
+
+The maximum variable-component suffix length is 64 decimal digits.
+Reaching that ceiling fails closed.
+
+Every completed partition leaf is retained separately under the raw response
+tree and is recorded in `opencitations_partition_leaves.tsv`, including its
+direction, execution order, recursion depth, suffix, regex, request hash,
+raw-response path and row count.
+
+The original unpartitioned failed responses from earlier production attempts
+are not reused.
+
 ## Raw responses
 
 Every successful API response used to construct an edge is retained under the

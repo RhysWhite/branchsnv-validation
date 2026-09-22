@@ -671,3 +671,56 @@ Failed Attempts 03 and 04 remain audit artefacts only and cannot contribute
 citation rows to a later successful Wave 0 result.
 
 The complete design is frozen in `OPENCITATIONS_PARTITIONING_SPEC.md`.
+
+## Amendment 21 — implement deterministic OpenCitations OCI partitioning
+
+**Timing:** implemented after Amendment 20 froze the partition design and
+before any further production citation retrieval.
+
+The frozen deterministic OCI-partition design is now implemented.
+
+For every positive OpenCitations independent count, citation data are requested
+through ten disjoint terminal-digit OCI root filters. Every successful leaf
+validates complete OCI syntax and leaf membership.
+
+A non-exact leaf that exhausts the existing bounded retry policy specifically
+because of `http.client.IncompleteRead` is recursively replaced by the frozen
+exact-number child and ten next-terminal-digit children.
+
+The implementation uses a 64-digit variable-OCI-component suffix ceiling.
+The ceiling is a transport-safety bound only. Reaching it fails closed.
+
+Before implementation, OCI component lengths were inspected structurally in
+the frozen Attempt 04 raw-response archive and verified not to exceed this
+ceiling. No citation relevance or software content was inspected or used for
+partition assignment.
+
+The final reconstructed operation prohibits duplicate OCIs and requires the
+number of unique OCI identities to equal the existing independent
+citation/reference count exactly.
+
+Zero independent counts terminate without citation-data requests.
+
+Every completed partition leaf is preserved separately and recorded in
+`opencitations_partition_leaves.tsv`; each citation edge retains the exact leaf
+raw-response path from which it originated.
+
+Offline tests cover:
+
+- root partition exclusivity and exhaustiveness;
+- exact-plus-ten recursive child coverage;
+- forward versus backward variable OCI components;
+- filtered URL construction;
+- missing, malformed and out-of-leaf OCI failure;
+- duplicate OCI failure;
+- independent-count mismatch failure;
+- order-independent union reconciliation;
+- deterministic leaf execution order;
+- retry-exhaustion subdivision;
+- recursion-ceiling failure;
+- non-IncompleteRead failure without subdivision;
+- zero-count short-circuiting; and
+- preservation of the pre-existing incomplete-body write protections.
+
+No citation source, anchor, scientific filter, search expression, screening
+criterion, comparator role, or saturation rule changed.

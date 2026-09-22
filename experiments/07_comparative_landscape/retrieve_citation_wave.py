@@ -53,6 +53,10 @@ from typing import Any, Callable
 OPENALEX_ROOT = "https://api.openalex.org"
 OPENCITATIONS_ROOT = "https://api.opencitations.net/index/v2"
 
+OPENCITATIONS_PARTITION_DIGITS = "0123456789"
+OPENCITATIONS_OCI_PATTERN = r"^[0-9]+-[0-9]+$"
+OPENCITATIONS_PARTITION_MAX_SUFFIX_DIGITS = 64
+
 OPENALEX_SELECT_SINGLE = ",".join([
     "id",
     "doi",
@@ -122,6 +126,22 @@ STATUS_FIELDS = [
     "terminal_detail",
 ]
 
+
+OPENCITATIONS_PARTITION_FIELDS = [
+    "wave",
+    "anchor_id",
+    "anchor_tool",
+    "direction",
+    "leaf_order",
+    "recursion_depth",
+    "suffix_digits",
+    "partition_kind",
+    "suffix",
+    "leaf_regex",
+    "request_sha256",
+    "raw_file",
+    "row_count",
+]
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -576,9 +596,12 @@ def openalex_forward_url(
     )
 
 
+
 def opencitations_url(
     direction: str,
     doi: str,
+    *,
+    oci_filter: str | None = None,
 ) -> str:
     if direction not in {
         "backward",
@@ -599,9 +622,25 @@ def opencitations_url(
         safe=":",
     )
 
-    return (
+    base = (
         f"{OPENCITATIONS_ROOT}/"
         f"{operation}/{identifier}"
+    )
+
+    if oci_filter is None:
+        return base
+
+    if not oci_filter:
+        raise ValueError(
+            "OpenCitations OCI filter cannot be empty"
+        )
+
+    return build_url(
+        base,
+        {
+            "filter":
+                f"oci:{oci_filter}",
+        },
     )
 
 
@@ -1082,6 +1121,431 @@ def retrieve_openalex(
     )
 
 
+def opencitations_partition_regex(
+    direction: str,
+    suffix: str,
+    *,
+    exact: bool,
+) -> str:
+    if direction not in {
+        "backward",
+        "forward",
+    }:
+        raise ValueError(
+            f"Invalid direction: {direction}"
+        )
+
+    if (
+        not suffix
+        or any(
+            digit not in OPENCITATIONS_PARTITION_DIGITS
+            for digit in suffix
+        )
+    ):
+        raise ValueError(
+            f"Invalid OCI decimal suffix: {suffix!r}"
+        )
+
+    if direction == "forward":
+        if exact:
+            return (
+                rf"^{suffix}-[0-9]+$"
+            )
+
+        return (
+            rf"^[0-9]*{suffix}-[0-9]+$"
+        )
+
+    if exact:
+        return (
+            rf"^[0-9]+-{suffix}$"
+        )
+
+    return (
+        rf"^[0-9]+-[0-9]*{suffix}$"
+    )
+
+
+def opencitations_partition_raw_path(
+    raw_root: Path,
+    direction: str,
+    suffix: str,
+    *,
+    exact: bool,
+    recursion_depth: int,
+) -> Path:
+    kind = (
+        "exact"
+        if exact
+        else "suffix"
+    )
+
+    return (
+        raw_root
+        / f"{direction}_partitions"
+        / f"depth_{recursion_depth:02d}"
+        / (
+            f"digits_{len(suffix):02d}_"
+            f"{kind}_{suffix}.json"
+        )
+    )
+
+
+def caused_by_incomplete_read(
+    exc: BaseException,
+) -> bool:
+    current: BaseException | None = exc
+    visited: set[int] = set()
+
+    while current is not None:
+        identity = id(current)
+
+        if identity in visited:
+            break
+
+        visited.add(identity)
+
+        if isinstance(
+            current,
+            http.client.IncompleteRead,
+        ):
+            return True
+
+        next_exc = current.__cause__
+
+        if (
+            next_exc is None
+            and not current.__suppress_context__
+        ):
+            next_exc = current.__context__
+
+        current = next_exc
+
+    return False
+
+
+def validate_opencitations_partition_payload(
+    payload: Any,
+    *,
+    leaf_regex: str,
+    context: str,
+) -> list[dict]:
+    rows = flatten_json_list(
+        payload
+    )
+
+    full_re = re.compile(
+        OPENCITATIONS_OCI_PATTERN
+    )
+
+    leaf_re = re.compile(
+        leaf_regex
+    )
+
+    for row in rows:
+        oci = str(
+            row.get("oci")
+            or ""
+        ).strip()
+
+        if not oci:
+            raise RuntimeError(
+                f"{context}: OpenCitations row "
+                "contains no OCI"
+            )
+
+        if not full_re.fullmatch(oci):
+            raise RuntimeError(
+                f"{context}: malformed OCI {oci!r}"
+            )
+
+        if not leaf_re.fullmatch(oci):
+            raise RuntimeError(
+                f"{context}: OCI {oci!r} "
+                "does not belong to its partition leaf"
+            )
+
+    return rows
+
+
+def reconcile_opencitations_partition_rows(
+    records: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    *,
+    expected_count: int,
+    context: str,
+) -> list[
+    tuple[
+        dict,
+        Path,
+    ]
+]:
+    seen: dict[
+        str,
+        Path,
+    ] = {}
+
+    for row, raw_path in records:
+        oci = str(
+            row.get("oci")
+            or ""
+        ).strip()
+
+        if not oci:
+            raise RuntimeError(
+                f"{context}: OpenCitations row "
+                "contains no OCI during reconciliation"
+            )
+
+        if oci in seen:
+            raise RuntimeError(
+                f"{context}: duplicate OCI {oci!r} "
+                "across partition leaves"
+            )
+
+        seen[oci] = raw_path
+
+    if len(seen) != expected_count:
+        raise RuntimeError(
+            f"{context}: OpenCitations reported "
+            f"{expected_count}, retrieved "
+            f"{len(seen)} unique OCI rows"
+        )
+
+    return sorted(
+        records,
+        key=lambda pair: str(
+            pair[0].get("oci")
+            or ""
+        ),
+    )
+
+
+def retrieve_opencitations_partitioned(
+    *,
+    anchor: dict[str, str],
+    direction: str,
+    doi: str,
+    expected_count: int,
+    wave: int,
+    headers: dict[str, str],
+    raw_root: Path,
+    output_root: Path,
+    fetcher: Callable[..., Any],
+    max_suffix_digits: int = (
+        OPENCITATIONS_PARTITION_MAX_SUFFIX_DIGITS
+    ),
+) -> tuple[
+    list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    list[dict],
+]:
+    if expected_count < 0:
+        raise ValueError(
+            "expected_count cannot be negative"
+        )
+
+    if max_suffix_digits < 1:
+        raise ValueError(
+            "max_suffix_digits must be positive"
+        )
+
+    if expected_count == 0:
+        return [], []
+
+    context = (
+        f"{anchor['anchor_id']}: "
+        f"OpenCitations {direction}"
+    )
+
+    records: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ] = []
+
+    leaves: list[dict] = []
+
+    leaf_order = 0
+
+    def retrieve_leaf(
+        suffix: str,
+        *,
+        exact: bool,
+        recursion_depth: int,
+    ) -> None:
+        nonlocal leaf_order
+
+        leaf_regex = (
+            opencitations_partition_regex(
+                direction,
+                suffix,
+                exact=exact,
+            )
+        )
+
+        raw_path = (
+            opencitations_partition_raw_path(
+                raw_root,
+                direction,
+                suffix,
+                exact=exact,
+                recursion_depth=recursion_depth,
+            )
+        )
+
+        request_url = (
+            opencitations_url(
+                direction,
+                doi,
+                oci_filter=leaf_regex,
+            )
+        )
+
+        try:
+            payload = fetcher(
+                request_url,
+                headers=headers,
+                raw_path=raw_path,
+                delay=0.40,
+            )
+
+        except NotIndexed as exc:
+            raise RuntimeError(
+                f"{context}: independent count "
+                "endpoint resolved the anchor but "
+                "a filtered citation-data request "
+                "returned HTTP 404"
+            ) from exc
+
+        except RuntimeError as exc:
+            if (
+                not exact
+                and caused_by_incomplete_read(exc)
+            ):
+                if (
+                    len(suffix)
+                    >= max_suffix_digits
+                ):
+                    raise RuntimeError(
+                        f"{context}: OCI partition "
+                        "recursion ceiling reached at "
+                        f"{len(suffix)} suffix digits "
+                        f"for suffix {suffix!r}"
+                    ) from exc
+
+                retrieve_leaf(
+                    suffix,
+                    exact=True,
+                    recursion_depth=(
+                        recursion_depth + 1
+                    ),
+                )
+
+                for digit in (
+                    OPENCITATIONS_PARTITION_DIGITS
+                ):
+                    retrieve_leaf(
+                        digit + suffix,
+                        exact=False,
+                        recursion_depth=(
+                            recursion_depth + 1
+                        ),
+                    )
+
+                return
+
+            raise
+
+        rows = (
+            validate_opencitations_partition_payload(
+                payload,
+                leaf_regex=leaf_regex,
+                context=context,
+            )
+        )
+
+        leaf_order += 1
+
+        leaves.append({
+            "wave": wave,
+            "anchor_id":
+                anchor["anchor_id"],
+            "anchor_tool":
+                anchor["tool"],
+            "direction":
+                direction,
+            "leaf_order":
+                leaf_order,
+            "recursion_depth":
+                recursion_depth,
+            "suffix_digits":
+                len(suffix),
+            "partition_kind":
+                (
+                    "exact"
+                    if exact
+                    else "suffix"
+                ),
+            "suffix":
+                suffix,
+            "leaf_regex":
+                leaf_regex,
+            "request_sha256":
+                hashlib.sha256(
+                    request_url.encode(
+                        "utf-8"
+                    )
+                ).hexdigest(),
+            "raw_file":
+                raw_rel(
+                    raw_path,
+                    output_root,
+                ),
+            "row_count":
+                len(rows),
+        })
+
+        for row in rows:
+            records.append(
+                (
+                    row,
+                    raw_path,
+                )
+            )
+
+    for digit in (
+        OPENCITATIONS_PARTITION_DIGITS
+    ):
+        retrieve_leaf(
+            digit,
+            exact=False,
+            recursion_depth=0,
+        )
+
+    reconciled = (
+        reconcile_opencitations_partition_rows(
+            records,
+            expected_count=expected_count,
+            context=context,
+        )
+    )
+
+    return (
+        reconciled,
+        leaves,
+    )
+
+
 def retrieve_opencitations(
     anchor: dict[str, str],
     *,
@@ -1090,6 +1554,7 @@ def retrieve_opencitations(
     output_root: Path,
     fetcher: Callable[..., Any] = fetch_json,
 ) -> tuple[
+    list[dict],
     list[dict],
     list[dict],
     list[dict],
@@ -1117,6 +1582,7 @@ def retrieve_opencitations(
     edges: list[dict] = []
     neighbours: list[dict] = []
     statuses: list[dict] = []
+    partition_leaves: list[dict] = []
 
     for direction in [
         "backward",
@@ -1137,6 +1603,7 @@ def retrieve_opencitations(
                 raw_path=count_path,
                 delay=0.40,
             )
+
         except NotIndexed:
             statuses.append({
                 "wave": wave,
@@ -1154,6 +1621,7 @@ def retrieve_opencitations(
                 "terminal_detail":
                     "count endpoint returned HTTP 404",
             })
+
             continue
 
         reported_count = (
@@ -1162,46 +1630,56 @@ def retrieve_opencitations(
             )
         )
 
-        raw_path = (
-            raw_root
-            / f"{direction}.json"
-        )
+        if reported_count == 0:
+            statuses.append({
+                "wave": wave,
+                "anchor_id":
+                    anchor["anchor_id"],
+                "anchor_tool":
+                    anchor["tool"],
+                "source":
+                    "opencitations",
+                "direction": direction,
+                "status":
+                    "resolved_zero_edges",
+                "reported_count": 0,
+                "retrieved_count": 0,
+                "response_files": 1,
+                "terminal_detail":
+                    "independent count endpoint "
+                    "reported zero; no partition "
+                    "data requests required",
+            })
 
-        try:
-            payload = fetcher(
-                opencitations_url(
-                    direction,
-                    doi,
-                ),
+            continue
+
+        (
+            partition_rows,
+            direction_leaves,
+        ) = (
+            retrieve_opencitations_partitioned(
+                anchor=anchor,
+                direction=direction,
+                doi=doi,
+                expected_count=reported_count,
+                wave=wave,
                 headers=headers,
-                raw_path=raw_path,
-                delay=0.40,
+                raw_root=raw_root,
+                output_root=output_root,
+                fetcher=fetcher,
             )
-        except NotIndexed as exc:
-            raise RuntimeError(
-                f"{anchor['anchor_id']}: "
-                f"OpenCitations {direction} "
-                "count endpoint resolved the anchor "
-                "but citation-data endpoint returned 404"
-            ) from exc
-
-        rows = flatten_json_list(
-            payload
         )
 
-        if len(rows) != reported_count:
-            raise RuntimeError(
-                f"{anchor['anchor_id']}: "
-                f"OpenCitations {direction} reported "
-                f"{reported_count}, retrieved "
-                f"{len(rows)}"
-            )
+        partition_leaves.extend(
+            direction_leaves
+        )
 
-        seen_rows: set[
-            tuple[str, str, str]
-        ] = set()
+        seen_oci: set[str] = set()
 
-        for item in rows:
+        for (
+            item,
+            item_raw_path,
+        ) in partition_rows:
             citing = parse_pid_bundle(
                 item.get("citing")
             )
@@ -1215,28 +1693,14 @@ def retrieve_opencitations(
                 or ""
             ).strip()
 
-            key = (
-                unique_join(
-                    citing["doi"]
-                    + citing["pmid"]
-                    + citing["omid"]
-                ),
-                unique_join(
-                    cited["doi"]
-                    + cited["pmid"]
-                    + cited["omid"]
-                ),
-                oci,
-            )
-
-            if key in seen_rows:
+            if oci in seen_oci:
                 raise RuntimeError(
                     f"{anchor['anchor_id']}: "
                     f"duplicate OpenCitations "
-                    f"{direction} row"
+                    f"{direction} OCI {oci!r}"
                 )
 
-            seen_rows.add(key)
+            seen_oci.add(oci)
 
             edges.append({
                 "wave": wave,
@@ -1277,7 +1741,7 @@ def retrieve_opencitations(
                     ),
                 "oci": oci,
                 "raw_file": raw_rel(
-                    raw_path,
+                    item_raw_path,
                     output_root,
                 ),
             })
@@ -1341,25 +1805,26 @@ def retrieve_opencitations(
             "source":
                 "opencitations",
             "direction": direction,
-            "status": (
-                "complete"
-                if rows
-                else "resolved_zero_edges"
-            ),
+            "status": "complete",
             "reported_count":
                 reported_count,
             "retrieved_count":
-                len(rows),
-            "response_files": 2,
+                len(partition_rows),
+            "response_files":
+                1 + len(
+                    direction_leaves
+                ),
             "terminal_detail":
-                "independent count endpoint reconciled "
-                "with Index v2 citation response",
+                "independent count endpoint "
+                "reconciled with deterministic "
+                "disjoint OCI partition union",
         })
 
     return (
         edges,
         neighbours,
         statuses,
+        partition_leaves,
     )
 
 
@@ -1502,6 +1967,7 @@ def main() -> int:
     all_edges: list[dict] = []
     all_neighbours: list[dict] = []
     all_statuses: list[dict] = []
+    all_oc_partition_leaves: list[dict] = []
 
     for anchor in anchors:
         (
@@ -1527,6 +1993,7 @@ def main() -> int:
             edges,
             neighbours,
             statuses,
+            partition_leaves,
         ) = retrieve_opencitations(
             anchor,
             wave=args.wave,
@@ -1540,6 +2007,9 @@ def main() -> int:
         )
         all_statuses.extend(
             statuses
+        )
+        all_oc_partition_leaves.extend(
+            partition_leaves
         )
 
     validate_status_matrix(
@@ -1588,6 +2058,15 @@ def main() -> int:
         )
     )
 
+    all_oc_partition_leaves.sort(
+        key=lambda row: (
+            int(row["wave"]),
+            row["anchor_id"],
+            row["direction"],
+            int(row["leaf_order"]),
+        )
+    )
+
     write_tsv(
         args.output
         / "citation_edges.tsv",
@@ -1607,6 +2086,13 @@ def main() -> int:
         / "source_status.tsv",
         STATUS_FIELDS,
         all_statuses,
+    )
+
+    write_tsv(
+        args.output
+        / "opencitations_partition_leaves.tsv",
+        OPENCITATIONS_PARTITION_FIELDS,
+        all_oc_partition_leaves,
     )
 
     manifest = {
@@ -1636,6 +2122,10 @@ def main() -> int:
             len(all_edges),
         "neighbour_rows":
             len(all_neighbours),
+        "opencitations_partition_leaf_rows":
+            len(all_oc_partition_leaves),
+        "opencitations_partition_max_suffix_digits":
+            OPENCITATIONS_PARTITION_MAX_SUFFIX_DIGITS,
         "credential_values_written":
             False,
         "openalex_api":
@@ -1662,6 +2152,7 @@ def main() -> int:
         "citation_edges.tsv",
         "neighbour_records.tsv",
         "source_status.tsv",
+        "opencitations_partition_leaves.tsv",
         "retrieval_manifest.json",
     ]
 
