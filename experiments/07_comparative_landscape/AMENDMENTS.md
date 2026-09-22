@@ -165,3 +165,41 @@ unchanged.
 
 No records from failed Attempt 03 were screened or used for inclusion,
 exclusion, capability classification, or benchmark selection.
+
+## Amendment 05 — merged seed-recovery ordering validation
+
+**Timing:** recorded after execution of the prespecified merged-universe
+seed-recovery diagnostic and before any modification of validation code,
+human confirmation, eligibility screening, capability classification, or
+citation chaining.
+
+The production diagnostic completed successfully, but an auxiliary
+byte-for-byte comparison of its formal-stage candidate-match projection against
+the earlier formal-search output failed.
+
+A read-only differential audit demonstrated that the two outputs contain the
+same 29-row multiset with zero missing and zero extra row occurrences. The
+difference consists solely of the reversed order of two SNPPar OpenAlex Q11
+records (`W3041660225` and `W4225492844`).
+
+The original frozen checker sorts candidate matches by seed tool, source,
+case-folded title, and query ID. Those two records are tied on every field in
+that sort key, so Python's stable sort preserves their pre-existing input
+order. The deterministic merged candidate universe supplies the tied records
+in the opposite order.
+
+Full-row deterministic canonicalization produces identical formal-stage
+content (SHA-256
+`7b00244753bbdc8b19637dfcc2bab96ba77633ea649a887a2b9203462fc20c14`).
+
+Accordingly, the reproduction criterion for this ordering tie is clarified as
+exact row-multiset equality plus byte-identical deterministic canonicalization,
+rather than byte identity under an incomplete historical sort key.
+
+This amendment does not change the seed registry, aliases, normalization,
+phrase matching, uniqueness definition, recovery status, search expressions,
+merged search universe, or generated production diagnostic. The production
+diagnostic is retained unchanged.
+
+Search retuning remains prohibited. Candidate matches remain pending human
+confirmation.

@@ -1,0 +1,29 @@
+{
+  "affected_query_id": "Q11",
+  "affected_seed_tool": "SNPPar",
+  "affected_source": "openalex",
+  "affected_source_record_ids": [
+    "W3041660225",
+    "W4225492844"
+  ],
+  "candidate_evidence_set_changed": false,
+  "canonical_sha256": "7b00244753bbdc8b19637dfcc2bab96ba77633ea649a887a2b9203462fc20c14",
+  "capability_classification_performed": false,
+  "eligibility_decisions_made": false,
+  "extra_row_occurrences": 0,
+  "issue_class": "ordering_only_under_incomplete_original_sort_tie_break",
+  "matching_semantics_changed": false,
+  "merged_formal_rows": 29,
+  "merged_match_file_sha256": "ca68f701903bfac4e142fc9f1abc62fa6dcb795bacff44fe1a34ace0e3f65875",
+  "missing_row_occurrences": 0,
+  "original_formal_rows": 29,
+  "original_match_file_sha256": "7b00244753bbdc8b19637dfcc2bab96ba77633ea649a887a2b9203462fc20c14",
+  "original_sort_tied_groups": 1,
+  "positional_differences": 2,
+  "schema_version": 1,
+  "screening_performed": false,
+  "search_strategy_changed": false,
+  "seed_recovery_status_changed": false,
+  "status": "PASS",
+  "tied_groups_with_changed_internal_order": 1
+}
