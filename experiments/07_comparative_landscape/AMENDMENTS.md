@@ -362,3 +362,34 @@ prespecified final completeness and miss analysis.
 
 The complete operational rules are frozen in
 `CITATION_CHAINING_PROTOCOL.md`.
+
+## Amendment 11 — citation-wave retrieval implementation
+
+**Timing:** frozen after the iterative dual-source citation-chaining protocol
+and before the first production citation API request.
+
+The Wave citation retriever is implemented for the two prespecified citation
+sources.
+
+OpenAlex anchors are resolved from DOI. Backward edges use the resolved Work's
+`referenced_works` relation and forward edges use the Works `cites` filter with
+cursor pagination.
+
+OpenCitations Index v2 uses its `references` and `citations` operations for
+backward and forward chaining respectively.
+
+Retrieval is fail-closed. The implementation requires a terminal status for
+each anchor × source × direction combination and requires available reported
+counts to reconcile with retrieved counts.
+
+Raw API responses are retained. Credentials are environment-only and are not
+written to outputs.
+
+Offline regression tests cover identifier normalization, OpenCitations PID
+parsing, response-shape handling, OpenAlex backward retrieval, OpenAlex
+forward cursor pagination, OpenCitations bidirectional retrieval, terminal
+status completeness, and fail-closed count behaviour.
+
+The regression suite makes no network requests.
+
+No citation results had been retrieved when this implementation was frozen.
