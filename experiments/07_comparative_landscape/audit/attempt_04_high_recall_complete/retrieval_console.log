@@ -1,0 +1,21 @@
+[HR01] PubMed
+[HR01] OpenAlex
+[HR01] bio.tools
+[HR02] PubMed
+[HR02] OpenAlex
+[HR02] bio.tools
+[HR03] PubMed
+[HR03] OpenAlex
+[HR03] bio.tools
+[HR04] PubMed
+[HR04] OpenAlex
+[HR04] bio.tools
+[HR05] PubMed
+[HR05] OpenAlex
+[HR05] bio.tools
+
+PASS | high-recall search retrieval complete
+candidate rows     = 113,448
+deduplicated rows  = 78,962
+source/query pulls = 15
+output             = /home/rwhite/github/branchsnv-validation/results/07_comparative_landscape/high_recall_search
