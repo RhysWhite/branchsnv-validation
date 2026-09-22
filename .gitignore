@@ -7,3 +7,5 @@ experiments/04_scalability/inputs/
 
 # Experiment 07 large raw search archives (archived externally at release)
 results/07_comparative_landscape/archive/*.tar.gz
+results/07_comparative_landscape/high_recall_search/raw/
+results/07_comparative_landscape/high_recall_search/corpus_checksums.sha256

@@ -1,0 +1,16 @@
+source	query_id	query_family	reported_count	retrieved_count	response_files	complete
+biotools	HR01	high_recall_clade_marker	0	0	1	True
+biotools	HR02	high_recall_branch_mapping	0	0	1	True
+biotools	HR03	high_recall_ancestral_reconstruction	54	54	2	True
+biotools	HR04	high_recall_homoplasy	1	1	1	True
+biotools	HR05	high_recall_genotyping	1	1	1	True
+openalex	HR01	high_recall_clade_marker	15020	15020	151	True
+openalex	HR02	high_recall_branch_mapping	4713	4713	48	True
+openalex	HR03	high_recall_ancestral_reconstruction	11945	11945	120	True
+openalex	HR04	high_recall_homoplasy	8600	8600	87	True
+openalex	HR05	high_recall_genotyping	37837	37837	379	True
+pubmed	HR01	high_recall_clade_marker	8815	8815	46	True
+pubmed	HR02	high_recall_branch_mapping	1626	1626	10	True
+pubmed	HR03	high_recall_ancestral_reconstruction	9432	9432	49	True
+pubmed	HR04	high_recall_homoplasy	2750	2750	15	True
+pubmed	HR05	high_recall_genotyping	12654	12654	88	True
