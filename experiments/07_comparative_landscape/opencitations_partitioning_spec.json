@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "api": {
+    "source": "OpenCitations Index",
+    "api_version": "v2",
+    "documentation_version_observed": "2.2.0",
+    "documentation_version_date": "2025-04-15",
+    "base_url": "https://api.opencitations.net/index/v2"
+  },
+  "citation_identity": {
+    "field": "oci",
+    "full_regex": "^[0-9]+-[0-9]+$"
+  },
+  "partition": {
+    "field": "oci",
+    "filter_semantics": "regex",
+    "root_radix": 10,
+    "root_digits": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "partition_end": "terminal_digit",
+    "forward_variable_component": "citing",
+    "backward_variable_component": "cited",
+    "positive_count_always_partitioned": true,
+    "scientific_filter": false
+  },
+  "forward_root_regex_template": "^[0-9]*{digit}-[0-9]+$",
+  "backward_root_regex_template": "^[0-9]+-[0-9]*{digit}$",
+  "recursive_rule": {
+    "forward_parent_template": "^[0-9]*{suffix}-[0-9]+$",
+    "forward_exact_template": "^{suffix}-[0-9]+$",
+    "forward_child_template": "^[0-9]*{digit}{suffix}-[0-9]+$",
+    "backward_parent_template": "^[0-9]+-[0-9]*{suffix}$",
+    "backward_exact_template": "^[0-9]+-{suffix}$",
+    "backward_child_template": "^[0-9]+-[0-9]*{digit}{suffix}$"
+  },
+  "completion_requirements": {
+    "all_leaves_terminal": true,
+    "oci_required": true,
+    "oci_must_match_full_regex": true,
+    "oci_must_match_leaf_regex": true,
+    "duplicate_oci_per_operation_allowed": false,
+    "unique_oci_count_must_equal_independent_count": true,
+    "partial_union_allowed": false
+  },
+  "independent_counts": {
+    "forward": "citation-count",
+    "backward": "reference-count"
+  },
+  "failed_attempt_reuse": false,
+  "primary_search_changed": false,
+  "citation_scope_changed": false,
+  "screening_changed": false,
+  "saturation_rule_changed": false
+}

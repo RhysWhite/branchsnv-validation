@@ -630,3 +630,44 @@ identities are prohibited, and incomplete coverage fails closed.
 
 No citation source, anchor, scientific filter, search expression, screening
 criterion, or saturation rule is changed by this finding.
+
+## Amendment 20 — deterministic OCI partitioning for OpenCitations
+
+**Timing:** frozen after Wave 0 Attempt 04 demonstrated persistent
+whole-response failure despite five bounded retries, and before implementation
+or production use of any partitioned OpenCitations retrieval.
+
+OpenCitations Index v2 documents result filtering by regular expression and
+defines each citation using an Open Citation Identifier (OCI) with numeric
+citing and cited components.
+
+Positive-count OpenCitations operations will therefore be retrieved as a
+deterministic partition of the OCI identifier space rather than as one
+unpartitioned citation-data response.
+
+The root partition is based on the terminal decimal digit of the variable OCI
+component:
+
+- citing component for forward citations;
+- cited component for backward references.
+
+The ten decimal buckets are mutually exclusive and exhaustive for the
+documented OCI lexical form.
+
+A bucket that still exhausts the existing bounded transport retry policy may be
+recursively subdivided by the next terminal digit. Subdivision retains an
+exact-number child so numeric components shorter than the new suffix depth
+cannot be lost.
+
+No biological, bibliographic, temporal, lexical, software-name, or relevance
+field participates in partition assignment.
+
+A reconstructed operation is accepted only when every leaf is complete, every
+row has a valid OCI belonging to its leaf, no OCI is duplicated across leaves,
+and the unique OCI union exactly equals the independently retrieved
+citation/reference count.
+
+Failed Attempts 03 and 04 remain audit artefacts only and cannot contribute
+citation rows to a later successful Wave 0 result.
+
+The complete design is frozen in `OPENCITATIONS_PARTITIONING_SPEC.md`.
