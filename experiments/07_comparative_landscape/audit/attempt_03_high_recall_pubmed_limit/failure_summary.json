@@ -1,0 +1,14 @@
+{
+  "attempt": "03",
+  "capability_classification_performed": false,
+  "eligibility_decisions_made": false,
+  "failing_query": "HR05",
+  "failing_source": "PubMed",
+  "partial_output_file_count": 533,
+  "pubmed_reported_count": 12654,
+  "repository_commit": "080b581cbd93a5b4d4f1f12bb6bd03b2edb7e3c7",
+  "retriever_limit": 10000,
+  "schema_version": 1,
+  "screening_performed": false,
+  "status": "FAILED"
+}

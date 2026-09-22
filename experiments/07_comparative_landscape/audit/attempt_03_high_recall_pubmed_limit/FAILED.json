@@ -1,0 +1,11 @@
+{
+  "experiment": "07_comparative_landscape_high_recall_search",
+  "failed_utc": "2026-09-22T12:21:00.821994+00:00",
+  "python_version": "3.10.14",
+  "repository_commit": "080b581cbd93a5b4d4f1f12bb6bd03b2edb7e3c7",
+  "retrieval_script_sha256": "83743fc0129a35be5b7444c479e9005c4de91076cf22035c1f75120b8bdec4ed",
+  "schema_version": 1,
+  "search_queries_sha256": "6f4752cb07e2897ecaca8ff4fcd2802df6d9a9166c3b252cab8fdcc0565ce7f1",
+  "started_utc": "2026-09-22T12:01:32.918536+00:00",
+  "status": "FAILED"
+}

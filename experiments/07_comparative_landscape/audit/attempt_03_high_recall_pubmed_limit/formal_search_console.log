@@ -1,0 +1,21 @@
+[HR01] PubMed
+[HR01] OpenAlex
+[HR01] bio.tools
+[HR02] PubMed
+[HR02] OpenAlex
+[HR02] bio.tools
+[HR03] PubMed
+[HR03] OpenAlex
+[HR03] bio.tools
+[HR04] PubMed
+[HR04] OpenAlex
+[HR04] bio.tools
+[HR05] PubMed
+Traceback (most recent call last):
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_high_recall_corpus.py", line 910, in <module>
+    raise SystemExit(main())
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_high_recall_corpus.py", line 768, in main
+    rows, summary = retrieve_pubmed(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_high_recall_corpus.py", line 326, in retrieve_pubmed
+    raise RuntimeError(
+RuntimeError: HR05: PubMed returned 12,654 records. This exceeds the PubMed ESearch 10,000-record retrieval limit. The query must be prespecifically subdivided before continuing.
