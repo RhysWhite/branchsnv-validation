@@ -393,3 +393,36 @@ status completeness, and fail-closed count behaviour.
 The regression suite makes no network requests.
 
 No citation results had been retrieved when this implementation was frozen.
+
+## Amendment 12 — independent OpenCitations count reconciliation
+
+**Timing:** recorded after freezing the first citation-wave retrieval
+implementation but before any production citation API request.
+
+A pre-production implementation audit identified that OpenAlex retrieval had
+an independent completeness check but the initial OpenCitations implementation
+set `reported_count` equal to the number of rows returned by the citation-data
+endpoint. That value could not independently detect an incomplete response.
+
+OpenCitations Index v2 provides separate `reference-count` and
+`citation-count` operations. The retriever is therefore hardened so that each
+backward/forward OpenCitations retrieval first obtains the independently
+reported count and then requires the corresponding `references` or
+`citations` response to contain exactly that many citation rows.
+
+A mismatch fails closed.
+
+If the count endpoint returns HTTP 404 the anchor/direction is recorded as
+`not_indexed`. If the count endpoint resolves the anchor but the corresponding
+citation-data endpoint returns HTTP 404, retrieval fails rather than
+interpreting the result as zero citations.
+
+Offline regression tests now include valid count reconciliation and an
+explicit count-mismatch failure case.
+
+This change affects retrieval validation only. It changes no citation source,
+anchor, search criterion, screening criterion, scientific filter, or
+citation-chaining stopping rule.
+
+No production citation result had been observed when this hardening was
+specified.

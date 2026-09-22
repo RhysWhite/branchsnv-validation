@@ -161,6 +161,38 @@ for bad in [
         )
 
 # ------------------------------------------------------------
+# OpenCitations count parsing.
+# ------------------------------------------------------------
+
+assert_equal(
+    mod.parse_opencitations_count(
+        [{"count": "35"}]
+    ),
+    35,
+    "OpenCitations count parsing",
+)
+
+for bad in [
+    [],
+    [{"not_count": "1"}],
+    [{"count": "-1"}],
+    [{"count": "abc"}],
+    [{"count": "1"}, {"count": "2"}],
+]:
+    try:
+        mod.parse_opencitations_count(
+            bad
+        )
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError(
+            "invalid OpenCitations count "
+            f"accepted: {bad!r}"
+        )
+
+
+# ------------------------------------------------------------
 # Request construction.
 # ------------------------------------------------------------
 
@@ -193,6 +225,28 @@ back_url = mod.opencitations_url(
 forward_oc_url = mod.opencitations_url(
     "forward",
     "10.1093/ve/vex042",
+)
+
+back_count_url = mod.opencitations_count_url(
+    "backward",
+    "10.1093/ve/vex042",
+)
+
+forward_count_url = mod.opencitations_count_url(
+    "forward",
+    "10.1093/ve/vex042",
+)
+
+assert (
+    "/reference-count/"
+    "doi:10.1093%2Fve%2Fvex042"
+    in back_count_url
+)
+
+assert (
+    "/citation-count/"
+    "doi:10.1093%2Fve%2Fvex042"
+    in forward_count_url
 )
 
 assert (
@@ -351,7 +405,21 @@ class FakeOpenCitations:
             exist_ok=True,
         )
 
-        if "/references/" in url:
+        if "/reference-count/" in url:
+            payload = [
+                {
+                    "count": "1",
+                }
+            ]
+
+        elif "/citation-count/" in url:
+            payload = [
+                {
+                    "count": "1",
+                }
+            ]
+
+        elif "/references/" in url:
             payload = [
                 {
                     "oci": "1-2",
@@ -573,6 +641,71 @@ with tempfile.TemporaryDirectory() as td:
         )
 
 
+class BadOpenCitationsCount:
+    def __call__(
+        self,
+        url,
+        *,
+        headers,
+        raw_path,
+        delay,
+        retries=5,
+    ):
+        raw_path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        if "/reference-count/" in url:
+            payload = [
+                {
+                    "count": "2",
+                }
+            ]
+
+        elif "/references/" in url:
+            payload = [
+                {
+                    "oci": "1-2",
+                    "citing":
+                        "doi:10.1000/test",
+                    "cited":
+                        "doi:10.4000/ref",
+                }
+            ]
+
+        else:
+            raise AssertionError(
+                "Should fail during backward "
+                "OpenCitations reconciliation"
+            )
+
+        raw_path.write_text(
+            json.dumps(payload),
+            encoding="utf-8",
+        )
+
+        return payload
+
+
+with tempfile.TemporaryDirectory() as td:
+    try:
+        mod.retrieve_opencitations(
+            anchor,
+            wave=0,
+            token="",
+            output_root=Path(td),
+            fetcher=BadOpenCitationsCount(),
+        )
+    except RuntimeError as exc:
+        assert "reported 2, retrieved 1" in str(exc)
+    else:
+        raise AssertionError(
+            "OpenCitations count mismatch "
+            "did not fail"
+        )
+
+
 bad_status = [
     {
         "anchor_id": "W0TEST",
@@ -607,5 +740,6 @@ print("PASS | synthetic OpenCitations backward retrieval")
 print("PASS | synthetic OpenCitations forward retrieval")
 print("PASS | complete source-direction matrix validation")
 print("PASS | OpenAlex count mismatch fails closed")
+print("PASS | OpenCitations independent count mismatch fails closed")
 print("PASS | incomplete source matrix fails closed")
 print("PASS | offline tests made zero network requests")

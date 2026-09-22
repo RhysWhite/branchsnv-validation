@@ -302,6 +302,48 @@ def flatten_json_list(payload: Any) -> list[dict]:
     return list(payload)
 
 
+def parse_opencitations_count(
+    payload: Any,
+) -> int:
+    """Parse one OpenCitations count-endpoint response."""
+
+    rows = flatten_json_list(
+        payload
+    )
+
+    if len(rows) != 1:
+        raise RuntimeError(
+            "OpenCitations count endpoint "
+            f"returned {len(rows)} rows; expected 1"
+        )
+
+    if "count" not in rows[0]:
+        raise RuntimeError(
+            "OpenCitations count response "
+            "does not contain 'count'"
+        )
+
+    try:
+        count = int(
+            rows[0]["count"]
+        )
+    except (
+        TypeError,
+        ValueError,
+    ) as exc:
+        raise RuntimeError(
+            "OpenCitations count is not an integer"
+        ) from exc
+
+    if count < 0:
+        raise RuntimeError(
+            "OpenCitations count is negative"
+        )
+
+    return count
+
+
+
 def build_url(
     base: str,
     params: dict[str, str | int],
@@ -563,6 +605,36 @@ def opencitations_url(
         f"{OPENCITATIONS_ROOT}/"
         f"{operation}/{identifier}"
     )
+
+
+def opencitations_count_url(
+    direction: str,
+    doi: str,
+) -> str:
+    if direction not in {
+        "backward",
+        "forward",
+    }:
+        raise ValueError(
+            f"Invalid direction: {direction}"
+        )
+
+    operation = (
+        "reference-count"
+        if direction == "backward"
+        else "citation-count"
+    )
+
+    identifier = urllib.parse.quote(
+        f"doi:{normalise_doi(doi)}",
+        safe=":",
+    )
+
+    return (
+        f"{OPENCITATIONS_ROOT}/"
+        f"{operation}/{identifier}"
+    )
+
 
 
 def openalex_ids(
@@ -1050,19 +1122,19 @@ def retrieve_opencitations(
         "backward",
         "forward",
     ]:
-        raw_path = (
+        count_path = (
             raw_root
-            / f"{direction}.json"
+            / f"{direction}_count.json"
         )
 
         try:
-            payload = fetcher(
-                opencitations_url(
+            count_payload = fetcher(
+                opencitations_count_url(
                     direction,
                     doi,
                 ),
                 headers=headers,
-                raw_path=raw_path,
+                raw_path=count_path,
                 delay=0.40,
             )
         except NotIndexed:
@@ -1080,13 +1152,50 @@ def retrieve_opencitations(
                 "retrieved_count": 0,
                 "response_files": 1,
                 "terminal_detail":
-                    "endpoint returned HTTP 404",
+                    "count endpoint returned HTTP 404",
             })
             continue
+
+        reported_count = (
+            parse_opencitations_count(
+                count_payload
+            )
+        )
+
+        raw_path = (
+            raw_root
+            / f"{direction}.json"
+        )
+
+        try:
+            payload = fetcher(
+                opencitations_url(
+                    direction,
+                    doi,
+                ),
+                headers=headers,
+                raw_path=raw_path,
+                delay=0.40,
+            )
+        except NotIndexed as exc:
+            raise RuntimeError(
+                f"{anchor['anchor_id']}: "
+                f"OpenCitations {direction} "
+                "count endpoint resolved the anchor "
+                "but citation-data endpoint returned 404"
+            ) from exc
 
         rows = flatten_json_list(
             payload
         )
+
+        if len(rows) != reported_count:
+            raise RuntimeError(
+                f"{anchor['anchor_id']}: "
+                f"OpenCitations {direction} reported "
+                f"{reported_count}, retrieved "
+                f"{len(rows)}"
+            )
 
         seen_rows: set[
             tuple[str, str, str]
@@ -1238,12 +1347,13 @@ def retrieve_opencitations(
                 else "resolved_zero_edges"
             ),
             "reported_count":
-                len(rows),
+                reported_count,
             "retrieved_count":
                 len(rows),
-            "response_files": 1,
+            "response_files": 2,
             "terminal_detail":
-                "single Index v2 response complete",
+                "independent count endpoint reconciled "
+                "with Index v2 citation response",
         })
 
     return (

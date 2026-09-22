@@ -24,15 +24,23 @@ resolved operation with zero edges is `resolved_zero_edges`.
 
 ## OpenCitations
 
-OpenCitations Index v2 is queried with:
+OpenCitations Index v2 is queried with independent count and data
+operations:
 
-- `/references/doi:<DOI>` for backward citation edges;
-- `/citations/doi:<DOI>` for forward citation edges.
+- `/reference-count/doi:<DOI>` followed by `/references/doi:<DOI>` for
+  backward citation edges;
+- `/citation-count/doi:<DOI>` followed by `/citations/doi:<DOI>` for
+  forward citation edges.
+
+The number of citation rows retrieved must equal the independently reported
+count. A mismatch fails closed.
 
 Returned DOI, PMID, and OMID values are retained.
 
-A successful empty response is `resolved_zero_edges`; HTTP 404 is
-`not_indexed`.
+A successful count of zero reconciled to an empty citation response is
+`resolved_zero_edges`. HTTP 404 from the count endpoint is `not_indexed`. If
+the count endpoint resolves an anchor but the corresponding citation-data
+endpoint returns 404, retrieval fails closed.
 
 ## Credentials
 
@@ -53,7 +61,9 @@ Every anchor must receive a terminal status for all four combinations:
 - OpenCitations forward.
 
 The retriever fails closed if this matrix is incomplete or if a reported count
-does not equal the retrieved count.
+does not equal the retrieved count. Both citation sources therefore have an
+independent count reconciliation: OpenAlex uses its Work/list metadata and
+OpenCitations uses the Index v2 count endpoints.
 
 ## Raw responses
 
