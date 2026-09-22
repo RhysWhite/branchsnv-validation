@@ -1,10 +1,10 @@
-tool	seed_category	seed_role_candidate	search_stages_recovered	candidate_match_rows	unique_candidate_records	tool_identity_status	identity_evidence	criterion_method_documentation	criterion_software_implementation	criterion_data_scope	criterion_analytical_role	landscape_decision	landscape_decision_reason	confirmed_role	canonical_anchor_identifier_type	canonical_anchor_identifier	canonical_anchor_title	canonical_anchor_year	anchor_evidence	citation_chain_anchor_decision	notes
-CLASSICO/Evidente	clade-specific SNP discovery	direct_candidate	high_recall	2	2	pending		pending	pending	pending	pending	pending		pending						pending	
-SNPPar	branch mutation mapping / homoplasy	direct_candidate	formal;high_recall	26	4	pending		pending	pending	pending	pending	pending		pending						pending	
-SubRecon	single-branch ancestral substitution reconstruction	direct_candidate	high_recall	3	2	pending		pending	pending	pending	pending	pending		pending						pending	
-TreeTime	ancestral sequence reconstruction / mutation mapping	direct_candidate	high_recall	5	5	pending		pending	pending	pending	pending	pending		pending						pending	
-FastML	ancestral sequence reconstruction	near_direct_candidate	formal;high_recall	5	3	pending		pending	pending	pending	pending	pending		pending						pending	
-IQ-TREE 2	phylogenetic inference / ancestral reconstruction	near_direct_candidate	high_recall	2	2	pending		pending	pending	pending	pending	pending		pending						pending	
-kSNP3.0	SNP discovery / phylogeny / node-associated SNP mapping	near_direct_candidate	high_recall	2	2	pending		pending	pending	pending	pending	pending		pending						pending	
-PAML	model-based ancestral sequence reconstruction	near_direct_candidate	high_recall	3	3	pending		pending	pending	pending	pending	pending		pending						pending	
-PastML	ancestral-state reconstruction	near_direct_candidate	high_recall	1	1	pending		pending	pending	pending	pending	pending		pending						pending	
+tool	seed_category	seed_role_candidate	search_stages_recovered	candidate_match_rows	unique_candidate_records	tool_identity_status	identity_evidence	criterion_method_documentation	criterion_software_implementation	criterion_data_scope	criterion_analytical_role	landscape_decision	landscape_decision_reason	confirmed_role	canonical_anchor_identifier_type	canonical_anchor_identifier	canonical_anchor_title	canonical_anchor_year	anchor_evidence	notes	citation_chain_anchor_decision
+CLASSICO/Evidente	clade-specific SNP discovery	direct_candidate	high_recall	2	2	pending		pending	pending	pending	pending	pending		pending							pending
+SNPPar	branch mutation mapping / homoplasy	direct_candidate	formal;high_recall	26	4	pending		pending	pending	pending	pending	pending		pending							pending
+SubRecon	single-branch ancestral substitution reconstruction	direct_candidate	high_recall	3	2	pending		pending	pending	pending	pending	pending		pending							pending
+TreeTime	ancestral sequence reconstruction / mutation mapping	direct_candidate	high_recall	5	5	pending		pending	pending	pending	pending	pending		pending							pending
+FastML	ancestral sequence reconstruction	near_direct_candidate	formal;high_recall	5	3	pending		pending	pending	pending	pending	pending		pending							pending
+IQ-TREE 2	phylogenetic inference / ancestral reconstruction	near_direct_candidate	high_recall	2	2	pending		pending	pending	pending	pending	pending		pending							pending
+kSNP3.0	SNP discovery / phylogeny / node-associated SNP mapping	near_direct_candidate	high_recall	2	2	pending		pending	pending	pending	pending	pending		pending							pending
+PAML	model-based ancestral sequence reconstruction	near_direct_candidate	high_recall	3	3	pending		pending	pending	pending	pending	pending		pending							pending
+PastML	ancestral-state reconstruction	near_direct_candidate	high_recall	1	1	pending		pending	pending	pending	pending	pending		pending							pending

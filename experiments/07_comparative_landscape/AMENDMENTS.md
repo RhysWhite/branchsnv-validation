@@ -239,3 +239,22 @@ completed and frozen.
 
 This operationalization does not modify the completed search strategies or
 permit search retuning.
+
+## Amendment 07 — citation-anchor TSV serialization correction
+
+**Timing:** recorded immediately after freezing the citation-chain anchor
+screening procedure and before any human confirmation, landscape screening,
+primary-source assessment, anchor selection, or citation retrieval.
+
+The initial nine-row pre-screening TSV placed the empty `notes` field as its
+final column. Consequently, each unscreened data row ended with a literal tab,
+which was reported as trailing whitespace by `git diff --check`.
+
+This amendment changes only TSV serialization: the empty `notes` column is
+moved immediately before the non-empty `citation_chain_anchor_decision`
+column. All nine records and every parsed field value are unchanged.
+
+No identity status, eligibility criterion, landscape decision, analytical
+role, bibliographic anchor, screening note, or citation-chain decision was
+modified. All nine candidates remain completely unscreened and all
+citation-chain anchor decisions remain `pending`.
