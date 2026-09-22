@@ -8,10 +8,12 @@ No network access is permitted by these tests.
 from __future__ import annotations
 
 import importlib.util
+import http.client
 import json
 import tempfile
 
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(
@@ -262,6 +264,174 @@ assert (
     "doi:10.1093%2Fve%2Fvex042"
     in forward_oc_url
 )
+
+# ------------------------------------------------------------
+# Direct transport retry: IncompleteRead then success.
+# ------------------------------------------------------------
+
+class IncompleteThenCompleteResponse:
+    def __init__(
+        self,
+        *,
+        fail,
+        payload,
+    ):
+        self.fail = fail
+        self.payload = payload
+
+    def __enter__(self):
+        return self
+
+    def __exit__(
+        self,
+        exc_type,
+        exc,
+        tb,
+    ):
+        return False
+
+    def read(self):
+        if self.fail:
+            raise http.client.IncompleteRead(
+                b'{"partial":',
+                100,
+            )
+
+        return self.payload
+
+
+with tempfile.TemporaryDirectory() as td:
+    raw_path = (
+        Path(td)
+        / "response.json"
+    )
+
+    payload = json.dumps(
+        {
+            "status": "complete",
+            "records": [1, 2, 3],
+        }
+    ).encode("utf-8")
+
+    responses = [
+        IncompleteThenCompleteResponse(
+            fail=True,
+            payload=b"",
+        ),
+        IncompleteThenCompleteResponse(
+            fail=False,
+            payload=payload,
+        ),
+    ]
+
+    calls = []
+
+    def fake_urlopen(
+        request,
+        timeout,
+    ):
+        calls.append(request.full_url)
+
+        if not responses:
+            raise AssertionError(
+                "unexpected additional urlopen call"
+            )
+
+        return responses.pop(0)
+
+    with patch(
+        "urllib.request.urlopen",
+        side_effect=fake_urlopen,
+    ):
+        observed = mod.fetch_json(
+            "https://example.invalid/test",
+            headers={
+                "Authorization":
+                    "Bearer TEST",
+            },
+            raw_path=raw_path,
+            delay=0,
+            retries=2,
+        )
+
+    assert_equal(
+        observed,
+        {
+            "status": "complete",
+            "records": [1, 2, 3],
+        },
+        "IncompleteRead retry result",
+    )
+
+    assert_equal(
+        len(calls),
+        2,
+        "IncompleteRead retry request count",
+    )
+
+    assert_equal(
+        raw_path.read_bytes(),
+        payload,
+        "IncompleteRead retry raw output",
+    )
+
+
+# ------------------------------------------------------------
+# Persistent IncompleteRead must fail closed.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as td:
+    raw_path = (
+        Path(td)
+        / "response.json"
+    )
+
+    calls = []
+
+    def always_incomplete(
+        request,
+        timeout,
+    ):
+        calls.append(request.full_url)
+
+        return IncompleteThenCompleteResponse(
+            fail=True,
+            payload=b"",
+        )
+
+    with patch(
+        "urllib.request.urlopen",
+        side_effect=always_incomplete,
+    ):
+        try:
+            mod.fetch_json(
+                "https://example.invalid/test",
+                headers={},
+                raw_path=raw_path,
+                delay=0,
+                retries=2,
+            )
+        except RuntimeError as exc:
+            assert (
+                "Request failed after 2 attempts"
+                in str(exc)
+            )
+        else:
+            raise AssertionError(
+                "persistent IncompleteRead did not fail"
+            )
+
+    assert_equal(
+        len(calls),
+        2,
+        "persistent IncompleteRead attempts",
+    )
+
+    if raw_path.exists():
+        raise AssertionError(
+            "incomplete HTTP body was written to raw output"
+        )
+
 
 # ------------------------------------------------------------
 # Synthetic anchor.
@@ -743,6 +913,10 @@ print("PASS | identifier normalisation")
 print("PASS | OpenCitations PID parsing")
 print("PASS | OpenCitations payload-shape validation")
 print("PASS | API request construction")
+print("PASS | IncompleteRead is retried from a fresh request")
+print("PASS | successful retry writes only the complete response")
+print("PASS | persistent IncompleteRead fails closed")
+print("PASS | incomplete response body is never written")
 print("PASS | OpenAlex credential absent from request URLs")
 print("PASS | OpenAlex credential supplied by Authorization header")
 print("PASS | synthetic OpenAlex backward retrieval")

@@ -34,6 +34,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import http.client
 import json
 import os
 import re
@@ -423,6 +424,7 @@ def fetch_json(
         except (
             urllib.error.URLError,
             TimeoutError,
+            http.client.IncompleteRead,
             json.JSONDecodeError,
         ) as exc:
             last_error = exc

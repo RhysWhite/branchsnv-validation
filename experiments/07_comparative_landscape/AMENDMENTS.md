@@ -567,3 +567,36 @@ This failure exposes a transport-robustness gap in the retriever:
 Any subsequent implementation change may add retry handling for this transport
 exception but may not alter citation sources, anchors, filters, search
 expressions, screening criteria, or the saturation stopping rule.
+
+## Amendment 18 — retry incomplete HTTP response bodies
+
+**Timing:** specified after Wave 0 Attempt 03 was frozen as a failed production
+retrieval and before any subsequent Wave 0 production attempt.
+
+Attempt 03 failed because an OpenCitations response terminated before its
+declared HTTP body was complete. Python raised
+`http.client.IncompleteRead`.
+
+The common JSON fetcher already applied a bounded retry policy to transient URL
+errors, timeouts, and JSON decoding failures, but did not include
+`http.client.IncompleteRead`.
+
+The implementation is therefore hardened by adding only
+`http.client.IncompleteRead` to that existing retryable exception set.
+
+When this exception occurs:
+
+1. the incomplete response body is discarded;
+2. no raw response file is written from that incomplete body;
+3. the same request is retried from the beginning under the existing retry
+   count and backoff policy; and
+4. persistent failure remains fail-closed.
+
+Offline regression tests simulate an incomplete first response followed by a
+complete second response and verify that exactly the complete response is
+written. A second test verifies that repeated incomplete responses exhaust the
+bounded retry policy, fail the retrieval, and leave no raw response file.
+
+This patch changes transport robustness only. It does not change citation
+sources, citation operations, anchors, count reconciliation, discovery scope,
+filters, screening criteria, search expressions, or the saturation rule.

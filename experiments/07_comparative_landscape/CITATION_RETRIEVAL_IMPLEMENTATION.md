@@ -67,6 +67,25 @@ does not equal the retrieved count. Both citation sources therefore have an
 independent count reconciliation: OpenAlex uses its Work/list metadata and
 OpenCitations uses the Index v2 count endpoints.
 
+## Transport retries
+
+Transient transport failures handled by the common JSON fetcher include:
+
+- URL/network errors;
+- timeouts;
+- `http.client.IncompleteRead`; and
+- JSON decoding failures.
+
+An `IncompleteRead` discards the incomplete body and retries the same request
+from the beginning under the existing bounded retry policy.
+
+A raw response file is written only after the complete HTTP body has been
+received. Consequently, an incomplete HTTP body is not accepted as a raw
+citation response.
+
+If all retry attempts fail, retrieval terminates and the wave remains
+incomplete.
+
 ## Raw responses
 
 Every successful API response used to construct an edge is retained under the
