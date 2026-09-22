@@ -288,3 +288,42 @@ evidence-supported role.
 
 This clarification changes no search result, seed-recovery result, eligibility
 criterion, capability result, benchmark decision, or citation-chain decision.
+
+## Amendment 09 — search-parameter rationale and completeness validation
+
+**Timing:** frozen after completion of the formal and generic high-recall
+database searches and citation-anchor screening, but before any backward or
+forward citation-chain retrieval.
+
+The database search expressions are not asserted to be uniquely optimal.
+Because the complete relevant software set is unknown a priori, such an
+optimality claim cannot be established at query-design time.
+
+The search instead follows a staged validation design:
+
+1. analytical concepts were defined before formal screening;
+2. the pre-search seed registry informed vocabulary but not final inclusion;
+3. the original exact-phrase-oriented search was executed across PubMed,
+   OpenAlex, and bio.tools;
+4. a frozen pre-screening sensitivity diagnostic demonstrated inadequate
+   recovery of prespecified priority candidates;
+5. one generic high-recall expansion was defined and committed without software
+   names or author names;
+6. no subsequent query retuning was permitted; and
+7. final search performance will be measured against the completed
+   evidence-supported direct/near-direct landscape after citation chaining.
+
+Because seed knowledge contributed to search vocabulary, seed recovery is
+explicitly treated as a development-set diagnostic rather than an unbiased
+estimate of recall.
+
+The final validation will report relative recall of the formal search,
+high-recall search, their union, source-specific and query-family contribution,
+coverage of methods absent from the original seed registry, and structured
+analysis of any methods found only through citation chaining.
+
+These endpoints are frozen in
+`SEARCH_COMPLETENESS_VALIDATION_PLAN.md` before citation results are observed.
+
+Results of this validation will not be used to modify the primary search
+corpus.
