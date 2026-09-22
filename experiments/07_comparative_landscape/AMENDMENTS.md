@@ -600,3 +600,33 @@ bounded retry policy, fail the retrieval, and leave no raw response file.
 This patch changes transport robustness only. It does not change citation
 sources, citation operations, anchors, count reconciliation, discovery scope,
 filters, screening criteria, search expressions, or the saturation rule.
+
+## Amendment 19 — persistent large OpenCitations response failure
+
+**Timing:** recorded immediately after Wave 0 production Attempt 04 and before
+any subsequent retry, partitioned retrieval, reconciliation, or citation
+screening.
+
+Attempt 04 used the hardened retriever that treats
+`http.client.IncompleteRead` as a retryable transient transport error.
+
+The same OpenCitations forward-citation operation for W0A07 (PAML) nevertheless
+failed after all five bounded whole-response attempts.
+
+The final attempt received 859,003 bytes before the connection terminated,
+with 3,953,541 additional bytes expected.
+
+This demonstrates that bounded repetition of the same large unpartitioned
+response is insufficient. Increasing the retry count alone is therefore not
+adopted.
+
+The partial response tree is preserved in the Attempt 04 audit and is excluded
+from screening and scientific analysis.
+
+A subsequent implementation may partition the same OpenCitations citation
+result into deterministic smaller requests, provided that the partition union
+is reconciled against the independent citation count, duplicate citation
+identities are prohibited, and incomplete coverage fails closed.
+
+No citation source, anchor, scientific filter, search expression, screening
+criterion, or saturation rule is changed by this finding.
