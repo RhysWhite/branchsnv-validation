@@ -23,3 +23,31 @@ The original pre-retrieval protocol remains preserved in Git history at commit
 This amendment changes query syntax only and does not change the prespecified
 search concepts, eligibility criteria, analytical roles, or benchmark
 eligibility criteria.
+
+## Amendment 02 — Harmonisation of OpenAlex search field
+
+**Timing:** after retrieval attempt 01 and before record screening,
+eligibility assessment, capability classification, or tool selection.
+
+Retrieval attempt 01 completed successfully for all 18 queries across PubMed,
+OpenAlex, and bio.tools. All 54 source-query retrievals were complete and all
+reported counts matched retrieved counts.
+
+Inspection of aggregate retrieval counts, before screening any individual
+records, identified a systematic database-scope mismatch. The prespecified
+PubMed queries searched Title/Abstract fields, whereas the OpenAlex `search`
+parameter searched title, abstract, and full text.
+
+This produced 33,217 OpenAlex candidate rows compared with 718 PubMed and
+498 bio.tools rows. OpenAlex Q16 alone returned 17,179 records and Q11
+returned 6,573 records. The resulting corpus contained 34,433 candidate rows
+and 31,349 deduplicated records.
+
+To harmonise bibliographic search scope across PubMed and OpenAlex, the
+OpenAlex implementation will therefore be amended to search title and abstract
+only. The 18 prespecified concepts, PubMed queries, bio.tools queries,
+eligibility criteria, and benchmark criteria remain unchanged.
+
+No candidate records from retrieval attempt 01 were screened before this
+decision. Retrieval-attempt metadata, query counts, corpus checksums, and the
+console-log checksum are retained in the repository audit record.
