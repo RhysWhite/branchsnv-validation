@@ -1,0 +1,19 @@
+{
+  "anchors_sha256": "362b0a25d68f68b29a936a92b3a9f6e11aefd539e4c0678480ce99abc2789ae4",
+  "attempt": 1,
+  "child_process_environment_populated": false,
+  "citation_api_requests_made_by_retriever": false,
+  "citation_results_observed": false,
+  "failure_class": "credential_environment_not_exported",
+  "failure_message": "ERROR | OPENALEX_API_KEY is required",
+  "production_execution_head": "efbe2e75d7351b9e065383b863cc04285416e754",
+  "production_output_directory_created": false,
+  "retrieval_implementation_changed": false,
+  "retriever_exit_code": 1,
+  "retriever_sha256": "326786243e561162bfe2d1665ac41d927247ef032daa7b0b1fb4327a62b285b4",
+  "schema_version": 1,
+  "scientific_protocol_changed": false,
+  "shell_variable_populated": true,
+  "status": "FAILED_PRE_REQUEST",
+  "wave": 0
+}

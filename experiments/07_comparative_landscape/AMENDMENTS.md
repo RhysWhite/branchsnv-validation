@@ -480,3 +480,29 @@ The audit is retained under
 
 No production citation retrieval had occurred when this resolution was
 recorded.
+
+## Amendment 15 — Wave 0 Attempt 01 pre-request environment failure
+
+**Timing:** recorded immediately after the first production invocation of the
+Wave 0 citation retriever and before any successful production citation
+retrieval.
+
+Attempt 01 terminated with:
+
+`ERROR | OPENALEX_API_KEY is required`
+
+The invoking shell contained a populated `OPENALEX_API_KEY` shell variable,
+but a post-failure audit confirmed that the variable was absent from the child
+process environment (`os.environ`). The failure is therefore consistent with
+the variable not having been exported.
+
+The retriever checks this requirement before creating the output directory and
+before performing any citation API request. No Wave 0 result directory was
+created and no citation result was observed.
+
+The failed execution is retained under
+`audit/citation_wave_0_attempt_01_env/`.
+
+The retriever, citation protocol, anchors, search corpus, and scientific
+criteria are unchanged. A subsequent production attempt is permitted after
+exporting the existing shell variable to the child-process environment.
