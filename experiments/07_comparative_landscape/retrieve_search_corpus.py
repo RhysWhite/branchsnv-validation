@@ -41,7 +41,7 @@ from pathlib import Path
 
 PUBMED_ESEARCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 PUBMED_ESUMMARY = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
-OPENALEX_WORKS = "https://api.openalex.org/works"
+OPENALEX_API_ROOT = "https://api.openalex.org/"
 BIOTOOLS_TOOLS = "https://bio.tools/api/tool/"
 
 OPENALEX_SELECT = ",".join([
@@ -415,9 +415,9 @@ def retrieve_openalex(
     qid = query["query_id"]
     parameter = query["openalex_parameter"]
 
-    if parameter not in {"search", "search.exact"}:
+    if parameter != "oql":
         raise RuntimeError(
-            f"{qid}: unsupported OpenAlex search parameter {parameter}"
+            f"{qid}: expected OpenAlex OQL parameter; observed {parameter}"
         )
 
     cursor = "*"
@@ -429,13 +429,13 @@ def retrieve_openalex(
         page_number += 1
 
         params = {
-            parameter: query["openalex_query"],
-            "per_page": 100,
+            "oql": query["openalex_query"],
+            "per-page": 100,
             "cursor": cursor,
             "select": OPENALEX_SELECT,
         }
 
-        url = build_url(OPENALEX_WORKS, params)
+        url = build_url(OPENALEX_API_ROOT, params)
 
         payload = fetch_json(
             url,

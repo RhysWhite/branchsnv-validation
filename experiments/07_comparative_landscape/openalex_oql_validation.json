@@ -1,0 +1,134 @@
+{
+  "queries": [
+    {
+      "canonical_oql": "works where title/abstract has (\"clade-specific SNP\" or \"clade specific SNP\" or \"clade-specific single nucleotide\")",
+      "query_id": "Q01",
+      "submitted_oql": "works where title/abstract has (\"clade-specific SNP\" or \"clade specific SNP\" or \"clade-specific single nucleotide\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"lineage-specific SNP\" or \"lineage specific SNP\" or \"lineage-specific single nucleotide\")",
+      "query_id": "Q02",
+      "submitted_oql": "works where title/abstract has (\"lineage-specific SNP\" or \"lineage specific SNP\" or \"lineage-specific single nucleotide\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"canonical SNP\" or \"canonical single nucleotide polymorphism\")",
+      "query_id": "Q03",
+      "submitted_oql": "works where title/abstract has (\"canonical SNP\" or \"canonical single nucleotide polymorphism\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"branch-specific SNP\" or \"branch specific SNP\")",
+      "query_id": "Q04",
+      "submitted_oql": "works where title/abstract has (\"branch-specific SNP\" or \"branch specific SNP\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"branch-defining SNP\" or \"branch defining SNP\")",
+      "query_id": "Q05",
+      "submitted_oql": "works where title/abstract has (\"branch-defining SNP\" or \"branch defining SNP\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"lineage-defining SNP\" or \"lineage defining SNP\")",
+      "query_id": "Q06",
+      "submitted_oql": "works where title/abstract has (\"lineage-defining SNP\" or \"lineage defining SNP\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"phylogenetic SNP marker\" or \"phylogenetic SNP markers\")",
+      "query_id": "Q07",
+      "submitted_oql": "works where title/abstract has (\"phylogenetic SNP marker\" or \"phylogenetic SNP markers\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"node-specific SNP\" or \"node specific SNP\" or \"node-associated SNP\")",
+      "query_id": "Q08",
+      "submitted_oql": "works where title/abstract has (\"node-specific SNP\" or \"node specific SNP\" or \"node-associated SNP\")",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((\"SNP barcode\" or \"SNP barcoding\") and lineage)",
+      "query_id": "Q09",
+      "submitted_oql": "works where title/abstract has ((\"SNP barcode\" or \"SNP barcoding\") and lineage)",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"hierarchical SNP\" and (genotyping or typing))",
+      "query_id": "Q10",
+      "submitted_oql": "works where title/abstract has (\"hierarchical SNP\" and (genotyping or typing))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((\"ancestral state reconstruction\" or \"ancestral character reconstruction\") and (software or tool or package or algorithm or method))",
+      "query_id": "Q11",
+      "submitted_oql": "works where title/abstract has ((\"ancestral state reconstruction\" or \"ancestral character reconstruction\") and (software or tool or package or algorithm or method))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"ancestral sequence reconstruction\" and (software or tool or package or algorithm or method))",
+      "query_id": "Q12",
+      "submitted_oql": "works where title/abstract has (\"ancestral sequence reconstruction\" and (software or tool or package or algorithm or method))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((\"mutation mapping\" or \"mapping mutations\") and (phylogeny or phylogenetic))",
+      "query_id": "Q13",
+      "submitted_oql": "works where title/abstract has ((\"mutation mapping\" or \"mapping mutations\") and (phylogeny or phylogenetic))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((\"substitution mapping\" or \"mapping substitutions\") and (phylogeny or phylogenetic))",
+      "query_id": "Q14",
+      "submitted_oql": "works where title/abstract has ((\"substitution mapping\" or \"mapping substitutions\") and (phylogeny or phylogenetic))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((\"branch substitution\" or \"branch-specific substitution\") and (reconstruction or reconstruct or inference or infer or mapping or map))",
+      "query_id": "Q15",
+      "submitted_oql": "works where title/abstract has ((\"branch substitution\" or \"branch-specific substitution\") and (reconstruction or reconstruct or inference or infer or mapping or map))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((homoplasy or homoplastic or homoplasies) and (detection or detect or identification or identify) and (phylogeny or phylogenetic))",
+      "query_id": "Q16",
+      "submitted_oql": "works where title/abstract has ((homoplasy or homoplastic or homoplasies) and (detection or detect or identification or identify) and (phylogeny or phylogenetic))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has (\"recurrent mutation\" and (phylogeny or phylogenetic) and (software or tool or method or algorithm))",
+      "query_id": "Q17",
+      "submitted_oql": "works where title/abstract has (\"recurrent mutation\" and (phylogeny or phylogenetic) and (software or tool or method or algorithm))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((\"clade-specific polymorphism\" or \"clade specific polymorphism\") and (SNP or nucleotide or genomic))",
+      "query_id": "Q18",
+      "submitted_oql": "works where title/abstract has ((\"clade-specific polymorphism\" or \"clade specific polymorphism\") and (SNP or nucleotide or genomic))",
+      "valid": true,
+      "warnings": []
+    }
+  ],
+  "query_count": 18,
+  "schema_version": 1,
+  "search_executed": false,
+  "validation_endpoint": "https://api.openalex.org/query/oql/"
+}

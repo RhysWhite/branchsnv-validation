@@ -51,3 +51,23 @@ eligibility criteria, and benchmark criteria remain unchanged.
 No candidate records from retrieval attempt 01 were screened before this
 decision. Retrieval-attempt metadata, query counts, corpus checksums, and the
 console-log checksum are retained in the repository audit record.
+
+### Implementation of Amendment 02
+
+The amended OpenAlex searches use OpenAlex Query Language (OQL) at the API
+root. Each bibliographic concept query is expressed as:
+
+`works where title/abstract has (<prespecified Boolean concept expression>)`
+
+This limits OpenAlex bibliographic retrieval to title and abstract text while
+preserving the 18 previously defined search concepts. Quoted phrases remain
+exact phrases and unquoted terms use OpenAlex's documented stemmed search
+behaviour.
+
+All 18 amended OQL expressions will be passed through the OpenAlex `/query`
+translation/validation endpoint before retrieval. This endpoint validates the
+query without executing it against the search index.
+
+The OpenAlex retrieval implementation is also changed from the classic
+`/works?search=` interface to the API-root `?oql=` interface with cursor
+pagination. No PubMed or bio.tools search definition is changed.
