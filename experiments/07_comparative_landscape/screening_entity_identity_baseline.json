@@ -1,0 +1,74 @@
+{
+  "citation": {
+    "conflict_hold_entities": 69,
+    "conflict_reason_entity_counts": {
+      "doi_multiple_pmids": 5,
+      "doi_multiple_pmids|pmid_multiple_doi": 1,
+      "pmid_multiple_doi": 63
+    },
+    "conflict_types": {
+      "doi_multiple_pmids": 6,
+      "pmid_multiple_doi": 32
+    },
+    "identity_conflicts": 38,
+    "input_provenance_rows": 33071,
+    "omid_only_provenance_rows": 7,
+    "openalex_only_provenance_rows": 531,
+    "provider_specific_unresolved_entities": 502,
+    "provider_specific_unresolved_namespaces": {
+      "omid": 7,
+      "openalex": 495
+    },
+    "provisional_publication_entities": 17605,
+    "resolved_identity_entities": 17034,
+    "unique_omid_only_identities": 7,
+    "unique_openalex_only_identities": 495
+  },
+  "database": {
+    "conflict_hold_entities": 40,
+    "conflict_types": {
+      "pmid_multiple_doi": 20
+    },
+    "identity_conflicts": 20,
+    "input_discovery_rows": 79917,
+    "input_minus_entity_count": 155,
+    "publication_entities": 79547,
+    "screening_entities": 79762,
+    "software_registry_entities": 215
+  },
+  "frozen_input_sha256": {
+    "citation_wave_0_neighbours": "16f8c48ea0757452ab2489b3952d5b8193a5cd9c46494f6852c0733220419de2",
+    "historical_screening_log": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "merged_database_universe": "618e42658a5734fede70c62b772582c15354b7d9ed6f2cef426dc0dce79ad42a"
+  },
+  "frozen_normaliser_source_sha256": {
+    "normalise_doi": "1c12d0511cae74a9d85991658637464fa5a0f38923bfeaa686f879c1d2fb4165",
+    "normalise_omid": "b5792a3f33169e20b4f7c7912ea77d90c5a3a3f4dba25e19d6ce8ad7516ad07d",
+    "normalise_openalex_id": "f202dcede460a77afd4bcb0810f74b5bd6a5d2c8b933d5a650352fc154e5c9f2",
+    "normalise_pmid": "61f2db6fd049506f7b6e8b38dae474f2095ea3360a08e63881fa3d357f07415c"
+  },
+  "implementation_sha256": {
+    "screening_entity_identity.py": "9ebf57ddeef7e4f5fb4d5ed2250f261e81fcc476d51114281bee6b41961c097a",
+    "test_citation_publication_identity.py": "297f2d00f6f1456b402d3ffb60582b8cd88608fd1c8e34cf4c498fc39c044e98",
+    "test_screening_entity_identity.py": "01e1c2c8ca431c8ee1240d0d7db84596c8064eb65dafafaa89e85bc5f783db5a"
+  },
+  "interpretation": {
+    "derived_counts_are_regression_baselines_not_target_sample_sizes": true,
+    "identity_conflicts_are_preserved_not_silently_collapsed": true,
+    "identity_construction_is_not_scientific_screening": true,
+    "provider_specific_unresolved_requires_later_metadata_resolution": true
+  },
+  "repository_commit_before_implementation_freeze": "6e1906ccbf3535b6a34ea2b36128ad474876ba93",
+  "status": "FROZEN_OFFLINE_IDENTITY_IMPLEMENTATION",
+  "validation": {
+    "citation_forward_reverse_byte_identical": true,
+    "citation_provenance_preserved_exactly_once": true,
+    "database_forward_reverse_byte_identical": true,
+    "database_provenance_preserved_exactly_once": true,
+    "historical_screening_rows": 0,
+    "network_capable_identity_code": false,
+    "production_result_files_written": false,
+    "retriever_imported_as_executable_module": false,
+    "scientific_screening_performed": false
+  }
+}
