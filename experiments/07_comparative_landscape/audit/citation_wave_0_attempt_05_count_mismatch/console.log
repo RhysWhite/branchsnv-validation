@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 2196, in <module>
+    raise SystemExit(main())
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 1997, in main
+    ) = retrieve_opencitations(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 1660, in retrieve_opencitations
+    retrieve_opencitations_partitioned(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 1536, in retrieve_opencitations_partitioned
+    reconcile_opencitations_partition_rows(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 1313, in reconcile_opencitations_partition_rows
+    raise RuntimeError(
+RuntimeError: W0A07: OpenCitations forward: OpenCitations reported 12846, retrieved 12845 unique OCI rows

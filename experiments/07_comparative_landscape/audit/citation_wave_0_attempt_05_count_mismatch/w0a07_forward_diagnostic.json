@@ -1,0 +1,13 @@
+{
+  "all_root_suffixes_present": true,
+  "anchor_id": "W0A07",
+  "anchor_tool": "PAML",
+  "direction": "forward",
+  "duplicate_oci_count": 0,
+  "missing_relative_to_independent_count": 1,
+  "recursive_leaf_count": 0,
+  "reported_count": 12846,
+  "root_leaf_count": 10,
+  "root_leaf_rows": 12845,
+  "unique_oci_rows": 12845
+}

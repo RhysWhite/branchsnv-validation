@@ -724,3 +724,37 @@ Offline tests cover:
 
 No citation source, anchor, scientific filter, search expression, screening
 criterion, comparator role, or saturation rule changed.
+
+## Amendment 22 — Wave 0 Attempt 05 independent-count mismatch
+
+**Timing:** recorded immediately after Wave 0 production Attempt 05 and before
+any retry, API diagnostic request, partition modification, reconciliation, or
+citation screening.
+
+Attempt 05 was the first production execution using the frozen deterministic
+OCI partition implementation.
+
+For W0A07 (PAML) forward citations, all ten root terminal-digit partitions
+completed without recursive subdivision.
+
+Every returned OCI was syntactically valid, matched its recorded root
+partition, and was unique across the partition union.
+
+The independently retrieved OpenCitations citation-count endpoint reported
+12,846 citation relationships, whereas the complete ten-partition union
+contained 12,845 unique OCI rows.
+
+The implementation therefore failed closed at the independent count
+reconciliation gate.
+
+The cause of the one-record discrepancy is not inferred from the failed
+production run. Potential source-state drift, endpoint-semantic differences,
+and a countable relationship outside the assumed valid-OCI partition universe
+remain separate hypotheses requiring explicit diagnosis.
+
+All Attempt 05 raw responses are preserved for audit and excluded from
+scientific screening or method classification.
+
+No citation source, partition rule, search expression, anchor, relevance
+criterion, comparator classification, or saturation rule is changed by this
+observation.
