@@ -877,3 +877,38 @@ reported separately.
 
 No source result from this diagnostic is itself a production Wave 0 corpus,
 and no literature-search or screening rule is changed.
+
+## Amendment 27 — implement creation-string OpenCitations diagnostic
+
+**Timing:** implemented after Amendment 26 froze the OCI-independent design and
+before any Diagnostic-02 network request.
+
+A final read-only pre-implementation inspection established that all 12,845
+frozen Attempt-05 citation rows are unique as complete records, all 12,845
+numeric OCIs are unique, every row exposes the same seven fields, and archived
+creation values contain only digits and hyphens with no embedded newlines.
+
+The canonical complete-row multiset SHA-256 is
+`82e2992dda9fe3f3d5a18cb417343edb47ba1af617832aec3b2f241d5500e928`.
+
+The standalone Diagnostic-02 retriever now performs the frozen sequence of
+pre-count, creation-string-partitioned citation retrieval and post-count.
+
+Partition assignment uses only the raw `creation` string. OCI is not consulted
+until after the complete creation-partition result has been reconstructed.
+
+Only exhausted `IncompleteRead` failures on literal-prefix leaves trigger
+deterministic recursive subdivision. Complete-row duplication, missing or
+non-string creation values, out-of-leaf rows and recursion-ceiling exhaustion
+all fail closed.
+
+Offline end-to-end validation used all 12,845 real archived Attempt-05 rows
+plus one synthetic extra citation. A size-sensitive fake transport forced
+recursive subdivision on the real creation-value distribution. The diagnostic
+reconstructed all 12,846 rows, preserved all 119 genuine empty creation
+values, and isolated exactly the one synthetic additional OCI.
+
+All offline tests prohibit network access.
+
+No production retrieval, search, screening, comparator classification or
+saturation rule changed.

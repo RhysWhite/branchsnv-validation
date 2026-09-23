@@ -1,0 +1,23 @@
+{
+  "canonical_complete_row_multiset_sha256": "82e2992dda9fe3f3d5a18cb417343edb47ba1af617832aec3b2f241d5500e928",
+  "creation_allowed_observed_characters": "0123456789-",
+  "creation_string_only": true,
+  "creation_values_with_newlines": 0,
+  "distinct_field_sets": 1,
+  "duplicate_complete_row_instances": 0,
+  "duplicate_complete_row_signatures": 0,
+  "field_names": [
+    "author_sc",
+    "cited",
+    "citing",
+    "creation",
+    "journal_sc",
+    "oci",
+    "timespan"
+  ],
+  "rows": 12845,
+  "schema_version": 1,
+  "source": "frozen_attempt_05_w0a07_forward_partition_union",
+  "unique_complete_rows": 12845,
+  "unique_ocis": 12845
+}
