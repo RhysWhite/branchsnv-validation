@@ -912,3 +912,38 @@ All offline tests prohibit network access.
 
 No production retrieval, search, screening, comparator classification or
 saturation rule changed.
+
+## Amendment 28 — successful OCI-independent creation-partition diagnostic
+
+**Timing:** recorded immediately after successful Diagnostic 02 and before any
+production-retriever change or new Wave 0 attempt.
+
+Diagnostic 02 bracketed its retrieval with independent W0A07/PAML citation
+counts of 12,846 before and 12,846 after retrieval.
+
+The OCI-independent `creation`-partition reconstruction returned exactly 12,846
+citation rows, all 12,846 complete rows were unique, all 12,846 OCIs were valid
+and unique, and no duplicate OCI occurred.
+
+Relative to the frozen Attempt-05 12,845-OCI union, Diagnostic 02 contains two
+new-only OCIs and lacks one old-only OCI.
+
+The sole Attempt-05-only relationship and one Diagnostic-02-only relationship
+share the same citing OpenAlex identifier (`openalex:W2806987055`) and cited
+target while using different OpenCitations resource identifiers and metadata.
+This is consistent with source-side reidentification or re-keying of that
+citing work.
+
+The second Diagnostic-02-only relationship has no DOI, PMID or OpenAlex citing
+identifier match anywhere in the frozen Attempt-05 corpus.
+
+The source citation set therefore changed between snapshots, with a net
+increase of one reconstructed row.
+
+This diagnostic does not establish that the Attempt-05 OCI terminal-digit
+partition omitted a row. The historical fact that Attempt 05's independent
+count already reported 12,846 while its citation-data union contained 12,845
+remains unresolved.
+
+No production completeness gate, literature-search rule, screening criterion,
+comparator classification or saturation rule is changed by this observation.

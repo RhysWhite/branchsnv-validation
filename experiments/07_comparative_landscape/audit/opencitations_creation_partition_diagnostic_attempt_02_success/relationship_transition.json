@@ -1,0 +1,42 @@
+{
+  "attempt05_count_data_discrepancy_fully_explained": false,
+  "interpretation": "SOURCE_SET_EVOLUTION_SUPPORTED; ONE_OLD_ONLY_RELATIONSHIP_HAS_A_STABLE_IDENTIFIER_MATCH_TO_ONE_NEW_ONLY_RELATIONSHIP; ONE_ADDITIONAL_NEW_RELATIONSHIP_HAS_NO_STABLE_IDENTIFIER_MATCH_IN_ATTEMPT05; ATTEMPT05_COUNT_DATA_MISMATCH_REMAINS_UNRESOLVED",
+  "net_oci_change": 1,
+  "net_row_change": 1,
+  "new_only_oci_count": 2,
+  "new_snapshot_rows": 12846,
+  "new_snapshot_unique_ocis": 12846,
+  "newly_present_relationship": {
+    "citing": "omid:br/061603258625 doi:10.1016/s0076-6879(08)36029-7 openalex:W132329763",
+    "citing_stable_identifiers": [
+      "doi:10.1016/s0076-6879(08)36029-7",
+      "openalex:w132329763"
+    ],
+    "creation": "2008",
+    "new_oci": "061603258625-062601170274",
+    "stable_identifier_match_anywhere_in_attempt05": false,
+    "timespan": "P0Y"
+  },
+  "oci_partition_miss_established": false,
+  "old_only_oci": "06304077365-062601170274",
+  "old_only_oci_count": 1,
+  "old_snapshot_rows": 12845,
+  "old_snapshot_unique_ocis": 12845,
+  "schema_version": 1,
+  "source_set_changed_between_snapshots": true,
+  "stable_identifier_matched_replacement": {
+    "interpretation": "CONSISTENT_WITH_SAME_CITING_WORK_REIDENTIFIED_OR_REKEYED",
+    "new_citing": "omid:br/06240668839 doi:10.1007/s12041-018-0939-3 openalex:W2806987055",
+    "new_creation": "2018-05-31",
+    "new_oci": "06240668839-062601170274",
+    "new_timespan": "P11Y1M13D",
+    "old_citing": "omid:br/06304077365 openalex:W2806987055 pmid:29932069",
+    "old_creation": "2018",
+    "old_oci": "06304077365-062601170274",
+    "old_timespan": "P10Y",
+    "same_cited_record": true,
+    "shared_citing_identifiers": [
+      "openalex:w2806987055"
+    ]
+  }
+}
