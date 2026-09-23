@@ -180,6 +180,16 @@ OPENCITATIONS_SNAPSHOT_FIELDS = [
     "creation_oci_set_sha256",
     "complete_row_sets_equal",
     "oci_sets_equal",
+    "production_axis",
+    "provider_reconciliation_candidate",
+    "provider_reconciliation",
+    "provider_reconciled_row_count",
+    "provider_reconciled_complete_row_sha256",
+    "provider_reconciled_oci_set_sha256",
+    "provider_alias_pair_count",
+    "provider_missing_row_count",
+    "provider_discrepant_oci_count",
+    "provider_direct_lookup_count",
     "oci_leaf_count",
     "creation_leaf_count",
     "oci_max_recursion_depth",
@@ -988,61 +998,119 @@ def retrieve_openalex(
 
     # ------------------------------------------------------
     # Forward citations.
+    #
+    # OpenAlex cursor pagination is a live traversal rather
+    # than a documented immutable snapshot. A provider-side
+    # index change during traversal can therefore manifest as
+    # duplicate Works, changing counts, cursor cycles, or a
+    # final unique-Work/count mismatch.
+    #
+    # Each attempt is staged independently. Failed attempts
+    # remain on disk as forensic evidence but contribute no
+    # production edges or neighbours. A retry always restarts
+    # from cursor="*".
     # ------------------------------------------------------
 
-    cursor = "*"
-    page_number = 0
-    reported_forward: int | None = None
-    forward_seen: set[str] = set()
+    max_forward_snapshot_attempts = 3
+    forward_response_files = 0
+    forward_accepted = False
+    final_retry_reason = ""
 
-    while cursor:
-        page_number += 1
-
-        page_path = (
+    for snapshot_attempt in range(
+        1,
+        max_forward_snapshot_attempts + 1,
+    ):
+        attempt_root = (
             raw_root
             / (
-                "forward_"
-                f"page_{page_number:04d}.json"
+                "forward_snapshot_attempt_"
+                f"{snapshot_attempt:02d}"
             )
         )
 
-        payload = fetcher(
-            openalex_forward_url(
-                work_id,
-                cursor,
-            ),
-            headers={
-                "Authorization":
-                    f"Bearer {api_key}",
-                "User-Agent":
-                    "branchsnv-validation/experiment07",
-            },
-            raw_path=page_path,
-            delay=0.12,
+        attempt_root.mkdir(
+            parents=True,
+            exist_ok=True,
         )
 
-        if not isinstance(payload, dict):
-            raise RuntimeError(
-                f"{anchor['anchor_id']}: "
-                "invalid OpenAlex forward payload"
+        cursor = "*"
+        seen_cursors = {
+            cursor,
+        }
+
+        page_number = 0
+        reported_forward: int | None = None
+        forward_seen: set[str] = set()
+
+        attempt_edges: list[dict] = []
+        attempt_neighbours: list[dict] = []
+
+        retry_reason = ""
+
+        while cursor:
+            page_number += 1
+
+            page_path = (
+                attempt_root
+                / (
+                    "forward_"
+                    f"page_{page_number:04d}.json"
+                )
             )
 
-        meta = payload.get("meta") or {}
-        results = payload.get(
-            "results"
-        ) or []
-
-        if not isinstance(
-            results,
-            list,
-        ):
-            raise RuntimeError(
-                f"{anchor['anchor_id']}: "
-                "OpenAlex results is not a list"
+            payload = fetcher(
+                openalex_forward_url(
+                    work_id,
+                    cursor,
+                ),
+                headers={
+                    "Authorization":
+                        f"Bearer {api_key}",
+                    "User-Agent":
+                        "branchsnv-validation/experiment07",
+                },
+                raw_path=page_path,
+                delay=0.12,
             )
 
-        if reported_forward is None:
-            reported_forward = int(
+            forward_response_files += 1
+
+            if not isinstance(
+                payload,
+                dict,
+            ):
+                raise RuntimeError(
+                    f"{anchor['anchor_id']}: "
+                    "invalid OpenAlex forward payload"
+                )
+
+            meta = payload.get(
+                "meta"
+            ) or {}
+
+            if not isinstance(
+                meta,
+                dict,
+            ):
+                raise RuntimeError(
+                    f"{anchor['anchor_id']}: "
+                    "OpenAlex forward meta is not an object"
+                )
+
+            results = payload.get(
+                "results"
+            ) or []
+
+            if not isinstance(
+                results,
+                list,
+            ):
+                raise RuntimeError(
+                    f"{anchor['anchor_id']}: "
+                    "OpenAlex results is not a list"
+                )
+
+            page_reported = int(
                 meta.get(
                     "count",
                     0,
@@ -1050,149 +1118,316 @@ def retrieve_openalex(
                 or 0
             )
 
-        for item in results:
-            if not isinstance(
-                item,
-                dict,
+            if reported_forward is None:
+                reported_forward = (
+                    page_reported
+                )
+
+            elif (
+                page_reported
+                != reported_forward
             ):
-                raise RuntimeError(
-                    f"{anchor['anchor_id']}: "
-                    "OpenAlex result is not an object"
+                retry_reason = (
+                    "OpenAlex forward meta.count "
+                    "changed during cursor traversal "
+                    f"{reported_forward}!="
+                    f"{page_reported}"
+                )
+                break
+
+            for item in results:
+                if not isinstance(
+                    item,
+                    dict,
+                ):
+                    raise RuntimeError(
+                        f"{anchor['anchor_id']}: "
+                        "OpenAlex result is not an object"
+                    )
+
+                (
+                    citing_doi,
+                    citing_pmid,
+                    citing_id,
+                ) = openalex_ids(
+                    item
                 )
 
-            (
-                citing_doi,
-                citing_pmid,
-                citing_id,
-            ) = openalex_ids(item)
+                if not citing_id:
+                    raise RuntimeError(
+                        f"{anchor['anchor_id']}: "
+                        "forward OpenAlex Work lacks ID"
+                    )
 
-            if not citing_id:
-                raise RuntimeError(
-                    f"{anchor['anchor_id']}: "
-                    "forward OpenAlex Work lacks ID"
+                if (
+                    citing_id
+                    in forward_seen
+                ):
+                    retry_reason = (
+                        "duplicate forward Work "
+                        f"{citing_id}"
+                    )
+                    break
+
+                forward_seen.add(
+                    citing_id
                 )
 
-            if citing_id in forward_seen:
-                raise RuntimeError(
-                    f"{anchor['anchor_id']}: "
-                    f"duplicate forward Work "
-                    f"{citing_id}"
-                )
+                attempt_edges.append({
+                    "wave":
+                        wave,
+                    "anchor_id":
+                        anchor["anchor_id"],
+                    "anchor_tool":
+                        anchor["tool"],
+                    "source":
+                        "openalex",
+                    "direction":
+                        "forward",
+                    "anchor_doi":
+                        doi,
+                    "anchor_openalex_id":
+                        work_id,
+                    "citing_dois":
+                        citing_doi,
+                    "cited_dois":
+                        doi,
+                    "citing_pmids":
+                        citing_pmid,
+                    "cited_pmids":
+                        "",
+                    "citing_openalex_ids":
+                        citing_id,
+                    "cited_openalex_ids":
+                        work_id,
+                    "citing_omids":
+                        "",
+                    "cited_omids":
+                        "",
+                    "oci":
+                        "",
+                    "raw_file":
+                        raw_rel(
+                            page_path,
+                            output_root,
+                        ),
+                })
 
-            forward_seen.add(
-                citing_id
+                attempt_neighbours.append({
+                    "wave":
+                        wave,
+                    "anchor_id":
+                        anchor["anchor_id"],
+                    "anchor_tool":
+                        anchor["tool"],
+                    "source":
+                        "openalex",
+                    "direction":
+                        "forward",
+                    "doi":
+                        citing_doi,
+                    "pmid":
+                        citing_pmid,
+                    "openalex_id":
+                        citing_id,
+                    "omid":
+                        "",
+                    "title":
+                        str(
+                            item.get(
+                                "title"
+                            )
+                            or item.get(
+                                "display_name"
+                            )
+                            or ""
+                        ).strip(),
+                    "year":
+                        str(
+                            item.get(
+                                "publication_year"
+                            )
+                            or ""
+                        ),
+                    "source_record_id":
+                        citing_id,
+                })
+
+            if retry_reason:
+                break
+
+            next_cursor = meta.get(
+                "next_cursor"
             )
 
-            edges.append({
-                "wave": wave,
-                "anchor_id":
-                    anchor["anchor_id"],
-                "anchor_tool":
-                    anchor["tool"],
-                "source": "openalex",
-                "direction": "forward",
-                "anchor_doi": doi,
-                "anchor_openalex_id":
-                    work_id,
-                "citing_dois":
-                    citing_doi,
-                "cited_dois": doi,
-                "citing_pmids":
-                    citing_pmid,
-                "cited_pmids": "",
-                "citing_openalex_ids":
-                    citing_id,
-                "cited_openalex_ids":
-                    work_id,
-                "citing_omids": "",
-                "cited_omids": "",
-                "oci": "",
-                "raw_file": raw_rel(
-                    page_path,
-                    output_root,
-                ),
-            })
+            if (
+                results
+                and next_cursor
+            ):
+                next_cursor = str(
+                    next_cursor
+                )
 
-            neighbours.append({
-                "wave": wave,
-                "anchor_id":
-                    anchor["anchor_id"],
-                "anchor_tool":
-                    anchor["tool"],
-                "source": "openalex",
-                "direction": "forward",
-                "doi": citing_doi,
-                "pmid": citing_pmid,
-                "openalex_id":
-                    citing_id,
-                "omid": "",
-                "title": str(
-                    item.get("title")
-                    or item.get(
-                        "display_name"
+                if (
+                    next_cursor
+                    in seen_cursors
+                ):
+                    retry_reason = (
+                        "OpenAlex forward cursor cycle "
+                        f"{next_cursor!r}"
                     )
-                    or ""
-                ).strip(),
-                "year": str(
-                    item.get(
-                        "publication_year"
-                    )
-                    or ""
-                ),
-                "source_record_id":
-                    citing_id,
-            })
+                    break
 
-        next_cursor = meta.get(
-            "next_cursor"
+                seen_cursors.add(
+                    next_cursor
+                )
+
+                cursor = next_cursor
+
+            else:
+                cursor = ""
+
+        reported_forward = (
+            reported_forward
+            if reported_forward is not None
+            else 0
         )
 
-        if results and next_cursor:
-            cursor = str(
-                next_cursor
+        if (
+            not retry_reason
+            and len(
+                forward_seen
             )
-        else:
-            cursor = ""
+            != reported_forward
+        ):
+            retry_reason = (
+                "OpenAlex forward reported "
+                f"{reported_forward}, retrieved "
+                f"{len(forward_seen)}"
+            )
 
-    reported_forward = (
-        reported_forward
-        if reported_forward is not None
-        else 0
-    )
+        attempt_record = {
+            "wave":
+                wave,
+            "anchor_id":
+                anchor["anchor_id"],
+            "anchor_tool":
+                anchor["tool"],
+            "source":
+                "openalex",
+            "direction":
+                "forward",
+            "snapshot_attempt":
+                snapshot_attempt,
+            "status":
+                (
+                    "retryable_failure"
+                    if retry_reason
+                    else "accepted"
+                ),
+            "retryable":
+                bool(
+                    retry_reason
+                ),
+            "reported_count":
+                reported_forward,
+            "retrieved_count":
+                len(
+                    forward_seen
+                ),
+            "response_files":
+                page_number,
+            "terminal_detail":
+                (
+                    retry_reason
+                    if retry_reason
+                    else (
+                        "complete unique-Work cursor "
+                        "snapshot"
+                    )
+                ),
+        }
 
-    if (
-        len(forward_seen)
-        != reported_forward
-    ):
+        (
+            attempt_root
+            / "snapshot_attempt.json"
+        ).write_text(
+            json.dumps(
+                attempt_record,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+        if retry_reason:
+            final_retry_reason = (
+                retry_reason
+            )
+
+            if (
+                snapshot_attempt
+                == max_forward_snapshot_attempts
+            ):
+                break
+
+            continue
+
+        # Only a completely validated traversal is promoted
+        # into production.
+        edges.extend(
+            attempt_edges
+        )
+
+        neighbours.extend(
+            attempt_neighbours
+        )
+
+        statuses.append({
+            "wave":
+                wave,
+            "anchor_id":
+                anchor["anchor_id"],
+            "anchor_tool":
+                anchor["tool"],
+            "source":
+                "openalex",
+            "direction":
+                "forward",
+            "status":
+                (
+                    "complete"
+                    if forward_seen
+                    else "resolved_zero_edges"
+                ),
+            "reported_count":
+                reported_forward,
+            "retrieved_count":
+                len(
+                    forward_seen
+                ),
+            "response_files":
+                forward_response_files,
+            "terminal_detail":
+                (
+                    "cursor pagination complete; "
+                    "accepted forward snapshot "
+                    f"attempt {snapshot_attempt}"
+                ),
+        })
+
+        forward_accepted = True
+        break
+
+    if not forward_accepted:
         raise RuntimeError(
             f"{anchor['anchor_id']}: "
-            f"OpenAlex forward reported "
-            f"{reported_forward}, retrieved "
-            f"{len(forward_seen)}"
+            "OpenAlex forward did not produce "
+            "an acceptable snapshot within "
+            f"{max_forward_snapshot_attempts} attempts: "
+            f"{final_retry_reason}"
         )
-
-    statuses.append({
-        "wave": wave,
-        "anchor_id":
-            anchor["anchor_id"],
-        "anchor_tool":
-            anchor["tool"],
-        "source": "openalex",
-        "direction": "forward",
-        "status": (
-            "complete"
-            if forward_seen
-            else "resolved_zero_edges"
-        ),
-        "reported_count":
-            reported_forward,
-        "retrieved_count":
-            len(forward_seen),
-        "response_files":
-            page_number,
-        "terminal_detail":
-            "cursor pagination complete",
-    })
 
     return (
         edges,
@@ -2040,6 +2275,780 @@ def opencitations_oci_identity(
     )
 
 
+
+def opencitations_identifier_values(
+    value: str,
+    scheme: str,
+) -> set[str]:
+    scheme = scheme.lower()
+
+    values = set()
+
+    for token in str(
+        value
+        or ""
+    ).split():
+        if ":" not in token:
+            continue
+
+        observed_scheme, identifier = (
+            token.split(
+                ":",
+                1,
+            )
+        )
+
+        if (
+            observed_scheme.lower()
+            != scheme
+        ):
+            continue
+
+        identifier = identifier.strip()
+
+        if not identifier:
+            continue
+
+        if scheme == "doi":
+            identifier = (
+                normalise_doi(
+                    identifier
+                ).lower()
+            )
+        else:
+            identifier = (
+                identifier.lower()
+            )
+
+        values.add(
+            identifier
+        )
+
+    return values
+
+
+def opencitations_single_citing_openalex(
+    row: dict,
+) -> str | None:
+    values = (
+        opencitations_identifier_values(
+            str(
+                row.get(
+                    "citing"
+                )
+                or ""
+            ),
+            "openalex",
+        )
+    )
+
+    if len(values) != 1:
+        return None
+
+    return next(
+        iter(values)
+    )
+
+
+def opencitations_direct_citation_url(
+    oci: str,
+) -> str:
+    return (
+        f"{OPENCITATIONS_ROOT}/citation/"
+        + urllib.parse.quote(
+            oci,
+            safe="-",
+        )
+    )
+
+
+def build_opencitations_provider_candidate(
+    *,
+    anchor: dict[str, str],
+    direction: str,
+    expected_count: int,
+    oci_rows: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    creation_rows: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    attempt_root: Path,
+) -> dict | None:
+    """
+    Build a narrowly scoped candidate for a known class of
+    OpenCitations forward filtered-endpoint inconsistency.
+
+    The OCI axis remains canonical. Creation-axis rows are used only
+    to identify:
+      1. alternate OCI representations of a work already present on
+         the OCI axis, paired by exactly one OpenAlex citing-work ID;
+      2. genuinely missing works absent from the complete OCI axis.
+
+    Only genuinely missing creation-axis rows enter production.
+    """
+
+    if direction != "forward":
+        return None
+
+    if (
+        len(creation_rows)
+        != expected_count
+    ):
+        return None
+
+    oci_by_signature = {
+        canonical_opencitations_row(
+            row
+        ):
+            (
+                row,
+                raw_path,
+            )
+        for row, raw_path in oci_rows
+    }
+
+    creation_by_signature = {
+        canonical_opencitations_row(
+            row
+        ):
+            (
+                row,
+                raw_path,
+            )
+        for row, raw_path in creation_rows
+    }
+
+    only_oci_signatures = (
+        set(
+            oci_by_signature
+        )
+        - set(
+            creation_by_signature
+        )
+    )
+
+    only_creation_signatures = (
+        set(
+            creation_by_signature
+        )
+        - set(
+            oci_by_signature
+        )
+    )
+
+    if (
+        not only_oci_signatures
+        or not only_creation_signatures
+    ):
+        return None
+
+    only_oci = [
+        oci_by_signature[
+            signature
+        ]
+        for signature in sorted(
+            only_oci_signatures
+        )
+    ]
+
+    only_creation = [
+        creation_by_signature[
+            signature
+        ]
+        for signature in sorted(
+            only_creation_signatures
+        )
+    ]
+
+    oci_by_openalex = {}
+
+    for row, raw_path in only_oci:
+        openalex_id = (
+            opencitations_single_citing_openalex(
+                row
+            )
+        )
+
+        if openalex_id is None:
+            return None
+
+        if (
+            openalex_id
+            in oci_by_openalex
+        ):
+            return None
+
+        oci_by_openalex[
+            openalex_id
+        ] = (
+            row,
+            raw_path,
+        )
+
+    creation_by_openalex = {}
+
+    for row, raw_path in only_creation:
+        openalex_id = (
+            opencitations_single_citing_openalex(
+                row
+            )
+        )
+
+        if openalex_id is None:
+            return None
+
+        if (
+            openalex_id
+            in creation_by_openalex
+        ):
+            return None
+
+        creation_by_openalex[
+            openalex_id
+        ] = (
+            row,
+            raw_path,
+        )
+
+    alias_ids = (
+        set(
+            oci_by_openalex
+        )
+        & set(
+            creation_by_openalex
+        )
+    )
+
+    unmatched_oci_ids = (
+        set(
+            oci_by_openalex
+        )
+        - set(
+            creation_by_openalex
+        )
+    )
+
+    missing_ids = (
+        set(
+            creation_by_openalex
+        )
+        - set(
+            oci_by_openalex
+        )
+    )
+
+    # This exception is intentionally limited to the observed class
+    # of inconsistency: at least one alternate representation and at
+    # least one genuinely missing creation-axis work.
+    if (
+        not alias_ids
+        or not missing_ids
+        or unmatched_oci_ids
+    ):
+        return None
+
+    all_oci_openalex = {}
+
+    for row, _ in oci_rows:
+        for openalex_id in (
+            opencitations_identifier_values(
+                str(
+                    row.get(
+                        "citing"
+                    )
+                    or ""
+                ),
+                "openalex",
+            )
+        ):
+            all_oci_openalex[
+                openalex_id
+            ] = (
+                all_oci_openalex.get(
+                    openalex_id,
+                    0,
+                )
+                + 1
+            )
+
+    all_creation_openalex = {}
+
+    for row, _ in creation_rows:
+        for openalex_id in (
+            opencitations_identifier_values(
+                str(
+                    row.get(
+                        "citing"
+                    )
+                    or ""
+                ),
+                "openalex",
+            )
+        ):
+            all_creation_openalex[
+                openalex_id
+            ] = (
+                all_creation_openalex.get(
+                    openalex_id,
+                    0,
+                )
+                + 1
+            )
+
+    for openalex_id in alias_ids:
+        if (
+            all_oci_openalex.get(
+                openalex_id,
+                0,
+            )
+            != 1
+            or all_creation_openalex.get(
+                openalex_id,
+                0,
+            )
+            != 1
+        ):
+            return None
+
+    missing_records = []
+
+    for openalex_id in sorted(
+        missing_ids
+    ):
+        if (
+            all_oci_openalex.get(
+                openalex_id,
+                0,
+            )
+            != 0
+        ):
+            return None
+
+        if (
+            all_creation_openalex.get(
+                openalex_id,
+                0,
+            )
+            != 1
+        ):
+            return None
+
+        missing_records.append(
+            creation_by_openalex[
+                openalex_id
+            ]
+        )
+
+    production_rows = (
+        list(
+            oci_rows
+        )
+        + missing_records
+    )
+
+    if (
+        len(production_rows)
+        != expected_count
+    ):
+        return None
+
+    try:
+        (
+            production_complete_rows,
+            production_complete_hash,
+        ) = (
+            opencitations_complete_row_identity(
+                production_rows,
+                context=(
+                    f"{anchor['anchor_id']}: "
+                    f"OpenCitations {direction} "
+                    "provider-reconciled production"
+                ),
+            )
+        )
+
+        (
+            production_ocis,
+            production_oci_hash,
+        ) = (
+            opencitations_oci_identity(
+                production_rows,
+                context=(
+                    f"{anchor['anchor_id']}: "
+                    f"OpenCitations {direction} "
+                    "provider-reconciled production"
+                ),
+            )
+        )
+
+    except RuntimeError:
+        return None
+
+    if (
+        len(
+            production_complete_rows
+        )
+        != expected_count
+        or len(
+            production_ocis
+        )
+        != expected_count
+    ):
+        return None
+
+    discrepant_records = {}
+
+    for row, raw_path in (
+        only_oci
+        + only_creation
+    ):
+        oci = str(
+            row.get(
+                "oci"
+            )
+            or ""
+        ).strip()
+
+        if not oci:
+            return None
+
+        signature = (
+            canonical_opencitations_row(
+                row
+            )
+        )
+
+        if (
+            oci in discrepant_records
+            and discrepant_records[
+                oci
+            ][
+                "signature"
+            ]
+            != signature
+        ):
+            return None
+
+        discrepant_records[
+            oci
+        ] = {
+            "row":
+                row,
+            "signature":
+                signature,
+            "raw_path":
+                raw_path,
+        }
+
+    alias_pairs = []
+
+    for openalex_id in sorted(
+        alias_ids
+    ):
+        oci_row, oci_raw = (
+            oci_by_openalex[
+                openalex_id
+            ]
+        )
+
+        creation_row, creation_raw = (
+            creation_by_openalex[
+                openalex_id
+            ]
+        )
+
+        alias_pairs.append({
+            "openalex_id":
+                openalex_id,
+            "oci_axis_oci":
+                str(
+                    oci_row.get(
+                        "oci"
+                    )
+                    or ""
+                ),
+            "creation_axis_oci":
+                str(
+                    creation_row.get(
+                        "oci"
+                    )
+                    or ""
+                ),
+            "oci_axis_raw_file":
+                str(
+                    oci_raw.relative_to(
+                        attempt_root
+                    )
+                ),
+            "creation_axis_raw_file":
+                str(
+                    creation_raw.relative_to(
+                        attempt_root
+                    )
+                ),
+        })
+
+    missing_evidence = []
+
+    for openalex_id in sorted(
+        missing_ids
+    ):
+        row, raw_path = (
+            creation_by_openalex[
+                openalex_id
+            ]
+        )
+
+        missing_evidence.append({
+            "openalex_id":
+                openalex_id,
+            "oci":
+                str(
+                    row.get(
+                        "oci"
+                    )
+                    or ""
+                ),
+            "raw_file":
+                str(
+                    raw_path.relative_to(
+                        attempt_root
+                    )
+                ),
+            "complete_row":
+                row,
+        })
+
+    evidence = {
+        "status":
+            "provider_reconciliation_candidate",
+        "anchor_id":
+            anchor[
+                "anchor_id"
+            ],
+        "direction":
+            direction,
+        "reported_count":
+            expected_count,
+        "oci_row_count":
+            len(
+                oci_rows
+            ),
+        "creation_row_count":
+            len(
+                creation_rows
+            ),
+        "alias_pair_count":
+            len(
+                alias_pairs
+            ),
+        "missing_row_count":
+            len(
+                missing_records
+            ),
+        "discrepant_oci_count":
+            len(
+                discrepant_records
+            ),
+        "reconciled_row_count":
+            len(
+                production_rows
+            ),
+        "reconciled_complete_row_sha256":
+            production_complete_hash,
+        "reconciled_oci_set_sha256":
+            production_oci_hash,
+        "alias_pairs":
+            alias_pairs,
+        "missing_rows":
+            missing_evidence,
+        "discrepant_ocis":
+            sorted(
+                discrepant_records
+            ),
+    }
+
+    return {
+        "production_rows":
+            production_rows,
+        "row_count":
+            len(
+                production_rows
+            ),
+        "complete_row_sha256":
+            production_complete_hash,
+        "oci_set_sha256":
+            production_oci_hash,
+        "alias_pair_count":
+            len(
+                alias_pairs
+            ),
+        "missing_row_count":
+            len(
+                missing_records
+            ),
+        "discrepant_oci_count":
+            len(
+                discrepant_records
+            ),
+        "discrepant_records":
+            discrepant_records,
+        "evidence":
+            evidence,
+    }
+
+
+def verify_opencitations_provider_discrepancies(
+    *,
+    anchor: dict[str, str],
+    doi: str,
+    candidate: dict,
+    attempt_root: Path,
+    raw_root: Path,
+    headers: dict[str, str],
+    fetcher: Callable[..., Any],
+    verification_cache: dict,
+    seen_discrepant_ocis: set[str],
+) -> bool:
+    """
+    Directly verify each unique discrepant OCI exactly once.
+
+    A direct /citation/{oci} result must reproduce the complete
+    discrepant row byte-for-byte after canonical JSON serialisation
+    and must cite the anchor DOI.
+    """
+
+    anchor_doi = (
+        normalise_doi(
+            doi
+        ).lower()
+    )
+
+    discrepant_records = (
+        candidate[
+            "discrepant_records"
+        ]
+    )
+
+    seen_discrepant_ocis.update(
+        discrepant_records
+    )
+
+    for oci in sorted(
+        discrepant_records
+    ):
+        expected = (
+            discrepant_records[
+                oci
+            ]
+        )
+
+        expected_signature = (
+            expected[
+                "signature"
+            ]
+        )
+
+        if (
+            oci
+            in verification_cache
+        ):
+            if (
+                verification_cache[
+                    oci
+                ][
+                    "complete_row"
+                ]
+                != expected_signature
+            ):
+                return False
+
+            continue
+
+        raw_path = (
+            attempt_root
+            / "provider_reconciliation_direct_oci"
+            / f"{oci}.json"
+        )
+
+        payload = fetcher(
+            opencitations_direct_citation_url(
+                oci
+            ),
+            headers=headers,
+            raw_path=raw_path,
+            delay=0.40,
+        )
+
+        rows = flatten_json_list(
+            payload
+        )
+
+        if len(rows) != 1:
+            return False
+
+        direct_row = rows[
+            0
+        ]
+
+        direct_signature = (
+            canonical_opencitations_row(
+                direct_row
+            )
+        )
+
+        if (
+            direct_signature
+            != expected_signature
+        ):
+            return False
+
+        cited_dois = (
+            opencitations_identifier_values(
+                str(
+                    direct_row.get(
+                        "cited"
+                    )
+                    or ""
+                ),
+                "doi",
+            )
+        )
+
+        if (
+            anchor_doi
+            not in cited_dois
+        ):
+            return False
+
+        verification_cache[
+            oci
+        ] = {
+            "complete_row":
+                direct_signature,
+            "raw_file":
+                str(
+                    raw_path.relative_to(
+                        raw_root
+                    )
+                ),
+        }
+
+    return (
+        set(
+            verification_cache
+        )
+        >= seen_discrepant_ocis
+    )
+
+
 def opencitations_creation_root_leaves() -> list[dict]:
     leaves = [
         {
@@ -2593,8 +3602,11 @@ def opencitations_attempt_response_files(
         for path in attempt_root.rglob(
             "*.json"
         )
-        if path.name
-        != "snapshot_attempt.json"
+        if path.name not in {
+            "snapshot_attempt.json",
+            "provider_reconciliation_candidate.json",
+            "provider_reconciliation.json",
+        }
     )
 
 
@@ -2845,6 +3857,9 @@ def retrieve_opencitations_dual_axis(
         direction_attempt_records = []
         direction_complete = False
 
+        provider_direct_verification = {}
+        provider_seen_discrepant_ocis = set()
+
         for snapshot_attempt in range(
             1,
             maximum_snapshot_attempts + 1,
@@ -2892,6 +3907,26 @@ def retrieve_opencitations_dual_axis(
                     "",
                 "oci_sets_equal":
                     "",
+                "production_axis":
+                    "",
+                "provider_reconciliation_candidate":
+                    False,
+                "provider_reconciliation":
+                    False,
+                "provider_reconciled_row_count":
+                    "",
+                "provider_reconciled_complete_row_sha256":
+                    "",
+                "provider_reconciled_oci_set_sha256":
+                    "",
+                "provider_alias_pair_count":
+                    "",
+                "provider_missing_row_count":
+                    "",
+                "provider_discrepant_oci_count":
+                    "",
+                "provider_direct_lookup_count":
+                    0,
                 "oci_leaf_count":
                     0,
                 "creation_leaf_count":
@@ -3059,6 +4094,9 @@ def retrieve_opencitations_dual_axis(
                     record[
                         "oci_sets_equal"
                     ] = True
+                    record[
+                        "production_axis"
+                    ] = "none"
 
                     if post_count != 0:
                         raise OpenCitationsSnapshotRetryable(
@@ -3392,19 +4430,326 @@ def retrieve_opencitations_dual_axis(
                         "cross-axis OCI sets differ"
                     )
 
+                production_rows = (
+                    oci_rows
+                )
+
+                accepted_status = (
+                    "accepted"
+                )
+
+                source_status = (
+                    "complete"
+                )
+
+                accepted_detail = (
+                    "stable counts and exact "
+                    "dual-axis row/OCI agreement"
+                )
+
+                provider_accepted = False
+
                 if failures:
-                    raise OpenCitationsSnapshotRetryable(
-                        f"{anchor['anchor_id']}: "
-                        f"OpenCitations {direction} "
-                        "snapshot reconciliation failed: "
-                        + "; ".join(
-                            failures
+                    candidate = None
+
+                    if (
+                        direction == "forward"
+                        and pre_count
+                        == post_count
+                    ):
+                        candidate = (
+                            build_opencitations_provider_candidate(
+                                anchor=
+                                    anchor,
+                                direction=
+                                    direction,
+                                expected_count=
+                                    pre_count,
+                                oci_rows=
+                                    oci_rows,
+                                creation_rows=
+                                    creation_rows,
+                                attempt_root=
+                                    attempt_root,
+                            )
                         )
-                    )
+
+                    if candidate is not None:
+                        record[
+                            "provider_reconciliation_candidate"
+                        ] = True
+
+                        record[
+                            "provider_reconciled_row_count"
+                        ] = candidate[
+                            "row_count"
+                        ]
+
+                        record[
+                            "provider_reconciled_complete_row_sha256"
+                        ] = candidate[
+                            "complete_row_sha256"
+                        ]
+
+                        record[
+                            "provider_reconciled_oci_set_sha256"
+                        ] = candidate[
+                            "oci_set_sha256"
+                        ]
+
+                        record[
+                            "provider_alias_pair_count"
+                        ] = candidate[
+                            "alias_pair_count"
+                        ]
+
+                        record[
+                            "provider_missing_row_count"
+                        ] = candidate[
+                            "missing_row_count"
+                        ]
+
+                        record[
+                            "provider_discrepant_oci_count"
+                        ] = candidate[
+                            "discrepant_oci_count"
+                        ]
+
+                        (
+                            attempt_root
+                            / "provider_reconciliation_candidate.json"
+                        ).write_text(
+                            json.dumps(
+                                candidate[
+                                    "evidence"
+                                ],
+                                indent=2,
+                                sort_keys=True,
+                            )
+                            + "\n",
+                            encoding="utf-8",
+                        )
+
+                        directly_verified = (
+                            verify_opencitations_provider_discrepancies(
+                                anchor=
+                                    anchor,
+                                doi=
+                                    doi,
+                                candidate=
+                                    candidate,
+                                attempt_root=
+                                    attempt_root,
+                                raw_root=
+                                    raw_root,
+                                headers=
+                                    headers,
+                                fetcher=
+                                    fetcher,
+                                verification_cache=
+                                    provider_direct_verification,
+                                seen_discrepant_ocis=
+                                    provider_seen_discrepant_ocis,
+                            )
+                        )
+
+                        record[
+                            "provider_direct_lookup_count"
+                        ] = len(
+                            provider_direct_verification
+                        )
+
+                        stable_three = False
+
+                        if (
+                            directly_verified
+                            and len(
+                                direction_attempt_records
+                            )
+                            >= 2
+                        ):
+                            previous = (
+                                direction_attempt_records[
+                                    -2:
+                                ]
+                            )
+
+                            stable_three = all(
+                                item.get(
+                                    "provider_reconciliation_candidate"
+                                )
+                                is True
+                                and item.get(
+                                    "pre_count"
+                                )
+                                == pre_count
+                                and item.get(
+                                    "post_count"
+                                )
+                                == post_count
+                                and item.get(
+                                    "provider_reconciled_row_count"
+                                )
+                                == candidate[
+                                    "row_count"
+                                ]
+                                and item.get(
+                                    "provider_reconciled_complete_row_sha256"
+                                )
+                                == candidate[
+                                    "complete_row_sha256"
+                                ]
+                                and item.get(
+                                    "provider_reconciled_oci_set_sha256"
+                                )
+                                == candidate[
+                                    "oci_set_sha256"
+                                ]
+                                for item in previous
+                            )
+
+                        all_seen_verified = (
+                            set(
+                                provider_direct_verification
+                            )
+                            ==
+                            provider_seen_discrepant_ocis
+                        )
+
+                        if (
+                            stable_three
+                            and all_seen_verified
+                        ):
+                            provider_accepted = True
+
+                            production_rows = (
+                                candidate[
+                                    "production_rows"
+                                ]
+                            )
+
+                            accepted_status = (
+                                "accepted_provider_reconciled"
+                            )
+
+                            source_status = (
+                                "complete_provider_reconciled"
+                            )
+
+                            accepted_detail = (
+                                "three forward snapshots produced "
+                                "byte-identical OCI-plus-verified-"
+                                "missing-work reconciliation; all "
+                                "unique discrepant OCIs directly "
+                                "verified"
+                            )
+
+                            record[
+                                "provider_reconciliation"
+                            ] = True
+
+                            record[
+                                "production_axis"
+                            ] = (
+                                "oci_plus_verified_creation_missing"
+                            )
+
+                            reconciliation_evidence = {
+                                "status":
+                                    accepted_status,
+                                "anchor_id":
+                                    anchor[
+                                        "anchor_id"
+                                    ],
+                                "direction":
+                                    direction,
+                                "reported_count":
+                                    pre_count,
+                                "production_axis":
+                                    record[
+                                        "production_axis"
+                                    ],
+                                "reconciled_row_count":
+                                    candidate[
+                                        "row_count"
+                                    ],
+                                "reconciled_complete_row_sha256":
+                                    candidate[
+                                        "complete_row_sha256"
+                                    ],
+                                "reconciled_oci_set_sha256":
+                                    candidate[
+                                        "oci_set_sha256"
+                                    ],
+                                "stable_snapshot_attempts":
+                                    [
+                                        int(
+                                            previous[
+                                                0
+                                            ][
+                                                "snapshot_attempt"
+                                            ]
+                                        ),
+                                        int(
+                                            previous[
+                                                1
+                                            ][
+                                                "snapshot_attempt"
+                                            ]
+                                        ),
+                                        snapshot_attempt,
+                                    ],
+                                "unique_discrepant_ocis":
+                                    sorted(
+                                        provider_seen_discrepant_ocis
+                                    ),
+                                "direct_verification":
+                                    {
+                                        oci:
+                                            provider_direct_verification[
+                                                oci
+                                            ]
+                                        for oci in sorted(
+                                            provider_direct_verification
+                                        )
+                                    },
+                                "accepted_candidate":
+                                    candidate[
+                                        "evidence"
+                                    ],
+                            }
+
+                            (
+                                attempt_root
+                                / "provider_reconciliation.json"
+                            ).write_text(
+                                json.dumps(
+                                    reconciliation_evidence,
+                                    indent=2,
+                                    sort_keys=True,
+                                )
+                                + "\n",
+                                encoding="utf-8",
+                            )
+
+                    if not provider_accepted:
+                        raise OpenCitationsSnapshotRetryable(
+                            f"{anchor['anchor_id']}: "
+                            f"OpenCitations {direction} "
+                            "snapshot reconciliation failed: "
+                            + "; ".join(
+                                failures
+                            )
+                        )
+
+                else:
+                    record[
+                        "production_axis"
+                    ] = "oci"
 
                 record[
                     "status"
-                ] = "accepted"
+                ] = accepted_status
 
                 record[
                     "retryable"
@@ -3420,10 +4765,7 @@ def retrieve_opencitations_dual_axis(
 
                 record[
                     "terminal_detail"
-                ] = (
-                    "stable counts and exact "
-                    "dual-axis row/OCI agreement"
-                )
+                ] = accepted_detail
 
                 write_opencitations_snapshot_attempt(
                     attempt_root,
@@ -3451,7 +4793,7 @@ def retrieve_opencitations_dual_axis(
                 ) = (
                     opencitations_rows_to_outputs(
                         partition_rows=
-                            oci_rows,
+                            production_rows,
                         anchor=
                             anchor,
                         direction=
@@ -3488,12 +4830,12 @@ def retrieve_opencitations_dual_axis(
                     "direction":
                         direction,
                     "status":
-                        "complete",
+                        source_status,
                     "reported_count":
                         pre_count,
                     "retrieved_count":
                         len(
-                            oci_rows
+                            production_rows
                         ),
                     "response_files":
                         sum(
@@ -3508,9 +4850,11 @@ def retrieve_opencitations_dual_axis(
                         ),
                     "terminal_detail":
                         (
-                            "dual-axis snapshot "
-                            "reconciliation accepted "
-                            f"attempt {snapshot_attempt}"
+                            accepted_detail
+                            + "; accepted attempt "
+                            + str(
+                                snapshot_attempt
+                            )
                         ),
                 })
 
@@ -3671,6 +5015,7 @@ def validate_status_matrix(
 
     terminal = {
         "complete",
+        "complete_provider_reconciled",
         "resolved_zero_edges",
         "not_indexed",
     }
@@ -3924,7 +5269,7 @@ def main() -> int:
     )
 
     manifest = {
-        "schema_version": 2,
+        "schema_version": 3,
         "status": "COMPLETE",
         "wave": args.wave,
         "retrieved_at_utc":
@@ -3965,9 +5310,9 @@ def main() -> int:
         "opencitations_max_snapshot_attempts":
             OPENCITATIONS_MAX_SNAPSHOT_ATTEMPTS,
         "opencitations_snapshot_reconciliation":
-            "dual_axis_exact_complete_row_and_oci_set",
+            "dual_axis_exact_or_verified_forward_oci_plus_creation_missing",
         "opencitations_canonical_production_axis":
-            "oci",
+            "oci_or_oci_plus_verified_creation_missing",
         "credential_values_written":
             False,
         "openalex_api":

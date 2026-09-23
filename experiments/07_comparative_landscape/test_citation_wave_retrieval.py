@@ -1053,6 +1053,399 @@ print("PASS | persistent IncompleteRead fails closed")
 print("PASS | incomplete response body is never written")
 print("PASS | OpenAlex credential absent from request URLs")
 print("PASS | OpenAlex credential supplied by Authorization header")
+
+
+# ==================================================================
+# OpenAlex forward cursor snapshot retry.
+#
+# Attempt 1:
+#   page 1 -> A, B
+#   page 2 -> B, C
+#
+# Work B therefore appears twice across cursor pages. The duplicate
+# record is byte-identical, but the whole traversal is invalid and
+# must be discarded from production.
+#
+# Attempt 2:
+#   page 1 -> A, B
+#   page 2 -> C
+#
+# This complete 3/3 unique-Work traversal is accepted.
+#
+# Failed-attempt raw responses must remain preserved, while production
+# edge provenance must reference only accepted attempt 2.
+# ==================================================================
+
+class OpenAlexDuplicateThenStableFetcher:
+    def __init__(
+        self,
+    ):
+        self.forward_starts = 0
+
+    @staticmethod
+    def work(
+        work_id,
+        doi,
+    ):
+        return {
+            "id":
+                f"https://openalex.org/{work_id}",
+            "doi":
+                f"https://doi.org/{doi}",
+            "title":
+                f"Synthetic {work_id}",
+            "publication_year":
+                2024,
+        }
+
+    def __call__(
+        self,
+        url,
+        *,
+        headers,
+        raw_path,
+        delay,
+        retries=5,
+    ):
+        import urllib.parse
+
+        raw_path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        if raw_path.name == "resolve_anchor.json":
+            payload = {
+                "id":
+                    "https://openalex.org/W9000000001",
+                "doi":
+                    "https://doi.org/10.1234/openalex-retry",
+                "referenced_works":
+                    [],
+                "referenced_works_count":
+                    0,
+            }
+
+        else:
+            query = urllib.parse.parse_qs(
+                urllib.parse.urlparse(
+                    url
+                ).query
+            )
+
+            cursor = query.get(
+                "cursor",
+                [""],
+            )[0]
+
+            if cursor == "*":
+                self.forward_starts += 1
+
+            attempt = self.forward_starts
+
+            if attempt == 1:
+                if cursor == "*":
+                    results = [
+                        self.work(
+                            "W1000000001",
+                            "10.2000/a",
+                        ),
+                        self.work(
+                            "W1000000002",
+                            "10.2000/b",
+                        ),
+                    ]
+
+                    next_cursor = (
+                        "attempt-1-page-2"
+                    )
+
+                elif cursor == "attempt-1-page-2":
+                    results = [
+                        # Deliberately repeated across cursor pages.
+                        self.work(
+                            "W1000000002",
+                            "10.2000/b",
+                        ),
+                        self.work(
+                            "W1000000003",
+                            "10.2000/c",
+                        ),
+                    ]
+
+                    next_cursor = None
+
+                else:
+                    raise AssertionError(
+                        "Unexpected attempt-1 cursor: "
+                        f"{cursor!r}"
+                    )
+
+            elif attempt == 2:
+                if cursor == "*":
+                    results = [
+                        self.work(
+                            "W1000000001",
+                            "10.2000/a",
+                        ),
+                        self.work(
+                            "W1000000002",
+                            "10.2000/b",
+                        ),
+                    ]
+
+                    next_cursor = (
+                        "attempt-2-page-2"
+                    )
+
+                elif cursor == "attempt-2-page-2":
+                    results = [
+                        self.work(
+                            "W1000000003",
+                            "10.2000/c",
+                        ),
+                    ]
+
+                    next_cursor = None
+
+                else:
+                    raise AssertionError(
+                        "Unexpected attempt-2 cursor: "
+                        f"{cursor!r}"
+                    )
+
+            else:
+                raise AssertionError(
+                    "Unexpected additional OpenAlex "
+                    f"snapshot attempt: {attempt}"
+                )
+
+            payload = {
+                "meta": {
+                    "count":
+                        3,
+                    "next_cursor":
+                        next_cursor,
+                },
+                "results":
+                    results,
+            }
+
+        raw_path.write_text(
+            json.dumps(
+                payload
+            ),
+            encoding="utf-8",
+        )
+
+        return payload
+
+
+with tempfile.TemporaryDirectory() as td:
+    out = Path(td)
+
+    retry_anchor = {
+        "anchor_id":
+            "W0OPENALEXRETRY",
+        "tool":
+            "synthetic",
+        "canonical_identifier":
+            "10.1234/openalex-retry",
+    }
+
+    fetcher = (
+        OpenAlexDuplicateThenStableFetcher()
+    )
+
+    (
+        retry_edges,
+        retry_neighbours,
+        retry_statuses,
+    ) = mod.retrieve_openalex(
+        retry_anchor,
+        wave=0,
+        api_key="synthetic-key",
+        output_root=out,
+        fetcher=fetcher,
+    )
+
+    assert fetcher.forward_starts == 2
+
+    forward_edges = [
+        row
+        for row in retry_edges
+        if row["direction"] == "forward"
+    ]
+
+    forward_neighbours = [
+        row
+        for row in retry_neighbours
+        if row["direction"] == "forward"
+    ]
+
+    assert len(
+        forward_edges
+    ) == 3
+
+    assert len(
+        forward_neighbours
+    ) == 3
+
+    assert {
+        row[
+            "citing_openalex_ids"
+        ]
+        for row in forward_edges
+    } == {
+        "W1000000001",
+        "W1000000002",
+        "W1000000003",
+    }
+
+    # Failed attempt 1 must not contaminate accepted production.
+    assert all(
+        "forward_snapshot_attempt_02/"
+        in row[
+            "raw_file"
+        ]
+        for row in forward_edges
+    )
+
+    assert all(
+        "forward_snapshot_attempt_01/"
+        not in row[
+            "raw_file"
+        ]
+        for row in forward_edges
+    )
+
+    forward_status = [
+        row
+        for row in retry_statuses
+        if row[
+            "direction"
+        ] == "forward"
+    ]
+
+    assert len(
+        forward_status
+    ) == 1
+
+    assert forward_status[
+        0
+    ][
+        "status"
+    ] == "complete"
+
+    assert forward_status[
+        0
+    ][
+        "reported_count"
+    ] == 3
+
+    assert forward_status[
+        0
+    ][
+        "retrieved_count"
+    ] == 3
+
+    # Two responses in failed attempt 1 + two responses in accepted
+    # attempt 2.
+    assert forward_status[
+        0
+    ][
+        "response_files"
+    ] == 4
+
+    assert (
+        "accepted forward snapshot attempt 2"
+        in forward_status[
+            0
+        ][
+            "terminal_detail"
+        ]
+    )
+
+    attempt_1 = (
+        out
+        / "raw/openalex/W0OPENALEXRETRY/"
+          "forward_snapshot_attempt_01/"
+          "snapshot_attempt.json"
+    )
+
+    attempt_2 = (
+        out
+        / "raw/openalex/W0OPENALEXRETRY/"
+          "forward_snapshot_attempt_02/"
+          "snapshot_attempt.json"
+    )
+
+    assert attempt_1.is_file()
+    assert attempt_2.is_file()
+
+    a1 = json.loads(
+        attempt_1.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    a2 = json.loads(
+        attempt_2.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert a1[
+        "status"
+    ] == "retryable_failure"
+
+    assert a1[
+        "retryable"
+    ] is True
+
+    assert a1[
+        "reported_count"
+    ] == 3
+
+    assert (
+        "duplicate forward Work W1000000002"
+        in a1[
+            "terminal_detail"
+        ]
+    )
+
+    assert a2[
+        "status"
+    ] == "accepted"
+
+    assert a2[
+        "retryable"
+    ] is False
+
+    assert a2[
+        "reported_count"
+    ] == 3
+
+    assert a2[
+        "retrieved_count"
+    ] == 3
+
+    # Both failed-attempt pages remain as forensic evidence.
+    assert (
+        out
+        / "raw/openalex/W0OPENALEXRETRY/"
+          "forward_snapshot_attempt_01/"
+          "forward_page_0001.json"
+    ).is_file()
+
+    assert (
+        out
+        / "raw/openalex/W0OPENALEXRETRY/"
+          "forward_snapshot_attempt_01/"
+          "forward_page_0002.json"
+    ).is_file()
+
+
 print("PASS | synthetic OpenAlex backward retrieval")
 print("PASS | synthetic OpenAlex cursor pagination")
 print("PASS | synthetic OpenCitations backward retrieval")

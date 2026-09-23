@@ -1880,17 +1880,19 @@ with tempfile.TemporaryDirectory() as td:
 
     assert manifest[
         "schema_version"
-    ] == 2
+    ] == 3
 
     assert manifest[
         "opencitations_snapshot_reconciliation"
     ] == (
-        "dual_axis_exact_complete_row_and_oci_set"
+        "dual_axis_exact_or_verified_forward_oci_plus_creation_missing"
     )
 
     assert manifest[
         "opencitations_canonical_production_axis"
-    ] == "oci"
+    ] == (
+        "oci_or_oci_plus_verified_creation_missing"
+    )
 
     assert manifest[
         "opencitations_snapshot_attempt_rows"
@@ -1933,6 +1935,548 @@ with tempfile.TemporaryDirectory() as td:
     )
 
 
+
+
+# ==================================================================
+# Verified forward-provider reconciliation.
+#
+# Synthetic analogue of the live W0A07 behaviour:
+#
+# reported count = 4
+#
+# Stable OCI axis:
+#   shared A
+#   work B, representation B1
+#   work C, representation C1
+#
+# Creation attempt 1:
+#   shared A
+#   B1
+#   C2 (alias of C1)
+#   genuinely missing work D
+#
+# Creation attempts 2 and 3:
+#   shared A
+#   C1
+#   B2 (alias of B1)
+#   genuinely missing work D
+#
+# Thus the raw creation-axis complete-row set changes, but:
+#
+#   canonical production =
+#       stable OCI axis
+#       + genuinely missing work D
+#
+# is exactly identical across all three attempts.
+#
+# Every cross-axis discrepant row has exactly one OpenAlex citing-work
+# identity. Alias rows pair by that identity. The unmatched creation
+# row is absent from the complete OCI axis and accounts exactly for
+# the one-row count deficit.
+#
+# All unique discrepant OCIs across all three attempts must then be
+# verified directly through /citation/{oci}.
+# ==================================================================
+
+PROVIDER_SHARED = {
+    "oci":
+        "101-201",
+    "citing":
+        "omid:br/101 doi:10.2000/shared "
+        "openalex:W100000001",
+    "cited":
+        "omid:br/201 doi:10.1000/test "
+        "openalex:W900000001",
+    "creation":
+        "2010",
+    "timespan":
+        "P0Y",
+    "journal_sc":
+        "no",
+    "author_sc":
+        "no",
+}
+
+PROVIDER_B_OCI = {
+    "oci":
+        "301-201",
+    "citing":
+        "omid:br/301 doi:10.2000/b "
+        "openalex:W100000002",
+    "cited":
+        "omid:br/201 doi:10.1000/test "
+        "openalex:W900000001",
+    "creation":
+        "2018",
+    "timespan":
+        "P8Y",
+    "journal_sc":
+        "no",
+    "author_sc":
+        "no",
+}
+
+PROVIDER_B_ALIAS = {
+    "oci":
+        "302-201",
+    "citing":
+        "omid:br/302 openalex:W100000002 pmid:3002",
+    "cited":
+        "omid:br/201 doi:10.1000/test "
+        "openalex:W900000001",
+    "creation":
+        "2018-05-31",
+    "timespan":
+        "P8Y4M",
+    "journal_sc":
+        "no",
+    "author_sc":
+        "no",
+}
+
+PROVIDER_C_OCI = {
+    "oci":
+        "401-201",
+    "citing":
+        "omid:br/401 openalex:W100000003 pmid:4001",
+    "cited":
+        "omid:br/201 doi:10.1000/test "
+        "openalex:W900000001",
+    "creation":
+        "2017",
+    "timespan":
+        "P7Y",
+    "journal_sc":
+        "no",
+    "author_sc":
+        "no",
+}
+
+PROVIDER_C_ALIAS = {
+    "oci":
+        "402-201",
+    "citing":
+        "omid:br/402 doi:10.2000/c "
+        "openalex:W100000003",
+    "cited":
+        "omid:br/201 doi:10.1000/test "
+        "openalex:W900000001",
+    "creation":
+        "2017-06-01",
+    "timespan":
+        "P7Y5M",
+    "journal_sc":
+        "no",
+    "author_sc":
+        "no",
+}
+
+PROVIDER_MISSING = {
+    "oci":
+        "501-201",
+    "citing":
+        "omid:br/501 doi:10.2000/missing "
+        "openalex:W100000004",
+    "cited":
+        "omid:br/201 doi:10.1000/test "
+        "openalex:W900000001",
+    "creation":
+        "2008",
+    "timespan":
+        "P0Y",
+    "journal_sc":
+        "no",
+    "author_sc":
+        "no",
+}
+
+
+class VolatileProviderAliasFetcher(
+    StableDualAxisFetcher
+):
+    def __init__(
+        self,
+    ):
+        super().__init__()
+
+        self.direct_calls = []
+
+        self.direct_rows = {
+            row["oci"]:
+                row
+            for row in [
+                PROVIDER_B_OCI,
+                PROVIDER_B_ALIAS,
+                PROVIDER_C_OCI,
+                PROVIDER_C_ALIAS,
+                PROVIDER_MISSING,
+            ]
+        }
+
+    def count_value(
+        self,
+        direction,
+    ):
+        if direction == "forward":
+            return 4
+
+        return 2
+
+    def transform_rows(
+        self,
+        *,
+        direction,
+        field,
+        rows,
+    ):
+        if direction != "forward":
+            return rows
+
+        if field == "oci":
+            return [
+                dict(PROVIDER_SHARED),
+                dict(PROVIDER_B_OCI),
+                dict(PROVIDER_C_OCI),
+            ]
+
+        if field != "creation":
+            raise AssertionError(
+                f"Unexpected field: {field}"
+            )
+
+        # During partition retrieval the forward pre-count has
+        # already occurred, while the post-count has not.
+        #
+        # count_calls = 1,3,5 for attempts 1,2,3.
+        attempt = (
+            self.count_calls[
+                "forward"
+            ]
+            + 1
+        ) // 2
+
+        if attempt == 1:
+            return [
+                dict(PROVIDER_SHARED),
+                dict(PROVIDER_B_OCI),
+                dict(PROVIDER_C_ALIAS),
+                dict(PROVIDER_MISSING),
+            ]
+
+        return [
+            dict(PROVIDER_SHARED),
+            dict(PROVIDER_C_OCI),
+            dict(PROVIDER_B_ALIAS),
+            dict(PROVIDER_MISSING),
+        ]
+
+    def __call__(
+        self,
+        url,
+        *,
+        headers,
+        raw_path,
+        delay,
+        retries=5,
+    ):
+        parsed = urllib.parse.urlparse(
+            url
+        )
+
+        if (
+            "/citation/" in parsed.path
+            and "/citations/" not in parsed.path
+        ):
+            oci = urllib.parse.unquote(
+                parsed.path.rsplit(
+                    "/",
+                    1,
+                )[-1]
+            )
+
+            if oci not in self.direct_rows:
+                raise AssertionError(
+                    f"Unexpected direct OCI lookup: {oci}"
+                )
+
+            self.direct_calls.append(
+                oci
+            )
+
+            payload = [
+                dict(
+                    self.direct_rows[
+                        oci
+                    ]
+                )
+            ]
+
+            raw_path.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+            raw_path.write_text(
+                json.dumps(
+                    payload
+                ),
+                encoding="utf-8",
+            )
+
+            return payload
+
+        return super().__call__(
+            url,
+            headers=headers,
+            raw_path=raw_path,
+            delay=delay,
+            retries=retries,
+        )
+
+
+with tempfile.TemporaryDirectory() as td:
+    out = Path(td)
+
+    fetcher = (
+        VolatileProviderAliasFetcher()
+    )
+
+    (
+        edges,
+        neighbours,
+        statuses,
+        oci_leaves,
+        creation_leaves,
+        attempts,
+    ) = (
+        mod.retrieve_opencitations_dual_axis(
+            ANCHOR,
+            wave=0,
+            token="",
+            output_root=out,
+            fetcher=fetcher,
+        )
+    )
+
+    forward = [
+        row
+        for row in attempts
+        if row[
+            "direction"
+        ] == "forward"
+    ]
+
+    assert [
+        row["status"]
+        for row in forward
+    ] == [
+        "retryable_failure",
+        "retryable_failure",
+        "accepted_provider_reconciled",
+    ]
+
+    # Raw creation snapshots are deliberately NOT stable.
+    assert (
+        forward[0][
+            "creation_complete_row_sha256"
+        ]
+        !=
+        forward[1][
+            "creation_complete_row_sha256"
+        ]
+    )
+
+    assert (
+        forward[1][
+            "creation_complete_row_sha256"
+        ]
+        ==
+        forward[2][
+            "creation_complete_row_sha256"
+        ]
+    )
+
+    # The reconciled production set must nevertheless be identical
+    # across all three independent attempts.
+    assert len({
+        row[
+            "provider_reconciled_complete_row_sha256"
+        ]
+        for row in forward
+    }) == 1
+
+    assert len({
+        row[
+            "provider_reconciled_oci_set_sha256"
+        ]
+        for row in forward
+    }) == 1
+
+    for row in forward:
+        assert row[
+            "provider_reconciliation_candidate"
+        ] is True
+
+        assert row[
+            "provider_reconciled_row_count"
+        ] == 4
+
+        assert row[
+            "provider_alias_pair_count"
+        ] == 1
+
+        assert row[
+            "provider_missing_row_count"
+        ] == 1
+
+        assert row[
+            "provider_discrepant_oci_count"
+        ] == 3
+
+    accepted = forward[-1]
+
+    assert accepted[
+        "provider_reconciliation"
+    ] is True
+
+    assert accepted[
+        "production_axis"
+    ] == "oci_plus_verified_creation_missing"
+
+    # Five unique discrepant OCIs appeared across the three attempts:
+    # B1, B2, C1, C2, and missing D.
+    assert accepted[
+        "provider_direct_lookup_count"
+    ] == 5
+
+    assert sorted(
+        fetcher.direct_calls
+    ) == sorted([
+        "301-201",
+        "302-201",
+        "401-201",
+        "402-201",
+        "501-201",
+    ])
+
+    forward_edges = [
+        row
+        for row in edges
+        if row[
+            "direction"
+        ] == "forward"
+    ]
+
+    assert len(
+        forward_edges
+    ) == 4
+
+    assert sum(
+        "/oci_axis/"
+        in row[
+            "raw_file"
+        ]
+        for row in forward_edges
+    ) == 3
+
+    assert sum(
+        "/creation_axis/"
+        in row[
+            "raw_file"
+        ]
+        for row in forward_edges
+    ) == 1
+
+    forward_status = [
+        row
+        for row in statuses
+        if row[
+            "direction"
+        ] == "forward"
+    ]
+
+    assert len(
+        forward_status
+    ) == 1
+
+    assert forward_status[
+        0
+    ][
+        "status"
+    ] == "complete_provider_reconciled"
+
+    assert forward_status[
+        0
+    ][
+        "reported_count"
+    ] == 4
+
+    assert forward_status[
+        0
+    ][
+        "retrieved_count"
+    ] == 4
+
+    evidence = (
+        out
+        / "raw/opencitations/W0TEST/"
+          "forward_snapshot_attempt_03/"
+          "provider_reconciliation.json"
+    )
+
+    assert evidence.is_file()
+
+
+
+# The exceptional completion state must also satisfy the final
+# source-direction matrix validator used by main().
+provider_terminal_matrix = []
+
+for source in (
+    "openalex",
+    "opencitations",
+):
+    for direction in (
+        "backward",
+        "forward",
+    ):
+        status = "complete"
+
+        if (
+            source == "opencitations"
+            and direction == "forward"
+        ):
+            status = (
+                "complete_provider_reconciled"
+            )
+
+        provider_terminal_matrix.append({
+            "anchor_id":
+                ANCHOR[
+                    "anchor_id"
+                ],
+            "source":
+                source,
+            "direction":
+                direction,
+            "status":
+                status,
+            "reported_count":
+                1,
+            "retrieved_count":
+                1,
+        })
+
+mod.validate_status_matrix(
+    [ANCHOR],
+    provider_terminal_matrix,
+)
+
+print(
+    "PASS | status matrix accepts provider-reconciled terminal status"
+)
+
+print("PASS | volatile raw aliases reconcile to stable production")
 print("PASS | stable positive dual-axis snapshot accepted")
 print("PASS | pre/post counts bracket both partition axes")
 print("PASS | both axes independently match the stable count")
@@ -1953,7 +2497,7 @@ print("PASS | creation IncompleteRead subdivision remains deterministic")
 print("PASS | failed creation parent response is not retained")
 print("PASS | main writes independent creation-partition ledger")
 print("PASS | main writes snapshot-attempt reconciliation ledger")
-print("PASS | manifest schema 2 records dual-axis reconciliation")
+print("PASS | manifest schema 3 records exact-or-verified reconciliation")
 print("PASS | checksum manifest includes both new production ledgers")
 print("PASS | credential value absent from generated outputs")
 print("PASS | dedicated snapshot-reconciliation tests made zero network requests")
