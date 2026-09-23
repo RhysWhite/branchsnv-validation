@@ -787,3 +787,38 @@ discarded.
 
 The diagnostic cannot itself be used as the Wave 0 production corpus and does
 not alter the exact production completeness gate.
+
+## Amendment 24 — implement frozen OpenCitations count-mismatch diagnostic
+
+**Timing:** implemented after Amendment 23 froze the diagnostic design and
+before any diagnostic network request or subsequent Wave 0 production attempt.
+
+A standalone source-forensic retriever now implements exactly the frozen
+W0A07/PAML sequence:
+
+1. citation-count JSON;
+2. unfiltered citations CSV;
+3. citation-count JSON.
+
+The production Wave 0 retriever is unchanged.
+
+Successful response bodies are preserved byte-for-byte only after complete HTTP
+transfer. Incomplete bodies are discarded. Transient transport failures use a
+bounded five-attempt policy.
+
+The exact Attempt-05 comparator is reconstructed from the committed failed-run
+archive and independently required to contain all ten root partitions and
+12,845 unique valid OCIs with no duplicates.
+
+CSV analysis retains empty and nonconforming OCI rows, explicitly reports valid
+OCI duplicates and both set differences, and never treats the diagnostic as a
+production corpus.
+
+Offline end-to-end validation used the real frozen 12,845-OCI Attempt-05 union
+plus one synthetic additional OCI. The diagnostic correctly recovered 12,846
+unique CSV OCIs and isolated exactly the one synthetic CSV-only relationship.
+
+All offline tests prohibit network access.
+
+No production retrieval, citation search, relevance screening, comparator
+classification or saturation rule was changed.
