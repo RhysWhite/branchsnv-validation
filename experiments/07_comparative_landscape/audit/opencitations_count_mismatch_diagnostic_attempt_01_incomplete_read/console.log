@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/run_opencitations_count_mismatch_diagnostic.py", line 164, in fetch_bytes
+    body = response.read()
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/http/client.py", line 482, in read
+    s = self._safe_read(self.length)
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/http/client.py", line 633, in _safe_read
+    raise IncompleteRead(data, amt-len(data))
+http.client.IncompleteRead: IncompleteRead(1087839 bytes read, 1605197 more expected)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/run_opencitations_count_mismatch_diagnostic.py", line 1249, in <module>
+    main()
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/run_opencitations_count_mismatch_diagnostic.py", line 1190, in main
+    summary = run_diagnostic(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/run_opencitations_count_mismatch_diagnostic.py", line 919, in run_diagnostic
+    fetch_bytes(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/run_opencitations_count_mismatch_diagnostic.py", line 261, in fetch_bytes
+    raise RuntimeError(
+RuntimeError: Diagnostic request failed after 5 attempts: https://api.opencitations.net/index/v2/citations/doi:10.1093%2Fmolbev%2Fmsm088

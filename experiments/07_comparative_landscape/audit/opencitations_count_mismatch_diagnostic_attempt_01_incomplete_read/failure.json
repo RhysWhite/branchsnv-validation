@@ -1,0 +1,37 @@
+{
+  "attempt_05_reclassified": false,
+  "attempts_exhausted": true,
+  "completed_operations": [
+    "citation-count-pre"
+  ],
+  "diagnostic_attempt": 1,
+  "diagnostic_script_sha256": "e00fba874f673e80584ec65ff08d348ef824c26c3ebf300d7aa1f1d5104cb6a7",
+  "diagnostic_spec_sha256": "9493bd590177ec4d035e714916fe4ddd5ed56fa3e60a073d0ffca8e1d32b24c7",
+  "diagnostic_summary_written": false,
+  "direction": "forward",
+  "failed_csv_body_written": false,
+  "failed_operation": "citations-unfiltered-csv",
+  "failure_class": "persistent_http_client_incomplete_read",
+  "final_attempt_bytes_read": 1087839,
+  "final_attempt_bytes_remaining_expected": 1605197,
+  "final_attempt_declared_response_bytes": 2693036,
+  "interpretation_performed": false,
+  "maximum_transport_attempts": 5,
+  "partial_archive_bytes": 196,
+  "partial_archive_sha256": "3eb42a02d1f65b8fc5d992a2834d835f4ea8344226b76728e3a0dfcbc66a815d",
+  "pre_count": 12846,
+  "production_corpus": false,
+  "production_execution_head": "29d6258de50a1c8e314931d77bce9b8497620de0",
+  "production_retriever_changed": false,
+  "schema_version": 1,
+  "scientific_protocol_changed": false,
+  "scientific_screening_performed": false,
+  "source": "OpenCitations Index v2",
+  "status": "FAILED_DURING_DIAGNOSTIC_TRANSPORT",
+  "target_anchor_id": "W0A07",
+  "target_doi": "10.1093/molbev/msm088",
+  "target_tool": "PAML",
+  "unattempted_operations": [
+    "citation-count-post"
+  ]
+}

@@ -822,3 +822,30 @@ All offline tests prohibit network access.
 
 No production retrieval, citation search, relevance screening, comparator
 classification or saturation rule was changed.
+
+## Amendment 25 — unfiltered CSV diagnostic fails bounded transport
+
+**Timing:** recorded immediately after the first execution of the frozen
+OpenCitations count-mismatch diagnostic and before any retry, diagnostic
+redesign, or subsequent Wave 0 production attempt.
+
+The pre-diagnostic W0A07/PAML citation-count request completed successfully.
+
+The next frozen operation requested the same unfiltered OpenCitations
+`/citations` result as CSV rather than JSON.
+
+That CSV response still failed with `http.client.IncompleteRead` after all five
+bounded whole-response attempts.
+
+The incomplete body was never written as a successful response.
+
+The frozen post-count operation was consequently not attempted, and no
+diagnostic interpretation was produced.
+
+This establishes that changing serialization from JSON to CSV is insufficient
+to solve the large unfiltered-response transport problem for this target.
+
+The result does not resolve the one-record count discrepancy and does not alter
+the production completeness gate, citation partition design, literature search,
+screening criteria, comparator classifications, or citation-chaining saturation
+rule.
