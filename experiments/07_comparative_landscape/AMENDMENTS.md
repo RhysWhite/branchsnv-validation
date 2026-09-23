@@ -849,3 +849,31 @@ The result does not resolve the one-record count discrepancy and does not alter
 the production completeness gate, citation partition design, literature search,
 screening criteria, comparator classifications, or citation-chaining saturation
 rule.
+
+## Amendment 26 — freeze OCI-independent creation-string diagnostic
+
+**Timing:** frozen after the unfiltered CSV diagnostic failed bounded transport
+and before any second diagnostic network request.
+
+Offline inspection of the frozen Attempt-05 W0A07 forward corpus showed that
+`creation` cannot safely be treated as a strict complete calendar date.
+The archived data include complete dates, reduced-precision year-month values,
+reduced-precision year values, and empty values.
+
+The second diagnostic therefore treats `creation` only as an opaque raw string.
+
+Its root consists of explicit empty and non-digit buckets plus ten digit-prefix
+regular-expression buckets. A large digit/hyphen prefix bucket may be
+recursively subdivided into an exact-prefix child, ten decimal continuations,
+a hyphen continuation and an unexpected-character continuation.
+
+This partition is independent of OCI and preserves reduced-precision and
+unexpected creation strings.
+
+The independent citation count is retrieved immediately before and after the
+partition sequence. Returned row counts, complete row duplicates, OCI syntax,
+OCI duplicates and exact set differences relative to Attempt 05 are all
+reported separately.
+
+No source result from this diagnostic is itself a production Wave 0 corpus,
+and no literature-search or screening rule is changed.

@@ -1,0 +1,6 @@
+sourcedocumentation_versionevidence_used
+OpenCitations Index REST API v22.2.0 (2025-04-15)citations returns the creation field for incoming citation records
+OpenCitations Index REST API v22.2.0 (2025-04-15)filter without an explicit comparison operator is interpreted as a regular expression
+OpenCitations Index REST API v22.2.0 (2025-04-15)multiple API filtering operations are supported and are applied after require operations
+OpenCitations historical API examplesv1reduced-precision creation values such as YYYY-MM are represented in API output
+OpenCitations POCI API examplesv1reduced-precision creation values such as YYYY are represented in API output

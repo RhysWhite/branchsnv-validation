@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "target": {
+    "anchor_id": "W0A07",
+    "tool": "PAML",
+    "doi": "10.1093/molbev/msm088",
+    "direction": "forward",
+    "source": "OpenCitations Index v2"
+  },
+  "sequence": [
+    "citation-count-pre",
+    "creation-partitioned-citations",
+    "citation-count-post"
+  ],
+  "partition": {
+    "field": "creation",
+    "semantics": "raw_string_regex",
+    "root": {
+      "empty": "^$",
+      "non_digit": "^[^0-9].*$",
+      "digit_prefixes": [
+        "^0.*$",
+        "^1.*$",
+        "^2.*$",
+        "^3.*$",
+        "^4.*$",
+        "^5.*$",
+        "^6.*$",
+        "^7.*$",
+        "^8.*$",
+        "^9.*$"
+      ]
+    },
+    "recursive_child_types": [
+      "exact_prefix",
+      "digit_0",
+      "digit_1",
+      "digit_2",
+      "digit_3",
+      "digit_4",
+      "digit_5",
+      "digit_6",
+      "digit_7",
+      "digit_8",
+      "digit_9",
+      "hyphen",
+      "other_character"
+    ],
+    "subdivision_trigger": "exhausted_IncompleteRead_only",
+    "max_prefix_characters": 32
+  },
+  "row_accounting": {
+    "silent_deduplication": false,
+    "creation_field_required_in_returned_rows": true,
+    "full_row_duplicates_allowed": false,
+    "row_count_compared_to_stable_independent_count": true
+  },
+  "oci_analysis": {
+    "used_for_partitioning": false,
+    "numeric_regex": "^[0-9]+-[0-9]+$",
+    "empty_retained": true,
+    "nonconforming_retained": true,
+    "duplicates_reported": true,
+    "attempt05_set_difference_reported": true
+  },
+  "transport": {
+    "maximum_attempts": 5,
+    "incomplete_body_accepted": false
+  },
+  "production_acceptance_rule_changed": false,
+  "scientific_screening": false,
+  "attempt05_reclassified": false
+}

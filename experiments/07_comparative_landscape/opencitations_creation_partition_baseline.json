@@ -1,0 +1,13 @@
+{
+  "creation_empty": 119,
+  "creation_field_missing": 0,
+  "creation_full_date": 9619,
+  "creation_max_string_length": 10,
+  "creation_other": 0,
+  "creation_year_month": 2281,
+  "creation_year_only": 826,
+  "rows": 12845,
+  "schema_version": 1,
+  "source": "frozen_attempt_05_w0a07_forward_partition_union",
+  "unique_creation_values": 4478
+}
