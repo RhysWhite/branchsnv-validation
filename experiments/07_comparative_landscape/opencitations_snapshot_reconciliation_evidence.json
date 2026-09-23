@@ -1,0 +1,39 @@
+{
+  "attempt05": {
+    "difference": 1,
+    "independent_count": 12846,
+    "oci_partition_miss_established": false,
+    "oci_partition_unique_rows": 12845
+  },
+  "conclusions_supported": [
+    "whole-response serialization remains transport-fragile",
+    "creation partitioning can independently reconstruct the full source result",
+    "OpenCitations relationship sets can evolve between retrieval snapshots",
+    "Attempt-05 OCI partition omission is not established",
+    "single count plus one partition axis is insufficient for strongest snapshot-consistency assurance"
+  ],
+  "cross_snapshot_transition": {
+    "additional_relationship_without_attempt05_stable_id_match": true,
+    "net_row_change": 1,
+    "new_only_oci_count": 2,
+    "old_only_oci_count": 1,
+    "source_set_changed": true,
+    "stable_identifier_matched_replacement": true
+  },
+  "diagnostic01": {
+    "failure_class": "persistent_http_client_incomplete_read",
+    "maximum_transport_attempts": 5,
+    "pre_count": 12846,
+    "unfiltered_csv_completed": false
+  },
+  "diagnostic02": {
+    "creation_partition_rows": 12846,
+    "duplicate_valid_oci_count": 0,
+    "partition_uses_oci": false,
+    "post_count": 12846,
+    "pre_count": 12846,
+    "unique_complete_rows": 12846,
+    "unique_valid_numeric_ocis": 12846
+  },
+  "schema_version": 1
+}

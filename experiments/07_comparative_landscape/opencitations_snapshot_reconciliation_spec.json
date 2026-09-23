@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "scope": "all_positive_count_opencitations_source_direction_operations",
+  "snapshot_attempt": [
+    "count_pre",
+    "oci_partition_retrieval",
+    "creation_partition_retrieval",
+    "count_post",
+    "within_axis_validation",
+    "cross_axis_reconciliation"
+  ],
+  "maximum_snapshot_attempts": 3,
+  "reuse_between_snapshot_attempts": false,
+  "axes": {
+    "primary": "oci",
+    "independent_witness": "creation_raw_string"
+  },
+  "positive_count_acceptance": {
+    "pre_count_equals_post_count": true,
+    "oci_row_count_equals_stable_count": true,
+    "creation_row_count_equals_stable_count": true,
+    "oci_complete_rows_unique": true,
+    "creation_complete_rows_unique": true,
+    "complete_row_sets_exactly_equal": true,
+    "oci_sets_exactly_equal": true,
+    "all_partition_integrity_checks_pass": true
+  },
+  "zero_count_acceptance": {
+    "pre_count": 0,
+    "post_count": 0,
+    "data_partition_requests_required": false
+  },
+  "canonical_production_axis": "oci",
+  "creation_axis_double_counted": false,
+  "failed_attempt_rows_reused": false,
+  "attempt05_reclassified": false,
+  "scientific_protocol_changed": false,
+  "citation_chaining_rules_changed": false
+}

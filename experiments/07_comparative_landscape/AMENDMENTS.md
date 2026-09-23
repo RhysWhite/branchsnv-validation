@@ -947,3 +947,41 @@ remains unresolved.
 
 No production completeness gate, literature-search rule, screening criterion,
 comparator classification or saturation rule is changed by this observation.
+
+## Amendment 29 — freeze dual-axis OpenCitations snapshot reconciliation
+
+**Timing:** frozen after the successful OCI-independent creation-partition
+diagnostic and before any production-retriever modification or new Wave 0
+attempt.
+
+The preceding audits establish three separate operational facts: whole
+unpartitioned responses can fail transport; a historical count/data mismatch
+can occur despite a structurally complete OCI partition; and the OpenCitations
+relationship set can evolve between retrieval snapshots.
+
+No OCI-partition defect has been established.
+
+Production OpenCitations retrieval will therefore use dual-axis snapshot
+reconciliation rather than replacing the existing OCI partition.
+
+Every positive-count source-direction operation will be bracketed by pre- and
+post-count requests and independently reconstructed through both the existing
+OCI partition and the validated raw-string `creation` partition.
+
+Acceptance requires stable bracketing counts, each axis independently matching
+that count, unique complete rows within each axis, exact complete-row equality
+between axes, exact OCI-set equality between axes, and all partition-integrity
+checks passing.
+
+The OCI reconstruction remains the sole canonical production corpus. The
+creation reconstruction is an independent completeness witness and is never
+double-counted.
+
+Up to three fresh whole-snapshot attempts are permitted for transient
+source-reconciliation or transport failures. No rows or successful leaves are
+reused across snapshot attempts.
+
+The three-attempt ceiling is operational only and does not alter any scientific
+eligibility, screening, comparator or saturation criterion.
+
+Attempt 05 remains failed.
