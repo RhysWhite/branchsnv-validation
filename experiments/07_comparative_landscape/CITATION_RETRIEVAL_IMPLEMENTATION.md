@@ -150,3 +150,25 @@ It does not:
 - assess saturation.
 
 Those operations occur only after the raw citation wave has been frozen.
+
+## Dual-axis OpenCitations snapshot reconciliation
+
+The production OpenCitations path was subsequently hardened after the frozen
+Wave 0 source-forensic investigation.
+
+Positive-count operations are now independently reconstructed through both the
+existing OCI partition and a raw-string `creation` partition inside a
+pre-count/post-count snapshot bracket.
+
+A snapshot is accepted only when both axes independently equal the stable
+count and their complete canonical row sets and OCI sets agree exactly.
+
+The OCI reconstruction remains the sole canonical production corpus.
+
+Up to three fresh whole-snapshot attempts are permitted for retryable
+transport or reconciliation failures, with no response reuse between
+attempts.
+
+See `OPENCITATIONS_SNAPSHOT_RECONCILIATION_SPEC.md` and
+`OPENCITATIONS_SNAPSHOT_RECONCILIATION_IMPLEMENTATION.md` for the frozen
+design and implementation evidence.

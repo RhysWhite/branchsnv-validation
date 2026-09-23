@@ -985,3 +985,36 @@ The three-attempt ceiling is operational only and does not alter any scientific
 eligibility, screening, comparator or saturation criterion.
 
 Attempt 05 remains failed.
+
+## Amendment 30 — implement dual-axis OpenCitations snapshot reconciliation
+
+**Timing:** implemented after Amendment 29 froze the design and before any new
+production Wave 0 network request.
+
+The production retriever now brackets every OpenCitations source-direction
+snapshot with independent pre- and post-count requests and, for positive
+counts, independently reconstructs the result through both the existing OCI
+partition and the validated raw-string `creation` partition.
+
+Acceptance requires a stable count, both axes independently matching that
+count, unique complete rows within each axis, exact complete-row equality
+between axes, exact OCI-set equality between axes and successful partition
+integrity validation.
+
+The OCI reconstruction remains the sole canonical production corpus.
+
+The implementation permits at most three fresh whole-snapshot attempts for
+retryable source-reconciliation or transport failures. No result from a failed
+attempt is reused.
+
+Stable zero counts are independently bracketed and issue no citation-data
+requests.
+
+The pre-existing retrieval and OCI-partition offline suites remain passing
+unchanged. A dedicated zero-network snapshot-reconciliation suite additionally
+covers cross-axis metadata disagreement, count/data mismatch, pre/post count
+drift, transport retry, zero-count bracketing, non-retryable schema failure,
+creation-partition recursion, attempt isolation, output ledgers, manifest
+schema and credential non-disclosure.
+
+No scientific citation-chaining rule changed.

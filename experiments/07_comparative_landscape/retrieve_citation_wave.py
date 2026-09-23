@@ -56,6 +56,8 @@ OPENCITATIONS_ROOT = "https://api.opencitations.net/index/v2"
 OPENCITATIONS_PARTITION_DIGITS = "0123456789"
 OPENCITATIONS_OCI_PATTERN = r"^[0-9]+-[0-9]+$"
 OPENCITATIONS_PARTITION_MAX_SUFFIX_DIGITS = 64
+OPENCITATIONS_CREATION_PARTITION_MAX_PREFIX_CHARACTERS = 32
+OPENCITATIONS_MAX_SNAPSHOT_ATTEMPTS = 3
 
 OPENALEX_SELECT_SINGLE = ",".join([
     "id",
@@ -132,6 +134,7 @@ OPENCITATIONS_PARTITION_FIELDS = [
     "anchor_id",
     "anchor_tool",
     "direction",
+    "snapshot_attempt",
     "leaf_order",
     "recursion_depth",
     "suffix_digits",
@@ -142,6 +145,52 @@ OPENCITATIONS_PARTITION_FIELDS = [
     "raw_file",
     "row_count",
 ]
+
+OPENCITATIONS_CREATION_PARTITION_FIELDS = [
+    "wave",
+    "anchor_id",
+    "anchor_tool",
+    "direction",
+    "snapshot_attempt",
+    "leaf_order",
+    "recursion_depth",
+    "partition_kind",
+    "literal_prefix",
+    "leaf_regex",
+    "request_sha256",
+    "raw_file",
+    "row_count",
+]
+
+OPENCITATIONS_SNAPSHOT_FIELDS = [
+    "wave",
+    "anchor_id",
+    "anchor_tool",
+    "direction",
+    "snapshot_attempt",
+    "status",
+    "retryable",
+    "pre_count",
+    "post_count",
+    "oci_row_count",
+    "creation_row_count",
+    "oci_complete_row_sha256",
+    "creation_complete_row_sha256",
+    "oci_set_sha256",
+    "creation_oci_set_sha256",
+    "complete_row_sets_equal",
+    "oci_sets_equal",
+    "oci_leaf_count",
+    "creation_leaf_count",
+    "oci_max_recursion_depth",
+    "creation_max_recursion_depth",
+    "response_files",
+    "terminal_detail",
+]
+
+
+class OpenCitationsSnapshotRetryable(RuntimeError):
+    """Transient snapshot-consistency failure eligible for a fresh attempt."""
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -597,11 +646,13 @@ def openalex_forward_url(
 
 
 
+
 def opencitations_url(
     direction: str,
     doi: str,
     *,
     oci_filter: str | None = None,
+    creation_filter: str | None = None,
 ) -> str:
     if direction not in {
         "backward",
@@ -627,21 +678,50 @@ def opencitations_url(
         f"{operation}/{identifier}"
     )
 
-    if oci_filter is None:
+    selected = [
+        (
+            "oci",
+            oci_filter,
+        ),
+        (
+            "creation",
+            creation_filter,
+        ),
+    ]
+
+    selected = [
+        (
+            field,
+            value,
+        )
+        for field, value in selected
+        if value is not None
+    ]
+
+    if not selected:
         return base
 
-    if not oci_filter:
+    if len(selected) != 1:
         raise ValueError(
-            "OpenCitations OCI filter cannot be empty"
+            "Exactly one OpenCitations partition "
+            "filter may be supplied"
+        )
+
+    field, value = selected[0]
+
+    if not value:
+        raise ValueError(
+            f"OpenCitations {field} filter cannot be empty"
         )
 
     return build_url(
         base,
         {
             "filter":
-                f"oci:{oci_filter}",
+                f"{field}:{value}",
         },
     )
+
 
 
 def opencitations_count_url(
@@ -1268,6 +1348,7 @@ def validate_opencitations_partition_payload(
     return rows
 
 
+
 def reconcile_opencitations_partition_rows(
     records: list[
         tuple[
@@ -1276,7 +1357,7 @@ def reconcile_opencitations_partition_rows(
         ]
     ],
     *,
-    expected_count: int,
+    expected_count: int | None,
     context: str,
 ) -> list[
     tuple[
@@ -1309,8 +1390,11 @@ def reconcile_opencitations_partition_rows(
 
         seen[oci] = raw_path
 
-    if len(seen) != expected_count:
-        raise RuntimeError(
+    if (
+        expected_count is not None
+        and len(seen) != expected_count
+    ):
+        raise OpenCitationsSnapshotRetryable(
             f"{context}: OpenCitations reported "
             f"{expected_count}, retrieved "
             f"{len(seen)} unique OCI rows"
@@ -1325,6 +1409,7 @@ def reconcile_opencitations_partition_rows(
     )
 
 
+
 def retrieve_opencitations_partitioned(
     *,
     anchor: dict[str, str],
@@ -1336,6 +1421,8 @@ def retrieve_opencitations_partitioned(
     raw_root: Path,
     output_root: Path,
     fetcher: Callable[..., Any],
+    snapshot_attempt: int = 0,
+    enforce_expected_count: bool = True,
     max_suffix_digits: int = (
         OPENCITATIONS_PARTITION_MAX_SUFFIX_DIGITS
     ),
@@ -1484,6 +1571,8 @@ def retrieve_opencitations_partitioned(
                 anchor["tool"],
             "direction":
                 direction,
+            "snapshot_attempt":
+                snapshot_attempt,
             "leaf_order":
                 leaf_order,
             "recursion_depth":
@@ -1535,7 +1624,11 @@ def retrieve_opencitations_partitioned(
     reconciled = (
         reconcile_opencitations_partition_rows(
             records,
-            expected_count=expected_count,
+            expected_count=(
+                expected_count
+                if enforce_expected_count
+                else None
+            ),
             context=context,
         )
     )
@@ -1828,6 +1921,1697 @@ def retrieve_opencitations(
     )
 
 
+def canonical_opencitations_row(
+    row: dict,
+) -> str:
+    return json.dumps(
+        row,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+
+
+def hash_sorted_strings(
+    values,
+) -> str:
+    return hashlib.sha256(
+        "\n".join(
+            sorted(values)
+        ).encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def opencitations_complete_row_identity(
+    records: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    *,
+    context: str,
+) -> tuple[
+    set[str],
+    str,
+]:
+    signatures = [
+        canonical_opencitations_row(
+            row
+        )
+        for row, _ in records
+    ]
+
+    unique = set(
+        signatures
+    )
+
+    if len(unique) != len(signatures):
+        raise RuntimeError(
+            f"{context}: duplicate complete "
+            "OpenCitations row"
+        )
+
+    return (
+        unique,
+        hash_sorted_strings(
+            unique
+        ),
+    )
+
+
+def opencitations_oci_identity(
+    records: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    *,
+    context: str,
+) -> tuple[
+    set[str],
+    str,
+]:
+    full_re = re.compile(
+        OPENCITATIONS_OCI_PATTERN
+    )
+
+    ocis = []
+
+    for row, _ in records:
+        oci = str(
+            row.get("oci")
+            or ""
+        ).strip()
+
+        if not oci:
+            raise RuntimeError(
+                f"{context}: row contains no OCI"
+            )
+
+        if not full_re.fullmatch(
+            oci
+        ):
+            raise RuntimeError(
+                f"{context}: malformed OCI {oci!r}"
+            )
+
+        ocis.append(
+            oci
+        )
+
+    if len(ocis) != len(set(ocis)):
+        raise RuntimeError(
+            f"{context}: duplicate OCI"
+        )
+
+    values = set(
+        ocis
+    )
+
+    return (
+        values,
+        hash_sorted_strings(
+            values
+        ),
+    )
+
+
+def opencitations_creation_root_leaves() -> list[dict]:
+    leaves = [
+        {
+            "partition_kind":
+                "empty",
+            "literal_prefix":
+                "",
+            "leaf_regex":
+                r"^$",
+            "recursion_depth":
+                0,
+            "subdividable":
+                False,
+        },
+        {
+            "partition_kind":
+                "non_digit",
+            "literal_prefix":
+                "",
+            "leaf_regex":
+                r"^[^0-9].*$",
+            "recursion_depth":
+                0,
+            "subdividable":
+                False,
+        },
+    ]
+
+    for digit in (
+        OPENCITATIONS_PARTITION_DIGITS
+    ):
+        leaves.append({
+            "partition_kind":
+                "prefix",
+            "literal_prefix":
+                digit,
+            "leaf_regex":
+                rf"^{re.escape(digit)}.*$",
+            "recursion_depth":
+                0,
+            "subdividable":
+                True,
+        })
+
+    return leaves
+
+
+def opencitations_creation_prefix_children(
+    prefix: str,
+    *,
+    recursion_depth: int,
+) -> list[dict]:
+    if not prefix:
+        raise ValueError(
+            "Cannot subdivide empty creation prefix"
+        )
+
+    children = [
+        {
+            "partition_kind":
+                "exact",
+            "literal_prefix":
+                prefix,
+            "leaf_regex":
+                rf"^{re.escape(prefix)}$",
+            "recursion_depth":
+                recursion_depth,
+            "subdividable":
+                False,
+        },
+    ]
+
+    for digit in (
+        OPENCITATIONS_PARTITION_DIGITS
+    ):
+        child_prefix = (
+            prefix
+            + digit
+        )
+
+        children.append({
+            "partition_kind":
+                "prefix",
+            "literal_prefix":
+                child_prefix,
+            "leaf_regex":
+                rf"^{re.escape(child_prefix)}.*$",
+            "recursion_depth":
+                recursion_depth,
+            "subdividable":
+                True,
+        })
+
+    hyphen_prefix = (
+        prefix
+        + "-"
+    )
+
+    children.append({
+        "partition_kind":
+            "prefix",
+        "literal_prefix":
+            hyphen_prefix,
+        "leaf_regex":
+            rf"^{re.escape(hyphen_prefix)}.*$",
+        "recursion_depth":
+            recursion_depth,
+        "subdividable":
+            True,
+    })
+
+    children.append({
+        "partition_kind":
+            "other",
+        "literal_prefix":
+            prefix,
+        "leaf_regex":
+            (
+                rf"^{re.escape(prefix)}"
+                r"[^0-9-].*$"
+            ),
+        "recursion_depth":
+            recursion_depth,
+        "subdividable":
+            False,
+    })
+
+    return children
+
+
+def opencitations_creation_safe_prefix(
+    value: str,
+) -> str:
+    if not value:
+        return "EMPTY"
+
+    return value.replace(
+        "-",
+        "H",
+    )
+
+
+def opencitations_creation_raw_path(
+    raw_root: Path,
+    leaf: dict,
+) -> Path:
+    return (
+        raw_root
+        / "creation_partitions"
+        / (
+            "depth_"
+            f"{int(leaf['recursion_depth']):02d}"
+        )
+        / (
+            f"{leaf['partition_kind']}_"
+            f"{opencitations_creation_safe_prefix(str(leaf['literal_prefix']))}"
+            ".json"
+        )
+    )
+
+
+def validate_opencitations_creation_payload(
+    payload: Any,
+    *,
+    leaf_regex: str,
+    context: str,
+) -> list[dict]:
+    rows = flatten_json_list(
+        payload
+    )
+
+    rx = re.compile(
+        leaf_regex
+    )
+
+    for row in rows:
+        if "creation" not in row:
+            raise RuntimeError(
+                f"{context}: OpenCitations row "
+                "lacks creation field"
+            )
+
+        creation = row[
+            "creation"
+        ]
+
+        if not isinstance(
+            creation,
+            str,
+        ):
+            raise RuntimeError(
+                f"{context}: OpenCitations creation "
+                "field is not a string"
+            )
+
+        if not rx.fullmatch(
+            creation
+        ):
+            raise RuntimeError(
+                f"{context}: creation value "
+                f"{creation!r} does not belong "
+                "to its partition leaf"
+            )
+
+    return rows
+
+
+def reconcile_opencitations_creation_rows(
+    records: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    *,
+    expected_count: int | None,
+    context: str,
+) -> list[
+    tuple[
+        dict,
+        Path,
+    ]
+]:
+    opencitations_complete_row_identity(
+        records,
+        context=context,
+    )
+
+    (
+        ocis,
+        _,
+    ) = opencitations_oci_identity(
+        records,
+        context=context,
+    )
+
+    if (
+        expected_count is not None
+        and len(records) != expected_count
+    ):
+        raise OpenCitationsSnapshotRetryable(
+            f"{context}: OpenCitations reported "
+            f"{expected_count}, creation partition "
+            f"retrieved {len(records)} complete rows"
+        )
+
+    if len(ocis) != len(records):
+        raise RuntimeError(
+            f"{context}: creation partition OCI "
+            "cardinality differs from row cardinality"
+        )
+
+    return sorted(
+        records,
+        key=lambda pair: str(
+            pair[0].get("oci")
+            or ""
+        ),
+    )
+
+
+def retrieve_opencitations_creation_partitioned(
+    *,
+    anchor: dict[str, str],
+    direction: str,
+    doi: str,
+    expected_count: int,
+    wave: int,
+    snapshot_attempt: int,
+    headers: dict[str, str],
+    raw_root: Path,
+    output_root: Path,
+    fetcher: Callable[..., Any],
+    enforce_expected_count: bool = True,
+    max_prefix_characters: int = (
+        OPENCITATIONS_CREATION_PARTITION_MAX_PREFIX_CHARACTERS
+    ),
+) -> tuple[
+    list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    list[dict],
+]:
+    if expected_count < 0:
+        raise ValueError(
+            "expected_count cannot be negative"
+        )
+
+    if max_prefix_characters < 1:
+        raise ValueError(
+            "max_prefix_characters must be positive"
+        )
+
+    if expected_count == 0:
+        return [], []
+
+    context = (
+        f"{anchor['anchor_id']}: "
+        f"OpenCitations {direction} creation axis"
+    )
+
+    records = []
+    leaves = []
+    leaf_order = 0
+
+    def retrieve_leaf(
+        leaf: dict,
+    ) -> None:
+        nonlocal leaf_order
+
+        leaf_regex = str(
+            leaf["leaf_regex"]
+        )
+
+        raw_path = (
+            opencitations_creation_raw_path(
+                raw_root,
+                leaf,
+            )
+        )
+
+        request_url = (
+            opencitations_url(
+                direction,
+                doi,
+                creation_filter=
+                    leaf_regex,
+            )
+        )
+
+        try:
+            payload = fetcher(
+                request_url,
+                headers=headers,
+                raw_path=raw_path,
+                delay=0.40,
+            )
+
+        except NotIndexed as exc:
+            raise RuntimeError(
+                f"{context}: independent count "
+                "endpoint resolved the anchor but "
+                "a filtered citation-data request "
+                "returned HTTP 404"
+            ) from exc
+
+        except RuntimeError as exc:
+            if (
+                bool(
+                    leaf[
+                        "subdividable"
+                    ]
+                )
+                and caused_by_incomplete_read(
+                    exc
+                )
+            ):
+                prefix = str(
+                    leaf[
+                        "literal_prefix"
+                    ]
+                )
+
+                if (
+                    len(prefix)
+                    >= max_prefix_characters
+                ):
+                    raise RuntimeError(
+                        f"{context}: creation partition "
+                        "recursion ceiling reached at "
+                        f"{len(prefix)} prefix characters"
+                    ) from exc
+
+                for child in (
+                    opencitations_creation_prefix_children(
+                        prefix,
+                        recursion_depth=(
+                            int(
+                                leaf[
+                                    "recursion_depth"
+                                ]
+                            )
+                            + 1
+                        ),
+                    )
+                ):
+                    retrieve_leaf(
+                        child
+                    )
+
+                return
+
+            raise
+
+        rows = (
+            validate_opencitations_creation_payload(
+                payload,
+                leaf_regex=
+                    leaf_regex,
+                context=
+                    context,
+            )
+        )
+
+        leaf_order += 1
+
+        leaves.append({
+            "wave":
+                wave,
+            "anchor_id":
+                anchor["anchor_id"],
+            "anchor_tool":
+                anchor["tool"],
+            "direction":
+                direction,
+            "snapshot_attempt":
+                snapshot_attempt,
+            "leaf_order":
+                leaf_order,
+            "recursion_depth":
+                int(
+                    leaf[
+                        "recursion_depth"
+                    ]
+                ),
+            "partition_kind":
+                str(
+                    leaf[
+                        "partition_kind"
+                    ]
+                ),
+            "literal_prefix":
+                str(
+                    leaf[
+                        "literal_prefix"
+                    ]
+                ),
+            "leaf_regex":
+                leaf_regex,
+            "request_sha256":
+                hashlib.sha256(
+                    request_url.encode(
+                        "utf-8"
+                    )
+                ).hexdigest(),
+            "raw_file":
+                raw_rel(
+                    raw_path,
+                    output_root,
+                ),
+            "row_count":
+                len(rows),
+        })
+
+        for row in rows:
+            records.append(
+                (
+                    row,
+                    raw_path,
+                )
+            )
+
+    for leaf in (
+        opencitations_creation_root_leaves()
+    ):
+        retrieve_leaf(
+            leaf
+        )
+
+    reconciled = (
+        reconcile_opencitations_creation_rows(
+            records,
+            expected_count=(
+                expected_count
+                if enforce_expected_count
+                else None
+            ),
+            context=context,
+        )
+    )
+
+    return (
+        reconciled,
+        leaves,
+    )
+
+
+def caused_by_retryable_transport_error(
+    exc: BaseException,
+) -> bool:
+    current = exc
+    seen = set()
+
+    while current is not None:
+        identity = id(
+            current
+        )
+
+        if identity in seen:
+            break
+
+        seen.add(
+            identity
+        )
+
+        if isinstance(
+            current,
+            urllib.error.HTTPError,
+        ):
+            return (
+                current.code == 429
+                or 500 <= current.code <= 599
+            )
+
+        if isinstance(
+            current,
+            (
+                http.client.IncompleteRead,
+                TimeoutError,
+            ),
+        ):
+            return True
+
+        if isinstance(
+            current,
+            urllib.error.URLError,
+        ):
+            return True
+
+        next_exc = current.__cause__
+
+        if (
+            next_exc is None
+            and not current.__suppress_context__
+        ):
+            next_exc = current.__context__
+
+        current = next_exc
+
+    return False
+
+
+def opencitations_attempt_response_files(
+    attempt_root: Path,
+) -> int:
+    return sum(
+        1
+        for path in attempt_root.rglob(
+            "*.json"
+        )
+        if path.name
+        != "snapshot_attempt.json"
+    )
+
+
+def write_opencitations_snapshot_attempt(
+    attempt_root: Path,
+    record: dict,
+) -> None:
+    attempt_root.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    (
+        attempt_root
+        / "snapshot_attempt.json"
+    ).write_text(
+        json.dumps(
+            record,
+            indent=2,
+            sort_keys=True,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+
+def opencitations_rows_to_outputs(
+    *,
+    partition_rows: list[
+        tuple[
+            dict,
+            Path,
+        ]
+    ],
+    anchor: dict[str, str],
+    direction: str,
+    doi: str,
+    wave: int,
+    output_root: Path,
+) -> tuple[
+    list[dict],
+    list[dict],
+]:
+    edges = []
+    neighbours = []
+    seen_oci = set()
+
+    for (
+        item,
+        item_raw_path,
+    ) in partition_rows:
+        citing = parse_pid_bundle(
+            item.get("citing")
+        )
+
+        cited = parse_pid_bundle(
+            item.get("cited")
+        )
+
+        oci = str(
+            item.get("oci")
+            or ""
+        ).strip()
+
+        if oci in seen_oci:
+            raise RuntimeError(
+                f"{anchor['anchor_id']}: "
+                f"duplicate OpenCitations "
+                f"{direction} OCI {oci!r}"
+            )
+
+        seen_oci.add(
+            oci
+        )
+
+        edges.append({
+            "wave":
+                wave,
+            "anchor_id":
+                anchor["anchor_id"],
+            "anchor_tool":
+                anchor["tool"],
+            "source":
+                "opencitations",
+            "direction":
+                direction,
+            "anchor_doi":
+                doi,
+            "anchor_openalex_id":
+                "",
+            "citing_dois":
+                unique_join(
+                    citing["doi"]
+                ),
+            "cited_dois":
+                unique_join(
+                    cited["doi"]
+                ),
+            "citing_pmids":
+                unique_join(
+                    citing["pmid"]
+                ),
+            "cited_pmids":
+                unique_join(
+                    cited["pmid"]
+                ),
+            "citing_openalex_ids":
+                "",
+            "cited_openalex_ids":
+                "",
+            "citing_omids":
+                unique_join(
+                    citing["omid"]
+                ),
+            "cited_omids":
+                unique_join(
+                    cited["omid"]
+                ),
+            "oci":
+                oci,
+            "raw_file":
+                raw_rel(
+                    item_raw_path,
+                    output_root,
+                ),
+        })
+
+        neighbour = (
+            cited
+            if direction == "backward"
+            else citing
+        )
+
+        source_record_id = (
+            first_nonempty(
+                neighbour["doi"]
+            )
+            or first_nonempty(
+                neighbour["pmid"]
+            )
+            or first_nonempty(
+                neighbour["omid"]
+            )
+        )
+
+        if not source_record_id:
+            raise RuntimeError(
+                f"{anchor['anchor_id']}: "
+                "OpenCitations neighbour "
+                "contains no supported identifier"
+            )
+
+        neighbours.append({
+            "wave":
+                wave,
+            "anchor_id":
+                anchor["anchor_id"],
+            "anchor_tool":
+                anchor["tool"],
+            "source":
+                "opencitations",
+            "direction":
+                direction,
+            "doi":
+                first_nonempty(
+                    neighbour["doi"]
+                ),
+            "pmid":
+                first_nonempty(
+                    neighbour["pmid"]
+                ),
+            "openalex_id":
+                "",
+            "omid":
+                first_nonempty(
+                    neighbour["omid"]
+                ),
+            "title":
+                "",
+            "year":
+                "",
+            "source_record_id":
+                source_record_id,
+        })
+
+    return (
+        edges,
+        neighbours,
+    )
+
+
+def retrieve_opencitations_dual_axis(
+    anchor: dict[str, str],
+    *,
+    wave: int,
+    token: str,
+    output_root: Path,
+    fetcher: Callable[..., Any] = fetch_json,
+    maximum_snapshot_attempts: int = (
+        OPENCITATIONS_MAX_SNAPSHOT_ATTEMPTS
+    ),
+) -> tuple[
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+]:
+    if maximum_snapshot_attempts < 1:
+        raise ValueError(
+            "maximum_snapshot_attempts must be positive"
+        )
+
+    raw_root = (
+        output_root
+        / "raw"
+        / "opencitations"
+        / anchor["anchor_id"]
+    )
+
+    doi = normalise_doi(
+        anchor["canonical_identifier"]
+    )
+
+    headers = {
+        "Accept":
+            "application/json",
+        "User-Agent":
+            "branchsnv-validation/experiment07",
+    }
+
+    if token:
+        headers[
+            "authorization"
+        ] = token
+
+    edges = []
+    neighbours = []
+    statuses = []
+    oci_partition_leaves = []
+    creation_partition_leaves = []
+    snapshot_attempts = []
+
+    for direction in [
+        "backward",
+        "forward",
+    ]:
+        direction_attempt_records = []
+        direction_complete = False
+
+        for snapshot_attempt in range(
+            1,
+            maximum_snapshot_attempts + 1,
+        ):
+            attempt_root = (
+                raw_root
+                / (
+                    f"{direction}_snapshot_attempt_"
+                    f"{snapshot_attempt:02d}"
+                )
+            )
+
+            record = {
+                "wave":
+                    wave,
+                "anchor_id":
+                    anchor["anchor_id"],
+                "anchor_tool":
+                    anchor["tool"],
+                "direction":
+                    direction,
+                "snapshot_attempt":
+                    snapshot_attempt,
+                "status":
+                    "",
+                "retryable":
+                    "",
+                "pre_count":
+                    "",
+                "post_count":
+                    "",
+                "oci_row_count":
+                    "",
+                "creation_row_count":
+                    "",
+                "oci_complete_row_sha256":
+                    "",
+                "creation_complete_row_sha256":
+                    "",
+                "oci_set_sha256":
+                    "",
+                "creation_oci_set_sha256":
+                    "",
+                "complete_row_sets_equal":
+                    "",
+                "oci_sets_equal":
+                    "",
+                "oci_leaf_count":
+                    0,
+                "creation_leaf_count":
+                    0,
+                "oci_max_recursion_depth":
+                    0,
+                "creation_max_recursion_depth":
+                    0,
+                "response_files":
+                    0,
+                "terminal_detail":
+                    "",
+            }
+
+            try:
+                pre_path = (
+                    attempt_root
+                    / "count_pre.json"
+                )
+
+                try:
+                    pre_payload = fetcher(
+                        opencitations_count_url(
+                            direction,
+                            doi,
+                        ),
+                        headers=headers,
+                        raw_path=pre_path,
+                        delay=0.40,
+                    )
+
+                except NotIndexed:
+                    record[
+                        "status"
+                    ] = "not_indexed"
+
+                    record[
+                        "retryable"
+                    ] = False
+
+                    record[
+                        "response_files"
+                    ] = 1
+
+                    record[
+                        "terminal_detail"
+                    ] = (
+                        "pre-count endpoint returned HTTP 404"
+                    )
+
+                    write_opencitations_snapshot_attempt(
+                        attempt_root,
+                        record,
+                    )
+
+                    direction_attempt_records.append(
+                        dict(
+                            record
+                        )
+                    )
+
+                    snapshot_attempts.append(
+                        dict(
+                            record
+                        )
+                    )
+
+                    statuses.append({
+                        "wave":
+                            wave,
+                        "anchor_id":
+                            anchor[
+                                "anchor_id"
+                            ],
+                        "anchor_tool":
+                            anchor[
+                                "tool"
+                            ],
+                        "source":
+                            "opencitations",
+                        "direction":
+                            direction,
+                        "status":
+                            "not_indexed",
+                        "reported_count":
+                            0,
+                        "retrieved_count":
+                            0,
+                        "response_files":
+                            1,
+                        "terminal_detail":
+                            (
+                                "count endpoint "
+                                "returned HTTP 404"
+                            ),
+                    })
+
+                    direction_complete = True
+                    break
+
+                pre_count = (
+                    parse_opencitations_count(
+                        pre_payload
+                    )
+                )
+
+                record[
+                    "pre_count"
+                ] = pre_count
+
+                if pre_count == 0:
+                    post_path = (
+                        attempt_root
+                        / "count_post.json"
+                    )
+
+                    post_payload = fetcher(
+                        opencitations_count_url(
+                            direction,
+                            doi,
+                        ),
+                        headers=headers,
+                        raw_path=
+                            post_path,
+                        delay=0.40,
+                    )
+
+                    post_count = (
+                        parse_opencitations_count(
+                            post_payload
+                        )
+                    )
+
+                    record[
+                        "post_count"
+                    ] = post_count
+
+                    empty_hash = (
+                        hash_sorted_strings(
+                            set()
+                        )
+                    )
+
+                    record[
+                        "oci_row_count"
+                    ] = 0
+                    record[
+                        "creation_row_count"
+                    ] = 0
+                    record[
+                        "oci_complete_row_sha256"
+                    ] = empty_hash
+                    record[
+                        "creation_complete_row_sha256"
+                    ] = empty_hash
+                    record[
+                        "oci_set_sha256"
+                    ] = empty_hash
+                    record[
+                        "creation_oci_set_sha256"
+                    ] = empty_hash
+                    record[
+                        "complete_row_sets_equal"
+                    ] = True
+                    record[
+                        "oci_sets_equal"
+                    ] = True
+
+                    if post_count != 0:
+                        raise OpenCitationsSnapshotRetryable(
+                            f"{anchor['anchor_id']}: "
+                            f"OpenCitations {direction} "
+                            "zero pre-count changed to "
+                            f"post-count {post_count}"
+                        )
+
+                    record[
+                        "status"
+                    ] = "accepted_zero"
+
+                    record[
+                        "retryable"
+                    ] = False
+
+                    record[
+                        "response_files"
+                    ] = (
+                        opencitations_attempt_response_files(
+                            attempt_root
+                        )
+                    )
+
+                    record[
+                        "terminal_detail"
+                    ] = (
+                        "stable zero pre/post count; "
+                        "no partition data requests"
+                    )
+
+                    write_opencitations_snapshot_attempt(
+                        attempt_root,
+                        record,
+                    )
+
+                    direction_attempt_records.append(
+                        dict(record)
+                    )
+                    snapshot_attempts.append(
+                        dict(record)
+                    )
+
+                    statuses.append({
+                        "wave":
+                            wave,
+                        "anchor_id":
+                            anchor[
+                                "anchor_id"
+                            ],
+                        "anchor_tool":
+                            anchor[
+                                "tool"
+                            ],
+                        "source":
+                            "opencitations",
+                        "direction":
+                            direction,
+                        "status":
+                            "resolved_zero_edges",
+                        "reported_count":
+                            0,
+                        "retrieved_count":
+                            0,
+                        "response_files":
+                            sum(
+                                int(
+                                    item[
+                                        "response_files"
+                                    ]
+                                )
+                                for item in (
+                                    direction_attempt_records
+                                )
+                            ),
+                        "terminal_detail":
+                            (
+                                "dual-axis snapshot "
+                                "reconciliation accepted "
+                                f"attempt {snapshot_attempt}; "
+                                "stable zero count"
+                            ),
+                    })
+
+                    direction_complete = True
+                    break
+
+                (
+                    oci_rows,
+                    oci_leaves,
+                ) = (
+                    retrieve_opencitations_partitioned(
+                        anchor=anchor,
+                        direction=
+                            direction,
+                        doi=doi,
+                        expected_count=
+                            pre_count,
+                        wave=wave,
+                        headers=headers,
+                        raw_root=(
+                            attempt_root
+                            / "oci_axis"
+                        ),
+                        output_root=
+                            output_root,
+                        fetcher=
+                            fetcher,
+                        snapshot_attempt=
+                            snapshot_attempt,
+                        enforce_expected_count=
+                            False,
+                    )
+                )
+
+                (
+                    creation_rows,
+                    creation_leaves,
+                ) = (
+                    retrieve_opencitations_creation_partitioned(
+                        anchor=anchor,
+                        direction=
+                            direction,
+                        doi=doi,
+                        expected_count=
+                            pre_count,
+                        wave=wave,
+                        snapshot_attempt=
+                            snapshot_attempt,
+                        headers=headers,
+                        raw_root=(
+                            attempt_root
+                            / "creation_axis"
+                        ),
+                        output_root=
+                            output_root,
+                        fetcher=
+                            fetcher,
+                        enforce_expected_count=
+                            False,
+                    )
+                )
+
+                (
+                    oci_row_set,
+                    oci_row_hash,
+                ) = (
+                    opencitations_complete_row_identity(
+                        oci_rows,
+                        context=(
+                            f"{anchor['anchor_id']}: "
+                            f"OpenCitations {direction} "
+                            "OCI axis"
+                        ),
+                    )
+                )
+
+                (
+                    creation_row_set,
+                    creation_row_hash,
+                ) = (
+                    opencitations_complete_row_identity(
+                        creation_rows,
+                        context=(
+                            f"{anchor['anchor_id']}: "
+                            f"OpenCitations {direction} "
+                            "creation axis"
+                        ),
+                    )
+                )
+
+                (
+                    oci_set,
+                    oci_set_hash,
+                ) = opencitations_oci_identity(
+                    oci_rows,
+                    context=(
+                        f"{anchor['anchor_id']}: "
+                        f"OpenCitations {direction} "
+                        "OCI axis"
+                    ),
+                )
+
+                (
+                    creation_oci_set,
+                    creation_oci_set_hash,
+                ) = opencitations_oci_identity(
+                    creation_rows,
+                    context=(
+                        f"{anchor['anchor_id']}: "
+                        f"OpenCitations {direction} "
+                        "creation axis"
+                    ),
+                )
+
+                record[
+                    "oci_row_count"
+                ] = len(
+                    oci_rows
+                )
+                record[
+                    "creation_row_count"
+                ] = len(
+                    creation_rows
+                )
+                record[
+                    "oci_complete_row_sha256"
+                ] = oci_row_hash
+                record[
+                    "creation_complete_row_sha256"
+                ] = creation_row_hash
+                record[
+                    "oci_set_sha256"
+                ] = oci_set_hash
+                record[
+                    "creation_oci_set_sha256"
+                ] = creation_oci_set_hash
+                record[
+                    "complete_row_sets_equal"
+                ] = (
+                    oci_row_set
+                    == creation_row_set
+                )
+                record[
+                    "oci_sets_equal"
+                ] = (
+                    oci_set
+                    == creation_oci_set
+                )
+                record[
+                    "oci_leaf_count"
+                ] = len(
+                    oci_leaves
+                )
+                record[
+                    "creation_leaf_count"
+                ] = len(
+                    creation_leaves
+                )
+                record[
+                    "oci_max_recursion_depth"
+                ] = max(
+                    (
+                        int(
+                            item[
+                                "recursion_depth"
+                            ]
+                        )
+                        for item in oci_leaves
+                    ),
+                    default=0,
+                )
+                record[
+                    "creation_max_recursion_depth"
+                ] = max(
+                    (
+                        int(
+                            item[
+                                "recursion_depth"
+                            ]
+                        )
+                        for item in creation_leaves
+                    ),
+                    default=0,
+                )
+
+                post_path = (
+                    attempt_root
+                    / "count_post.json"
+                )
+
+                post_payload = fetcher(
+                    opencitations_count_url(
+                        direction,
+                        doi,
+                    ),
+                    headers=headers,
+                    raw_path=post_path,
+                    delay=0.40,
+                )
+
+                post_count = (
+                    parse_opencitations_count(
+                        post_payload
+                    )
+                )
+
+                record[
+                    "post_count"
+                ] = post_count
+
+                failures = []
+
+                if pre_count != post_count:
+                    failures.append(
+                        "pre/post count disagreement "
+                        f"{pre_count}!={post_count}"
+                    )
+
+                if len(
+                    oci_rows
+                ) != pre_count:
+                    failures.append(
+                        "OCI-axis row count "
+                        f"{len(oci_rows)}!={pre_count}"
+                    )
+
+                if len(
+                    creation_rows
+                ) != pre_count:
+                    failures.append(
+                        "creation-axis row count "
+                        f"{len(creation_rows)}!={pre_count}"
+                    )
+
+                if (
+                    oci_row_set
+                    != creation_row_set
+                ):
+                    failures.append(
+                        "cross-axis complete-row "
+                        "sets differ"
+                    )
+
+                if (
+                    oci_set
+                    != creation_oci_set
+                ):
+                    failures.append(
+                        "cross-axis OCI sets differ"
+                    )
+
+                if failures:
+                    raise OpenCitationsSnapshotRetryable(
+                        f"{anchor['anchor_id']}: "
+                        f"OpenCitations {direction} "
+                        "snapshot reconciliation failed: "
+                        + "; ".join(
+                            failures
+                        )
+                    )
+
+                record[
+                    "status"
+                ] = "accepted"
+
+                record[
+                    "retryable"
+                ] = False
+
+                record[
+                    "response_files"
+                ] = (
+                    opencitations_attempt_response_files(
+                        attempt_root
+                    )
+                )
+
+                record[
+                    "terminal_detail"
+                ] = (
+                    "stable counts and exact "
+                    "dual-axis row/OCI agreement"
+                )
+
+                write_opencitations_snapshot_attempt(
+                    attempt_root,
+                    record,
+                )
+
+                direction_attempt_records.append(
+                    dict(record)
+                )
+                snapshot_attempts.append(
+                    dict(record)
+                )
+
+                oci_partition_leaves.extend(
+                    oci_leaves
+                )
+
+                creation_partition_leaves.extend(
+                    creation_leaves
+                )
+
+                (
+                    direction_edges,
+                    direction_neighbours,
+                ) = (
+                    opencitations_rows_to_outputs(
+                        partition_rows=
+                            oci_rows,
+                        anchor=
+                            anchor,
+                        direction=
+                            direction,
+                        doi=
+                            doi,
+                        wave=
+                            wave,
+                        output_root=
+                            output_root,
+                    )
+                )
+
+                edges.extend(
+                    direction_edges
+                )
+                neighbours.extend(
+                    direction_neighbours
+                )
+
+                statuses.append({
+                    "wave":
+                        wave,
+                    "anchor_id":
+                        anchor[
+                            "anchor_id"
+                        ],
+                    "anchor_tool":
+                        anchor[
+                            "tool"
+                        ],
+                    "source":
+                        "opencitations",
+                    "direction":
+                        direction,
+                    "status":
+                        "complete",
+                    "reported_count":
+                        pre_count,
+                    "retrieved_count":
+                        len(
+                            oci_rows
+                        ),
+                    "response_files":
+                        sum(
+                            int(
+                                item[
+                                    "response_files"
+                                ]
+                            )
+                            for item in (
+                                direction_attempt_records
+                            )
+                        ),
+                    "terminal_detail":
+                        (
+                            "dual-axis snapshot "
+                            "reconciliation accepted "
+                            f"attempt {snapshot_attempt}"
+                        ),
+                })
+
+                direction_complete = True
+                break
+
+            except Exception as exc:
+                message = str(
+                    exc
+                )
+
+                recursion_ceiling = (
+                    "partition recursion ceiling"
+                    in message
+                )
+
+                retryable = (
+                    isinstance(
+                        exc,
+                        OpenCitationsSnapshotRetryable,
+                    )
+                    or (
+                        not recursion_ceiling
+                        and caused_by_retryable_transport_error(
+                            exc
+                        )
+                    )
+                )
+
+                record[
+                    "status"
+                ] = (
+                    "retryable_failure"
+                    if retryable
+                    else "nonretryable_failure"
+                )
+
+                record[
+                    "retryable"
+                ] = retryable
+
+                record[
+                    "response_files"
+                ] = (
+                    opencitations_attempt_response_files(
+                        attempt_root
+                    )
+                )
+
+                record[
+                    "terminal_detail"
+                ] = message
+
+                write_opencitations_snapshot_attempt(
+                    attempt_root,
+                    record,
+                )
+
+                direction_attempt_records.append(
+                    dict(record)
+                )
+                snapshot_attempts.append(
+                    dict(record)
+                )
+
+                if (
+                    retryable
+                    and snapshot_attempt
+                    < maximum_snapshot_attempts
+                ):
+                    continue
+
+                if retryable:
+                    raise RuntimeError(
+                        f"{anchor['anchor_id']}: "
+                        f"OpenCitations {direction} "
+                        "did not produce an acceptable "
+                        "snapshot within "
+                        f"{maximum_snapshot_attempts} "
+                        "attempts. Last failure: "
+                        f"{message}"
+                    ) from exc
+
+                raise
+
+        if not direction_complete:
+            raise RuntimeError(
+                f"{anchor['anchor_id']}: "
+                f"OpenCitations {direction} "
+                "did not reach a terminal state"
+            )
+
+    return (
+        edges,
+        neighbours,
+        statuses,
+        oci_partition_leaves,
+        creation_partition_leaves,
+        snapshot_attempts,
+    )
+
 def git_head() -> str:
     try:
         return subprocess.check_output(
@@ -1968,6 +3752,8 @@ def main() -> int:
     all_neighbours: list[dict] = []
     all_statuses: list[dict] = []
     all_oc_partition_leaves: list[dict] = []
+    all_oc_creation_partition_leaves: list[dict] = []
+    all_oc_snapshot_attempts: list[dict] = []
 
     for anchor in anchors:
         (
@@ -1994,7 +3780,9 @@ def main() -> int:
             neighbours,
             statuses,
             partition_leaves,
-        ) = retrieve_opencitations(
+            creation_partition_leaves,
+            snapshot_attempts,
+        ) = retrieve_opencitations_dual_axis(
             anchor,
             wave=args.wave,
             token=oc_token,
@@ -2010,6 +3798,12 @@ def main() -> int:
         )
         all_oc_partition_leaves.extend(
             partition_leaves
+        )
+        all_oc_creation_partition_leaves.extend(
+            creation_partition_leaves
+        )
+        all_oc_snapshot_attempts.extend(
+            snapshot_attempts
         )
 
     validate_status_matrix(
@@ -2063,7 +3857,27 @@ def main() -> int:
             int(row["wave"]),
             row["anchor_id"],
             row["direction"],
+            int(row["snapshot_attempt"]),
             int(row["leaf_order"]),
+        )
+    )
+
+    all_oc_creation_partition_leaves.sort(
+        key=lambda row: (
+            int(row["wave"]),
+            row["anchor_id"],
+            row["direction"],
+            int(row["snapshot_attempt"]),
+            int(row["leaf_order"]),
+        )
+    )
+
+    all_oc_snapshot_attempts.sort(
+        key=lambda row: (
+            int(row["wave"]),
+            row["anchor_id"],
+            row["direction"],
+            int(row["snapshot_attempt"]),
         )
     )
 
@@ -2095,8 +3909,22 @@ def main() -> int:
         all_oc_partition_leaves,
     )
 
+    write_tsv(
+        args.output
+        / "opencitations_creation_partition_leaves.tsv",
+        OPENCITATIONS_CREATION_PARTITION_FIELDS,
+        all_oc_creation_partition_leaves,
+    )
+
+    write_tsv(
+        args.output
+        / "opencitations_snapshot_attempts.tsv",
+        OPENCITATIONS_SNAPSHOT_FIELDS,
+        all_oc_snapshot_attempts,
+    )
+
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "COMPLETE",
         "wave": args.wave,
         "retrieved_at_utc":
@@ -2124,8 +3952,22 @@ def main() -> int:
             len(all_neighbours),
         "opencitations_partition_leaf_rows":
             len(all_oc_partition_leaves),
+        "opencitations_oci_partition_leaf_rows":
+            len(all_oc_partition_leaves),
+        "opencitations_creation_partition_leaf_rows":
+            len(all_oc_creation_partition_leaves),
+        "opencitations_snapshot_attempt_rows":
+            len(all_oc_snapshot_attempts),
         "opencitations_partition_max_suffix_digits":
             OPENCITATIONS_PARTITION_MAX_SUFFIX_DIGITS,
+        "opencitations_creation_partition_max_prefix_characters":
+            OPENCITATIONS_CREATION_PARTITION_MAX_PREFIX_CHARACTERS,
+        "opencitations_max_snapshot_attempts":
+            OPENCITATIONS_MAX_SNAPSHOT_ATTEMPTS,
+        "opencitations_snapshot_reconciliation":
+            "dual_axis_exact_complete_row_and_oci_set",
+        "opencitations_canonical_production_axis":
+            "oci",
         "credential_values_written":
             False,
         "openalex_api":
@@ -2153,6 +3995,8 @@ def main() -> int:
         "neighbour_records.tsv",
         "source_status.tsv",
         "opencitations_partition_leaves.tsv",
+        "opencitations_creation_partition_leaves.tsv",
+        "opencitations_snapshot_attempts.tsv",
         "retrieval_manifest.json",
     ]
 
