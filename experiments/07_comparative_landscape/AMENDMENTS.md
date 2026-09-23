@@ -758,3 +758,32 @@ scientific screening or method classification.
 No citation source, partition rule, search expression, anchor, relevance
 criterion, comparator classification, or saturation rule is changed by this
 observation.
+
+## Amendment 23 — freeze diagnostic for OpenCitations count mismatch
+
+**Timing:** frozen after Attempt 05 and before any new OpenCitations diagnostic
+request or further Wave 0 production attempt.
+
+Attempts 03, 04 and 05 each returned an independent W0A07/PAML forward
+citation count of 12,846.
+
+Attempt 05 successfully retrieved all ten frozen terminal-digit OCI root
+partitions, yielding 12,845 unique valid OCIs with no duplicates.
+
+The cause of the one-record discrepancy remains unresolved.
+
+A source-forensic diagnostic is therefore frozen before execution. It will
+bracket one unfiltered OpenCitations `/citations` request with independent
+citation-count requests immediately before and after it.
+
+The citation-data operation will request `text/csv`, a serialization documented
+by OpenCitations for its REST API. No filter, relevance criterion, date rule,
+software term or other scientific selection will be applied.
+
+The resulting CSV rows will be compared against the exact Attempt-05 OCI union
+reconstructed from the committed failed-attempt archive. Empty, malformed or
+otherwise nonconforming OCI values will be retained and reported rather than
+discarded.
+
+The diagnostic cannot itself be used as the Wave 0 production corpus and does
+not alter the exact production completeness gate.

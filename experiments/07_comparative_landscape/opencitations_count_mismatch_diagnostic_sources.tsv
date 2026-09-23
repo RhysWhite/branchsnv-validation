@@ -1,0 +1,5 @@
+sourcedocumentation_versionevidence_used
+OpenCitations Index REST API v22.2.0 (2025-04-15)citation-count returns the number of incoming citations to the identified bibliographic entity
+OpenCitations Index REST API v22.2.0 (2025-04-15)citations returns citation data for incoming citations to the identified bibliographic entity
+OpenCitations Index REST API v22.2.0 (2025-04-15)API operations may return JSON or CSV according to the requested MIME type
+OpenCitations Index REST API v22.2.0 (2025-04-15)OCI lexical input form is two numeric components separated by a hyphen
