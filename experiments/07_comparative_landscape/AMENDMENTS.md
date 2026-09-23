@@ -1018,3 +1018,107 @@ creation-partition recursion, attempt isolation, output ledgers, manifest
 schema and credential non-disclosure.
 
 No scientific citation-chaining rule changed.
+
+## Amendment 31 — citation publication reconciliation
+
+**Timing:** frozen after successful Wave 0 retrieval and its subsequent
+read-only identity/metadata audit, but before any citation-publication metadata
+enrichment request, record-level screening, Wave 1 anchor selection, or Wave 1
+citation retrieval.
+
+Wave 0 contains citation-neighbour provenance rows rather than a final
+publication-screening table. The read-only audit established that provider
+metadata are asymmetric and that naive transitive identifier reconciliation is
+unsafe.
+
+In particular:
+
+- OpenAlex backward records can initially contain only OpenAlex Work IDs;
+- OpenCitations citation records lack titles in the frozen neighbour table;
+- exact DOI, PMID, OpenAlex and OMID relationships can form connected
+  components containing multiple values from the same identifier namespace;
+- different DOI values can therefore be connected through secondary provider
+  identifiers; and
+- DOI and PMID evidence can point to different records in the already-frozen
+  merged database universe.
+
+The existing formal/high-recall `MERGE_SPEC.md` cannot simply be extended
+retrospectively because its publication identity rule was frozen specifically
+for those search corpora and explicitly prohibits adding new identifier
+resolution rules.
+
+A separate citation-publication reconciliation layer is therefore frozen in
+`CITATION_PUBLICATION_RECONCILIATION_SPEC.md`.
+
+The reconciliation is deliberately conservative. Different non-empty DOI
+values are not automatically merged through PMID, OpenAlex ID, OMID,
+title/year, or transitive graph connectivity. Ambiguous relationships enter an
+explicit conflict state rather than being silently collapsed.
+
+The original Wave 0 corpus and the frozen merged database universe remain
+unchanged.
+
+## Amendment 32 — unified screening entities and anchor promotion
+
+**Timing:** frozen with Amendment 31, after Wave 0 retrieval and the
+pre-screening identity audit but before any record-level screening, metadata
+enrichment for screening, or Wave 1 construction.
+
+The initial citation-anchor procedure selected a prospectively frozen
+graph-bootstrap population from recovered prespecified direct/near-direct seed
+candidates. It did not establish that every direct/near-direct method in the
+complete frozen database-search universe had already been identified.
+
+The historical production `screening_log.tsv` remained empty at this point.
+
+A further pre-screening audit established that the 79,917 frozen merged
+database-search records are not equivalent to 79,917 publication-screening
+units. The universe contains 79,702 publication records and 215 bio.tools
+software-registry records. In addition, some publication identities are
+represented by more than one frozen deduplication key.
+
+The audit found 213 PMIDs spanning more than one frozen database key. Of these,
+155 had the simple pattern of one DOI-keyed record plus one PMID-keyed record,
+whereas 20 PMIDs were associated with multiple DOI keys and therefore cannot be
+used as an unconditional publication-merge rule. Exact title/year equality was
+also non-unique across the frozen universe and is not promoted to an identity
+criterion.
+
+Accordingly, immutable discovery records are distinguished from scientific
+screening entities.
+
+Publication records are projected conservatively into publication screening
+entities using DOI-first identity semantics and conflict-preserving PMID
+attachment. Different non-empty DOI values are never silently collapsed through
+PMID, title/year, provider identifiers, or transitive connectivity.
+
+bio.tools software-registry records remain independent software-registry
+screening entities. A registry entry and a publication may later support the
+same source-backed software/method identity, but they are not automatically
+treated as the same screening entity.
+
+Before Wave 1 construction, the complete frozen database universe and the
+reconciled Wave 0 citation universe must be projected into this screening-entity
+layer and completely screened under the already-frozen scientific eligibility
+rules.
+
+Any included direct/near-direct method may become eligible for later citation
+expansion once its canonical primary publication is established and provided
+that publication has not already been expanded. This applies irrespective of
+whether the method was discovered through the formal search, high-recall
+search, bio.tools, Wave 0 citation chaining, or multiple routes.
+
+This closes two distinct failure modes:
+
+1. a non-seed direct/near-direct method already present in the database corpus
+   cannot be omitted from later citation expansion solely because complete
+   database screening had not occurred before the initial graph bootstrap; and
+2. duplicate or heterogeneous discovery records cannot be counted or screened
+   as though each were necessarily a distinct publication.
+
+The complete rules are frozen in
+`UNIFIED_SCREENING_AND_WAVE_PROMOTION_SPEC.md`.
+
+No search expression, frozen discovery corpus, scientific eligibility
+criterion, direct/near-direct role definition, Wave 0 result, or citation-chain
+saturation criterion is changed.
