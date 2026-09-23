@@ -605,6 +605,7 @@ with tempfile.TemporaryDirectory() as td:
                 output_root=out,
                 fetcher=
                     CrossAxisMetadataMismatch(),
+                maximum_snapshot_attempts=3,
             ),
         "did not produce an acceptable snapshot within 3 attempts",
     )
@@ -2475,6 +2476,354 @@ mod.validate_status_matrix(
 print(
     "PASS | status matrix accepts provider-reconciled terminal status"
 )
+
+
+
+# ==================================================================
+# Provider reconciliation may require more than three observations
+# to establish THREE CONSECUTIVE identical reconciled snapshots.
+#
+# This models the live provider behaviour in which the underlying
+# missing OpenAlex Work remains the same but its OpenCitations
+# representation changes on the first attempt:
+#
+#     candidate A -> candidate B -> candidate B -> candidate B
+#
+# Acceptance must occur only on attempt 4, using attempts 2/3/4 as
+# the three consecutive byte-identical reconciliations.
+# ==================================================================
+
+PROVIDER_MISSING_ALT = dict(
+    PROVIDER_MISSING
+)
+
+PROVIDER_MISSING_ALT.update({
+    "oci":
+        "502-201",
+    "citing":
+        "omid:br/502 doi:10.2000/missing "
+        "openalex:W100000004",
+})
+
+
+class DelayedStableProviderFetcher(
+    VolatileProviderAliasFetcher
+):
+    def __init__(
+        self,
+    ):
+        super().__init__()
+
+        self.direct_rows[
+            PROVIDER_MISSING_ALT["oci"]
+        ] = dict(
+            PROVIDER_MISSING_ALT
+        )
+
+    def transform_rows(
+        self,
+        *,
+        direction,
+        field,
+        rows,
+    ):
+        if direction != "forward":
+            return rows
+
+        if field == "oci":
+            return [
+                dict(PROVIDER_SHARED),
+                dict(PROVIDER_B_OCI),
+                dict(PROVIDER_C_OCI),
+            ]
+
+        if field != "creation":
+            raise AssertionError(
+                f"Unexpected field: {field}"
+            )
+
+        # During creation-axis retrieval, the attempt's pre-count
+        # request has occurred and its post-count request has not.
+        attempt = (
+            self.count_calls[
+                "forward"
+            ]
+            + 1
+        ) // 2
+
+        missing = (
+            PROVIDER_MISSING_ALT
+            if attempt == 1
+            else PROVIDER_MISSING
+        )
+
+        return [
+            dict(PROVIDER_SHARED),
+            dict(PROVIDER_C_OCI),
+            dict(PROVIDER_B_ALIAS),
+            dict(missing),
+        ]
+
+
+with tempfile.TemporaryDirectory() as td:
+    out = Path(td)
+
+    fetcher = (
+        DelayedStableProviderFetcher()
+    )
+
+    (
+        edges,
+        neighbours,
+        statuses,
+        oci_leaves,
+        creation_leaves,
+        attempts,
+    ) = (
+        mod.retrieve_opencitations_dual_axis(
+            ANCHOR,
+            wave=0,
+            token="",
+            output_root=out,
+            fetcher=fetcher,
+        )
+    )
+
+    forward = [
+        row
+        for row in attempts
+        if row[
+            "direction"
+        ] == "forward"
+    ]
+
+    assert [
+        row["status"]
+        for row in forward
+    ] == [
+        "retryable_failure",
+        "retryable_failure",
+        "retryable_failure",
+        "accepted_provider_reconciled",
+    ]
+
+    assert [
+        row[
+            "snapshot_attempt"
+        ]
+        for row in forward
+    ] == [
+        1,
+        2,
+        3,
+        4,
+    ]
+
+    # Attempt 1 has a different provider representation.
+    assert (
+        forward[0][
+            "provider_reconciled_complete_row_sha256"
+        ]
+        !=
+        forward[1][
+            "provider_reconciled_complete_row_sha256"
+        ]
+    )
+
+    # Attempts 2/3/4 establish the required three-in-a-row
+    # byte-identical reconciled production identity.
+    assert len({
+        row[
+            "provider_reconciled_complete_row_sha256"
+        ]
+        for row in forward[
+            1:
+        ]
+    }) == 1
+
+    assert len({
+        row[
+            "provider_reconciled_oci_set_sha256"
+        ]
+        for row in forward[
+            1:
+        ]
+    }) == 1
+
+    accepted = forward[-1]
+
+    assert accepted[
+        "provider_reconciliation"
+    ] is True
+
+    assert accepted[
+        "production_axis"
+    ] == (
+        "oci_plus_verified_creation_missing"
+    )
+
+    evidence_path = (
+        out
+        / "raw/opencitations/W0TEST/"
+          "forward_snapshot_attempt_04/"
+          "provider_reconciliation.json"
+    )
+
+    assert evidence_path.is_file()
+
+    evidence = json.loads(
+        evidence_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert evidence[
+        "stable_snapshot_attempts"
+    ] == [
+        2,
+        3,
+        4,
+    ]
+
+    assert evidence[
+        "status"
+    ] == (
+        "accepted_provider_reconciled"
+    )
+
+    # Both observed representations of the same missing Work must
+    # have been directly verified before acceptance.
+    assert (
+        PROVIDER_MISSING_ALT["oci"]
+        in evidence[
+            "unique_discrepant_ocis"
+        ]
+    )
+
+    assert (
+        PROVIDER_MISSING["oci"]
+        in evidence[
+            "unique_discrepant_ocis"
+        ]
+    )
+
+
+# ==================================================================
+# A larger retry budget must NOT permit unstable provider state.
+#
+# Alternate candidate A/B on every attempt. Even with five attempts
+# there can never be three consecutive identical reconciliations.
+# Retrieval must therefore fail closed after the full default budget.
+# ==================================================================
+
+class PersistentlyAlternatingProviderFetcher(
+    DelayedStableProviderFetcher
+):
+    def transform_rows(
+        self,
+        *,
+        direction,
+        field,
+        rows,
+    ):
+        if direction != "forward":
+            return rows
+
+        if field == "oci":
+            return [
+                dict(PROVIDER_SHARED),
+                dict(PROVIDER_B_OCI),
+                dict(PROVIDER_C_OCI),
+            ]
+
+        if field != "creation":
+            raise AssertionError(
+                f"Unexpected field: {field}"
+            )
+
+        attempt = (
+            self.count_calls[
+                "forward"
+            ]
+            + 1
+        ) // 2
+
+        missing = (
+            PROVIDER_MISSING_ALT
+            if attempt % 2
+            else PROVIDER_MISSING
+        )
+
+        return [
+            dict(PROVIDER_SHARED),
+            dict(PROVIDER_C_OCI),
+            dict(PROVIDER_B_ALIAS),
+            dict(missing),
+        ]
+
+
+with tempfile.TemporaryDirectory() as td:
+    out = Path(td)
+
+    fetcher = (
+        PersistentlyAlternatingProviderFetcher()
+    )
+
+    try:
+        mod.retrieve_opencitations_dual_axis(
+            ANCHOR,
+            wave=0,
+            token="",
+            output_root=out,
+            fetcher=fetcher,
+        )
+    except RuntimeError as exc:
+        message = str(exc)
+    else:
+        raise AssertionError(
+            "Persistently alternating provider "
+            "state did not fail closed"
+        )
+
+    assert (
+        "did not produce an acceptable snapshot "
+        "within 5 attempts"
+        in message
+    )
+
+    for n in range(
+        1,
+        6,
+    ):
+        attempt_path = (
+            out
+            / "raw/opencitations/W0TEST/"
+              f"forward_snapshot_attempt_{n:02d}/"
+              "snapshot_attempt.json"
+        )
+
+        assert attempt_path.is_file()
+
+        record = json.loads(
+            attempt_path.read_text(
+                encoding="utf-8"
+            )
+        )
+
+        assert record[
+            "status"
+        ] == "retryable_failure"
+
+        assert record[
+            "provider_reconciliation"
+        ] is False
+
+    assert not (
+        out
+        / "raw/opencitations/W0TEST/"
+          "forward_snapshot_attempt_06"
+    ).exists()
+
 
 print("PASS | volatile raw aliases reconcile to stable production")
 print("PASS | stable positive dual-axis snapshot accepted")
