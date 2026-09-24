@@ -1122,3 +1122,186 @@ The complete rules are frozen in
 No search expression, frozen discovery corpus, scientific eligibility
 criterion, direct/near-direct role definition, Wave 0 result, or citation-chain
 saturation criterion is changed.
+
+## Amendment 33 — exact metadata-resolution evidence queue
+
+**Status:** frozen before any live metadata-resolution request.
+
+After freezing the offline within-stage identity layer and the offline
+cross-stage screening-component layer, the combined provisional screening
+universe contained 95,113 components. Of these, 1,342 publication components
+required identity and/or title attention before scientific screening.
+
+No live metadata-resolution request had been made when this amendment was
+defined.
+
+### Evidence questions
+
+The attention set is decomposed into three evidence questions:
+
+1. resolve a provider-specific provisional identity;
+2. adjudicate an identifier conflict; and
+3. recover a missing publication title.
+
+These questions overlap and therefore do not define independent component or
+request counts.
+
+### Exact-identifier restriction
+
+First-pass metadata resolution is restricted to exact identifiers already
+present in frozen discovery provenance.
+
+No fuzzy title search, title similarity, author matching, free-text search, or
+new discovery query is permitted by this queue.
+
+Metadata returned by an external provider is evidence for later reconciliation.
+It does not by itself override the frozen DOI anti-overcollapse rule.
+
+### Provider-specific unresolved identities
+
+A provider-specific unresolved citation identity is queried first using its
+native provider identifier only:
+
+- OpenAlex-only provisional identities use the exact OpenAlex Work ID;
+- OpenCitations-only provisional identities use the exact OMID.
+
+If the same component also lacks a title, that same native lookup serves both
+the identity and title evidence questions.
+
+### Identifier conflicts
+
+For a component requiring identifier-conflict adjudication, all already-known
+applicable exact evidence routes are included in the first-pass evidence plan.
+
+The applicable routes are:
+
+- OpenAlex Work ID -> OpenAlex;
+- DOI -> OpenAlex;
+- DOI -> OpenCitations Meta;
+- PMID -> OpenAlex;
+- PMID -> PubMed; and
+- OMID -> OpenCitations Meta.
+
+There is no provider precedence and no early stopping for conflict
+adjudication.
+
+Different DOI identities remain separate pending explicit reconciliation.
+
+### Title-only components
+
+For a component whose only unresolved requirement is a missing title, the
+first pass uses the exact native identifier of the provider that supplied the
+frozen discovery record.
+
+Native provider identifiers are:
+
+- OpenAlex Work ID for OpenAlex provenance;
+- PMID for PubMed provenance; and
+- OMID for OpenCitations provenance.
+
+A title-only component with more than one native provider receives all of its
+native exact lookups rather than an invented provider-preference tie-breaker.
+
+In the frozen queue:
+
+- 722 title-only components have exactly one native exact route;
+- one title-only component has two native exact routes; and
+- zero title-only components lack a native exact route.
+
+The rule therefore does not require a provider hierarchy.
+
+### Shared logical lookups
+
+A logical provider/route/identifier lookup may support more than one
+provisional screening component or more than one evidence question.
+
+Such a lookup is retrieved and archived once and linked to every relevant
+component-evidence assignment.
+
+Sharing a lookup does not itself merge the corresponding provisional
+components.
+
+### Logical evidence lookup versus transport request
+
+A logical lookup is defined by:
+
+- provider;
+- exact route;
+- identifier namespace; and
+- identifier value.
+
+Logical lookups are frozen independently of HTTP transport implementation.
+
+Batching multiple logical lookups into one transport request, retrying a
+request, following a provider redirect, or partitioning retrieval work must
+not add, remove, or change logical evidence lookups.
+
+### Redirects
+
+Provider redirects are transport evidence rather than silent identity
+resolution.
+
+For a redirected lookup, later retrieval code must preserve at least:
+
+- the originally requested provider/route/identifier;
+- redirect status and target where applicable;
+- final response location;
+- returned provider identifier; and
+- raw response evidence.
+
+A redirect does not automatically authorize a cross-component merge.
+
+### Escalation
+
+This amendment freezes the first-pass exact evidence queue only.
+
+Failure of a first-pass lookup, or a response lacking sufficient metadata,
+does not authorize fuzzy search or an unplanned alternate-provider lookup.
+
+Any second-pass escalation queue must be derived from retained first-pass
+failure evidence, remain exact-identifier based, and be frozen before its
+execution.
+
+### Frozen first-pass queue diagnostics
+
+The pre-retrieval queue contains:
+
+- 1,342 attention components;
+- 1,847 component-evidence assignments;
+- 1,731 unique logical lookup keys.
+
+Assignment classes:
+
+- 621 conflict-all-exact-evidence assignments;
+- 502 native-provider-identity assignments;
+- 724 native-title-evidence assignments.
+
+Unique logical lookup keys by provider:
+
+- OpenAlex: 1,169;
+- OpenCitations Meta: 495;
+- PubMed: 67.
+
+Unique logical lookup keys by exact route:
+
+- OpenAlex by DOI: 115;
+- OpenAlex by Work ID: 987;
+- OpenAlex by PMID: 67;
+- OpenCitations Meta by DOI: 115;
+- OpenCitations Meta by OMID: 380;
+- PubMed by PMID: 67.
+
+There are 116 logical lookup keys serving more than one provisional component.
+Of these, 115 are shared within conflict evidence and one is shared between
+native-provider identity resolution and conflict evidence.
+
+These are evidence-plan counts, not counts of HTTP transport operations.
+
+### Classification
+
+This amendment is a pre-retrieval evidence-policy and source-structure
+decision.
+
+Provider batching, retry timing, rate limiting, authentication, and transport
+partition sizes are operational implementation details and do not alter the
+frozen logical evidence queue.

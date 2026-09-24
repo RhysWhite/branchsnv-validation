@@ -1,0 +1,84 @@
+{
+  "amendment_33_sha256": "bef6067b915de7b79e2f17391aa1ac14c2e49db5de656f1a6737ffaaa2fc72db",
+  "artifact_sha256": {
+    "METADATA_RESOLUTION_QUEUE_SPEC.md": "3afc1ed8d67c36b4c412fff02502580c74748f460f614dc0419339215d6d5603",
+    "build_metadata_resolution_queue.py": "14762f31984a1587a7c79725934fccbbc6351ef8c046e229d085ac67c1e0c18d",
+    "metadata_resolution_logical_lookups.tsv": "7d4873f463315e98a3d5fd14358c015eeca65ad7f08fe74af906a90bbb928e1f",
+    "metadata_resolution_queue_assignments.tsv": "b96edcf191ca02c878158a654fa2c00a1cfdbadd0ffed6eb73851dac990cf5b9",
+    "metadata_resolution_queue_components.tsv": "4e090e1230e6594f02f73a819a549400211388cc0ad8edb08628bc9068afbb79",
+    "test_metadata_resolution_queue.py": "7556c9509b170f9e1d98142bd48489c3799820f3960e8f62313e8a05a8ca3eb4"
+  },
+  "derived_sha256": {
+    "assignments": "480d67b87a26823a6b3b1117ab1840efda70ae024bb84677a49b8a1799ae991b",
+    "complete_queue_object": "022754e3a69378a82795c12692a1daf44dec45d80a50486a23df7154188aeae9",
+    "components": "ef21d0f76037a50fd3dec6bfd30f185b1715edcdbead1a1d67d8dee7813453f9",
+    "logical_lookups": "db51ec2fd86e9efbd91953bfd66ff9ebb9c3901f524e992c8afd6c46e0c69d75"
+  },
+  "frozen_cross_stage_dependency": {
+    "baseline_sha256": "c89c8bebb46f9a045f172f2a168361568372fae3d582eb1e498917b10615d40b",
+    "commit": "78836f58fb1fdc31b3144cf7038f571b3f1f7947",
+    "implementation_sha256": "956b4b55721479460c667486649c6ffd3bfbe3abbb509b725f958c898222d220"
+  },
+  "interpretation": {
+    "logical_lookup_count_is_not_http_request_count": true,
+    "provider_metadata_is_evidence_not_automatic_identity_authority": true,
+    "second_pass_escalation_requires_separate_pre_execution_freeze": true,
+    "shared_lookup_does_not_imply_component_identity": true
+  },
+  "queue_summary": {
+    "attention_components": 1342,
+    "component_evidence_assignments": 1847,
+    "logical_lookup_keys": 1731,
+    "logical_lookup_provider_counts": {
+      "openalex": 1169,
+      "opencitations_meta": 495,
+      "pubmed": 67
+    },
+    "logical_lookup_route_counts": {
+      "openalex|work_by_doi": 115,
+      "openalex|work_by_openalex_id": 987,
+      "openalex|work_by_pmid": 67,
+      "opencitations_meta|metadata_by_doi": 115,
+      "opencitations_meta|metadata_by_omid": 380,
+      "pubmed|record_by_pmid": 67
+    },
+    "policy_counts": {
+      "conflict_all_exact_evidence": 621,
+      "native_provider_identity": 502,
+      "native_title_evidence": 724
+    },
+    "question_combination_counts": {
+      "adjudicate_identifier_conflict": 107,
+      "adjudicate_identifier_conflict|recover_title": 10,
+      "recover_title": 723,
+      "resolve_provider_identity": 168,
+      "resolve_provider_identity|recover_title": 334
+    },
+    "question_counts": {
+      "adjudicate_identifier_conflict": 117,
+      "recover_title": 1067,
+      "resolve_provider_identity": 502
+    },
+    "shared_logical_lookup_keys": 116,
+    "shared_policy_combination_counts": {
+      "conflict_all_exact_evidence": 115,
+      "conflict_all_exact_evidence|native_provider_identity": 1
+    },
+    "title_native_route_multiplicity": {
+      "1": 722,
+      "2": 1
+    },
+    "title_only_components": 723
+  },
+  "repository_commit_before_queue_freeze": "78836f58fb1fdc31b3144cf7038f571b3f1f7947",
+  "status": "FROZEN_PRE_RETRIEVAL_METADATA_RESOLUTION_QUEUE",
+  "validation": {
+    "fuzzy_or_text_search_authorized": false,
+    "live_metadata_requests_made": false,
+    "logical_lookup_queue_frozen": true,
+    "provider_responses_accepted": false,
+    "provisional_components_merged": false,
+    "scientific_screening_performed": false,
+    "transport_request_count_frozen": false
+  }
+}
