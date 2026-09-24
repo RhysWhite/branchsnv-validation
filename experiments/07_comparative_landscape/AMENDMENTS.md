@@ -1335,3 +1335,26 @@ OpenCitations behavior is unchanged.
 
 Live metadata execution remains disabled until the amended implementation and
 its regression tests are separately frozen.
+
+
+## Amendment 35 — metadata-retrieval live-execution authorization
+
+**Status:** frozen before live enablement and before any production
+metadata-resolution request.
+
+The offline transport, Amendment 34 provider-contract correction, hostile
+regression tests, archive/resume integrity layer, and exact 1,731-lookup
+evidence queue are frozen.
+
+This amendment defines the independent authorization gates, permitted
+production entry point, first-network-request provenance rule, production
+archive behavior, failure handling, and scientific boundary for live metadata
+retrieval.
+
+The detailed authorization contract is frozen in:
+
+`METADATA_RETRIEVAL_LIVE_EXECUTION_AUTHORIZATION.md`
+
+Live execution remains disabled when this amendment is frozen.
+
+The subsequent enablement must be a separate minimal implementation commit.
