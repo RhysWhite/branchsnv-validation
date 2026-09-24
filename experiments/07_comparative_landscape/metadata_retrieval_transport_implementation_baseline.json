@@ -1,0 +1,54 @@
+{
+  "frozen_dependencies": {
+    "logical_lookup_count": 1731,
+    "logical_lookup_queue_sha256": "7d4873f463315e98a3d5fd14358c015eeca65ad7f08fe74af906a90bbb928e1f",
+    "metadata_resolution_queue_baseline_sha256": "1937f30fee71affe2d300b993f53e9e5f9a0327a6387a502f8030cd2f730dd03",
+    "transport_preimplementation_sha256": "8132f25c9a8cd6e2f263bce9798e04e20718bece3181bf01a5faac471fe63f39",
+    "transport_spec_sha256": "7dd711188dbdee4648c4cb5b48881366bd771c3e8e1e0cd9cab0a528781c8f93"
+  },
+  "history_rewrite_provenance_commit": "a6f57d66f637afe674c2a532e5fa94b55a410e77",
+  "implementation_files_sha256": {
+    "metadata_resolution_transport_archive.py": "bfa8290a98433099b380f7b43827bc50207bca0f4df9b732b549c8dac69a1b66",
+    "retrieve_metadata_resolution_queue.py": "e05b321b27dca4ef66fec50df92d6b6613413400309df928dcadaa100f03d645",
+    "test_metadata_resolution_transport.py": "0ff54206c4404610fed17dfae4e0975e9e5c428a823b399a20dc17811d04bd00",
+    "test_metadata_resolution_transport_archive.py": "cf9e634df95673971550f55dfbe5764abc0615858cab7e490705b774e2d06a59"
+  },
+  "interpretation": {
+    "implementation_freeze_is_operational_not_scientific": true,
+    "live_execution_requires_separate_post_freeze_authorization": true,
+    "transport_does_not_perform_scientific_screening": true,
+    "transport_does_not_perform_tool_consolidation": true,
+    "transport_does_not_reconcile_publication_identity": true
+  },
+  "repository_commit_before_implementation_freeze": "a6f57d66f637afe674c2a532e5fa94b55a410e77",
+  "rewritten_transport_design_commit": "cab2e61a0bdf7b64c0bfbf082da7df7a22c2720e",
+  "runtime_contract": {
+    "accepted_terminal_statuses": [
+      "not_found",
+      "success"
+    ],
+    "batching_enabled": false,
+    "component_merge_permitted": false,
+    "live_execution_enabled": false,
+    "logical_lookup_count": 1731,
+    "logical_lookups_per_primary_operation": 1,
+    "max_redirect_hops": 5,
+    "max_transport_attempts": 5,
+    "maximum_request_initiation_rate_per_provider_per_second": 2,
+    "scientific_screening_permitted": false
+  },
+  "status": "FROZEN_PRE_LIVE_EXECUTION_METADATA_TRANSPORT_IMPLEMENTATION",
+  "validation": {
+    "archive_resume_synthetic_suite_passed": true,
+    "core_transport_synthetic_suite_passed": true,
+    "current_offline_stack_passed": true,
+    "derived_ledgers_reproduce_from_raw_evidence": true,
+    "historical_experiment_07_regression_stack_passed": true,
+    "history_rewrite_provenance_verified": true,
+    "live_metadata_requests_made_during_implementation_validation": false,
+    "production_provider_responses_accepted": false,
+    "production_retrieval_directory_present": false,
+    "repository_neutrality_gate_passed": true,
+    "scientific_screening_performed": false
+  }
+}
