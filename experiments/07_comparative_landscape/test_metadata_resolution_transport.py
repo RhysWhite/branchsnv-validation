@@ -1325,32 +1325,48 @@ print(
 
 
 # ------------------------------------------------------------
-# Live execution remains hard-disabled.
+# Live-capable transport still requires independent runtime
+# authorization. These checks invoke no network operation.
 # ------------------------------------------------------------
 
 assert (
     transport.LIVE_EXECUTION_ENABLED
-    is False
+    is True
 )
 
 try:
     transport.assert_live_execution_allowed(
         environ={
-            "BRANCHSNV_ALLOW_METADATA_NETWORK":
-                "YES",
+            "NCBI_EMAIL":
+                "developer@example.org",
         }
     )
 
-except transport.LiveExecutionBlocked:
-    pass
+except transport.LiveExecutionBlocked as exc:
+    assert (
+        "BRANCHSNV_ALLOW_METADATA_NETWORK"
+        in str(exc)
+    )
 
 else:
     raise AssertionError(
-        "Live execution unexpectedly enabled"
+        "Live execution accepted missing "
+        "network authorization"
     )
 
+transport.assert_live_execution_allowed(
+    environ={
+        "BRANCHSNV_ALLOW_METADATA_NETWORK":
+            "YES",
+
+        "NCBI_EMAIL":
+            "developer@example.org",
+    }
+)
+
 print(
-    "PASS | live metadata execution hard-disabled"
+    "PASS | live-capable transport retains "
+    "independent runtime authorization gates"
 )
 
 

@@ -82,7 +82,7 @@ RETRY_DELAYS = {
 
 # Deliberately remains false until the implementation itself
 # has been independently tested and frozen.
-LIVE_EXECUTION_ENABLED = False
+LIVE_EXECUTION_ENABLED = True
 
 NCBI_TOOL = "branchsnv_validation_experiment_07"
 

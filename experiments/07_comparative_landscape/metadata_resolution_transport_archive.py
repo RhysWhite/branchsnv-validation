@@ -2815,8 +2815,8 @@ def validate_lookup_raw_evidence(
 # ------------------------------------------------------------
 # Frozen production runner.
 #
-# It is intentionally unreachable while the low-level module
-# retains LIVE_EXECUTION_ENABLED = False.
+# It remains protected by the low-level live-enable gate plus
+# explicit network and NCBI-contact authorization preflight.
 # ------------------------------------------------------------
 
 HERE = Path(__file__).resolve().parent

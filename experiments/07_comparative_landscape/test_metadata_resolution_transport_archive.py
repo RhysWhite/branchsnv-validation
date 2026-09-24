@@ -924,16 +924,18 @@ print(
 
 
 # ------------------------------------------------------------
-# Live execution remains hard-disabled.
+# Archive orchestration is now live-capable, but real execution
+# remains subject to the independent runtime gates.
 # ------------------------------------------------------------
 
 assert (
     transport.LIVE_EXECUTION_ENABLED
-    is False
+    is True
 )
 
 print(
-    "PASS | archive orchestration does not enable live execution"
+    "PASS | archive orchestration recognizes "
+    "frozen live enablement"
 )
 
 
@@ -1423,7 +1425,8 @@ print(
 
 
 # ------------------------------------------------------------
-# Live runner gate occurs BEFORE output-directory creation.
+# Explicit network authorization is required BEFORE any
+# production-directory creation.
 # ------------------------------------------------------------
 
 with tempfile.TemporaryDirectory() as tmp:
@@ -1438,23 +1441,28 @@ with tempfile.TemporaryDirectory() as tmp:
         archive.run_frozen_queue_live(
             archive_root=root,
             environ={
-                "BRANCHSNV_ALLOW_METADATA_NETWORK":
-                    "YES",
+                "NCBI_EMAIL":
+                    "developer@example.org",
             },
         )
 
-    except transport.LiveExecutionBlocked:
-        pass
+    except transport.LiveExecutionBlocked as exc:
+        assert (
+            "BRANCHSNV_ALLOW_METADATA_NETWORK"
+            in str(exc)
+        )
 
     else:
         raise AssertionError(
-            "Live runner unexpectedly passed hard gate"
+            "Live runner unexpectedly passed "
+            "network-authorization gate"
         )
 
     assert not root.exists()
 
 print(
-    "PASS | live runner hard gate precedes production-directory creation"
+    "PASS | network-authorization gate precedes "
+    "production-directory creation"
 )
 
 
@@ -2074,8 +2082,13 @@ finally:
     )
 
 assert (
+    original_live_execution_enabled
+    is True
+)
+
+assert (
     transport.LIVE_EXECUTION_ENABLED
-    is False
+    is original_live_execution_enabled
 )
 
 print(
