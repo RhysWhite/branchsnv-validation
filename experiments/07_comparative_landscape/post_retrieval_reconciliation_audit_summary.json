@@ -1,0 +1,74 @@
+{
+  "component_merge_performed": false,
+  "identifier_conflict_components": {
+    "automatic_resolution_permitted": false,
+    "clean_connected_candidate_count": 0,
+    "connected_but_title_residual_count": 17,
+    "primary_linkage_classes": {
+      "cross_provider_primary_identifier_disagreement": 48,
+      "external_focal_same_namespace_identifier": 1,
+      "focal_response_same_namespace_multiplicity": 68
+    },
+    "requested_identifier_graph_disconnected_count": 0,
+    "self_confirmation_failure_count": 0,
+    "total": 117
+  },
+  "metadata_reconciliation_performed": false,
+  "native_provider_identity_components": {
+    "multiple_publication_anchor_assignment_count": 0,
+    "not_found": 8,
+    "one_doi_only": 48,
+    "one_doi_plus_one_pmid": 262,
+    "one_pmid_only": 1,
+    "self_confirmation_failure_count": 0,
+    "success": 494,
+    "success_without_doi_or_pmid_anchor": 183,
+    "total": 502,
+    "unique_publication_anchor_components": 311
+  },
+  "recover_title_components": {
+    "cross_identifier_residual_disagreement": 2,
+    "multiple_exact_titles_compact_equivalent": 1,
+    "multiple_exact_titles_token_equivalent": 7,
+    "multiple_titles_residual_after_compact_normalisation": 2,
+    "no_retrieved_title": 482,
+    "one_exact_title": 575,
+    "total": 1067,
+    "within_identifier_residual_disagreement": 0
+  },
+  "retrieval_universe": {
+    "assignments": 1847,
+    "components": 1342,
+    "logical_lookups": 1731,
+    "not_found": 33,
+    "success": 1698
+  },
+  "schema_version": 1,
+  "scientific_screening_performed": false,
+  "source_audits": {
+    "native_provider_identity": {
+      "sha256": "d64f2551fee6b907fa034e9aff8e9cb12d17e4b82f5dd0c145d2ed17df57d0dc"
+    },
+    "post_retrieval_evidence": {
+      "sha256": "ba830416cd93e9f40e8f118ded593f211aac256f47b06452f6bbe21784d672d6"
+    },
+    "primary_identifier_linkage": {
+      "sha256": "70ddcf9efc5b0cdbbda163a1f1c203263479050559ca31b9b134c6493fea58a6"
+    },
+    "reconciliation_conflict": {
+      "sha256": "97b6400e4a70d2560930a2dd0282d8625b68ecea78fbce9b929804ded1ae8fa4"
+    }
+  },
+  "status": "FROZEN_RECONCILIATION_DESIGN_EVIDENCE",
+  "superseded_diagnostics": {
+    "identifier_linkage_audit_sha256": "7654d752636ae44da6baace12ea9b0cb37e5a81a3096530e067034727fe3c697",
+    "reason": "Superseded because its PubMed parser recursively treated nested reference/correction identifiers as focal-record identifiers. It is excluded from all reconciliation decisions."
+  },
+  "title_evidence_all_components": {
+    "multiple_exact_titles_compact_equivalent": 7,
+    "multiple_exact_titles_token_equivalent": 93,
+    "multiple_titles_residual_after_compact_normalisation": 17,
+    "no_retrieved_title": 482,
+    "one_exact_title": 743
+  }
+}
