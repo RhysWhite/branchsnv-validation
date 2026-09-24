@@ -1305,3 +1305,33 @@ decision.
 Provider batching, retry timing, rate limiting, authentication, and transport
 partition sizes are operational implementation details and do not alter the
 frozen logical evidence queue.
+
+
+## Amendment 34 — metadata-retrieval provider source-contract correction
+
+**Status:** frozen after offline transport implementation and before any live
+metadata-resolution request.
+
+A final provider-contract preflight identified two operational differences
+between the previously frozen transport source snapshot and current provider
+documentation.
+
+OpenAlex now documents optional API-key authentication through the `api_key`
+query parameter rather than the previously frozen Bearer-header mechanism.
+
+NCBI E-utility guidance states that `tool` and `email` should accompany
+E-utility requests.
+
+The detailed correction is frozen in:
+
+`METADATA_RETRIEVAL_SOURCE_CONTRACT_AMENDMENT.md`
+
+This amendment authorizes only the provider-contract corrections defined
+there. It does not change the 1,731 logical evidence lookups, provider
+allocation, scientific identity rules, screening units, or comparator
+eligibility.
+
+OpenCitations behavior is unchanged.
+
+Live metadata execution remains disabled until the amended implementation and
+its regression tests are separately frozen.
