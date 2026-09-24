@@ -2058,6 +2058,152 @@ def scan_for_secret(
 # checksum snapshot.
 # ------------------------------------------------------------
 
+def validate_archived_initial_request_url(
+    row: dict,
+    archived_url: object,
+) -> str:
+    if not isinstance(
+        archived_url,
+        str,
+    ):
+        raise RuntimeError(
+            "Archived initial request URL is not a string"
+        )
+
+    try:
+        parsed = (
+            transport.urllib.parse.urlsplit(
+                archived_url
+            )
+        )
+
+        query = (
+            transport.urllib.parse.parse_qsl(
+                parsed.query,
+                keep_blank_values=True,
+            )
+        )
+
+    except Exception as exc:
+        raise RuntimeError(
+            "Malformed archived initial request URL"
+        ) from exc
+
+    provider = row["provider"]
+
+    permitted_redacted_parameters = {
+        "openalex": {
+            "api_key",
+        },
+
+        "opencitations_meta": set(),
+
+        "pubmed": {
+            "email",
+        },
+    }
+
+    if provider not in (
+        permitted_redacted_parameters
+    ):
+        raise RuntimeError(
+            "Unsupported provider during archived "
+            "request URL validation"
+        )
+
+    sensitive_names = {
+        "api_key",
+        "email",
+    }
+
+    observed_sensitive = {}
+
+    for key, value in query:
+        normalized = key.lower()
+
+        if normalized not in sensitive_names:
+            continue
+
+        observed_sensitive.setdefault(
+            normalized,
+            [],
+        ).append(
+            value
+        )
+
+    for (
+        name,
+        values,
+    ) in observed_sensitive.items():
+
+        if len(values) != 1:
+            raise RuntimeError(
+                "Archived initial request URL contains "
+                f"multiple {name} parameters"
+            )
+
+        if (
+            name
+            not in permitted_redacted_parameters[
+                provider
+            ]
+        ):
+            raise RuntimeError(
+                "Archived initial request URL contains "
+                "provider-incompatible sensitive parameter"
+            )
+
+        if values[0] != "<REDACTED>":
+            raise RuntimeError(
+                "Archived initial request URL contains "
+                "unredacted sensitive parameter"
+            )
+
+    environ = {}
+
+    if (
+        provider == "openalex"
+        and "api_key"
+        in observed_sensitive
+    ):
+        environ[
+            "OPENALEX_API_KEY"
+        ] = (
+            "ARCHIVE-VALIDATION-OPENALEX-SECRET"
+        )
+
+    if (
+        provider == "pubmed"
+        and "email"
+        in observed_sensitive
+    ):
+        environ[
+            "NCBI_EMAIL"
+        ] = (
+            "archive-validation@example.invalid"
+        )
+
+    expected_request = (
+        transport.build_request(
+            row,
+            environ=environ,
+        )
+    )
+
+    expected_url = (
+        transport.sanitized_url(
+            expected_request.url
+        )
+    )
+
+    if archived_url != expected_url:
+        raise RuntimeError(
+            "Archived initial request URL mismatch"
+        )
+
+    return expected_url
+
+
 def validate_lookup_raw_evidence(
     archive_root: Path,
     row: dict,
@@ -2093,13 +2239,6 @@ def validate_lookup_raw_evidence(
                 "Unexpected lookup archive file: "
                 + item.name
             )
-
-    expected_request = (
-        transport.build_request(
-            row,
-            environ={},
-        )
-    )
 
     attempts = load_attempt_records(
         root
@@ -2183,14 +2322,14 @@ def validate_lookup_raw_evidence(
                 "Archived request method mismatch"
             )
 
-        if request.get(
-            "url"
-        ) != transport.sanitized_url(
-            expected_request.url
-        ):
-            raise RuntimeError(
-                "Archived initial request URL mismatch"
+        expected_url = (
+            validate_archived_initial_request_url(
+                row,
+                request.get(
+                    "url"
+                ),
             )
+        )
 
         for pair in request.get(
             "headers",
@@ -2261,12 +2400,6 @@ def validate_lookup_raw_evidence(
                 "Redirect/response hop numbering "
                 "is not sequential"
             )
-
-        expected_url = (
-            transport.sanitized_url(
-                expected_request.url
-            )
-        )
 
         allowed_attempt_files = {
             "request.json",
@@ -2401,6 +2534,21 @@ def validate_lookup_raw_evidence(
                             location,
                     )
                 )
+
+                if (
+                    row["provider"]
+                    == "openalex"
+                ):
+                    target = (
+                        transport.
+                        preserve_openalex_api_key_on_redirect(
+                            current_url=
+                                expected_url,
+
+                            target_url=
+                                target,
+                        )
+                    )
 
                 expected_url = (
                     transport.sanitized_url(

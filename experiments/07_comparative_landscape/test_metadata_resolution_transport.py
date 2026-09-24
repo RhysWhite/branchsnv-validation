@@ -154,6 +154,10 @@ assert (
 assert "db=pubmed" in r.url
 assert "id=123" in r.url
 assert "retmode=xml" in r.url
+assert (
+    "tool=branchsnv_validation_experiment_07"
+    in r.url
+)
 
 print(
     "PASS | all frozen routes construct exact requests"
@@ -175,22 +179,47 @@ r = transport.build_request(
     },
 )
 
-assert secret_a not in r.url
-
-assert (
-    "Authorization",
-    f"Bearer {secret_a}",
-) in r.headers
-
-redacted = dict(
-    transport.redact_headers(
-        r.headers
+openalex_query = (
+    transport.urllib.parse.parse_qs(
+        transport.urllib.parse.urlsplit(
+            r.url
+        ).query
     )
 )
 
-assert redacted[
-    "Authorization"
-] == "<REDACTED>"
+assert openalex_query[
+    "api_key"
+] == [
+    secret_a
+]
+
+assert not any(
+    key.lower() == "authorization"
+    for key, _
+    in r.headers
+)
+
+sanitized_openalex = (
+    transport.sanitized_url(
+        r.url
+    )
+)
+
+assert secret_a not in sanitized_openalex
+
+sanitized_openalex_query = (
+    transport.urllib.parse.parse_qs(
+        transport.urllib.parse.urlsplit(
+            sanitized_openalex
+        ).query
+    )
+)
+
+assert sanitized_openalex_query[
+    "api_key"
+] == [
+    "<REDACTED>"
+]
 
 r2 = transport.build_request(
     row(
@@ -213,7 +242,97 @@ assert secret_o not in json.dumps(
 )
 
 print(
-    "PASS | credentials remain header-only and redact"
+    "PASS | provider credentials follow amended source contract and redact"
+)
+
+
+# ------------------------------------------------------------
+# PubMed tool/email source contract and URL redaction.
+# ------------------------------------------------------------
+
+contact = "developer@example.org"
+
+pubmed_contact_request = (
+    transport.build_request(
+        row(
+            provider="pubmed",
+            route="record_by_pmid",
+            namespace="pmid",
+            identifier="123",
+        ),
+        environ={
+            "NCBI_EMAIL":
+                contact,
+        },
+    )
+)
+
+pubmed_contact_query = (
+    transport.urllib.parse.parse_qs(
+        transport.urllib.parse.urlsplit(
+            pubmed_contact_request.url
+        ).query
+    )
+)
+
+assert pubmed_contact_query[
+    "tool"
+] == [
+    "branchsnv_validation_experiment_07"
+]
+
+assert pubmed_contact_query[
+    "email"
+] == [
+    contact
+]
+
+sanitized_pubmed = (
+    transport.sanitized_url(
+        pubmed_contact_request.url
+    )
+)
+
+assert contact not in sanitized_pubmed
+
+sanitized_pubmed_query = (
+    transport.urllib.parse.parse_qs(
+        transport.urllib.parse.urlsplit(
+            sanitized_pubmed
+        ).query
+    )
+)
+
+assert sanitized_pubmed_query[
+    "email"
+] == [
+    "<REDACTED>"
+]
+
+try:
+    transport.build_request(
+        row(
+            provider="pubmed",
+            route="record_by_pmid",
+            namespace="pmid",
+            identifier="123",
+        ),
+        environ={
+            "NCBI_EMAIL":
+                "not-an-email",
+        },
+    )
+
+except ValueError:
+    pass
+
+else:
+    raise AssertionError(
+        "Malformed NCBI_EMAIL accepted"
+    )
+
+print(
+    "PASS | PubMed tool/email parameters validate and redact"
 )
 
 
@@ -1404,4 +1523,227 @@ with tempfile.TemporaryDirectory() as tmp:
 
 print(
     "PASS | resume continues after prior immutable attempt"
+)
+
+
+# ------------------------------------------------------------
+# Amendment 34: authenticated OpenAlex redirects retain the
+# api_key without persisting it.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    redirect_secret = (
+        "OPENALEX-REDIRECT-SECRET"
+    )
+
+    initial = transport.build_request(
+        row(),
+        environ={
+            "OPENALEX_API_KEY":
+                redirect_secret,
+        },
+    )
+
+    seen = []
+
+    def redirect_then_ok(req):
+        seen.append(
+            req
+        )
+
+        if len(seen) == 1:
+            return transport.HTTPResponse(
+                status=301,
+                url=req.url,
+                headers=(
+                    (
+                        "Location",
+                        "https://api.openalex.org/works/W2",
+                    ),
+                ),
+                body=b"",
+            )
+
+        return transport.HTTPResponse(
+            status=200,
+            url=req.url,
+            headers=(),
+            body=json.dumps({
+                "id":
+                    "https://openalex.org/W2",
+                "ids": {},
+            }).encode(),
+        )
+
+    final_response, evidence = (
+        transport.request_with_redirects(
+            initial,
+            executor=redirect_then_ok,
+            archive_directory=root,
+        )
+    )
+
+    assert final_response.status == 200
+    assert len(seen) == 2
+    assert len(evidence) == 2
+
+    second_query = (
+        transport.urllib.parse.parse_qs(
+            transport.urllib.parse.urlsplit(
+                seen[1].url
+            ).query
+        )
+    )
+
+    assert second_query[
+        "api_key"
+    ] == [
+        redirect_secret
+    ]
+
+    for path in root.rglob("*"):
+        if path.is_file():
+            assert (
+                redirect_secret.encode()
+                not in path.read_bytes()
+            )
+
+print(
+    "PASS | OpenAlex redirect preserves api_key without persistence"
+)
+
+
+# ------------------------------------------------------------
+# A redirect may not substitute or introduce another OpenAlex
+# credential, and Location evidence must remain redacted.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    redirect_secret = (
+        "OPENALEX-ORIGINAL-SECRET"
+    )
+
+    attacker_secret = (
+        "OPENALEX-UNEXPECTED-SECRET"
+    )
+
+    initial = transport.build_request(
+        row(),
+        environ={
+            "OPENALEX_API_KEY":
+                redirect_secret,
+        },
+    )
+
+    def conflicting_redirect(req):
+        return transport.HTTPResponse(
+            status=301,
+            url=req.url,
+            headers=(
+                (
+                    "Location",
+                    "https://api.openalex.org/works/W2"
+                    "?api_key="
+                    + attacker_secret,
+                ),
+            ),
+            body=b"",
+        )
+
+    try:
+        transport.request_with_redirects(
+            initial,
+            executor=conflicting_redirect,
+            archive_directory=root,
+        )
+
+    except transport.RedirectFailure:
+        pass
+
+    else:
+        raise AssertionError(
+            "OpenAlex redirect changed api_key"
+        )
+
+    for path in root.rglob("*"):
+        if not path.is_file():
+            continue
+
+        payload = path.read_bytes()
+
+        assert (
+            redirect_secret.encode()
+            not in payload
+        )
+
+        assert (
+            attacker_secret.encode()
+            not in payload
+        )
+
+print(
+    "PASS | OpenAlex redirect credential substitution fails closed and redacts"
+)
+
+
+# ------------------------------------------------------------
+# PubMed contact address must not enter archived evidence.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    contact = "developer@example.org"
+
+    xml = b"""<?xml version="1.0"?>
+<PubmedArticleSet>
+  <PubmedArticle>
+    <MedlineCitation>
+      <PMID Version="1">123</PMID>
+    </MedlineCitation>
+  </PubmedArticle>
+</PubmedArticleSet>
+"""
+
+    def pubmed_ok(req):
+        return transport.HTTPResponse(
+            status=200,
+            url=req.url,
+            headers=(),
+            body=xml,
+        )
+
+    result = transport.transport_lookup(
+        row(
+            provider="pubmed",
+            route="record_by_pmid",
+            namespace="pmid",
+            identifier="123",
+        ),
+        archive_root=root,
+        executor=pubmed_ok,
+        sleeper=lambda _: None,
+        environ={
+            "NCBI_EMAIL":
+                contact,
+        },
+    )
+
+    assert result[
+        "terminal_status"
+    ] == "success"
+
+    for path in root.rglob("*"):
+        if path.is_file():
+            assert (
+                contact.encode()
+                not in path.read_bytes()
+            )
+
+print(
+    "PASS | NCBI_EMAIL absent from complete synthetic archive"
 )

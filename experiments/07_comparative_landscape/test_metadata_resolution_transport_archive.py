@@ -2004,3 +2004,816 @@ with tempfile.TemporaryDirectory() as tmp:
 print(
     "PASS | all production TSV ledgers must reproduce from raw evidence"
 )
+
+
+# ------------------------------------------------------------
+# Amendment 34 live preflight:
+# NCBI_EMAIL must fail before archive-directory creation.
+# ------------------------------------------------------------
+
+original_live_execution_enabled = (
+    transport.LIVE_EXECUTION_ENABLED
+)
+
+try:
+    transport.LIVE_EXECUTION_ENABLED = True
+
+    invalid_environments = [
+        {
+            "BRANCHSNV_ALLOW_METADATA_NETWORK":
+                "YES",
+        },
+        {
+            "BRANCHSNV_ALLOW_METADATA_NETWORK":
+                "YES",
+            "NCBI_EMAIL":
+                "not-an-email",
+        },
+    ]
+
+    for environ in invalid_environments:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = (
+                Path(tmp)
+                / "production"
+            )
+
+            try:
+                archive.run_frozen_queue_live(
+                    archive_root=root,
+                    environ=environ,
+                )
+
+            except transport.LiveExecutionBlocked as exc:
+                assert (
+                    "NCBI_EMAIL"
+                    in str(exc)
+                )
+
+            else:
+                raise AssertionError(
+                    "Live runner accepted missing/malformed "
+                    "NCBI_EMAIL"
+                )
+
+            assert not root.exists()
+
+    # A valid preflight may pass the authorization helper itself.
+    transport.assert_live_execution_allowed(
+        environ={
+            "BRANCHSNV_ALLOW_METADATA_NETWORK":
+                "YES",
+            "NCBI_EMAIL":
+                "developer@example.org",
+        }
+    )
+
+finally:
+    transport.LIVE_EXECUTION_ENABLED = (
+        original_live_execution_enabled
+    )
+
+assert (
+    transport.LIVE_EXECUTION_ENABLED
+    is False
+)
+
+print(
+    "PASS | NCBI_EMAIL live preflight fails before production-directory creation"
+)
+
+
+
+# ============================================================
+# Amendment 34 archive URL-integrity regressions.
+# ============================================================
+
+# ------------------------------------------------------------
+# Valid redacted OpenAlex api_key survives independent raw-
+# evidence validation.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = oa_row()
+
+    secret = (
+        "ARCHIVE-OPENALEX-SECRET"
+    )
+
+    def oa_ok(request):
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=json.dumps({
+                "id":
+                    "https://openalex.org/W1",
+                "ids": {},
+            }).encode(),
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=oa_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={
+            "OPENALEX_API_KEY":
+                secret,
+        },
+        now_fn=now_fn,
+    )
+
+    archive.validate_lookup_raw_evidence(
+        root,
+        row,
+    )
+
+    for file_path in root.rglob("*"):
+        if file_path.is_file():
+            assert (
+                secret.encode()
+                not in file_path.read_bytes()
+            )
+
+print(
+    "PASS | archived redacted OpenAlex api_key "
+    "reconstructs exactly"
+)
+
+
+# ------------------------------------------------------------
+# An archived OpenAlex api_key must remain redacted.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = oa_row()
+
+    def oa_ok(request):
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=json.dumps({
+                "id":
+                    "https://openalex.org/W1",
+                "ids": {},
+            }).encode(),
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=oa_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={
+            "OPENALEX_API_KEY":
+                "ORIGINAL-SECRET",
+        },
+        now_fn=now_fn,
+    )
+
+    request_path = next(
+        root.rglob(
+            "request.json"
+        )
+    )
+
+    request_record = json.loads(
+        request_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    parsed = (
+        transport.urllib.parse.urlsplit(
+            request_record["url"]
+        )
+    )
+
+    query = (
+        transport.urllib.parse.parse_qsl(
+            parsed.query,
+            keep_blank_values=True,
+        )
+    )
+
+    query = [
+        (
+            key,
+            (
+                "FORGED-UNREDACTED"
+                if key.lower()
+                == "api_key"
+                else value
+            ),
+        )
+        for key, value
+        in query
+    ]
+
+    request_record["url"] = (
+        transport.urllib.parse.urlunsplit(
+            (
+                parsed.scheme,
+                parsed.netloc,
+                parsed.path,
+                transport.urllib.parse.urlencode(
+                    query
+                ),
+                parsed.fragment,
+            )
+        )
+    )
+
+    request_path.write_text(
+        json.dumps(
+            request_record,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    try:
+        archive.validate_lookup_raw_evidence(
+            root,
+            row,
+        )
+
+    except RuntimeError:
+        pass
+
+    else:
+        raise AssertionError(
+            "Unredacted archived OpenAlex api_key "
+            "was accepted"
+        )
+
+print(
+    "PASS | unredacted archived OpenAlex api_key "
+    "fails closed"
+)
+
+
+# ------------------------------------------------------------
+# Provider-incompatible redacted parameters remain forbidden.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = oa_row()
+
+    def oa_ok(request):
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=json.dumps({
+                "id":
+                    "https://openalex.org/W1",
+                "ids": {},
+            }).encode(),
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=oa_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={},
+        now_fn=now_fn,
+    )
+
+    request_path = next(
+        root.rglob(
+            "request.json"
+        )
+    )
+
+    request_record = json.loads(
+        request_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    request_record["url"] = (
+        transport.add_query_parameters(
+            request_record["url"],
+            [
+                (
+                    "email",
+                    "<REDACTED>",
+                )
+            ],
+        )
+    )
+
+    request_path.write_text(
+        json.dumps(
+            request_record,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    try:
+        archive.validate_lookup_raw_evidence(
+            root,
+            row,
+        )
+
+    except RuntimeError:
+        pass
+
+    else:
+        raise AssertionError(
+            "Provider-incompatible sensitive "
+            "query parameter was accepted"
+        )
+
+print(
+    "PASS | provider-incompatible redacted "
+    "query parameter fails closed"
+)
+
+
+# ------------------------------------------------------------
+# PubMed tool stays exact while redacted email is permitted.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = {
+        "logical_lookup_id":
+            "lookup_pubmed_amendment34",
+
+        "provider":
+            "pubmed",
+
+        "route":
+            "record_by_pmid",
+
+        "identifier_namespace":
+            "pmid",
+
+        "identifier":
+            "123",
+    }
+
+    xml = b"""<?xml version="1.0"?>
+<PubmedArticleSet>
+  <PubmedArticle>
+    <MedlineCitation>
+      <PMID Version="1">123</PMID>
+    </MedlineCitation>
+  </PubmedArticle>
+</PubmedArticleSet>
+"""
+
+    def pubmed_ok(request):
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=xml,
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=pubmed_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={
+            "NCBI_EMAIL":
+                "developer@example.org",
+        },
+        now_fn=now_fn,
+    )
+
+    archive.validate_lookup_raw_evidence(
+        root,
+        row,
+    )
+
+    request_path = next(
+        root.rglob(
+            "request.json"
+        )
+    )
+
+    request_record = json.loads(
+        request_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    parsed = (
+        transport.urllib.parse.urlsplit(
+            request_record["url"]
+        )
+    )
+
+    query = (
+        transport.urllib.parse.parse_qsl(
+            parsed.query,
+            keep_blank_values=True,
+        )
+    )
+
+    assert (
+        "tool",
+        "branchsnv_validation_experiment_07",
+    ) in query
+
+    assert (
+        "email",
+        "<REDACTED>",
+    ) in query
+
+print(
+    "PASS | archived PubMed tool is exact and "
+    "email is redacted"
+)
+
+
+# ------------------------------------------------------------
+# PubMed non-sensitive tool value cannot be forged.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = {
+        "logical_lookup_id":
+            "lookup_pubmed_tool_forgery",
+
+        "provider":
+            "pubmed",
+
+        "route":
+            "record_by_pmid",
+
+        "identifier_namespace":
+            "pmid",
+
+        "identifier":
+            "123",
+    }
+
+    xml = b"""<?xml version="1.0"?>
+<PubmedArticleSet>
+  <PubmedArticle>
+    <MedlineCitation>
+      <PMID Version="1">123</PMID>
+    </MedlineCitation>
+  </PubmedArticle>
+</PubmedArticleSet>
+"""
+
+    def pubmed_ok(request):
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=xml,
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=pubmed_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={
+            "NCBI_EMAIL":
+                "developer@example.org",
+        },
+        now_fn=now_fn,
+    )
+
+    request_path = next(
+        root.rglob(
+            "request.json"
+        )
+    )
+
+    request_record = json.loads(
+        request_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    parsed = (
+        transport.urllib.parse.urlsplit(
+            request_record["url"]
+        )
+    )
+
+    query = (
+        transport.urllib.parse.parse_qsl(
+            parsed.query,
+            keep_blank_values=True,
+        )
+    )
+
+    forged_query = [
+        (
+            key,
+            (
+                "forged_tool"
+                if key == "tool"
+                else value
+            ),
+        )
+        for key, value
+        in query
+    ]
+
+    request_record["url"] = (
+        transport.urllib.parse.urlunsplit(
+            (
+                parsed.scheme,
+                parsed.netloc,
+                parsed.path,
+                transport.urllib.parse.urlencode(
+                    forged_query
+                ),
+                parsed.fragment,
+            )
+        )
+    )
+
+    request_path.write_text(
+        json.dumps(
+            request_record,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    try:
+        archive.validate_lookup_raw_evidence(
+            root,
+            row,
+        )
+
+    except RuntimeError:
+        pass
+
+    else:
+        raise AssertionError(
+            "Forged PubMed tool value was accepted"
+        )
+
+print(
+    "PASS | forged PubMed tool value fails closed"
+)
+
+
+# ------------------------------------------------------------
+# Authenticated OpenAlex redirects must reconstruct the same
+# redacted api_key on each subsequent archived request URL.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = oa_row()
+
+    secret = (
+        "REDIRECT-ARCHIVE-SECRET"
+    )
+
+    calls = []
+
+    def redirect_then_ok(request):
+        calls.append(
+            request
+        )
+
+        if len(calls) == 1:
+            return transport.HTTPResponse(
+                status=301,
+                url=request.url,
+                headers=(
+                    (
+                        "Location",
+                        "https://api.openalex.org/works/W2",
+                    ),
+                ),
+                body=b"",
+            )
+
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=json.dumps({
+                "id":
+                    "https://openalex.org/W2",
+                "ids": {},
+            }).encode(),
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=redirect_then_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={
+            "OPENALEX_API_KEY":
+                secret,
+        },
+        now_fn=now_fn,
+    )
+
+    archive.validate_lookup_raw_evidence(
+        root,
+        row,
+    )
+
+    hop_records = sorted(
+        root.rglob(
+            "hop_*_response.json"
+        )
+    )
+
+    assert len(hop_records) == 2
+
+    second = json.loads(
+        hop_records[1].read_text(
+            encoding="utf-8"
+        )
+    )
+
+    second_query = (
+        transport.urllib.parse.parse_qs(
+            transport.urllib.parse.urlsplit(
+                second[
+                    "request_url"
+                ]
+            ).query
+        )
+    )
+
+    assert second_query[
+        "api_key"
+    ] == [
+        "<REDACTED>"
+    ]
+
+    for file_path in root.rglob("*"):
+        if file_path.is_file():
+            assert (
+                secret.encode()
+                not in file_path.read_bytes()
+            )
+
+print(
+    "PASS | archived OpenAlex redirect chain "
+    "reconstructs redacted api_key"
+)
+
+
+# ------------------------------------------------------------
+# Removing the inherited redacted key from a later archived
+# OpenAlex redirect request must fail closed.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = oa_row()
+
+    calls = []
+
+    def redirect_then_ok(request):
+        calls.append(
+            request
+        )
+
+        if len(calls) == 1:
+            return transport.HTTPResponse(
+                status=301,
+                url=request.url,
+                headers=(
+                    (
+                        "Location",
+                        "https://api.openalex.org/works/W2",
+                    ),
+                ),
+                body=b"",
+            )
+
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(),
+            body=json.dumps({
+                "id":
+                    "https://openalex.org/W2",
+                "ids": {},
+            }).encode(),
+        )
+
+    archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=redirect_then_ok,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={
+            "OPENALEX_API_KEY":
+                "REDIRECT-TAMPER-SECRET",
+        },
+        now_fn=now_fn,
+    )
+
+    hop_records = sorted(
+        root.rglob(
+            "hop_*_response.json"
+        )
+    )
+
+    second_path = hop_records[1]
+
+    second = json.loads(
+        second_path.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    parsed = (
+        transport.urllib.parse.urlsplit(
+            second[
+                "request_url"
+            ]
+        )
+    )
+
+    query = [
+        (
+            key,
+            value,
+        )
+        for key, value
+        in transport.urllib.parse.parse_qsl(
+            parsed.query,
+            keep_blank_values=True,
+        )
+        if key.lower()
+        != "api_key"
+    ]
+
+    second["request_url"] = (
+        transport.urllib.parse.urlunsplit(
+            (
+                parsed.scheme,
+                parsed.netloc,
+                parsed.path,
+                transport.urllib.parse.urlencode(
+                    query
+                ),
+                parsed.fragment,
+            )
+        )
+    )
+
+    second_path.write_text(
+        json.dumps(
+            second,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    try:
+        archive.validate_lookup_raw_evidence(
+            root,
+            row,
+        )
+
+    except RuntimeError:
+        pass
+
+    else:
+        raise AssertionError(
+            "Missing inherited OpenAlex api_key "
+            "was accepted in redirect archive"
+        )
+
+print(
+    "PASS | missing inherited OpenAlex redirect "
+    "api_key fails closed"
+)

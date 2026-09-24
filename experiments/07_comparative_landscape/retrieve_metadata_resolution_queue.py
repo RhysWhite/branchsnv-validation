@@ -84,6 +84,8 @@ RETRY_DELAYS = {
 # has been independently tested and frozen.
 LIVE_EXECUTION_ENABLED = False
 
+NCBI_TOOL = "branchsnv_validation_experiment_07"
+
 
 class TransportError(RuntimeError):
     pass
@@ -265,13 +267,26 @@ def redact_headers(
     output = []
 
     for key, value in headers:
-        if key.lower() in sensitive:
+        normalized = key.lower()
+
+        if normalized == "location":
+            output.append(
+                (
+                    key,
+                    sanitized_url(
+                        value
+                    ),
+                )
+            )
+
+        elif normalized in sensitive:
             output.append(
                 (
                     key,
                     "<REDACTED>",
                 )
             )
+
         else:
             output.append(
                 (
@@ -301,6 +316,7 @@ def sanitized_url(
         "token",
         "access_token",
         "key",
+        "email",
     }
 
     clean_query = []
@@ -349,21 +365,7 @@ def provider_headers(
         ),
     ]
 
-    if provider == "openalex":
-        key = environ.get(
-            "OPENALEX_API_KEY",
-            "",
-        ).strip()
-
-        if key:
-            headers.append(
-                (
-                    "Authorization",
-                    f"Bearer {key}",
-                )
-            )
-
-    elif provider == "opencitations_meta":
+    if provider == "opencitations_meta":
         token = environ.get(
             "OPENCITATIONS_ACCESS_TOKEN",
             "",
@@ -386,6 +388,198 @@ def encode_path_identifier(
     return urllib.parse.quote(
         value,
         safe=":",
+    )
+
+
+def add_query_parameters(
+    url: str,
+    parameters: Iterable[
+        tuple[str, str]
+    ],
+) -> str:
+    parsed = urllib.parse.urlsplit(
+        url
+    )
+
+    query = urllib.parse.parse_qsl(
+        parsed.query,
+        keep_blank_values=True,
+    )
+
+    query.extend(
+        parameters
+    )
+
+    return urllib.parse.urlunsplit(
+        (
+            parsed.scheme,
+            parsed.netloc,
+            parsed.path,
+            urllib.parse.urlencode(
+                query
+            ),
+            parsed.fragment,
+        )
+    )
+
+
+def validate_ncbi_email_value(
+    value: str,
+) -> str:
+    email = value.strip()
+
+    if not email:
+        raise ValueError(
+            "NCBI email is empty"
+        )
+
+    if any(
+        character.isspace()
+        for character in email
+    ):
+        raise ValueError(
+            "NCBI email contains whitespace"
+        )
+
+    if email.count("@") != 1:
+        raise ValueError(
+            "NCBI email must contain exactly one @"
+        )
+
+    local, domain = email.split(
+        "@",
+        1,
+    )
+
+    if not local or not domain:
+        raise ValueError(
+            "NCBI email has an empty local or domain part"
+        )
+
+    return email
+
+
+def optional_ncbi_email(
+    environ: dict[str, str],
+) -> str | None:
+    raw = environ.get(
+        "NCBI_EMAIL",
+        "",
+    )
+
+    if not raw.strip():
+        return None
+
+    return validate_ncbi_email_value(
+        raw
+    )
+
+
+def require_ncbi_email(
+    environ: dict[str, str],
+) -> str:
+    raw = environ.get(
+        "NCBI_EMAIL",
+        "",
+    )
+
+    try:
+        return validate_ncbi_email_value(
+            raw
+        )
+
+    except ValueError as exc:
+        raise LiveExecutionBlocked(
+            "NCBI_EMAIL is required and must be "
+            "syntactically valid before live metadata execution"
+        ) from exc
+
+
+def preserve_openalex_api_key_on_redirect(
+    *,
+    current_url: str,
+    target_url: str,
+) -> str:
+    current = urllib.parse.urlsplit(
+        current_url
+    )
+
+    target = urllib.parse.urlsplit(
+        target_url
+    )
+
+    current_query = urllib.parse.parse_qsl(
+        current.query,
+        keep_blank_values=True,
+    )
+
+    target_query = urllib.parse.parse_qsl(
+        target.query,
+        keep_blank_values=True,
+    )
+
+    current_keys = [
+        value
+        for key, value
+        in current_query
+        if key.lower() == "api_key"
+    ]
+
+    target_keys = [
+        value
+        for key, value
+        in target_query
+        if key.lower() == "api_key"
+    ]
+
+    if len(current_keys) > 1:
+        raise RedirectFailure(
+            "Current OpenAlex request contains "
+            "multiple api_key parameters"
+        )
+
+    if len(target_keys) > 1:
+        raise RedirectFailure(
+            "OpenAlex redirect contains multiple "
+            "api_key parameters"
+        )
+
+    if not current_keys:
+        if target_keys:
+            raise RedirectFailure(
+                "OpenAlex redirect introduced an "
+                "unexpected api_key"
+            )
+
+        return target_url
+
+    current_key = current_keys[0]
+
+    if target_keys:
+        if target_keys[0] != current_key:
+            raise RedirectFailure(
+                "OpenAlex redirect changed api_key"
+            )
+
+        return target_url
+
+    target_query.append(
+        (
+            "api_key",
+            current_key,
+        )
+    )
+
+    return urllib.parse.urlunsplit(
+        (
+            target.scheme,
+            target.netloc,
+            target.path,
+            urllib.parse.urlencode(
+                target_query
+            ),
+            target.fragment,
+        )
     )
 
 
@@ -456,6 +650,22 @@ def build_request(
             + path_value
         )
 
+        key = environ.get(
+            "OPENALEX_API_KEY",
+            "",
+        ).strip()
+
+        if key:
+            url = add_query_parameters(
+                url,
+                [
+                    (
+                        "api_key",
+                        key,
+                    )
+                ],
+            )
+
     elif provider == "opencitations_meta":
         base = (
             "https://api.opencitations.net"
@@ -489,11 +699,40 @@ def build_request(
                 + route
             )
 
-        query = urllib.parse.urlencode({
-            "db": "pubmed",
-            "id": identifier,
-            "retmode": "xml",
-        })
+        query_parameters = [
+            (
+                "db",
+                "pubmed",
+            ),
+            (
+                "id",
+                identifier,
+            ),
+            (
+                "retmode",
+                "xml",
+            ),
+            (
+                "tool",
+                NCBI_TOOL,
+            ),
+        ]
+
+        email = optional_ncbi_email(
+            environ
+        )
+
+        if email is not None:
+            query_parameters.append(
+                (
+                    "email",
+                    email,
+                )
+            )
+
+        query = urllib.parse.urlencode(
+            query_parameters
+        )
 
         url = (
             "https://eutils.ncbi.nlm.nih.gov"
@@ -1160,6 +1399,14 @@ def request_with_redirects(
             current_url=current.url,
             location=location,
         )
+
+        if current.provider == "openalex":
+            target = (
+                preserve_openalex_api_key_on_redirect(
+                    current_url=current.url,
+                    target_url=target,
+                )
+            )
 
         current = RequestSpec(
             logical_lookup_id=
@@ -1986,6 +2233,10 @@ def assert_live_execution_allowed(
             "BRANCHSNV_ALLOW_METADATA_NETWORK=YES "
             "is required"
         )
+
+    require_ncbi_email(
+        environ
+    )
 
 
 def main() -> int:
