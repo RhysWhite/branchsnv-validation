@@ -1018,6 +1018,184 @@ def extract_pubmed_primary_pmid(
     return value
 
 
+
+OPENCITATIONS_MULTIPLICITY_EXCLUDED_FIELDS = frozenset({
+    "pub_date",
+    "venue",
+})
+
+
+def validate_opencitations_multi_record_response(
+    request: RequestSpec,
+    records: list,
+) -> tuple[str, tuple[str, ...]]:
+    """
+    Validate Amendment 36 identity-concordant multiplicity.
+
+    Multiple records are acceptable only when they carry the
+    same exact identifier bundle, every bundle contains the
+    exact requested identifier token, and removal of only
+    venue/pub_date makes every record canonically identical.
+    """
+
+    if (
+        request.provider
+        != "opencitations_meta"
+        or request.route
+        not in {
+            "metadata_by_doi",
+            "metadata_by_omid",
+        }
+    ):
+        raise ResponseIntegrityError(
+            "OpenCitations multiplicity rule "
+            "used outside an exact metadata route"
+        )
+
+    if (
+        not isinstance(
+            records,
+            list,
+        )
+        or len(records) <= 1
+    ):
+        raise ResponseIntegrityError(
+            "OpenCitations multiplicity rule "
+            "requires more than one record"
+        )
+
+    expected_token = (
+        f"{request.identifier_namespace}:"
+        f"{request.identifier}"
+    )
+
+    provider_ids = []
+    reduced_records = []
+
+    for record in records:
+        if not isinstance(
+            record,
+            dict,
+        ):
+            raise ResponseIntegrityError(
+                "OpenCitations multi-record "
+                "response contains a non-object"
+            )
+
+        provider_id = record.get(
+            "id"
+        )
+
+        if (
+            not isinstance(
+                provider_id,
+                str,
+            )
+            or not provider_id.strip()
+        ):
+            raise ResponseIntegrityError(
+                "OpenCitations multi-record "
+                "response lacks a non-empty id"
+            )
+
+        provider_id = (
+            provider_id.strip()
+        )
+
+        if (
+            expected_token
+            not in provider_id.split()
+        ):
+            raise ResponseIntegrityError(
+                "OpenCitations multi-record "
+                "response lacks the exact "
+                "requested identifier token"
+            )
+
+        provider_ids.append(
+            provider_id
+        )
+
+        reduced_records.append({
+            key: value
+            for key, value
+            in record.items()
+            if key
+            not in (
+                OPENCITATIONS_MULTIPLICITY_EXCLUDED_FIELDS
+            )
+        })
+
+    if len(
+        set(provider_ids)
+    ) != 1:
+        raise ResponseIntegrityError(
+            "OpenCitations multi-record "
+            "response has differing id bundles"
+        )
+
+    canonical_reduced = {
+        canonical_json_bytes(
+            record
+        )
+        for record in reduced_records
+    }
+
+    if len(
+        canonical_reduced
+    ) != 1:
+        raise ResponseIntegrityError(
+            "OpenCitations multi-record "
+            "response differs outside "
+            "venue/pub_date"
+        )
+
+    all_keys = sorted(
+        set().union(
+            *[
+                set(record)
+                for record in records
+            ]
+        )
+    )
+
+    varying_fields = []
+
+    for key in all_keys:
+        values = {
+            canonical_json_bytes(
+                record.get(
+                    key,
+                    None,
+                )
+            )
+            for record in records
+        }
+
+        if len(values) > 1:
+            varying_fields.append(
+                key
+            )
+
+    if not set(
+        varying_fields
+    ).issubset(
+        OPENCITATIONS_MULTIPLICITY_EXCLUDED_FIELDS
+    ):
+        raise ResponseIntegrityError(
+            "OpenCitations multi-record "
+            "response has an unpermitted "
+            "varying field"
+        )
+
+    return (
+        provider_ids[0],
+        tuple(
+            varying_fields
+        ),
+    )
+
+
 def classify_response(
     request: RequestSpec,
     response: HTTPResponse,
@@ -1125,10 +1303,25 @@ def classify_response(
                 metadata={},
             )
 
-        if len(value) != 1:
-            raise ResponseIntegrityError(
-                "OpenCitations exact lookup returned "
-                f"{len(value)} records"
+        if len(value) > 1:
+            (
+                provider_id,
+                _varying_fields,
+            ) = (
+                validate_opencitations_multi_record_response(
+                    request,
+                    value,
+                )
+            )
+
+            return Classification(
+                terminal_status="success",
+                provider_identifier=
+                    provider_id,
+                metadata={
+                    "provider_id":
+                        provider_id,
+                },
             )
 
         if not isinstance(

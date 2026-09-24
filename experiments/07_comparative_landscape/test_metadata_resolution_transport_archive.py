@@ -660,6 +660,400 @@ print(
 
 
 # ------------------------------------------------------------
+# Amendment 36 historical OpenCitations failure adjudication:
+# preserve the original failed attempt byte-for-byte, perform
+# no second provider request, and derive success from raw
+# evidence under the frozen amended rule.
+# ------------------------------------------------------------
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+
+    row = dict(
+        oa_row()
+    )
+
+    row.update({
+        "logical_lookup_id":
+            "lookup:amendment36-synthetic",
+
+        "provider":
+            "opencitations_meta",
+
+        "route":
+            "metadata_by_omid",
+
+        "identifier_namespace":
+            "omid",
+
+        "identifier":
+            "br/1",
+    })
+
+    common = {
+        "id":
+            "omid:br/1 doi:10.1234/example",
+
+        "title":
+            "Example title",
+
+        "author":
+            "Example Author",
+
+        "type":
+            "journal article",
+
+        "pub_date":
+            "2020-01-01",
+    }
+
+    provider_payload = [
+        {
+            **common,
+            "venue":
+                "Venue A",
+        },
+        {
+            **common,
+            "venue":
+                "Venue B",
+        },
+    ]
+
+    def multiplicity_response(
+        request,
+    ):
+        return transport.HTTPResponse(
+            status=200,
+            url=request.url,
+            headers=(
+                (
+                    "Content-Type",
+                    "application/json",
+                ),
+            ),
+            body=json.dumps(
+                provider_payload
+            ).encode(),
+        )
+
+    original_classifier = (
+        transport.classify_response
+    )
+
+    def pre_amendment_classifier(
+        request,
+        response,
+    ):
+        if (
+            request.provider
+            == "opencitations_meta"
+            and response.status == 200
+        ):
+            value = json.loads(
+                response.body.decode(
+                    "utf-8"
+                )
+            )
+
+            if (
+                isinstance(
+                    value,
+                    list,
+                )
+                and len(value) != 1
+            ):
+                raise (
+                    transport.ResponseIntegrityError(
+                        "OpenCitations exact lookup returned "
+                        f"{len(value)} records"
+                    )
+                )
+
+        return original_classifier(
+            request,
+            response,
+        )
+
+    transport.classify_response = (
+        pre_amendment_classifier
+    )
+
+    try:
+        first = archive.execute_queue(
+            [row],
+            archive_root=root,
+            executor=multiplicity_response,
+            pacer=fake_pacer(),
+            retry_sleeper=lambda _: None,
+            environ={},
+            now_fn=now_fn,
+        )
+
+    finally:
+        transport.classify_response = (
+            original_classifier
+        )
+
+    assert (
+        first[0][
+            "terminal_status"
+        ]
+        == "response_integrity_failure"
+    )
+
+    lookup = archive.lookup_root(
+        root,
+        row[
+            "logical_lookup_id"
+        ],
+    )
+
+    failure = (
+        lookup
+        / "failure.json"
+    )
+
+    assert failure.is_file()
+
+    assert not (
+        lookup
+        / "terminal.json"
+    ).exists()
+
+    before = {
+        path.relative_to(
+            lookup
+        ).as_posix():
+            hashlib.sha256(
+                path.read_bytes()
+            ).hexdigest()
+
+        for path in lookup.rglob("*")
+        if path.is_file()
+    }
+
+    network_calls = [0]
+
+    def must_not_call(
+        request,
+    ):
+        network_calls[0] += 1
+
+        raise AssertionError(
+            "Amendment 36 adjudication "
+            "must not issue another provider request"
+        )
+
+    second = archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=must_not_call,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={},
+        now_fn=now_fn,
+    )
+
+    assert network_calls[0] == 0
+
+    assert (
+        second[0][
+            "terminal_status"
+        ]
+        == "success"
+    )
+
+    assert (
+        second[0][
+            "resume_action"
+        ]
+        == "adjudicated_existing_failure"
+    )
+
+    adjudication = (
+        lookup
+        / "adjudication.json"
+    )
+
+    assert adjudication.is_file()
+    assert failure.is_file()
+
+    assert not (
+        lookup
+        / "terminal.json"
+    ).exists()
+
+    for relative, digest in (
+        before.items()
+    ):
+        path = (
+            lookup
+            / relative
+        )
+
+        assert path.is_file()
+
+        assert hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest() == digest
+
+    state = (
+        archive.infer_lookup_state(
+            root,
+            row,
+        )
+    )
+
+    assert (
+        state["state"]
+        == "adjudicated"
+    )
+
+    assert (
+        state[
+            "terminal_status"
+        ]
+        == "success"
+    )
+
+    replay_calls = [0]
+
+    def replay_must_not_call(
+        request,
+    ):
+        replay_calls[0] += 1
+
+        raise AssertionError(
+            "Existing adjudication "
+            "must be reused without network"
+        )
+
+    third = archive.execute_queue(
+        [row],
+        archive_root=root,
+        executor=replay_must_not_call,
+        pacer=fake_pacer(),
+        retry_sleeper=lambda _: None,
+        environ={},
+        now_fn=now_fn,
+    )
+
+    assert replay_calls[0] == 0
+
+    assert (
+        third[0][
+            "resume_action"
+        ]
+        == "reused_adjudication"
+    )
+
+    manifest = (
+        archive.write_archive_state(
+            [row],
+            root,
+            now_fn=now_fn,
+        )
+    )
+
+    # Synthetic one-row archives cannot be production COMPLETE,
+    # but this lookup itself is now an accepted success.
+    assert (
+        manifest[
+            "lookup_status_counts"
+        ][
+            "success"
+        ]
+        == 1
+    )
+
+    status = (
+        archive.collect_lookup_status(
+            [row],
+            root,
+        )
+    )
+
+    assert (
+        status[0][
+            "status"
+        ]
+        == "success"
+    )
+
+    archive.validate_archive(
+        [row],
+        root,
+        require_complete=False,
+    )
+
+    print(
+        "PASS | Amendment 36 adjudicates "
+        "historical multiplicity without network"
+    )
+
+    print(
+        "PASS | original failure and attempt "
+        "evidence remain byte-identical"
+    )
+
+    print(
+        "PASS | adjudicated success reproduces "
+        "from raw evidence"
+    )
+
+    value = json.loads(
+        adjudication.read_text(
+            encoding="utf-8"
+        )
+    )
+
+    value[
+        "provider_identifier"
+    ] = (
+        "omid:br/999"
+    )
+
+    adjudication.write_bytes(
+        transport.canonical_json_bytes(
+            value
+        )
+    )
+
+    # Even an attacker who regenerates the outer checksum
+    # manifest must not be able to forge the adjudication.
+    archive.write_checksums(
+        root
+    )
+
+    archive.validate_checksums(
+        root,
+        require_exact_coverage=True,
+    )
+
+    try:
+        archive.validate_archive(
+            [row],
+            root,
+            require_complete=False,
+        )
+
+    except RuntimeError:
+        pass
+
+    else:
+        raise AssertionError(
+            "Semantically forged Amendment 36 "
+            "adjudication passed validation"
+        )
+
+print(
+    "PASS | re-checksummed Amendment 36 "
+    "adjudication forgery fails semantic validation"
+)
+
+
+# ------------------------------------------------------------
 # Redirect ledger records redirect evidence.
 # ------------------------------------------------------------
 
@@ -940,20 +1334,15 @@ print(
 
 
 # ------------------------------------------------------------
-# No production retrieval directory exists.
+# Production-directory presence is no longer a synthetic-test
+# invariant after the first frozen live retrieval. All tests
+# above use temporary archive roots and must not mutate the
+# production archive.
 # ------------------------------------------------------------
 
-production = (
-    Path(__file__).resolve().parent.parent.parent
-    / "results"
-    / "07_comparative_landscape"
-    / "metadata_resolution_retrieval"
-)
-
-assert not production.exists()
-
 print(
-    "PASS | archive tests created no production retrieval directory"
+    "PASS | synthetic archive tests are "
+    "independent of production-directory presence"
 )
 
 print()

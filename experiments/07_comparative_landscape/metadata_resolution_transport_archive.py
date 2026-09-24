@@ -390,6 +390,507 @@ def write_failure(
     )
 
 
+
+AMENDMENT_36_ADJUDICATION_FILENAME = (
+    "adjudication.json"
+)
+
+AMENDMENT_36_FREEZE_COMMIT = (
+    "b0c56466ae575fee194c35fd38af547f7f2776e7"
+)
+
+AMENDMENT_36_RULE_ID = (
+    "experiment_07_amendment_36_"
+    "opencitations_exact_response_multiplicity"
+)
+
+
+def adjudication_path(
+    archive_root: Path,
+    logical_lookup_id: str,
+) -> Path:
+    return (
+        lookup_root(
+            archive_root,
+            logical_lookup_id,
+        )
+        / AMENDMENT_36_ADJUDICATION_FILENAME
+    )
+
+
+def derive_amendment_36_adjudication(
+    archive_root: Path,
+    row: dict,
+) -> dict | None:
+    """
+    Reconstruct an Amendment 36 adjudication entirely from
+    immutable archived evidence.
+
+    Returns None when the historical failure is not within the
+    amendment's deliberately narrow scope.
+    """
+
+    if (
+        row.get("provider")
+        != "opencitations_meta"
+        or row.get("route")
+        not in {
+            "metadata_by_doi",
+            "metadata_by_omid",
+        }
+    ):
+        return None
+
+    root = lookup_root(
+        archive_root,
+        row[
+            "logical_lookup_id"
+        ],
+    )
+
+    failure = failure_path(
+        archive_root,
+        row[
+            "logical_lookup_id"
+        ],
+    )
+
+    if not failure.is_file():
+        return None
+
+    failure_record = read_json(
+        failure
+    )
+
+    for key in (
+        "logical_lookup_id",
+        "provider",
+        "route",
+        "identifier_namespace",
+        "identifier",
+    ):
+        if (
+            failure_record.get(key)
+            != row.get(key)
+        ):
+            raise RuntimeError(
+                "Amendment 36 failure "
+                "identity mismatch"
+            )
+
+    if (
+        failure_record.get(
+            "terminal_status"
+        )
+        != "response_integrity_failure"
+    ):
+        return None
+
+    attempts = load_attempt_records(
+        root
+    )
+
+    if not attempts:
+        raise RuntimeError(
+            "Amendment 36 failure "
+            "has no attempt evidence"
+        )
+
+    attempt_count = int(
+        failure_record.get(
+            "attempt_count",
+            -1,
+        )
+    )
+
+    if attempt_count != len(
+        attempts
+    ):
+        raise RuntimeError(
+            "Amendment 36 failure "
+            "attempt-count mismatch"
+        )
+
+    last = attempts[-1]
+
+    if (
+        last.get("outcome")
+        != "response_integrity_failure"
+    ):
+        return None
+
+    error = last.get(
+        "error"
+    )
+
+    if not isinstance(
+        error,
+        str,
+    ):
+        return None
+
+    match = re.fullmatch(
+        r"OpenCitations exact lookup "
+        r"returned (\d+) records",
+        error,
+    )
+
+    if match is None:
+        return None
+
+    historical_record_count = int(
+        match.group(1)
+    )
+
+    if historical_record_count <= 1:
+        raise RuntimeError(
+            "Historical OpenCitations "
+            "multiplicity count is invalid"
+        )
+
+    attempt_number = int(
+        last[
+            "attempt_number"
+        ]
+    )
+
+    if attempt_number != attempt_count:
+        raise RuntimeError(
+            "Amendment 36 source attempt "
+            "is not the final attempt"
+        )
+
+    attempt_root = (
+        root
+        / f"attempt_{attempt_number:02d}"
+    )
+
+    request_path = (
+        attempt_root
+        / "request.json"
+    )
+
+    attempt_path = (
+        attempt_root
+        / "attempt.json"
+    )
+
+    if (
+        not request_path.is_file()
+        or not attempt_path.is_file()
+    ):
+        raise RuntimeError(
+            "Amendment 36 source attempt "
+            "is incomplete"
+        )
+
+    request_record = read_json(
+        request_path
+    )
+
+    response_paths = sorted(
+        attempt_root.glob(
+            "hop_*_response.json"
+        )
+    )
+
+    if not response_paths:
+        raise RuntimeError(
+            "Amendment 36 source attempt "
+            "has no archived response"
+        )
+
+    response_path = (
+        response_paths[-1]
+    )
+
+    response_record = read_json(
+        response_path
+    )
+
+    if int(
+        response_record.get(
+            "response_status",
+            -1,
+        )
+    ) != 200:
+        return None
+
+    body_name = response_record.get(
+        "body_file"
+    )
+
+    if not isinstance(
+        body_name,
+        str,
+    ):
+        raise RuntimeError(
+            "Amendment 36 source response "
+            "lacks body filename"
+        )
+
+    body_path = (
+        attempt_root
+        / body_name
+    )
+
+    if not body_path.is_file():
+        raise RuntimeError(
+            "Amendment 36 source body "
+            "is missing"
+        )
+
+    body = body_path.read_bytes()
+
+    body_sha = (
+        transport.sha256_bytes(
+            body
+        )
+    )
+
+    if (
+        body_sha
+        != response_record.get(
+            "body_sha256"
+        )
+    ):
+        raise RuntimeError(
+            "Amendment 36 source body "
+            "checksum mismatch"
+        )
+
+    try:
+        records = json.loads(
+            body.decode(
+                "utf-8"
+            )
+        )
+    except Exception as exc:
+        raise RuntimeError(
+            "Historical OpenCitations "
+            "multiplicity body is no longer "
+            "valid JSON"
+        ) from exc
+
+    if (
+        not isinstance(
+            records,
+            list,
+        )
+        or len(records)
+        != historical_record_count
+    ):
+        raise RuntimeError(
+            "Historical OpenCitations "
+            "multiplicity body no longer "
+            "matches its original failure"
+        )
+
+    request = transport.RequestSpec(
+        logical_lookup_id=
+            row[
+                "logical_lookup_id"
+            ],
+        provider=
+            row["provider"],
+        route=
+            row["route"],
+        identifier_namespace=
+            row[
+                "identifier_namespace"
+            ],
+        identifier=
+            row["identifier"],
+        method=
+            request_record.get(
+                "method",
+                "GET",
+            ),
+        url=
+            request_record.get(
+                "url",
+                "",
+            ),
+        headers=tuple(),
+    )
+
+    try:
+        (
+            provider_identifier,
+            varying_fields,
+        ) = (
+            transport.
+            validate_opencitations_multi_record_response(
+                request,
+                records,
+            )
+        )
+
+    except transport.ResponseIntegrityError:
+        return None
+
+    return {
+        "schema_version":
+            1,
+
+        "rule_id":
+            AMENDMENT_36_RULE_ID,
+
+        "amendment_number":
+            36,
+
+        "amendment_freeze_commit":
+            AMENDMENT_36_FREEZE_COMMIT,
+
+        "logical_lookup_id":
+            row[
+                "logical_lookup_id"
+            ],
+
+        "provider":
+            row["provider"],
+
+        "route":
+            row["route"],
+
+        "identifier_namespace":
+            row[
+                "identifier_namespace"
+            ],
+
+        "identifier":
+            row["identifier"],
+
+        "historical_terminal_status":
+            "response_integrity_failure",
+
+        "effective_terminal_status":
+            "success",
+
+        "provider_identifier":
+            provider_identifier,
+
+        "provider_record_count":
+            len(records),
+
+        "varying_fields":
+            list(
+                varying_fields
+            ),
+
+        "permitted_varying_fields": [
+            "pub_date",
+            "venue",
+        ],
+
+        "source_attempt_number":
+            attempt_number,
+
+        "source_failure_sha256":
+            sha256_file(
+                failure
+            ),
+
+        "source_attempt_record_sha256":
+            sha256_file(
+                attempt_path
+            ),
+
+        "source_response_metadata_sha256":
+            sha256_file(
+                response_path
+            ),
+
+        "source_response_body_sha256":
+            body_sha,
+    }
+
+
+def verify_amendment_36_adjudication(
+    archive_root: Path,
+    row: dict,
+) -> dict:
+    path = adjudication_path(
+        archive_root,
+        row[
+            "logical_lookup_id"
+        ],
+    )
+
+    if not path.is_file():
+        raise RuntimeError(
+            "Amendment 36 adjudication missing"
+        )
+
+    actual = read_json(
+        path
+    )
+
+    expected = (
+        derive_amendment_36_adjudication(
+            archive_root,
+            row,
+        )
+    )
+
+    if expected is None:
+        raise RuntimeError(
+            "Adjudication is not supported "
+            "by immutable Amendment 36 evidence"
+        )
+
+    if actual != expected:
+        raise RuntimeError(
+            "Amendment 36 adjudication "
+            "does not reproduce from raw evidence"
+        )
+
+    return actual
+
+
+def write_amendment_36_adjudication_if_eligible(
+    archive_root: Path,
+    row: dict,
+) -> dict | None:
+    expected = (
+        derive_amendment_36_adjudication(
+            archive_root,
+            row,
+        )
+    )
+
+    if expected is None:
+        return None
+
+    path = adjudication_path(
+        archive_root,
+        row[
+            "logical_lookup_id"
+        ],
+    )
+
+    if path.exists():
+        return (
+            verify_amendment_36_adjudication(
+                archive_root,
+                row,
+            )
+        )
+
+    path.write_bytes(
+        canonical_json_bytes(
+            expected
+        )
+    )
+
+    return (
+        verify_amendment_36_adjudication(
+            archive_root,
+            row,
+        )
+    )
+
+
 def infer_lookup_state(
     archive_root: Path,
     row: dict,
@@ -418,6 +919,15 @@ def infer_lookup_state(
         ],
     )
 
+    adjudication = (
+        adjudication_path(
+            archive_root,
+            row[
+                "logical_lookup_id"
+            ],
+        )
+    )
+
     if (
         terminal_path.exists()
         and failure.exists()
@@ -425,6 +935,24 @@ def infer_lookup_state(
         raise RuntimeError(
             "Lookup has both terminal.json "
             "and failure.json"
+        )
+
+    if (
+        terminal_path.exists()
+        and adjudication.exists()
+    ):
+        raise RuntimeError(
+            "Lookup has both terminal.json "
+            "and adjudication.json"
+        )
+
+    if (
+        adjudication.exists()
+        and not failure.exists()
+    ):
+        raise RuntimeError(
+            "Adjudication lacks historical "
+            "failure.json"
         )
 
     if terminal_path.exists():
@@ -457,6 +985,48 @@ def infer_lookup_state(
             "prior_attempts":
                 terminal[
                     "attempts"
+                ],
+        }
+
+    if adjudication.exists():
+        record = (
+            verify_amendment_36_adjudication(
+                archive_root,
+                row,
+            )
+        )
+
+        attempts = (
+            load_attempt_records(
+                root
+            )
+        )
+
+        return {
+            "state":
+                "adjudicated",
+
+            "terminal_status":
+                record[
+                    "effective_terminal_status"
+                ],
+
+            "attempt_count":
+                int(
+                    record[
+                        "source_attempt_number"
+                    ]
+                ),
+
+            "start_attempt_number":
+                None,
+
+            "prior_attempts":
+                attempts,
+
+            "provider_identifier":
+                record[
+                    "provider_identifier"
                 ],
         }
 
@@ -841,7 +1411,87 @@ def execute_queue(
 
         if state[
             "state"
+        ] == "adjudicated":
+            results.append({
+                "logical_lookup_id":
+                    row[
+                        "logical_lookup_id"
+                    ],
+
+                "terminal_status":
+                    state[
+                        "terminal_status"
+                    ],
+
+                "attempt_count":
+                    state[
+                        "attempt_count"
+                    ],
+
+                "resume_action":
+                    "reused_adjudication",
+            })
+
+            continue
+
+        if state[
+            "state"
         ] == "failure":
+            if (
+                state[
+                    "terminal_status"
+                ]
+                == "response_integrity_failure"
+            ):
+                adjudication = (
+                    write_amendment_36_adjudication_if_eligible(
+                        archive_root,
+                        row,
+                    )
+                )
+
+                if adjudication is not None:
+                    resolved = (
+                        infer_lookup_state(
+                            archive_root,
+                            row,
+                        )
+                    )
+
+                    if (
+                        resolved[
+                            "state"
+                        ]
+                        != "adjudicated"
+                    ):
+                        raise RuntimeError(
+                            "Amendment 36 adjudication "
+                            "did not resolve to an "
+                            "adjudicated state"
+                        )
+
+                    results.append({
+                        "logical_lookup_id":
+                            row[
+                                "logical_lookup_id"
+                            ],
+
+                        "terminal_status":
+                            resolved[
+                                "terminal_status"
+                            ],
+
+                        "attempt_count":
+                            resolved[
+                                "attempt_count"
+                            ],
+
+                        "resume_action":
+                            "adjudicated_existing_failure",
+                    })
+
+                    continue
+
             failure = failure_path(
                 archive_root,
                 row[
@@ -1908,22 +2558,47 @@ def validate_archive(
         ]
 
         if status in ACCEPTED_TERMINAL:
-            terminal = (
-                verify_terminal_for_row(
+            adjudication = (
+                adjudication_path(
                     archive_root,
-                    queue_row,
+                    queue_row[
+                        "logical_lookup_id"
+                    ],
                 )
             )
 
-            if (
-                terminal[
-                    "terminal_status"
-                ]
-                != status
-            ):
+            if adjudication.is_file():
+                accepted = (
+                    verify_amendment_36_adjudication(
+                        archive_root,
+                        queue_row,
+                    )
+                )
+
+                observed_status = (
+                    accepted[
+                        "effective_terminal_status"
+                    ]
+                )
+
+            else:
+                accepted = (
+                    verify_terminal_for_row(
+                        archive_root,
+                        queue_row,
+                    )
+                )
+
+                observed_status = (
+                    accepted[
+                        "terminal_status"
+                    ]
+                )
+
+            if observed_status != status:
                 raise RuntimeError(
                     "lookup_status differs "
-                    "from terminal archive"
+                    "from accepted raw state"
                 )
 
         elif status in FAILURE_TERMINAL:
@@ -2221,6 +2896,7 @@ def validate_lookup_raw_evidence(
     allowed_root_files = {
         "terminal.json",
         "failure.json",
+        AMENDMENT_36_ADJUDICATION_FILENAME,
     }
 
     for item in root.iterdir():
@@ -2658,6 +3334,11 @@ def validate_lookup_raw_evidence(
         / "failure.json"
     )
 
+    adjudication = (
+        root
+        / AMENDMENT_36_ADJUDICATION_FILENAME
+    )
+
     if (
         terminal_path.exists()
         and failure.exists()
@@ -2665,6 +3346,24 @@ def validate_lookup_raw_evidence(
         raise RuntimeError(
             "Lookup archive has both terminal "
             "and failure records"
+        )
+
+    if (
+        terminal_path.exists()
+        and adjudication.exists()
+    ):
+        raise RuntimeError(
+            "Lookup archive has both terminal "
+            "and adjudication records"
+        )
+
+    if (
+        adjudication.exists()
+        and not failure.exists()
+    ):
+        raise RuntimeError(
+            "Lookup adjudication lacks "
+            "historical failure record"
         )
 
     if terminal_path.exists():
@@ -2809,6 +3508,12 @@ def validate_lookup_raw_evidence(
             raise RuntimeError(
                 "retry_exhausted without "
                 "maximum attempt count"
+            )
+
+        if adjudication.exists():
+            verify_amendment_36_adjudication(
+                archive_root,
+                row,
             )
 
 

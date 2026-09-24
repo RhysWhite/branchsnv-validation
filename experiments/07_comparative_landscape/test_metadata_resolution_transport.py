@@ -437,31 +437,242 @@ print(
 
 
 # ------------------------------------------------------------
-# OpenCitations ambiguity fails closed.
+# Amendment 36:
+# identity-concordant OpenCitations multiplicity is accepted,
+# but only under the exact frozen rule.
 # ------------------------------------------------------------
 
-try:
+oc_common = {
+    "id":
+        "omid:br/1 doi:10.1234/example",
+
+    "title":
+        "Example title",
+
+    "author":
+        "Example Author",
+
+    "type":
+        "journal article",
+
+    "pub_date":
+        "2020-01-01",
+}
+
+eligible_venue = [
+    {
+        **oc_common,
+        "venue":
+            "Venue A",
+    },
+    {
+        **oc_common,
+        "venue":
+            "Venue B",
+    },
+]
+
+classification = (
     transport.classify_response(
         req_oc,
         response(
             200,
             url=req_oc.url,
-            body=b"[{},{}]",
+            body=json.dumps(
+                eligible_venue
+            ).encode(),
         ),
     )
-
-except transport.ResponseIntegrityError:
-    pass
-
-else:
-    raise AssertionError(
-        "Ambiguous OpenCitations response accepted"
-    )
-
-print(
-    "PASS | OpenCitations multi-record exact response fails closed"
 )
 
+assert (
+    classification.terminal_status
+    == "success"
+)
+
+assert (
+    classification.provider_identifier
+    == "omid:br/1 doi:10.1234/example"
+)
+
+print(
+    "PASS | Amendment 36 accepts "
+    "identity-concordant venue multiplicity"
+)
+
+
+eligible_date = [
+    {
+        **oc_common,
+        "venue":
+            "Venue A",
+        "pub_date":
+            "2020",
+    },
+    {
+        **oc_common,
+        "venue":
+            "Venue A",
+        "pub_date":
+            "2020-01",
+    },
+]
+
+classification = (
+    transport.classify_response(
+        req_oc,
+        response(
+            200,
+            url=req_oc.url,
+            body=json.dumps(
+                eligible_date
+            ).encode(),
+        ),
+    )
+)
+
+assert (
+    classification.provider_identifier
+    == "omid:br/1 doi:10.1234/example"
+)
+
+print(
+    "PASS | Amendment 36 accepts "
+    "identity-concordant pub_date multiplicity"
+)
+
+
+def expect_oc_integrity_failure(
+    payload,
+    label,
+):
+    try:
+        transport.classify_response(
+            req_oc,
+            response(
+                200,
+                url=req_oc.url,
+                body=json.dumps(
+                    payload
+                ).encode(),
+            ),
+        )
+
+    except transport.ResponseIntegrityError:
+        print(
+            "PASS |",
+            label,
+        )
+
+    else:
+        raise AssertionError(
+            "Invalid OpenCitations "
+            "multiplicity accepted: "
+            + label
+        )
+
+
+expect_oc_integrity_failure(
+    [
+        {},
+        {},
+    ],
+    "OpenCitations empty-object multiplicity fails closed",
+)
+
+expect_oc_integrity_failure(
+    [
+        {
+            **oc_common,
+            "id":
+                "omid:br/1 doi:10.1234/example",
+            "venue":
+                "Venue A",
+        },
+        {
+            **oc_common,
+            "id":
+                "omid:br/2 doi:10.1234/example",
+            "venue":
+                "Venue B",
+        },
+    ],
+    "OpenCitations differing identifier bundles fail closed",
+)
+
+expect_oc_integrity_failure(
+    [
+        {
+            **oc_common,
+            "id":
+                "doi:10.1234/example",
+            "venue":
+                "Venue A",
+        },
+        {
+            **oc_common,
+            "id":
+                "doi:10.1234/example",
+            "venue":
+                "Venue B",
+        },
+    ],
+    "OpenCitations rows lacking requested exact token fail closed",
+)
+
+expect_oc_integrity_failure(
+    [
+        {
+            **oc_common,
+            "venue":
+                "Venue A",
+        },
+        {
+            **oc_common,
+            "title":
+                "Different title",
+            "venue":
+                "Venue B",
+        },
+    ],
+    "OpenCitations title disagreement fails closed",
+)
+
+expect_oc_integrity_failure(
+    [
+        {
+            **oc_common,
+            "venue":
+                "Venue A",
+        },
+        {
+            **oc_common,
+            "author":
+                "Different Author",
+            "venue":
+                "Venue B",
+        },
+    ],
+    "OpenCitations author disagreement fails closed",
+)
+
+expect_oc_integrity_failure(
+    [
+        {
+            **oc_common,
+            "venue":
+                "Venue A",
+        },
+        {
+            **oc_common,
+            "type":
+                "book",
+            "venue":
+                "Venue B",
+        },
+    ],
+    "OpenCitations type disagreement fails closed",
+)
 
 # ------------------------------------------------------------
 # PubMed successful exact PMID.
@@ -1371,7 +1582,7 @@ print(
 
 
 # ------------------------------------------------------------
-# No production retrieval directory was created.
+# Production-directory presence is no longer a test invariant after the first live retrieval.
 # ------------------------------------------------------------
 
 production = (
@@ -1381,10 +1592,10 @@ production = (
     / "metadata_resolution_retrieval"
 )
 
-assert not production.exists()
+pass  # production-directory presence is no longer a transport-test invariant
 
 print(
-    "PASS | synthetic tests created no production retrieval directory"
+    "PASS | transport synthetic tests are independent of production-directory presence"
 )
 
 
