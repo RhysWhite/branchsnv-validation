@@ -1358,3 +1358,30 @@ The detailed authorization contract is frozen in:
 Live execution remains disabled when this amendment is frozen.
 
 The subsequent enablement must be a separate minimal implementation commit.
+
+
+## Amendment 36 — OpenCitations exact-response multiplicity
+
+**Status:** frozen after the first production retrieval and before any resume.
+
+The first live metadata-resolution run returned seven OpenCitations Meta
+response-integrity failures in which exact DOI/OMID lookups produced multiple
+HTTP-200 JSON records.
+
+Empirical inspection established that the records within each affected lookup
+shared one exact identifier bundle and were canonically identical after
+excluding only `venue` and `pub_date`.
+
+The amendment permits a multi-record OpenCitations exact lookup to establish
+provider identity only under strict identity-concordance and canonical
+equivalence conditions. Conflicting `venue` and `pub_date` values remain
+unresolved raw provider evidence and are not selected or promoted.
+
+Detailed rules are frozen in:
+
+`METADATA_RETRIEVAL_OPENCITATIONS_MULTIPLICITY_AMENDMENT.md`
+
+The original failed attempts remain immutable.
+
+Production retrieval must not resume until the implementation of this amendment
+is separately tested and frozen.

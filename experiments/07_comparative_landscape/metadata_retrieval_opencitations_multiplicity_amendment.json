@@ -1,0 +1,143 @@
+{
+  "amended_multi_record_acceptance_rule": {
+    "all_elements_must_be_objects": true,
+    "canonical_equivalence_after_excluding_permitted_fields_required": true,
+    "common_nonempty_exact_id_bundle_required": true,
+    "conflicting_descriptive_value_selection_permitted": false,
+    "first_record_selection_permitted": false,
+    "majority_selection_permitted": false,
+    "only_fields_permitted_to_differ": [
+      "venue",
+      "pub_date"
+    ],
+    "provider": "opencitations_meta",
+    "raw_response_remains_authoritative_provenance": true,
+    "requested_exact_identifier_token_required_in_every_row": true,
+    "routes": [
+      "metadata_by_doi",
+      "metadata_by_omid"
+    ]
+  },
+  "amendment_number": 36,
+  "empirical_opencitations_multiplicity": {
+    "all_authors_invariant": true,
+    "all_lookup_identifier_bundles_invariant": true,
+    "all_rows_contain_requested_identifier": true,
+    "all_titles_invariant": true,
+    "all_types_invariant": true,
+    "canonical_equivalence_after_excluding_venue_pub_date": true,
+    "failed_lookup_count": 7,
+    "lookups": [
+      {
+        "common_provider_identifier": "doi:10.1128/spectrum.02641-21 openalex:W4293213075 pmid:36000897 omid:br/062403445387",
+        "first_attempt_response_body_sha256": "8734a30e67714e4390285f6ca81e9bdf51776d678e1cece66d4cd08172f61acc",
+        "identifier": "br/062403445387",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:11a7f6e985801cab029e06767ae165f535bd6290a85db501c67350be88480846",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "common_provider_identifier": "doi:10.1093/molbev/msw064 doi:10.1093/molbev/msw135 doi:10.3929/ethz-b-000119183 pmid:27189573 pmid:27433002 omid:br/06504318239",
+        "first_attempt_response_body_sha256": "ede18a678ba8e25d7b6c125b788bb7686555eda3ff7cd80fc09c08f56a874ad4",
+        "identifier": "br/06504318239",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:771353c05233d90e8522e7cef989c405e5240e8c5c7b52b11402978d169eb00f",
+        "provider_record_count": 3,
+        "route": "metadata_by_omid",
+        "varying_fields": [
+          "pub_date"
+        ]
+      },
+      {
+        "common_provider_identifier": "doi:10.1073/pnas.0409853102 openalex:W2138468602 pmid:15689398 omid:br/061703066994",
+        "first_attempt_response_body_sha256": "1931e7837124f78c73987508d85049647546ed95bd197897675486a8118f3b36",
+        "identifier": "br/061703066994",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:8411f6ca4d999610a551a9a6c49119fc065fbbbcc2a581825c0907a6d263169b",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "common_provider_identifier": "doi:10.1073/pnas.0500371102 openalex:W1983297759 pmid:15728394 omid:br/061603071664",
+        "first_attempt_response_body_sha256": "c7e17cbfd6769ff4683c7129b58bd511d3d8fb24ac3548af6889d2fb3e4ed85a",
+        "identifier": "br/061603071664",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:980acf9fa6bf8a6b093396852ebf00f2ae3c35bc3c16af593b0ebf223d41040c",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "common_provider_identifier": "doi:10.1073/pnas.98.4.1883 openalex:W3169430995 pmid:11172045 omid:br/06503484142",
+        "first_attempt_response_body_sha256": "5e2baede611de03aad3e846a2b3a9658d8d8d7214ffc58a7cbac0e503d71873a",
+        "identifier": "10.1073/pnas.98.4.1883",
+        "identifier_namespace": "doi",
+        "logical_lookup_id": "lookup:a3c7308a15b56dad692ebc1ee36af0bc69554e9f0c7c5a2563ea5ad0de220062",
+        "provider_record_count": 2,
+        "route": "metadata_by_doi",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "common_provider_identifier": "doi:10.3354/meps14701 openalex:W4402526634 omid:br/062204413539",
+        "first_attempt_response_body_sha256": "85171850894621ff477e04cf006e44a590b8facb24798ba2dae5b50fb4aa2b6d",
+        "identifier": "br/062204413539",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:d017febb19dbc4894f4f079e9a249304f215c1beadb16aa748bfaf0703891e1a",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "common_provider_identifier": "doi:10.1073/pnas.0700435104 openalex:W2007172672 pmid:17360548 omid:br/06303478876",
+        "first_attempt_response_body_sha256": "f97a8ba57ab4b09abbbb3a69ecc6d845f5c0aa2948e161fda834f1b752f5ac55",
+        "identifier": "br/06303478876",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:e2c3bff36402aac9d881fcf9bdd69d510784514cc50379c48f59ef774e15c0e8",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "varying_fields": [
+          "venue"
+        ]
+      }
+    ],
+    "permitted_observed_varying_fields": [
+      "pub_date",
+      "venue"
+    ],
+    "provider_record_count": 15
+  },
+  "first_live_run": {
+    "checksums_manifest_sha256": "a01c746b75181273e993640f81ade38ca3c98bc0f7726bbbf6bf857d639236e8",
+    "component_merge_performed": false,
+    "frozen_queue_count": 1731,
+    "manifest_sha256": "0659896427a136bc732e03a0c4ceb07a2bbaaad8c3e3347e0ca00e84f0a7c52c",
+    "not_found": 33,
+    "response_integrity_failure": 7,
+    "scientific_screening_performed": false,
+    "status": "INCOMPLETE",
+    "success": 1691
+  },
+  "next_gate": "IMPLEMENT_TEST_AND_FREEZE_AMENDMENT_36_BEFORE_PRODUCTION_RESUME",
+  "repository_head_at_empirical_trigger": "86f25c8b42cdb5f71db296e4140ed6c93dd3afca",
+  "status": "FROZEN_PRE_IMPLEMENTATION_RESPONSE_MULTIPLICITY_CORRECTION",
+  "unchanged_boundaries": {
+    "logical_lookup_count": 1731,
+    "publication_component_merge_permitted": false,
+    "scientific_screening_permitted": false,
+    "title_reconciliation_implemented_by_this_amendment": false,
+    "tool_consolidation_permitted": false
+  }
+}
