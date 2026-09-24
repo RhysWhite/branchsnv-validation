@@ -1,0 +1,185 @@
+{
+  "amendment_36": {
+    "adjudication_count": 7,
+    "adjudications": [
+      {
+        "adjudication_sha256": "a99ce4a6065b59385e544f53ce19a3045a12ff27bf0b58dd20f9038310e82177",
+        "identifier": "br/062403445387",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:11a7f6e985801cab029e06767ae165f535bd6290a85db501c67350be88480846",
+        "provider_identifier": "doi:10.1128/spectrum.02641-21 openalex:W4293213075 pmid:36000897 omid:br/062403445387",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "a474f73192bad44967c9a63d75d67f68dc773731b4e5d0b0f6a371152103e8c9",
+        "source_failure_sha256": "9a6c43cf1fe10b5aafe7dee08c04617ad4c11cf06837c1b0b60e7081c7f458d2",
+        "source_response_body_sha256": "8734a30e67714e4390285f6ca81e9bdf51776d678e1cece66d4cd08172f61acc",
+        "source_response_metadata_sha256": "46ef07529737221fbf34499788fad6993581daeaf255bc247f0d8112dd7a71df",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "adjudication_sha256": "5ec8630b486f8bb0f92e76902c324b5ea9d66c39fd7ef0851572af9e86e1a517",
+        "identifier": "br/06504318239",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:771353c05233d90e8522e7cef989c405e5240e8c5c7b52b11402978d169eb00f",
+        "provider_identifier": "doi:10.1093/molbev/msw064 doi:10.1093/molbev/msw135 doi:10.3929/ethz-b-000119183 pmid:27189573 pmid:27433002 omid:br/06504318239",
+        "provider_record_count": 3,
+        "route": "metadata_by_omid",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "f10458d204558637004224add89d5f15f4c6efa11552b322952d6f4308b708f0",
+        "source_failure_sha256": "60dc0e5358459e4eb39602915242042e4573eebcc5b8ede3e3443faf980bfcd7",
+        "source_response_body_sha256": "ede18a678ba8e25d7b6c125b788bb7686555eda3ff7cd80fc09c08f56a874ad4",
+        "source_response_metadata_sha256": "c312c7f77b88ccf84a0f5eef68dc10f53883e58b614bf8354d451452c39bbb93",
+        "varying_fields": [
+          "pub_date"
+        ]
+      },
+      {
+        "adjudication_sha256": "32a85e902971f371150a31bc8cce980670e53a889030358df73f2aedde71e9e9",
+        "identifier": "br/061703066994",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:8411f6ca4d999610a551a9a6c49119fc065fbbbcc2a581825c0907a6d263169b",
+        "provider_identifier": "doi:10.1073/pnas.0409853102 openalex:W2138468602 pmid:15689398 omid:br/061703066994",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "a474f73192bad44967c9a63d75d67f68dc773731b4e5d0b0f6a371152103e8c9",
+        "source_failure_sha256": "1d31573f152d485c0de6d4202d38cd1d89ce791ebced999df67481055b4b8975",
+        "source_response_body_sha256": "1931e7837124f78c73987508d85049647546ed95bd197897675486a8118f3b36",
+        "source_response_metadata_sha256": "41adde7f1585a6dfb215aea46be2a7726f9e08e0aec4a8c1fe1b1ba884d9721d",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "adjudication_sha256": "e6fbc7b4d73dfee5fe7ed85d9cd5f7081b65446d614dff61371995eceaff48a4",
+        "identifier": "br/061603071664",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:980acf9fa6bf8a6b093396852ebf00f2ae3c35bc3c16af593b0ebf223d41040c",
+        "provider_identifier": "doi:10.1073/pnas.0500371102 openalex:W1983297759 pmid:15728394 omid:br/061603071664",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "a474f73192bad44967c9a63d75d67f68dc773731b4e5d0b0f6a371152103e8c9",
+        "source_failure_sha256": "134875c67b785199fbfd0adc489e42276ae748101cb80890f4e08d756626a8ec",
+        "source_response_body_sha256": "c7e17cbfd6769ff4683c7129b58bd511d3d8fb24ac3548af6889d2fb3e4ed85a",
+        "source_response_metadata_sha256": "91412fd2ec0c31eff0d15e9848c87ad4994fee8b37986c97ba04781c6a7c45da",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "adjudication_sha256": "a791d36e4d65601ab20187c47b8d19f40ab5f3a55ceed385dba597582c55de55",
+        "identifier": "10.1073/pnas.98.4.1883",
+        "identifier_namespace": "doi",
+        "logical_lookup_id": "lookup:a3c7308a15b56dad692ebc1ee36af0bc69554e9f0c7c5a2563ea5ad0de220062",
+        "provider_identifier": "doi:10.1073/pnas.98.4.1883 openalex:W3169430995 pmid:11172045 omid:br/06503484142",
+        "provider_record_count": 2,
+        "route": "metadata_by_doi",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "a474f73192bad44967c9a63d75d67f68dc773731b4e5d0b0f6a371152103e8c9",
+        "source_failure_sha256": "8fdcce63cbe86bd31712387260a79797c89f31eab89f6ffac93710ed96ef210e",
+        "source_response_body_sha256": "5e2baede611de03aad3e846a2b3a9658d8d8d7214ffc58a7cbac0e503d71873a",
+        "source_response_metadata_sha256": "36061f2eae271b2f242af93d46db9b303cc1f246e38e35cbc5a62e381d382f3b",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "adjudication_sha256": "a485fc13c10873898136b107f8722446e74e1851a0badc0285e7397cc4570f8a",
+        "identifier": "br/062204413539",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:d017febb19dbc4894f4f079e9a249304f215c1beadb16aa748bfaf0703891e1a",
+        "provider_identifier": "doi:10.3354/meps14701 openalex:W4402526634 omid:br/062204413539",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "a474f73192bad44967c9a63d75d67f68dc773731b4e5d0b0f6a371152103e8c9",
+        "source_failure_sha256": "8a9f178808a7acdea367c63b76d699b86fe429cd06a24254e720377931a44719",
+        "source_response_body_sha256": "85171850894621ff477e04cf006e44a590b8facb24798ba2dae5b50fb4aa2b6d",
+        "source_response_metadata_sha256": "544be864fac8231745ac591e523b9d22b9f361aa5cf2f1df85990f8113d02722",
+        "varying_fields": [
+          "venue"
+        ]
+      },
+      {
+        "adjudication_sha256": "8d7701691303ccdd67d1291325e864d052cc6742e2300414c5f389a7fd895624",
+        "identifier": "br/06303478876",
+        "identifier_namespace": "omid",
+        "logical_lookup_id": "lookup:e2c3bff36402aac9d881fcf9bdd69d510784514cc50379c48f59ef774e15c0e8",
+        "provider_identifier": "doi:10.1073/pnas.0700435104 openalex:W2007172672 pmid:17360548 omid:br/06303478876",
+        "provider_record_count": 2,
+        "route": "metadata_by_omid",
+        "source_attempt_number": 1,
+        "source_attempt_record_sha256": "a474f73192bad44967c9a63d75d67f68dc773731b4e5d0b0f6a371152103e8c9",
+        "source_failure_sha256": "b885e9e98c9856fc87f232219de83517a3d0677c63ec38efa11851d85a7b866a",
+        "source_response_body_sha256": "f97a8ba57ab4b09abbbb3a69ecc6d845f5c0aa2948e161fda834f1b752f5ac55",
+        "source_response_metadata_sha256": "da6761a657ca380ab035f4825061880d2262b84cdb4970652a3fe230aae515d6",
+        "varying_fields": [
+          "venue"
+        ]
+      }
+    ],
+    "attempt_02_created": false,
+    "historical_attempts_preserved": true,
+    "historical_failure_count": 7,
+    "historical_failure_records_preserved": true,
+    "new_provider_exchange_count": 0,
+    "post_adjudication_exchange_counts": {
+      "attempt_directories": 1731,
+      "request_json": 1731,
+      "response_bodies": 1731,
+      "response_metadata": 1731
+    },
+    "pre_adjudication_exchange_counts": {
+      "attempt_directories": 1731,
+      "request_json": 1731,
+      "response_bodies": 1731,
+      "response_metadata": 1731
+    },
+    "terminal_json_manufactured": false
+  },
+  "frozen_queue": {
+    "count": 1731,
+    "sha256": "7d4873f463315e98a3d5fd14358c015eeca65ad7f08fe74af906a90bbb928e1f"
+  },
+  "implementation_commit": "900b97bceab40427ab5422f64d4b95e71015e955",
+  "next_gate": "FREEZE_POST_RETRIEVAL_METADATA_RECONCILIATION_DESIGN",
+  "pre_adjudication_snapshot": {
+    "path_at_validation": "/tmp/branchsnv-exp07-am36-pre-production-adjudication.json",
+    "sha256": "35884ff5717192a044a236c063f7169e653a06dffeb70c9aeb34c149a5778abf"
+  },
+  "production_archive": {
+    "accepted_terminal_statuses": [
+      "not_found",
+      "success"
+    ],
+    "archive_is_exact_frozen_queue": true,
+    "archive_queue_count": 1731,
+    "attempts_sha256": "408448177ed62e19a4500385160b6b4fffd48690b4eb5b86d1b093e092fa0053",
+    "checksums_manifest_sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86",
+    "component_merge_performed": false,
+    "file_count": 8667,
+    "generated_at_utc": "2026-09-24T12:11:51.547243+00:00",
+    "lookup_status_counts": {
+      "not_found": 33,
+      "success": 1698
+    },
+    "lookup_status_sha256": "d2ee2e1528ac93fc81fc5266fa52ffe7d4a4381e03bd5d32ce3e57dc7b61f28e",
+    "manifest_sha256": "b68a9a3968f6a515e5f9b400fe2a6488dddf035a316e9ed8da7f3cea39f770a0",
+    "redirects_sha256": "ea0f60625d4178933f5024b84ce05799a1e36c2694189ef057868e49e13b62bc",
+    "scientific_screening_performed": false,
+    "status": "COMPLETE",
+    "total_bytes": 35977174
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "component_merge_performed": false,
+    "descriptive_metadata_reconciled": false,
+    "scientific_screening_performed": false,
+    "tool_ranking_performed": false
+  },
+  "status": "COMPLETE"
+}
