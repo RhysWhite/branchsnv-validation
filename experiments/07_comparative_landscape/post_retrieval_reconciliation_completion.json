@@ -1,0 +1,68 @@
+{
+  "next_gate": "FREEZE_SCIENTIFIC_SCREENING_DESIGN_BEFORE_EXECUTION",
+  "parent_reconciliation_implementation_commit": "a8f8d75688db7280fce8135b707e847dba1feae0",
+  "production_directory": "results/07_comparative_landscape/post_retrieval_reconciliation",
+  "production_file_count": 4,
+  "production_files": {
+    "checksums.sha256": {
+      "bytes": 269,
+      "sha256": "bd4c79c9c3dc0455a42ad4ec423ad90de2504513011433459a1d4aa07c4cee62"
+    },
+    "component_reconciliation.tsv": {
+      "bytes": 630822,
+      "sha256": "74159ff88bbd07f94547112de617caebb8339d03ecfc8a451ebb7b11d0a4fe8b"
+    },
+    "manifest.json": {
+      "bytes": 829,
+      "sha256": "2a5351a43382e686d50225f8fae716ae7e9a50e0a6d93a9924ddd8b4786b9ba1"
+    },
+    "reconciliation_evidence.tsv": {
+      "bytes": 800828,
+      "sha256": "cbd47a7e371538d7d7599e2069e9996a943a870da7e46646cd8d00115c46765d"
+    }
+  },
+  "production_manifest": {
+    "component_count": 1342,
+    "component_merge_performed": false,
+    "evidence_row_count": 1847,
+    "identifier_status_counts": {
+      "identifier_conflict_hold": 117,
+      "not_applicable": 723,
+      "provider_identity_anchored": 311,
+      "provider_identity_confirmed_unanchored": 183,
+      "provider_identity_not_found": 8
+    },
+    "logical_lookup_count": 1731,
+    "network_access_performed": false,
+    "raw_retrieval_archive_modified": false,
+    "scientific_screening_performed": false,
+    "status": "RECONCILED_METADATA_PRE_SCREENING",
+    "title_status_counts": {
+      "not_applicable": 275,
+      "title_conflict_hold": 2,
+      "title_equivalent_variants": 8,
+      "title_resolved_exact": 575,
+      "title_unresolved": 482
+    }
+  },
+  "production_total_bytes": 1432748,
+  "reproducibility": {
+    "independent_rebuild_byte_identical": true,
+    "independent_rebuild_performed": true,
+    "production_validation_passed": true
+  },
+  "retrieval_archive_integrity": {
+    "checksum_validation": true,
+    "checksums_sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86",
+    "lookup_status_sha256": "d2ee2e1528ac93fc81fc5266fa52ffe7d4a4381e03bd5d32ce3e57dc7b61f28e",
+    "manifest_sha256": "b68a9a3968f6a515e5f9b400fe2a6488dddf035a316e9ed8da7f3cea39f770a0",
+    "modified_by_reconciliation": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "component_merge_performed": false,
+    "scientific_screening_performed": false,
+    "screening_log_empty": true
+  },
+  "status": "COMPLETE"
+}
