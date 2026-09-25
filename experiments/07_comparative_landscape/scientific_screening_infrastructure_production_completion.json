@@ -1,0 +1,83 @@
+{
+  "baseline_universe": {
+    "publication_entities": 94898,
+    "screening_entities": 95113,
+    "software_registry_entities": 215
+  },
+  "implementation_commit": "2e887383d37fbf091d6901864d373a4ec0491907",
+  "initial_screening_state": {
+    "blocked_metadata": 484,
+    "blocked_title_conflict": 2,
+    "blocked_title_unresolved": 482,
+    "ready": 94629,
+    "screenable": 94629
+  },
+  "next_gate": "DESIGN_CONTROLLED_BASELINE_SCIENTIFIC_SCREENING_EXECUTION",
+  "production_artifact_count": 8,
+  "production_artifacts": {
+    "baseline_screening_queue.tsv": {
+      "bytes": 48815899,
+      "sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58"
+    },
+    "canonical_publications.tsv": {
+      "bytes": 180,
+      "sha256": "6c7d3eed63b12f76e57a19799869ebd242b628950b99292359fb695086b2aaae"
+    },
+    "checksums.sha256": {
+      "bytes": 628,
+      "sha256": "8b73918e39e2e718553856ccfbc146f77fa4d8c27bb997b68cd3f945504bd591"
+    },
+    "manifest.json": {
+      "bytes": 1948,
+      "sha256": "da44e142cab87aac54f7022aaba3aa044b447cc882b134e1aac0d97d6ccd21a7"
+    },
+    "method_assessments.tsv": {
+      "bytes": 548,
+      "sha256": "9a7185fd3d554c9a101a4cc56756323934ff760a20444339520a5540c2b03d2b"
+    },
+    "method_evidence.tsv": {
+      "bytes": 136,
+      "sha256": "cb9091e1865b5b15ac9b5836453141a03118b8b732eba04a8e798ae9b9eea6ff"
+    },
+    "source_escalation.tsv": {
+      "bytes": 166,
+      "sha256": "17773b93925bc5b1c0258cf32e72884d24d777b58244a3c9308369d660b76048"
+    },
+    "wave1_promotion_candidates.tsv": {
+      "bytes": 246,
+      "sha256": "3ced4244300f4c7392c80d3de398d6ac688847e6e392c6cd62abd7b70fb64330"
+    }
+  },
+  "production_artifacts_tracked_in_git": false,
+  "production_path": "results/07_comparative_landscape/scientific_screening",
+  "production_total_bytes": 48819751,
+  "queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+  "reproducibility": {
+    "all_eight_artifacts_reproduced": true,
+    "frozen_implementation_validation_passed": true,
+    "independent_rebuild_byte_identical": true
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_rows": 0,
+    "method_assessment_rows": 0,
+    "method_assessments_made": 0,
+    "method_evidence_rows": 0,
+    "new_role_assignments_made": 0,
+    "queue_scientific_decision_fields_nonempty": 0,
+    "scientific_screening_decisions": 0,
+    "source_escalation_rows": 0,
+    "wave1_promotion_candidate_rows": 0,
+    "wave1_promotions_made": 0
+  },
+  "scientific_screening_started": false,
+  "status": "FROZEN_PRE_SCREENING",
+  "upstream_integrity": {
+    "discovery_evidence_modified": false,
+    "historical_screening_log_rows": 0,
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "implementation_freeze_sha256": "678ba77e813893b06e46144148d46398a602c941d500113985ffc495563833b2",
+    "reconciliation_evidence_modified": false,
+    "retrieval_evidence_modified": false
+  }
+}
