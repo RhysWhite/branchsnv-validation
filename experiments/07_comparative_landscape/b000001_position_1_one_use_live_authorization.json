@@ -1,0 +1,40 @@
+{
+  "B000001_membership_identity": {
+    "batch_manifest_ordered_entity_ids_sha256": "8a98c513759bc8a8d00a53cad104411a860aebe2ccdb20a825aa636ccfb06ceb",
+    "canonical_baseline_rows_sha256": "f9f1938f1fd296eb7ecc2ea9f0c87aae54a103e39d3374cd351293677698e12c",
+    "canonical_membership_rows_sha256": "dbf86779c8d82b0185cc1c5c03194d00694b1322a2ef7235068c6d8082f3160b",
+    "canonical_ordered_entity_ids_sha256": "8a98c513759bc8a8d00a53cad104411a860aebe2ccdb20a825aa636ccfb06ceb"
+  },
+  "authorized_baseline_row_sha256": "bb8ef2c1e0fd980a70884709d3085b8e44b5b425500d390ae943f638f1d08048",
+  "authorized_position": 1,
+  "authorized_screening_entity_id": "publication_component:citation:publication:doi:10.1001/archdermatol.2012.1817",
+  "b000001_authorization_design_freeze_sha256": "c3d66ae36e4aa30bb38bcd872df2fd21ef94244c55512829d9b5c788381e47c8",
+  "batch_id": "B000001",
+  "event_appender_implementation_freeze_sha256": "d499167e2e2dce77bcb4b924958cc02d7b050a9d0d074b96e2b12c00b8b37ace",
+  "event_appender_implementation_sha256": "abf4c15e9c993bcb96c73ccb53ff3dae56e229c533e9df25056c37cfd5eda98b",
+  "event_entry_design_freeze_sha256": "73555f0c8aadc37caa3dbe2110be439b0cb13a48398e5d597168492a65ed82b9",
+  "expected_pre_ledger_sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+  "max_live_event_count": 1,
+  "one_use": true,
+  "operator_id": "Rhys",
+  "operator_type": "human_with_assistance",
+  "parent_commit": "92e1f1ed27c5b95a74d59b9e7d63f74dd51dd7db",
+  "permitted_initial_event_types": [
+    "record_decision",
+    "source_escalation"
+  ],
+  "positions_2_to_500_authorized": false,
+  "receipt_checkpoint_contract": {
+    "final_files": [
+      "authorization.json",
+      "proposal.tsv",
+      "receipt.json"
+    ],
+    "final_transaction_directory": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000001",
+    "root": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts",
+    "transaction_id": "T000001"
+  },
+  "schema_version": 1,
+  "scientific_decision_preselected": false,
+  "status": "AUTHORIZED_B000001_POSITION_1_CANARY_ONE_USE"
+}
