@@ -1,0 +1,89 @@
+{
+  "authority_boundary": {
+    "dynamic_child_route_execution_authorized": false,
+    "event_ledger_mutation_authorized": false,
+    "live_authorization_created": false,
+    "live_network_execution_authorized": false,
+    "network_capability_implemented": true,
+    "review_packet_mutation_authorized": false,
+    "scientific_decisions_authorized": false
+  },
+  "frozen_contracts": {
+    "live_authorization_contract_sha256": "8117f35c0c348afe49478a666aba05231eff1bc131eba19b6baafb3bd7d82360",
+    "network_policy_sha256": "201ea525346222c72483e775aa2c5109aa355af22a27ccc2df4e956c50c63e6a",
+    "retrieval_run_id": "ASR000001",
+    "seed_queue_sha256": "04b758cb6feb7460811116efef9b38a509b5996f63ca30cf225d9cf75448c691",
+    "seed_queue_task_count": 26,
+    "target_identity_sha256": "5970e1ec739b5b01c546e526c402d2f3a6e06e8f43aef0bfcd375e692bc2ab5e"
+  },
+  "hostile_validation": {
+    "child_routes_recorded_not_executed": true,
+    "complete_fake_seed_run": true,
+    "evidence_assessment_header_only": true,
+    "fake_dns_only": true,
+    "fake_transport_only": true,
+    "interruption_recovery_tested": true,
+    "production_ledger_unchanged": true,
+    "production_retrieval_root_absent": true,
+    "real_dns_requests": 0,
+    "real_network_requests": 0,
+    "review_packet_unchanged": true,
+    "scientific_decisions_created": 0,
+    "seed_tasks_considered": 26,
+    "untracked_live_authorization_rejected": true
+  },
+  "implementation": {
+    "hostile_test_path": "experiments/07_comparative_landscape/test_t000002_authoritative_source_network_transport.py",
+    "hostile_test_sha256": "44439a0f4b91f32add6871f74adaa35bd013344716a2277bbd06ad4f678c5dad",
+    "transport_path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+    "transport_sha256": "eea4de31a7ac9eae2605c460df6951f706543111da637c215ca9a6a51988e47a"
+  },
+  "implemented_recovery_controls": {
+    "atomic_finalization": true,
+    "existing_final_run_blocks_new_run": true,
+    "existing_staging_blocks_new_run": true,
+    "one_run_identity": "ASR000001",
+    "silent_reissue_prohibited": true,
+    "staging_before_network_lifecycle": true,
+    "staging_preserved_after_interruption": true
+  },
+  "implemented_security_controls": {
+    "attempt_logging": true,
+    "bounded_payloads": true,
+    "bounded_redirects": true,
+    "bounded_retries": true,
+    "connection_ip_pinning": true,
+    "dns_resolution_validation": true,
+    "doi_public_https_redirect_enforcement": true,
+    "get_only": true,
+    "http_downgrade_rejection": true,
+    "https_only": true,
+    "ip_literal_rejection": true,
+    "link_local_rejection": true,
+    "loopback_rejection": true,
+    "multicast_rejection": true,
+    "ncbi_same_host_redirect_enforcement": true,
+    "non_default_port_rejection": true,
+    "payload_hashing": true,
+    "private_address_rejection": true,
+    "redirect_chain_recording": true,
+    "reserved_address_rejection": true,
+    "response_header_recording": true,
+    "tls_certificate_validation": true,
+    "tls_hostname_validation": true,
+    "unspecified_address_rejection": true,
+    "userinfo_rejection": true
+  },
+  "next_gate": "CREATE_T000002_AUTHORITATIVE_SOURCE_ASR000001_ONE_USE_LIVE_RETRIEVAL_AUTHORIZATION",
+  "parent_transport_design_commit": "3312c68ed2b2a5e23769345cb457dddbfd32bcfe",
+  "production_boundary": {
+    "awaiting_source_escalation": 10,
+    "ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "production_event_count": 11,
+    "production_retrieval_root_exists": false,
+    "production_retrieval_state": "NO_RUN",
+    "review_packet_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6"
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_LIVE_RETRIEVAL_AUTHORIZATION"
+}
