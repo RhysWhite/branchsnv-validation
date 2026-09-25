@@ -1,0 +1,83 @@
+{
+  "continuation": {
+    "authorized_task_count": 16,
+    "doi_http_error_tasks_reissued": false,
+    "doi_policy_failure_task_reissued": false,
+    "dynamic_child_routes_authorized": false,
+    "live_execution_authorized": false,
+    "purpose": "retry_exact_transport_failed_NCBI_seed_tasks_after_validated_address_failover_amendment",
+    "queue_ids": [
+      "RQ000001",
+      "RQ000002",
+      "RQ000004",
+      "RQ000005",
+      "RQ000007",
+      "RQ000008",
+      "RQ000010",
+      "RQ000011",
+      "RQ000013",
+      "RQ000014",
+      "RQ000016",
+      "RQ000017",
+      "RQ000019",
+      "RQ000020",
+      "RQ000022",
+      "RQ000023"
+    ],
+    "queue_sha256": "d0a50b1610f0dcc5f61412cb2285b23391c38dd527890e1542c1b25ade7b3ca2",
+    "reissue_reason": "transport_failure_only",
+    "routes": [
+      "pubmed_record",
+      "pubmed_pmc_link_discovery"
+    ],
+    "run_id": "ASR000002",
+    "scientific_decisions_authorized": false,
+    "source_asr000001_final_status_required": "transient_transport_error"
+  },
+  "diagnosis": {
+    "doi_http_error_tasks": 9,
+    "doi_http_status": 403,
+    "doi_policy_failure_tasks": 1,
+    "failed_retrieval_is_scientific_exclusion": false,
+    "ncbi_error_signature": "Transient HTTPS transport error: [Errno 101] Network is unreachable",
+    "ncbi_transport_attempts": 48,
+    "ncbi_transport_failed_tasks": 16,
+    "scientific_review_ready": false,
+    "successful_seed_retrievals": 0
+  },
+  "next_gate": "IMPLEMENT_VALIDATED_ADDRESS_FAILOVER_AND_ASR000002_CONTINUATION_GUARD",
+  "required_transport_amendment": {
+    "https_policy_unchanged": true,
+    "one_validated_address_per_retry_attempt": true,
+    "private_or_non_global_address_still_prohibited": true,
+    "record_attempted_resolved_address": true,
+    "timeout_policy_unchanged": true,
+    "validated_public_address_failover": true
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "all_ten_records_remain_awaiting_source_escalation": true,
+    "event_ledger_mutated": false,
+    "review_packet_mutated": false,
+    "terminal_decisions_added": 0
+  },
+  "source_run": {
+    "authorization_commit": "6cf27a91d61aa10d257e543c00e59030a45e393c",
+    "authorization_sha256": "5e12f5eb15fbfa1dab5f826d8e174270bc395e089a01e2f311537267217aa1be",
+    "checksums_sha256": "d030cc0c326d18a827ad5f643b42b374b8bb4753293051833b26db74a7a44569",
+    "final_transport_status_counts": {
+      "http_error": 9,
+      "policy_failure": 1,
+      "transient_transport_error": 16
+    },
+    "manifest_sha256": "9257c1c690d3681dcb4c43911386bfa54a02492a73e3c8c527d15ab62424a5c4",
+    "raw_bytes": 107547,
+    "raw_file_count": 67,
+    "run_id": "ASR000001",
+    "seed_queue_sha256": "04b758cb6feb7460811116efef9b38a509b5996f63ca30cf225d9cf75448c691",
+    "seed_task_count": 26,
+    "summary_sha256": "f2d5867b7b26bce33303c0374cc931c79fcd4086334ce1e963d40a2bde57c97d",
+    "transport_attempt_count": 58
+  },
+  "status": "ASR000001_COMPLETE_CONTINUATION_REQUIRED"
+}
