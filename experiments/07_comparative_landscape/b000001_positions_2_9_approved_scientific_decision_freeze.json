@@ -1,0 +1,97 @@
+{
+  "asr000002_completion_freeze_sha256": "aa20d24a66482122156f8e6e11df8febc3b2c9a21354aa728c9d2b492c8ca25d",
+  "authority_boundary": {
+    "event_ledger_mutation_authorized": false,
+    "production_event_append_authorized": false,
+    "review_packet_mutation_authorized": false,
+    "scientific_decisions_preapproved": true
+  },
+  "decisions": {
+    "evidence_escalation_status": "resolved",
+    "excluded_positions": [
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "exclusion_reason_code": "application_only_no_reusable_method",
+    "position_5_candidate_method_flag": true,
+    "retained_for_method_assessment_positions": [
+      5
+    ]
+  },
+  "evidence": {
+    "decision_packet_checksums_sha256": "8ae2e10abdad612ca31e2cbfd64735077dadae259fc462cf712f0b6c1d1aadee",
+    "proposal_sha256": "ebc3efe4aa43cdeee2d727a440e3ddf7919df5ca4ea4103c13027e69b6319593",
+    "source_review_json_sha256": "f3fb68cb08f03c255daf13ee0d72222b14528cf41920b31e0af57c6d3a005928",
+    "source_review_md_sha256": "399d60f54ffe1f3273eb75ba7dceca2cab4c2e99d15af7deee79a458334f0952"
+  },
+  "expected_post_state_if_future_append_succeeds": {
+    "awaiting_source_escalation_total": 2,
+    "complete_total": 9,
+    "event_count": 19,
+    "positions_10_11_awaiting": true
+  },
+  "expected_pre_state": {
+    "event_count": 11,
+    "ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "positions_2_to_11_current_state": "awaiting_source_escalation"
+  },
+  "human_approval": {
+    "operator_id": "Rhys",
+    "operator_type": "human_with_assistance",
+    "phrase": "APPROVE POSITIONS 2-9"
+  },
+  "next_gate": "CREATE_ONE_USE_AUTHORIZATION_FOR_E000000012_TO_E000000019",
+  "parent_commit": "27323d1364206c55eb064fd39fdf5c374fba481f",
+  "schema_version": 1,
+  "status": "FROZEN_PRE_LIVE_EVENT_AUTHORIZATION",
+  "transaction": {
+    "atomic_required": true,
+    "batch_id": "B000001",
+    "event_count": 8,
+    "event_type": "superseding_record_decision",
+    "expected_future_event_ids": [
+      "E000000012",
+      "E000000013",
+      "E000000014",
+      "E000000015",
+      "E000000016",
+      "E000000017",
+      "E000000018",
+      "E000000019"
+    ],
+    "partial_execution_allowed": false,
+    "positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "supersedes_event_ids": [
+      "E000000002",
+      "E000000003",
+      "E000000004",
+      "E000000005",
+      "E000000006",
+      "E000000007",
+      "E000000008",
+      "E000000009"
+    ]
+  },
+  "untouched_positions": {
+    "duplicate_relationship_inferred": false,
+    "positions": [
+      10,
+      11
+    ],
+    "remain_awaiting_source_escalation": true
+  }
+}
