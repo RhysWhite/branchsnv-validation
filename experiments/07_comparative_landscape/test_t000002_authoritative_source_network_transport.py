@@ -427,7 +427,8 @@ class FakeAdapter:
         url,
         resolved_ip,
         headers,
-        timeout_seconds,
+        connect_timeout_seconds,
+        read_timeout_seconds,
         max_payload_bytes,
     ):
         self.calls.append({
@@ -442,8 +443,11 @@ class FakeAdapter:
                     headers
                 ),
 
-            "timeout":
-                timeout_seconds,
+            "connect_timeout_seconds":
+                connect_timeout_seconds,
+
+            "read_timeout_seconds":
+                read_timeout_seconds,
 
             "max_payload_bytes":
                 max_payload_bytes,
@@ -693,6 +697,154 @@ class ExplodingAdapter:
         }
 
 
+class WallLimitAdapter:
+    def __init__(
+        self,
+        clock,
+    ):
+        self.clock = clock
+        self.calls = []
+
+    def request_once(
+        self,
+        *,
+        url,
+        resolved_ip,
+        headers,
+        connect_timeout_seconds,
+        read_timeout_seconds,
+        max_payload_bytes,
+    ):
+        self.calls.append({
+            "url":
+                url,
+
+            "connect_timeout_seconds":
+                float(
+                    connect_timeout_seconds
+                ),
+
+            "read_timeout_seconds":
+                float(
+                    read_timeout_seconds
+                ),
+        })
+
+        # Simulate a request that returns only after the frozen 60-second
+        # per-attempt wall limit has been exceeded.
+        self.clock.value += 61.0
+
+        return {
+            "status":
+                200,
+
+            "reason":
+                "OK",
+
+            "headers": [
+                [
+                    "Content-Type",
+                    "application/xml",
+                ],
+            ],
+
+            "location":
+                "",
+
+            "payload":
+                b"<late/>",
+        }
+
+
+wall_clock = FakeClock()
+
+wall_adapter = WallLimitAdapter(
+    wall_clock
+)
+
+wall_pacer = transport.RequestPacer(
+    minimum_interval_seconds=1.0,
+    clock=wall_clock.now,
+    sleeper=wall_clock.sleep,
+)
+
+wall_result = transport.execute_seed_task(
+    row=
+        first_pubmed,
+
+    network_policy=
+        network_policy,
+
+    adapter=
+        wall_adapter,
+
+    resolver=
+        public_resolver,
+
+    pacer=
+        wall_pacer,
+
+    timestamp=
+        lambda:
+            "2026-09-25T10:00:00Z",
+
+    sleeper=
+        wall_clock.sleep,
+)
+
+assert wall_result[
+    "final_status"
+] == "transient_transport_error"
+
+assert len(
+    wall_result[
+        "attempts"
+    ]
+) == 3
+
+assert all(
+    (
+        "Per-attempt wall-time limit exceeded"
+        in attempt[
+            "error"
+        ]
+    )
+    for attempt in wall_result[
+        "attempts"
+    ]
+)
+
+assert len(
+    wall_adapter.calls
+) == 3
+
+assert all(
+    call[
+        "connect_timeout_seconds"
+    ] <= 10.0
+    for call in wall_adapter.calls
+)
+
+assert all(
+    call[
+        "read_timeout_seconds"
+    ] <= 30.0
+    for call in wall_adapter.calls
+)
+
+print(
+    "PASS | frozen 60-second per-attempt wall-time limit enforced"
+)
+
+print(
+    "PASS | frozen connect timeout never exceeds 10 seconds"
+)
+
+print(
+    "PASS | frozen read timeout never exceeds 30 seconds"
+)
+
+
 with tempfile.TemporaryDirectory() as temporary:
     temp = Path(
         temporary
@@ -813,6 +965,30 @@ with tempfile.TemporaryDirectory() as temporary:
     assert execution[
         "review_packet_mutated"
     ] is False
+
+    assert adapter.calls
+
+    assert all(
+        call[
+            "connect_timeout_seconds"
+        ] <= 10.0
+        for call in adapter.calls
+    )
+
+    assert all(
+        call[
+            "read_timeout_seconds"
+        ] <= 30.0
+        for call in adapter.calls
+    )
+
+    print(
+        "PASS | fake full run uses frozen connect-timeout ceiling"
+    )
+
+    print(
+        "PASS | fake full run uses frozen read-timeout ceiling"
+    )
 
     final = (
         test_root
@@ -1182,7 +1358,14 @@ assert (
 
 assert not transport.PRODUCTION_ROOT.exists()
 
-assert not transport.LIVE_AUTHORIZATION.exists()
+assert transport.LIVE_AUTHORIZATION.is_file()
+
+assert transport.sha256_file(
+    transport.LIVE_AUTHORIZATION
+) == (
+    "20687900cdf36124fdc1c2d791c60450"
+    "7ff9048558055be3b9cec71bdd7ddd19"
+)
 
 print(
     "PASS | real production ledger unchanged"
@@ -1197,7 +1380,7 @@ print(
 )
 
 print(
-    "PASS | real live authorization absent"
+    "PASS | historical unconsumed authorization preserved byte-identically"
 )
 
 print(

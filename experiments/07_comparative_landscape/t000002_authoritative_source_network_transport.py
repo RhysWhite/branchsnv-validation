@@ -114,7 +114,7 @@ TRANSPORT_DESIGN_SUMS = (
 
 TRANSPORT_IMPLEMENTATION_SUMS = (
     HERE
-    / "t000002_authoritative_source_network_transport_implementation.sha256"
+    / "t000002_authoritative_source_network_transport_implementation_amendment_01.sha256"
 )
 
 LIVE_AUTHORIZATION = (
@@ -1025,18 +1025,27 @@ class PinnedHTTPSConnection(
         *,
         hostname: str,
         resolved_ip: str,
-        timeout: float,
+        connect_timeout_seconds: float,
+        read_timeout_seconds: float,
         context: ssl.SSLContext,
     ):
         super().__init__(
             host=hostname,
             port=443,
-            timeout=timeout,
+            timeout=read_timeout_seconds,
             context=context,
         )
 
         self._resolved_ip = (
             resolved_ip
+        )
+
+        self._connect_timeout_seconds = float(
+            connect_timeout_seconds
+        )
+
+        self._read_timeout_seconds = float(
+            read_timeout_seconds
         )
 
     def connect(
@@ -1048,13 +1057,24 @@ class PinnedHTTPSConnection(
                 443,
             ),
             timeout=
-                self.timeout,
+                self._connect_timeout_seconds,
+        )
+
+        # The frozen connect timeout applies only to TCP establishment.
+        # TLS handshake and subsequent response I/O use the frozen read
+        # timeout.
+        sock.settimeout(
+            self._read_timeout_seconds
         )
 
         self.sock = self._context.wrap_socket(
             sock,
             server_hostname=
                 self.host,
+        )
+
+        self.sock.settimeout(
+            self._read_timeout_seconds
         )
 
 
@@ -1082,7 +1102,8 @@ class PinnedHTTPSAdapter:
         url: str,
         resolved_ip: str,
         headers: dict[str, str],
-        timeout_seconds: float,
+        connect_timeout_seconds: float,
+        read_timeout_seconds: float,
         max_payload_bytes: int,
     ) -> dict:
         parsed = urllib.parse.urlsplit(
@@ -1112,8 +1133,11 @@ class PinnedHTTPSAdapter:
             resolved_ip=
                 resolved_ip,
 
-            timeout=
-                timeout_seconds,
+            connect_timeout_seconds=
+                connect_timeout_seconds,
+
+            read_timeout_seconds=
+                read_timeout_seconds,
 
             context=
                 self.context,
@@ -1422,6 +1446,39 @@ def execute_seed_task(
         ]
     )
 
+    connect_timeout_seconds = float(
+        request[
+            "connect_timeout_seconds"
+        ]
+    )
+
+    read_timeout_seconds = float(
+        request[
+            "read_timeout_seconds"
+        ]
+    )
+
+    per_attempt_wall_time_limit_seconds = float(
+        request[
+            "per_attempt_wall_time_limit_seconds"
+        ]
+    )
+
+    if connect_timeout_seconds <= 0:
+        raise TransportPolicyError(
+            "Frozen connect timeout must be positive"
+        )
+
+    if read_timeout_seconds <= 0:
+        raise TransportPolicyError(
+            "Frozen read timeout must be positive"
+        )
+
+    if per_attempt_wall_time_limit_seconds <= 0:
+        raise TransportPolicyError(
+            "Frozen per-attempt wall-time limit must be positive"
+        )
+
     initial_url = build_initial_url(
         row=
             row,
@@ -1445,6 +1502,10 @@ def execute_seed_task(
         max_attempts + 1,
     ):
         attempt_started = timestamp()
+
+        attempt_wall_started = (
+            pacer.clock()
+        )
 
         current_url = initial_url
         redirect_chain = []
@@ -1472,6 +1533,31 @@ def execute_seed_task(
             while True:
                 pacer.wait()
 
+                elapsed_before_request = (
+                    pacer.clock()
+                    - attempt_wall_started
+                )
+
+                remaining_wall_seconds = (
+                    per_attempt_wall_time_limit_seconds
+                    - elapsed_before_request
+                )
+
+                if remaining_wall_seconds <= 0:
+                    raise NetworkTransientError(
+                        "Per-attempt wall-time limit exceeded before request"
+                    )
+
+                effective_connect_timeout = min(
+                    connect_timeout_seconds,
+                    remaining_wall_seconds,
+                )
+
+                effective_read_timeout = min(
+                    read_timeout_seconds,
+                    remaining_wall_seconds,
+                )
+
                 response = adapter.request_once(
                     url=
                         current_url,
@@ -1486,12 +1572,11 @@ def execute_seed_task(
                             "default_headers"
                         ],
 
-                    timeout_seconds=
-                        float(
-                            request[
-                                "read_timeout_seconds"
-                            ]
-                        ),
+                    connect_timeout_seconds=
+                        effective_connect_timeout,
+
+                    read_timeout_seconds=
+                        effective_read_timeout,
 
                     max_payload_bytes=
                         int(
@@ -1500,6 +1585,19 @@ def execute_seed_task(
                             ]
                         ),
                 )
+
+                elapsed_after_request = (
+                    pacer.clock()
+                    - attempt_wall_started
+                )
+
+                if (
+                    elapsed_after_request
+                    > per_attempt_wall_time_limit_seconds
+                ):
+                    raise NetworkTransientError(
+                        "Per-attempt wall-time limit exceeded"
+                    )
 
                 status = int(
                     response[

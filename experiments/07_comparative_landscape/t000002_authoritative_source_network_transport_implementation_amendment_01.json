@@ -1,0 +1,58 @@
+{
+  "amended_implementation": {
+    "connect_timeout_seconds": 10,
+    "monotonic_wall_time_accounting": true,
+    "per_attempt_wall_time_limit_seconds": 60,
+    "read_timeout_seconds": 30,
+    "remaining_wall_budget_clamps_connect_timeout": true,
+    "remaining_wall_budget_clamps_read_timeout": true,
+    "test_sha256": "33d71d52a143f7da498988c92d8f105b88993a5ebdf9e79573d1abf5a85ebe7f",
+    "transport_sha256": "7830fea6fc9369609fe6ff0b7dc5392c714b23110d111480c068f5365754994c"
+  },
+  "amendment_id": "T000002_NETWORK_TRANSPORT_IMPLEMENTATION_AMENDMENT_01",
+  "authority_boundary": {
+    "event_ledger_mutation_authorized": false,
+    "live_network_execution_authorized": false,
+    "previous_authorization_valid_for_amended_transport": false,
+    "replacement_authorization_required": true,
+    "review_packet_mutation_authorized": false,
+    "scientific_decisions_authorized": false
+  },
+  "historical_authorization": {
+    "bytes": 2314,
+    "commit": "eb93edfc30ae29ce79eb0ca1bf1c086d92dea2f3",
+    "consumed": false,
+    "production_root_created": false,
+    "real_network_requests": 0,
+    "sha256": "20687900cdf36124fdc1c2d791c604507ff9048558055be3b9cec71bdd7ddd19",
+    "status": "SUPERSEDED_BEFORE_USE"
+  },
+  "next_gate": "REPLACE_ASR000001_ONE_USE_LIVE_RETRIEVAL_AUTHORIZATION_AFTER_TRANSPORT_AMENDMENT_01",
+  "original_implementation": {
+    "commit": "46c45aa851832810abe694b4f33e34636d7486a6",
+    "implementation_freeze_sha256": "80a68505bcef25e0fef58053d7f40e6c097b61806357dfb065883aac2f0f8d63"
+  },
+  "production_boundary": {
+    "awaiting_source_escalation": 10,
+    "ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "production_event_count": 11,
+    "production_retrieval_state": "NO_RUN",
+    "review_packet_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6"
+  },
+  "reason": {
+    "frozen_connect_timeout_seconds": 10,
+    "frozen_per_attempt_wall_time_limit_seconds": 60,
+    "frozen_read_timeout_seconds": 30,
+    "identified_before_live_network_execution": true,
+    "original_connect_timeout_not_independently_enforced": true,
+    "original_per_attempt_wall_time_limit_not_enforced": true
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_REPLACEMENT_LIVE_RETRIEVAL_AUTHORIZATION",
+  "unchanged_contracts": {
+    "live_authorization_contract_sha256": "8117f35c0c348afe49478a666aba05231eff1bc131eba19b6baafb3bd7d82360",
+    "network_policy_sha256": "201ea525346222c72483e775aa2c5109aa355af22a27ccc2df4e956c50c63e6a",
+    "seed_queue_sha256": "04b758cb6feb7460811116efef9b38a509b5996f63ca30cf225d9cf75448c691",
+    "target_identity_sha256": "5970e1ec739b5b01c546e526c402d2f3a6e06e8f43aef0bfcd375e692bc2ab5e"
+  }
+}
