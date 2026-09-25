@@ -1,0 +1,281 @@
+{
+  "authorization_contract": {
+    "authorization_must_explicitly_forbid_positions_12_to_500": true,
+    "authorization_must_pin_event_count_10": true,
+    "authorization_must_pin_exact_target_identity": true,
+    "authorization_must_pin_expected_pre_ledger_sha256": true,
+    "authorization_must_pin_explicit_operator": true,
+    "authorization_must_pin_positions_2_to_11": true,
+    "authorization_one_use": true,
+    "no_intervening_tracked_commit_before_execution": true,
+    "scientific_decisions_preselected": false,
+    "separate_tracked_authorization_required": true
+  },
+  "checkpoint_contract": {
+    "append_success_checkpoint_failure_requires_recovery": true,
+    "exact_three_file_checkpoint": true,
+    "final_files": [
+      "authorization.json",
+      "proposal.tsv",
+      "receipt.json"
+    ],
+    "final_transaction_directory": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000002",
+    "retry_after_partial_completion": false,
+    "rollback_after_successful_append": false,
+    "root": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts",
+    "transaction_id": "T000002"
+  },
+  "continuation_strategy": {
+    "automatic_scaling": false,
+    "further_tranche_authority": false,
+    "post_transaction_freeze_required": true,
+    "rationale": "Validate multi-event human-reviewed operation and checkpoint reconciliation on a bounded ten-record tranche before considering larger tranches.",
+    "strategy": "bounded_sequential_validation_tranche"
+  },
+  "current_scientific_boundary": {
+    "B000001_complete_positions": 1,
+    "B000001_positions_2_to_500_authorized": false,
+    "B000001_positions_2_to_500_decided": false,
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "production_events": 1,
+    "retained_candidate_method_decisions": 0,
+    "role_assignments": 0,
+    "source_escalation_events": 0,
+    "wave1_promotions": 0
+  },
+  "design_id": "B000001_POST_CANARY_CONTINUATION_DESIGN",
+  "live_mutation_permitted_by_this_design": false,
+  "next_gate": "IMPLEMENT_CONTROLLED_B000001_T000002_CONTINUATION_GUARD_WITHOUT_EVENTS",
+  "operator_contract": {
+    "allowed_operator_types": [
+      "human",
+      "human_with_assistance"
+    ],
+    "explicit_nonempty_operator_id_required": true,
+    "human_remains_scientific_decision_maker": true,
+    "operator_identity_must_not_be_inferred": true
+  },
+  "parent_state": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 1,
+    "event_count": 1,
+    "event_id": "E000000001",
+    "ledger_sha256": "33b49116d126f45cb54354b121eb69eb0abb212738794fef524a667ee0b2f2ba",
+    "ready": 94621,
+    "review_packet_bytes": 306073,
+    "review_packet_sha256": "bbaa8eeed4b60fa310434819dcf67ecf540d25112634818690bdb37cf5e0e286",
+    "t000001_authorization_sha256": "b316feae227a6a5917fa77d64a0a72887931702ca3bb08ea85173ba7c8584e5d",
+    "t000001_proposal_sha256": "a4f262c77d1a469996c388916febd465f4ee107f25be4598afcdd82a0148891b",
+    "t000001_receipt_sha256": "adc7b410a08d29ff3141300a3e40ee3f4ced3dbf9bcbe9967ac5513b1ef51733",
+    "transaction_id": "T000001"
+  },
+  "parent_t000001_completion_commit": "5770934347af9d604c22c8c199cbb6e9c1db58ca",
+  "post_t000002_gate": {
+    "further_authorization_before_freeze": false,
+    "mandatory_completion_reconciliation_freeze": true,
+    "must_reconcile_all_10_events": true,
+    "must_reconcile_checkpoint": true,
+    "must_reconcile_review_packet_to_proposal": true,
+    "must_verify_positions_12_to_500_unchanged": true,
+    "must_verify_replay_rejection": true
+  },
+  "proposal_contract": {
+    "exactly_one_proposal_per_target_position": true,
+    "positions_outside_2_to_11_prohibited": true,
+    "proposal_count": 10,
+    "proposal_order": "ascending_position_in_batch",
+    "single_batch_only": "B000001",
+    "supersedes_event_id_blank_for_all": true
+  },
+  "review_packet_contract": {
+    "human_entry_fields": [
+      "proposed_event_type",
+      "proposed_record_decision",
+      "proposed_exclusion_reason_code",
+      "proposed_candidate_method_flag",
+      "proposed_evidence_basis",
+      "proposed_evidence_source_locator",
+      "proposed_evidence_escalation_status",
+      "proposed_notes"
+    ],
+    "model_preclassification": false,
+    "position_1_locked_to_t000001_state": true,
+    "positions_12_to_500_must_remain_blank": true,
+    "positions_2_to_11_editable_after_separate_authorization": true,
+    "pre_t000002_bytes": 306073,
+    "pre_t000002_sha256": "bbaa8eeed4b60fa310434819dcf67ecf540d25112634818690bdb37cf5e0e286",
+    "software_preclassification": false,
+    "working_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/review_packet.tsv"
+  },
+  "schema_version": 1,
+  "scientific_review_contract": {
+    "allowed_exclusion_reason_codes": [
+      "application_only_no_reusable_method",
+      "unrelated_variant_or_data_type",
+      "duplicate_record_same_method_no_distinct_capability",
+      "unsupported_by_primary_or_stable_authoritative_source"
+    ],
+    "allowed_initial_event_types": [
+      "record_decision",
+      "source_escalation"
+    ],
+    "allowed_terminal_record_decisions": [
+      "exclude",
+      "retain_for_method_assessment"
+    ],
+    "autonomous_model_decision_prohibited": true,
+    "human_review_required_for_every_target_position": true,
+    "source_escalation_requires_nonempty_evidence_basis": true,
+    "source_escalation_source_locator_may_be_blank": true,
+    "source_escalation_status": "awaiting_source_escalation",
+    "source_escalation_terminal_fields_blank": true,
+    "terminal_decision_requires_nonempty_evidence_basis": true,
+    "terminal_decision_requires_nonempty_evidence_source_locator": true,
+    "terminal_exclude_requires_candidate_method_false": true,
+    "terminal_retain_requires_candidate_method_true": true,
+    "title_only_preclassification_prohibited": true,
+    "uncertainty_retained_for_source_checking": true
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "t000002": {
+    "authorization_artifact_created_by_this_design": false,
+    "authorized_by_this_design": false,
+    "batch_id": "B000001",
+    "expected_first_event_id": "E000000002",
+    "expected_last_event_id": "E000000011",
+    "expected_pre_ledger_sha256": "33b49116d126f45cb54354b121eb69eb0abb212738794fef524a667ee0b2f2ba",
+    "partial_transaction_permitted": false,
+    "positions_12_to_500_authorized": false,
+    "post_event_count_if_successful": 11,
+    "pre_event_count": 1,
+    "scientific_decisions_preselected": false,
+    "superseding_events_permitted": false,
+    "target_event_count": 10,
+    "target_position_end": 11,
+    "target_position_start": 2,
+    "target_positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "transaction_id": "T000002"
+  },
+  "target_identity": {
+    "canonical_baseline_queue_rows_sha256": "c02e9eb5d12fd8433c363bc24dccf1f3d965fa9c4fd64edb48a74576b98bdbd7",
+    "canonical_membership_rows_sha256": "c35fb0b42daf9c7bec8ce70f7170452b6f19800d0bddcfd6e83ccdccb432ba09",
+    "canonical_target_identity_sha256": "2f8188c05e3e804133604cbe9d2f1325657aa30f9aa87dcbe5c75572908eb671",
+    "entities": [
+      {
+        "baseline_row_sha256": "95063f377c539af86ca0a0d5b2b5d06f4e223bc02a4ae96aaa3c91a77ae21d42",
+        "doi": "10.1001/jamanetworkopen.2018.7665",
+        "global_active_index": 2,
+        "pmid": "30768189",
+        "position_in_batch": 2,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1001/jamanetworkopen.2018.7665",
+        "title_or_software_name": "Risk Assessment After a Severe Hospital-Acquired Infection Associated With Carbapenemase-Producing Pseudomonas aeruginosa",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "976cf5bbe47a5fe7f8d80ec10c8e93f8b0999f926b45a1324ad66ab145d40781",
+        "doi": "10.1001/jamanetworkopen.2020.24191",
+        "global_active_index": 3,
+        "pmid": "33026453",
+        "position_in_batch": 3,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1001/jamanetworkopen.2020.24191",
+        "title_or_software_name": "Analysis of Genomic Characteristics and Transmission Routes of Patients With Confirmed SARS-CoV-2 in Southern California During the Early Stage of the US COVID-19 Pandemic",
+        "year": "2020"
+      },
+      {
+        "baseline_row_sha256": "18f92cc654af581b1bea5dff5dbe7c0580879707e0832e217242799f786f9d3b",
+        "doi": "10.1001/jamanetworkopen.2026.17898",
+        "global_active_index": 4,
+        "pmid": "42275063",
+        "position_in_batch": 4,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1001/jamanetworkopen.2026.17898",
+        "title_or_software_name": "Hospital Environment\u2013Associated Sources of Mycobacterium abscessus Infection in Transplant Recipients",
+        "year": "2026"
+      },
+      {
+        "baseline_row_sha256": "e8ad05c3b5a50b298d65cd6de86217c4ba0836e10d7707d57ca8e1d01d42c837",
+        "doi": "10.1002/0471142727.mb1901s101",
+        "global_active_index": 5,
+        "pmid": "23288462",
+        "position_in_batch": 5,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/0471142727.mb1901s101",
+        "title_or_software_name": "Detecting the Signatures of Adaptive Evolution in Protein\u2010Coding Genes",
+        "year": "2013"
+      },
+      {
+        "baseline_row_sha256": "ff97b6d665ffaf371fa83622d8ce3cf9409ac866a1d6e8fc403c4869c788fcf8",
+        "doi": "10.1002/1873-3468.13356",
+        "global_active_index": 6,
+        "pmid": "30861107",
+        "position_in_batch": 6,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/1873-3468.13356",
+        "title_or_software_name": "Molecular evolution of proteins mediating mitochondrial fission\u2013fusion dynamics",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "83380ff654ecbd316bf71ada12ebafdd32e963f7c79da7c44f52d4f8aee2ead9",
+        "doi": "10.1002/2211-5463.12843",
+        "global_active_index": 7,
+        "pmid": "32189477",
+        "position_in_batch": 7,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/2211-5463.12843",
+        "title_or_software_name": "Origin and adaptation of green\u2010sensitive (RH2) pigments in vertebrates",
+        "year": "2020"
+      },
+      {
+        "baseline_row_sha256": "c396dd435735bf5a5935c3ea4a053ea145b5e0ca451c657e30e8cf71635c0c76",
+        "doi": "10.1002/2211-5463.13555",
+        "global_active_index": 8,
+        "pmid": "36647789",
+        "position_in_batch": 8,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/2211-5463.13555",
+        "title_or_software_name": "Potentially reduced fusogenicity of syncytin\u20102 in New World monkeys",
+        "year": "2023"
+      },
+      {
+        "baseline_row_sha256": "0c2b6bc07cd3bd69ac2fb111bc5be0d5279f4be49a525ea66aea119c9cee4269",
+        "doi": "10.1002/2211-5463.13728",
+        "global_active_index": 9,
+        "pmid": "37905308",
+        "position_in_batch": 9,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/2211-5463.13728",
+        "title_or_software_name": "Insights into the identification and evolutionary conservation of key genes in the transcriptional circuits of meiosis initiation and commitment in budding yeast",
+        "year": "2023"
+      },
+      {
+        "baseline_row_sha256": "af854acdd8f52ea2b34950e8ed56de90e87e5b78a34812cb8da98fdf8e49ec74",
+        "doi": "10.1002/9780470015902.a0020859",
+        "global_active_index": 10,
+        "pmid": "",
+        "position_in_batch": 10,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859",
+        "title_or_software_name": "Selection against Amino Acid Replacements in Human Proteins",
+        "year": "2008"
+      },
+      {
+        "baseline_row_sha256": "3bc43d2f7176233cfa1e88af0134ab4352ffc2dc3877ba50d3abd5c0a4269709",
+        "doi": "10.1002/9780470015902.a0020859.pub2",
+        "global_active_index": 11,
+        "pmid": "",
+        "position_in_batch": 11,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859.pub2",
+        "title_or_software_name": "Selection against Amino Acid Replacements in Human Proteins",
+        "year": "2013"
+      }
+    ],
+    "entity_count": 10,
+    "ordered_entity_ids_sha256": "ab135632dc02db9435ccec5ce5301ef9847770c1ee61a9d91de9103a9ca9ea65"
+  }
+}
