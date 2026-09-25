@@ -1,0 +1,93 @@
+{
+  "implementation": {
+    "design_json_sha256": "2ce726a15a7e228933d42a6bc8ff8a6790901c65e58dc7179d79c76b0a0b9860",
+    "hostile_test_path": "experiments/07_comparative_landscape/test_t000002_authoritative_source_retrieval.py",
+    "hostile_test_sha256": "b9f425285a1fc2cf446fd191fd41b61384af97d817a4c731fe0546c6daa4277d",
+    "runner_path": "experiments/07_comparative_landscape/t000002_authoritative_source_retrieval.py",
+    "runner_sha256": "f2ac303829b0d582737cde00a95384edc6cc64936dec601847258bc503f724eb"
+  },
+  "implemented_controls": {
+    "baseline_row_tamper_rejection": true,
+    "byte_deterministic_queue_serialization": true,
+    "canonical_queue_ids": true,
+    "deterministic_queue_construction": true,
+    "entity_identity_tamper_rejection": true,
+    "event_identity_tamper_rejection": true,
+    "exact_target_validation": true,
+    "missing_task_rejection": true,
+    "network_capable_imports": false,
+    "network_execution_fail_closed": true,
+    "out_of_scope_rejection": true,
+    "scientific_authority_rejection": true,
+    "target_identity_reproduction": true,
+    "unknown_route_rejection": true
+  },
+  "network_boundary": {
+    "live_network_authorized": false,
+    "network_environment_consumed": false,
+    "production_root_created": false,
+    "transport_implemented": false
+  },
+  "next_gate": "DESIGN_T000002_AUTHORITATIVE_SOURCE_NETWORK_TRANSPORT_AND_LIVE_RETRIEVAL_AUTHORIZATION",
+  "parent_authoritative_source_design_commit": "bae2a0a6854df50a05163f7ffc8121379579fe3e",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "authoritative_sources_retrieved": 0,
+    "awaiting_source_escalation": 10,
+    "blocked_metadata": 484,
+    "candidate_method_decisions_added": 0,
+    "complete": 1,
+    "production_event_mutation_permitted": false,
+    "production_events": 11,
+    "ready": 94611,
+    "scientific_resolution_permitted": false,
+    "terminal_decisions_added": 0
+  },
+  "seed_queue": {
+    "all_network_required": true,
+    "materialized_in_production": false,
+    "route_counts": {
+      "doi_publisher_article": 10,
+      "pubmed_pmc_link_discovery": 8,
+      "pubmed_record": 8
+    },
+    "scientific_decision_authority": false,
+    "sha256": "04b758cb6feb7460811116efef9b38a509b5996f63ca30cf225d9cf75448c691",
+    "status": "planned_pre_network_authorization",
+    "task_count": 26
+  },
+  "status": "FROZEN_PRE_NETWORK_TRANSPORT_DESIGN",
+  "storage_boundary": {
+    "production_root": "results/07_comparative_landscape/t000002_authoritative_source_retrieval",
+    "production_root_exists": false,
+    "seed_queue_persisted": false
+  },
+  "target": {
+    "canonical_target_identity_sha256": "5970e1ec739b5b01c546e526c402d2f3a6e06e8f43aef0bfcd375e692bc2ab5e",
+    "count": 10,
+    "current_event_ids": [
+      "E000000002",
+      "E000000003",
+      "E000000004",
+      "E000000005",
+      "E000000006",
+      "E000000007",
+      "E000000008",
+      "E000000009",
+      "E000000010",
+      "E000000011"
+    ],
+    "positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  }
+}
