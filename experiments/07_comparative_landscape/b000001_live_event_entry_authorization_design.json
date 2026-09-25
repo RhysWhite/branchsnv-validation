@@ -1,0 +1,256 @@
+{
+  "authorization_artifact_contract": {
+    "preselects_scientific_decision": false,
+    "required_fields": [
+      "status",
+      "parent_commit",
+      "event_appender_implementation_sha256",
+      "event_entry_design_freeze_sha256",
+      "B000001_membership_identity",
+      "batch_id",
+      "authorized_position",
+      "authorized_screening_entity_id",
+      "authorized_baseline_row_sha256",
+      "expected_pre_ledger_sha256",
+      "max_live_event_count",
+      "operator_id",
+      "operator_type",
+      "permitted_initial_event_types",
+      "receipt_checkpoint_contract",
+      "positions_2_to_500_authorized"
+    ],
+    "tracked_before_live_append": true
+  },
+  "authorization_scope": {
+    "batch_entity_count": 500,
+    "batch_id": "B000001",
+    "later_batches_authorized": false,
+    "live_authorized_by_this_design": false
+  },
+  "batch_identity": {
+    "batch_manifest_ordered_entity_ids_sha256": "8a98c513759bc8a8d00a53cad104411a860aebe2ccdb20a825aa636ccfb06ceb",
+    "canonical_baseline_rows_sha256": "f9f1938f1fd296eb7ecc2ea9f0c87aae54a103e39d3374cd351293677698e12c",
+    "canonical_membership_rows_sha256": "dbf86779c8d82b0185cc1c5c03194d00694b1322a2ef7235068c6d8082f3160b",
+    "canonical_ordered_entity_ids_sha256": "8a98c513759bc8a8d00a53cad104411a860aebe2ccdb20a825aa636ccfb06ceb",
+    "first_baseline_row_sha256": "bb8ef2c1e0fd980a70884709d3085b8e44b5b425500d390ae943f638f1d08048",
+    "first_screening_entity_id": "publication_component:citation:publication:doi:10.1001/archdermatol.2012.1817",
+    "last_screening_entity_id": "publication_component:citation:publication:doi:10.1007/s00239-016-9761-9"
+  },
+  "canary_policy": {
+    "authorized_baseline_row_sha256": "bb8ef2c1e0fd980a70884709d3085b8e44b5b425500d390ae943f638f1d08048",
+    "authorized_position": 1,
+    "authorized_screening_entity_id": "publication_component:citation:publication:doi:10.1001/archdermatol.2012.1817",
+    "max_live_events": 1,
+    "permitted_initial_event_types": [
+      "record_decision",
+      "source_escalation"
+    ],
+    "positions_2_to_500_authorized": false,
+    "post_canary_completion_freeze_required": true,
+    "required": true,
+    "superseding_record_decision_permitted": false
+  },
+  "canary_review": {
+    "human_checks_evidence": true,
+    "human_determines_source_escalation": true,
+    "human_selects_event_type": true,
+    "human_selects_exclusion_reason_if_applicable": true,
+    "human_selects_terminal_decision_if_applicable": true,
+    "only_position_1_may_be_proposed": true,
+    "source_escalation_locator_may_be_empty": true,
+    "terminal_evidence_locator_required": true
+  },
+  "checkpoint_contract": {
+    "atomic_directory_publication_after_ledger_append": true,
+    "final_files": [
+      "authorization.json",
+      "proposal.tsv",
+      "receipt.json"
+    ],
+    "final_transaction_directory": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000001",
+    "root": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts",
+    "stage_before_ledger_append": true,
+    "successful_append_with_checkpoint_failure": "recovery_required_no_retry_no_rollback",
+    "transaction_id": "T000001"
+  },
+  "crash_policy": {
+    "preserve_staged_checkpoint_on_post_append_failure": true,
+    "require_reconciliation_gate": true,
+    "retry_after_successful_ledger_append": false,
+    "rollback_accepted_ledger": false
+  },
+  "expected_pre_ledger": {
+    "event_count": 0,
+    "sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+    "stale_if_changed": true
+  },
+  "immutable_dependencies": {
+    "baseline_queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "batch_manifest_sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0",
+    "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "event_appender_implementation_freeze_sha256": "d499167e2e2dce77bcb4b924958cc02d7b050a9d0d074b96e2b12c00b8b37ace",
+    "event_appender_sha256": "abf4c15e9c993bcb96c73ccb53ff3dae56e229c533e9df25056c37cfd5eda98b",
+    "event_entry_design_freeze_sha256": "73555f0c8aadc37caa3dbe2110be439b0cb13a48398e5d597168492a65ed82b9",
+    "event_entry_design_sha256": "98f73c921f371a60f959dc630b7028026a5983b41efbd11b911e6e73c0f5e09d",
+    "event_ledger_genesis_json_sha256": "89486b47eb83f896259b84a5dd90b8ae3a41083637bd331261167e1165e113be",
+    "immutable_execution_checksums_sha256": "3ea3cc193f47da8a32e817579c31f4ca294de615e1e0e29e4eb37963e374f13c"
+  },
+  "implementation_boundary": {
+    "may_append_real_production_event": false,
+    "may_create_live_authorization_artifact": false,
+    "may_create_real_T000001_checkpoint": false,
+    "may_generate_review_packet": true,
+    "may_test_against_temporary_ledgers": true,
+    "may_validate_authorization": true,
+    "may_validate_canary_proposal": true
+  },
+  "next_gate": "IMPLEMENT_CONTROLLED_B000001_LIVE_AUTHORIZATION_GUARD_WITHOUT_EVENTS",
+  "operator_authorization": {
+    "must_be_frozen_in_later_authorization_artifact": true,
+    "operator_id_may_be_inferred_from_environment": false,
+    "operator_id_must_be_explicit": true,
+    "operator_type_must_be_explicit": true,
+    "permitted_operator_types": [
+      "human",
+      "human_with_assistance"
+    ]
+  },
+  "parent_event_appender_implementation_commit": "552a0bc2620953c12683be9be6cd8cde61611864",
+  "production_invocation": {
+    "allow_production_parameter_is_authorization": false,
+    "frozen_appender_cli_remains_production_refusing": true,
+    "future_guard_may_call_library_allow_production_true": true,
+    "tracked_authorization_required": true
+  },
+  "proposal_contract": {
+    "batch_id": "B000001",
+    "dry_run_must_not_mutate": true,
+    "dry_run_required_before_live_append": true,
+    "expected_first_event_id": "E000000001",
+    "permitted_event_types": [
+      "record_decision",
+      "source_escalation"
+    ],
+    "post_ledger_sha_precomputed_in_authorization": false,
+    "proposal_sha256_recorded_in_receipt": true,
+    "row_count": 1,
+    "screening_entity_id": "publication_component:citation:publication:doi:10.1001/archdermatol.2012.1817"
+  },
+  "receipt_required_fields": [
+    "transaction_id",
+    "batch_id",
+    "screening_entity_id",
+    "proposal_sha256",
+    "authorization_commit",
+    "authorization_json_sha256",
+    "pre_append_ledger_sha256",
+    "post_append_ledger_sha256",
+    "pre_append_event_count",
+    "post_append_event_count",
+    "first_assigned_event_id",
+    "last_assigned_event_id",
+    "transaction_timestamp_utc",
+    "event_type_counts",
+    "terminal_decision_counts",
+    "derived_state_counts_after_append",
+    "strict_prefix_extension",
+    "published",
+    "post_publication_validation_passed"
+  ],
+  "review_packet": {
+    "authoritative_history": false,
+    "baseline_queue_fields": [
+      "screening_entity_id",
+      "screening_entity_class",
+      "publication_reconciliation_key",
+      "database_dedup_keys",
+      "biotools_id",
+      "citation_provenance_ids",
+      "discovery_stages",
+      "citation_wave_provenance",
+      "title_or_software_name",
+      "title_variants",
+      "year",
+      "doi",
+      "pmid",
+      "openalex_id",
+      "omid",
+      "identity_attention_status",
+      "metadata_screenability",
+      "screening_state",
+      "record_decision",
+      "exclusion_reason_code",
+      "candidate_method_flag",
+      "evidence_escalation_status",
+      "operator",
+      "decision_batch",
+      "notes"
+    ],
+    "fields": [
+      "batch_id",
+      "position_in_batch",
+      "global_active_index",
+      "baseline_row_sha256",
+      "screening_entity_id",
+      "screening_entity_class",
+      "publication_reconciliation_key",
+      "database_dedup_keys",
+      "biotools_id",
+      "citation_provenance_ids",
+      "discovery_stages",
+      "citation_wave_provenance",
+      "title_or_software_name",
+      "title_variants",
+      "year",
+      "doi",
+      "pmid",
+      "openalex_id",
+      "omid",
+      "identity_attention_status",
+      "metadata_screenability",
+      "screening_state",
+      "record_decision",
+      "exclusion_reason_code",
+      "candidate_method_flag",
+      "evidence_escalation_status",
+      "operator",
+      "decision_batch",
+      "notes",
+      "proposed_event_type",
+      "proposed_record_decision",
+      "proposed_exclusion_reason_code",
+      "proposed_candidate_method_flag",
+      "evidence_basis",
+      "evidence_source_locator",
+      "evidence_escalation_status",
+      "notes"
+    ],
+    "human_entry_fields": [
+      "proposed_event_type",
+      "proposed_record_decision",
+      "proposed_exclusion_reason_code",
+      "proposed_candidate_method_flag",
+      "evidence_basis",
+      "evidence_source_locator",
+      "evidence_escalation_status",
+      "notes"
+    ],
+    "human_entry_fields_blank_at_generation": true,
+    "model_preclassification_allowed": false,
+    "ordered_by": "position_in_batch",
+    "row_count": 500,
+    "software_preclassification_allowed": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "B000001_accepted_decisions": 0,
+    "B000001_source_escalation_events": 0,
+    "authoritatively_reviewed_B000001_positions": 0,
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "production_event_rows": 0,
+    "role_assignments": 0,
+    "wave1_promotions": 0
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}
