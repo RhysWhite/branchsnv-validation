@@ -1,0 +1,55 @@
+{
+  "authorized_positions": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "batch_id": "B000001",
+  "event_appender_implementation_freeze_sha256": "d499167e2e2dce77bcb4b924958cc02d7b050a9d0d074b96e2b12c00b8b37ace",
+  "event_appender_implementation_sha256": "abf4c15e9c993bcb96c73ccb53ff3dae56e229c533e9df25056c37cfd5eda98b",
+  "event_entry_design_freeze_sha256": "73555f0c8aadc37caa3dbe2110be439b0cb13a48398e5d597168492a65ed82b9",
+  "expected_first_event_id": "E000000002",
+  "expected_last_event_id": "E000000011",
+  "expected_pre_event_count": 1,
+  "expected_pre_ledger_sha256": "33b49116d126f45cb54354b121eb69eb0abb212738794fef524a667ee0b2f2ba",
+  "max_live_event_count": 10,
+  "one_use": true,
+  "operator_id": "Rhys",
+  "operator_type": "human_with_assistance",
+  "parent_commit": "9309aa2af14a1d022b8ae47c87191b87df4bf300",
+  "partial_transaction_permitted": false,
+  "permitted_initial_event_types": [
+    "record_decision",
+    "source_escalation"
+  ],
+  "positions_12_to_500_authorized": false,
+  "post_canary_continuation_design_freeze_sha256": "368776c93131e65e457260d6c46296a6024e6515dd3dadf83775bffa3a3470fd",
+  "receipt_checkpoint_contract": {
+    "final_files": [
+      "authorization.json",
+      "proposal.tsv",
+      "receipt.json"
+    ],
+    "final_transaction_directory": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000002",
+    "root": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts",
+    "transaction_id": "T000002"
+  },
+  "schema_version": 1,
+  "scientific_decisions_preselected": false,
+  "status": "AUTHORIZED_B000001_T000002_POSITIONS_2_TO_11_ONE_USE",
+  "t000001_completion_freeze_sha256": "284be7226a7fa2a29d61c6e390afc7d35ba390dfbd70804fa76ebdc0207f9287",
+  "target_identity": {
+    "canonical_baseline_queue_rows_sha256": "c02e9eb5d12fd8433c363bc24dccf1f3d965fa9c4fd64edb48a74576b98bdbd7",
+    "canonical_membership_rows_sha256": "c35fb0b42daf9c7bec8ce70f7170452b6f19800d0bddcfd6e83ccdccb432ba09",
+    "canonical_target_identity_sha256": "2f8188c05e3e804133604cbe9d2f1325657aa30f9aa87dcbe5c75572908eb671",
+    "entity_count": 10,
+    "ordered_entity_ids_sha256": "ab135632dc02db9435ccec5ce5301ef9847770c1ee61a9d91de9103a9ca9ea65"
+  }
+}
