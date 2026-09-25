@@ -1,0 +1,63 @@
+{
+  "baseline_population": {
+    "blocked_metadata_entities": 484,
+    "ready_entities": 94629,
+    "screening_entities": 95113
+  },
+  "execution_output_created": false,
+  "execution_output_path": "results/07_comparative_landscape/baseline_scientific_screening_execution",
+  "immutable_baseline": {
+    "execution_design_checksum_manifest_sha256": "fd1564e305e6e07b50dddee082b6d26354c0fb13b3fdee0699eacc1e8931f9c1",
+    "execution_design_sha256": "b27e57db996ecc143f9e74ce9a6e389d022e9bb3b29de4220765404bc60ab3c1",
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "production_checksums_sha256": "8b73918e39e2e718553856ccfbc146f77fa4d8c27bb997b68cd3f945504bd591",
+    "production_completion_checksum_manifest_sha256": "9cd2f6389b294f49d4082f334c1bcb05c97346f09d0c0fa08b3cd1d564b4fa29",
+    "queue_path": "results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv",
+    "queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58"
+  },
+  "implementation": {
+    "path": "experiments/07_comparative_landscape/baseline_scientific_screening_execution.py",
+    "sha256": "6084faeffe6d5b28aaeb6150ad434bf7f723507efde1c67e336549ee61a5e97a",
+    "test_path": "experiments/07_comparative_landscape/test_baseline_scientific_screening_execution.py",
+    "test_sha256": "d452890c84080a80d05b9bd66ebca796afc8740a304ec1370bf85a00732624d0"
+  },
+  "implementation_may_make_scientific_decisions": false,
+  "implemented_capabilities": {
+    "append_only_event_validation": true,
+    "baseline_row_hashing": true,
+    "blocked_metadata_fail_closed": true,
+    "conflicting_terminal_event_detection": true,
+    "deterministic_batching": true,
+    "deterministic_current_state_projection": true,
+    "deterministic_ordered_membership_hashing": true,
+    "explicit_supersession_validation": true,
+    "operator_provenance_validation": true,
+    "prior_adjudication_mapping_validation": true,
+    "source_escalation_validation": true,
+    "terminal_decision_invariant_validation": true
+  },
+  "network_access_performed": false,
+  "next_gate": "RESOLVE_AND_FREEZE_PRIOR_WAVE0_ADJUDICATION_MAPPING",
+  "parent_execution_design_commit": "3a49a9837a09cf3a49ff2bb567beb3db5bcf1b74",
+  "prior_wave0_dependency": {
+    "active_ready_entity_count": null,
+    "batch_count": null,
+    "batch_generation_authorized": false,
+    "expected_anchor_count": 8,
+    "fuzzy_mapping_allowed": false,
+    "mapped_anchor_count": 0,
+    "mapping_may_be_inferred": false,
+    "mapping_status": "PENDING_FROZEN_MAPPING",
+    "semantic_mapping_allowed": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "event_ledger_rows": 0,
+    "method_assessments": 0,
+    "role_assignments": 0,
+    "scientific_screening_decisions": 0,
+    "wave1_promotions": 0
+  },
+  "status": "FROZEN_PRE_CARRY_FORWARD_MAPPING"
+}
