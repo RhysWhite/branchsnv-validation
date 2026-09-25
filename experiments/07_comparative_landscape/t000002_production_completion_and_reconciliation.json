@@ -1,0 +1,167 @@
+{
+  "additional_live_event_authority": false,
+  "authoritative_source_retrieval_started": false,
+  "authorization": {
+    "authorized_positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "bytes": 2267,
+    "commit": "66c4a7c637a7f556161e14bf9c0a0dc4ab483bc3",
+    "consumed": true,
+    "one_use": true,
+    "operator_id": "Rhys",
+    "operator_type": "human_with_assistance",
+    "positions_12_to_500_authorized": false,
+    "sha256": "5b5988b435b62a73420c8b728a362b4e9e98029bac85e75e6aa85ad4a1b649f4"
+  },
+  "derived_state_after_transaction": {
+    "awaiting_source_escalation": 10,
+    "blocked_metadata": 484,
+    "complete": 1,
+    "ready": 94611
+  },
+  "event_ids": [
+    "E000000002",
+    "E000000003",
+    "E000000004",
+    "E000000005",
+    "E000000006",
+    "E000000007",
+    "E000000008",
+    "E000000009",
+    "E000000010",
+    "E000000011"
+  ],
+  "ledger_transition": {
+    "direct_path_checksum_frozen": false,
+    "new_event_count": 10,
+    "post_bytes": 12714,
+    "post_event_count": 11,
+    "post_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "pre_event_count": 1,
+    "pre_sha256": "33b49116d126f45cb54354b121eb69eb0abb212738794fef524a667ee0b2f2ba",
+    "reason_not_directly_checksummed": "append_only_future_mutable_production_ledger",
+    "strict_prefix_extension": true,
+    "transaction_timestamp_utc": "2026-09-25T09:30:12Z"
+  },
+  "next_gate": "DESIGN_T000002_AUTHORITATIVE_SOURCE_RETRIEVAL_AND_ESCALATION_RESOLUTION",
+  "pre_review_evidence": {
+    "direct_path_checksums_frozen": true,
+    "exact_rows_bytes": 6979,
+    "exact_rows_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/T000002_position_2_11_evidence/exact_rows.tsv",
+    "exact_rows_sha256": "01f9bb29f5c4ddab68a7b8fc4cb32be119cfd12152744599196cface8541d56c",
+    "local_evidence_bytes": 134372,
+    "local_evidence_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/T000002_position_2_11_evidence/local_evidence_matches.json",
+    "local_evidence_sha256": "0f4d82e3c20eb8b97d984cb7a6cc96c63ea5ff88081e99c8fb7c81f48efff785",
+    "review_packet_modified_when_snapshot_created": false,
+    "scientific_decisions_made_when_snapshot_created": false
+  },
+  "proposal": {
+    "bytes": 9994,
+    "event_type_counts": {
+      "source_escalation": 10
+    },
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000002/proposal.tsv",
+    "rows": 10,
+    "sha256": "ce1eb7e2bf7cb3ea4ab09e5b8137658173e5893ce8995c103c3d830c29266f1e",
+    "terminal_decision_count": 0
+  },
+  "receipt": {
+    "bytes": 2047,
+    "checkpoint_status": "COMPLETE",
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000002/receipt.json",
+    "post_publication_validation_passed": true,
+    "published": true,
+    "sha256": "21486cef8d49f3497b0fe9a2671061a31969f76acbc06be6cb142fa73190d271"
+  },
+  "reconciliation": {
+    "authorization_checkpoint_byte_identical": true,
+    "checkpoint_artifact_count": 3,
+    "exact_pre_review_rows_reconciled": true,
+    "post_publication_validation_passed": true,
+    "post_replay_ledger_unchanged": true,
+    "pre_review_evidence_reconciled": true,
+    "pre_t000002_ledger_prefix_sha_reproduced": true,
+    "proposal_matches_ledger_events": true,
+    "proposal_matches_review_packet": true,
+    "receipt_matches_ledger_transition": true,
+    "replay_rejected": true
+  },
+  "review_packet_at_transaction": {
+    "bytes": 314642,
+    "direct_path_checksum_frozen": false,
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/review_packet.tsv",
+    "position_1_terminal": true,
+    "positions_12_to_500_blank": true,
+    "positions_2_to_11_source_escalation": true,
+    "reason_not_directly_checksummed": "future_mutable_working_review_artifact",
+    "rows": 500,
+    "sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6"
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "awaiting_source_escalation_entities": 10,
+    "blocked_metadata_entities": 484,
+    "canonical_publication_decisions": 0,
+    "complete_baseline_entities": 1,
+    "method_assessments": 0,
+    "new_t000002_terminal_decisions": 0,
+    "positions_12_to_500_authorized": false,
+    "positions_12_to_500_blank": true,
+    "positions_2_to_11_require_authoritative_source_review": true,
+    "production_events": 11,
+    "ready_baseline_entities": 94611,
+    "retained_candidate_method_decisions": 0,
+    "role_assignments": 0,
+    "source_escalation_events": 10,
+    "terminal_exclusions": 1,
+    "wave1_promotions": 0
+  },
+  "scientific_screening_started": true,
+  "status": "FROZEN_POST_T000002_COMPLETION",
+  "t000002_scientific_events": {
+    "candidate_method_decisions": 0,
+    "event_count": 10,
+    "event_ids": [
+      "E000000002",
+      "E000000003",
+      "E000000004",
+      "E000000005",
+      "E000000006",
+      "E000000007",
+      "E000000008",
+      "E000000009",
+      "E000000010",
+      "E000000011"
+    ],
+    "event_type": "source_escalation",
+    "evidence_escalation_status": "awaiting_source_escalation",
+    "exclusion_reason_decisions": 0,
+    "operator_id": "Rhys",
+    "operator_type": "human_with_assistance",
+    "positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "superseding_events": 0,
+    "terminal_record_decisions": 0
+  },
+  "transaction_id": "T000002"
+}
