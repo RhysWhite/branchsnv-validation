@@ -1,0 +1,64 @@
+{
+  "derived_execution_population": {
+    "active_ready_entities": 94622,
+    "batch_count": 190,
+    "blocked_metadata_entities": 484,
+    "first_batch_id": "B000001",
+    "frozen_ready_entities": 94629,
+    "last_batch_entity_count": 122,
+    "last_batch_id": "B000190",
+    "max_batch_size": 500
+  },
+  "deterministic_execution_hashes": {
+    "active_ordered_entity_ids_sha256": "d0970cbd5a582ce05585926bc1e81acba502b01a96acc4b84ab8db454a0ea4c1",
+    "batch_manifest_sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0"
+  },
+  "immutable_dependencies": {
+    "baseline_queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "contract_amendment_checksum_manifest_sha256": "927febb2d501324d01985fc8f268b08a6c83f50138eaddf677309a5d14cad471",
+    "contract_amendment_sha256": "a0b5bae840c60ce0e971eab7081b6353616810e67f36f6227bd776c939ccb1fd",
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "original_execution_implementation_checksum_manifest_sha256": "65be8560a46e15f52f48dc68fc1bed2f43e0d35555e6d5bda4bdde3e461c7eb1",
+    "original_execution_implementation_sha256": "6084faeffe6d5b28aaeb6150ad434bf7f723507efde1c67e336549ee61a5e97a",
+    "prior_anchor_resolution_checksum_manifest_sha256": "878a38c06075644c2bbef4418eefb81f6e4fd995a99371865b9f216930583f06",
+    "prior_anchor_resolution_sha256": "88049a07411b6819753b004e9db9984d22b68b850bb3540694240bca39fd939a"
+  },
+  "implementation": {
+    "path": "experiments/07_comparative_landscape/baseline_scientific_screening_execution_amendment_01.py",
+    "sha256": "a962c83e9e600995c97e66824d6d7a08caef4f5268d334be720da8d58954d725",
+    "test_path": "experiments/07_comparative_landscape/test_baseline_scientific_screening_execution_amendment_01.py",
+    "test_sha256": "93e2556e74620d50e5aa3a1306199e03a3434ed39f04192beab3355b12d49839"
+  },
+  "implementation_may_make_scientific_decisions": false,
+  "network_access_performed": false,
+  "next_gate": "DESIGN_CONTROLLED_PRE_DECISION_EXECUTION_PRODUCTION_ARTIFACT_SET",
+  "original_frozen_engine": {
+    "historical_fail_closed_state_preserved": true,
+    "modified": false
+  },
+  "parent_contract_amendment_commit": "70a692a70c4bc153bff0db3ebf70ba2eb5e84bd2",
+  "prior_anchor_contract": {
+    "ambiguous_prior_anchors": 0,
+    "historical_prior_anchors": 8,
+    "in_baseline_carry_forwards": 7,
+    "out_of_baseline_anchor_id": "W0A06",
+    "out_of_baseline_doi": "10.1093/bioinformatics/btv271",
+    "out_of_baseline_prior_anchors": 1,
+    "out_of_baseline_tool": "kSNP3.0"
+  },
+  "production_state": {
+    "event_ledger_rows": 0,
+    "execution_output_created": false,
+    "production_batches_created": 0
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "role_assignments": 0,
+    "scientific_screening_decisions": 0,
+    "source_escalation_events": 0,
+    "wave1_promotions": 0
+  },
+  "status": "FROZEN_PRE_EXECUTION_PRODUCTION"
+}
