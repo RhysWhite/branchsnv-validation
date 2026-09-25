@@ -1356,15 +1356,78 @@ assert (
     == real_packet_before
 )
 
-assert not transport.PRODUCTION_ROOT.exists()
+assert transport.PRODUCTION_ROOT.is_dir()
+
+asr000001_root = (
+    transport.PRODUCTION_ROOT
+    / "ASR000001"
+)
+
+assert asr000001_root.is_dir()
+
+asr000001_checksums = (
+    asr000001_root
+    / "checksums.sha256"
+)
+
+assert asr000001_checksums.is_file()
+
+for line in asr000001_checksums.read_text(
+    encoding="utf-8"
+).splitlines():
+    digest, relative = line.split(
+        "  ",
+        1,
+    )
+
+    assert transport.sha256_file(
+        asr000001_root
+        / relative
+    ) == digest
+
+asr000001_summary = json.loads(
+    (
+        asr000001_root
+        / "retrieval_summary.json"
+    ).read_text(
+        encoding="utf-8"
+    )
+)
+
+assert asr000001_summary[
+    "status"
+] == "ASR000001_COMPLETE"
+
+assert asr000001_summary[
+    "scientific_decisions_made"
+] is False
+
+assert asr000001_summary[
+    "event_ledger_mutated"
+] is False
+
+assert asr000001_summary[
+    "review_packet_mutated"
+] is False
+
+assert not (
+    transport.PRODUCTION_ROOT
+    / "ASR000002"
+).exists()
+
+assert not list(
+    transport.PRODUCTION_ROOT.glob(
+        ".ASR000002.tmp.*"
+    )
+)
 
 assert transport.LIVE_AUTHORIZATION.is_file()
 
 assert transport.sha256_file(
     transport.LIVE_AUTHORIZATION
 ) == (
-    "20687900cdf36124fdc1c2d791c60450"
-    "7ff9048558055be3b9cec71bdd7ddd19"
+    "5e12f5eb15fbfa1dab5f826d8e174270"
+    "bc395e089a01e2f311537267217aa1be"
 )
 
 print(
@@ -1376,11 +1439,15 @@ print(
 )
 
 print(
-    "PASS | real production retrieval root absent"
+    "PASS | completed ASR000001 production evidence preserved checksum-exact"
 )
 
 print(
-    "PASS | historical unconsumed authorization preserved byte-identically"
+    "PASS | ASR000002 production run remains absent"
+)
+
+print(
+    "PASS | consumed ASR000001 authorization preserved byte-identically"
 )
 
 print(

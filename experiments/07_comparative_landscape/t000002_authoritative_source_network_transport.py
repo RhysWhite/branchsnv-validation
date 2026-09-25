@@ -846,6 +846,51 @@ def validate_https_url(
     }
 
 
+def select_validated_address(
+    *,
+    validated: dict,
+    attempt_number: int,
+) -> str:
+    """
+    Deterministically fail over across the complete set of already validated
+    public addresses.
+
+    Attempt 1 uses address 1, attempt 2 address 2, and so on, wrapping only
+    when attempts exceed the number of validated addresses.
+
+    No address enters this function unless it has already passed the frozen
+    public-address / SSRF policy.
+    """
+
+    addresses = list(
+        validated[
+            "resolved_addresses"
+        ]
+    )
+
+    if not addresses:
+        raise TransportPolicyError(
+            "No validated public destination addresses available"
+        )
+
+    if attempt_number < 1:
+        raise TransportPolicyError(
+            "Attempt number must be positive"
+        )
+
+    index = (
+        attempt_number
+        - 1
+    ) % len(
+        addresses
+    )
+
+    return addresses[
+        index
+    ]
+
+
+
 def build_initial_url(
     *,
     row: dict[str, str],
@@ -1510,6 +1555,8 @@ def execute_seed_task(
         current_url = initial_url
         redirect_chain = []
 
+        resolved_addresses_attempted = []
+
         attempt_status = None
         response = None
         payload = b""
@@ -1558,14 +1605,26 @@ def execute_seed_task(
                     remaining_wall_seconds,
                 )
 
+                selected_address = (
+                    select_validated_address(
+                        validated=
+                            validated,
+
+                        attempt_number=
+                            attempt_number,
+                    )
+                )
+
+                resolved_addresses_attempted.append(
+                    selected_address
+                )
+
                 response = adapter.request_once(
                     url=
                         current_url,
 
                     resolved_ip=
-                        validated[
-                            "selected_address"
-                        ],
+                        selected_address,
 
                     headers=
                         request[
@@ -1817,6 +1876,11 @@ def execute_seed_task(
 
             "redirect_chain":
                 redirect_chain,
+
+            "resolved_addresses_attempted":
+                list(
+                    resolved_addresses_attempted
+                ),
 
             "response_headers":
                 (
@@ -2131,6 +2195,11 @@ def manifest_rows_for_result(
                     "redirect_chain"
                 ],
 
+            "resolved_addresses_attempted":
+                attempt[
+                    "resolved_addresses_attempted"
+                ],
+
             "response_headers":
                 attempt[
                     "response_headers"
@@ -2189,6 +2258,18 @@ def manifest_rows_for_result(
                 )
             ),
         ]
+
+        if attempt[
+            "resolved_addresses_attempted"
+        ]:
+            notes.append(
+                "resolved_addresses="
+                + ",".join(
+                    attempt[
+                        "resolved_addresses_attempted"
+                    ]
+                )
+            )
 
         if attempt[
             "error"
