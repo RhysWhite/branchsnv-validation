@@ -1,0 +1,122 @@
+{
+  "amended_execution_contract": {
+    "all_historical_anchors_must_be_resolved": true,
+    "all_historical_anchors_must_map_to_baseline": false,
+    "only_in_baseline_mappings_removed_from_active_ready_population": true,
+    "required_ambiguous_count": 0,
+    "required_in_baseline_mapping_count": 7,
+    "required_out_of_baseline_count": 1,
+    "substitute_related_publication_allowed": false
+  },
+  "amendment_id": "BASELINE_SCREENING_EXECUTION_CONTRACT_AMENDMENT_01",
+  "amends_execution_design_commit": "3a49a9837a09cf3a49ff2bb567beb3db5bcf1b74",
+  "amends_execution_implementation_commit": "fe05df419b62a53cc6b5278cd0ebb57c56f682f2",
+  "current_implementation_state": {
+    "batch_generation_authorized": false,
+    "execution_output_created": false,
+    "supports_amended_contract": false
+  },
+  "derived_execution_population": {
+    "active_ready_entities": 94622,
+    "batch_count": 190,
+    "frozen_ready_entities": 94629,
+    "in_baseline_carry_forwards": 7,
+    "max_batch_size": 500
+  },
+  "evidence": {
+    "anchor_baseline_presence_audit_sha256": "fa0c8b5bf5663c8ed5e387c608b1c85562fcc55016757e8f7b1b652b87bb7194",
+    "prior_anchor_resolution_json_sha256": "f85e114c3cc70b188d51cbffd133e31752a5732e75742b080c4c1b8c8ea60bc1",
+    "prior_anchor_resolution_path": "experiments/07_comparative_landscape/prior_wave0_baseline_presence_resolution.tsv",
+    "prior_anchor_resolution_sha256": "88049a07411b6819753b004e9db9984d22b68b850bb3540694240bca39fd939a"
+  },
+  "historical_prior_anchors": {
+    "ambiguous": 0,
+    "in_baseline": 7,
+    "out_of_baseline": 1,
+    "total": 8
+  },
+  "immutable_baseline_queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+  "in_baseline_carry_forwards": [
+    {
+      "anchor_id": "W0A01",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1093/bioadv/vbac075",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1093/bioadv/vbac075",
+      "tool": "CLASSICO/Evidente"
+    },
+    {
+      "anchor_id": "W0A02",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1099/mgen.0.000694",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1099/mgen.0.000694",
+      "tool": "SNPPar"
+    },
+    {
+      "anchor_id": "W0A03",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1093/bioinformatics/bty101",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1093/bioinformatics/bty101",
+      "tool": "SubRecon"
+    },
+    {
+      "anchor_id": "W0A04",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1093/ve/vex042",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1093/ve/vex042",
+      "tool": "TreeTime"
+    },
+    {
+      "anchor_id": "W0A05",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1093/nar/gks498",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1093/nar/gks498",
+      "tool": "FastML"
+    },
+    {
+      "anchor_id": "W0A07",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1093/molbev/msm088",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1093/molbev/msm088",
+      "tool": "PAML"
+    },
+    {
+      "anchor_id": "W0A08",
+      "candidate_method_flag_projection": "true",
+      "canonical_doi": "10.1093/molbev/msz131",
+      "record_decision_projection": "retain_for_method_assessment",
+      "screening_entity_id": "publication_component:database:publication:doi:10.1093/molbev/msz131",
+      "tool": "PastML"
+    }
+  ],
+  "next_gate": "IMPLEMENT_BASELINE_SCREENING_EXECUTION_CONTRACT_AMENDMENT_01_WITHOUT_DECISIONS",
+  "normative_precedence": {
+    "all_other_execution_design_requirements_remain": true,
+    "overrides": "requirement_that_all_eight_historical_anchors_map_to_eight_baseline_entities"
+  },
+  "out_of_baseline_prior_anchor": {
+    "anchor_id": "W0A06",
+    "canonical_doi": "10.1093/bioinformatics/btv271",
+    "prior_adjudication_preserved": true,
+    "screening_entity_id": null,
+    "tool": "kSNP3.0"
+  },
+  "parent_prior_anchor_resolution_commit": "9d2da879e4d07353b699a18ea9e93fe707a0f097",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "execution_event_rows": 0,
+    "method_assessments": 0,
+    "new_record_level_decisions": 0,
+    "prior_anchor_scientific_reassessments": 0,
+    "real_batches_created": 0,
+    "role_assignments": 0,
+    "wave1_promotions": 0
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION_AMENDMENT"
+}
