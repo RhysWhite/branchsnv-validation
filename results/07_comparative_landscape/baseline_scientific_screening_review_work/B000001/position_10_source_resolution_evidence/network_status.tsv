@@ -1,0 +1,4 @@
+source	curl_return_code	http_code	effective_url
+crossref_rest	0	200	https://api.crossref.org/works/10.1002%2F9780470015902.a0020859
+doi_csl	0	200	https://api.crossref.org/v1/works/10.1002%2F9780470015902.a0020859/transform
+doi_resolution	0	403	https://onlinelibrary.wiley.com/doi/10.1002/9780470015902.a0020859

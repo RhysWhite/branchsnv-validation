@@ -1,0 +1,40 @@
+{
+  "authority_boundary": {
+    "event_ledger_mutation_authorized": false,
+    "event_proposal_created": false,
+    "production_ledger_mutated": false,
+    "scientific_decision_created": false
+  },
+  "batch_id": "B000001",
+  "evidence": {
+    "checksums_sha256": "4b5ef95e11ab1d6a67e84094ffd236a44cfa7cb565bdf3ee3f3c7aee1d348261",
+    "facts_tsv_sha256": "b11022571fb37b5f707561eb2dbf10753f05a735299a726f4080c3b6d0b6e12c",
+    "packet_json_sha256": "59d70f1a8dfea1042be3f48f03e09648ca173fe482841fd571e181ae56b928a5",
+    "packet_markdown_sha256": "012be3ba5e67226ee02f56c133bb38c205958f91f4622d08d0754be16b4619d6",
+    "raw_crossref_sha256": "527f5940b8ebeb809cddad32738e6199773df726c78d1dbc58ade120d7bd4a45",
+    "raw_doi_csl_sha256": "4d67b712667ed03269be199b761938f1fc9288576d12b534ed8e22187b02c574",
+    "raw_doi_resolution_body_sha256": "b8de6852573ef4d89e097cdb0ca3b2485c84333a22d2aa3646e551987778e7fd",
+    "raw_doi_resolution_headers_sha256": "b8c2bd5f5e92e444851c5ceb171c4ab2ade1afd622a6349fe74e265969ed60ea",
+    "raw_network_status_sha256": "700b5e0adfb86fc4e81490713a12abd50b07ebd9eb4e78b0c5a78eafb67646e9"
+  },
+  "next_gate": "FREEZE_HUMAN_APPROVED_B000001_POSITION_10_SCIENTIFIC_DECISION",
+  "parent_commit": "dd0c5036f5ae28890ba85d1758e6a070aaeeaeef",
+  "position_10": {
+    "current_event_id": "E000000010",
+    "current_state": "awaiting_source_escalation",
+    "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859",
+    "terminal_decision_present": false
+  },
+  "production_boundary": {
+    "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "expected_event_count": 21,
+    "expected_ledger_sha256": "3433a183d6a5bb4434a4b26e72bf6e380d546d6e53688a506328bf7f4bda5793",
+    "ledger_mutation_performed": false,
+    "live_authorization_created": false
+  },
+  "schema_version": 1,
+  "scope_positions": [
+    10
+  ],
+  "status": "FROZEN_POSITION_10_SOURCE_EVIDENCE_PRE_DECISION_FREEZE"
+}
