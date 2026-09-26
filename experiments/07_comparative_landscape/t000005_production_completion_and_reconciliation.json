@@ -1,0 +1,65 @@
+{
+  "authorization_commit": "e450559584400ca0e621276ac34cf3c0d09e048b",
+  "authorization_sha256": "e8728251268b6366f9e4e4bace62f28250a4133929bd7eb5b8b18344871ac00c",
+  "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+  "decision": {
+    "candidate_method_flag": false,
+    "current_event_id": "E000000022",
+    "evidence_escalation_status": "resolved",
+    "exclusion_reason_code": "application_only_no_reusable_method",
+    "position": 10,
+    "record_decision": "exclude",
+    "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859",
+    "superseded_event_id": "E000000010"
+  },
+  "decision_freeze_sha256": "8d362ea03b2c08013072a39c28dadfa4f80dc7b561fbd88ddca77e172a8721f5",
+  "derived_state_counts": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 11,
+    "ready": 94611
+  },
+  "event_count_after": 22,
+  "event_count_before": 21,
+  "first_new_event_id": "E000000022",
+  "initial_b000001_pilot": {
+    "all_positions_terminal": true,
+    "current_source_escalations_remaining": 0,
+    "position_count": 11,
+    "positions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "terminal_escalation_status_contract": "direct terminal events may have blank evidence_escalation_status; superseding terminal resolutions may use resolved",
+    "unresolved_position_count": 0
+  },
+  "last_new_event_id": "E000000022",
+  "new_event_count": 1,
+  "next_gate": "DESIGN_POST_PILOT_BASELINE_SCIENTIFIC_SCREENING_CONTINUATION",
+  "post_ledger_sha256": "85eabc27f89cc215b75b4b48611e6131f8ef1f7e7d5a022b1229d1241bd960ac",
+  "pre_ledger_sha256": "3433a183d6a5bb4434a4b26e72bf6e380d546d6e53688a506328bf7f4bda5793",
+  "proposal_sha256": "6d57c5b0dd105baa61635599641df6bb6e3abd2b107c7b6ebcfbb5eb04fd416b",
+  "receipt_sha256": "417c5bc50fcf3681ca3b864e2bb7e4aafece173397026b3d12b3704eb24d4bb6",
+  "safety": {
+    "checkpoint_complete": true,
+    "further_live_event_authority_created": false,
+    "one_use_authorization_consumed": true,
+    "staging_absent": true,
+    "stale_sha_replay_rejected": true,
+    "strict_prefix_extension": true
+  },
+  "schema_version": 1,
+  "source_evidence_freeze_sha256": "9e5be4661751d2af72d74e26f184478f3d2e5b1d9b6600d5b71df8b453a6800b",
+  "status": "COMPLETE_RECONCILED",
+  "transaction_id": "T000005",
+  "transaction_timestamp_utc": "2026-09-26T02:56:57Z"
+}
