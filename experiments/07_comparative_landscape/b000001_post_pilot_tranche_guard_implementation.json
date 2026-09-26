@@ -1,0 +1,75 @@
+{
+  "implementation": {
+    "guard_path": "experiments/07_comparative_landscape/b000001_post_pilot_tranche_guard.py",
+    "guard_sha256": "598c14c595a4bc5c1faff6c5411cae1b7fe898dbfeb5227a15d707d76fea6575",
+    "pre_review_snapshot_path": "experiments/07_comparative_landscape/t000006_pre_review_packet.tsv",
+    "pre_review_snapshot_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6",
+    "test_path": "experiments/07_comparative_landscape/test_b000001_post_pilot_tranche_guard.py",
+    "test_sha256": "9374c68c5e78f5ab6f3e60d034ad9649e8a2d352ec3ba78f4e95f25cd60ffcd4"
+  },
+  "implementation_id": "B000001_POST_PILOT_TRANCHE_GUARD_IMPLEMENTATION",
+  "next_gate": "CONDUCT_T000006_SCIENTIFIC_REVIEW_POSITIONS_12_TO_36",
+  "parent_commit": "169b0aac57d1f06fb22a89807b3996e9240774d9",
+  "production_boundary": {
+    "event_count": 22,
+    "ledger_sha256": "85eabc27f89cc215b75b4b48611e6131f8ef1f7e7d5a022b1229d1241bd960ac",
+    "live_authorization_created": false,
+    "production_mutation_performed": false,
+    "scientific_decisions_created": false
+  },
+  "reusability": {
+    "future_tranches_do_not_require_bespoke_guard": true,
+    "future_tranches_require_new_frozen_design": true,
+    "generic_post_pilot_guard": true
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_T000006_REVIEW",
+  "t000006_design": {
+    "design_manifest_sha256": "0b3ef74719ca8720897e1013a65756e0a483bb85f537252022c4e347989bfcbe",
+    "design_sha256": "b8deb91c62f9387aa745a956e3b289286f5d8c527e9dfcc4fc680e2e6b50708c",
+    "expected_event_ids": [
+      "E000000023",
+      "E000000047"
+    ],
+    "target_count": 25,
+    "target_positions": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ]
+  },
+  "validation": {
+    "checkpoint_validation_passed": true,
+    "dry_run_nonmutation_passed": true,
+    "future_positions_prohibited": true,
+    "historical_review_rows_locked": true,
+    "hostile_suite_passed": true,
+    "real_ledger_unchanged": true,
+    "real_review_packet_unchanged": true,
+    "recovery_required_path_passed": true,
+    "replay_rejection_passed": true,
+    "temporary_25_event_execution_passed": true
+  }
+}
