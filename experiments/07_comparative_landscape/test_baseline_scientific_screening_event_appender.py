@@ -1145,8 +1145,13 @@ expect_error(
 
 
 # ---------------------------------------------------------
-# Real frozen package integration tests, but all mutations
-# occur only on temporary copies of the genesis ledger.
+# Real frozen package integration tests.
+#
+# The current production ledger is validated read-only at
+# whatever legitimate production state it has reached.
+#
+# Mutation tests themselves operate only on a reconstructed
+# temporary copy of the frozen zero-event genesis ledger.
 # ---------------------------------------------------------
 
 real_context = mod.load_context(
@@ -1168,16 +1173,53 @@ real_validation = mod.validate_current_ledger(
         real_context,
 )
 
-assert real_validation[
+real_production_bytes = (
+    mod.DEFAULT_LEDGER.read_bytes()
+)
+
+real_production_sha = hashlib.sha256(
+    real_production_bytes
+).hexdigest()
+
+real_production_event_count = real_validation[
     "event_count"
-] == 0
+]
 
 assert real_validation[
     "ledger_sha256"
-] == mod.EXPECTED_GENESIS_LEDGER_SHA256
+] == real_production_sha
+
+assert real_production_event_count >= 0
+
+
+# A zero-event ledger consists only of the immutable TSV
+# header. Reconstruct the frozen genesis fixture from that
+# header rather than copying the advanced production ledger.
+genesis_lines = real_production_bytes.splitlines(
+    keepends=True
+)
+
+assert genesis_lines
+
+genesis_bytes = genesis_lines[0]
+
+assert hashlib.sha256(
+    genesis_bytes
+).hexdigest() == mod.EXPECTED_GENESIS_LEDGER_SHA256
+
 
 print(
-    "PASS | real production genesis validates read-only"
+    "PASS | current real production ledger validates read-only"
+)
+
+print(
+    "INFO | current real production event count =",
+    real_production_event_count,
+)
+
+print(
+    "PASS | frozen zero-event genesis fixture reconstructed "
+    "from immutable ledger header"
 )
 
 
@@ -1202,10 +1244,13 @@ with tempfile.TemporaryDirectory(
         / "event_ledger.tsv"
     )
 
-    shutil.copyfile(
-        mod.DEFAULT_LEDGER,
-        temp_ledger,
+    temp_ledger.write_bytes(
+        genesis_bytes
     )
+
+    assert hashlib.sha256(
+        temp_ledger.read_bytes()
+    ).hexdigest() == mod.EXPECTED_GENESIS_LEDGER_SHA256
 
     proposal_path = (
         root
@@ -1371,7 +1416,7 @@ expect_error(
                 ),
 
             expected_pre_ledger_sha256=
-                mod.EXPECTED_GENESIS_LEDGER_SHA256,
+                real_production_sha,
 
             context=
                 real_context,
@@ -1384,12 +1429,37 @@ expect_error(
 )
 
 
-assert hashlib.sha256(
+assert (
     mod.DEFAULT_LEDGER.read_bytes()
-).hexdigest() == mod.EXPECTED_GENESIS_LEDGER_SHA256
+    == real_production_bytes
+)
+
+post_real_validation = mod.validate_current_ledger(
+    ledger_path=
+        mod.DEFAULT_LEDGER,
+
+    context=
+        real_context,
+)
+
+assert post_real_validation[
+    "ledger_sha256"
+] == real_production_sha
+
+assert post_real_validation[
+    "event_count"
+] == real_production_event_count
+
+assert post_real_validation[
+    "derived_state_counts"
+] == real_validation[
+    "derived_state_counts"
+]
+
 
 print(
-    "PASS | real production ledger remained untouched throughout tests"
+    "PASS | real production ledger remained byte-identical "
+    "throughout tests"
 )
 
 print(
