@@ -1,0 +1,60 @@
+{
+  "authorization_commit": "d955d234ba8e7f9782c50dcfdec3fccd7de839b9",
+  "authorization_sha256": "8cc3ad087b20c617a20cffb46fe9d53f4c54e219aba9abb98049a74a6cc05e7b",
+  "batch_completion": {
+    "B000001_terminal": 500,
+    "B000002_terminal": 500,
+    "B000003_remaining": 0,
+    "B000003_terminal": 500
+  },
+  "batch_id": "B000003",
+  "checkpoint": {
+    "authorization_byte_identical": true,
+    "exact_three_file_checkpoint": true,
+    "post_publication_validation_passed": true,
+    "proposal_byte_identical": true,
+    "status": "COMPLETE"
+  },
+  "completion_reconciled": true,
+  "cross_batch_guard_v3_freeze_sha256": "0160e66b837028d877ebf71cc0a74fa402f14e42be6cb89e57d500c3e0fecc47",
+  "cross_batch_guard_v3_sha256": "469273c1d2ed9f5ca7ca01efb636b5a045b7e785de6812814780f1c3d73a5aec",
+  "exclusion_reason_counts": {
+    "application_only_no_reusable_method": 483,
+    "duplicate_record_same_method_no_distinct_capability": 0,
+    "unrelated_variant_or_data_type": 6,
+    "unsupported_by_primary_or_stable_authoritative_source": 0
+  },
+  "first_assigned_event_id": "E000001012",
+  "last_assigned_event_id": "E000001511",
+  "new_event_count": 500,
+  "next_gate": "BUILD_B000004_T000013_DESIGN",
+  "post_transaction_state": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 1500,
+    "current_exclude": 1388,
+    "current_retain_for_method_assessment": 112,
+    "ready": 93122
+  },
+  "pre_append_event_count": 1011,
+  "pre_append_ledger_sha256": "ab183ceb88b2cd9f09072dc9a2e819c735cb95ef723b73a732b99d065410deae",
+  "production_completed": true,
+  "proposal_sha256": "0907392b05e95d60519bf1c6d607a8ea2aca5ea172372b38323f2a3acad27798",
+  "receipt_sha256": "0dac72173b6bdd57ff6e8ce0df33395504f9549f57f6e3910df6c09389fe1e21",
+  "replay_state": "FINAL_CHECKPOINT_EXISTS",
+  "review_packet_sha256": "9f6de4ab47515e6d1622fba7e032156bda2f239200a526d34bbdcc9c5aed9da4",
+  "schema_version": 1,
+  "scientific_decision_freeze_manifest_sha256": "1e8781ef6466b19c3f402c547e0bcff062e97bf7a07dba438dddb7ea7f847cbc",
+  "scientific_decision_freeze_sha256": "dbd349b2b8cc0846da6ff5db6037e873e7671f5b53ab37196814c0ca78b52882",
+  "status": "T000012_EXECUTION_COMPLETE",
+  "terminal_decision_counts": {
+    "exclude": 489,
+    "retain_for_method_assessment": 11
+  },
+  "tranche_design_freeze_sha256": "42f56a873ac89f1d384c267782cd97e1142990ed0abcea6e9c4214b6a33edcc3",
+  "tranche_design_sha256": "9b67ea87f359b9b468ba85cfe346701d084bc5794c3af30da1aca5d550da0541",
+  "transaction_id": "T000012",
+  "transaction_timestamp_utc": "2026-09-26T23:21:00Z",
+  "validated_post_append_event_count": 1511,
+  "validated_post_append_ledger_sha256": "edb131a6381f0d3afb03549c4773d55762c738eec435b3b5d8dfa0448865f08b"
+}
