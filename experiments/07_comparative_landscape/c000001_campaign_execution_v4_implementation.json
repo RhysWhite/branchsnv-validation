@@ -1,0 +1,179 @@
+{
+  "authority_state": {
+    "c000001_authorized_for_production": false,
+    "c000001_executed_in_production": false,
+    "implementation_freeze_creates_live_authority": false,
+    "scientific_review_approval_creates_live_authority": false
+  },
+  "campaign_id": "C000001",
+  "implementation_contract": {
+    "campaign_design_path": "experiments/07_comparative_landscape/baseline_scientific_screening_campaign_orchestration_v4_design.json",
+    "campaign_design_sha256": "3667a57177d42b3ccceed5d3f3cf7116407d571fb2f27c10832e96e84818d7c2",
+    "scientific_freeze_path": "experiments/07_comparative_landscape/c000001_approved_scientific_decision_freeze.json",
+    "scientific_freeze_sha256": "b467031730514790a929ee3668f3e716e9fd55749fe53bc82f58691d56493402",
+    "source_path": "experiments/07_comparative_landscape/c000001_campaign_execution_v4.py",
+    "source_sha256": "ce072594dd4112560233361c8da056756b2f649e2526dde13365cceffcc0eb86",
+    "test_path": "experiments/07_comparative_landscape/test_c000001_campaign_execution_v4.py",
+    "test_sha256": "4bbe30704c9cac0acde3351221e016d299956a093364b7cdd88418f98286f072"
+  },
+  "implementation_id": "C000001_CAMPAIGN_EXECUTION_V4_IMPLEMENTATION",
+  "parent_commit": "ffa0f368cd6de4bb76987d63ff598c992c2dcd35",
+  "production_boundary": {
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "projected_final_state": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 4500,
+    "event_count": 4511,
+    "ledger_sha256": "8ec90dec5a8a78e4bb2ab21df69ba7e3bdd94f66b6acf3eb8410fa7a49e14aaa",
+    "ready": 90122
+  },
+  "projected_transactions": [
+    {
+      "batch_id": "B000005",
+      "canonical_target_identity_sha256": "68e2461d2657f6609c297a83332b0f3cf8daff4c9f82db8c53f41c6bac87f098",
+      "first_event_id": "E000002012",
+      "last_event_id": "E000002511",
+      "post_event_count": 2511,
+      "pre_event_count": 2011,
+      "pre_ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+      "projected_post_ledger_sha256": "8b377eee33858eb42946721946e632729d5267275c841a8d8cbf16fe21c5adcd",
+      "projected_post_state_counts": {
+        "awaiting_source_escalation": 0,
+        "blocked_metadata": 484,
+        "complete": 2500,
+        "ready": 92122
+      },
+      "proposal_sha256": "596de8ff20ee370609341824eabb53b4a92d74241163b5bf6890b27448dfbf6e",
+      "transaction_id": "T000014",
+      "transaction_timestamp_utc": "2026-09-27T05:00:00Z"
+    },
+    {
+      "batch_id": "B000006",
+      "canonical_target_identity_sha256": "b314877d63f4699e50dceb6b1dc98cc33dd7ab9a1b8c9a0ce2454ee60a958bf2",
+      "first_event_id": "E000002512",
+      "last_event_id": "E000003011",
+      "post_event_count": 3011,
+      "pre_event_count": 2511,
+      "pre_ledger_sha256": "8b377eee33858eb42946721946e632729d5267275c841a8d8cbf16fe21c5adcd",
+      "projected_post_ledger_sha256": "1799a7fd9f5435f025bc064db34e2e9fffbb01aeea102144c6bdf11a58388332",
+      "projected_post_state_counts": {
+        "awaiting_source_escalation": 0,
+        "blocked_metadata": 484,
+        "complete": 3000,
+        "ready": 91622
+      },
+      "proposal_sha256": "e8d40bfd966e2d06b08c7e56aab6dce546cf27b277588fec07d78a5241287ffb",
+      "transaction_id": "T000015",
+      "transaction_timestamp_utc": "2026-09-27T05:01:00Z"
+    },
+    {
+      "batch_id": "B000007",
+      "canonical_target_identity_sha256": "c405621d175ac75234d66a4c0f9c34c2c556ad5c32182472a3f1948093dd305d",
+      "first_event_id": "E000003012",
+      "last_event_id": "E000003511",
+      "post_event_count": 3511,
+      "pre_event_count": 3011,
+      "pre_ledger_sha256": "1799a7fd9f5435f025bc064db34e2e9fffbb01aeea102144c6bdf11a58388332",
+      "projected_post_ledger_sha256": "6a015b2e328cea4abde454caa282f4a74843b39e2d18232b26b070ded91156eb",
+      "projected_post_state_counts": {
+        "awaiting_source_escalation": 0,
+        "blocked_metadata": 484,
+        "complete": 3500,
+        "ready": 91122
+      },
+      "proposal_sha256": "607082831e490b98ec247026b415f7bdb5614c6816f242fa7c76617442d3c6e5",
+      "transaction_id": "T000016",
+      "transaction_timestamp_utc": "2026-09-27T05:02:00Z"
+    },
+    {
+      "batch_id": "B000008",
+      "canonical_target_identity_sha256": "754f38f4ee526ddca2fe1033f0fb4891bcb2da7711f55b8bd2b918ce217dcd10",
+      "first_event_id": "E000003512",
+      "last_event_id": "E000004011",
+      "post_event_count": 4011,
+      "pre_event_count": 3511,
+      "pre_ledger_sha256": "6a015b2e328cea4abde454caa282f4a74843b39e2d18232b26b070ded91156eb",
+      "projected_post_ledger_sha256": "eae722e1cf28ee215b03c84e4c756899772354a895d1683a6e21800434bf2c8a",
+      "projected_post_state_counts": {
+        "awaiting_source_escalation": 0,
+        "blocked_metadata": 484,
+        "complete": 4000,
+        "ready": 90622
+      },
+      "proposal_sha256": "cab86529055e17722f1cd35fb9821b13b8616e5b21ccea538e56e003afddde1a",
+      "transaction_id": "T000017",
+      "transaction_timestamp_utc": "2026-09-27T05:03:00Z"
+    },
+    {
+      "batch_id": "B000009",
+      "canonical_target_identity_sha256": "7448c52882d9105a65f5098d953aef8f3b178a2baea3661a84bf51e22f2c5808",
+      "first_event_id": "E000004012",
+      "last_event_id": "E000004511",
+      "post_event_count": 4511,
+      "pre_event_count": 4011,
+      "pre_ledger_sha256": "eae722e1cf28ee215b03c84e4c756899772354a895d1683a6e21800434bf2c8a",
+      "projected_post_ledger_sha256": "8ec90dec5a8a78e4bb2ab21df69ba7e3bdd94f66b6acf3eb8410fa7a49e14aaa",
+      "projected_post_state_counts": {
+        "awaiting_source_escalation": 0,
+        "blocked_metadata": 484,
+        "complete": 4500,
+        "ready": 90122
+      },
+      "proposal_sha256": "3c6d45337b95be9f9784ffbab06f5a1d8dece06503d06aadbaab7aab521f9c38",
+      "transaction_id": "T000018",
+      "transaction_timestamp_utc": "2026-09-27T05:04:00Z"
+    }
+  ],
+  "recommended_next_engineering_gate": "DESIGN_AND_VALIDATE_HIGH_RECALL_SCALABLE_TRIAGE_FOR_REMAINING_READY_RECORDS_BEFORE_ANY_DECISION_TO_AUTHORIZE_C000001",
+  "scaling_observation": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete_after_projected_c000001": 4500,
+    "exclude": 2419,
+    "execution_scaling_conclusion": "The validated 500-record transaction path is frozen as the reference execution mechanism. The remaining ready queue requires a separately designed and validated high-recall triage strategy before further large-scale scientific review.",
+    "ready_after_projected_c000001": 90122,
+    "retain_for_method_assessment": 81,
+    "retain_for_method_assessment_fraction": 0.0324,
+    "reviewed_c000001_records": 2500
+  },
+  "schema_version": 1,
+  "scientific_freeze_summary": {
+    "decision_counts": {
+      "exclude": 2419,
+      "record_decision": 2500,
+      "retain_for_method_assessment": 81,
+      "source_escalation": 0
+    },
+    "exclusion_reason_counts": {
+      "application_only_no_reusable_method": 2419,
+      "duplicate_record_same_method_no_distinct_capability": 0,
+      "unrelated_variant_or_data_type": 0,
+      "unsupported_by_primary_or_stable_authoritative_source": 0
+    },
+    "record_count": 2500
+  },
+  "status": "FROZEN_IMPLEMENTED_NO_PRODUCTION_MUTATION",
+  "validated_invariants": {
+    "all_projections_unpublished": true,
+    "approved_proposals_regenerated_byte_identically": true,
+    "c000001_scientific_freeze_validated": true,
+    "each_projection_is_strict_prefix_extension": true,
+    "five_transactions_projected_sequentially": true,
+    "live_authorizations_created": false,
+    "production_execution_performed": false,
+    "real_production_ledger_unchanged": true,
+    "t000013_target_identity_reproduced_exactly": true,
+    "transaction_checkpoints_created": false,
+    "v3_compatible_per_batch_designs_validated": true
+  },
+  "validation": {
+    "c000001_regression_test_count": 7,
+    "c000001_regression_tests_passed": true,
+    "existing_appender_harness_style": "script_level_assertion_harness",
+    "existing_appender_native_harness_passed": true,
+    "pytest_required": false
+  }
+}
