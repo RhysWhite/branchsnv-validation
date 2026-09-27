@@ -1,0 +1,71 @@
+{
+  "all_proposed_fields_blank": true,
+  "batches": [
+    {
+      "batch_id": "B000005",
+      "pre_review_snapshot_path": "experiments/07_comparative_landscape/t000014_pre_review_packet.tsv",
+      "pre_review_snapshot_sha256": "8c779969efbe4b22e4ea17fbaa3470010d77e2cb9bec7fb743c5f321ddc7cfa7",
+      "record_count": 500,
+      "review_packet_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000005/review_packet.tsv",
+      "review_packet_sha256": "8c779969efbe4b22e4ea17fbaa3470010d77e2cb9bec7fb743c5f321ddc7cfa7",
+      "transaction_id": "T000014"
+    },
+    {
+      "batch_id": "B000006",
+      "pre_review_snapshot_path": "experiments/07_comparative_landscape/t000015_pre_review_packet.tsv",
+      "pre_review_snapshot_sha256": "b2cb97140e9db3d71e391bb119f320358549a5544b12373bdef780d2dd4ec25b",
+      "record_count": 500,
+      "review_packet_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000006/review_packet.tsv",
+      "review_packet_sha256": "b2cb97140e9db3d71e391bb119f320358549a5544b12373bdef780d2dd4ec25b",
+      "transaction_id": "T000015"
+    },
+    {
+      "batch_id": "B000007",
+      "pre_review_snapshot_path": "experiments/07_comparative_landscape/t000016_pre_review_packet.tsv",
+      "pre_review_snapshot_sha256": "029bdd92bb5cc19a5405e2a40bb7fbe8deb6e2bfc744a7ec3d1e0931608c1812",
+      "record_count": 500,
+      "review_packet_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000007/review_packet.tsv",
+      "review_packet_sha256": "029bdd92bb5cc19a5405e2a40bb7fbe8deb6e2bfc744a7ec3d1e0931608c1812",
+      "transaction_id": "T000016"
+    },
+    {
+      "batch_id": "B000008",
+      "pre_review_snapshot_path": "experiments/07_comparative_landscape/t000017_pre_review_packet.tsv",
+      "pre_review_snapshot_sha256": "a4bec582c9d1b03246890068820b4b8625e844a6107fc8fc8822dca2d0ae9469",
+      "record_count": 500,
+      "review_packet_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000008/review_packet.tsv",
+      "review_packet_sha256": "a4bec582c9d1b03246890068820b4b8625e844a6107fc8fc8822dca2d0ae9469",
+      "transaction_id": "T000017"
+    },
+    {
+      "batch_id": "B000009",
+      "pre_review_snapshot_path": "experiments/07_comparative_landscape/t000018_pre_review_packet.tsv",
+      "pre_review_snapshot_sha256": "0a8838c0f5d79907013407766baaeacde29a6d7a5ef76097d78524eb841e5ed3",
+      "record_count": 500,
+      "review_packet_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000009/review_packet.tsv",
+      "review_packet_sha256": "0a8838c0f5d79907013407766baaeacde29a6d7a5ef76097d78524eb841e5ed3",
+      "transaction_id": "T000018"
+    }
+  ],
+  "campaign_id": "C000001",
+  "campaign_orchestration_v4_implementation_freeze_sha256": "7f05a51a9c5a42d4ec384b05aa25f805dd973aa9c549442cbc617e8f3497724b",
+  "campaign_orchestration_v4_implementation_sha256": "6b48d80e60dc5dd9343467c0dcbce86176eab0871e88d7550b53395d04c22016",
+  "campaign_record_count": 2500,
+  "campaign_review_bundle_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/C000001/campaign_review_bundle.tsv",
+  "campaign_review_bundle_sha256": "801e599f5d96239a65e356214de6d678998b3c86636daf536357f4ff818bcd2b",
+  "freeze_id": "C000001_BASELINE_SCREENING_REVIEW_WORKSPACE_FREEZE",
+  "global_active_index_end": 4500,
+  "global_active_index_start": 2001,
+  "live_authorization_created": false,
+  "next_gate": "CONDUCT_C000001_SCIENTIFIC_REVIEW",
+  "parent_commit": "f80509caefdbf931f22b558230a4f1bf7c4d0820",
+  "production_state": {
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "production_mutated": false
+  },
+  "schema_version": 1,
+  "scientific_decisions_present": false,
+  "status": "FROZEN_PRE_REVIEW_WORKSPACE",
+  "transaction_checkpoints_created": false
+}
