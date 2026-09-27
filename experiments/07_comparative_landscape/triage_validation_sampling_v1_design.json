@@ -1,0 +1,196 @@
+{
+  "authority": {
+    "changes_baseline_queue": false,
+    "changes_batch_membership": false,
+    "creates_ledger_events": false,
+    "creates_production_authority": false,
+    "creates_scientific_decisions": false
+  },
+  "design_id": "TRIAGE_VALIDATION_SAMPLING_V1",
+  "development_validation_separation": {
+    "c000001_is_development_only": true,
+    "citation_provenance_used_for_sampling": false,
+    "doi_or_publisher_used_for_sampling": false,
+    "titles_or_keywords_used_for_sampling": false,
+    "triage_model_output_used_for_sampling": false,
+    "validation_labels_available_at_sampling": false,
+    "validation_sample_excludes_all_c000001_entities": true,
+    "validation_sample_excludes_all_current_terminal_entities": true
+  },
+  "population_accounting": {
+    "active_membership": 94622,
+    "blind_validation_sampling_universe": 90122,
+    "c000001_development_entities": 2500,
+    "current_terminal_production_entities": 2000
+  },
+  "prespecified_sequential_validation_rule": {
+    "if_fewer_than_60_retained_positives": "Draw an additional pre-specified probability sample from the remaining unsampled validation universe before final recall interpretation.",
+    "minimum_retained_positive_records_for_primary_recall_assessment": 60,
+    "stage_1_n": 2000,
+    "validation_labels_must_not_be_used_to_tune_the_triage_model": true
+  },
+  "purpose": "Create a representative blind holdout sample for validating scalable high-recall triage of the remaining Experiment 07 baseline scientific-screening universe.",
+  "repo_head": "5566b7ea5f97b658b5778fb8d7f6a384c6598de9",
+  "sample_artifact": {
+    "path": "results/07_comparative_landscape/triage_validation_v1/sample.tsv",
+    "row_count": 2000,
+    "sha256": "e9018ce5e17c3e1c3906746e2b63913d601077170c2a174e2fd166a41b49d0c4"
+  },
+  "sampling": {
+    "allocation": "proportional_largest_remainder",
+    "blind_review_order": "independent_sha256_rank",
+    "selection_salt_sha256": "a7c7997ef6c07892dcce30ba71dcce103f297e3f156ef18dd99c9bd0dfa75f1d",
+    "stage": 1,
+    "strata": [
+      {
+        "end_global_active_index": 5000,
+        "population_n": 500,
+        "sample_n": 11,
+        "sampling_fraction": 0.022,
+        "start_global_active_index": 1
+      },
+      {
+        "end_global_active_index": 10000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 5001
+      },
+      {
+        "end_global_active_index": 15000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 10001
+      },
+      {
+        "end_global_active_index": 20000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 15001
+      },
+      {
+        "end_global_active_index": 25000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 20001
+      },
+      {
+        "end_global_active_index": 30000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 25001
+      },
+      {
+        "end_global_active_index": 35000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 30001
+      },
+      {
+        "end_global_active_index": 40000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 35001
+      },
+      {
+        "end_global_active_index": 45000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 40001
+      },
+      {
+        "end_global_active_index": 50000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 45001
+      },
+      {
+        "end_global_active_index": 55000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 50001
+      },
+      {
+        "end_global_active_index": 60000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 55001
+      },
+      {
+        "end_global_active_index": 65000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 60001
+      },
+      {
+        "end_global_active_index": 70000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 65001
+      },
+      {
+        "end_global_active_index": 75000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 70001
+      },
+      {
+        "end_global_active_index": 80000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 75001
+      },
+      {
+        "end_global_active_index": 85000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 80001
+      },
+      {
+        "end_global_active_index": 90000,
+        "population_n": 5000,
+        "sample_n": 111,
+        "sampling_fraction": 0.0222,
+        "start_global_active_index": 85001
+      },
+      {
+        "end_global_active_index": 95000,
+        "population_n": 4622,
+        "sample_n": 102,
+        "sampling_fraction": 0.02206836867157075,
+        "start_global_active_index": 90001
+      }
+    ],
+    "stratification_variable": "frozen_global_active_index",
+    "stratum_width": 5000,
+    "target_n": 2000,
+    "within_stratum_selection": "lowest_sha256_rank"
+  },
+  "schema_version": 1,
+  "source_identity": {
+    "baseline_queue_path": "results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv",
+    "baseline_queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "batch_membership_path": "results/07_comparative_landscape/baseline_scientific_screening_execution/batch_membership.tsv",
+    "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "c000001_scientific_freeze_path": "experiments/07_comparative_landscape/c000001_approved_scientific_decision_freeze.json",
+    "c000001_scientific_freeze_sha256": "b467031730514790a929ee3668f3e716e9fd55749fe53bc82f58691d56493402",
+    "production_ledger_path": "results/07_comparative_landscape/baseline_scientific_screening_execution/event_ledger.tsv",
+    "production_ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "status": "FROZEN_BLIND_SAMPLE_MEMBERSHIP_NO_LABELS"
+}
