@@ -1,0 +1,311 @@
+{
+  "authority_separation": {
+    "automated_exclusion_protocol_amendment_approved": false,
+    "design_creates_model_authority": false,
+    "design_creates_network_authority": false,
+    "design_creates_production_authority": false,
+    "design_creates_scientific_decisions": false,
+    "live_network_retrieval_requires_separate_explicit_authorization": true,
+    "production_scientific_screening_protocol_unchanged": true
+  },
+  "design_id": "TRIAGE_PRE_REVIEW_TEXT_RETRIEVAL_V1",
+  "development_population": {
+    "batch_prohibited_as_predictive_feature": true,
+    "batch_retained_as_validation_group": true,
+    "expanded_terminal_or_frozen_labels": 4500,
+    "final_label_counts": {
+      "exclude": 4297,
+      "retain_for_method_assessment": 203
+    },
+    "poolability_basis": "Audit 15 established common frozen record-level decision semantics across the historical and C000001 development labels.",
+    "protected_from_publication_text_lane": 1,
+    "protected_rule": "screening_entity_class != publication OR identity_attention_status non-empty",
+    "publication_text_retrieval_eligible": 4499,
+    "scientifically_poolable_for_development": true
+  },
+  "downstream_feature_prohibitions_without_separate_amendment": [
+    "batch_id",
+    "global_active_index",
+    "discovery_stage",
+    "doi_prefix",
+    "journal",
+    "publisher",
+    "provider_used",
+    "retrieval_status",
+    "retrieval_failure_state",
+    "review_evidence",
+    "scientific_decision_fields"
+  ],
+  "frozen_source_hashes": {
+    "active_membership": {
+      "path": "/home/rwhite/github/branchsnv-validation/results/07_comparative_landscape/baseline_scientific_screening_execution/batch_membership.tsv",
+      "sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91"
+    },
+    "baseline_queue": {
+      "path": "/home/rwhite/github/branchsnv-validation/results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv",
+      "sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58"
+    },
+    "existing_transport_sources": [
+      {
+        "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+        "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+        "sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+      }
+    ],
+    "production_ledger": {
+      "path": "/home/rwhite/github/branchsnv-validation/results/07_comparative_landscape/baseline_scientific_screening_execution/event_ledger.tsv",
+      "sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+    },
+    "scientific_contracts": [
+      {
+        "path": "experiments/07_comparative_landscape/scientific_screening_design.json",
+        "sha256": "4a713bf1c91c69e86409e48b4f92ed497d3fb1f585ed0e4505cb217b0f266a25"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/SCIENTIFIC_SCREENING_DESIGN.md",
+        "sha256": "f795b3623cba417567059bf07a60be5ae63b31e5e76aa480c786da1bf89caeae"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/SCIENTIFIC_DECISION_LEDGER.md",
+        "sha256": "45917c708eb15f4be0da21444c908b5582d353f77bad97f2864a2c05bac7cd44"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/PROTOCOL.md",
+        "sha256": "0197704daad2b79900b523a102d7f1cf98e77f577d429a3bca5aac1a20ea3991"
+      }
+    ],
+    "scientific_decision_freezes": [
+      {
+        "path": "experiments/07_comparative_landscape/b000001_position_10_approved_scientific_decision_freeze.json",
+        "sha256": "05841e16c8d5f4a69c50168bcb918ef678083bd879002c5e5e1ebe082c7debfe"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_positions_2_9_approved_scientific_decision_freeze.json",
+        "sha256": "55d8b3e58dd63687500e82cef9420d429ea77349809fab5bf3564aaa18021ae0"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_positions_5_11_approved_scientific_decision_freeze.json",
+        "sha256": "5c5e50e6c57fe142cf1b9c1dc2b7cc4351a1847c5ae1a67c4c2f3088f1f11db8"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_t000006_positions_12_36_approved_scientific_decision_freeze.json",
+        "sha256": "6054546fbe2110564a562951076e942058cf73abe962d87a37e9ff69284b9f4a"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_t000007_positions_37_86_approved_scientific_decision_freeze.json",
+        "sha256": "a0d685a9d6080ea861b0411ecd4041bae558a2c128e4bdb5d6b1356381a62a03"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_t000008_positions_87_186_approved_scientific_decision_freeze.json",
+        "sha256": "ff4a247ddc25bdab94777ed3b9a25277b996731edb0ea6c0444d6be4ecb1309c"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_t000009_positions_187_386_approved_scientific_decision_freeze.json",
+        "sha256": "e10f0dd5f3883cd774a5465ee025de835811e2ecf3c5cf6c6264e40fe9e6c941"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000001_t000010_positions_387_500_approved_scientific_decision_freeze.json",
+        "sha256": "29b4227683985a32d6e58fad50639ef40be5a5bac07b5234d613fd55428ddcd2"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000002_t000011_positions_1_500_approved_scientific_decision_freeze.json",
+        "sha256": "2906a678a9903a6bf94093ada79a713a9f1e89a64d9fbec8539a60ba828ed63d"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000003_t000012_positions_1_500_approved_scientific_decision_freeze.json",
+        "sha256": "dbd349b2b8cc0846da6ff5db6037e873e7671f5b53ab37196814c0ca78b52882"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/b000004_t000013_positions_1_500_approved_scientific_decision_freeze.json",
+        "sha256": "7ed7a22d718603b892219322bdcbcaf4d4ffcc543e8c6cdfca8d3428fd05624c"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/c000001_approved_scientific_decision_freeze.json",
+        "sha256": "b467031730514790a929ee3668f3e716e9fd55749fe53bc82f58691d56493402"
+      }
+    ]
+  },
+  "implementation_gate": {
+    "next_gate": "IMPLEMENT_AND_TEST_PURE_ABSTRACT_NORMALIZER_AND_DEVELOPMENT_ONLY_RETRIEVAL_RUNNER_BEFORE_ANY_LIVE_NETWORK_RETRIEVAL",
+    "requirements": [
+      "parser tests using archived verified PubMed and OpenAlex payloads",
+      "tests for PubMed multi-section abstracts",
+      "tests for OpenAlex null abstracts",
+      "tests for OpenAlex malformed and duplicate positions",
+      "tests for OpenAlex noncontiguous position handling",
+      "deterministic output and checksum tests",
+      "assert no retrieval artifact contains scientific labels or review evidence",
+      "assert blind validation sample is not read by implementation",
+      "assert production ledger boundary remains unchanged"
+    ]
+  },
+  "model_development_boundary": {
+    "acceptable_recall_threshold_defined": false,
+    "blind_holdout_must_remain_unopened_for_model_development": true,
+    "future_records_must_not_be_scored_during_development": true,
+    "missing_abstract_must_not_be_treated_as_negative_evidence": true,
+    "retrieval_freeze_does_not_freeze_a_classifier": true,
+    "retrieval_freeze_does_not_freeze_a_threshold": true,
+    "whole_batch_nested_validation_required": true
+  },
+  "normalization_contract": {
+    "minimum_abstract_length_threshold": null,
+    "normalizer_is_pure_derivative_of_verified_raw_bytes": true,
+    "openalex": {
+      "abstract_source": "abstract_inverted_index",
+      "duplicate_position": "parser_failure",
+      "non_integer_position": "parser_failure",
+      "non_list_position_vector": "parser_failure",
+      "non_string_token": "parser_failure",
+      "noncontiguous_positions": "record explicit position_gap status; do not silently classify as ordinary primary-model abstract",
+      "null_or_absent_abstract": "abstract_absent",
+      "reconstruction": "sort observed integer positions ascending and emit corresponding tokens",
+      "title_sources": [
+        "display_name",
+        "title"
+      ]
+    },
+    "production_reconciliation_parser_must_not_be_modified": true,
+    "pubmed": {
+      "abstract_source": "AbstractText elements in document order",
+      "accepted_record_types": [
+        "PubmedArticle",
+        "PubmedBookArticle"
+      ],
+      "empty_abstract_elements_count_as_usable": false,
+      "requested_pmid_must_match_returned_record": true,
+      "section_labels_injected_into_model_text": false,
+      "section_labels_preserved_as_metadata": true,
+      "title_sources": [
+        "ArticleTitle",
+        "BookTitle"
+      ],
+      "whitespace_normalization": "collapse Unicode whitespace to single spaces"
+    },
+    "reason_no_threshold_is_frozen": "No evidence-based minimum length criterion has yet been approved; absence/quality must not be converted into an implicit exclusion rule."
+  },
+  "parent_commit": "e9be6821b6ec3ce151d39e6880598282c59cc125",
+  "planned_derived_statuses": [
+    "usable_abstract_pubmed",
+    "usable_abstract_openalex",
+    "abstract_absent_all_attempted_sources",
+    "openalex_position_gap",
+    "provider_not_found",
+    "provider_identity_mismatch",
+    "retrieval_failure",
+    "parser_failure"
+  ],
+  "planned_normalized_output_fields": [
+    "screening_entity_id",
+    "provider_used",
+    "provider_lookup_type",
+    "provider_record_id",
+    "source_body_sha256",
+    "provider_identity_status",
+    "parser_status",
+    "abstract_status",
+    "title_text",
+    "abstract_text",
+    "abstract_section_metadata_json"
+  ],
+  "production_boundary": {
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "purpose": "Freeze the development-only, label-blind pre-review publication-text retrieval design required to evaluate title-plus-abstract triage without modifying the production scientific screening workflow.",
+  "retrieval_cascade": {
+    "crossref_primary_route": false,
+    "label_blind": true,
+    "openalex": {
+      "lookup_preference": [
+        "exact_work_id",
+        "exact_doi",
+        "exact_pmid"
+      ],
+      "priority": 2,
+      "transient_failure_does_not_imply_scientific_exclusion": true,
+      "transient_failure_is_recorded": true,
+      "used_when": "PubMed is not applicable, does not yield a usable abstract, or fails to resolve the requested record."
+    },
+    "pubmed": {
+      "absence_or_not_found_allows_openalex_fallback": true,
+      "condition": "PMID present",
+      "priority": 1,
+      "transient_failure_does_not_imply_scientific_exclusion": true,
+      "transient_failure_is_recorded": true,
+      "transport": "exact PMID EFetch",
+      "usable_abstract_stops_cascade": true
+    },
+    "same_rules_for_every_manifest_row": true
+  },
+  "retrieval_manifest": {
+    "cascade_counts": {
+      "exact_pmid_efetch>openalex_exact_doi": 76,
+      "exact_pmid_efetch>openalex_exact_work_id": 3880,
+      "openalex_exact_doi": 16,
+      "openalex_exact_work_id": 527
+    },
+    "contains_batch_id": false,
+    "contains_model_scores": false,
+    "contains_review_evidence": false,
+    "contains_scientific_labels": false,
+    "identifier_coverage": {
+      "doi": 4499,
+      "openalex_id": 4407,
+      "pmid": 3956,
+      "primary_identifier_available": 4499
+    },
+    "ordering": "ascending frozen global_active_index; global_active_index itself is not emitted",
+    "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/input_manifest.tsv",
+    "rows": 4499,
+    "sha256": "4e5ba0313e008a58e968a9368ea90b6fdb70049b866003742ed1c967c31120ba"
+  },
+  "retrieval_output_prohibitions": [
+    "record_decision",
+    "exclusion_reason_code",
+    "candidate_method_flag",
+    "evidence_basis",
+    "evidence_source_locator",
+    "evidence_escalation_status",
+    "operator_id",
+    "operator_type",
+    "reviewer_id",
+    "review_status",
+    "adjudication_status",
+    "notes",
+    "model_score",
+    "model_threshold"
+  ],
+  "schema_version": 1,
+  "scope_boundary": {
+    "blind_validation_sample_in_scope": false,
+    "development_publications_only": true,
+    "future_universe_in_scope": false,
+    "identity_attention_records_in_scope": false,
+    "production_screening_in_scope": false,
+    "software_registry_in_scope": false
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "transport_contract": {
+    "credentials_must_not_be_persisted": true,
+    "existing_retry_rate_limit_and_redirect_semantics_preserved": true,
+    "new_independent_http_stack_prohibited": true,
+    "provider_identity_validation_required": true,
+    "raw_provider_response_must_be_archived": true,
+    "raw_response_sha256_required": true,
+    "reuse_existing_exact_identifier_transport": true,
+    "transport_source_hashes": [
+      {
+        "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+        "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+        "sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+      }
+    ]
+  }
+}
