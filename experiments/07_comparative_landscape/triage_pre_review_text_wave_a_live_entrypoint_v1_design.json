@@ -1,0 +1,142 @@
+{
+  "authority_boundary": {
+    "authorization_template_generation_permitted": false,
+    "blind_validation_content_use_permitted": false,
+    "creates_authorization": false,
+    "creates_network_authority": false,
+    "model_scoring_permitted": false,
+    "network_before_successful_human_authorization_validation": false,
+    "production_ledger_write_permitted": false,
+    "scientific_decisions_permitted": false,
+    "wave_b_execution_permitted": false
+  },
+  "authorization_lifecycle": {
+    "authorization_bytes_bound_on_first_claim": true,
+    "authorization_must_be_human_created": true,
+    "authorization_must_be_untracked_at_execution_time": true,
+    "authorization_must_not_be_committed_before_execution": true,
+    "authorized_execution_commit": "Must equal the final committed live-entrypoint implementation HEAD at authorization creation and throughout execution/resume.",
+    "canonical_authorization_path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a/authorization.json",
+    "different_execution_id_resume": false,
+    "intervening_tracked_commit_after_authorization": "forbidden",
+    "one_use": true,
+    "post_execution_version_control": "Any later archival or commit of execution artifacts is a separate post-run preservation step and does not form part of executable authorization.",
+    "reason": "The frozen guard requires authorized_execution_commit to equal the current git HEAD. Committing an authorization that names the preceding implementation commit would change HEAD and invalidate the authorization.",
+    "same_execution_id_resume": true,
+    "tracked_tree": "must remain clean"
+  },
+  "credential_contract": {
+    "NCBI_API_KEY": "forbidden",
+    "NCBI_EMAIL": "required at live start",
+    "OPENALEX_API_KEY": "optional",
+    "credentials_in_claim_state_checkpoint_or_adapter_evidence": false,
+    "credentials_in_raw_archived_metadata": false
+  },
+  "design_id": "TRIAGE_PRE_REVIEW_TEXT_WAVE_A_LIVE_ENTRYPOINT_V1",
+  "execution_contract": {
+    "automatic_reissue_after_ambiguous_partial_archive": false,
+    "automatic_reissue_after_noncheckpointing_fault": false,
+    "checkpoint_after_each_verified_terminal_lookup": true,
+    "completion": "Continue sequentially until guard state is COMPLETED or halt immediately on the first fault/exception.",
+    "concurrency": 1,
+    "continue_after_noncheckpointing_fault": false,
+    "fallback_to_wave_b": false,
+    "manifest_order": "strictly ascending frozen request_sequence",
+    "paced_executor_instances_per_process": 1,
+    "pacer_instances_per_process": 1,
+    "provider_cold_start_seconds": 0.5,
+    "provider_maximum_initiation_rate_per_second": 2.0,
+    "retry_sleeper": "time.sleep",
+    "underlying_live_executor": "retrieve_metadata_resolution_queue.default_http_executor",
+    "wave_id": "A"
+  },
+  "frozen_inputs": {
+    "adapter_runner_tests": {
+      "path": "experiments/07_comparative_landscape/test_triage_pre_review_text_wave_a_transport_adapter_runner_v1.py",
+      "sha256": "1996a7c55759d2b26c556c1d45d58a82feb006c82c4d38f60a151558325caaa9"
+    },
+    "authorization_guard": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_guard_v1.py",
+      "sha256": "40dadd678bfe282e196ef007dbb443e4672c578055f1608d737625bae9c5b7af"
+    },
+    "exact_transport": {
+      "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+      "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+    },
+    "live_retrieval_design": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_live_retrieval_v1_design.json",
+      "sha256": "3dff9e1a41196343adc02951b7a88a2b1306e7df05838f3b2ab50ed53ce16172"
+    },
+    "mock_runner": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_mock_runner_v1.py",
+      "sha256": "21c67dd6791aac29d995ab33828ec6ff444fd4e52d911a10fd20809d30ca5242"
+    },
+    "transport_adapter": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_transport_evidence_adapter_v1.py",
+      "sha256": "30a311626b3e99e6520601585b87df3b600991094d7724cd358b52159d902bac"
+    }
+  },
+  "human_gate_after_implementation": {
+    "authorization_may_be_created_by_implementation_or_tests": false,
+    "network_may_be_started_automatically_after_commit": false,
+    "next_gate": "COMMIT_FINAL_LIVE_ENTRYPOINT_THEN_STOP_FOR_EXPLICIT_HUMAN_WAVE_A_NETWORK_AUTHORIZATION"
+  },
+  "implementation_architecture": {
+    "adapter_modification_permitted": false,
+    "core_rule": "Shared core contains state, archive, evidence and checkpoint orchestration but has no default network executor and creates no authorization.",
+    "guard_modification_permitted": false,
+    "live_entrypoint": "triage_pre_review_text_wave_a_live_entrypoint_v1.py",
+    "live_rule": "Live entrypoint is the only wrapper permitted to bind the shared core to retrieve_metadata_resolution_queue.default_http_executor.",
+    "mock_rule": "Mock wrapper accepts injected executors and must continue to reject the frozen default HTTP executor.",
+    "mock_wrapper": "triage_pre_review_text_wave_a_mock_runner_v1.py",
+    "new_independent_http_stack_permitted": false,
+    "new_shared_core": "triage_pre_review_text_wave_a_runner_core_v1.py",
+    "transport_modification_permitted": false
+  },
+  "operator_interface": {
+    "authorization_creation_command_provided": false,
+    "authorization_path_configurable": false,
+    "automatic_claim_or_evidence_deletion": false,
+    "automatic_execution_id_generation": false,
+    "automatic_fault_cleanup": false,
+    "execution_id_required": true,
+    "explicit_confirmation_literal": "EXECUTE-AUTHORIZED-WAVE-A",
+    "explicit_confirmation_required": true
+  },
+  "parent_commit": "e2754127593e25ad361025a301729c96391d44d8",
+  "preclaim_preflight_order": [
+    "require explicit CLI live-execution confirmation token",
+    "require explicitly supplied non-empty execution ID",
+    "require canonical authorization path",
+    "require authorization file to be untracked",
+    "validate frozen implementation dependencies",
+    "validate authorization non-mutatively with frozen guard",
+    "require NCBI_EMAIL because Wave A contains PubMed requests",
+    "reject NCBI_API_KEY",
+    "validate adapter base design plus amendment",
+    "only then call guard.open_execution and create/restore the one-use claim/state"
+  ],
+  "purpose": "Provide the sole live Wave A execution entrypoint while retaining the frozen authorization guard, exact transport, transport-evidence adapter, manifest order, checkpoint semantics and fail-closed recovery behavior.",
+  "required_hostile_tests": [
+    "Missing authorization causes zero executor calls and creates no claim/state.",
+    "Noncanonical authorization path is rejected before claim.",
+    "Tracked authorization artifact is rejected before claim.",
+    "Authorization bound to wrong git HEAD is rejected before any executor call.",
+    "Dirty tracked tree is rejected before any executor call.",
+    "Missing NCBI_EMAIL is rejected before claim.",
+    "Presence of NCBI_API_KEY is rejected before claim.",
+    "Missing or wrong explicit live confirmation is rejected before claim.",
+    "Live entrypoint binds only the frozen default HTTP executor; tests monkeypatch that exact object with a synthetic executor so no real network occurs.",
+    "One shared ProviderPacer and one paced executor are used throughout a process.",
+    "Same execution ID resumes without duplicate transport.",
+    "Different execution ID is rejected.",
+    "Partial raw archive and noncheckpointing fault remain fail-closed with zero automatic reissue.",
+    "Credential sentinel values are absent from every generated claim, state, checkpoint, adapter-evidence and archived request/response metadata file.",
+    "Wave B files/routes are never generated or invoked.",
+    "Existing adapter/mock hostile suite and guard hostile suite remain passing after shared-core refactor.",
+    "No test performs a real network request.",
+    "Production boundary remains byte-identical."
+  ],
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}
