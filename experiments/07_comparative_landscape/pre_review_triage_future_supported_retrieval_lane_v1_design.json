@@ -1,0 +1,50 @@
+{
+  "authority": {
+    "future_scoring_performed": false,
+    "model_fit_performed": false,
+    "network_retrieval_performed": false,
+    "production_mutated": false,
+    "scientific_screening_decisions_made": false
+  },
+  "blind_validation_boundary": {
+    "blind_abstracts_inspected": false,
+    "blind_ids_used_for_mechanical_exclusion_only": true,
+    "blind_labels_used": false,
+    "blind_scientific_content_used": false,
+    "blind_titles_inspected": false
+  },
+  "counts": {
+    "baseline_only_from_membership": 491,
+    "blind_sample_entities_mechanically_excluded_by_id": 2000,
+    "canonical_baseline_entities": 95113,
+    "development_retrieval_manifest_entities": 4499,
+    "frozen_batch_membership_entities": 94622,
+    "future_scoring_performed": false,
+    "model_fit_performed": false,
+    "schema_version": 1,
+    "supported_after_development_exclusion": 12450,
+    "supported_before_development_exclusion": 16949,
+    "supported_blind_entities_excluded": 288,
+    "supported_future_post_membership_additions": 6,
+    "supported_future_retrieval_lane": 12162
+  },
+  "eligibility": {
+    "blind_sample_ids_excluded": true,
+    "citation_wave_provenance": "0",
+    "development_ids_excluded": true,
+    "identity_attention_status": "",
+    "metadata_screenability": "screenable",
+    "screening_entity_class": "publication",
+    "screening_state": "ready"
+  },
+  "freeze_parent_commit": "640d3469461db7c83438c6798473ef0fb66bff0c",
+  "next_gate": "AUTHORIZE_AND_RUN_TEXT_RETRIEVAL_FOR_EXACT_SUPPORTED_FUTURE_LANE",
+  "schema_version": 1,
+  "source_hashes": {
+    "results/07_comparative_landscape/baseline_scientific_screening_execution/batch_membership.tsv": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/input_manifest.tsv": "4e5ba0313e008a58e968a9368ea90b6fdb70049b866003742ed1c967c31120ba",
+    "results/07_comparative_landscape/triage_validation_v1/sample.tsv": "e9018ce5e17c3e1c3906746e2b63913d601077170c2a174e2fd166a41b49d0c4"
+  },
+  "status": "FROZEN_SUPPORTED_FUTURE_RETRIEVAL_LANE_PRE_RETRIEVAL"
+}

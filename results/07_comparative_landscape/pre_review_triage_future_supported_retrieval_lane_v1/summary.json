@@ -1,0 +1,32 @@
+{
+  "baseline_only_from_membership": 491,
+  "blind_boundary": {
+    "blind_abstracts_inspected": false,
+    "blind_ids_used_for_mechanical_exclusion_only": true,
+    "blind_labels_used": false,
+    "blind_scientific_content_used": false,
+    "blind_titles_inspected": false
+  },
+  "blind_sample_entities_mechanically_excluded_by_id": 2000,
+  "canonical_baseline_entities": 95113,
+  "development_retrieval_manifest_entities": 4499,
+  "eligibility_rule": {
+    "blind_sample_ids_excluded": true,
+    "citation_wave_provenance": "0",
+    "development_ids_excluded": true,
+    "identity_attention_status": "",
+    "metadata_screenability": "screenable",
+    "screening_entity_class": "publication",
+    "screening_state": "ready"
+  },
+  "frozen_batch_membership_entities": 94622,
+  "future_scoring_performed": false,
+  "model_fit_performed": false,
+  "schema_version": 1,
+  "status": "FROZEN_SUPPORTED_FUTURE_RETRIEVAL_LANE_PRE_RETRIEVAL",
+  "supported_after_development_exclusion": 12450,
+  "supported_before_development_exclusion": 16949,
+  "supported_blind_entities_excluded": 288,
+  "supported_future_post_membership_additions": 6,
+  "supported_future_retrieval_lane": 12162
+}
