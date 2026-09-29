@@ -1,0 +1,56 @@
+{
+  "blind_validation_boundary": {
+    "blind_validation_content_scientifically_inspected": false,
+    "blind_validation_content_used": false,
+    "blind_validation_labels_used": false
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_v1.sha256": "8f6d390f8b4ce83471add5e3a9d1c26241da467c0383a35ae6fa6756037b4e87",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1.sha256": "124604ec4667db15072f12883abc2cd0cbed29b424ea47ad78577758f2250b75",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_curves_v1.sha256": "c15f3ae564b99805f3a172d8a70fafff1d6da282a30523302e62715eafda396d",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_v1.sha256": "503d99d651a20ddbd3de9437ffd2d630cf3a1a8ac2509287a6383dcf217b8244",
+    "experiments/07_comparative_landscape/triage_pre_review_text_retrieval_v1.sha256": "2c59510b25fb7a08f5a3a0d9387b2fefb04acdcfb7dbf089961bff6519b88af8",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "evidence_contract": {
+    "current_curve_freeze_contains_no_selected_criterion": true,
+    "development_design_explicitly_states_no_acceptance_threshold": true,
+    "development_design_prior_sampling_rule_not_adopted_as_acceptance_rule": true,
+    "model_candidate_design_acceptable_recall_threshold_defined_false": true,
+    "model_candidate_design_threshold_optimization_permitted_false": true,
+    "retrieval_design_acceptable_recall_threshold_defined_false": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_OPERATING_POINT_ACCEPTANCE_CRITERION_PROVENANCE_V1",
+  "freeze_parent_commit": "65d2ee36ff67784d3dd04aea39f0d7d465306040",
+  "next_gate": "DEFINE_AND_FREEZE_NEW_ACCEPTANCE_CRITERION_FROM_INTENDED_USE_OR_EXTERNAL_WORKLOAD_CONSTRAINT_BEFORE_ANY_CURVE_BASED_OPERATING_POINT_SELECTION",
+  "provenance_classification": {
+    "new_acceptance_criterion_must_be_declared_before_curve_based_selection": true,
+    "new_acceptance_criterion_will_be_post_development_curve": true,
+    "upstream_acceptable_recall_target_existed": false,
+    "upstream_model_acceptance_rule_existed": false,
+    "upstream_operating_point_existed": false,
+    "upstream_review_fraction_existed": false,
+    "upstream_score_threshold_existed": false,
+    "upstream_workload_target_existed": false
+  },
+  "schema_version": 1,
+  "selection_boundary": {
+    "acceptable_recall_target_defined": false,
+    "curve_locations_may_now_be_searched_for_preferred_cutoff": false,
+    "operating_point_selected": false,
+    "raw_score_threshold_selected": false,
+    "review_fraction_selected": false,
+    "workload_target_defined": false
+  },
+  "status": "FROZEN_NO_UPSTREAM_ACCEPTANCE_CRITERION_PRE_NEW_CRITERION",
+  "validation_sampling_rule_classification": {
+    "if_insufficient": "draw_additional_prespecified_probability_sample_before_final_recall_interpretation",
+    "is_model_acceptance_rule": false,
+    "is_recall_target": false,
+    "is_review_fraction": false,
+    "is_score_threshold": false,
+    "may_be_repurposed_as_operating_point_criterion": false,
+    "minimum_retained_positive_records": 60,
+    "purpose": "minimum_sample_support_for_primary_blind_validation_recall_assessment"
+  }
+}
