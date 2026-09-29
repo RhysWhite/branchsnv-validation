@@ -1,0 +1,70 @@
+{
+  "amendment_contract": {
+    "amended_executable_path": "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_amendment_001.py",
+    "amended_executable_sha256": "6e2edf8e625d769d8de85c4e4957d708ea7774c23d160976fe0030a323f46acd",
+    "base_file_modified": false,
+    "base_runtime_serializer_replaced": true,
+    "batch_review_count_rule_changed": false,
+    "change": "format_number now returns str values unchanged before numeric serialization",
+    "curve_metric_arithmetic_changed": false,
+    "fraction_grid_changed": false,
+    "hostile_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_operating_point_curve_v1_amendment_001_hostile.py",
+    "hostile_test_sha256": "281c51815c538caa920f8b469db720f18ee869b4711d6bd38ab405a3a723ba5e",
+    "ranking_changed": false,
+    "scope": "serialization_string_passthrough_only",
+    "selection_policy_changed": false,
+    "standard_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_operating_point_curve_v1_amendment_001.py",
+    "standard_test_sha256": "e35a707930d07f09afa02b8438184cec1dd1a45f5f183f81066cab406385d33b"
+  },
+  "base_implementation": {
+    "modified": false,
+    "path": "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1.py",
+    "sha256": "bc0b44961ba6e1c5c8e022979d97d7df961ab68c79bc6c2815be6d72cac8db65"
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_evaluation_results_v1.sha256": "9a002f7e66dc18717c7280a28bec4bfe2c474d24a54024295b852fd401ef46b6",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_implementation.sha256": "0f7d762e80b11f2696845974d1c3705ced162aa8220cebe4b99422843bf02525",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_v1.sha256": "503d99d651a20ddbd3de9437ffd2d630cf3a1a8ac2509287a6383dcf217b8244",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "failed_canonical_output_retirement": {
+    "authorized_after_amendment_commit": true,
+    "preconditions": [
+      "archived_partial_committed",
+      "archived_partial_sha256_matches_failed_partial",
+      "failure_receipt_committed",
+      "canonical_output_contains_only_failed_header_partial"
+    ],
+    "retirement_action": "remove failed canonical header-only partial and empty canonical output directory",
+    "scientific_data_deleted": false
+  },
+  "failure_evidence": {
+    "archived_partial_contains_data_rows": false,
+    "archived_partial_line_count": 1,
+    "archived_partial_path": "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_failed_attempt_001/per_batch_prefix_curve.tsv.partial",
+    "archived_partial_sha256": "743ebdcfd7fb6896655c863c8b593f9dca8db1c0347a2f8fe2735f7062acc95b",
+    "canonical_partial_sha256": "743ebdcfd7fb6896655c863c8b593f9dca8db1c0347a2f8fe2735f7062acc95b",
+    "exception_message": "could not convert string to float: 'B000001'",
+    "exception_type": "ValueError",
+    "failed_attempt_number": 1,
+    "failure_receipt_path": "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_failed_attempt_001/failure_receipt.json",
+    "failure_receipt_sha256": "eb259527812a0db7a9ce4ce96f0d08ad271a071415bf9fe9438de4a0a9af3bd4",
+    "failure_stage": "per_batch_prefix_curve_serialization"
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_OPERATING_POINT_CURVE_V1_AMENDMENT_001",
+  "freeze_parent_commit": "78ad4d356bc7aa972b8f5e9b4f81921c4ad4dae8",
+  "next_gate": "GENERATE_AND_FREEZE_PRE_REVIEW_TRIAGE_OPERATING_POINT_CURVES_V1_WITH_AMENDMENT_001",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "blind_validation_content_use_authorized": false,
+    "calibration_fit_authorized": false,
+    "future_scoring_authorized": false,
+    "model_fit_authorized": false,
+    "production_mutation_authorized": false,
+    "review_fraction_selection_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized": false
+  },
+  "status": "FROZEN_SERIALIZATION_AMENDMENT_001_PRE_REGENERATION"
+}
