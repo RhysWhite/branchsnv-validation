@@ -1,0 +1,19 @@
+{
+  "authorization_scope": "ONE_TIME_FROZEN_DEVELOPMENT_EVALUATION",
+  "authorization_status": "AUTHORIZED_DEVELOPMENT_EVALUATION",
+  "authorized_output_rel": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1",
+  "blind_validation_content_use_authorized": false,
+  "canonical_text_sha256": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+  "environment_state_design_sha256": "748f32d6af113ff1c0b945d484d03723493d8fa95e173a322c2fda01c0c6986d",
+  "execution_id": "TRIAGE-DEV-EVAL-V1-001",
+  "future_scoring_authorized": false,
+  "hyperparameter_selection_authorized": false,
+  "implementation_freeze_commit": "38f2934b48bef39f62657cbb3360e2daf61e17e2",
+  "implementation_sha256": "bd5520bbbb7bad1bc33cab131d21ce90701815a927076fee159ede3045843a10",
+  "model_fit_authorized": true,
+  "production_mutation_authorized": false,
+  "schema_version": 1,
+  "scientific_screening_decisions_authorized": false,
+  "threshold_selection_authorized": false,
+  "vectorizer_fit_authorized": true
+}
