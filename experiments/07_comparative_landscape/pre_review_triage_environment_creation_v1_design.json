@@ -1,0 +1,108 @@
+{
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_MODEL_CANDIDATES_V1.md": "eb16fdd8015791b8c82570197a190547f92bad6cfed7566042c45c912ce442f2",
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_MODEL_CANDIDATES_V1_AMENDMENT_001.md": "2e504b6205894e8f16c36c3053af2d7798c44a0d3c9f28ef869b0c8c9497ed65",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1.sha256": "124604ec4667db15072f12883abc2cd0cbed29b424ea47ad78577758f2250b75",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001.sha256": "4b74fa09e029d69deb9661c4ec0eee8ebc6a92074b324f6026755091bfc18110",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001_design.json": "d5f956212f39ad9e948f4517a5652a32cf35225682a844a91dbbdf1156bce97e",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001_freeze.py": "f8bd6be8b3b2934d1214fc51e6e823ee231ced33810ccd7404d1cc12725f2edc",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_design.json": "708e6c597a83b54416b1d657fe424fabea78cfe490ba960e308eb9d0841389a3",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_freeze.py": "09ab374486ddb7e04b676711ac45411fd4db0640748b800744e54ec60c4c2b10"
+  },
+  "environment_identity": {
+    "existing_environment_may_be_deleted_or_overwritten": false,
+    "existing_unrelated_environment_may_be_reused": false,
+    "expected_prefix": "$HOME/.conda/envs/branchsnv-triage-v1",
+    "must_be_absent_before_creation": true,
+    "name": "branchsnv-triage-v1"
+  },
+  "execution_authority": {
+    "authorization_scope": "ONE_DEDICATED_ENVIRONMENT_CREATION",
+    "blind_validation_content_use_authorized": false,
+    "environment_creation_authorized": true,
+    "future_scoring_authorized": false,
+    "hyperparameter_selection_authorized": false,
+    "model_fit_authorized": false,
+    "package_installation_authorized": true,
+    "package_installation_scope": "Only dependencies resolved for the exact frozen branchsnv-triage-v1 creation request.",
+    "production_mutation_authorized": false,
+    "repository_mutation_during_environment_creation_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized": false
+  },
+  "execution_preconditions": {
+    "environment_must_not_exist": true,
+    "exact_authorization_commit_required": true,
+    "fail_closed_if_environment_exists": true,
+    "repository_staging_area_must_be_empty": true,
+    "repository_tracked_tree_must_be_clean": true
+  },
+  "failure_contract": {
+    "automatic_additional_channels_permitted": false,
+    "automatic_environment_deletion_permitted": false,
+    "automatic_pip_fallback_permitted": false,
+    "automatic_retry_with_changed_versions_permitted": false,
+    "on_constructor_failure": "STOP_AND_AUDIT",
+    "on_existing_environment": "STOP_AND_AUDIT",
+    "on_solver_failure": "STOP_AND_AUDIT",
+    "on_version_mismatch": "STOP_AND_AUDIT"
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_ENVIRONMENT_CREATION_V1",
+  "freeze_parent_commit": "ea85f024d4251fd8eef9deb1e12015eecce86e3f",
+  "next_gate": "CREATE_VALIDATE_AND_FREEZE_RESOLVED_BRANCHSNV_TRIAGE_V1_ENVIRONMENT_STATE",
+  "package_cache_contract": {
+    "CONDA_PKGS_DIRS": "$HOME/.conda/pkgs",
+    "reason": "Avoid write attempts against shared system package-cache lockfiles observed during the initial solver inspection.",
+    "shared_system_package_cache_required": false,
+    "user_local_cache_required": true
+  },
+  "post_creation_validation": {
+    "candidate_constructor_validation_required": true,
+    "candidate_import_validation_required": true,
+    "capture_conda_explicit_specification": true,
+    "capture_conda_from_history": true,
+    "capture_conda_list": true,
+    "model_fit_permitted_during_validation": false,
+    "numpy": "1.26.4",
+    "python_major_minor": "3.11",
+    "resolved_environment_must_be_frozen_before_model_implementation": true,
+    "scikit_learn": "1.9.0",
+    "scipy": "1.12.0",
+    "vectorizer_fit_permitted_during_validation": false
+  },
+  "purpose": "Authorize one fail-closed creation of the dedicated branchsnv-triage-v1 modelling environment using the amended Python 3.11 compatibility target, without authorizing any vectorizer or model fitting.",
+  "schema_version": 1,
+  "solver_contract": {
+    "channels": [
+      "conda-forge"
+    ],
+    "creation_argv": [
+      "mamba",
+      "create",
+      "-y",
+      "-n",
+      "branchsnv-triage-v1",
+      "--override-channels",
+      "-c",
+      "conda-forge",
+      "--strict-channel-priority",
+      "python=3.11",
+      "numpy=1.26.4",
+      "scipy=1.12.0",
+      "scikit-learn=1.9.0"
+    ],
+    "executable": "mamba",
+    "override_channels": true,
+    "python_3_10_dry_run_previously_failed_for_scikit_learn_1_9_0": true,
+    "python_3_11_dry_run_previously_succeeded": true,
+    "requested_specs": [
+      "python=3.11",
+      "numpy=1.26.4",
+      "scipy=1.12.0",
+      "scikit-learn=1.9.0"
+    ],
+    "strict_channel_priority": true
+  },
+  "status": "FROZEN_ENVIRONMENT_CREATION_AUTHORIZATION_PRE_EXECUTION"
+}
