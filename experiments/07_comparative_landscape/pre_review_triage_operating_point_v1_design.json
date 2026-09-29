@@ -1,0 +1,191 @@
+{
+  "amendment_required_for": [
+    "raw_score_threshold_selection",
+    "score_or_probability_calibration",
+    "model_family_change",
+    "automatic_scientific_exclusion"
+  ],
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_evaluation_results_v1.sha256": "9a002f7e66dc18717c7280a28bec4bfe2c474d24a54024295b852fd401ef46b6",
+    "experiments/07_comparative_landscape/pre_review_triage_environment_state_v1.sha256": "98eef6587a78bcc74f2853a1ef6302d1b3b4c9606f9d5f3f3888bda47959b054",
+    "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_implementation.sha256": "115a5d08f00be48367b2d6c968892ab63e6be40d5bf0b854f9f6df1839ced699",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "curve_contract": {
+    "cross_batch_candidate_fraction_grid": "exact_union_of_all_rational_batch_prefix_fractions_k_over_n",
+    "cross_batch_primary_summaries": [
+      "minimum_batch_recall",
+      "median_batch_recall",
+      "unweighted_mean_batch_recall"
+    ],
+    "cross_batch_review_count_rule": "for_candidate_fraction_q_each_batch_reviews_ceil_q_times_batch_size_records",
+    "operating_point_selected_by_curve_generation": false,
+    "per_batch_curve": "evaluate every prefix k from zero through batch size after deterministic descending-score ranking",
+    "precision_definition": "retained_positive_records_in_reviewed_prefix_divided_by_reviewed_prefix_size_for_k_greater_than_zero",
+    "recall_definition": "retained_positive_records_in_reviewed_prefix_divided_by_total_retained_positive_records_in_batch",
+    "review_fraction_definition": "k_divided_by_batch_record_count",
+    "secondary_summaries": [
+      "pooled_development_recall",
+      "unweighted_mean_batch_precision",
+      "reviewed_record_count"
+    ]
+  },
+  "development_score_artifact": {
+    "negatives": 4022,
+    "path": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/outer_scores.tsv",
+    "positives": 168,
+    "records": 4190,
+    "sha256": "1da5b38902d893a91cb99b7d9965f179717667c42b66ff80f63313ac50251c47",
+    "whole_batches": 9
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_OPERATING_POINT_V1",
+  "freeze_parent_commit": "f91eb31b0014fe7fd99a00ecb2874b5533ffb673",
+  "future_selection_gate": {
+    "acceptable_recall_target_invented_by_design": false,
+    "operating_point_may_be_selected_now": false,
+    "required_before_selection": [
+      "frozen_operating_point_curve_results",
+      "explicit_acceptance_criterion_or_workload_constraint",
+      "separate_operating_point_selection_authorization"
+    ]
+  },
+  "next_gate": "FREEZE_PRE_REVIEW_TRIAGE_OPERATING_POINT_CURVE_IMPLEMENTATION_V1_BEFORE_CURVE_GENERATION",
+  "operating_point_policy_family": {
+    "acceptable_recall_target_defined": false,
+    "authorized_family": "within_batch_rank_review_fraction",
+    "pooled_cross_fold_raw_score_threshold_authorized": false,
+    "probability_calibration_authorized": false,
+    "raw_score_threshold_policy_authorized": false,
+    "review_fraction_selected": false,
+    "score_calibration_fit_authorized": false,
+    "workload_target_defined": false
+  },
+  "ranking_contract": {
+    "batch_identifier_used_as_predictive_feature": false,
+    "deterministic_tie_break": "screening_entity_id_ascending",
+    "labels_used_to_construct_ranking": false,
+    "primary_sort": "continuous_score_descending",
+    "ranking_scope": "each_held_out_development_batch_independently"
+  },
+  "routing_semantics": {
+    "candidate_cutoff_if_later_selected": "priority_review_boundary",
+    "model_generated_terminal_exclusion_authorized": false,
+    "model_output_is_routing_only": true,
+    "records_below_boundary": "residual_human_review_queue",
+    "records_below_boundary_scientifically_excluded": false,
+    "terminal_scientific_decision_maker": "human_review"
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "blind_validation_content_use_authorized": false,
+    "calibration_fit_authorized": false,
+    "future_scoring_authorized": false,
+    "model_fit_authorized": false,
+    "production_mutation_authorized": false,
+    "review_fraction_selection_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized": false
+  },
+  "score_scale_diagnostic": {
+    "cross_batch_summary": {
+      "batch_positive_minimum_score_max": -0.24562175468334446,
+      "batch_positive_minimum_score_min": -1.0924015281250203,
+      "batch_recall_at_raw_score_zero_max": 0.8,
+      "batch_recall_at_raw_score_zero_min": 0.1791044776119403,
+      "batch_review_fraction_at_raw_score_zero_max": 0.126,
+      "batch_review_fraction_at_raw_score_zero_min": 0.006036217303822937,
+      "batch_review_fraction_for_all_observed_positives_max": 0.6740088105726872,
+      "batch_review_fraction_for_all_observed_positives_min": 0.022132796780684104,
+      "batch_score_median_max": -0.9830825223675078,
+      "batch_score_median_min": -1.0717407643610652
+    },
+    "diagnostic_only": true,
+    "interpretation": "raw LinearSVC decision-function scores show materially different positive-score and recall-at-zero behaviour across held-out development batches",
+    "per_batch": {
+      "B000001": {
+        "positive_minimum_score": -1.0924015281250203,
+        "positives": 67,
+        "recall_at_raw_score_zero": 0.1791044776119403,
+        "records": 454,
+        "review_fraction_at_raw_score_zero": 0.02643171806167401,
+        "review_fraction_required_to_capture_all_observed_positives": 0.6740088105726872,
+        "score_median": -1.0150868766141286
+      },
+      "B000002": {
+        "positive_minimum_score": -0.4446057466074169,
+        "positives": 7,
+        "recall_at_raw_score_zero": 0.7142857142857143,
+        "records": 380,
+        "review_fraction_at_raw_score_zero": 0.013157894736842105,
+        "review_fraction_required_to_capture_all_observed_positives": 0.02894736842105263,
+        "score_median": -1.0717407643610652
+      },
+      "B000003": {
+        "positive_minimum_score": -0.6793184078325541,
+        "positives": 6,
+        "recall_at_raw_score_zero": 0.3333333333333333,
+        "records": 423,
+        "review_fraction_at_raw_score_zero": 0.009456264775413711,
+        "review_fraction_required_to_capture_all_observed_positives": 0.08747044917257683,
+        "score_median": -1.0327063758373882
+      },
+      "B000004": {
+        "positive_minimum_score": -0.7121643988091599,
+        "positives": 9,
+        "recall_at_raw_score_zero": 0.4444444444444444,
+        "records": 471,
+        "review_fraction_at_raw_score_zero": 0.008492569002123142,
+        "review_fraction_required_to_capture_all_observed_positives": 0.07855626326963906,
+        "score_median": -1.0596489107168914
+      },
+      "B000005": {
+        "positive_minimum_score": -0.24562175468334446,
+        "positives": 5,
+        "recall_at_raw_score_zero": 0.8,
+        "records": 475,
+        "review_fraction_at_raw_score_zero": 0.010526315789473684,
+        "review_fraction_required_to_capture_all_observed_positives": 0.031578947368421054,
+        "score_median": -1.0276054055515367
+      },
+      "B000006": {
+        "positive_minimum_score": -0.687847297513425,
+        "positives": 10,
+        "recall_at_raw_score_zero": 0.5,
+        "records": 491,
+        "review_fraction_at_raw_score_zero": 0.012219959266802444,
+        "review_fraction_required_to_capture_all_observed_positives": 0.0855397148676171,
+        "score_median": -1.0130781086226885
+      },
+      "B000007": {
+        "positive_minimum_score": -0.3449379941260765,
+        "positives": 3,
+        "recall_at_raw_score_zero": 0.6666666666666666,
+        "records": 497,
+        "review_fraction_at_raw_score_zero": 0.006036217303822937,
+        "review_fraction_required_to_capture_all_observed_positives": 0.022132796780684104,
+        "score_median": -1.040452766276832
+      },
+      "B000008": {
+        "positive_minimum_score": -0.9044010094510675,
+        "positives": 6,
+        "recall_at_raw_score_zero": 0.5,
+        "records": 499,
+        "review_fraction_at_raw_score_zero": 0.01002004008016032,
+        "review_fraction_required_to_capture_all_observed_positives": 0.26452905811623245,
+        "score_median": -1.038473067801909
+      },
+      "B000009": {
+        "positive_minimum_score": -0.7892385595487985,
+        "positives": 55,
+        "recall_at_raw_score_zero": 0.6545454545454545,
+        "records": 500,
+        "review_fraction_at_raw_score_zero": 0.126,
+        "review_fraction_required_to_capture_all_observed_positives": 0.302,
+        "score_median": -0.9830825223675078
+      }
+    }
+  },
+  "selected_model_family": "linear_svc_balanced_l2_v1",
+  "status": "FROZEN_PRE_OPERATING_POINT_CURVE_IMPLEMENTATION"
+}
