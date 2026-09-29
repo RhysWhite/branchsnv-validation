@@ -1,0 +1,224 @@
+{
+  "authority_at_this_freeze": {
+    "blind_validation_content_use_authorized": false,
+    "development_evaluation_execution_authorized": false,
+    "future_scoring_authorized": false,
+    "hyperparameter_selection_authorized": false,
+    "model_fit_authorized": false,
+    "production_mutation_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized": false
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_v1_design.json": "080b392e363bfa60232be7bcc4c478175163726703f3382b694643a46602bf26",
+    "experiments/07_comparative_landscape/pre_review_triage_environment_state_v1.sha256": "98eef6587a78bcc74f2853a1ef6302d1b3b4c9606f9d5f3f3888bda47959b054",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1.sha256": "124604ec4667db15072f12883abc2cd0cbed29b424ea47ad78577758f2250b75",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001.sha256": "4b74fa09e029d69deb9661c4ec0eee8ebc6a92074b324f6026755091bfc18110",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "candidate_contract": {
+    "candidate_count": 3,
+    "candidate_grid_search": false,
+    "candidate_order": [
+      "logistic_regression_balanced_l2_v1",
+      "linear_svc_balanced_l2_v1",
+      "complement_nb_v1"
+    ],
+    "hyperparameter_search": false,
+    "vectorizer_family_search": false
+  },
+  "development_contract": {
+    "batch_counts": {
+      "B000001": {
+        "negative": 387,
+        "positive": 67,
+        "records": 454
+      },
+      "B000002": {
+        "negative": 373,
+        "positive": 7,
+        "records": 380
+      },
+      "B000003": {
+        "negative": 417,
+        "positive": 6,
+        "records": 423
+      },
+      "B000004": {
+        "negative": 462,
+        "positive": 9,
+        "records": 471
+      },
+      "B000005": {
+        "negative": 470,
+        "positive": 5,
+        "records": 475
+      },
+      "B000006": {
+        "negative": 481,
+        "positive": 10,
+        "records": 491
+      },
+      "B000007": {
+        "negative": 494,
+        "positive": 3,
+        "records": 497
+      },
+      "B000008": {
+        "negative": 493,
+        "positive": 6,
+        "records": 499
+      },
+      "B000009": {
+        "negative": 445,
+        "positive": 55,
+        "records": 500
+      }
+    },
+    "batch_is_predictive_feature": false,
+    "batch_is_validation_group_only": true,
+    "canonical_text_sha256": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "negative_label": "exclude",
+    "negative_numeric": 0,
+    "negative_records": 4022,
+    "positive_label": "retain_for_method_assessment",
+    "positive_numeric": 1,
+    "positive_records": 168,
+    "predictive_fields": [
+      "title_text",
+      "abstract_text"
+    ],
+    "records": 4190
+  },
+  "environment_contract": {
+    "environment": "branchsnv-triage-v1",
+    "fit_requires_exact_dedicated_runtime": true,
+    "numpy": "1.26.4",
+    "python": "3.11.16",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.12.0"
+  },
+  "fit_surface_contract": {
+    "development_run_also_authorization_gated": true,
+    "direct_fit_bypass_test_present": true,
+    "fit_and_fit_transform_calls_outside_fit_capable_function": false,
+    "fit_capable_function": "fit_and_score_partition",
+    "fit_capable_function_self_authorization_gated": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_EVALUATOR_V1_IMPLEMENTATION",
+  "freeze_parent_commit": "b0c068d7abd9853088ae3134249fdf89ffa79ba0",
+  "future_execution_authorization_contract": {
+    "artifact_existed_at_implementation_freeze": false,
+    "artifact_must_be_git_tracked": true,
+    "artifact_must_match_committed_head": true,
+    "artifact_path": "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_execution_authorization.json",
+    "authorization_scope": "ONE_TIME_FROZEN_DEVELOPMENT_EVALUATION",
+    "authorization_status": "AUTHORIZED_DEVELOPMENT_EVALUATION",
+    "authorized_output_rel": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1",
+    "blind_validation_content_use_authorized": false,
+    "canonical_text_sha256_must_match": true,
+    "environment_state_design_sha256_must_match": true,
+    "execution_id": "TRIAGE-DEV-EVAL-V1-001",
+    "future_scoring_authorized": false,
+    "hyperparameter_selection_authorized": false,
+    "implementation_freeze_commit_must_be_ancestor_of_execution_head": true,
+    "implementation_sha256_must_match_live_evaluator": true,
+    "model_fit_authorized_by_future_artifact": true,
+    "production_mutation_authorized": false,
+    "schema_version": 1,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized_by_future_artifact": true
+  },
+  "implementation_contract": {
+    "hostile_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_evaluator_hostile_v1.py",
+    "hostile_test_sha256": "afea9e6146ed68bc34bcac696c3c09ce011095a8713823424892ecbcd528feda",
+    "implementation_path": "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1.py",
+    "implementation_sha256": "bd5520bbbb7bad1bc33cab131d21ce90701815a927076fee159ede3045843a10",
+    "manual_importlib_loaders_register_sys_modules_before_exec": true,
+    "standard_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_evaluator_v1.py",
+    "standard_test_sha256": "6da79c1b8099aad166be2fb1b2e1da1a2857b99309b0b18e74816db920db22fa",
+    "validated_no_fit_test_count": 21
+  },
+  "nested_validation_contract": {
+    "candidate_selection_tie_break_order": [
+      "higher_macro_mean_average_precision",
+      "higher_minimum_average_precision",
+      "higher_median_average_precision",
+      "frozen_candidate_order"
+    ],
+    "comparison_rounding": false,
+    "comparison_tolerance": null,
+    "final_family_comparison": "nine_fold_leave_one_whole_batch_out_for_each_fixed_candidate",
+    "final_family_selection_uses_same_metric_and_ties": true,
+    "floating_point_comparison": "raw_python_float_tuple_comparison",
+    "hard_predictions_generated": false,
+    "inner_fold_count_per_outer": 8,
+    "inner_scheme": "leave_one_whole_batch_out_within_outer_training_batches",
+    "inner_selection_metric": "unweighted_macro_mean_held_out_batch_average_precision",
+    "model_fit_scope": "training_partition_only",
+    "outer_fold_count": 9,
+    "outer_scheme": "leave_one_whole_batch_out",
+    "outer_scoring": "untouched_outer_batch_continuous_scores",
+    "outer_selected_candidate_refit": "full_outer_training_batches",
+    "threshold_selected": false,
+    "vectorizer_fit_scope": "training_partition_only"
+  },
+  "next_gate": "FREEZE_ONE_TIME_PRE_REVIEW_TRIAGE_DEVELOPMENT_EVALUATION_EXECUTION_AUTHORIZATION_BEFORE_FIRST_MODEL_OR_VECTORIZER_FIT",
+  "one_time_execution_contract": {
+    "automatic_retry_after_claim": false,
+    "canonical_output_directory": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1",
+    "claim_persists_if_later_execution_fails": true,
+    "completion_file": "execution_completion.json",
+    "completion_written_only_after_all_evaluation_outputs": true,
+    "execution_claim_file": "execution_claim.json",
+    "execution_claim_written_before_first_fit": true,
+    "output_directory_must_not_exist_before_execution": true,
+    "overwrite_existing_output_directory": false
+  },
+  "output_contract": {
+    "average_precision_metrics": true,
+    "continuous_scores_only": true,
+    "files": [
+      "execution_claim.json",
+      "inner_metrics.tsv",
+      "outer_metrics.tsv",
+      "outer_scores.tsv",
+      "final_candidate_batch_metrics.tsv",
+      "summary.json",
+      "execution_completion.json"
+    ],
+    "future_scoring_output": false,
+    "hard_classification_output": false,
+    "threshold_output": false
+  },
+  "schema_version": 1,
+  "score_orientation_contract": {
+    "complement_nb": "predict_proba_column_where_classes_equals_positive_class",
+    "linear_svc": "decision_function_with_required_classes_order_0_1",
+    "logistic_regression": "predict_proba_column_where_classes_equals_positive_class",
+    "orientation_tests_present": true,
+    "positive_class": 1
+  },
+  "status": "FROZEN_IMPLEMENTATION_PRE_DEVELOPMENT_EVALUATION",
+  "validation_evidence": {
+    "blind_validation_content_used": false,
+    "direct_fit_authorization_guard_validated": true,
+    "exact_batch_counts_validated": true,
+    "exact_constructor_tests_passed": true,
+    "future_scoring_performed": false,
+    "hyperparameter_selection_performed": false,
+    "model_fit_performed": false,
+    "no_fit_test_count": 21,
+    "no_fit_tests_passed": true,
+    "production_mutated": false,
+    "scientific_screening_decisions_made": false,
+    "score_orientation_tests_passed": true,
+    "threshold_selection_performed": false,
+    "unauthorized_cli_created_output": false,
+    "unauthorized_cli_execution_refused": true,
+    "vectorizer_fit_performed": false,
+    "whole_batch_geometry_validated": true
+  }
+}
