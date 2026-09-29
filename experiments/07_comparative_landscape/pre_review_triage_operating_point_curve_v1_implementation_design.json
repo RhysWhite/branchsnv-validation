@@ -1,0 +1,92 @@
+{
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_evaluation_results_v1.sha256": "9a002f7e66dc18717c7280a28bec4bfe2c474d24a54024295b852fd401ef46b6",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_v1.sha256": "503d99d651a20ddbd3de9437ffd2d630cf3a1a8ac2509287a6383dcf217b8244",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "cross_batch_contract": {
+    "batch_review_count_rule": "ceil_exact_fraction_times_batch_size",
+    "candidate_fraction_grid": "exact_union_of_fraction_k_over_batch_size",
+    "curve_monotonicity_checks": [
+      "reviewed_record_count",
+      "minimum_batch_recall",
+      "unweighted_mean_batch_recall",
+      "pooled_development_recall"
+    ],
+    "first_point": "zero_workload_zero_recall",
+    "fraction_arithmetic": "python_fractions_Fraction",
+    "last_point": "full_workload_full_recall",
+    "summaries": [
+      "minimum_batch_recall",
+      "median_batch_recall",
+      "unweighted_mean_batch_recall",
+      "pooled_development_recall",
+      "unweighted_mean_batch_precision",
+      "reviewed_record_count",
+      "pooled_review_fraction"
+    ]
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_OPERATING_POINT_CURVE_V1_IMPLEMENTATION",
+  "freeze_parent_commit": "c473ea381eaeaecea2f4f46996f184a5e996ffde",
+  "implementation_contract": {
+    "calibration_fit_call_surface": false,
+    "hostile_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_operating_point_curve_hostile_v1.py",
+    "hostile_test_sha256": "859ad841341a803db3d21129cec01971d977495d8bcab851f5e02b37fee05a32",
+    "implementation_path": "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1.py",
+    "implementation_sha256": "bc0b44961ba6e1c5c8e022979d97d7df961ab68c79bc6c2815be6d72cac8db65",
+    "model_fit_call_surface": false,
+    "prediction_call_surface": false,
+    "standard_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_operating_point_curve_v1.py",
+    "standard_test_sha256": "8ecc3fc57a30119901d894797fa2abdfd3cb89ec8b4d91835fd8017fbc3c176b"
+  },
+  "input_contract": {
+    "negatives": 4022,
+    "path": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/outer_scores.tsv",
+    "positives": 168,
+    "records": 4190,
+    "selected_family": "linear_svc_balanced_l2_v1",
+    "sha256": "1da5b38902d893a91cb99b7d9965f179717667c42b66ff80f63313ac50251c47"
+  },
+  "next_gate": "GENERATE_AND_FREEZE_PRE_REVIEW_TRIAGE_OPERATING_POINT_CURVES_V1",
+  "output_contract": {
+    "directory": "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1",
+    "files": [
+      "per_batch_prefix_curve.tsv",
+      "cross_batch_review_fraction_curve.tsv",
+      "summary.json"
+    ],
+    "overwrite": false
+  },
+  "prefix_curve_contract": {
+    "evaluate_k": "all_integers_zero_through_batch_size",
+    "precision_at_k_zero": null,
+    "recall_at_k_equals_batch_size": 1.0,
+    "recall_at_k_zero": 0.0,
+    "total_rows": 4199
+  },
+  "ranking_contract": {
+    "label_used_for_ranking": false,
+    "primary_sort": "continuous_score_descending",
+    "scope": "within_each_held_out_development_batch",
+    "tie_break": "screening_entity_id_ascending"
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "blind_validation_content_use_authorized": false,
+    "calibration_fit_authorized": false,
+    "future_scoring_authorized": false,
+    "model_fit_authorized": false,
+    "production_mutation_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "vectorizer_fit_authorized": false
+  },
+  "selection_boundary": {
+    "acceptable_recall_target_defined": false,
+    "curve_generation_authorizes_scientific_exclusion": false,
+    "curve_generation_selects_operating_point": false,
+    "raw_score_threshold_selected": false,
+    "review_fraction_selected": false,
+    "workload_target_defined": false
+  },
+  "status": "FROZEN_PRE_CURVE_GENERATION"
+}
