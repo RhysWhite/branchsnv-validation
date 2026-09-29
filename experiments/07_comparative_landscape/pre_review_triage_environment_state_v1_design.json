@@ -1,0 +1,83 @@
+{
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_ENVIRONMENT_CREATION_V1.md": "4f7cd79c021c68580d5e5f7c320aaf8ad688d99b1c99b8b9e26f90bc810d2318",
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_MODEL_CANDIDATES_V1_AMENDMENT_001.md": "2e504b6205894e8f16c36c3053af2d7798c44a0d3c9f28ef869b0c8c9497ed65",
+    "experiments/07_comparative_landscape/pre_review_triage_environment_creation_v1.sha256": "884788feaf4c2b32f4cb4bd5c5288916493bf1c490eb1155f47a017371c44be3",
+    "experiments/07_comparative_landscape/pre_review_triage_environment_creation_v1_design.json": "0ec054c99b2dac448b92729f06cb9ae6faaab0dc1c60ff1b28a51db5e6b95529",
+    "experiments/07_comparative_landscape/pre_review_triage_environment_creation_v1_freeze.py": "9b24311e6f747966d0e888c7a0c8cb13da9526cbca1edad2937f4c1d748d0060",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001.sha256": "4b74fa09e029d69deb9661c4ec0eee8ebc6a92074b324f6026755091bfc18110",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001_design.json": "d5f956212f39ad9e948f4517a5652a32cf35225682a844a91dbbdf1156bce97e",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001_freeze.py": "f8bd6be8b3b2934d1214fc51e6e823ee231ced33810ccd7404d1cc12725f2edc"
+  },
+  "environment_identity": {
+    "core_packages": {
+      "numpy": "1.26.4",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.12.0"
+    },
+    "creation_authorization_commit": "73b529bf89b5fb108f43cb2c1aeaa39fa76b2c0f",
+    "name": "branchsnv-triage-v1",
+    "platform": "Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "runtime_python_full": "3.11.16 (main, Sep  2 2026, 23:39:52) [GCC 15.3.0]",
+    "runtime_python_major_minor": "3.11"
+  },
+  "environment_mutation_boundary": {
+    "additional_package_installation_permitted_without_amendment": false,
+    "environment_may_be_modified_before_model_implementation": false,
+    "environment_recreation_permitted_without_amendment": false,
+    "package_downgrade_permitted_without_amendment": false,
+    "package_upgrade_permitted_without_amendment": false,
+    "pip_install_permitted_without_amendment": false,
+    "resolved_environment_state_must_remain_fixed_for_evaluator_implementation": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_ENVIRONMENT_STATE_V1",
+  "freeze_parent_commit": "73b529bf89b5fb108f43cb2c1aeaa39fa76b2c0f",
+  "next_gate": "FREEZE_PRE_REVIEW_TRIAGE_EVALUATOR_IMPLEMENTATION_V1_BEFORE_ANY_MODEL_OR_VECTORIZER_FIT",
+  "resolved_state_artifacts": {
+    "channel_interpretation": "The authorized creation used --override-channels with only conda-forge. The resolved explicit specification contains only conda-forge package URLs. The from-history export also lists bioconda from surrounding conda configuration/history and is therefore retained as observed metadata rather than used as package-origin evidence.",
+    "conda_explicit_is_authoritative_resolved_package_specification": true,
+    "conda_explicit_package_origin": "conda-forge",
+    "conda_from_history_is_package_origin_authority": false,
+    "conda_from_history_preserved_as_observed_metadata": true,
+    "directory": "experiments/07_comparative_landscape/pre_review_triage_environment_state_v1",
+    "execution_hashes": {
+      "conda-explicit.txt": "d1d88b51ed4ea51dafbd1cb6d70bdf0a6e2412c2cdfb55bd658c064758deaca7",
+      "conda-from-history.yml": "c6705fccae1612e41694d41e66e13722b720de329759e64141a89af0b125dd81",
+      "conda-list.json": "dec296fbacdd35a17db9035be774930a17b98a2d5e90d048f3387b9011f1524e",
+      "conda-list.txt": "8bf535c087fc75b3532363b40fd35d127362bc361125d371feae29a2db7a3fec",
+      "creation-contract.txt": "d8c1f0531869a4bcfcca086303b122f6e07c0dcc1291c1e322971d047e28e09a",
+      "runtime.json": "0e5af26720d09b004532eaaebbe919883daec78e74766170c09ea583304b6ffd"
+    },
+    "observed_from_history_channels": [
+      "bioconda",
+      "conda-forge"
+    ],
+    "resolved_state_manifest_sha256": "7e7d65dbd02c25aacb16f35ce71c818de638c5b99440099db875208efa8fd5c1"
+  },
+  "schema_version": 1,
+  "scientific_authority": {
+    "blind_validation_content_use_authorized": false,
+    "evaluator_implementation_authorized_by_this_freeze": false,
+    "future_scoring_authorized": false,
+    "hyperparameter_selection_authorized": false,
+    "model_fit_authorized": false,
+    "production_mutation_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized": false
+  },
+  "status": "FROZEN_RESOLVED_ENVIRONMENT_STATE_PRE_MODEL_IMPLEMENTATION",
+  "validation_evidence": {
+    "blind_validation_content_used": false,
+    "candidate_constructors_validated_without_fit": true,
+    "candidate_imports_validated": true,
+    "core_versions_validated": true,
+    "future_scoring_performed": false,
+    "live_environment_byte_matched_captured_state_before_freeze": true,
+    "model_fit_performed": false,
+    "production_mutated": false,
+    "scientific_screening_decisions_made": false,
+    "threshold_selection_performed": false,
+    "vectorizer_fit_performed": false
+  }
+}
