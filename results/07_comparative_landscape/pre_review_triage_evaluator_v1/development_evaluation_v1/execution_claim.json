@@ -1,0 +1,13 @@
+{
+  "authorization_sha256": "42a23c5a0694912c55940805757bc877c36b15592d1ac0b6fca6868543dd2765",
+  "authorized_output_rel": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1",
+  "blind_validation_content_use_authorized": false,
+  "execution_id": "TRIAGE-DEV-EVAL-V1-001",
+  "future_scoring_authorized": false,
+  "implementation_sha256": "bd5520bbbb7bad1bc33cab131d21ce90701815a927076fee159ede3045843a10",
+  "production_mutation_authorized": false,
+  "schema_version": 1,
+  "scientific_screening_decisions_authorized": false,
+  "status": "CLAIMED_BEFORE_FIRST_FIT",
+  "threshold_selection_authorized": false
+}

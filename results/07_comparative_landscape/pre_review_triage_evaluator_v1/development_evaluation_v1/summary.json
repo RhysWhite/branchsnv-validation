@@ -1,0 +1,36 @@
+{
+  "blind_validation_content_used": false,
+  "candidate_count": 3,
+  "development_records": 4190,
+  "final_candidate_aggregates": [
+    {
+      "candidate_id": "logistic_regression_balanced_l2_v1",
+      "macro_mean_ap": 0.6880426563807389,
+      "median_ap": 0.7109827565823919,
+      "minimum_ap": 0.44326554671382257
+    },
+    {
+      "candidate_id": "linear_svc_balanced_l2_v1",
+      "macro_mean_ap": 0.7165093450310815,
+      "median_ap": 0.7101188144666406,
+      "minimum_ap": 0.5286143286143286
+    },
+    {
+      "candidate_id": "complement_nb_v1",
+      "macro_mean_ap": 0.30979572753382134,
+      "median_ap": 0.3134920634920635,
+      "minimum_ap": 0.10310962591664347
+    }
+  ],
+  "final_selected_candidate_id": "linear_svc_balanced_l2_v1",
+  "future_scoring_performed": false,
+  "hard_predictions_generated": false,
+  "negative_records": 4022,
+  "outer_fold_count": 9,
+  "positive_records": 168,
+  "production_mutated": false,
+  "schema_version": 1,
+  "scientific_screening_decisions_made": false,
+  "status": "DEVELOPMENT_EVALUATION_COMPLETE",
+  "threshold_selected": false
+}
