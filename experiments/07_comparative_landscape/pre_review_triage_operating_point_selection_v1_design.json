@@ -1,0 +1,35 @@
+{
+  "criterion_commit": "569cda22b60c49dcf55ab47c5874250f3e4ba9bf",
+  "criterion_design_sha256": "2c6099f1c453467c60aa351ea947903ff71b45c63b53f5f9656a9b7a7b3bcd5e",
+  "curve_artifact": "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1/cross_batch_review_fraction_curve.tsv",
+  "curve_sha256": "e6eeef6d8236c1062126c8d69a40f92c2c71e272840a653b9f14dca4505d4e1b",
+  "next_gate": "FREEZE_FINAL_MODEL_REFIT_AND_SUPPORTED_FUTURE_SCORING_DESIGN_BEFORE_GENERATING_REVIEW_QUEUE",
+  "schema_version": 1,
+  "selected_operating_point": {
+    "automatic_scientific_exclusion_authorized": false,
+    "blind_validation_content_used": false,
+    "candidate_fraction_denominator": 76,
+    "candidate_fraction_numerator": 35,
+    "candidate_review_fraction": "0.46052631578947367",
+    "criterion": "minimum_batch_recall_greater_than_or_equal_to_0.95",
+    "future_scoring_authorized": false,
+    "median_batch_recall": "1",
+    "minimum_batch_recall": "0.95522388059701491",
+    "pooled_development_recall": "0.9821428571428571",
+    "pooled_review_fraction": "0.46133651551312649",
+    "production_mutated": false,
+    "raw_score_threshold_selected": false,
+    "reviewed_record_count_across_development_batches": 1933,
+    "schema_version": 1,
+    "selection_rule": "smallest_exact_candidate_review_fraction_meeting_criterion",
+    "status": "DEVELOPMENT_OPERATING_POINT_SELECTED",
+    "unweighted_mean_batch_precision": "0.084574703874627719",
+    "unweighted_mean_batch_recall": "0.99502487562189046"
+  },
+  "selection_audit": {
+    "curve_rows": 4047,
+    "qualifying_rows": 2184,
+    "smaller_qualifying_fraction_exists": false
+  },
+  "status": "FROZEN_DEVELOPMENT_OPERATING_POINT_SELECTION_V1"
+}

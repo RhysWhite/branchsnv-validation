@@ -1,0 +1,21 @@
+{
+  "automatic_scientific_exclusion_authorized": false,
+  "blind_validation_content_used": false,
+  "candidate_fraction_denominator": 76,
+  "candidate_fraction_numerator": 35,
+  "candidate_review_fraction": "0.46052631578947367",
+  "criterion": "minimum_batch_recall_greater_than_or_equal_to_0.95",
+  "future_scoring_authorized": false,
+  "median_batch_recall": "1",
+  "minimum_batch_recall": "0.95522388059701491",
+  "pooled_development_recall": "0.9821428571428571",
+  "pooled_review_fraction": "0.46133651551312649",
+  "production_mutated": false,
+  "raw_score_threshold_selected": false,
+  "reviewed_record_count_across_development_batches": 1933,
+  "schema_version": 1,
+  "selection_rule": "smallest_exact_candidate_review_fraction_meeting_criterion",
+  "status": "DEVELOPMENT_OPERATING_POINT_SELECTED",
+  "unweighted_mean_batch_precision": "0.084574703874627719",
+  "unweighted_mean_batch_recall": "0.99502487562189046"
+}
