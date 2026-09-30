@@ -1,0 +1,57 @@
+{
+  "blind_validation_content_used": false,
+  "existing_archive_scan": {
+    "distinct_openalex_dois": 1369,
+    "distinct_openalex_pmids": 351,
+    "distinct_openalex_work_ids": 1546,
+    "distinct_pubmed_pmids": 4017,
+    "provider_counts": {
+      "openalex": 1708,
+      "pubmed": 4017
+    },
+    "successful_exact_provider_payloads": 5725
+  },
+  "future_universe_scored": false,
+  "manifest": {
+    "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/input_manifest.tsv",
+    "rows": 12162,
+    "sha256": "345c90522a44f9f548fb164618943cac24fb87f7820d52a9048bcfe7a4eec6cf"
+  },
+  "model_fitted": false,
+  "network_performed": false,
+  "outputs": {
+    "offline_cache_resolution": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_cache_resolution.tsv",
+      "sha256": "72ac4012dc1643b56a9d0f0fd089f3c78fd8d272aca8775447c85105c7a49ed0"
+    },
+    "offline_cached_normalized_text": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_cached_normalized_text.tsv",
+      "sha256": "971cd9df8ea9e945922bbaca4f0747ae014fc20930efd9079dcd3d412cfb63ab"
+    },
+    "offline_network_requirements": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_network_requirements.tsv",
+      "sha256": "19d0c9ce7049c35e10cfbb9e56be8b0c012256d9329a39300f94f5584b8ed25f"
+    }
+  },
+  "resolution": {
+    "cached_usable_text_rows": 14,
+    "network_requirement_rows": 12147,
+    "next_network_route_counts": {
+      "openalex:exact_doi": 34,
+      "openalex:exact_work_id": 3574,
+      "pubmed:exact_pmid_efetch": 8539
+    },
+    "provider_used_counts": {
+      "openalex": 15
+    },
+    "rows": 12162,
+    "status_counts": {
+      "cached_sources_no_usable_abstract": 1,
+      "requires_openalex_lookup": 3608,
+      "requires_pubmed_lookup": 8539,
+      "resolved_cached_openalex": 14
+    }
+  },
+  "runner": "TRIAGE_PRE_REVIEW_TEXT_OFFLINE_RUNNER_V1",
+  "schema_version": 1
+}
