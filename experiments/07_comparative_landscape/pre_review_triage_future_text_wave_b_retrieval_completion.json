@@ -1,0 +1,87 @@
+{
+    "artifact_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_B_RETRIEVAL_COMPLETION_V1",
+    "artifact_trees": {
+        "checkpoints": {
+            "byte_count": 44151,
+            "file_count": 80,
+            "tree_sha256": "6bbe6bf9a2af48d928f08cbc13a34ba7bf02093561807655e1df6f7d6d11648a"
+        },
+        "live_wave_b": {
+            "byte_count": 1153783,
+            "file_count": 367,
+            "tree_sha256": "bcca5b8b1506ad574b508bf1c1fe18b20fdd5a29b46f44db41c6b2fe5d856ec5"
+        },
+        "raw": {
+            "byte_count": 1066265,
+            "file_count": 200,
+            "tree_sha256": "6d9574640bac4780a09a211ce2a50f04cda1dbc13f533ad053c8f0f406351f15"
+        },
+        "transport_evidence": {
+            "byte_count": 39808,
+            "file_count": 80,
+            "tree_sha256": "79edee9aad95c40ebaf2f310cda85ef31494009f7f7c44a30f20bdb2c9dff300"
+        }
+    },
+    "audit": {
+        "checkpoint_ineligible_records": 0,
+        "checkpoint_receipts": 40,
+        "durable_adapter_evidence_reconstructed": 40,
+        "manifest_defect_exceptions": 0,
+        "manifest_rows": 40,
+        "raw_lookup_archives_reverified": 40,
+        "replay_exceptions": 0,
+        "unresolved_faults": 0
+    },
+    "authority": {
+        "authorization_id": "FUTURE-WAVE-B-HUMAN-AUTH-20261001-01",
+        "authorization_sha256": "74f96336da4c72fe34a805a70f96bd3aa0b6a6c77f110a1af1c112796889e67b",
+        "derivation_sha256": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+        "maximum_request_count": 40,
+        "request_manifest_sha256": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11"
+    },
+    "checksum_manifest": {
+        "checksum_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b",
+        "expected_entries": 367,
+        "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_retrieval_checksums.sha256",
+        "path_convention": "live_wave_b_relative",
+        "self_excluded": true,
+        "sha256": "34ec1ac483d423ce528477300cd492c5a22f7da6196a712de50e2aec5c386b82"
+    },
+    "execution": {
+        "authorization_claim_sha256": "8e84b3469c2d350dd7f2a2aa29f5587c8b8614d18419538352d2abe5b7864395",
+        "checkpoint_chain_sha256": "cde30878c017fa0bdd334371acaf0fd28c33873d20da9549c50993e655449444",
+        "completed_request_count": 40,
+        "completion_receipt_sha256": "a688eade4658559c0e34c1d9ab43afa4cee9bc7ff3e9df7f8b59ff44d2295885",
+        "execution_id": "FUTURE-WAVE-B-EXEC-20261001-01",
+        "execution_state_sha256": "52f5c5b61707873653db54dc2c5ab1071f426bf454562a8936c8c5d587ecd9bd",
+        "execution_status": "COMPLETED",
+        "next_request_sequence": 41
+    },
+    "live_outcomes": {
+        "adapter_status_counts": {
+            "verified_success": 40
+        },
+        "provider_identity_status_counts": {
+            "matched": 40
+        },
+        "provider_route_counts": {
+            "exact_doi": 8,
+            "exact_pmid": 1,
+            "exact_work_id": 31
+        },
+        "transport_terminal_status_counts": {
+            "success": 40
+        }
+    },
+    "schema_version": 1,
+    "scientific_boundary": {
+        "blind_validation_scientific_content_inspected": false,
+        "future_scoring_performed": false,
+        "model_fitting_performed": false,
+        "reconciliation_performed": false,
+        "scientific_screening_decisions_created": false,
+        "threshold_selection_performed": false
+    },
+    "source_commit": "f5518f1c85b5e3da202a173b5c0b4e5ed32a2fc1",
+    "status": "VERIFIED_COMPLETED_RETRIEVAL"
+}

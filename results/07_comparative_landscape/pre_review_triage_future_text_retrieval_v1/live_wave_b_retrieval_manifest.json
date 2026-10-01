@@ -1,0 +1,109 @@
+{
+    "artifact_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_B_RETRIEVAL_FREEZE_V1",
+    "artifact_trees": {
+        "checkpoints": {
+            "byte_count": 44151,
+            "file_count": 80,
+            "tree_sha256": "6bbe6bf9a2af48d928f08cbc13a34ba7bf02093561807655e1df6f7d6d11648a"
+        },
+        "live_wave_b": {
+            "byte_count": 1153783,
+            "file_count": 367,
+            "tree_sha256": "bcca5b8b1506ad574b508bf1c1fe18b20fdd5a29b46f44db41c6b2fe5d856ec5"
+        },
+        "raw": {
+            "byte_count": 1066265,
+            "file_count": 200,
+            "tree_sha256": "6d9574640bac4780a09a211ce2a50f04cda1dbc13f533ad053c8f0f406351f15"
+        },
+        "transport_evidence": {
+            "byte_count": 39808,
+            "file_count": 80,
+            "tree_sha256": "79edee9aad95c40ebaf2f310cda85ef31494009f7f7c44a30f20bdb2c9dff300"
+        }
+    },
+    "authority": {
+        "authorization_id": "FUTURE-WAVE-B-HUMAN-AUTH-20261001-01",
+        "authorization_sha256": "74f96336da4c72fe34a805a70f96bd3aa0b6a6c77f110a1af1c112796889e67b",
+        "derivation_sha256": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+        "maximum_request_count": 40,
+        "request_manifest_sha256": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11"
+    },
+    "checksum_manifest": {
+        "checksum_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b",
+        "expected_entries": 367,
+        "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_retrieval_checksums.sha256",
+        "path_convention": "live_wave_b_relative",
+        "self_excluded": true,
+        "sha256": "34ec1ac483d423ce528477300cd492c5a22f7da6196a712de50e2aec5c386b82"
+    },
+    "execution": {
+        "authorization_claim_sha256": "8e84b3469c2d350dd7f2a2aa29f5587c8b8614d18419538352d2abe5b7864395",
+        "checkpoint_chain_sha256": "cde30878c017fa0bdd334371acaf0fd28c33873d20da9549c50993e655449444",
+        "completed_request_count": 40,
+        "completion_receipt_sha256": "a688eade4658559c0e34c1d9ab43afa4cee9bc7ff3e9df7f8b59ff44d2295885",
+        "execution_id": "FUTURE-WAVE-B-EXEC-20261001-01",
+        "execution_state_sha256": "52f5c5b61707873653db54dc2c5ab1071f426bf454562a8936c8c5d587ecd9bd",
+        "execution_status": "COMPLETED",
+        "next_request_sequence": 41
+    },
+    "live_outcomes": {
+        "canonical_adapter_status_counts": {
+            "verified_success": 40
+        },
+        "checkpoint_ineligible_sequences": [],
+        "checkpoint_receipts": 40,
+        "provider_identity_status_counts": {
+            "matched": 40
+        },
+        "raw_lookup_directories": 40,
+        "transport_terminal_status_counts": {
+            "success": 40
+        },
+        "unresolved_fault_sequences": []
+    },
+    "next_gate": "DESIGN_AND_VALIDATE_FUTURE_TEXT_POST_RETRIEVAL_RECONCILIATION_BEFORE_EXECUTION",
+    "partition": {
+        "live_wave_b_rows": 40,
+        "provider_route_counts": {
+            "openalex_exact_doi": 8,
+            "openalex_exact_pmid": 1,
+            "openalex_exact_work_id": 31
+        }
+    },
+    "prefreeze_result_tree": {
+        "byte_count": 452418929,
+        "file_count": 109765,
+        "tree_sha256": "49c557d069a3738305f6187ebca5930a4cf614ea72ba1d0d81a3d495c166fc5e"
+    },
+    "schema_version": 1,
+    "scientific_boundary": {
+        "blind_validation_scientific_content_inspected": false,
+        "future_scoring_performed": false,
+        "model_fitting_performed": false,
+        "reconciliation_performed": false,
+        "scientific_screening_decisions_created": false,
+        "threshold_selection_performed": false
+    },
+    "source_bindings": {
+        "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_B_RETRIEVAL_COMPLETION.md": "676876e1d1d1a1480411649fcc32da590665f9de3c8933ecc9b824f188f0e451",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_execution_v1_design.json": "bb6fe772ccb8d12515d5469a2b790240ffa9da632e87f45187d1e3db73393230",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_guard_v1.py": "60dad0cf516e829e4a33c52d693436662dd40dbae02dc7b67ae830dabc9f8610",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_implementation_v1_design.json": "ce90499de29cede735b34fe40d1bbcaf6496372239221a99db09fba57dab2122",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_live_entrypoint_v1.py": "47c64d12ea4a79724ed3eede9355f3c14cb9e2602c458968622f5861d21ffc48",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_manifest_v1_design.json": "aab3d23f6d7c4b4c155d924730e062d1a9fc14ff57e35a12a9a3df7c03077afd",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_retrieval_completion.json": "245fd3064374c3211bd921f30eae9cd2df0d60f96abcdb92120a74249e02049b",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_runner_core_v1.py": "bf94d9d84d74783fbe05b4414738b332d0ed9bfe8fad8798c09b3775c03df101",
+        "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_transport_evidence_adapter_v1.py": "fff2203b57de35b11fbce2678466196dfcc192599978eedf3e12cf18996271d6",
+        "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f",
+        "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962",
+        "experiments/07_comparative_landscape/test_pre_review_triage_future_text_wave_b_execution_v1.py": "dd8638517d8b7656609814b19c7a2ecd2a3e555d85f62f334262c37385077d26",
+        "experiments/07_comparative_landscape/test_pre_review_triage_future_text_wave_b_live_hostile_v1.py": "666146dc99d2aaf379df8fcb655c65918080d70b372ac5f0b6777bce783919e2",
+        "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d",
+        "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_derivation.tsv": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+        "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_request_manifest.tsv": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11",
+        "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_retrieval_checksums.sha256": "34ec1ac483d423ce528477300cd492c5a22f7da6196a712de50e2aec5c386b82"
+    },
+    "source_commit": "f5518f1c85b5e3da202a173b5c0b4e5ed32a2fc1",
+    "status": "FROZEN_COMPLETED_RETRIEVAL"
+}
