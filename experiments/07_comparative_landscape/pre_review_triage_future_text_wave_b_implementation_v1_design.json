@@ -1,0 +1,101 @@
+{
+  "authorization_gate": {
+    "authorization_created_by_this_freeze": false,
+    "authorization_must_bind_exact_current_git_head": true,
+    "authorization_must_remain_untracked_at_execution": true,
+    "completed_authorization_replay_permitted": false,
+    "explicit_human_authorization_required": true,
+    "network_authorized_by_this_freeze": false,
+    "one_use": true,
+    "same_execution_id_resume_permitted": true,
+    "second_execution_id_with_same_authorization_permitted": false,
+    "wave_a_authorization_reusable": false
+  },
+  "execution_contract": {
+    "ad_hoc_probe_permitted": false,
+    "allowed_routes": [
+      {
+        "frozen_route": "exact_work_id",
+        "identifier_namespace": "openalex",
+        "transport_route": "work_by_openalex_id"
+      },
+      {
+        "frozen_route": "exact_doi",
+        "identifier_namespace": "doi",
+        "transport_route": "work_by_doi"
+      },
+      {
+        "frozen_route": "exact_pmid",
+        "identifier_namespace": "pmid",
+        "transport_route": "work_by_pmid"
+      }
+    ],
+    "automatic_reissue_after_ambiguous_network_intent": false,
+    "cold_start_seconds": 0.5,
+    "concurrency": 1,
+    "credential_values_must_not_be_archived": true,
+    "cross_process_execution_lock_required": true,
+    "crossref_permitted": false,
+    "maximum_request_count": 40,
+    "maximum_requests_per_second": 2,
+    "ordering": "strict ascending request_sequence",
+    "provider": "openalex",
+    "pubmed_provider_permitted": false,
+    "runtime_invariants_rechecked_between_requests": true,
+    "same_execution_id_resume_only": true,
+    "search_or_list_endpoints_permitted": false
+  },
+  "freeze_commit_binding": "The executable authorization boundary is the git commit containing this exact freeze artifact together with the exact implementation and test hashes recorded here. Any later authorization must bind that exact clean current HEAD.",
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_B_IMPLEMENTATION_V1",
+  "freeze_parent_commit": "c410749fec34c726a5a6ce8a76d0ad84df18f2db",
+  "frozen_upstream": {
+    "derivation_sha256": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+    "exact_transport_sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f",
+    "execution_design_sha256": "bb6fe772ccb8d12515d5469a2b790240ffa9da632e87f45187d1e3db73393230",
+    "manifest_design_sha256": "aab3d23f6d7c4b4c155d924730e062d1a9fc14ff57e35a12a9a3df7c03077afd",
+    "normalizer_sha256": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d",
+    "request_manifest_sha256": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11",
+    "transport_policy_sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+  },
+  "implementation_commit": "c410749fec34c726a5a6ce8a76d0ad84df18f2db",
+  "implementation_source_sha256": {
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_guard_v1.py": "60dad0cf516e829e4a33c52d693436662dd40dbae02dc7b67ae830dabc9f8610",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_live_entrypoint_v1.py": "47c64d12ea4a79724ed3eede9355f3c14cb9e2602c458968622f5861d21ffc48",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_runner_core_v1.py": "bf94d9d84d74783fbe05b4414738b332d0ed9bfe8fad8798c09b3775c03df101",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_transport_evidence_adapter_v1.py": "fff2203b57de35b11fbce2678466196dfcc192599978eedf3e12cf18996271d6"
+  },
+  "next_gate": "OBTAIN_SEPARATE_EXPLICIT_ONE_USE_HUMAN_FUTURE_WAVE_B_NETWORK_AUTHORIZATION_BOUND_TO_THE_RESULTING_IMPLEMENTATION_FREEZE_HEAD",
+  "preservation_contract": {
+    "blind_validation_content_used": false,
+    "development_wave_b_sources_byte_identical": true,
+    "future_wave_a_sources_and_archives_byte_identical": true,
+    "low_level_transport_byte_identical": true,
+    "normalizer_byte_identical": true,
+    "production_mutation_permitted": false,
+    "scientific_decision_fields_permitted_in_transport_evidence": false,
+    "transport_policy_byte_identical": true
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_AUTHORIZATION",
+  "test_contract": {
+    "cross_process_lock_tested": true,
+    "different_execution_id_rejected_tested": true,
+    "exact_pmid_missing_identity_fails_closed_tested": true,
+    "exact_pmid_not_found_checkpoint_eligible_tested": true,
+    "exact_pmid_success_identity_tested": true,
+    "exact_pmid_wrong_identity_fails_closed_tested": true,
+    "focused_future_tests": 13,
+    "future_live_hostile_tests": 30,
+    "future_total_tests": 43,
+    "partial_archive_replay_prohibited_tested": true,
+    "real_default_network_executor_blocked_in_tests": true,
+    "required_result": "all tests pass",
+    "runtime_invariant_recheck_tested": true,
+    "same_execution_id_no_reissue_tested": true
+  },
+  "test_source_sha256": {
+    "experiments/07_comparative_landscape/test_pre_review_triage_future_text_wave_b_execution_v1.py": "dd8638517d8b7656609814b19c7a2ecd2a3e555d85f62f334262c37385077d26",
+    "experiments/07_comparative_landscape/test_pre_review_triage_future_text_wave_b_live_hostile_v1.py": "666146dc99d2aaf379df8fcb655c65918080d70b372ac5f0b6777bce783919e2"
+  },
+  "wave_id": "TRIAGE_FUTURE_TEXT_LIVE_WAVE_B"
+}
