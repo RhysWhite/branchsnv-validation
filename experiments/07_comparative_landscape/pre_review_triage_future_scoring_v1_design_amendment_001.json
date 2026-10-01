@@ -1,0 +1,86 @@
+{
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_DESIGN_AMENDMENT_001",
+  "corrected_scoring_contract": {
+    "candidate_constructor_must_match_frozen_development_evaluator": true,
+    "future_output_type": "continuous_score_only",
+    "hard_prediction_output_permitted": false,
+    "operating_point_selected": false,
+    "preprocessing_must_match_frozen_development_evaluator": true,
+    "raw_score_threshold_application_permitted": false,
+    "raw_score_threshold_exists": false,
+    "raw_score_threshold_selection_permitted": false,
+    "review_fraction_selected": false,
+    "score_orientation_must_match_development_evaluator": true,
+    "selected_candidate_family": "linear_svc_balanced_l2_v1",
+    "selected_candidate_family_may_change": false
+  },
+  "design_parent_commit": "1ca9f45403c329efd6fc857886894df1a955ac50",
+  "final_deployment_fit_contract": {
+    "blind_validation_content_may_enter_fit": false,
+    "candidate_family": "linear_svc_balanced_l2_v1",
+    "fit_classifier_once_on_all_frozen_development_records": true,
+    "fit_is_hyperparameter_selection": false,
+    "fit_is_model_selection": false,
+    "fit_is_threshold_selection": false,
+    "fit_vectorizer_once_on_all_frozen_development_records": true,
+    "future_labels_may_enter_fit": false,
+    "future_text_may_enter_fit": false,
+    "model_refit_after_future_scores_are_observed": false,
+    "permitted_only_during_separately_authorized_future_scoring": true,
+    "positive_record_count": 168,
+    "training_population": "complete frozen development normalized-text population",
+    "training_record_count": 4190
+  },
+  "implementation_requirements": [
+    "derive the selected candidate family only from the frozen development-evaluation result",
+    "reuse the frozen development evaluator preprocessing and candidate constructor",
+    "fit exactly one fresh TF-IDF/vectorizer state on all 4,190 frozen development normalized-text records",
+    "fit exactly one linear_svc_balanced_l2_v1 classifier on the same 4,190 development records",
+    "emit continuous scores only for the 11,905 canonical future normalized-text rows",
+    "emit no hard predictions, threshold decisions, calibrated probabilities, or review-fraction decisions",
+    "prove future rows and future/blind labels cannot enter the fit",
+    "prove model family, preprocessing, constructor, and training population cannot drift",
+    "require separate execution authorization after implementation and hostile-test freeze"
+  ],
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_AGAINST_DESIGN_PLUS_AMENDMENT_001_BEFORE_SEPARATE_EXECUTION_AUTHORIZATION",
+  "original_design": {
+    "checksum_manifest_sha256": "f5c3548c370af87c5964a3eff1db590d0800d7b5655bf9076fee0d757d52eaba",
+    "document_sha256": "ffaa0b9a343ce894e4b193a7dcdffc45063cda526f4a3e06b190d47f57b3d23a",
+    "sha256": "9809d5811123062c1580ec44a49c63b54bfcef45d9fe4a4aa1f86f6b6d183a03",
+    "status": "SUPPLEMENTED_BY_AMENDMENT_001"
+  },
+  "reason": {
+    "deployment_model_artifact_already_fitted": false,
+    "development_hard_predictions_generated": false,
+    "development_threshold_output": false,
+    "development_threshold_selected": false,
+    "final_full_development_fit_required_before_future_scoring": true,
+    "selected_candidate_family": "linear_svc_balanced_l2_v1",
+    "threshold_assumption_in_original_design_was_incorrect": true
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION_AMENDMENT",
+  "superseded_original_clauses": {
+    "decision_rule_must_be_frozen_development_rule": "SUPERSEDED: no hard decision rule or threshold was selected during development",
+    "model_fit_permitted": "SUPERSEDED only for the single final deployment fit defined by this amendment; model development/refitting otherwise remains prohibited",
+    "model_must_be_frozen_development_model": "SUPERSEDED: there is a frozen selected model family, not a serialized final deployment fit",
+    "threshold_must_be_frozen_development_threshold": "SUPERSEDED: no development threshold exists"
+  },
+  "unchanged_boundaries": {
+    "blind_validation_content_used": false,
+    "calibration_permitted": false,
+    "candidate_comparison_permitted": false,
+    "feature_selection_permitted": false,
+    "future_labels_read": false,
+    "future_scoring_performed_by_this_amendment": false,
+    "hyperparameter_tuning_permitted": false,
+    "model_family_selection_permitted": false,
+    "network_access_permitted": false,
+    "production_ledger_mutation_permitted": false,
+    "raw_retrieval_archive_mutation_permitted": false,
+    "reconciliation_output_mutation_permitted": false,
+    "scientific_decisions_permitted": false,
+    "scientific_screening_permitted": false,
+    "threshold_selection_permitted": false
+  }
+}
