@@ -90,6 +90,10 @@ OUTPUT_FILENAMES = (
     "reconciliation_outputs.sha256",
 )
 
+CANONICAL_CONFIRMATION = (
+    "WRITE-FROZEN-RECONCILIATION-V1"
+)
+
 NORMALIZED_TEXT_COLUMNS = [
     "retrieval_record_index",
     "screening_entity_id",
@@ -3998,10 +4002,11 @@ def validate_output_destination(
     if (
         output_root
         == RROOT.resolve()
+        and canonical_confirmation
+        != CANONICAL_CONFIRMATION
     ):
         raise ReconciliationError(
-            "Canonical future reconciliation write "
-            "is not authorized before implementation freeze"
+            "Canonical output requires exact confirmation"
         )
 
     for filename in OUTPUT_FILENAMES:
