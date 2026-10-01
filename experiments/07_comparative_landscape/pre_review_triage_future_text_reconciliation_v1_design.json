@@ -1,0 +1,163 @@
+{
+  "architecture": {
+    "focused_test_module": "experiments/07_comparative_landscape/test_pre_review_triage_future_text_reconciliation_v1.py",
+    "future_wave_a_archive_modification_permitted": false,
+    "future_wave_b_archive_modification_permitted": false,
+    "historical_reconciler_modification_permitted": false,
+    "historical_reconciler_role": "semantic_reference_only",
+    "historical_tests_modification_permitted": false,
+    "hostile_test_module": "experiments/07_comparative_landscape/test_pre_review_triage_future_text_reconciliation_hostile_v1.py",
+    "implementation_module": "experiments/07_comparative_landscape/pre_review_triage_future_text_reconciliation_v1.py",
+    "implementation_strategy": "future_specific_module"
+  },
+  "design_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_RECONCILIATION_V1",
+  "design_parent_commit": "1c9abbe08310cb5c914d549e6bf4c41df14befe4",
+  "implementation_validation_requirements": [
+    "verify every source binding before reconciliation",
+    "fail closed if future input cardinality is not 12162",
+    "fail closed if Future Wave A request cardinality is not 12147",
+    "fail closed if Future Wave B derivation cardinality is not 40",
+    "fail closed unless Future Wave B fallback reasons are exactly 38 abstract_absent and 2 verified_not_found",
+    "fail closed unless Future Wave B route counts are exactly 31 exact_work_id, 8 exact_doi and 1 exact_pmid",
+    "fail closed unless all 40 Future Wave B retrieval records remain success, verified_success and matched",
+    "verify every Future Wave B request is joined one-to-one to its derivation row",
+    "verify every Future Wave B fallback maps to the same retrieval_record_index and screening_entity_id as its frozen Wave A request",
+    "reverify Future Wave B raw transport archives before normalization",
+    "reconstruct Future Wave B durable adapter evidence and require byte-identical equality",
+    "use only triage_pre_review_text_normalizer_v1",
+    "preserve historical reconciliation output schemas",
+    "do not place abstract_absent rows in reconciled_normalized_text.tsv",
+    "do not promote title-only rows to model text",
+    "do not treat absence, not-found or retrieval failure as scientific exclusion evidence",
+    "fail closed on duplicate or missing input identities",
+    "fail closed on parser or position gaps before any canonical write",
+    "perform two independent temporary builds",
+    "require those temporary builds to be byte-identical",
+    "derive final abstract-status counts and final output SHA256 values from the temporary builds rather than predeclaring them",
+    "run focused and hostile future-specific reconciliation tests",
+    "preserve all historical development reconciliation files byte-identically",
+    "preserve Future Wave A and Future Wave B retrieval archives byte-identically"
+  ],
+  "known_structural_population": {
+    "future_input_rows": 12162,
+    "future_terminal_offline_rows": 15,
+    "future_wave_a_request_rows": 12147,
+    "future_wave_b_adapter_status_counts": {
+      "verified_success": 40
+    },
+    "future_wave_b_fallback_reason_counts": {
+      "abstract_absent": 38,
+      "verified_not_found": 2
+    },
+    "future_wave_b_fallback_rows": 40,
+    "future_wave_b_identity_status_counts": {
+      "matched": 40
+    },
+    "future_wave_b_primary_provider_counts": {
+      "pubmed": 40
+    },
+    "future_wave_b_route_counts": {
+      "exact_doi": 8,
+      "exact_pmid": 1,
+      "exact_work_id": 31
+    },
+    "future_wave_b_transport_status_counts": {
+      "success": 40
+    }
+  },
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_FUTURE_TEXT_RECONCILIATION_V1_WITH_TWO_INDEPENDENT_TEMPORARY_BUILDS",
+  "output_contract": {
+    "canonical_output_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1",
+    "canonical_production_write_permitted_by_this_design": false,
+    "canonical_write_requires_exact_expected_output_hashes": true,
+    "canonical_write_requires_future_implementation_freeze": true,
+    "historical_column_schemas_preserved": true,
+    "independent_temporary_builds_must_be_byte_identical": true,
+    "outputs": [
+      "reconciled_resolution.tsv",
+      "reconciled_normalized_text.tsv",
+      "reconciliation_summary.json",
+      "reconciliation_outputs.sha256"
+    ],
+    "temporary_build_count_required_before_implementation_freeze": 2,
+    "temporary_builds_must_not_modify_frozen_retrieval_archives": true,
+    "temporary_output_generation_permitted_during_implementation_validation": true
+  },
+  "preimplementation_unknowns": {
+    "final_abstract_absent_total": null,
+    "final_abstract_status_counts": null,
+    "final_normalized_text_row_count": null,
+    "final_output_sha256": null,
+    "final_terminal_source_counts": null,
+    "final_terminal_source_status_counts": null,
+    "final_usable_abstract_total": null,
+    "parser_or_position_gap_count": null,
+    "reason": "Transport success does not establish whether an OpenAlex record contains a usable abstract. These values must be measured only by the frozen normalizer during deterministic temporary reconciliation builds."
+  },
+  "purpose": "Offline deterministic reconciliation of the frozen 12,162-record future pre-review text retrieval cascade after completed Future Wave A and Future Wave B retrieval.",
+  "reconciliation_semantics": {
+    "abstract_absence_is_scientific_exclusion_evidence": false,
+    "abstract_absent_rows_enter_normalized_text": false,
+    "frozen_normalizer_only": true,
+    "historical_fallback_labels_may_only_be_used_after_primary_provider_validation": true,
+    "one_resolution_row_per_input_record": true,
+    "provider_not_found_is_scientific_exclusion_evidence": false,
+    "resolution_lanes": [
+      "offline_cache",
+      "wave_a_primary",
+      "wave_b_fallback"
+    ],
+    "resolution_ordering": "ascending_retrieval_record_index",
+    "resolution_row_count": 12162,
+    "retrieval_failure_is_scientific_exclusion_evidence": false,
+    "title_only_rows_promoted_to_model_text": false,
+    "usable_abstract_rows_enter_normalized_text": true,
+    "wave_b_durable_adapter_evidence_must_match_reconstruction": true,
+    "wave_b_fallback_is_one_to_one": true,
+    "wave_b_fallback_source_reason_values": [
+      "abstract_absent",
+      "verified_not_found"
+    ],
+    "wave_b_success_must_be_reconstructed_from_frozen_raw_archive": true
+  },
+  "safety_boundaries": {
+    "abstract_absence_as_exclusion_evidence_permitted": false,
+    "blind_validation_content_use_permitted": false,
+    "future_scoring_permitted": false,
+    "future_wave_a_mutation_permitted": false,
+    "future_wave_b_mutation_permitted": false,
+    "model_fit_permitted": false,
+    "network_execution_permitted": false,
+    "production_write_permitted": false,
+    "raw_archive_mutation_permitted": false,
+    "scientific_decision_permitted": false,
+    "scientific_label_addition_permitted": false,
+    "threshold_selection_permitted": false
+  },
+  "schema_version": 1,
+  "source_bindings": {
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_a_retrieval_completion.json": "034140d5e6aecc10eb3b1f04f1e6dbc93c857b5cefc9796814345e424cac95ab",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_guard_v1.py": "60dad0cf516e829e4a33c52d693436662dd40dbae02dc7b67ae830dabc9f8610",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_retrieval_completion.json": "245fd3064374c3211bd921f30eae9cd2df0d60f96abcdb92120a74249e02049b",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_transport_evidence_adapter_v1.py": "fff2203b57de35b11fbce2678466196dfcc192599978eedf3e12cf18996271d6",
+    "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f",
+    "experiments/07_comparative_landscape/test_triage_pre_review_text_reconciliation_hostile_v1.py": "b7be01254ee62bf13e35c8805af690b2301567522558efae16a6885cf0d40bd1",
+    "experiments/07_comparative_landscape/test_triage_pre_review_text_reconciliation_v1.py": "fb43dde98b8da8e9964ff672fca598141d70d366357f57755774175e97a95014",
+    "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1.py": "2383ef19b895056d3b66c78019d1cbd62e830bffa034dffb70424c921244ddad",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_amendment_001_design.json": "7c670aba3e85b62e16cf391bf41ba8501fbae7548308fec58b39906b95330360",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_design.json": "a4bad21a4cdafc0e8ad958726e1c694b0a6cab6e568febb71773eedda93eba89",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_implementation.sha256": "f382c47cb2aacc6f7d043e093cb9757f511359821d582f336fec6ba0b53dc5e1",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_implementation_design.json": "c35f7de39af4fe0cabb6fd345c08f0c0ae9eca11141fea0d9e859db9b72c7f94",
+    "results/07_comparative_landscape/metadata_resolution_retrieval/checksums.sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/checksums.sha256": "6d79c99c164c6d5b1db0cfb6168a8fb4211fa02cbf1866737b953767d7756c3c",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/input_manifest.tsv": "345c90522a44f9f548fb164618943cac24fb87f7820d52a9048bcfe7a4eec6cf",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a_request_manifest_amendment_001.tsv": "9c5a1b7cda465f0f4a88fc06c612c979af3093f0cecabbe4d8b42576cac30e73",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_derivation.tsv": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_request_manifest.tsv": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_retrieval_checksums.sha256": "34ec1ac483d423ce528477300cd492c5a22f7da6196a712de50e2aec5c386b82",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_retrieval_manifest.json": "f5e68fd14b5c17ed353ab39270bc3f320e11ed3865dd86d840e81d0c44f18043",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/manifest.json": "021942963bce5afd5ada74ad3f2a097ce0c9f0a7f971eec198a665bb0b8ca106"
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}
