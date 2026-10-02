@@ -1,0 +1,53 @@
+{
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_RESULTS_AMENDMENT_001",
+  "amendment_parent_commit": "40dace8c545cfe2433571f65b789a0a7f72a3c15",
+  "correction": {
+    "canonical_30_file_workspace_identity_remains_required": true,
+    "canonical_tree_sha256_remains_required": true,
+    "canonical_workspace_modified": false,
+    "current_live_future_entity_event_overlap_required_for_static_result_validation": false,
+    "current_live_ledger_row_count_required_for_static_result_validation": false,
+    "current_live_ledger_sha_required_for_static_result_validation": false,
+    "generation_time_event_count_preserved": 2011,
+    "generation_time_future_entity_event_rows_preserved": 0,
+    "generation_time_ledger_evidence_preserved": true,
+    "generation_time_ledger_sha256_preserved": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "independent_result_artifact_integrity_remains_required": true,
+    "original_34_result_freeze_paths_modified": false,
+    "original_result_checksum_closure_remains_required": true
+  },
+  "next_gate": null,
+  "next_gate_note": "The post-workspace human-review protocol remains unresolved. Freeze that protocol separately before scientific review begins.",
+  "original_result_freeze": {
+    "canonical_file_count": 30,
+    "canonical_tree_sha256": "4dc8ede8500339a7cbe70858b842239e56cab29d5e34ada3ef54ffb55d768d6f",
+    "checksum_manifest_sha256": "305510cf32496327ff9637792d5d316072de2bf520666c18165bca43e7271c17",
+    "commit": "40dace8c545cfe2433571f65b789a0a7f72a3c15",
+    "original_result_validator_sha256": "e8d8056ad9cf5b7ef30d23ffcf979cf24469a6bdbda25b4a6467d02f85b0e97f",
+    "result_design_sha256": "c9eb66033589d71607fb69613a3db89bedec470f3f9d07f7aedd1316602643b4",
+    "result_document_sha256": "65898205e952e45566e47ee6cba63ca42b3f8f87b2d4c6c2aeaf72537a7e24f9"
+  },
+  "problem": {
+    "canonical_result_corruption_detected": false,
+    "description": "The original result-freeze validator correctly verified the production ledger at result-freeze time, but encoded the generation-time ledger SHA, row count, and zero future-entity event overlap as continuing live validation requirements. Those requirements conflict with the frozen result document, which explicitly records the ledger identity as historical generation-time evidence and permits later separately authorized append-only scientific work.",
+    "generation_error_detected": false,
+    "scientific_semantics_changed": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_authorized": false,
+    "human_scientific_review_authorized": false,
+    "live_event_authorization_created": false,
+    "production_event_authorized": false,
+    "production_ledger_mutation_authorized": false,
+    "proposal_generation_authorized": false,
+    "scientific_decision_authorized": false
+  },
+  "status": "FROZEN_RESULT_VALIDATION_AMENDMENT_001",
+  "validation_scope": {
+    "reason": "The append-only event ledger is a mutable downstream scientific state. Current-ledger validity belongs to the separately frozen review/proposal/live-transaction gates, not to archival validation of this pre-review workspace result set.",
+    "validates_current_mutable_event_ledger": false,
+    "validates_generation_time_ledger_observation_from_frozen_metadata": true,
+    "validates_historical_result_artifacts": true
+  }
+}
