@@ -1,0 +1,52 @@
+{
+  "authority": {
+    "development_positive_rows": 168,
+    "development_rows": 4190,
+    "final_deployment_fit": true,
+    "future_continuous_scoring": true,
+    "future_coverage_rows": 12162,
+    "future_scoreable_rows": 11905,
+    "one_use": true,
+    "selected_candidate_id": "linear_svc_balanced_l2_v1"
+  },
+  "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_EXECUTION_001",
+  "authorization_sha256": "fea574377efe9a2c6fa8acb38face7da13f133dc0ace889b5c039d2c2131b3dc",
+  "design_amendment_001_checksum_manifest_sha256": "a81a90797ae05db3c8139cdade02069fc722d9abb7f815df2619f39f29e317c2",
+  "design_checksum_manifest_sha256": "f5c3548c370af87c5964a3eff1db590d0800d7b5655bf9076fee0d757d52eaba",
+  "execution_contract": {
+    "authorization_must_validate_before_fit": true,
+    "canonical_output_root": "results/07_comparative_landscape/pre_review_triage_future_scoring_v1",
+    "canonical_output_root_absent_at_authorization": true,
+    "confirmation": "EXECUTE-FROZEN-FUTURE-SCORING-V1",
+    "implementation_must_validate_before_fit": true,
+    "output_root_must_be_absent_before_execution": true,
+    "python_executable": "/home/rwhite/.conda/envs/branchsnv-triage-v1/bin/python"
+  },
+  "explicitly_not_authorized": {
+    "blind_validation_content_use": true,
+    "candidate_selection": true,
+    "future_label_use": true,
+    "hard_prediction_generation": true,
+    "hyperparameter_tuning": true,
+    "network_access": true,
+    "probability_calibration": true,
+    "production_ledger_mutation": true,
+    "review_fraction_selection": true,
+    "scientific_screening_decisions": true,
+    "threshold_selection": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_EXECUTION_AUTHORIZATION",
+  "freeze_parent_commit": "e9bb1f8aaa46f6039180bc2f100c6eeafe86c4cd",
+  "implementation_freeze_sha256": "fc3110e70c0454d69743dd4371e41396644a784fca58d2230152efec01c49684",
+  "next_gate": "EXECUTE_ONCE_FROZEN_PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1",
+  "pre_execution_state": {
+    "blind_validation_content_used": false,
+    "future_output_created": false,
+    "future_scoring_performed": false,
+    "model_fit_performed": false,
+    "threshold_selected": false
+  },
+  "reconciliation_completion_sha256": "0798d80b10c6fa4beb53cf1074bef959283c2cb0ef2e2be998c6ead4bbc048b1",
+  "schema_version": 1,
+  "status": "FROZEN_ONE_USE_AUTHORIZATION_PRE_EXECUTION"
+}
