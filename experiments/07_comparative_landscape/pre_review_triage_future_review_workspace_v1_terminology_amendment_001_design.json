@@ -1,0 +1,68 @@
+{
+  "affected_frozen_paths": {
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_DESIGN.md": "f96cedb1a512603c994aecc4c9192df72a00ad5276227657fc6899319f045edd",
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_AUTHORIZATION.md": "876860555fdd5fef9090b507fa2486befba22250ff5a803baf44a8552c6b0c4d",
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_IMPLEMENTATION.md": "6b253b2721484df166e5676beb207a7a3cdeaef08864545c6fb88b7f2ea0d07f",
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_RESULTS.md": "65898205e952e45566e47ee6cba63ca42b3f8f87b2d4c6c2aeaf72537a7e24f9",
+    "experiments/07_comparative_landscape/pre_review_triage_future_review_workspace_v1_design.json": "b535ee77a065ebe3e2507d359650464557b6639594f9141770e15b9694ea65b3"
+  },
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_TERMINOLOGY_AMENDMENT_001",
+  "amendment_parent_commit": "5acedcdd340523a92dfb626287197a2b177e1aad",
+  "authoritative_carry_forward_source": {
+    "path": "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/prior_carry_forwards.tsv",
+    "prior_anchor_decision": "include_as_anchor",
+    "record_decision": "retain_for_method_assessment",
+    "row_count": 6,
+    "scientific_reassessment_performed": false,
+    "sha256": "f5fcb33af01e3bcaecd8628a1827a5ab9afad708fa0967a64200fe12276be12b"
+  },
+  "downstream_contract": {
+    "existing_human_review_implementation_candidate_changed": false,
+    "existing_human_review_protocol_design_changed": false,
+    "future_documents_must_use_normative_terminology": true,
+    "future_machine_contracts_must_not_introduce_deprecated_machine_key": true,
+    "historical_frozen_files_must_not_be_rewritten": true
+  },
+  "identifier_contract": {
+    "existing_anchor_ids_are_modified": false,
+    "existing_anchor_ids_remain_historical_stable_identifiers": true,
+    "identifier_prefix_is_not_reinterpreted_as_category_membership": true
+  },
+  "legacy_terminology": {
+    "deprecated_category_label": "prior Wave 0 carry-forwards",
+    "deprecated_machine_key": "prior_wave0_carry_forwards",
+    "historical_occurrence_count": 5,
+    "historical_occurrences_are_retained_byte_for_byte": true
+  },
+  "next_gate": "FREEZE_TESTED_PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1_IMPLEMENTATION",
+  "normative_terminology": {
+    "equivalent_descriptive_label": "frozen prior adjudication carry-forwards",
+    "legacy_machine_key_interpretation": "The frozen historical key prior_wave0_carry_forwards means prior_anchor_carry_forwards and does not establish a scientific category named Wave 0.",
+    "preferred_category_label": "prior-anchor carry-forwards",
+    "preferred_machine_key_for_future_contracts": "prior_anchor_carry_forwards"
+  },
+  "purpose": "Correct an unsupported category label for the six frozen prior-adjudication carry-forwards without modifying any previously frozen workspace artifact or scientific result.",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_authorized": false,
+    "human_scientific_review_authorized": false,
+    "live_event_authorization_created": false,
+    "production_event_authorized": false,
+    "production_ledger_mutation_authorized": false,
+    "proposal_generation_authorized": false,
+    "scientific_decision_authorized": false
+  },
+  "scientific_effect": {
+    "candidate_status_changed": false,
+    "carry_forward_count_changed": false,
+    "carry_forward_identity_changed": false,
+    "prior_scientific_decision_changed": false,
+    "production_ledger_changed": false,
+    "queue_order_changed": false,
+    "record_decision_changed": false,
+    "review_universe_changed": false,
+    "scientific_reassessment_performed": false,
+    "workspace_bytes_changed": false
+  },
+  "status": "FROZEN_TERMINOLOGY_AMENDMENT_001"
+}
