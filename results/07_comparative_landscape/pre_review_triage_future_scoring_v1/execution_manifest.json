@@ -1,0 +1,53 @@
+{
+  "blind_validation_boundary": {
+    "blind_validation_content_used": false,
+    "future_labels_used": false,
+    "unblinding_performed": false
+  },
+  "decision_boundary": {
+    "hard_predictions_generated": false,
+    "probability_calibration_performed": false,
+    "review_fraction_selected": false,
+    "threshold_selected": false
+  },
+  "future": {
+    "coverage_rows": 12162,
+    "no_normalized_text_rows": 257,
+    "scored_rows": 11905
+  },
+  "model": {
+    "candidate_id": "linear_svc_balanced_l2_v1",
+    "feature_count": 92151,
+    "future_rows": 11905,
+    "hard_predictions_generated": false,
+    "positive_label": "retain_for_method_assessment",
+    "positive_numeric_class": 1,
+    "probability_calibration_performed": false,
+    "score_orientation": "larger_values_support_retain_for_method_assessment",
+    "score_type": "raw_linear_svc_decision_function",
+    "threshold_selected": false,
+    "training_positive_rows": 168,
+    "training_rows": 4190
+  },
+  "schema_version": 1,
+  "selected_candidate_id": "linear_svc_balanced_l2_v1",
+  "source_hashes": {
+    "development_normalized_text": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "development_outer_scores": "1da5b38902d893a91cb99b7d9965f179717667c42b66ff80f63313ac50251c47",
+    "future_normalized_text": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+    "future_reconciliation_summary": "14b8099cecff8787a3a62efe5c796beebddf8635a66a38588f089435fdd14209",
+    "future_resolution": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7",
+    "implementation_freeze": "fc3110e70c0454d69743dd4371e41396644a784fca58d2230152efec01c49684"
+  },
+  "status": "FUTURE_SCORING_EXECUTED_PRE_UNBLINDING",
+  "training": {
+    "document_join": "title_text + '\\n\\n' + abstract_text",
+    "negative_rows": 4022,
+    "positive_rows": 168,
+    "rows": 4190,
+    "text_fields": [
+      "title_text",
+      "abstract_text"
+    ]
+  }
+}
