@@ -1,0 +1,17 @@
+{
+  "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_001",
+  "blind_validation_content_use_authorized": false,
+  "confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-QUEUE-V1",
+  "design_checksum_manifest_sha256": "319ce18f144b97acc1d6c5b277420bd7b9f66fce0e99b2b8207a657559ea1e26",
+  "expected_priority_scored_rows": 5483,
+  "expected_residual_scored_rows": 6422,
+  "expected_total_human_review_rows": 12162,
+  "expected_unscored_manual_review_rows": 257,
+  "future_label_use_authorized": false,
+  "generation_authorized": true,
+  "one_use": true,
+  "output_root": "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1",
+  "schema_version": 1,
+  "scientific_decision_authorized": false,
+  "status": "AUTHORIZED_ONE_USE"
+}

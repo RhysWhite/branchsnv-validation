@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "one_use": true,
+    "priority_scored_rows": 5483,
+    "queue_generation": true,
+    "residual_scored_rows": 6422,
+    "total_human_review_rows": 12162,
+    "unscored_manual_review_rows": 257
+  },
+  "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_001",
+  "authorization_sha256": "f6b018056fdf4ffb9e7a404dcc08ae1f6993ca8ad73b008be67aa2c503b05018",
+  "execution_contract": {
+    "atomic_generation_required": true,
+    "authorization_identity_must_validate_before_generation": true,
+    "canonical_output_root": "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1",
+    "canonical_output_root_absent_at_authorization": true,
+    "confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-QUEUE-V1",
+    "implementation_identity_must_validate_before_generation": true
+  },
+  "explicitly_not_authorized": {
+    "blind_validation_content_use": true,
+    "cross_lane_priority_selection": true,
+    "future_label_use": true,
+    "hard_prediction_generation": true,
+    "network_access": true,
+    "production_ledger_mutation": true,
+    "raw_score_threshold_selection": true,
+    "scientific_exclusion": true,
+    "scientific_inclusion": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_AUTHORIZATION",
+  "freeze_parent_commit": "9ea56ec4cee7cf84215fc094666e2722f6494bce",
+  "future_scoring_results_checksum_manifest_sha256": "8be5645fb71f557306be11ae132f1d655013d6a6d573beb50380399cad9bc939",
+  "implementation_checksum_manifest_sha256": "f7b3eca45cee5b49e2ee63e4a2ddc778dc1f46291346c0c855ea737e2bd0793d",
+  "next_gate": "EXECUTE_ONCE_FROZEN_PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION",
+  "pre_execution_state": {
+    "blind_validation_content_used": false,
+    "future_labels_used": false,
+    "queue_generated": false,
+    "scientific_decision_made": false
+  },
+  "queue_design_checksum_manifest_sha256": "319ce18f144b97acc1d6c5b277420bd7b9f66fce0e99b2b8207a657559ea1e26",
+  "schema_version": 1,
+  "status": "FROZEN_ONE_USE_GENERATION_AUTHORIZATION_PRE_EXECUTION"
+}
