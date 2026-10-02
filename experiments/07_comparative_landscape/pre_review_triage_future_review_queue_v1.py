@@ -84,7 +84,7 @@ REVIEW_FRACTION_DENOMINATOR = 76
 
 AUTHORIZATION_ID = (
     "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_"
-    "GENERATION_001"
+    "GENERATION_002"
 )
 
 GENERATION_CONFIRMATION = (
@@ -1242,7 +1242,7 @@ def execute_authorized(
         exist_ok=True,
     )
 
-    temporary = Path(
+    staging_parent = Path(
         tempfile.mkdtemp(
             prefix=(
                 ".pre_review_triage_"
@@ -1252,9 +1252,14 @@ def execute_authorized(
         )
     )
 
+    payload = (
+        staging_parent
+        / "payload"
+    )
+
     try:
         write_outputs(
-            temporary,
+            payload,
             priority,
             residual,
             manual,
@@ -1262,7 +1267,7 @@ def execute_authorized(
 
         produced = {
             path.name
-            for path in temporary.iterdir()
+            for path in payload.iterdir()
             if path.is_file()
         }
 
@@ -1279,16 +1284,15 @@ def execute_authorized(
             )
 
         os.replace(
-            temporary,
+            payload,
             OUTPUT_ROOT,
         )
 
-    except Exception:
-        if temporary.exists():
+    finally:
+        if staging_parent.exists():
             shutil.rmtree(
-                temporary
+                staging_parent
             )
-        raise
 
 
 def main() -> None:

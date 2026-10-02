@@ -1,0 +1,29 @@
+{
+  "attempt_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_ATTEMPT_001",
+  "authorization_checksum_manifest_sha256": "b3e248e3e0841e68f0531e868dd40a0430a57eb5429cb8f51222e5845128ff13",
+  "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_001",
+  "authorization_sha256": "f6b018056fdf4ffb9e7a404dcc08ae1f6993ca8ad73b008be67aa2c503b05018",
+  "authorization_state": {
+    "generation_001_consumed_by_attempt": true,
+    "generation_001_reuse_permitted": false,
+    "replacement_authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_002",
+    "replacement_authorization_required": true
+  },
+  "failure": {
+    "cause": "tempfile.mkdtemp created the staging directory and write_outputs immediately attempted root.mkdir(parents=True, exist_ok=False) on that same directory",
+    "exception_type": "FileExistsError",
+    "failure_stage": "write_outputs_staging_root_creation"
+  },
+  "implementation_checksum_manifest_sha256": "f7b3eca45cee5b49e2ee63e4a2ddc778dc1f46291346c0c855ea737e2bd0793d",
+  "post_failure_state": {
+    "blind_validation_content_used": false,
+    "canonical_output_created": false,
+    "future_labels_used": false,
+    "scientific_decision_made": false,
+    "staging_residue_present": false,
+    "tracked_repository_mutated": false
+  },
+  "repository_commit_at_attempt": "5b74ffd36ea63a1b6e44de572c7557c5169ee187",
+  "schema_version": 1,
+  "status": "FAILED_PRE_CANONICAL_OUTPUT"
+}
