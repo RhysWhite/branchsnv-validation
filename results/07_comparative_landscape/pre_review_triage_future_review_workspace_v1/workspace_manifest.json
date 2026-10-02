@@ -1,0 +1,93 @@
+{
+  "artifact_sha256": {
+    "packet_manifest.tsv": "0ca641ac9e669034c3d8fa5cf5464c5e2f0b0ac5821efcfb4607c8938cbc31b1",
+    "packets/manual_001.tsv": "9ce8e5a03468024aa6b66c7fdb6c099a6babf64e1c9a8f587a5eb717156214fd",
+    "packets/priority_001.tsv": "665edd7eb4c00535ce1fb531460faa1e7c8193e6ef86814cad40fa0772435f05",
+    "packets/priority_002.tsv": "99e3140fd63686786348f94243164bf899375acdf144f3b5113d14882673f5a0",
+    "packets/priority_003.tsv": "2d5039e0e232a83546adb4e8bd07aa3d60803c1fa100e5947af5676327a0c6fc",
+    "packets/priority_004.tsv": "1f29578d63aa44b6b1cf5881baeef4a0ae3036d13fcbfad64dc39d54785e8ce0",
+    "packets/priority_005.tsv": "e8c83b1f35199e294abb15e723f6534935358ce596ef2b88cae5c26dcbd99ab9",
+    "packets/priority_006.tsv": "3790a0414844fc2fbf041cbeefd0fb9285b9bd2af94fdc0da2546489056e692e",
+    "packets/priority_007.tsv": "f3bdbef0a41434e0e62517db338823e7bee1dc7e05e4f07a3b2cfac4f5b052c0",
+    "packets/priority_008.tsv": "f29b34326eeda9cea9540f4dd82fa062f0c0c4b71df70abff35866388ebda728",
+    "packets/priority_009.tsv": "3e00cb1d4c847a2ededab2192f1ab2e2ebfb378456cdceb5cca93c34c79decaa",
+    "packets/priority_010.tsv": "3ec4571cad8602fd7bc16c2a6770ba55f2feb18df857db3af734d21fdef2a640",
+    "packets/priority_011.tsv": "ce2d241a5d0a06533b58ce316f78a1094e2c220beb6f0e687eee751803353300",
+    "packets/residual_001.tsv": "97536a71b51e658d5aabc38dbf9002395ac0fb5a9b1e097399d682644580dd7d",
+    "packets/residual_002.tsv": "d916030d911464d870ffde01c0c439b7f6c898c1177e4cb12a9ab5fd5bbe742f",
+    "packets/residual_003.tsv": "9d9b2e8492c8730bcd644d0cb63859832afbf581f2c6f1f5e6b9d85528d93a3a",
+    "packets/residual_004.tsv": "c27ba2ea2ae39a3723ce006c98363369f0d4d6964719b0923155097ed66776a6",
+    "packets/residual_005.tsv": "727a868f1b622eafddf806d9aabf21e44347d7b38a2728c01482d43aa8bb04d0",
+    "packets/residual_006.tsv": "dffaf81b03be3b716e6b10df616d836299e5898f71066f1dc089c373e5af9c79",
+    "packets/residual_007.tsv": "da4c7ffe02ff423a6fe2a81e1e907544f42cdc86bf9767cba18e794316c35ece",
+    "packets/residual_008.tsv": "b1183628ebe500917d6c3363fab1c97cbe6b1070a15b84224b38125648fcbf21",
+    "packets/residual_009.tsv": "042030ef04a93b0987a513c55c58bfa4e985d86cadae4098cf75a5ad6704fb40",
+    "packets/residual_010.tsv": "8089413b2db49669f23c510782bfbeffed42ee46de45cd20613f8f079c0a9f91",
+    "packets/residual_011.tsv": "05469cf53be7c604029e4056592130b53d0f7b8764d69c08664b8f8437cb31dc",
+    "packets/residual_012.tsv": "70f23786c841df6dd4a90ff9a53a2c67ef3266e47a93003237dfb1559cf0ea0a",
+    "packets/residual_013.tsv": "e9e6b1dcd86a8f2a5f08654ec66aebfdadd63379fe347501dbb8595e3294349e",
+    "prior_carry_forwards.tsv": "f5fcb33af01e3bcaecd8628a1827a5ab9afad708fa0967a64200fe12276be12b",
+    "review_work_membership.tsv": "d266a30e601d2609d3f845451e9161ac7e9e5d942137738c124438671f0ee728"
+  },
+  "authoritative_scientific_batch_membership_created": false,
+  "design_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1",
+  "existing_b000xxx_membership_mutated": false,
+  "global_cross_lane_order_defined": false,
+  "manual_vs_scored_priority_defined": false,
+  "maximum_packet_size": 500,
+  "model_information": {
+    "raw_continuous_score_exposed": false,
+    "selected_candidate_id_exposed": false
+  },
+  "packet_numbering": "lane_local",
+  "production_ledger_observation": {
+    "event_count": 2011,
+    "future_entity_event_rows": 0,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "review_lanes": {
+    "manual": {
+      "packet_count": 1,
+      "review_rows": 257
+    },
+    "priority": {
+      "packet_count": 11,
+      "review_rows": 5477
+    },
+    "residual": {
+      "packet_count": 13,
+      "review_rows": 6422
+    }
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_performed": false,
+    "live_event_authorization_created": false,
+    "new_scientific_batch_membership_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "scientific_decisions_present": false
+  },
+  "source_identity": {
+    "frozen_artifacts": {
+      "results/07_comparative_landscape/baseline_scientific_screening_execution/batch_membership.tsv": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+      "results/07_comparative_landscape/baseline_scientific_screening_execution/prior_anchor_carry_forwards.tsv": "5db8663c9dbf0915ea56430caba40bc87d5781ac1704a90f2eb563ca39c259b7",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/priority_scored_queue.tsv": "295868d5bb1812d6d5926abdda782df51149afebf54a35bd7538924d597aba0d",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/queue_manifest.json": "b8dc1f3589a1b96d646f74df57c450de5d514e74cc135542b0454bcb951b4734",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/residual_scored_queue.tsv": "91dcc176d20357ea162ede8a63591a4890419c4190b1754311c76016e4e62c72",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/unscored_manual_review_queue.tsv": "084dd93f02d8cf7a8adcccf08352cef2767ed3325b0a3b903defd6cfd296ee5d",
+      "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/input_manifest.tsv": "345c90522a44f9f548fb164618943cac24fb87f7820d52a9048bcfe7a4eec6cf",
+      "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_normalized_text.tsv": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+      "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_resolution.tsv": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7",
+      "results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58"
+    },
+    "workspace_design_checksum_manifest_sha256": "754288330069b576dff1e68c7c99c6fb57279c4860c3913818984bb6f57cb484"
+  },
+  "status": "FUTURE_REVIEW_WORKSPACE_GENERATED_PRE_REVIEW",
+  "total_packet_count": 25,
+  "universe": {
+    "frozen_triage_rows": 12162,
+    "new_review_work_rows": 12156,
+    "prior_carry_forward_rows": 6
+  }
+}
