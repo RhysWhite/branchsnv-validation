@@ -1,0 +1,126 @@
+{
+  "candidate_file_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_future_scoring_v1.py": "c25325097c4ea2d18e6a1bd2586af8a5fcd26b08fc4c470b476db0410f6d3a13",
+    "experiments/07_comparative_landscape/test_pre_review_triage_future_scoring_hostile_v1.py": "eb30c66c445a2b68681664127135e9f0da1b0ffcf6dbbdc27d0083cc5655ef1e",
+    "experiments/07_comparative_landscape/test_pre_review_triage_future_scoring_v1.py": "f53ba41ba62aca6c70c1408b659afab7a5b8cbcb6199810ecbabd0de947ea807"
+  },
+  "execution_boundary": {
+    "authorization_file": "experiments/07_comparative_landscape/pre_review_triage_future_scoring_v1_execution_authorization.json",
+    "authorization_required_before_fit": true,
+    "blind_validation_content_used": false,
+    "canonical_output_root": "results/07_comparative_landscape/pre_review_triage_future_scoring_v1",
+    "canonical_output_root_must_be_absent": true,
+    "confirmation": "EXECUTE-FROZEN-FUTURE-SCORING-V1",
+    "future_scoring_performed": false,
+    "hard_predictions_generated": false,
+    "model_fit_performed": false,
+    "network_access_performed": false,
+    "scientific_screening_decisions_made": false,
+    "threshold_selection_performed": false
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_IMPLEMENTATION",
+  "freeze_parent_commit": "f878fb6ed95ab11fbd52c66ea4753dd0aeefc969",
+  "future_contract": {
+    "no_normalized_text_rows": 257,
+    "no_text_rows_scored": false,
+    "normalized_text_source": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_normalized_text.tsv",
+    "resolution_rows": 12162,
+    "resolution_source": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_resolution.tsv",
+    "score_order": "ascending_retrieval_record_index",
+    "scoreable_rows": 11905
+  },
+  "model_contract": {
+    "constructors_structurally_identical_to_frozen_evaluator": true,
+    "document": "title_text + '\\n\\n' + abstract_text",
+    "linear_svc": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "dual": true,
+      "loss": "squared_hinge",
+      "max_iter": 10000,
+      "penalty": "l2",
+      "random_state": 0,
+      "tol": 0.0001
+    },
+    "tfidf": {
+      "analyzer": "word",
+      "dtype": "numpy.float64",
+      "lowercase": true,
+      "max_df": 1.0,
+      "max_features": null,
+      "min_df": 2,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "norm": "l2",
+      "smooth_idf": true,
+      "stop_words": null,
+      "strip_accents": "unicode",
+      "sublinear_tf": true,
+      "token_pattern": "(?u)\\b\\w\\w+\\b",
+      "use_idf": true
+    }
+  },
+  "next_gate": "FREEZE_ONE_USE_PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_EXECUTION_AUTHORIZATION",
+  "planned_production_artifacts": [
+    "scored_records.tsv",
+    "coverage.tsv",
+    "execution_manifest.json",
+    "checksums.sha256",
+    "execution_completion.json"
+  ],
+  "runtime_contract": {
+    "fail_closed_before_real_fit": true,
+    "joblib": "1.6.0",
+    "numpy": "1.26.4",
+    "python_executable": "/home/rwhite/.conda/envs/branchsnv-triage-v1/bin/python",
+    "python_major_minor": "3.11",
+    "resolved_state_sha256": "7e7d65dbd02c25aacb16f35ce71c818de638c5b99440099db875208efa8fd5c1",
+    "runtime_json_sha256": "0e5af26720d09b004532eaaebbe919883daec78e74766170c09ea583304b6ffd",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.12.0",
+    "threadpoolctl": "3.7.0"
+  },
+  "schema_version": 1,
+  "selected_candidate": {
+    "candidate_id": "linear_svc_balanced_l2_v1",
+    "hard_predictions": false,
+    "output_type": "continuous_score_only",
+    "positive_label": "retain_for_method_assessment",
+    "positive_numeric_class": 1,
+    "probability_calibration": false,
+    "threshold_selected": false
+  },
+  "source_contract": {
+    "design_amendment_001_checksum_manifest_sha256": "a81a90797ae05db3c8139cdade02069fc722d9abb7f815df2619f39f29e317c2",
+    "design_checksum_manifest_sha256": "f5c3548c370af87c5964a3eff1db590d0800d7b5655bf9076fee0d757d52eaba",
+    "development_normalized_text_sha256": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "frozen_evaluator_sha256": "bd5520bbbb7bad1bc33cab131d21ce90701815a927076fee159ede3045843a10",
+    "future_normalized_text_sha256": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+    "future_reconciliation_summary_sha256": "14b8099cecff8787a3a62efe5c796beebddf8635a66a38588f089435fdd14209",
+    "future_resolution_sha256": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7"
+  },
+  "status": "FROZEN_IMPLEMENTATION_PRE_AUTHORIZATION",
+  "training_contract": {
+    "blind_validation_content_enters_fit": false,
+    "future_labels_enter_fit": false,
+    "future_text_enters_fit": false,
+    "label_source": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/outer_scores.tsv",
+    "negative_rows": 4022,
+    "normalized_text_source": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_normalized_text.tsv",
+    "positive_rows": 168,
+    "rows": 4190,
+    "training_order": "ascending_retrieval_record_index"
+  },
+  "validation_evidence": {
+    "all_tests_passed": true,
+    "constructor_equivalence_passed": true,
+    "exact_runtime_gate_passed": true,
+    "hostile_test_count": 11,
+    "real_fit_performed": false,
+    "real_future_scoring_performed": false,
+    "total_test_count": 21,
+    "unit_test_count": 10
+  }
+}
