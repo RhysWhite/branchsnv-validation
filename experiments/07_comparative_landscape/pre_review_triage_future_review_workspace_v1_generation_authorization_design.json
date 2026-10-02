@@ -1,0 +1,49 @@
+{
+  "authorization": {
+    "authorization_artifact": "experiments/07_comparative_landscape/pre_review_triage_future_review_workspace_v1_generation_authorization.json",
+    "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_001",
+    "authorization_sha256": "42fc9031cf1a684406b591fb976d6bd8cd3f3ac8d433a510f7a29f31fcf003ce",
+    "exact_confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-WORKSPACE-V1",
+    "generation_authorized": true,
+    "one_time_generation_consumed": false,
+    "one_use": true,
+    "rerun_authorized": false
+  },
+  "authorized_generation_contract": {
+    "atomic_generation": true,
+    "frozen_triage_rows": 12162,
+    "manual_packet_count": 1,
+    "manual_review_rows": 257,
+    "maximum_packet_size": 500,
+    "new_review_work_rows": 12156,
+    "output_root": "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1",
+    "output_root_must_be_absent_before_execution": true,
+    "prior_carry_forward_rows": 6,
+    "priority_packet_count": 11,
+    "priority_review_rows": 5477,
+    "residual_packet_count": 13,
+    "residual_review_rows": 6422,
+    "total_packet_count": 25
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_AUTHORIZATION",
+  "freeze_parent_commit": "b6f2c6a6179e77a8931caa433ae01ede36b32ae6",
+  "implementation_binding": {
+    "active_builder_sha256": "b347de8b56325a56b5bb62d000d567c367b75270aed1566bdd907463992c05a0",
+    "implementation_checksum_manifest_sha256": "884c8e45ac89cdcd6631579b00be02cab664b8c644c58aec9c725e4d917e7449",
+    "workspace_design_checksum_manifest_sha256": "754288330069b576dff1e68c7c99c6fb57279c4860c3913818984bb6f57cb484"
+  },
+  "next_gate": "EXECUTE_ONCE_FROZEN_PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_001",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_authorized": false,
+    "cross_lane_priority_inference_authorized": false,
+    "human_scientific_review_authorized": false,
+    "live_scientific_event_authorized": false,
+    "new_scientific_batch_membership_authorized": false,
+    "production_ledger_mutation_authorized": false,
+    "raw_continuous_score_exposure_authorized": false,
+    "scientific_decision_authorized": false,
+    "selected_candidate_id_exposure_authorized": false
+  },
+  "status": "FROZEN_ONE_USE_GENERATION_AUTHORIZATION_PRE_EXECUTION"
+}
