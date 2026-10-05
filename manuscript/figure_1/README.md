@@ -1,8 +1,8 @@
 # Figure 1 — conceptual design of BRANCHSNV
 
-This directory contains the final Figure 1 artwork, the exact Python/Matplotlib script used to generate it, and a plain-English line-by-line walkthrough of the code.
+This directory contains the final Figure 1 artwork, the exact Python/Matplotlib script used to generate it, and documentation of the current figure generator.
 
-The figure is intentionally parsimonious: one branch, one site, two distinct analytical questions, complete retention of equally optimal focal-edge solutions, and the minimum set of safeguards needed to make the branch-level result auditable.
+The figure is intentionally parsimonious: one branch, one site, two distinct analytical questions, complete retention of optimal focal-edge state pairs, and the minimum set of safeguards needed to make the branch-level result auditable.
 
 ## Final figure
 
@@ -10,19 +10,19 @@ The figure is intentionally parsimonious: one branch, one site, two distinct ana
 
 ## Figure legend
 
-**Figure 1. Conceptual design of BRANCHSNV.** **(A)** A single nucleotide site is evaluated on an explicitly rooted phylogeny with a user-defined focal edge identified by its complete descendant set. In the illustrative example, all focal descendants carry G, while G also occurs in a sampled taxon outside the focal clade. **(B)** BRANCHSNV evaluates strict clade exclusivity and focal-edge substitution independently. Because G occurs outside the focal clade, the site is not fixed-exclusive. Under unordered equal-cost Sankoff parsimony, all globally minimum-change reconstructions support A→G on the focal edge, so the focal-edge substitution is classified as unambiguous. **(C)** BRANCHSNV retains all optimal parent-child nucleotide-state pairs on the focal edge. A single changing pair is reported as an unambiguous change; multiple changing pairs as state ambiguity; a mixture of changing and non-changing pairs as placement ambiguity; and exclusively non-changing pairs as no change. BRANCHSNV therefore retains reconstruction uncertainty rather than resolving equal-cost ties arbitrarily. The design safeguards shown below the panels make rooting, branch identity, taxon correspondence, optimal-solution retention, and analysis provenance explicit.
+**Figure 1. BRANCHSNV separates clade exclusivity from focal-edge substitution.** **a,** A single nucleotide site is evaluated on an explicitly rooted phylogeny with a focal edge defined by its exact sampled descendant set. All focal descendants carry G, while G also occurs in a sampled taxon outside the focal clade. **b,** BRANCHSNV evaluates clade exclusivity and focal-edge substitution independently. Because G occurs outside the focal clade, the site is not fixed-exclusive. Under unordered equal-cost Sankoff parsimony, every globally optimal reconstruction supports A→G on the focal edge, so the focal-edge substitution is unambiguous. **c,** BRANCHSNV retains every parent–child nucleotide-state pair attainable on the focal edge across globally optimal reconstructions. A single changing pair is reported as an unambiguous change; multiple changing pairs indicate state ambiguity; a mixture of changing and non-changing pairs indicates placement ambiguity; and exclusively non-changing pairs indicate no change. The safeguards shown below the panels make rooting, branch identity, taxon correspondence, optimal-solution retention and analysis provenance explicit.
 
 ## Directory contents
 
 | File | Purpose | SHA-256 |
 |---|---|---|
-| `Figure_1.pdf` | Vector PDF suitable for manuscript submission and production. | `3120521ba4053aabd08b883dde673c6d95dea3b5d11bffb6136ff4aee74c64ef` |
-| `Figure_1_editable.svg` | Editable vector source. | `afcc11df780919d18370bd320fdb01bb9f637f224ec8a6a8d6d19020ebc28a66` |
-| `Figure_1_preview_600dpi.png` | GitHub/README preview. | `81603ab43a5c67bd0f09e795f7af9afb0438b23dc3e6b2d28774679fe490d006` |
-| `Figure_1_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by the plotting script. | `ab2136c751c565d9b6ef336b9e6dfbb361740e475e91f2ba80f0575234325d4d` |
-| `Figure_1_1000dpi_RGB.tiff` | RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `be66a65a27546dcc7f29b9bce83d32204382176ce57d0113936c74c349ab8918` |
+| `Figure_1.pdf` | Vector PDF suitable for manuscript submission and production. | `69f9fb6af44741e2759ced93198a7bce23beeb80d1fa271106bac8ace6cd3141` |
+| `Figure_1_editable.svg` | Editable vector source. | `406ae542d72b6703ebe065f0fc4e1ba1a282b2a9188ce30cfdc82e458b31f2a8` |
+| `Figure_1_preview_600dpi.png` | GitHub/README preview. | `ce8a152ae97350c48f8303e25e4148cd7f51b158ec480aecefe1b402857e8816` |
+| `Figure_1_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by the plotting script. | `ea7b5692f5d195959bfb1c69d9e5b48c085734eb10806c32b293f1f9aaf20b75` |
+| `Figure_1_1000dpi_RGB.tiff` | RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `2b7604633767dec50bc065d5122c0183c6b9c73ecf61f12caf4ed2ab59f04b0b` |
 | `make_figure_1.py` | Exact script used to generate the final figure files in this directory. | — |
-| `CODE_WALKTHROUGH.md` | Plain-English explanation of the script, line by line. | — |
+| `CODE_WALKTHROUGH.md` | Plain-English explanation of the current figure generator. | — |
 | `requirements.txt` | Python package versions used for the locked render and production conversion. | — |
 
 ## Reproducing the figure
@@ -30,9 +30,9 @@ The figure is intentionally parsimonious: one branch, one site, two distinct ana
 The revised locked render and RGB production conversion used:
 
 ```text
-Python 3.13.15
+Python 3.10.14
 Matplotlib 3.10.8
-Pillow 12.3.0
+Pillow 12.2.0
 ```
 
 From this directory, run:
@@ -47,12 +47,12 @@ The script writes the PDF, SVG, PNG, and RGBA TIFF outputs into the same directo
 
 The final artwork is:
 
-- 6.50 × 5.10 inches (16.5 × 13.0 cm);
-- a single multi-panel figure with capital panel labels;
+- 180 × 135 mm;
+- a single multi-panel figure with lower-case bold panel labels `a`, `b` and `c`;
 - predominantly vector line art;
-- approximately 6–8 pt body text at final size;
-- 0.5–1.5 pt line weights;
-- RGB colour without a red/green pairing;
+- approximately 6–10 pt text at final size;
+- consistent publication-scale line weights;
+- restrained semantic colour encoding on a white background;
 - supplied as vector PDF and editable SVG;
 - supplied as a 1000-dpi LZW-compressed TIFF;
 - supplied as a separate 600-dpi PNG for GitHub preview;
