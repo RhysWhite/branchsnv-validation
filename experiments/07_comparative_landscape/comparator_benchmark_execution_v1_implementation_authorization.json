@@ -1,0 +1,45 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_IMPLEMENTATION_001",
+  "consumed": false,
+  "explicitly_not_authorized": {
+    "benchmark_truth_unblinding_for_tuning": true,
+    "canonical_150_scenario_dataset_generation": true,
+    "canonical_benchmark_execution": true,
+    "environment_or_container_build": true,
+    "networked_install_command_execution": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "third_party_software_execution": true,
+    "third_party_software_installation": true
+  },
+  "implementation_requirements": [
+    "Bind exactly the eight feasibility-qualified workflows and the frozen 150-scenario design.",
+    "Freeze a single master seed and deterministic scenario-seed derivation.",
+    "Implement an independent truth generator without importing or calling BRANCHSNV or comparator algorithms.",
+    "Implement canonical descendant-tip-set edge identifiers.",
+    "Implement truth-blind metric calculations for branch-event and recurrent-site endpoints.",
+    "Implement deterministic canonical-input adapters and tool-output normalization contracts.",
+    "Author but do not execute exact per-method environment/install recipes.",
+    "Pin exact comparator release, commit, source archive hash or container digest where authoritative evidence permits.",
+    "Do not vendor restricted third-party source or binaries.",
+    "Use only noncanonical toy fixtures for unit tests; do not generate the canonical 150 benchmark datasets.",
+    "Do not install or execute any comparator under this authorization."
+  ],
+  "next_gate_after_implementation_freeze": "AUTHORIZE_COMPARATOR_BENCHMARK_ENVIRONMENT_BUILD_AND_SMOKE_TEST_V1",
+  "one_time_implementation_freeze": true,
+  "parent_design_freeze_commit": "1dabd7bd514dbb97b7eea523e4e5f0e45b7e32fb",
+  "rerun_authorized": false,
+  "scope": {
+    "canonical_generator_implementation_authorized": true,
+    "environment_recipe_authoring_authorized": true,
+    "exact_version_and_source_pin_research_authorized": true,
+    "implementation_authorized": true,
+    "input_adapter_implementation_authorized": true,
+    "noncanonical_toy_fixture_generation_authorized": true,
+    "output_adapter_implementation_authorized": true,
+    "static_validation_authorized": true,
+    "truth_blind_metric_engine_implementation_authorized": true,
+    "unit_test_authoring_authorized": true
+  },
+  "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
