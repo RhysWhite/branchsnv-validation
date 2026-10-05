@@ -1,0 +1,196 @@
+{
+  "authority": {
+    "benchmark_execution_authorized": false,
+    "event_ledger_mutation_authorized": false,
+    "production_bridge_authorized": false,
+    "production_proposal_authorized": false
+  },
+  "event_ledger_boundary_evidence": {
+    "archival_validator_permanently_pins_mutable_ledger": false,
+    "sha256_at_freeze": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "freeze_id": "COMPARATIVE_LANDSCAPE_V1_RESULTS",
+  "freeze_parent_commit": "3f1f6c6210561661d6deae8153261f2d62be0f1c",
+  "next_gate": "FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION",
+  "next_gate_note": "Freeze comparator benchmark-feasibility/executability design before installing or executing comparator software. Production bridging remains separately gated.",
+  "production_artifacts": {
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_all_lanes_method_identity_master_v1.tsv": {
+      "bytes": 159915,
+      "sha256": "f45170bd89ed88f136b665ffc7ea5bf2700ca0fdc78ebec0e3866208b6929524"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_approved_review_decisions_v1.tsv": {
+      "bytes": 10146392,
+      "sha256": "00ee9de2d184f4edd735413f6bfdc9a285324e0feba4840f24f1cdcb5b5001e9"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_comparative_landscape_v1.tsv": {
+      "bytes": 145626,
+      "sha256": "d2bfa9d5b44eced6583ae58df074af0d0da04849d8f8ccf51553c9ac20a84808"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_comparative_landscape_v1_manifest.json": {
+      "bytes": 2694,
+      "sha256": "8f229c81838921edcc46d1576d3de86c6ceee9ba00b9974634430507bdba8a09"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_comparative_landscape_v1_summary.md": {
+      "bytes": 1259,
+      "sha256": "7a19e3c7872c45dffa921ab28e2e763559a7d3a5c850eb1103e5544f536ed3cf"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_direct_near_comparators_v1.tsv": {
+      "bytes": 19839,
+      "sha256": "d9cb7454707fe243a6088dba309063fdfcfe3c71cf4d89ae0836a9b7adb70229"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_noncomparators_v1.tsv": {
+      "bytes": 14671,
+      "sha256": "7d24a5fddd8d5734b0af534808d7f9200982449d0ce6f72c5fb246e66761c47d"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_prior_anchor_carry_forwards_v1.tsv": {
+      "bytes": 1602,
+      "sha256": "ea3c268a2b074558b72a040d37e5159a918865eec598b92efe21b7c087eb3f14"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_supporting_methods_v1.tsv": {
+      "bytes": 126169,
+      "sha256": "744155be2b6020ccccb8542f89fad1d33de966b2003d0244a1c46bd391f67885"
+    },
+    "results/07_comparative_landscape/comparative_landscape_v1/checksums.sha256": {
+      "bytes": 1497,
+      "sha256": "96520dd812ca3006cb3432f3dde5af19810f9e2a14a5823a030b6e99df7ee681"
+    }
+  },
+  "review_prerequisites": {
+    "active_review_packets": 25,
+    "active_review_rows": 12156,
+    "archival_validation_requires_live_review_workspace": false,
+    "consolidated_approved_decision_ledger": "results/07_comparative_landscape/comparative_landscape_v1/branchsnv_approved_review_decisions_v1.tsv",
+    "review_packet_and_approval_sha256": {
+      "manual_001": {
+        "approval": "dcb343a4028b9d2add38084ed9e26aa93310b852da2b50fed40edfc7696c2b25",
+        "reviewed": "0dbd3c04ac5ed20350e6e5a695d40fc06167940449d2f58e562742343fe00a01"
+      },
+      "priority_001": {
+        "approval": "db041138598249780ce68fbe6cb3834117be0cd170b6ba04c1602a0edb8289a7",
+        "reviewed": "df28e43ae4e4258522f730e8cbb32fe21a115555566c4f8e972d0548e757a643"
+      },
+      "priority_002": {
+        "approval": "92860f43d07596c3d0ad76fd2dc0daca4b168895070f51bb83ce3e5e33670011",
+        "reviewed": "97d3b262446a7c2cf4bdfba4fa2932810b29f3c15cf3ad52cd47d0e34cf2607e"
+      },
+      "priority_003": {
+        "approval": "dd46c87cdd4ab01e5e141bceff9c3f908930af4502d126e87d566cdb2eca068f",
+        "reviewed": "dcd294dd16e1e2b68108704f18b4fdd8003108becaf507acdc6fbce1337a91c6"
+      },
+      "priority_004": {
+        "approval": "eaddda380661af6ce810a1521b43b7834d407dd7e8242752e471efa797045aa3",
+        "reviewed": "931ce59c2266b333faf28fad92a843c47e368269ae247fb4ef6941dac82125b4"
+      },
+      "priority_005": {
+        "approval": "22e205294e2184e9545f2d220ff0ee61e4d52aeea9e10538723ed07c021f493a",
+        "reviewed": "fd74ad6194ab55eb6aef2faeac3881e29789640d923fab4dba2db94d27bf1832"
+      },
+      "priority_006": {
+        "approval": "f09ae88d942f75b5aabd1eaa3dc258068d2b8f0284dbe9650dcb489c7d5276cb",
+        "reviewed": "dc880a8672feb6caeb9f5309fccf9d832d0fd06f7f5d8bf65567aebae7fdddcb"
+      },
+      "priority_007": {
+        "approval": "7f9e9823e1a30bc5ad183fc31a616586e24bcb2aaf4855f8cf1815b112d03a5b",
+        "reviewed": "9a8b3579ccc4fae0a6ace0f794d3160e4af7b80273a64a5fc0cb505c531d08ed"
+      },
+      "priority_008": {
+        "approval": "6839f9f55a007d4cd0ad8cddeda219df96180911985e65e209275e861d790202",
+        "reviewed": "706bf13da15026888a4021b3e6db993163c3f7ad577408337ac16d6a8c604c06"
+      },
+      "priority_009": {
+        "approval": "f527d08c9c798aec010b21a9f19caca5020ab204411b28f4f3d6b14103544b1d",
+        "reviewed": "ea8fbfcc2270f815c061b21864b0c30ad8058bd03c29a012693ad113029b612b"
+      },
+      "priority_010": {
+        "approval": "49d79b111a496fe2caf3c1336de090c4246ddb9a4643bc7cfc587136f537bae8",
+        "reviewed": "b0e7f09e41584d76a48be28e6ce59d56d35dbe1d041718ba21ae72b4cd43b0c0"
+      },
+      "priority_011": {
+        "approval": "d2b53ae5286622fe3a1de7bb1260a2677b52fb052094078c4de5da89149b284c",
+        "reviewed": "ce1e36ba970ab62fa231da7ff3da5b87e8e78ef8a30ccc30ffe3ee5b3e8af1ca"
+      },
+      "residual_001": {
+        "approval": "f9b9f185a468a601dddc6d3d81ca974194d05e2d623a6986b3eab9463ee75c31",
+        "reviewed": "e03491feb95dcc71f7ec6da32a125e4ae5a3f45caa005368ab00dfe7b8fcacb8"
+      },
+      "residual_002": {
+        "approval": "09bb4ba5e61468c8e2c4b485a1f83ead361c27d8877feb3b938c5d7f2be71858",
+        "reviewed": "06b1502d4f22a9f5618b695e94648f27c782a3f6fb29192243cd80c534fd1ff4"
+      },
+      "residual_003": {
+        "approval": "fd5a04dc37d5f76ba6f718b77e6ed985a689e939fbb4b040be3564fdb5fc26e8",
+        "reviewed": "8c49c084cffb597f79f9922eafe7306c6af9eb41474bede0596dc35ca37cbc01"
+      },
+      "residual_004": {
+        "approval": "5910d1c1601eb2c807a8ed15b92d35dce3723c55450d4ebe86519af4b1aebbba",
+        "reviewed": "e89d935a9f5c239aff64c9099c5e7c515ac188574d54435d7e49b7f4b61cd25e"
+      },
+      "residual_005": {
+        "approval": "85245c9ac67ce49b50f8c5031b4bf0ae92dc3107a376118a7c0283b7cd4208ef",
+        "reviewed": "6bdd932ed5762ed0546fb99b5f11d65d41a15edbe831ad8b0bbf729531a563a3"
+      },
+      "residual_006": {
+        "approval": "89a4f4e9bf10acd2d00c0ccf01698a9ae456e17db7c3367eea01e618233a37a1",
+        "reviewed": "9fd3fa1d47e9cf33b641a513fa2faedaf9d0df1292de3c868713748200551777"
+      },
+      "residual_007": {
+        "approval": "56e097e4ae2388aace8df2178377c188a7b15fe7b5b4d62ed61c657f9c070866",
+        "reviewed": "dc59ef9011e48376758ec36bb62db4c5bc05e2bded65ae95a5dd2d0e1ece2feb"
+      },
+      "residual_008": {
+        "approval": "91e0e613aa2a57b4ce1e20b25d8fa138d45bd1891ee39c959837c0560a2d97ad",
+        "reviewed": "4e4ea33f00fb79b4e62f6d0310357e2526f46c3eab978cc2db5a742b03fe4c64"
+      },
+      "residual_009": {
+        "approval": "4cd32e01446b9bd0ea434b2e3fcd819c11f556634faa9ca89534bf214386b114",
+        "reviewed": "f308f158a99d39ae696d42cf7fac4fdd754ed37a3dd8432d0fdd42c7ee4ba471"
+      },
+      "residual_010": {
+        "approval": "930d9001ed3f755a75fa9aabc21996d3829f1699b83cf613948586a2d3e8cff3",
+        "reviewed": "1d89cc9c956cff9011822320acd9d3d5a58908807034b42580d83543d8304b49"
+      },
+      "residual_011": {
+        "approval": "f9496f014d73b6d2fcc0136b7b9af90340b9ac1ff98b5602a3770b914155a79b",
+        "reviewed": "1cfef04a0e068dd3934b17d62cc3a3b3df941a2d1a4ce08b49f0b182d352633a"
+      },
+      "residual_012": {
+        "approval": "df07c406bb4faf4985f37f9b31f72230a5dc74c7d539ad222f684ad797450e35",
+        "reviewed": "2b1299119526794d414605ca65c637c76bdc683e5c0ab6cab8f5b5511fd464f6"
+      },
+      "residual_013": {
+        "approval": "f393a00a3298f3bfb32ca3b19c15de90035d85ff82f9cbd960eb53817657d849",
+        "reviewed": "d89586090261899559a46bc8bfd5eab7228d4b88670c0abf13dfdd713bb26202"
+      }
+    }
+  },
+  "role_vocabulary": [
+    "branch_change_reconstruction",
+    "clade_lineage_marker_discovery",
+    "general_phylogenetic_parsimony_infrastructure",
+    "homoplasy_recurrent_state_analysis",
+    "marker_deployment_genotyping",
+    "upstream_variant_recombination_phylogeny_workflows"
+  ],
+  "scientific_result": {
+    "direct": 3,
+    "direct_set": [
+      "SNPPar",
+      "SubRecon",
+      "TreeTime"
+    ],
+    "excluded_review_rows": 7036,
+    "included_landscape_identities": 218,
+    "master_distinct_identities": 247,
+    "near_direct": 26,
+    "near_direct_prior_anchors": [
+      "FastML",
+      "PAML",
+      "PastML"
+    ],
+    "not_comparator": 29,
+    "prior_anchor_carry_forwards": 6,
+    "retained_review_rows": 5120,
+    "supporting_relevant": 189
+  },
+  "status": "FROZEN_COMPARATIVE_LANDSCAPE_V1_RESULTS"
+}
