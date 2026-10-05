@@ -1,0 +1,496 @@
+#!/usr/bin/env python3
+"""Deterministic benchmark adapters and output normalizers.
+
+These functions do not invoke comparator software.
+"""
+from __future__ import annotations
+
+import csv
+from hashlib import sha256
+import io
+from pathlib import Path
+import re
+from typing import Iterable
+
+DNA = set("ACGT")
+
+
+def read_fasta(path: Path) -> dict[str, str]:
+    records: dict[str, list[str]] = {}
+    current = None
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if line.startswith(">"):
+            current = line[1:].split()[0]
+            if current in records:
+                raise ValueError(f"duplicate FASTA id: {current}")
+            records[current] = []
+        elif current is None:
+            raise ValueError("FASTA sequence before header")
+        else:
+            records[current].append(line)
+    return {k: "".join(v).upper() for k, v in records.items()}
+
+
+def fasta_text(records: dict[str, str], width: int = 80) -> str:
+    parts = []
+    for name in sorted(records):
+        seq = records[name]
+        parts.append(f">{name}")
+        parts.extend(seq[i:i+width] for i in range(0, len(seq), width))
+    return "\n".join(parts) + "\n"
+
+
+def variable_positions(root_sequence: str, sequences: dict[str, str]) -> list[int]:
+    lengths = {len(root_sequence), *(len(x) for x in sequences.values())}
+    if len(lengths) != 1:
+        raise ValueError("sequence lengths differ")
+    out = []
+    for i, root_base in enumerate(root_sequence, start=1):
+        states = {seq[i - 1] for seq in sequences.values() if seq[i - 1] in DNA}
+        if any(s != root_base for s in states):
+            out.append(i)
+    return out
+
+
+def pastml_table_text(
+    observed_sequences: dict[str, str],
+    positions: Iterable[int],
+) -> str:
+    positions = list(positions)
+    out = io.StringIO(newline="")
+    fields = ["id"] + [f"site_{p}" for p in positions]
+    w = csv.DictWriter(out, fieldnames=fields, delimiter="\t", lineterminator="\n")
+    w.writeheader()
+    for tip in sorted(observed_sequences):
+        seq = observed_sequences[tip]
+        row = {"id": tip}
+        for p in positions:
+            base = seq[p - 1]
+            row[f"site_{p}"] = "" if base not in DNA else base
+        w.writerow(row)
+    return out.getvalue()
+
+
+def snppar_mfasta_text(
+    observed_sequences: dict[str, str],
+    positions: Iterable[int],
+) -> str:
+    positions = list(positions)
+    projected = {}
+    for tip, seq in observed_sequences.items():
+        projected[tip] = "".join(
+            seq[p - 1] if seq[p - 1] in DNA else "-"
+            for p in positions
+        )
+    return fasta_text(projected)
+
+
+def positions_text(positions: Iterable[int]) -> str:
+    return "".join(f"{p}\n" for p in positions)
+
+
+def minimal_genbank_text(root_sequence: str, locus: str = "BENCHREF") -> str:
+    seq = root_sequence.lower()
+    lines = [
+        f"LOCUS       {locus:<16}{len(seq):>11} bp    DNA     linear   BCT 01-JAN-2000",
+        "DEFINITION  Synthetic benchmark reference.",
+        f"ACCESSION   {locus}",
+        f"VERSION     {locus}.1",
+        "FEATURES             Location/Qualifiers",
+        f"     source          1..{len(seq)}",
+        "                     /organism=\"synthetic construct\"",
+        "ORIGIN",
+    ]
+    for i in range(0, len(seq), 60):
+        chunk = seq[i:i+60]
+        groups = " ".join(chunk[j:j+10] for j in range(0, len(chunk), 10))
+        lines.append(f"{i+1:>9} {groups}")
+    lines.append("//")
+    return "\n".join(lines) + "\n"
+
+
+def paml_phylip_text(observed_sequences: dict[str, str]) -> str:
+    names = sorted(observed_sequences)
+    length = len(observed_sequences[names[0]])
+    if any(len(observed_sequences[x]) != length for x in names):
+        raise ValueError("PAML sequence lengths differ")
+    # PAML accepts sequential format with names separated by whitespace.
+    lines = [f"{len(names)} {length}"]
+    for name in names:
+        seq = observed_sequences[name].replace("N", "?")
+        lines.append(f"{name}  {seq}")
+    return "\n".join(lines) + "\n"
+
+
+def paml_baseml_ctl_text(seqfile: str, treefile: str, outfile: str) -> str:
+    # JC69, fixed input branch lengths, constant site rate, ancestral reconstruction.
+    return f"""seqfile = {seqfile}
+treefile = {treefile}
+outfile = {outfile}
+noisy = 0
+verbose = 1
+runmode = 0
+model = 0
+Mgene = 0
+clock = 0
+fix_kappa = 1
+kappa = 1
+fix_alpha = 1
+alpha = 0
+Malpha = 0
+ncatG = 4
+nparK = 0
+nhomo = 0
+getSE = 0
+RateAncestor = 1
+Small_Diff = 1e-8
+cleandata = 0
+fix_blength = 2
+method = 0
+"""
+
+
+def arpip_config_text(
+    alignment_path: str,
+    tree_path: str,
+    out_dir: str,
+    seed: int,
+) -> str:
+    # lambda/mu are taken from the official nucleotide example and are not truth-tuned.
+    return f"""analysis_name=BRANCHSNV_BENCH
+alphabet=DNA
+input.sequence.file={alignment_path}
+input.sequence.sites_to_use=all
+init.tree=user
+input.tree.file={tree_path}
+model=PIP(model=JC69,lambda=10,mu=0.01)
+opt.seed={seed}
+opt.likelihood=0
+opt.pip_param_estimate=0
+opt.tree.with_ans_node_names=1
+rate_distribution=Constant
+output.msa.file={out_dir}/msa.fasta
+output.tree.file={out_dir}/tree.nwk
+output.ancestral.file={out_dir}/anc.fasta
+output.node_rel.file={out_dir}/node_rel.txt
+output.mlindelpoints.file={out_dir}/mlindelpoints.txt
+"""
+
+
+def poutine_dummy_phenotype_text(tips: Iterable[str]) -> str:
+    # POUTINE's scored endpoint here is genotype homoplasy count, not association.
+    # A deterministic balanced dummy phenotype prevents phenotype choice from
+    # becoming an analysis degree of freedom.
+    lines = []
+    for i, tip in enumerate(sorted(tips)):
+        lines.append(f"{tip}\t{i % 2}")
+    return "\n".join(lines) + "\n"
+
+
+def poutine_variant_fasta_text(
+    observed_sequences: dict[str, str],
+    positions: Iterable[int],
+) -> str:
+    positions = list(positions)
+    projected = {}
+    for tip, seq in observed_sequences.items():
+        projected[tip] = "".join(seq[p - 1] for p in positions)
+    return fasta_text(projected)
+
+
+# ---------- lightweight tree parser for output normalization ----------
+
+class _Node:
+    def __init__(self, label: str = ""):
+        self.label = label
+        self.children: list["_Node"] = []
+
+
+def _strip_newick_comments(text: str) -> str:
+    return re.sub(r"\[[^\]]*\]", "", text)
+
+
+def extract_newick(text: str) -> str:
+    text = text.strip()
+    if text.lower().startswith("#nexus"):
+        matches = re.findall(r"(?im)^\s*tree\s+[^=]+=\s*(.+?;)\s*$", text)
+        if not matches:
+            raise ValueError("no tree statement in NEXUS")
+        text = matches[-1]
+        text = re.sub(r"^\s*\[&R\]\s*", "", text)
+    start = text.find("(")
+    end = text.rfind(";")
+    if start < 0 or end < start:
+        raise ValueError("cannot locate Newick tree")
+    return _strip_newick_comments(text[start:end+1])
+
+
+def parse_newick(text: str) -> _Node:
+    s = extract_newick(text)
+    i = 0
+    auto = [0]
+
+    def skip_ws():
+        nonlocal i
+        while i < len(s) and s[i].isspace():
+            i += 1
+
+    def read_label() -> str:
+        nonlocal i
+        skip_ws()
+        start = i
+        while i < len(s) and s[i] not in ",():;":
+            i += 1
+        return s[start:i].strip()
+
+    def skip_length():
+        nonlocal i
+        skip_ws()
+        if i < len(s) and s[i] == ":":
+            i += 1
+            while i < len(s) and s[i] not in ",();":
+                i += 1
+
+    def parse_node() -> _Node:
+        nonlocal i
+        skip_ws()
+        if s[i] == "(":
+            i += 1
+            node = _Node()
+            node.children.append(parse_node())
+            skip_ws()
+            while i < len(s) and s[i] == ",":
+                i += 1
+                node.children.append(parse_node())
+                skip_ws()
+            if i >= len(s) or s[i] != ")":
+                raise ValueError("unbalanced Newick")
+            i += 1
+            label = read_label()
+            if not label:
+                auto[0] += 1
+                label = f"__AUTO_INTERNAL_{auto[0]:04d}"
+            node.label = label
+            skip_length()
+            return node
+        label = read_label()
+        if not label:
+            raise ValueError("empty tip label")
+        node = _Node(label)
+        skip_length()
+        return node
+
+    root = parse_node()
+    skip_ws()
+    if i >= len(s) or s[i] != ";":
+        raise ValueError("trailing Newick content")
+    return root
+
+
+def node_descendant_tips(newick_text: str) -> dict[str, tuple[str, ...]]:
+    root = parse_newick(newick_text)
+    out: dict[str, tuple[str, ...]] = {}
+
+    def visit(node: _Node) -> tuple[str, ...]:
+        if not node.children:
+            tips = (node.label,)
+        else:
+            tips = tuple(sorted(x for c in node.children for x in visit(c)))
+        if node.label in out:
+            raise ValueError(f"duplicate node label: {node.label}")
+        out[node.label] = tips
+        return tips
+
+    visit(root)
+    return out
+
+
+def canonical_edge_ids_by_node(newick_text: str) -> dict[str, str]:
+    root = parse_newick(newick_text)
+    desc = node_descendant_tips(newick_text)
+    mapping = {}
+
+    def walk(node: _Node, is_root: bool = False):
+        if not is_root:
+            material = "\n".join(desc[node.label]).encode("utf-8")
+            mapping[node.label] = sha256(material).hexdigest()
+        for child in node.children:
+            walk(child, False)
+
+    walk(root, True)
+    return mapping
+
+
+def parent_by_node(newick_text: str) -> dict[str, str]:
+    root = parse_newick(newick_text)
+    out = {}
+
+    def walk(node: _Node):
+        for child in node.children:
+            out[child.label] = node.label
+            walk(child)
+
+    walk(root)
+    return out
+
+
+def events_from_node_sequences(
+    newick_text: str,
+    node_sequences: dict[str, str],
+    *,
+    method: str,
+    scenario_id: str,
+) -> list[dict[str, str]]:
+    parents = parent_by_node(newick_text)
+    edge_map = canonical_edge_ids_by_node(newick_text)
+    events = []
+    for child, parent in parents.items():
+        if child not in node_sequences or parent not in node_sequences:
+            raise ValueError(f"missing reconstructed sequence for edge {parent}->{child}")
+        anc, der = node_sequences[parent], node_sequences[child]
+        if len(anc) != len(der):
+            raise ValueError("ancestral sequence lengths differ")
+        for idx, (a, d) in enumerate(zip(anc, der), start=1):
+            if a in DNA and d in DNA and a != d:
+                events.append({
+                    "scenario_id": scenario_id,
+                    "method": method,
+                    "edge_id": edge_map[child],
+                    "position": str(idx),
+                    "ancestral_state": a,
+                    "derived_state": d,
+                })
+    return events
+
+
+def parse_homoplasyfinder_report(text: str) -> list[dict[str, str]]:
+    lines = [x for x in text.splitlines() if x.strip()]
+    if not lines:
+        return []
+    dialect = "\t" if "\t" in lines[0] else ","
+    rd = csv.DictReader(io.StringIO("\n".join(lines)), delimiter=dialect)
+    fields = {x.lower().replace("_", "").replace(" ", ""): x for x in (rd.fieldnames or [])}
+    pos_field = fields.get("position") or fields.get("site") or fields.get("alignmentposition")
+    ci_field = fields.get("consistencyindex") or fields.get("consistency")
+    if not pos_field:
+        raise ValueError("HomoplasyFinder report lacks position field")
+    out = []
+    for row in rd:
+        if ci_field:
+            try:
+                if float(row[ci_field]) >= 1.0:
+                    continue
+            except (TypeError, ValueError):
+                pass
+        out.append({"position": str(int(float(row[pos_field]))), "reported_recurrence_count_if_available": ""})
+    return out
+
+
+def parse_poutine_result(text: str) -> list[dict[str, str]]:
+    lines = [x for x in text.splitlines() if x.strip() and not x.startswith("#")]
+    if not lines:
+        return []
+    rd = csv.DictReader(io.StringIO("\n".join(lines)), delimiter="\t")
+    needed = {"physical_pos", "a1_count", "a2_count"}
+    if not needed.issubset(set(rd.fieldnames or [])):
+        raise ValueError("POUTINE result lacks required columns")
+    out = []
+    for row in rd:
+        count = int(float(row["a1_count"])) + int(float(row["a2_count"]))
+        if count >= 2:
+            out.append({
+                "position": str(int(float(row["physical_pos"]))),
+                "reported_recurrence_count_if_available": str(count),
+            })
+    return out
+
+
+def parse_snppar_mutation_events(
+    text: str,
+    output_tree_newick: str,
+    *,
+    scenario_id: str,
+) -> list[dict[str, str]]:
+    rd = csv.DictReader(io.StringIO(text), delimiter="\t")
+    required = {"Position", "Ancestor_Node", "Derived_Node", "Ancestor_Call", "Derived_Call"}
+    if not required.issubset(set(rd.fieldnames or [])):
+        raise ValueError("SNPPar mutation table lacks required columns")
+    edge_map = canonical_edge_ids_by_node(output_tree_newick)
+    out = []
+    for row in rd:
+        child = row["Derived_Node"]
+        if child not in edge_map:
+            raise ValueError(f"SNPPar derived node not found in tree: {child}")
+        a, d = row["Ancestor_Call"].upper(), row["Derived_Call"].upper()
+        if a in DNA and d in DNA and a != d:
+            out.append({
+                "scenario_id": scenario_id,
+                "method": "SNPPar",
+                "edge_id": edge_map[child],
+                "position": str(int(float(row["Position"]))),
+                "ancestral_state": a,
+                "derived_state": d,
+            })
+    return out
+
+
+def parse_paml_rst_sequences(text: str) -> dict[str, str]:
+    # PAML rst contains a "List of extant and reconstructed sequences" block.
+    marker = "List of extant and reconstructed sequences"
+    if marker not in text:
+        raise ValueError("PAML rst lacks reconstructed-sequence block")
+    block = text.split(marker, 1)[1]
+    stop_markers = [
+        "Prob of best state at each node, listed by site",
+        "Posterior probabilities",
+        "Overall accuracy",
+    ]
+    for marker2 in stop_markers:
+        if marker2 in block:
+            block = block.split(marker2, 1)[0]
+
+    out = {}
+    for raw in block.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        m = re.match(r"(?:(node\s*#\s*\d+)|([A-Za-z0-9_.:-]+))\s+([ACGTUN?\s]+)$", line, re.I)
+        if not m:
+            continue
+        label = m.group(1) or m.group(2)
+        label = re.sub(r"\s+", "", label)
+        if label.lower().startswith("node#"):
+            label = "node#" + label.split("#", 1)[1]
+        seq = re.sub(r"\s+", "", m.group(3)).replace("U", "T").replace("?", "N").upper()
+        if seq and set(seq) <= set("ACGTN"):
+            out[label] = seq
+    if not out:
+        raise ValueError("no PAML sequences parsed")
+    return out
+
+
+def parse_tabular_node_states(
+    text: str,
+    site_columns: Iterable[int],
+) -> dict[str, str]:
+    """Parse generic tabular node-state output (used by PastML wrapper contract).
+
+    First column is node id; columns are named site_<1-based-position>.
+    Returned sequences are sparse strings encoded as dict-like ordered values,
+    represented here as concatenated states in `site_columns` order.
+    """
+    site_columns = list(site_columns)
+    rd = csv.DictReader(io.StringIO(text), delimiter="\t")
+    if not rd.fieldnames:
+        raise ValueError("empty state table")
+    node_field = rd.fieldnames[0]
+    needed = [f"site_{p}" for p in site_columns]
+    if not set(needed).issubset(rd.fieldnames):
+        raise ValueError("state table missing site columns")
+    out = {}
+    for row in rd:
+        out[row[node_field]] = "".join((row[c] or "N").upper() for c in needed)
+    return out

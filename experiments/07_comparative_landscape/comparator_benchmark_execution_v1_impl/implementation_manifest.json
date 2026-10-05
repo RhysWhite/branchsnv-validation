@@ -1,0 +1,56 @@
+{
+  "artifact_hashes": {
+    "IMPLEMENTATION.md": "d9faee06aaebfe5ace4cb0564bbb7761308f236bf55468550c9d2f6167d8fbac",
+    "adapters.py": "b5b6dae15008d403d8e408ea44220651b390c12f24a3902dfb7c5312daa01b16",
+    "environment_recipes.json": "743af4effea96e8afbba6be87b9796ee89471f024789c60fc74487d4ad6f9921",
+    "generator.py": "229ed49c541023d6d439967ca184dd82430a4b3592d42657131fac08c9f3f560",
+    "metrics.py": "b6d3ca91702e79a8a1b2dc36591616fa1519f59bd342a005e9cf646c8e8475de",
+    "source_pins.tsv": "b1f5d81a33ac407e9cdf3d15dfa6bcd6e45c676808e3f5232bab9d9c1dcf1365",
+    "toy_validation.py": "646cd346931ccbe8f988c5ee17ffb4302fa5e2cf2c8d84cd1037621ae46ed3eb"
+  },
+  "authorization": {
+    "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_IMPLEMENTATION_001",
+    "one_time_implementation_consumed": true,
+    "rerun_authorized": false
+  },
+  "authorization_commit": "51771f3766d34794b6eab124fa6b53eed6905017",
+  "canonical_dataset_generated": false,
+  "canonical_generation_guarded": true,
+  "canonical_scenario_count": 150,
+  "comparator_software_executed": false,
+  "environment_recipes_executed": false,
+  "event_site_counts": {
+    "convergent": {
+      "convergent": 20,
+      "unique": 20
+    },
+    "mixed_recurrence": {
+      "convergent": 10,
+      "parallel": 10,
+      "reversal": 10,
+      "unique": 10
+    },
+    "parallel": {
+      "parallel": 20,
+      "unique": 20
+    },
+    "reversal": {
+      "reversal": 20,
+      "unique": 20
+    },
+    "unique_only": {
+      "unique": 40
+    }
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_V1",
+  "known_smoke_resolution_items": {
+    "POUTINE": "capture full --help and freeze exact required CLI flags/input paths before canonical execution",
+    "PastML": "freeze exact machine-readable ancestral-state export/API before canonical execution"
+  },
+  "master_seed": 20261005012417,
+  "next_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_ENVIRONMENT_BUILD_AND_SMOKE_TEST_V1",
+  "source_pin_count": 8,
+  "status": "FROZEN_PRE_ENVIRONMENT_BUILD",
+  "third_party_software_installed": false,
+  "toy_validation_only": true
+}
