@@ -218,10 +218,9 @@ def draw_panel_b(ax):
     T(ax, rx, 0.474, "Substitution on the focal edge?", fontsize=BODY_FS, fontweight="bold")
     rounded_box(ax, rx, 0.354, 0.325, 0.095, LIGHT_ORANGE)
 
-    T(ax, rx+0.162, 0.428, "all optimal reconstructions", fontsize=SMALL_FS, color=MUTED, ha="center")
     px, gx, y = rx+0.082, rx+0.255, 0.382
-    T(ax, px, y+0.038, "parent", fontsize=SMALL_FS, color=MUTED, ha="center")
-    T(ax, gx, y+0.038, "child", fontsize=SMALL_FS, color=MUTED, ha="center")
+    T(ax, px, y+0.040, "parent", fontsize=SMALL_FS, color=MUTED, ha="center")
+    T(ax, gx, y+0.040, "child", fontsize=SMALL_FS, color=MUTED, ha="center")
     ax.add_patch(Circle((px, y), 0.021, transform=ax.transAxes, fill=False, ec=ORANGE, lw=1.0))
     ax.add_patch(Circle((gx, y), 0.021, transform=ax.transAxes, fill=False, ec=BLUE, lw=1.0))
     T(ax, px, y, "A", fontsize=BODY_FS, fontweight="bold", ha="center")
@@ -234,13 +233,13 @@ def draw_panel_b(ax):
     T(ax, rx+0.093, 0.295, "Only optimal focal-edge pair: A→G", fontsize=SMALL_FS, color=MUTED)
 
 def draw_panel_c(ax):
-    panel_label(ax, "c", "Retain all optimal focal-edge state pairs", 0.255)
+    panel_label(ax, "c", "Retain all optimal focal-edge state pairs", 0.258)
 
     x0, x1, x2 = 0.065, 0.390, 0.665
-    rounded_box(ax, x0, 0.198, x2-x0, 0.036, LIGHT)
-    T(ax, x0+0.012, 0.216, "Optimal parent→child pair(s)", fontsize=SMALL_FS, fontweight="bold")
-    T(ax, x1+0.012, 0.216, "BRANCHSNV reports", fontsize=SMALL_FS, fontweight="bold")
-    ax.plot([x1, x1], [0.120, 0.235], transform=ax.transAxes, color=RULE, lw=0.55)
+    rounded_box(ax, x0, 0.194, x2-x0, 0.036, LIGHT)
+    T(ax, x0+0.012, 0.212, "Optimal parent→child pair(s)", fontsize=SMALL_FS, fontweight="bold")
+    T(ax, x1+0.012, 0.212, "BRANCHSNV reports", fontsize=SMALL_FS, fontweight="bold")
+    ax.plot([x1, x1], [0.095, 0.231], transform=ax.transAxes, color=RULE, lw=0.55)
 
     rows = [
         ("A→G only", "Unambiguous change", BLUE),
@@ -248,7 +247,7 @@ def draw_panel_c(ax):
         ("A→G or G→G", "Placement ambiguity", PURPLE),
         ("G→G only", "No change", MUTED),
     ]
-    ys = [0.183,0.157,0.131,0.105]
+    ys = [0.179,0.153,0.127,0.101]
     for i,(lhs,rhs,c) in enumerate(rows):
         T(ax, x0+0.012, ys[i], lhs, fontsize=BODY_FS)
         T(ax, x1+0.012, ys[i], rhs, fontsize=BODY_FS, fontweight="bold", color=c)
@@ -257,43 +256,31 @@ def draw_panel_c(ax):
                     color="#E1E5E8", lw=0.5)
 
     ax.plot([0.685,0.685], [0.100,0.228], transform=ax.transAxes, color=RULE, lw=0.65)
-    T(ax, 0.710, 0.176, "No arbitrary tie-breaking", fontsize=BODY_FS, fontweight="bold")
-    T(ax, 0.710, 0.140, "All globally optimal focal-edge\nstate pairs are retained.",
+    T(ax, 0.710, 0.186, "No arbitrary tie-breaking", fontsize=BODY_FS, fontweight="bold")
+    T(ax, 0.710, 0.149, "All globally optimal focal-edge\nstate pairs are retained.",
       fontsize=SMALL_FS, color=MUTED, va="center", linespacing=1.1)
 
     # Safeguards
     HLINE(ax, 0.084)
     T(ax, 0.015, 0.066, "DESIGN SAFEGUARDS", fontsize=SMALL_FS, fontweight="bold", color=MUTED)
 
-    # Five equal-width safeguard modules; text is deliberately compact so
-    # nothing approaches the production crop boundary.
     bounds = [0.015, 0.209, 0.403, 0.597, 0.791, 0.985]
     modules = [
-        ("Explicit root", "defines direction", "root"),
-        ("Exact descendant set", "defines branch", "desc"),
-        ("Exact taxon labels", "define correspondence", "tag"),
-        ("Complete optimal set", "retains uncertainty", "stack"),
-        ("Deterministic provenance", "supports auditability", "doc"),
+        ("Explicit root", "defines direction"),
+        ("Exact descendant set", "defines branch"),
+        ("Exact taxon labels", "define correspondence"),
+        ("Complete optimal set", "retains uncertainty"),
+        ("Deterministic provenance", "supports auditability"),
     ]
-    for i,(head,sub,kind) in enumerate(modules):
+    for i, (head, sub) in enumerate(modules):
         left, right = bounds[i], bounds[i+1]
         if i > 0:
-            ax.plot([left,left],[0.012,0.065],transform=ax.transAxes,color=RULE,lw=0.55)
-        icon_x = left + 0.030
-        text_x = left + 0.057
-        icon_y = 0.036
-        if kind=="root":
-            draw_tree_icon(ax, icon_x, icon_y, False)
-        elif kind=="desc":
-            draw_tree_icon(ax, icon_x, icon_y, True)
-        elif kind=="tag":
-            draw_tag_icon(ax, icon_x, icon_y)
-        elif kind=="stack":
-            draw_stack_icon(ax, icon_x, icon_y)
-        elif kind=="doc":
-            draw_doc_icon(ax, icon_x, icon_y)
-        T(ax, text_x, 0.043, head, fontsize=5.75, fontweight="bold")
-        T(ax, text_x, 0.023, sub, fontsize=5.45, color=MUTED)
+            ax.plot([left, left], [0.012, 0.065], transform=ax.transAxes, color=RULE, lw=0.55)
+        x = (left + right) / 2
+        head_fs = 5.45 if head == "Deterministic provenance" else 5.70
+        sub_fs = 5.15 if head == "Deterministic provenance" else 5.35
+        T(ax, x, 0.043, head, fontsize=head_fs, fontweight="bold", ha="center")
+        T(ax, x, 0.023, sub, fontsize=sub_fs, color=MUTED, ha="center")
 
 def build():
     fig = plt.figure(figsize=(FIG_W_MM*MM, FIG_H_MM*MM), facecolor=WHITE)

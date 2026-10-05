@@ -16,11 +16,11 @@ The figure is intentionally parsimonious: one branch, one site, two distinct ana
 
 | File | Purpose | SHA-256 |
 |---|---|---|
-| `Figure_1.pdf` | Vector PDF suitable for manuscript submission and production. | `69f9fb6af44741e2759ced93198a7bce23beeb80d1fa271106bac8ace6cd3141` |
-| `Figure_1_editable.svg` | Editable vector source. | `406ae542d72b6703ebe065f0fc4e1ba1a282b2a9188ce30cfdc82e458b31f2a8` |
-| `Figure_1_preview_600dpi.png` | GitHub/README preview. | `ce8a152ae97350c48f8303e25e4148cd7f51b158ec480aecefe1b402857e8816` |
-| `Figure_1_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by the plotting script. | `ea7b5692f5d195959bfb1c69d9e5b48c085734eb10806c32b293f1f9aaf20b75` |
-| `Figure_1_1000dpi_RGB.tiff` | RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `2b7604633767dec50bc065d5122c0183c6b9c73ecf61f12caf4ed2ab59f04b0b` |
+| `Figure_1.pdf` | Vector PDF suitable for manuscript submission and production. | `6d2bba357a464278823614d04881b6a094a0095a8ddad21936ce59acc3559de5` |
+| `Figure_1_editable.svg` | Editable vector source. | `5618db9b77c7189690fe511124977f466668f15d66ccf5433ec24690e9137ed1` |
+| `Figure_1_preview_600dpi.png` | GitHub/README preview. | `d3c7a3ac525523a1beaefa50572f1f27c85d1de82a00d39987991c9e3b600420` |
+| `Figure_1_1000dpi.tiff` | 1000-dpi LZW-compressed TIFF generated directly by the plotting script. | `580029b43865323f4116c55cb8fc3cf97d3ec75e999098ae50fdaca787e1afcb` |
+| `Figure_1_1000dpi_RGB.tiff` | RGB-flattened 1000-dpi LZW TIFF for production workflows requiring RGB artwork. | `ca0152aec3e35fa7e76d2a52d25e9357caa2c75fd4a400d7b34bafbc216130b9` |
 | `make_figure_1.py` | Exact script used to generate the final figure files in this directory. | — |
 | `CODE_WALKTHROUGH.md` | Plain-English explanation of the current figure generator. | — |
 | `requirements.txt` | Python package versions used for the locked render and production conversion. | — |
