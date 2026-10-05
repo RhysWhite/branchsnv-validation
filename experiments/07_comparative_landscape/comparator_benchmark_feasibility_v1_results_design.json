@@ -1,0 +1,60 @@
+{
+  "authorization_consumed": true,
+  "authorization_id": "COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1_EXECUTION_001",
+  "benchmark_candidate_count": 8,
+  "benchmark_candidates": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "PastML",
+    "POUTINE",
+    "SNPPar",
+    "TreeTime"
+  ],
+  "canonical_result_artifacts": {
+    "checksums.sha256": {
+      "bytes": 335,
+      "sha256": "e01b1533d9cb99beaa6a4727589ad138d491794662015abdcff5ad42dac898e9"
+    },
+    "comparator_benchmark_feasibility_v1.tsv": {
+      "bytes": 41274,
+      "sha256": "528b810b296faf58d4801372dc2f6965e84aad8669a7ec478e86e94e93379c0e"
+    },
+    "comparator_benchmark_feasibility_v1_manifest.json": {
+      "bytes": 3591,
+      "sha256": "92c0f514c35bd6373878e7c35b6673147f0471843b99cf8c3a8719b3cebe400c"
+    },
+    "comparator_benchmark_feasibility_v1_summary.md": {
+      "bytes": 2086,
+      "sha256": "0689deaac7d3e2ac8f19f5f044a46874bbb185e7ceafb11ab163984df7465e31"
+    }
+  },
+  "execution_boundary": {
+    "benchmark_execution_authorized": false,
+    "production_bridge_authorized": false,
+    "production_ledger_mutation_authorized": false,
+    "software_execution_authorized": false,
+    "software_installation_authorized": false
+  },
+  "feasibility_counts": {
+    "blocked_reproducibility": 0,
+    "contextual_comparator_only": 21,
+    "endpoint_specific_benchmark_candidate": 6,
+    "quantitative_benchmark_candidate": 2,
+    "unresolved": 0
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_FEASIBILITY_RESULTS_V1",
+  "freeze_parent_commit": "2b4a7131c98283da65af79846d694cd147d0dda5",
+  "method_family_count": 29,
+  "next_gate": "FREEZE_COMPARATOR_BENCHMARK_EXECUTION_DESIGN_BEFORE_EXECUTION",
+  "next_gate_note": "Design the executable benchmark only around the eight frozen feasibility candidates, with endpoint-specific fairness, dependency disclosure, exact version/environment pins, datasets, metrics and failure handling. No software execution is authorized by this result freeze.",
+  "rerun_authorized": false,
+  "scientific_direct_set": [
+    "SNPPar",
+    "SubRecon",
+    "TreeTime"
+  ],
+  "scientific_status_unchanged": true,
+  "status": "FROZEN_PRE_EXECUTION"
+}
