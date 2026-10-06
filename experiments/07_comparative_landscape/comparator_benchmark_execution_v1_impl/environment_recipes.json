@@ -39,7 +39,7 @@
     "FastML": {
       "build_recipe": [
         "clone exact source pin",
-        "make"
+        "make CPPFLAGS=\"-O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32 -std=gnu++98\""
       ],
       "build_status": "READY_FOR_AUTHORIZED_SMOKE_BUILD",
       "dependencies": [
