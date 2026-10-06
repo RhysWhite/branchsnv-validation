@@ -1,0 +1,29 @@
+{
+    "authorization_id": "FASTML_RUN_CONTRACT_AMENDMENT_001",
+    "authorized_change": {
+        "from": "perl www/fastml/FastML_Wrapper.pl --MSA_File {alignment_fasta} --seqType nuc --outDir {out_dir} --Tree {tree_newick} --SubMatrix JC_Nuc --OptimizeBL no --UseGamma no --jointReconstruction yes",
+        "reason": "the repository wrapper aborts after successful joint reconstruction because it requires marginal-output files; the pinned FastML executable directly implements the intended JC nucleotide, homogeneous-rate, fixed-branch-length joint reconstruction",
+        "scientific_settings_changed": false,
+        "source_modification": false,
+        "to": "cd {out_dir} && {fastml_binary} -s {alignment_fasta} -mn -qf -t {tree_newick} -b"
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json"
+    ],
+    "baseline_environment_recipe_sha256": "5edbc753dab70439387ebe5a508cea662a7535ff03400dffd1cd81fce7ae7e5e",
+    "failed_smoke_attempt": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke",
+    "fastml_source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "next_gate": "IMPLEMENT_FASTML_RUN_CONTRACT_AMENDMENT_001",
+    "not_authorized": [
+        "FastML source modification",
+        "FastML source pin change",
+        "FastML rebuild",
+        "adapter change",
+        "truth change",
+        "metric change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "1b3c6970457a4f7212621401fb93ea3543d6b092",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
