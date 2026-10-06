@@ -157,6 +157,8 @@ def main():
     )
 
     print("PASS | synthetic SNPPar GenBank fixture contract")
+    paml_tree = adapters.paml_tree_text("((A:0.1,B:0.1):0.1,(C:0.1,D:0.1):0.1);", 4)
+    require(paml_tree == "4 1\n((A:0.1,B:0.1):0.1,(C:0.1,D:0.1):0.1);\n", "PAML tree serializer differs")
     ctl = adapters.paml_baseml_ctl_text("seq.phy", "tree.nwk", "mlb")
     require("RateAncestor = 1" in ctl and "fix_blength = 2" in ctl, "PAML contract differs")
     arp = adapters.arpip_config_text("a.fa", "t.nwk", "out", 7)

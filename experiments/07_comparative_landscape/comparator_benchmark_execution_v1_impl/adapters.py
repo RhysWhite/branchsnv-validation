@@ -157,6 +157,17 @@ def paml_phylip_text(observed_sequences: dict[str, str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def paml_tree_text(tree_newick: str, n_taxa: int) -> str:
+    if n_taxa < 2:
+        raise ValueError("PAML tree requires at least two taxa")
+    tree = tree_newick.strip()
+    if not tree or not tree.startswith("("):
+        raise ValueError("PAML tree must be non-empty Newick beginning with (")
+    if not tree.endswith(";") or tree.count(";") != 1:
+        raise ValueError("PAML tree must contain exactly one semicolon-terminated Newick record")
+    return f"{n_taxa} 1\n{tree}\n"
+
+
 def paml_baseml_ctl_text(seqfile: str, treefile: str, outfile: str) -> str:
     # JC69, fixed input branch lengths, constant site rate, ancestral reconstruction.
     return f"""seqfile = {seqfile}
