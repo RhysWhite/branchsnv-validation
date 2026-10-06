@@ -1,0 +1,63 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HOMOPLASYFINDER_PARSER_AMENDMENT_001",
+  "authorized_change": {
+    "function": "parse_homoplasyfinder_report",
+    "reason": "Preserve information explicitly reported by HomoplasyFinder for the already-frozen secondary recurrence-count metric.",
+    "requirements": [
+      "Recognize the HomoplasyFinder MinimumNumberChangesOnTree column.",
+      "For retained inconsistent sites, preserve an available numeric MinimumNumberChangesOnTree value in reported_recurrence_count_if_available.",
+      "Normalize integer-valued numeric counts to integer strings.",
+      "If the count column is absent or the value is empty, preserve the existing empty-string representation.",
+      "If the count column is present with a non-empty non-numeric value, fail rather than silently discard it.",
+      "Retain the existing ConsistencyIndex filtering behaviour.",
+      "Update focused toy validation to cover a real HomoplasyFinder report schema, count preservation, consistent-site filtering, missing-count behaviour and invalid-count failure."
+    ]
+  },
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "baseline_sha256": {
+    "adapters": "78c04404c80f33ff3abd2c396eaf0f071133ad333d3568ab545e60beae7e58fa",
+    "toy_validation": "ee06b388b981e497305a25de2d3ba3d2115e93323e3e85b96b55cc7461db4238"
+  },
+  "explicitly_not_authorized": {
+    "full_benchmark_execution": true,
+    "homoplasyfinder_jar_change": true,
+    "homoplasyfinder_output_contract_change": true,
+    "homoplasyfinder_recipe_change": true,
+    "homoplasyfinder_run_contract_change": true,
+    "homoplasyfinder_source_change": true,
+    "input_adapter_change": true,
+    "metric_change": true,
+    "other_comparator_change": true,
+    "other_parser_change": true,
+    "scenario_change": true,
+    "truth_change": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_HOMOPLASYFINDER_PARSER_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "48dda211b90141f8eddfb112e6a4a44c56b44487",
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_observation": {
+    "actual_report_columns": [
+      "Position",
+      "ConsistencyIndex",
+      "CountsACGT",
+      "MinimumNumberChangesOnTree"
+    ],
+    "actual_smoke_row": {
+      "ConsistencyIndex": "0.5",
+      "CountsACGT": "6:0:2:0",
+      "MinimumNumberChangesOnTree": "2",
+      "Position": "20"
+    },
+    "current_parser_output": {
+      "position": "20",
+      "reported_recurrence_count_if_available": ""
+    },
+    "method": "HomoplasyFinder",
+    "reason": "The executable reports a numeric minimum-change count, while the parser currently discards it. The frozen benchmark includes recurrence-count absolute error as a secondary endpoint."
+  }
+}
