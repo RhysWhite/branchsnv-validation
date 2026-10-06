@@ -1,0 +1,29 @@
+{
+    "authorization_id": "FASTML_BUILD_ENVIRONMENT_AMENDMENT_001",
+    "authorized_change": {
+        "reason": "the host GCC 8.5 default language mode rejects the pinned source ostream comparison, while the identical construct compiles under gnu++98",
+        "requirement": "build the unchanged pinned FastML source using the existing Makefiles with externally supplied CPPFLAGS that add -std=gnu++98",
+        "source_modification": false
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json"
+    ],
+    "baseline_sha256": {
+        "environment_recipes.json": "ccb9357aa7c8c3c5dc9bfdd0b3744885f7323cc2d9857ff94bcb9d67effb2b71",
+        "source_pins.tsv": "b1f5d81a33ac407e9cdf3d15dfa6bcd6e45c676808e3f5232bab9d9c1dcf1365"
+    },
+    "fastml_source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "next_gate": "IMPLEMENT_FASTML_BUILD_ENVIRONMENT_AMENDMENT_V1",
+    "not_authorized": [
+        "FastML source change",
+        "FastML source pin change",
+        "FastML binary redistribution",
+        "benchmark parameter change",
+        "truth change",
+        "metric change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "f1fae83c8bfd5cf7047b7d9e2d6c68a18c27a72a",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
