@@ -142,16 +142,23 @@
     "SNPPar": {
       "build_recipe": [
         "clone exact release tag/commit",
-        "install phylo-treetime==0.8.5 first",
-        "pip install . --no-deps in isolated environment"
+        "create isolated Python 3.8.20 environment",
+        "set PYTHONNOUSERSITE=1 for installation and execution",
+        "install biopython==1.76",
+        "install phylo-treetime==0.8.5",
+        "install ete3==3.1.3",
+        "pip install . --no-deps from exact frozen SNPPar source"
       ],
       "build_status": "READY_FOR_AUTHORIZED_SMOKE_BUILD",
       "dependencies": [
-        "Python >=3.6",
-        "BioPython >=1.66",
-        "ETE3",
-        "phylo-treetime==0.8.5 chosen to satisfy documented <0.8.6 constraint"
+        "Python ==3.8.20",
+        "BioPython ==1.76",
+        "ETE3 ==3.1.3",
+        "phylo-treetime ==0.8.5"
       ],
+      "environment": {
+        "PYTHONNOUSERSITE": "1"
+      },
       "output_contract": [
         "all mutation events TSV",
         "homoplasic mutation events TSV",
