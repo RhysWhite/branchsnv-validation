@@ -1,0 +1,26 @@
+{
+    "authorization_id": "FASTML_BUILD_ENVIRONMENT_AMENDMENT_002",
+    "authorized_change": {
+        "from": "make CPPFLAGS=\"-O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32 -std=gnu++98\"",
+        "reason": "the CPPFLAGS override removed FastML program-specific include paths; overriding CXX preserves the repository Makefile flags while applying the required language mode",
+        "source_modification": false,
+        "to": "make CXX=\"g++ -std=gnu++98\""
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json"
+    ],
+    "baseline_environment_recipe_sha256": "13eb4a941f9022014261049b0e18cda54ec21fe9cbde33cc4b3024c9086dbdbd",
+    "failed_attempt": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_02_build_gnu98",
+    "fastml_source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "next_gate": "IMPLEMENT_FASTML_BUILD_ENVIRONMENT_AMENDMENT_002",
+    "not_authorized": [
+        "FastML source modification",
+        "FastML source pin change",
+        "benchmark parameter change",
+        "adapter change",
+        "toy smoke execution",
+        "full benchmark execution"
+    ],
+    "parent_commit": "3eb1c4dd65ea0faae48322220e41f5de4bbe9269",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
