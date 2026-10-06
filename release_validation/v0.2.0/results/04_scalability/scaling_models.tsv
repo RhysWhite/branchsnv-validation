@@ -1,0 +1,5 @@
+model	n	x	y	slope_per_x_unit	intercept	r_squared	x_unit
+runtime_by_taxa_10000_sites	6	ntax	wall_median_seconds	0.0144207885305	0.0848207885305	0.999845807	taxon
+runtime_by_sites_250_taxa	6	nchar	wall_median_seconds	0.000355121441023	0.101967460779	0.999996389	site
+memory_by_taxa_10000_sites	6	ntax	peak_rss_median_mib	0.102057598566	26.3798942652	0.999039274	taxon
+memory_by_sites_250_taxa	6	nchar	peak_rss_median_mib	0.00273708897153	23.5791677397	0.999365836	site

@@ -1,0 +1,16 @@
+{
+  "branchsnv_root": "/home/rwhite/github/branchsnv/branchsnv",
+  "completed_utc": "2026-10-06T01:01:11.695304+00:00",
+  "cpu_count": 64,
+  "elapsed_seconds": 18.187881,
+  "exit_status": "PASS",
+  "experiment": "03_published_datasets",
+  "machine": "x86_64",
+  "output_dir": "/home/rwhite/github/branchsnv-validation-v0.2.0/reproduced_results/03_published_datasets",
+  "platform": "Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "processor": "x86_64",
+  "public_input_dir": "/home/rwhite/github/branchsnv-validation-v0.2.0/public_inputs/03_published_datasets",
+  "python_implementation": "CPython",
+  "python_version": "3.13.15",
+  "started_utc": "2026-10-06T01:00:53.502733+00:00"
+}

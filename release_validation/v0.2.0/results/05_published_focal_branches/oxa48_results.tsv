@@ -1,0 +1,14 @@
+site_id	reference	position	input_row	parent_states	child_states	possible_pairs	change	parsimony_status	fixed_within_clade	exclusive_to_clade	descendant_state	descendant_total	descendant_callable	descendant_state_count	outside_total	outside_callable	outside_same_state_count	parsimony_score	selection_reason
+18AR0845_1_48403	18AR0845_1	48403	2	G	A	G>A	G>A	unambiguous_change	true	true	A	39	39	39	8	8	0	1	both
+18AR0845_1_128874	18AR0845_1	128874	5	G	A	G>A	G>A	unambiguous_change	true	true	A	39	39	39	8	8	0	1	both
+18AR0845_1_585558	18AR0845_1	585558	31	C	T	C>T	C>T	unambiguous_change	true	true	T	39	39	39	8	8	0	1	both
+18AR0845_1_592973	18AR0845_1	592973	32	C	T	C>T	C>T	unambiguous_change	true	true	T	39	39	39	8	8	0	1	both
+18AR0845_1_1035621	18AR0845_1	1035621	69	C	T	C>T	C>T	unambiguous_change	true	true	T	39	39	39	8	8	0	1	both
+18AR0845_1_1244322	18AR0845_1	1244322	81	C	T	C>T	C>T	unambiguous_change	true	true	T	39	39	39	8	8	0	1	both
+18AR0845_1_1343549	18AR0845_1	1343549	85	C	T	C>T	C>T	unambiguous_change	true	true	T	39	39	39	8	8	0	1	both
+18AR0845_1_1397339	18AR0845_1	1397339	90	G	A	G>A	G>A	unambiguous_change	true	true	A	39	39	39	8	8	0	1	both
+18AR0845_1_2276376	18AR0845_1	2276376	138	C	T	C>T	C>T	unambiguous_change	true	true	T	39	39	39	8	8	0	1	both
+18AR0845_1_2716612	18AR0845_1	2716612	162	A	G	A>G	A>G	unambiguous_change	true	true	G	39	39	39	8	8	0	1	both
+18AR0845_1_3423672	18AR0845_1	3423672	190	G	A	G>A	G>A	unambiguous_change	true	true	A	39	39	39	8	8	0	1	both
+18AR0845_1_3434752	18AR0845_1	3434752	192	C	G	C>G	C>G	unambiguous_change	true	true	G	39	39	39	8	8	0	1	both
+18AR0845_1_4766134	18AR0845_1	4766134	254	A	G	A>G	A>G	unambiguous_change	true	true	G	39	39	39	8	8	0	1	both

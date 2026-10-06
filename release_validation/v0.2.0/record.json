@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "record_type": "BRANCHSNV stable release validation",
+  "branchsnv_version": "0.2.0",
+  "validation_date": "2026-10-06",
+  "overall_pass": true,
+  "production_repository": "RhysWhite/branchsnv",
+  "production_commit_at_run": "b63b6dbdde46162570dd0d17902e619467771624",
+  "validation_repository": "RhysWhite/branchsnv-validation",
+  "validation_framework_commit": "f48bd14048866820c7a252d935ed2d26cb9407e5",
+  "result_file_count": 47,
+  "results_checksum_manifest_sha256": "87c57ee4e0289bd2df2ea74a78d94651d0dcf0b7b67fd58c0822c3fee27952c0",
+  "original_capture": {
+    "zip_sha256": "2846df259ef44031be1ed7e952640a8ca79113c5ab91fa53f712fafc78a33955",
+    "external_manifest_sha256": "87c57ee4e0289bd2df2ea74a78d94651d0dcf0b7b67fd58c0822c3fee27952c0"
+  },
+  "environment": {
+    "python": "3.13.15",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.65.1"
+  },
+  "verification": {
+    "production_source_identity": "verified (13 Python files)",
+    "validation_script_identity": "verified",
+    "deterministic_analytical_outputs": "exact match to canonical scientific snapshot",
+    "experiments_01_to_06_headline_and_exact_pass_criteria": "verified",
+    "experiment_04_protocol": "3 repetitions; 39 measured runs"
+  },
+  "benchmark_note": "Experiment 04 raw timings, memory measurements, fitted scaling models, and summaries are archived as the observed v0.2.0 validation run. They are environment-dependent and are not expected to be byte-identical across machines or reruns."
+}

@@ -1,0 +1,5 @@
+dataset_id	organism	chromosome	taxa	variable_sites	non_root_edges	exact_edge_comparisons	method_difference_edge_comparisons	branchsnv_unambiguous_events	snppar_events	exact_unambiguous_matches	branchsnv_only_unambiguous	snppar_only_events	snppar_only_supported_as_branchsnv_placement_ambiguous	direction_differences	branchsnv_placement_ambiguous_edge_sites	branchsnv_change_state_ambiguous_edge_sites	converted_nexus_sha256
+elizabethkingia	Elizabethkingia anophelis	CP014805	70	374	138	134	4	365	382	365	0	17	17	0	34	0	ca528fe466bff112e089ee9d86bd887d880e0ba6341c4a7f0562bf9f266017c7
+burkholderia_chr1	Burkholderia dolosa	chromosome 1	114	299	226	215	11	307	333	307	0	26	26	0	55	0	2efd74025ec06a2d8600c7a05904ff024c874b037c8354fbc3e830a97f256bee
+burkholderia_chr2	Burkholderia dolosa	chromosome 2	114	153	226	214	12	152	167	152	0	15	15	0	39	0	a56ae8a1c71f1e11626477a70707d2fb61f3969e7dab4c342f99748ffaa24f21
+burkholderia_chr3	Burkholderia dolosa	chromosome 3	114	59	226	220	6	53	61	53	0	8	8	0	30	0	9e595006f08981513c10c6e419724e888441148ff8f0c17481119685e012d430
