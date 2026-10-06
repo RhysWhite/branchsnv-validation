@@ -1,0 +1,31 @@
+{
+    "authorization_id": "PAML_NODE_MAPPING_AMENDMENT_001",
+    "authorized_change": {
+        "fail_closed": "reject incomplete, conflicting, ambiguous, disconnected, or non-bijective node mappings",
+        "requirement": "map PAML reconstructed-sequence node identifiers onto benchmark tree node labels using descendant-tip sets derived from the explicit rst Branch parent..child graph and terminal tip annotations",
+        "reuse": "existing node_descendant_tips and events_from_node_sequences logic"
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+    ],
+    "baseline_sha256": {
+        "adapters.py": "44d01f642966ee6afde3936f0b6633dbac35ed831922ada1f19971db4659e405",
+        "toy_validation.py": "dffa9a06ec09c405206dffb58edf4464ad32fcc7e3232c350c027ac742a8876d"
+    },
+    "next_gate": "IMPLEMENT_PAML_NODE_MAPPING_AMENDMENT_V1",
+    "not_authorized": [
+        "PAML source change",
+        "PAML binary change",
+        "PAML control-file change",
+        "tree topology change",
+        "branch-length change",
+        "model change",
+        "truth change",
+        "metric change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "d718ae7d9b0be91e2c923c6fdee007cc55443ae1",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
