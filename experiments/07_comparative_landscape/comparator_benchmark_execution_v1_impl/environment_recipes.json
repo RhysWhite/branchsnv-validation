@@ -53,7 +53,7 @@
         "joint ancestral FASTA",
         "output Newick tree"
       ],
-      "run_contract": "perl www/fastml/FastML_Wrapper.pl --MSA_File {alignment_fasta} --seqType nuc --outDir {out_dir} --Tree {tree_newick} --SubMatrix JC_Nuc --OptimizeBL no --UseGamma no --jointReconstruction yes",
+      "run_contract": "cd {out_dir} && {fastml_binary} -s {alignment_fasta} -mn -qf -t {tree_newick} -b",
       "source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0"
     },
     "HomoplasyFinder": {
