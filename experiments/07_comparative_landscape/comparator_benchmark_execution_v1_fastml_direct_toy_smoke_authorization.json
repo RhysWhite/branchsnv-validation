@@ -1,0 +1,27 @@
+{
+    "adapter_modification_authorized": false,
+    "authorization_id": "FASTML_DIRECT_TOY_SMOKE_001",
+    "authorized_action": "perform exactly one FastML toy smoke using the frozen direct-executable run contract",
+    "authorized_attempt": "attempt_05_direct_toy_smoke",
+    "benchmark_parameter_change_authorized": false,
+    "environment_recipe_sha256": "4c526f6cdeff395988011cad7d0c23dd76afedf4746b5be5048ce17c6fe94106",
+    "fastml_binary_sha256": "f5b7acaaabb77b9c39c6dcde5b602b019c60d1a1d569acd3e9450f72f6b9bee6",
+    "fastml_source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "full_benchmark_authorized": false,
+    "next_gate": "FASTML_DIRECT_TOY_SMOKE_001",
+    "not_authorized": [
+        "FastML source modification",
+        "FastML source pin change",
+        "FastML rebuild",
+        "adapter change",
+        "truth change",
+        "metric change",
+        "scenario-set execution",
+        "full benchmark execution"
+    ],
+    "parent_commit": "c276deafe47e1e8fcb5d09b5d44437ec59e90ded",
+    "preceding_failed_smoke": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke",
+    "rebuild_authorized": false,
+    "source_modification_authorized": false,
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
