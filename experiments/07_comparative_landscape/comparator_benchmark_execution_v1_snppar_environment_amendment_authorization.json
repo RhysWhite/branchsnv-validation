@@ -1,0 +1,78 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_SNPPAR_ENVIRONMENT_AMENDMENT_001",
+  "authorized_change": {
+    "environment": {
+      "biopython": "1.76",
+      "disable_python_user_site": true,
+      "ete3": "3.1.3",
+      "phylo_treetime": "0.8.5",
+      "python": "3.8.20"
+    },
+    "file": "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+    "installation_policy": [
+      "Create an isolated Python 3.8 environment.",
+      "Run Python and pip with PYTHONNOUSERSITE=1.",
+      "Install Biopython 1.76.",
+      "Install phylo-treetime 0.8.5.",
+      "Install ETE3 3.1.3.",
+      "Install the already frozen SNPPar source revision with --no-deps.",
+      "Do not patch SNPPar source."
+    ],
+    "reason": "Bring the smoke environment into compliance with SNPPar's own declared dependency bounds and prevent user-site package leakage.",
+    "section": "methods.SNPPar"
+  },
+  "explicitly_not_authorized": {
+    "benchmark_scenario_change": true,
+    "full_150_scenario_dataset_generation": true,
+    "full_benchmark_execution": true,
+    "metric_change": true,
+    "other_comparator_environment_change": true,
+    "other_comparator_source_change": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "snppar_inference_setting_change": true,
+    "snppar_output_parser_change": true,
+    "snppar_source_change": true,
+    "snppar_source_pin_change": true,
+    "truth_generator_change": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_SNPPAR_ENVIRONMENT_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "2d05249319fe976a373f1142672dbbfdf3bf48b3",
+  "required_validation": [
+    "The SNPPar source pin must remain unchanged.",
+    "The SNPPar source tree must not be patched.",
+    "Python user-site packages must be disabled.",
+    "Biopython must resolve to version 1.76 inside the isolated environment.",
+    "TreeTime must resolve to version 0.8.5 inside the isolated environment.",
+    "ETE3 must resolve to version 3.1.3 inside the isolated environment.",
+    "Bio.Alphabet must import successfully.",
+    "SNPPar help must execute successfully.",
+    "The original failed smoke attempt must remain preserved.",
+    "No benchmark truth or full benchmark dataset may be used during this amendment."
+  ],
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_observations": {
+    "declared_dependencies": {
+      "biopython": ">=1.66,<=1.76",
+      "ete3": "required",
+      "phylo_treetime": ">=0.6.3,<=0.8.6",
+      "python": ">=3.6"
+    },
+    "initial_smoke_failure": "The first smoke environment contained Biopython 1.86 and loaded Bio from the user site, which is outside SNPPar's declared Biopython range and lacks Bio.Alphabet.",
+    "method": "SNPPar",
+    "resolution_test": {
+      "bio_alphabet_import": "PASS",
+      "biopython": "1.76",
+      "ete3": "3.1.3",
+      "phylo_treetime": "0.8.5",
+      "python": "3.8.20",
+      "python_no_user_site": true,
+      "snppar_help": "PASS"
+    },
+    "source_distribution_version": "1.0",
+    "source_pin": "0386df8edcff26faf242bc268c5f8865b09c9de9",
+    "source_ref": "v1.2"
+  }
+}
