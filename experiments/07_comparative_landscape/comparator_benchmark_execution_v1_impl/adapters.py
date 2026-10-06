@@ -479,8 +479,9 @@ def parse_tabular_node_states(
     """Parse generic tabular node-state output (used by PastML wrapper contract).
 
     First column is node id; columns are named site_<1-based-position>.
-    Returned sequences are sparse strings encoded as dict-like ordered values,
-    represented here as concatenated states in `site_columns` order.
+    PastML may represent uncertainty using multiple rows for the same node.
+    A node-site combination is retained only when exactly one distinct A/C/G/T
+    state is reported; absent or multi-state calls are encoded as N.
     """
     site_columns = list(site_columns)
     rd = csv.DictReader(io.StringIO(text), delimiter="\t")
@@ -490,7 +491,31 @@ def parse_tabular_node_states(
     needed = [f"site_{p}" for p in site_columns]
     if not set(needed).issubset(rd.fieldnames):
         raise ValueError("state table missing site columns")
-    out = {}
+
+    states_by_node: dict[str, dict[str, set[str]]] = {}
+
     for row in rd:
-        out[row[node_field]] = "".join((row[c] or "N").upper() for c in needed)
+        node = (row.get(node_field) or "").strip()
+        if not node:
+            raise ValueError("state table row lacks node id")
+
+        per_site = states_by_node.setdefault(
+            node,
+            {column: set() for column in needed},
+        )
+
+        for column in needed:
+            state = (row.get(column) or "").strip().upper()
+            if state in DNA:
+                per_site[column].add(state)
+
+    out = {}
+    for node, per_site in states_by_node.items():
+        out[node] = "".join(
+            sorted(per_site[column])[0]
+            if len(per_site[column]) == 1
+            else "N"
+            for column in needed
+        )
+
     return out
