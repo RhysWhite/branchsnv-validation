@@ -1,0 +1,57 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_ENVIRONMENT_SMOKE_001",
+  "explicitly_not_authorized": {
+    "canonical_150_scenario_dataset_generation": true,
+    "canonical_benchmark_execution": true,
+    "canonical_truth_unblinding_for_tuning": true,
+    "frozen_benchmark_design_mutation": true,
+    "frozen_source_pin_mutation": true,
+    "parameter_tuning_against_canonical_truth": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "third_party_source_or_binary_redistribution": true,
+    "third_party_source_patching_without_separate_amendment": true
+  },
+  "method_universe": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "POUTINE",
+    "PastML",
+    "SNPPar",
+    "TreeTime"
+  ],
+  "next_gate_after_environment_smoke": "FREEZE_COMPARATOR_BENCHMARK_ENVIRONMENT_AND_SMOKE_RESULTS_V1",
+  "one_time_environment_smoke_authorization": true,
+  "parent_implementation_freeze_commit": "f48bd14048866820c7a252d935ed2d26cb9407e5",
+  "requirements": [
+    "Use exactly the eight frozen comparator source pins.",
+    "Construct one isolated environment per comparator.",
+    "Network access is permitted only as required to obtain the frozen source pins and dependencies during environment construction.",
+    "Smoke testing must use dedicated noncanonical toy fixtures only.",
+    "Do not generate or inspect the canonical 150-scenario benchmark dataset.",
+    "Record exact source commit or release, dependency versions, environment identity, commands, stdout, stderr, wall time and peak memory where applicable.",
+    "Capture POUTINE help output and resolve its exact non-GWAS homoplasy command and required input paths before canonical execution.",
+    "Resolve and freeze the exact PastML machine-readable ancestral-state output or API before canonical execution.",
+    "Validate tool-specific input and output adapters against smoke-test outputs without access to canonical benchmark truth.",
+    "If installation or smoke execution fails, preserve the attempted command, stdout, stderr and environment metadata.",
+    "Do not silently alter parameters, source pins, adapters or tool source to obtain a successful result; any remediation requiring such a change must be separately frozen."
+  ],
+  "rerun_authorized": false,
+  "scope": {
+    "cli_help_capture_authorized": true,
+    "command_stdout_stderr_capture_authorized": true,
+    "environment_build_authorized": true,
+    "environment_metadata_capture_authorized": true,
+    "exact_pinned_source_checkout_authorized": true,
+    "input_output_adapter_smoke_validation_authorized": true,
+    "networked_dependency_install_authorized": true,
+    "noncanonical_smoke_execution_authorized": true,
+    "pastml_machine_readable_output_resolution_authorized": true,
+    "poutine_cli_resolution_authorized": true,
+    "third_party_software_execution_noncanonical_smoke_only": true,
+    "third_party_software_installation_authorized": true
+  },
+  "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
