@@ -44,7 +44,7 @@
   },
   "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_V1",
   "known_smoke_resolution_items": {
-    "POUTINE": "capture full --help and freeze exact required CLI flags/input paths before canonical execution",
+    "POUTINE": "RESOLVED by POUTINE_RUN_CONTRACT_AMENDMENT_001: full --help captured; exact CLI, input paths, environment, and primary output contract smoke validated",
     "PastML": "freeze exact machine-readable ancestral-state export/API before canonical execution"
   },
   "master_seed": 20261005012417,

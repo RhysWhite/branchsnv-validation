@@ -100,26 +100,26 @@
     "POUTINE": {
       "build_recipe": [
         "clone exact source pin",
-        "create isolated environment",
-        "install exactly phylo-treetime==0.8.6 plus documented runtime requirements"
+        "create isolated environment with openjdk=17.0.18=h1602c4f_18, python=3.8.20, and pip",
+        "install exactly phylo-treetime==0.8.6 with pip"
       ],
-      "build_status": "HELP_CAPTURE_REQUIRED_DURING_AUTHORIZED_SMOKE",
+      "build_status": "RESOLVED_AND_SMOKE_VALIDATED",
       "dependencies": [
-        "Java runtime",
-        "Python",
-        "phylo-treetime==0.8.6 per official README"
+        "openjdk=17.0.18=h1602c4f_18",
+        "python=3.8.20",
+        "phylo-treetime==0.8.6"
       ],
       "output_contract": [
-        "*.out.sorted_by_a1_maxT or *.out.sorted_by_a2_maxT with physical_pos,a1_count,a2_count"
+        "primary poutine.out with physical_pos,a1_count,a2_count; association statistics are not scored"
       ],
       "phenotype_policy": "deterministic balanced dummy phenotype; association statistics are not scored",
-      "run_contract": "./poutine.sh --help must be captured under later smoke authorization before the exact non-GWAS homoplasy invocation is frozen",
+      "run_contract": "./poutine.sh --fasta {variant_fasta} --phenos {dummy_phenotypes} --tree {tree_newick} --map {physical_positions_map} --replicates 10 --min_hcount 0 --threads 1 --out-dir {out_dir} --out poutine.out --log poutine.log --anc-recon-out-dir ancestral_reconstruction",
       "scored_fields": [
         "physical_pos",
         "a1_count",
         "a2_count"
       ],
-      "smoke_resolution_required": "Exact required CLI flags/input file names are intentionally not guessed from incomplete documentation.",
+      "smoke_resolution_required": "RESOLVED: CLI captured under OpenJDK 17 and normal TreeTime-backed workflow smoke validated successfully",
       "source_pin": "8faeeb243a0f3ddc6f8274c81ce5ee79e8845f7d"
     },
     "PastML": {

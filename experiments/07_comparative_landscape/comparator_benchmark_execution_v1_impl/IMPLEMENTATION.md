@@ -50,9 +50,9 @@ Release tags are used for PAML, PastML, SNPPar and TreeTime. ARPIP, FastML, Homo
 
 ## Static environment recipes
 
-Environment recipes are authored but not executed.
+Environment recipes were authored at the implementation freeze and are executed only under subsequent comparator-specific environment-smoke authorizations.
 
-POUTINE's public README does not expose its complete command-line flag contract in text. The implementation therefore explicitly refuses to guess an invocation. Its exact CLI is a required deliverable of the later authorized smoke-test gate.
+POUTINE's command-line contract was resolved during the authorized environment-smoke stage. POUTINE_RUN_CONTRACT_AMENDMENT_001 records the validated isolated environment (OpenJDK 17.0.18, Python 3.8.20 and phylo-treetime 0.8.6), the exact normal TreeTime-backed invocation, required inputs, and the primary poutine.out scoring fields. Association statistics are not scored.
 
 PastML similarly requires smoke validation of the exact machine-readable ancestral-state export/API before canonical execution.
 
