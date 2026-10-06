@@ -1,0 +1,22 @@
+{
+    "authorization_id": "FASTML_CORRECTED_REBUILD_002",
+    "authorized_action": "perform exactly one corrected FastML rebuild from a fresh disposable build checkout using the frozen CXX override recipe",
+    "authorized_attempt": "attempt_03_build_cxx_gnu98",
+    "environment_recipe_sha256": "5edbc753dab70439387ebe5a508cea662a7535ff03400dffd1cd81fce7ae7e5e",
+    "failed_attempt": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_02_build_gnu98",
+    "fastml_source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "full_benchmark_authorized": false,
+    "next_gate": "FASTML_CORRECTED_REBUILD_002",
+    "not_authorized": [
+        "FastML source modification",
+        "FastML source pin change",
+        "benchmark parameter change",
+        "adapter change",
+        "toy smoke execution",
+        "full benchmark execution"
+    ],
+    "parent_commit": "2c3e36701f55c67a1ac7ab30a4936350bde2ab58",
+    "smoke_execution_authorized": false,
+    "source_modification_authorized": false,
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
