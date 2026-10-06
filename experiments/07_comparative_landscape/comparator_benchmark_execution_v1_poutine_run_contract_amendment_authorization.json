@@ -1,0 +1,42 @@
+{
+    "authorization_id": "POUTINE_RUN_CONTRACT_AMENDMENT_001",
+    "authorized_change": {
+        "environment": "isolated OpenJDK 17.0.18 build h1602c4f_18, Python 3.8.20, and pip-installed phylo-treetime==0.8.6; isolated environment bin directory precedes system PATH and PYTHONNOUSERSITE=1",
+        "metric_change": false,
+        "output_contract": "parse primary poutine.out using physical_pos, a1_count and a2_count; association statistics are not scored",
+        "parser_change_required": false,
+        "run_contract": "./poutine.sh --fasta {variant_fasta} --phenos {dummy_phenotypes} --tree {tree_newick} --map {physical_positions_map} --replicates 10 --min_hcount 0 --threads 1 --out-dir {out_dir} --out poutine.out --log poutine.log --anc-recon-out-dir ancestral_reconstruction",
+        "scenario_change": false,
+        "source_modification": false,
+        "source_pin_change": false,
+        "truth_change": false
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/implementation_manifest.json",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/IMPLEMENTATION.md"
+    ],
+    "baseline_hashes": {
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/IMPLEMENTATION.md": "d9faee06aaebfe5ace4cb0564bbb7761308f236bf55468550c9d2f6167d8fbac",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json": "4c526f6cdeff395988011cad7d0c23dd76afedf4746b5be5048ce17c6fe94106",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/implementation_manifest.json": "d5249be8aa0e751f1f1b564dbc1a6cd7f1345cb485c36b07d32a8ce0731a51d7"
+    },
+    "next_gate": "IMPLEMENT_POUTINE_RUN_CONTRACT_AMENDMENT_001",
+    "not_authorized": [
+        "adapters.py change",
+        "toy_validation.py change",
+        "POUTINE source modification",
+        "POUTINE source pin change",
+        "truth change",
+        "metric change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "b0f9c309debe677a12743fe03e7a4f32864b26b4",
+    "poutine_source_pin": "8faeeb243a0f3ddc6f8274c81ce5ee79e8845f7d",
+    "smoke_evidence": {
+        "help": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_02_help_java17",
+        "successful_toy": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke"
+    },
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
