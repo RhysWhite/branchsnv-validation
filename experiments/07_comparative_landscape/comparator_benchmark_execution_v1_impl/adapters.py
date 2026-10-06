@@ -407,6 +407,7 @@ def parse_homoplasyfinder_report(text: str) -> list[dict[str, str]]:
     fields = {x.lower().replace("_", "").replace(" ", ""): x for x in (rd.fieldnames or [])}
     pos_field = fields.get("position") or fields.get("site") or fields.get("alignmentposition")
     ci_field = fields.get("consistencyindex") or fields.get("consistency")
+    count_field = fields.get("minimumnumberchangesontree")
     if not pos_field:
         raise ValueError("HomoplasyFinder report lacks position field")
     out = []
@@ -417,7 +418,27 @@ def parse_homoplasyfinder_report(text: str) -> list[dict[str, str]]:
                     continue
             except (TypeError, ValueError):
                 pass
-        out.append({"position": str(int(float(row[pos_field]))), "reported_recurrence_count_if_available": ""})
+
+        count = ""
+        if count_field:
+            raw_count = (row.get(count_field) or "").strip()
+            if raw_count:
+                try:
+                    numeric_count = float(raw_count)
+                except ValueError as exc:
+                    raise ValueError(
+                        "HomoplasyFinder minimum-change count is not numeric"
+                    ) from exc
+                if not numeric_count.is_integer():
+                    raise ValueError(
+                        "HomoplasyFinder minimum-change count is not an integer"
+                    )
+                count = str(int(numeric_count))
+
+        out.append({
+            "position": str(int(float(row[pos_field]))),
+            "reported_recurrence_count_if_available": count,
+        })
     return out
 
 

@@ -189,9 +189,76 @@ def main():
     print("PASS | truth-blind metric engine")
 
     # Synthetic output parser fixtures; no comparator is executed.
-    hf = "Position\tConsistencyIndex\n10\t0.5\n20\t1.0\n"
+    hf = (
+        "Position\tConsistencyIndex\tCountsACGT\tMinimumNumberChangesOnTree\n"
+        "10\t0.5\t6:0:2:0\t2\n"
+        "20\t1.0\t8:0:0:0\t1\n"
+    )
     parsed_hf = adapters.parse_homoplasyfinder_report(hf)
-    require([x["position"] for x in parsed_hf] == ["10"], "HomoplasyFinder parser fixture differs")
+    require(
+        parsed_hf == [
+            {
+                "position": "10",
+                "reported_recurrence_count_if_available": "2",
+            }
+        ],
+        "HomoplasyFinder parser real-schema fixture differs",
+    )
+
+    hf_without_count = "Position\tConsistencyIndex\n10\t0.5\n"
+    parsed_hf_without_count = adapters.parse_homoplasyfinder_report(
+        hf_without_count
+    )
+    require(
+        parsed_hf_without_count == [
+            {
+                "position": "10",
+                "reported_recurrence_count_if_available": "",
+            }
+        ],
+        "HomoplasyFinder parser missing-count behaviour differs",
+    )
+
+    hf_empty_count = (
+        "Position\tConsistencyIndex\tMinimumNumberChangesOnTree\n"
+        "10\t0.5\t\n"
+    )
+    parsed_hf_empty_count = adapters.parse_homoplasyfinder_report(
+        hf_empty_count
+    )
+    require(
+        parsed_hf_empty_count == [
+            {
+                "position": "10",
+                "reported_recurrence_count_if_available": "",
+            }
+        ],
+        "HomoplasyFinder parser empty-count behaviour differs",
+    )
+
+    try:
+        adapters.parse_homoplasyfinder_report(
+            "Position\tConsistencyIndex\tMinimumNumberChangesOnTree\n"
+            "10\t0.5\tnot-a-number\n"
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "HomoplasyFinder parser accepted non-numeric change count"
+        )
+
+    try:
+        adapters.parse_homoplasyfinder_report(
+            "Position\tConsistencyIndex\tMinimumNumberChangesOnTree\n"
+            "10\t0.5\t2.5\n"
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "HomoplasyFinder parser accepted non-integer change count"
+        )
 
     po = (
         "segsite_ID\tphysical_pos\tallele1\tallele2\ta1_count\ta2_count\n"

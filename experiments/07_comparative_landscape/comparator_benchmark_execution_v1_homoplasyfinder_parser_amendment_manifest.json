@@ -1,0 +1,41 @@
+{
+  "after_sha256": {
+    "adapters": "2266c88cf8bc3bb3c984d13db4a4dc388445d6d831bd79995bcb3ed65b0c6360",
+    "toy_validation": "e8802e6a235968e0688408a58fc4cae301586c1f220ddeb23cc33975af420ee3"
+  },
+  "authorization_consumed": true,
+  "before_sha256": {
+    "adapters": "78c04404c80f33ff3abd2c396eaf0f071133ad333d3568ab545e60beae7e58fa",
+    "toy_validation": "ee06b388b981e497305a25de2d3ba3d2115e93323e3e85b96b55cc7461db4238"
+  },
+  "changed_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HOMOPLASYFINDER_PARSER_AMENDMENT_V1",
+  "homoplasyfinder_jar_changed": false,
+  "homoplasyfinder_output_contract_changed": false,
+  "homoplasyfinder_recipe_changed": false,
+  "homoplasyfinder_run_contract_changed": false,
+  "homoplasyfinder_source_changed": false,
+  "input_adapter_changed": false,
+  "metric_changed": false,
+  "next_gate": "CLOSE_HOMOPLASYFINDER_SMOKE_AND_PROCEED_TO_PAML",
+  "other_comparator_changed": false,
+  "other_parser_changed": false,
+  "parent_authorization_commit": "d77443ffabd932adfc34df51932108f56fb8379b",
+  "parser_contract": {
+    "absent_count_is_empty_string": true,
+    "consistency_index_filtering_preserved": true,
+    "count_column": "MinimumNumberChangesOnTree",
+    "empty_count_is_empty_string": true,
+    "function": "parse_homoplasyfinder_report",
+    "integer_count_normalized_to_integer_string": true,
+    "invalid_non_numeric_count_fails": true,
+    "non_integer_numeric_count_fails": true,
+    "preserve_numeric_count": true
+  },
+  "scenario_changed": false,
+  "status": "FROZEN_AMENDMENT_V1",
+  "truth_changed": false
+}
