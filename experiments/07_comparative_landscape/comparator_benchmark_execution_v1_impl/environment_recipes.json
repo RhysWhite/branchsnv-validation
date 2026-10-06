@@ -68,7 +68,7 @@
       "output_contract": [
         "consistencyIndexReport_*.txt"
       ],
-      "run_contract": "java -jar homoplasyFinder.jar -fasta {alignment_fasta} -tree {tree_newick}",
+      "run_contract": "java -jar homoplasyFinder.jar --fasta {alignment_fasta} --tree {tree_newick}",
       "source_pin": "faed16f2ff1602a2a939663a942e0b8640b9bc50"
     },
     "PAML": {
