@@ -1,0 +1,40 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HOMOPLASYFINDER_CLI_AMENDMENT_001",
+  "authorized_change": {
+    "after": "java -jar homoplasyFinder.jar --fasta {alignment_fasta} --tree {tree_newick}",
+    "before": "java -jar homoplasyFinder.jar -fasta {alignment_fasta} -tree {tree_newick}",
+    "field": "run_contract",
+    "method": "HomoplasyFinder",
+    "reason": "Correct the CLI flag spelling to match the executable bundled at the frozen source revision."
+  },
+  "explicitly_not_authorized": {
+    "build_change": true,
+    "dependency_change": true,
+    "full_benchmark_execution": true,
+    "input_adapter_change": true,
+    "jar_change": true,
+    "metric_change": true,
+    "other_method_recipe_change": true,
+    "output_contract_change": true,
+    "output_parser_change": true,
+    "scenario_change": true,
+    "source_pin_change": true,
+    "truth_change": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_HOMOPLASYFINDER_CLI_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "9185bef84d69fb3458b07676c11d0864027f2f9d",
+  "recipe_before_sha256": "bfda0a3e1b5244ee3642f843cc22f56ac8efc61f0caaf6642ed4521d735b3b20",
+  "recipe_path": "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+  "rerun_authorized": false,
+  "smoke_success_requirement": "A rerun must both complete and produce at least one consistencyIndexReport_*.txt file.",
+  "source_pin": "faed16f2ff1602a2a939663a942e0b8640b9bc50",
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_observation": {
+    "attempt": "HomoplasyFinder/attempt_01_repository_jar",
+    "exit_status_behavior": "JAR returned zero despite rejecting the command, so output existence must also be required for smoke success.",
+    "jar_sha256": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b",
+    "observed_failure": "Frozen recipe used -fasta and -tree; JAR rejected -fasta.",
+    "observed_help": "Bundled repository JAR requires --fasta and --tree."
+  }
+}
