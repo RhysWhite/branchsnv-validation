@@ -85,8 +85,78 @@ def main():
     require(pml.splitlines()[0].startswith("id\tsite_"), "PastML table header")
     snpfa = adapters.snppar_mfasta_text(missing["observed_sequences"], positions)
     require("-" in snpfa, "SNPPar missing calls must be '-'")
-    gbk = adapters.minimal_genbank_text(toy1["root_sequence"])
+    gbk = adapters.minimal_genbank_text(
+        toy1["root_sequence"],
+        positions,
+    )
     require(gbk.endswith("//\n"), "GenBank terminator absent")
+
+    cds_lines = [
+        line
+        for line in gbk.splitlines()
+        if line.startswith("     CDS")
+    ]
+    require(len(cds_lines) == 1, "synthetic GenBank must contain one CDS")
+
+    cds_location = cds_lines[0].split()[-1]
+    cds_start, cds_end = [
+        int(x)
+        for x in cds_location.split("..")
+    ]
+
+    require(
+        cds_end - cds_start + 1 == 3,
+        "synthetic CDS must span exactly three bases",
+    )
+
+    variable_set = set(positions)
+
+    require(
+        variable_set.isdisjoint(
+            range(cds_start, cds_end + 1)
+        ),
+        "synthetic CDS overlaps a variable site",
+    )
+
+    eligible_starts = [
+        start
+        for start in range(
+            1,
+            len(toy1["root_sequence"]) - 1,
+        )
+        if variable_set.isdisjoint(
+            (start, start + 1, start + 2)
+        )
+    ]
+
+    require(
+        bool(eligible_starts),
+        "no variable-site-free triplet exists",
+    )
+
+    require(
+        cds_start == eligible_starts[0],
+        "synthetic CDS placement is not deterministic",
+    )
+
+    require(
+        '/locus_tag="SYNTH_CDS_001"' in gbk,
+        "synthetic CDS locus tag absent",
+    )
+
+    origin = gbk.split("ORIGIN\n", 1)[1].split("//", 1)[0]
+    rendered_sequence = "".join(
+        c
+        for c in origin.lower()
+        if c in "acgt"
+    ).upper()
+
+    require(
+        rendered_sequence == toy1["root_sequence"],
+        "synthetic GenBank changed the reference sequence",
+    )
+
+    print("PASS | synthetic SNPPar GenBank fixture contract")
     ctl = adapters.paml_baseml_ctl_text("seq.phy", "tree.nwk", "mlb")
     require("RateAncestor = 1" in ctl and "fix_blength = 2" in ctl, "PAML contract differs")
     arp = adapters.arpip_config_text("a.fa", "t.nwk", "out", 7)

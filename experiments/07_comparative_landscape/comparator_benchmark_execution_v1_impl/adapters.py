@@ -92,8 +92,36 @@ def positions_text(positions: Iterable[int]) -> str:
     return "".join(f"{p}\n" for p in positions)
 
 
-def minimal_genbank_text(root_sequence: str, locus: str = "BENCHREF") -> str:
+def minimal_genbank_text(
+    root_sequence: str,
+    variable_positions: Iterable[int],
+    locus: str = "BENCHREF",
+) -> str:
     seq = root_sequence.lower()
+    variable = {int(p) for p in variable_positions}
+
+    if len(seq) < 3:
+        raise ValueError("reference sequence must contain at least three bases")
+
+    if any(p < 1 or p > len(seq) for p in variable):
+        raise ValueError("variable position lies outside reference sequence")
+
+    cds_start = next(
+        (
+            start
+            for start in range(1, len(seq) - 1)
+            if variable.isdisjoint((start, start + 1, start + 2))
+        ),
+        None,
+    )
+
+    if cds_start is None:
+        raise ValueError(
+            "reference sequence contains no three-base interval free of variable sites"
+        )
+
+    cds_end = cds_start + 2
+
     lines = [
         f"LOCUS       {locus:<16}{len(seq):>11} bp    DNA     linear   BCT 01-JAN-2000",
         "DEFINITION  Synthetic benchmark reference.",
@@ -102,12 +130,16 @@ def minimal_genbank_text(root_sequence: str, locus: str = "BENCHREF") -> str:
         "FEATURES             Location/Qualifiers",
         f"     source          1..{len(seq)}",
         "                     /organism=\"synthetic construct\"",
+        f"     CDS             {cds_start}..{cds_end}",
+        "                     /locus_tag=\"SYNTH_CDS_001\"",
         "ORIGIN",
     ]
+
     for i in range(0, len(seq), 60):
         chunk = seq[i:i+60]
         groups = " ".join(chunk[j:j+10] for j in range(0, len(chunk), 10))
         lines.append(f"{i+1:>9} {groups}")
+
     lines.append("//")
     return "\n".join(lines) + "\n"
 
