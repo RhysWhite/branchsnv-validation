@@ -1,0 +1,31 @@
+{
+  "authorization_id": "PAML_TREE_SERIALIZER_AMENDMENT_001",
+  "authorized_change": {
+    "new_function": "paml_tree_text",
+    "requirement": "write n_taxa and one-tree count before the unchanged Newick record"
+  },
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "baseline_sha256": {
+    "adapters.py": "2266c88cf8bc3bb3c984d13db4a4dc388445d6d831bd79995bcb3ed65b0c6360",
+    "toy_validation.py": "e8802e6a235968e0688408a58fc4cae301586c1f220ddeb23cc33975af420ee3"
+  },
+  "next_gate": "IMPLEMENT_PAML_TREE_SERIALIZER_AMENDMENT_V1",
+  "not_authorized": [
+    "PAML source change",
+    "PAML binary change",
+    "PAML control-file change",
+    "tree topology change",
+    "branch-length change",
+    "model change",
+    "rst parser change",
+    "truth change",
+    "metric change",
+    "scenario change",
+    "full benchmark execution"
+  ],
+  "parent_commit": "ba8f0300f7da7b221c36ac7de034e8308eb23f5a",
+  "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}
