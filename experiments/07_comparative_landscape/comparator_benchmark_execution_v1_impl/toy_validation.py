@@ -401,6 +401,76 @@ def main():
         "ambiguous benchmark node mapping did not fail closed",
     )
 
+
+    # Synthetic FastML joint reconstruction with arbitrary internal labels.
+    fastml_tree = "((A:0.1,B:0.1)XAB:0.1,(C:0.1,D:0.1)XCD:0.1)XROOT;"
+    fastml_benchmark_tree = "((A:0.1,B:0.1):0.1,(C:0.1,D:0.1):0.1);"
+    fastml_joint = (
+        ">A\nAAAA\n"
+        ">B\nAAAG\n"
+        ">C\nAAAA\n"
+        ">D\nAAAA\n"
+        ">XAB\nAAAA\n"
+        ">XCD\nAAAA\n"
+        ">XROOT\nAAAA\n"
+    )
+
+    fastml_seqs = adapters.fastml_node_sequences_for_tree(
+        fastml_joint,
+        fastml_tree,
+        fastml_benchmark_tree,
+    )
+    fastml_events = adapters.events_from_node_sequences(
+        fastml_benchmark_tree,
+        fastml_seqs,
+        method="FastML",
+        scenario_id="TOY_FASTML",
+    )
+
+    require(len(fastml_seqs) == 7, "FastML node mapping fixture incomplete")
+    require(len(fastml_events) == 1, "FastML event fixture differs")
+    require(
+        fastml_events[0]["edge_id"]
+        == next(
+            v for k, v in vars(adapters).items()
+            if k.endswith("edge_ids_by_node")
+        )(fastml_benchmark_tree)["B"]
+        and fastml_events[0]["position"] == "4"
+        and fastml_events[0]["ancestral_state"] == "A"
+        and fastml_events[0]["derived_state"] == "G",
+        "FastML node mapping fixture differs",
+    )
+
+    require_value_error(
+        lambda: adapters.fastml_node_sequences_for_tree(
+            fastml_joint,
+            fastml_tree.replace("D:0.1", "E:0.1"),
+            fastml_benchmark_tree,
+        ),
+        "different tip sets",
+        "different-tip FastML mapping did not fail closed",
+    )
+
+    require_value_error(
+        lambda: adapters.fastml_node_sequences_for_tree(
+            fastml_joint,
+            fastml_tree,
+            "((A:0.1):0.1,B:0.1);",
+        ),
+        "ambiguous descendant-tip sets",
+        "ambiguous FastML mapping did not fail closed",
+    )
+
+    require_value_error(
+        lambda: adapters.fastml_node_sequences_for_tree(
+            fastml_joint.replace(">XCD\nAAAA\n", ""),
+            fastml_tree,
+            fastml_benchmark_tree,
+        ),
+        "missing reconstructed sequence",
+        "missing-sequence FastML mapping did not fail closed",
+    )
+
     print("PASS | synthetic tool-output parser fixtures")
 
     print("PASS | no third-party comparator installed or executed")

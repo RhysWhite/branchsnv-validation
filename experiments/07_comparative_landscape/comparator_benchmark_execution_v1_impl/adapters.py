@@ -634,6 +634,91 @@ def paml_node_sequences_for_tree(
     return out
 
 
+def fastml_node_sequences_for_tree(
+    joint_fasta_text: str,
+    fastml_newick: str,
+    benchmark_newick: str,
+) -> dict[str, str]:
+    sequences: dict[str, str] = {}
+    current: str | None = None
+    parts: list[str] = []
+
+    def store() -> None:
+        if current is None:
+            return
+        seq = "".join(parts).upper()
+        if not seq or not set(seq) <= set("ACGTN"):
+            raise ValueError(f"invalid FastML reconstructed sequence for node {current}")
+        sequences[current] = seq
+
+    for raw in joint_fasta_text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if line.startswith(">"):
+            store()
+            label = line[1:].split()[0]
+            if not label:
+                raise ValueError("empty FastML FASTA identifier")
+            if label in sequences:
+                raise ValueError(f"duplicate FastML FASTA identifier: {label}")
+            current = label
+            parts = []
+        else:
+            if current is None:
+                raise ValueError("FastML FASTA sequence before header")
+            parts.append(line)
+    store()
+
+    if not sequences:
+        raise ValueError("no FastML reconstructed sequences parsed")
+
+    fastml_desc = node_descendant_tips(fastml_newick)
+    benchmark_desc = node_descendant_tips(benchmark_newick)
+
+    def by_desc(
+        desc: dict[str, tuple[str, ...]],
+        tree_name: str,
+    ) -> dict[tuple[str, ...], str]:
+        out: dict[tuple[str, ...], str] = {}
+        for label, tips in desc.items():
+            if tips in out:
+                raise ValueError(
+                    f"{tree_name} tree has ambiguous descendant-tip sets"
+                )
+            out[tips] = label
+        return out
+
+    fastml_by_desc = by_desc(fastml_desc, "FastML")
+    benchmark_by_desc = by_desc(benchmark_desc, "benchmark")
+
+    fastml_tips = max(fastml_by_desc, key=len)
+    benchmark_tips = max(benchmark_by_desc, key=len)
+    if fastml_tips != benchmark_tips:
+        raise ValueError("FastML and benchmark trees contain different tip sets")
+
+    mapped: dict[str, str] = {}
+    for tips, fastml_label in fastml_by_desc.items():
+        if tips not in benchmark_by_desc:
+            raise ValueError("FastML node has no matching benchmark node")
+        mapped[fastml_label] = benchmark_by_desc[tips]
+
+    if len(set(mapped.values())) != len(mapped):
+        raise ValueError("FastML node mapping is not one-to-one")
+    if set(mapped.values()) != set(benchmark_desc):
+        raise ValueError("FastML node mapping does not cover the benchmark tree")
+
+    out: dict[str, str] = {}
+    for fastml_label, benchmark_label in mapped.items():
+        if fastml_label not in sequences:
+            raise ValueError(
+                f"missing reconstructed sequence for FastML node {fastml_label}"
+            )
+        out[benchmark_label] = sequences[fastml_label]
+
+    return out
+
+
 def parse_tabular_node_states(
     text: str,
     site_columns: Iterable[int],
