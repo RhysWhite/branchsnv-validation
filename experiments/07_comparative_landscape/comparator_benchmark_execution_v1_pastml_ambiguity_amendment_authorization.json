@@ -1,0 +1,43 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_PASTML_AMBIGUITY_AMENDMENT_001",
+  "authorized_change": {
+    "file": "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "function": "parse_tabular_node_states",
+    "reason": "Prevent repeated PastML rows from overwriting one another and silently converting ambiguous ancestral-state reconstruction into a falsely unambiguous nucleotide call.",
+    "rule": "Aggregate all rows by node and site. For each node-site cell, retain the nucleotide when exactly one distinct A/C/G/T state is reported. Encode the cell as N when no nucleotide state or more than one distinct nucleotide state is reported."
+  },
+  "explicitly_not_authorized": {
+    "any_other_adapter_change": true,
+    "benchmark_scenario_change": true,
+    "full_benchmark_dataset_generation": true,
+    "full_benchmark_execution": true,
+    "metric_change": true,
+    "other_comparator_change": true,
+    "pastml_inference_parameter_change": true,
+    "pastml_source_change": true,
+    "pastml_version_change": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "truth_generator_change": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_PASTML_AMBIGUITY_ADAPTER_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_environment_smoke_authorization_commit": "423d0b1b98a207c4287aadf56ab28c18e5003f96",
+  "required_validation": [
+    "Existing toy implementation validation must still pass.",
+    "Add a focused PastML parser test with repeated rows.",
+    "The focused test must prove singleton states remain unchanged.",
+    "The focused test must prove multi-state node-site reconstructions become N.",
+    "The focused test must prove downstream branch-event normalization does not emit an event when either endpoint is N.",
+    "PastML source pin, version, command-line inference settings and benchmark truth must remain unchanged."
+  ],
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_smoke_observation": {
+    "interface": "--out_data",
+    "method": "PastML",
+    "observed_behavior": "PastML can represent an ambiguous node-site reconstruction using multiple rows for the same node, with different non-empty states for that site.",
+    "source_pin": "1654471801c8104b51ac45eda625c289d8e3f1ac",
+    "version": "1.9.51"
+  }
+}
