@@ -536,6 +536,104 @@ def parse_paml_rst_sequences(text: str) -> dict[str, str]:
     return out
 
 
+def paml_node_sequences_for_tree(
+    rst_text: str,
+    benchmark_newick: str,
+) -> dict[str, str]:
+    sequences = parse_paml_rst_sequences(rst_text)
+
+    branch_re = re.compile(
+        r"^Branch\s+\d+:\s+(\d+)\.\.(\d+)(?:\s+\(([^)]+)\))?\s*$",
+        re.M,
+    )
+    branches = branch_re.findall(rst_text)
+    if not branches:
+        raise ValueError("PAML rst lacks explicit branch graph")
+
+    children: dict[str, list[str]] = {}
+    parent_of: dict[str, str] = {}
+    tip_name: dict[str, str] = {}
+    nodes: set[str] = set()
+
+    for parent, child, annotated_tip in branches:
+        nodes.update((parent, child))
+        if child in parent_of and parent_of[child] != parent:
+            raise ValueError("PAML branch graph gives a node multiple parents")
+        parent_of[child] = parent
+        children.setdefault(parent, []).append(child)
+
+        if annotated_tip:
+            annotated_tip = annotated_tip.strip()
+            if child in tip_name and tip_name[child] != annotated_tip:
+                raise ValueError("PAML tip annotation conflicts")
+            tip_name[child] = annotated_tip
+
+    roots = sorted(nodes - set(parent_of))
+    if len(roots) != 1:
+        raise ValueError("PAML branch graph does not have exactly one root")
+    root = roots[0]
+
+    visiting: set[str] = set()
+    visited: set[str] = set()
+    paml_desc: dict[str, tuple[str, ...]] = {}
+
+    def descend(node: str) -> tuple[str, ...]:
+        if node in visiting:
+            raise ValueError("PAML branch graph contains a cycle")
+        if node in visited:
+            return paml_desc[node]
+
+        visiting.add(node)
+        kids = children.get(node, [])
+        if kids:
+            if node in tip_name:
+                raise ValueError("PAML internal node has a tip annotation")
+            tips = tuple(sorted(x for child in kids for x in descend(child)))
+        else:
+            if node not in tip_name:
+                raise ValueError("PAML terminal node lacks a tip annotation")
+            tips = (tip_name[node],)
+
+        visiting.remove(node)
+        visited.add(node)
+        paml_desc[node] = tips
+        return tips
+
+    descend(root)
+    if visited != nodes:
+        raise ValueError("PAML branch graph is disconnected")
+
+    benchmark_desc = node_descendant_tips(benchmark_newick)
+    by_desc: dict[tuple[str, ...], str] = {}
+    for label, tips in benchmark_desc.items():
+        if tips in by_desc:
+            raise ValueError("benchmark tree has ambiguous descendant-tip sets")
+        by_desc[tips] = label
+
+    if paml_desc[root] not in by_desc:
+        raise ValueError("PAML and benchmark trees contain different tip sets")
+
+    mapped: dict[str, str] = {}
+    for node, tips in paml_desc.items():
+        if tips not in by_desc:
+            raise ValueError("PAML node has no matching benchmark node")
+        mapped[node] = by_desc[tips]
+
+    if len(set(mapped.values())) != len(mapped):
+        raise ValueError("PAML node mapping is not one-to-one")
+    if set(mapped.values()) != set(benchmark_desc):
+        raise ValueError("PAML node mapping does not cover the benchmark tree")
+
+    out: dict[str, str] = {}
+    for node, benchmark_label in mapped.items():
+        source_label = tip_name[node] if node in tip_name else f"node#{node}"
+        if source_label not in sequences:
+            raise ValueError(f"PAML reconstructed sequence missing for node {node}")
+        out[benchmark_label] = sequences[source_label]
+
+    return out
+
+
 def parse_tabular_node_states(
     text: str,
     site_columns: Iterable[int],

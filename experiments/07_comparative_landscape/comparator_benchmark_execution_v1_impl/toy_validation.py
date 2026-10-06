@@ -16,6 +16,15 @@ def require(cond, msg):
         raise AssertionError(msg)
 
 
+def require_value_error(fn, expected, msg):
+    try:
+        fn()
+    except ValueError as exc:
+        require(expected in str(exc), msg)
+    else:
+        raise AssertionError(msg)
+
+
 def main():
     print("===== TOY-ONLY IMPLEMENTATION VALIDATION =====")
 
@@ -285,6 +294,113 @@ def main():
         scenario_id="TOY",
     )
     require(len(parsed_sp) == 1 and parsed_sp[0]["edge_id"] == toy1["edge_ids"][child], "SNPPar parser fixture differs")
+    # Synthetic PAML rst: internal numbering is intentionally arbitrary.
+    paml_tree = "((A:0.1,B:0.1):0.1,(C:0.1,D:0.1):0.1);"
+    paml_rst = (
+        "Branch 1:    20..30\n"
+        "Branch 2:    30..1  (A)\n"
+        "Branch 3:    30..2  (B)\n"
+        "Branch 4:    20..40\n"
+        "Branch 5:    40..3  (C)\n"
+        "Branch 6:    40..4  (D)\n"
+        "List of extant and reconstructed sequences\n"
+        "     7     4\n"
+        "A                 AAAA\n"
+        "B                 AAAG\n"
+        "C                 AAAA\n"
+        "D                 AAAA\n"
+        "node #20          AAAA\n"
+        "node #30          AAAA\n"
+        "node #40          AAAA\n"
+        "Overall accuracy\n"
+    )
+    paml_seqs = adapters.paml_node_sequences_for_tree(paml_rst, paml_tree)
+    paml_events = adapters.events_from_node_sequences(
+        paml_tree,
+        paml_seqs,
+        method="PAML",
+        scenario_id="TOY_PAML",
+    )
+    require(len(paml_seqs) == 7, "PAML node mapping fixture incomplete")
+    require(len(paml_events) == 1, "PAML event fixture differs")
+    require(
+        paml_events[0]["edge_id"] == next(v for k, v in vars(adapters).items() if k.endswith("edge_ids_by_node"))(paml_tree)["B"]
+        and paml_events[0]["position"] == "4"
+        and paml_events[0]["ancestral_state"] == "A"
+        and paml_events[0]["derived_state"] == "G",
+        "PAML node mapping fixture differs",
+    )
+
+    paml_incomplete = paml_rst.replace(
+        "Branch 6:    40..4  (D)\n",
+        "",
+    )
+    require_value_error(
+        lambda: adapters.paml_node_sequences_for_tree(paml_incomplete, paml_tree),
+        "different tip sets",
+        "incomplete PAML mapping did not fail closed",
+    )
+
+    paml_conflicting = paml_rst.replace(
+        "List of extant and reconstructed sequences\n",
+        "Branch 7:    99..2  (B)\nList of extant and reconstructed sequences\n",
+    )
+    require_value_error(
+        lambda: adapters.paml_node_sequences_for_tree(paml_conflicting, paml_tree),
+        "multiple parents",
+        "conflicting PAML parentage did not fail closed",
+    )
+
+    paml_disconnected = paml_rst.replace(
+        "Branch 1:    20..30\n",
+        "Branch 1:    50..30\n",
+    )
+    require_value_error(
+        lambda: adapters.paml_node_sequences_for_tree(paml_disconnected, paml_tree),
+        "exactly one root",
+        "disconnected PAML graph did not fail closed",
+    )
+
+    paml_nonbijective_tree = "(A:0.1,B:0.1);"
+    paml_nonbijective_rst = (
+        "Branch 1:    20..30\n"
+        "Branch 2:    30..1  (A)\n"
+        "Branch 3:    30..2  (B)\n"
+        "List of extant and reconstructed sequences\n"
+        "A AAAA\n"
+        "B AAAG\n"
+        "node #20 AAAA\n"
+        "node #30 AAAA\n"
+        "Overall accuracy\n"
+    )
+    require_value_error(
+        lambda: adapters.paml_node_sequences_for_tree(
+            paml_nonbijective_rst,
+            paml_nonbijective_tree,
+        ),
+        "not one-to-one",
+        "non-bijective PAML mapping did not fail closed",
+    )
+
+    paml_ambiguous_tree = "((A:0.1):0.1,B:0.1);"
+    paml_ambiguous_rst = (
+        "Branch 1:    20..1  (A)\n"
+        "Branch 2:    20..2  (B)\n"
+        "List of extant and reconstructed sequences\n"
+        "A AAAA\n"
+        "B AAAG\n"
+        "node #20 AAAA\n"
+        "Overall accuracy\n"
+    )
+    require_value_error(
+        lambda: adapters.paml_node_sequences_for_tree(
+            paml_ambiguous_rst,
+            paml_ambiguous_tree,
+        ),
+        "ambiguous descendant-tip sets",
+        "ambiguous benchmark node mapping did not fail closed",
+    )
+
     print("PASS | synthetic tool-output parser fixtures")
 
     print("PASS | no third-party comparator installed or executed")
