@@ -1,0 +1,62 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_SNPPAR_REFERENCE_FIXTURE_AMENDMENT_001",
+  "authorized_change": {
+    "adapter_function": "minimal_genbank_text",
+    "reason": "Supply the minimum annotated GenBank structure required by SNPPar without changing sequence data, benchmark mutations, phylogeny, truth or scored endpoints.",
+    "requirements": [
+      "Require the scenario variable positions as an input.",
+      "Preserve the root nucleotide sequence exactly.",
+      "Preserve all variable-site coordinates exactly.",
+      "Select deterministically the first consecutive three-base interval containing no variable position.",
+      "Emit exactly one synthetic CDS feature at that interval.",
+      "Assign that CDS a stable synthetic locus_tag.",
+      "Do not place any benchmark variable position inside the synthetic CDS.",
+      "Update toy validation for the amended function contract.",
+      "Add focused assertions for CDS presence, deterministic placement and non-overlap with variable positions."
+    ]
+  },
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "baseline_sha256": {
+    "adapters": "5745112944c348081a7260d57428fbf561c831b2615902a138fee0a42e839d42",
+    "toy_validation": "646cd346931ccbe8f988c5ee17ffb4302fa5e2cf2c8d84cd1037621ae46ed3eb"
+  },
+  "explicitly_not_authorized": {
+    "benchmark_scenario_change": true,
+    "event_ledger_change": true,
+    "full_150_scenario_dataset_generation": true,
+    "full_benchmark_execution": true,
+    "metric_change": true,
+    "other_comparator_change": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "root_sequence_change": true,
+    "snppar_environment_change": true,
+    "snppar_inference_setting_change": true,
+    "snppar_output_parser_change": true,
+    "snppar_run_contract_change": true,
+    "snppar_source_change": true,
+    "snppar_source_pin_change": true,
+    "tree_change": true,
+    "truth_generator_change": true,
+    "variable_position_change": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_SNPPAR_REFERENCE_FIXTURE_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "6c18db058b7e4b9f71f3e499fdf08d094ca5e1d8",
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_observations": {
+    "benchmark_dimensions": {
+      "root_sequence_length_bp": 10000,
+      "variable_positions_per_scenario": 40
+    },
+    "method": "SNPPar",
+    "observed_failure": "SNPPar successfully read the toy SNP alignment and reference sequence but failed while constructing its gene index because the synthetic GenBank fixture contained no CDS feature.",
+    "source_behavior": "SNPPar indexes CDS features. Its zero-CDS fallback references an out-of-scope variable and fails before tree processing.",
+    "source_pin": "0386df8edcff26faf242bc268c5f8865b09c9de9",
+    "source_ref": "v1.2"
+  }
+}
