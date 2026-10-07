@@ -1,0 +1,64 @@
+{
+  "authorization_consumed": true,
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_POUTINE_MAP_SERIALIZATION_AMENDMENT_001",
+  "change": {
+    "duplicate_positions_rejected": true,
+    "final_newline": true,
+    "function": "poutine_physical_positions_map_text",
+    "header": false,
+    "input_order_preserved": true,
+    "marker_numbering": "one_based_projected_site_order",
+    "non_positive_positions_rejected": true,
+    "serialization": "1<TAB>markerN<TAB>0<TAB>GENOMIC_POSITION"
+  },
+  "changed_implementation_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_POUTINE_MAP_SERIALIZATION_AMENDMENT_V1",
+  "implementation_after_sha256": {
+    "adapters": "5c4e8d95fa104882952116e35c060df0f6bff87547fc9cae7c838b7247eaa49d",
+    "toy_validation": "7058dd7f8a490274cb49c49109b892923613f59916f77d7fa736926d92b5eb03"
+  },
+  "implementation_before_sha256": {
+    "adapters": "8d9726c58663f6e80299ff14c9e0c04878473770a8d92d398b902d3f6ddf49c1",
+    "toy_validation": "76d519a3476d690228136a38f430f0d6d474774623b533bffffe25fd4c3576de"
+  },
+  "next_gate": "REAUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V3",
+  "parent_authorization_commit": "91063725b4a9ab5bb20461bd90c3200020f440fe",
+  "runner_v2_authorization": {
+    "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V2_001",
+    "commit": "8c7c68715e2d2caa26e4115e9c4f315825d0932f",
+    "consumed": false,
+    "must_not_be_consumed": true,
+    "superseded_by_upstream_frozen_identity_change": true
+  },
+  "status": "FROZEN_AMENDMENT_V1",
+  "successful_smoke_evidence": {
+    "byte_exact_reproduction": true,
+    "path": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.map",
+    "sha256": "d2c3ee9ad184a8523f6e6e505612a8c5f63730dc71a1806598a5df8a82ae358b"
+  },
+  "unchanged_contracts": {
+    "POUTINE_dummy_phenotype_policy": true,
+    "POUTINE_environment": true,
+    "POUTINE_output_parser": true,
+    "POUTINE_parameters": true,
+    "POUTINE_run_contract": true,
+    "POUTINE_scoring_contract": true,
+    "POUTINE_source_pin": true,
+    "POUTINE_variant_fasta_serialization": true,
+    "benchmark_dataset": true,
+    "metrics": true,
+    "scenario_definitions": true,
+    "truth_generator": true
+  },
+  "validation": {
+    "benchmark_truth_accessed": false,
+    "pastml_ambiguity_regression": "PASS",
+    "poutine_output_parser_regression": "PASS",
+    "successful_smoke_map_byte_exact_crosscheck": "PASS",
+    "third_party_comparator_executed": false,
+    "toy_implementation_validation": "PASS"
+  }
+}

@@ -233,6 +233,34 @@ def poutine_dummy_phenotype_text(tips: Iterable[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+
+def poutine_physical_positions_map_text(
+    positions: Iterable[int],
+) -> str:
+    """Serialize projected POUTINE sites as the frozen four-column map."""
+    positions = list(positions)
+
+    for position in positions:
+        if (
+            not isinstance(position, int)
+            or isinstance(position, bool)
+            or position < 1
+        ):
+            raise ValueError(
+                "POUTINE physical positions must be positive integers"
+            )
+
+    if len(set(positions)) != len(positions):
+        raise ValueError(
+            "POUTINE physical positions contain duplicates"
+        )
+
+    return "".join(
+        f"1\tmarker{i}\t0\t{position}\n"
+        for i, position in enumerate(positions, start=1)
+    )
+
+
 def poutine_variant_fasta_text(
     observed_sequences: dict[str, str],
     positions: Iterable[int],

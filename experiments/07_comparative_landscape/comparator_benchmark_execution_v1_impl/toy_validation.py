@@ -94,6 +94,55 @@ def main():
     require(pml.splitlines()[0].startswith("id\tsite_"), "PastML table header")
     snpfa = adapters.snppar_mfasta_text(missing["observed_sequences"], positions)
     require("-" in snpfa, "SNPPar missing calls must be '-'")
+
+
+    poutine_map = adapters.poutine_physical_positions_map_text(
+        [10, 20, 30, 40]
+    )
+
+    require(
+        poutine_map == (
+            "1\tmarker1\t0\t10\n"
+            "1\tmarker2\t0\t20\n"
+            "1\tmarker3\t0\t30\n"
+            "1\tmarker4\t0\t40\n"
+        ),
+        "POUTINE physical-position map serialization differs",
+    )
+
+    require(
+        adapters.poutine_physical_positions_map_text(
+            [40, 10]
+        ) == (
+            "1\tmarker1\t0\t40\n"
+            "1\tmarker2\t0\t10\n"
+        ),
+        "POUTINE physical-position map did not preserve input order",
+    )
+
+    try:
+        adapters.poutine_physical_positions_map_text(
+            [10, 10]
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "duplicate POUTINE physical positions did not fail closed"
+        )
+
+    try:
+        adapters.poutine_physical_positions_map_text(
+            [10, 0]
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "non-positive POUTINE physical position did not fail closed"
+        )
+
+    print("PASS | POUTINE physical-position map serialization contract")
     gbk = adapters.minimal_genbank_text(
         toy1["root_sequence"],
         positions,
