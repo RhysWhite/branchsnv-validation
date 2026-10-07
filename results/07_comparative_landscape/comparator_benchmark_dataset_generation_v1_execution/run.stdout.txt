@@ -1,0 +1,5 @@
+PASS | generated exactly 150 frozen benchmark scenarios
+PASS | comparator inputs and benchmark truth stored separately
+PASS | benchmark_dataset_manifest.tsv written
+PASS | dataset checksums written
+PASS | output root = results/07_comparative_landscape/comparator_benchmark_dataset_v1
