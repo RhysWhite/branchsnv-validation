@@ -471,6 +471,79 @@ def main():
         "missing-sequence FastML mapping did not fail closed",
     )
 
+
+    # Synthetic ARPIP reconstruction with labeled internal nodes.
+    arpip_tree = "((A:0.1,B:0.1)V2:0.1,(C:0.1,D:0.1)V5:0.1)root;"
+    arpip_benchmark_tree = "((A:0.1,B:0.1):0.1,(C:0.1,D:0.1):0.1);"
+    arpip_ancestral = (
+        ">V2\nAAAA\n"
+        ">V5\nAAAA\n"
+        ">root\nAAAA\n"
+    )
+    arpip_observed = {
+        "A": "AAAA",
+        "B": "AAAG",
+        "C": "AAAA",
+        "D": "AAAA",
+    }
+
+    arpip_seqs = adapters.arpip_node_sequences_for_tree(
+        arpip_ancestral,
+        arpip_tree,
+        arpip_benchmark_tree,
+        arpip_observed,
+    )
+    arpip_events = adapters.events_from_node_sequences(
+        arpip_benchmark_tree,
+        arpip_seqs,
+        method="ARPIP",
+        scenario_id="TOY_ARPIP",
+    )
+
+    require(len(arpip_seqs) == 7, "ARPIP node mapping fixture incomplete")
+    require(len(arpip_events) == 1, "ARPIP event fixture differs")
+    require(
+        arpip_events[0]["edge_id"]
+        == adapters.canonical_edge_ids_by_node(arpip_benchmark_tree)["B"]
+        and arpip_events[0]["position"] == "4"
+        and arpip_events[0]["ancestral_state"] == "A"
+        and arpip_events[0]["derived_state"] == "G",
+        "ARPIP node mapping fixture differs",
+    )
+
+    require_value_error(
+        lambda: adapters.arpip_node_sequences_for_tree(
+            arpip_ancestral,
+            arpip_tree.replace("D:0.1", "E:0.1"),
+            arpip_benchmark_tree,
+            arpip_observed,
+        ),
+        "different tip sets",
+        "different-tip ARPIP mapping did not fail closed",
+    )
+
+    require_value_error(
+        lambda: adapters.arpip_node_sequences_for_tree(
+            arpip_ancestral,
+            arpip_tree,
+            "((A:0.1):0.1,B:0.1);",
+            arpip_observed,
+        ),
+        "ambiguous descendant-tip sets",
+        "ambiguous ARPIP mapping did not fail closed",
+    )
+
+    require_value_error(
+        lambda: adapters.arpip_node_sequences_for_tree(
+            arpip_ancestral.replace(">V5\nAAAA\n", ""),
+            arpip_tree,
+            arpip_benchmark_tree,
+            arpip_observed,
+        ),
+        "missing reconstructed sequence",
+        "missing-sequence ARPIP mapping did not fail closed",
+    )
+
     print("PASS | synthetic tool-output parser fixtures")
 
     print("PASS | no third-party comparator installed or executed")

@@ -719,6 +719,109 @@ def fastml_node_sequences_for_tree(
     return out
 
 
+def arpip_node_sequences_for_tree(
+    ancestral_fasta_text: str,
+    arpip_newick: str,
+    benchmark_newick: str,
+    observed_tip_sequences: dict[str, str],
+) -> dict[str, str]:
+    reconstructed: dict[str, str] = {}
+    current: str | None = None
+    parts: list[str] = []
+
+    def store() -> None:
+        if current is None:
+            return
+        seq = "".join(parts).upper()
+        if not seq or not set(seq) <= set("ACGTN"):
+            raise ValueError(
+                f"invalid ARPIP reconstructed sequence for node {current}"
+            )
+        if current in reconstructed:
+            raise ValueError(
+                f"duplicate ARPIP FASTA identifier: {current}"
+            )
+        reconstructed[current] = seq
+
+    for raw in ancestral_fasta_text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if line.startswith(">"):
+            store()
+            current = line[1:].split()[0]
+            if not current:
+                raise ValueError("empty ARPIP FASTA identifier")
+            parts = []
+        else:
+            if current is None:
+                raise ValueError("ARPIP FASTA sequence before header")
+            parts.append(line)
+    store()
+
+    if not reconstructed:
+        raise ValueError("no ARPIP reconstructed sequences parsed")
+
+    arpip_desc = node_descendant_tips(arpip_newick)
+    benchmark_desc = node_descendant_tips(benchmark_newick)
+
+    def by_desc(
+        desc: dict[str, tuple[str, ...]],
+        tree_name: str,
+    ) -> dict[tuple[str, ...], str]:
+        out: dict[tuple[str, ...], str] = {}
+        for label, tips in desc.items():
+            if tips in out:
+                raise ValueError(
+                    f"{tree_name} tree has ambiguous descendant-tip sets"
+                )
+            out[tips] = label
+        return out
+
+    arpip_by_desc = by_desc(arpip_desc, "ARPIP")
+    benchmark_by_desc = by_desc(benchmark_desc, "benchmark")
+
+    arpip_tips = max(arpip_by_desc, key=len)
+    benchmark_tips = max(benchmark_by_desc, key=len)
+    if arpip_tips != benchmark_tips:
+        raise ValueError("ARPIP and benchmark trees contain different tip sets")
+
+    if set(observed_tip_sequences) != set(arpip_tips):
+        raise ValueError("observed tip sequences do not match ARPIP tree tips")
+
+    sequences = dict(reconstructed)
+    for tip in arpip_tips:
+        if tip in sequences:
+            raise ValueError(
+                f"ARPIP ancestral FASTA unexpectedly contains tip {tip}"
+            )
+        seq = observed_tip_sequences[tip].upper()
+        if not seq or not set(seq) <= set("ACGTN"):
+            raise ValueError(f"invalid observed sequence for tip {tip}")
+        sequences[tip] = seq
+
+    mapped: dict[str, str] = {}
+    for tips, arpip_label in arpip_by_desc.items():
+        if tips not in benchmark_by_desc:
+            raise ValueError("ARPIP node has no matching benchmark node")
+        mapped[arpip_label] = benchmark_by_desc[tips]
+
+    if len(set(mapped.values())) != len(mapped):
+        raise ValueError("ARPIP node mapping is not one-to-one")
+    if set(mapped.values()) != set(benchmark_desc):
+        raise ValueError("ARPIP node mapping does not cover the benchmark tree")
+
+    out: dict[str, str] = {}
+    for arpip_label, benchmark_label in mapped.items():
+        if arpip_label not in sequences:
+            raise ValueError(
+                f"missing reconstructed sequence for ARPIP node {arpip_label}"
+            )
+        out[benchmark_label] = sequences[arpip_label]
+
+    return out
+
+
 def parse_tabular_node_states(
     text: str,
     site_columns: Iterable[int],
