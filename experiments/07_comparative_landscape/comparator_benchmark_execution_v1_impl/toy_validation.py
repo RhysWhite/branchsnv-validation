@@ -544,6 +544,194 @@ def main():
         "missing-sequence ARPIP mapping did not fail closed",
     )
 
+    # Generic descendant-tip-set mapping and projected genomic coordinates.
+    source_tree = (
+        "((A:0.1,B:0.1)SRC_LEFT:0.1,"
+        "(C:0.1,D:0.1)SRC_RIGHT:0.1)SRC_ROOT;"
+    )
+    benchmark_tree = (
+        "((A:0.1,B:0.1)BENCH_LEFT:0.1,"
+        "(C:0.1,D:0.1)BENCH_RIGHT:0.1)BENCH_ROOT;"
+    )
+
+    source_projected_sequences = {
+        "SRC_ROOT": "AA",
+        "SRC_LEFT": "AA",
+        "SRC_RIGHT": "AA",
+        "A": "GA",
+        "B": "AA",
+        "C": "AT",
+        "D": "AA",
+    }
+
+    mapped_projected_sequences = (
+        adapters.map_node_sequences_by_descendant_tips(
+            source_tree,
+            benchmark_tree,
+            source_projected_sequences,
+        )
+    )
+
+    require(
+        set(mapped_projected_sequences) == {
+            "BENCH_ROOT",
+            "BENCH_LEFT",
+            "BENCH_RIGHT",
+            "A",
+            "B",
+            "C",
+            "D",
+        },
+        "generic descendant-tip node mapping did not cover benchmark tree",
+    )
+
+    projected_events = adapters.events_from_projected_node_sequences(
+        benchmark_tree,
+        mapped_projected_sequences,
+        [253, 9964],
+        method="PastML",
+        scenario_id="TOY_PASTML_PROJECTED",
+    )
+
+    require(
+        sorted(event["position"] for event in projected_events)
+        == ["253", "9964"],
+        f"projected genomic positions differ: {projected_events!r}",
+    )
+
+    require(
+        all(
+            event["position"] not in {"1", "2"}
+            for event in projected_events
+        ),
+        "projected indices leaked into genomic event coordinates",
+    )
+
+    try:
+        adapters.map_node_sequences_by_descendant_tips(
+            "((A:0.1,B:0.1)X:0.1,(C:0.1,E:0.1)Y:0.1)R;",
+            benchmark_tree,
+            {
+                "R": "AA",
+                "X": "AA",
+                "Y": "AA",
+                "A": "AA",
+                "B": "AA",
+                "C": "AA",
+                "E": "AA",
+            },
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "different-tip generic node mapping did not fail closed"
+        )
+
+    try:
+        adapters.map_node_sequences_by_descendant_tips(
+            "((A:0.1,B:0.1)DUP:0.1,"
+            "(C:0.1,D:0.1)DUP:0.1)ROOT;",
+            benchmark_tree,
+            {
+                "ROOT": "AA",
+                "DUP": "AA",
+                "A": "AA",
+                "B": "AA",
+                "C": "AA",
+                "D": "AA",
+            },
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "ambiguous generic node mapping did not fail closed"
+        )
+
+    missing_source_sequences = dict(source_projected_sequences)
+    del missing_source_sequences["SRC_LEFT"]
+
+    try:
+        adapters.map_node_sequences_by_descendant_tips(
+            source_tree,
+            benchmark_tree,
+            missing_source_sequences,
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(
+            "missing-node generic mapping did not fail closed"
+        )
+
+    print("PASS | generic descendant-tip node mapping fixture")
+    print("PASS | projected PastML coordinates preserve genomic positions")
+
+    # SNPPar recurrent-site derivation from normalized homoplasic events.
+    snppar_events = [
+        {
+            "scenario_id": "TOY_SNPPAR",
+            "method": "SNPPar",
+            "edge_id": "edge_1",
+            "position": "20",
+            "ancestral_state": "A",
+            "derived_state": "G",
+        },
+        {
+            "scenario_id": "TOY_SNPPAR",
+            "method": "SNPPar",
+            "edge_id": "edge_2",
+            "position": "20",
+            "ancestral_state": "A",
+            "derived_state": "G",
+        },
+        {
+            "scenario_id": "TOY_SNPPAR",
+            "method": "SNPPar",
+            "edge_id": "edge_3",
+            "position": "30",
+            "ancestral_state": "C",
+            "derived_state": "T",
+        },
+    ]
+
+    require(
+        adapters.snppar_recurrent_sites_from_branch_events(
+            snppar_events
+        ) == [
+            {
+                "position": "20",
+                "reported_recurrence_count_if_available": "2",
+            }
+        ],
+        "SNPPar recurrent-site derivation fixture differs",
+    )
+
+    require(
+        adapters.snppar_recurrent_sites_from_branch_events(
+            [snppar_events[2]]
+        ) == [],
+        "single SNPPar branch event was incorrectly called recurrent",
+    )
+
+    try:
+        adapters.snppar_recurrent_sites_from_branch_events([
+            snppar_events[0],
+            dict(snppar_events[0]),
+        ])
+    except ValueError as exc:
+        require(
+            "duplicate SNPPar branch event" in str(exc),
+            "duplicate SNPPar failure message differs",
+        )
+    else:
+        raise AssertionError(
+            "duplicate SNPPar branch event did not fail closed"
+        )
+
+    print("PASS | SNPPar recurrent-site normalization fixture")
+
     # TreeTime recurrent-site derivation from normalized branch events.
     treetime_events = [
         {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e1", "position": "10", "ancestral_state": "A", "derived_state": "G"},

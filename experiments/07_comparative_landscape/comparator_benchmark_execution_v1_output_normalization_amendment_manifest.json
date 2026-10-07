@@ -1,0 +1,72 @@
+{
+  "authorization_consumed": true,
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_OUTPUT_NORMALIZATION_AMENDMENT_001",
+  "changed_implementation_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "execution_boundary": {
+    "benchmark_truth_accessed": false,
+    "benchmark_truth_used_for_debugging": false,
+    "canonical_benchmark_executed": false,
+    "production_bridge_performed": false,
+    "third_party_comparator_executed": false
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_OUTPUT_NORMALIZATION_AMENDMENT_V1",
+  "implementation_after_sha256": {
+    "adapters": "8d9726c58663f6e80299ff14c9e0c04878473770a8d92d398b902d3f6ddf49c1",
+    "environment_recipes": "957ab67424610c774d2d863ef2e0ab0797cff715221232547dfcd49c53b58668",
+    "toy_validation": "76d519a3476d690228136a38f430f0d6d474774623b533bffffe25fd4c3576de"
+  },
+  "implementation_before_sha256": {
+    "adapters": "bd79d8a856fe923dd9b19820ea35cc197c3377f72b621eff6f83b6ed70654ac1",
+    "environment_recipes": "7aeede3e317bbe02d50b065cd0da91316c77da5d408c01c2eee428d72ac23bd9",
+    "toy_validation": "8625285c92f53a46db5cf2a906ea1879d0ec81d4144f70d7203c698037bc8889"
+  },
+  "next_gate": "REAUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V2",
+  "parent_authorization_commit": "ceb9472dc0b17b73262881ee49f3fa10f9f62a84",
+  "pastml": {
+    "ambiguity_rule": "zero or multiple A/C/G/T states remain N and do not emit a discrete branch event",
+    "named_output_tree_added_to_output_contract": "named.tree_tree.nwk",
+    "node_mapping": "sorted descendant-tip-set identity",
+    "projected_coordinate_rule": "projected state index i maps to frozen genomic_positions[i]"
+  },
+  "runner_authorization_v1": {
+    "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_001",
+    "consumed": false,
+    "must_not_be_consumed": true,
+    "superseded_by_upstream_frozen_identity_change": true
+  },
+  "snppar": {
+    "homoplasy_source": "homoplasic_events_all_calls.tsv",
+    "recurrent_site_rule": "genomic position represented by at least two distinct normalized branch events",
+    "reported_recurrence_count_if_available": "number of distinct normalized branch events at the position"
+  },
+  "status": "FROZEN_AMENDMENT_V1",
+  "treetime": {
+    "ancestral_parameters_changed": false,
+    "generic_descendant_tip_mapping_available": true,
+    "recurrent_site_definition_changed": false
+  },
+  "unchanged_contracts": {
+    "benchmark_dataset": true,
+    "benchmark_scenarios": true,
+    "comparator_inference_parameters": true,
+    "comparator_versions": true,
+    "metrics": true,
+    "other_comparator_adapters": true,
+    "source_pins": true,
+    "truth_generator": true
+  },
+  "validation": {
+    "historical_smoke_normalization_audit": {
+      "PastML": "named output tree maps by descendant-tip identity; ambiguity preserved; no false discrete events",
+      "SNPPar": "two native homoplasic branch events normalize to recurrent genomic site 20 with count 2",
+      "TreeTime": "annotated tree plus ancestral FASTA maps by descendant-tip identity; A20G retained; single event remains non-recurrent",
+      "status": "PASS"
+    },
+    "pastml_ambiguity_regression": "PASS",
+    "toy_implementation_validation": "PASS"
+  }
+}

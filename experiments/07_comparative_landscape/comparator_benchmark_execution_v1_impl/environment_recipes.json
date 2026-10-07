@@ -132,7 +132,8 @@
         "Python environment from exact source release"
       ],
       "output_contract": [
-        "reconstructed_states.tsv"
+        "reconstructed_states.tsv",
+        "named.tree_tree.nwk"
       ],
       "release": "1.9.51",
       "run_contract": "pastml --tree {tree_newick} --data {pastml_table} --columns {site_columns} --data_sep '\\t' --out_data {out_dir}/reconstructed_states.tsv --work_dir {out_dir}",

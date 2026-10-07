@@ -871,6 +871,178 @@ def parse_tabular_node_states(
     return out
 
 
+
+def map_node_sequences_by_descendant_tips(
+    source_newick_text: str,
+    benchmark_newick_text: str,
+    source_node_sequences: dict[str, str],
+) -> dict[str, str]:
+    """Map source-tree node sequences onto benchmark node labels by clade identity.
+
+    Internal labels are never assumed to agree between tools. A node is identified
+    by its sorted descendant-tip set. Source and benchmark trees must therefore
+    contain exactly the same rooted clades, and the supplied source sequences must
+    cover exactly the nodes in the source tree.
+    """
+    source_desc = node_descendant_tips(source_newick_text)
+    benchmark_desc = node_descendant_tips(benchmark_newick_text)
+
+    def invert(
+        desc: dict[str, tuple[str, ...]],
+        tree_name: str,
+    ) -> dict[tuple[str, ...], str]:
+        out: dict[tuple[str, ...], str] = {}
+        for label, tips in desc.items():
+            if tips in out:
+                raise ValueError(
+                    f"{tree_name} tree has ambiguous descendant-tip sets"
+                )
+            out[tips] = label
+        return out
+
+    source_by_desc = invert(source_desc, "source")
+    benchmark_by_desc = invert(benchmark_desc, "benchmark")
+
+    if set(source_by_desc) != set(benchmark_by_desc):
+        raise ValueError(
+            "source and benchmark trees do not contain the same rooted clades"
+        )
+
+    supplied = set(source_node_sequences)
+    expected = set(source_desc)
+
+    missing = sorted(expected - supplied)
+    if missing:
+        raise ValueError(
+            "source reconstructed sequences are missing tree nodes: "
+            + ",".join(missing)
+        )
+
+    extra = sorted(supplied - expected)
+    if extra:
+        raise ValueError(
+            "source reconstructed sequences contain unknown tree nodes: "
+            + ",".join(extra)
+        )
+
+    mapped: dict[str, str] = {}
+    for tips, source_label in source_by_desc.items():
+        benchmark_label = benchmark_by_desc[tips]
+        mapped[benchmark_label] = source_node_sequences[source_label]
+
+    if set(mapped) != set(benchmark_desc):
+        raise ValueError("mapped node sequences do not cover benchmark tree")
+
+    return mapped
+
+
+def events_from_projected_node_sequences(
+    newick_text: str,
+    node_sequences: dict[str, str],
+    genomic_positions: Iterable[int],
+    *,
+    method: str,
+    scenario_id: str,
+) -> list[dict[str, str]]:
+    """Convert projected variable-site node states to genomic branch events.
+
+    Sequence character i corresponds to genomic_positions[i], not genomic
+    coordinate i+1.
+    """
+    positions = [int(x) for x in genomic_positions]
+
+    if any(position < 1 for position in positions):
+        raise ValueError("projected genomic positions must be positive")
+
+    if len(set(positions)) != len(positions):
+        raise ValueError("projected genomic positions contain duplicates")
+
+    tree_nodes = set(node_descendant_tips(newick_text))
+    supplied_nodes = set(node_sequences)
+
+    if supplied_nodes != tree_nodes:
+        missing = sorted(tree_nodes - supplied_nodes)
+        extra = sorted(supplied_nodes - tree_nodes)
+        raise ValueError(
+            "projected node sequences do not exactly cover tree nodes"
+            f"; missing={missing}; extra={extra}"
+        )
+
+    for node, sequence in node_sequences.items():
+        if len(sequence) != len(positions):
+            raise ValueError(
+                f"projected sequence length differs for node {node}: "
+                f"{len(sequence)} != {len(positions)}"
+            )
+
+    parents = parent_by_node(newick_text)
+    edge_map = canonical_edge_ids_by_node(newick_text)
+    events: list[dict[str, str]] = []
+
+    for child, parent in parents.items():
+        anc = node_sequences[parent]
+        der = node_sequences[child]
+
+        for position, a, d in zip(positions, anc, der):
+            if a in DNA and d in DNA and a != d:
+                events.append({
+                    "scenario_id": scenario_id,
+                    "method": method,
+                    "edge_id": edge_map[child],
+                    "position": str(position),
+                    "ancestral_state": a,
+                    "derived_state": d,
+                })
+
+    return events
+
+
+def snppar_recurrent_sites_from_branch_events(
+    events: Iterable[dict[str, str]],
+) -> list[dict[str, str]]:
+    """Derive SNPPar recurrent sites from normalized homoplasic branch events."""
+    counts: dict[int, int] = {}
+    seen: set[tuple[str, int]] = set()
+
+    for event in events:
+        if event.get("method") != "SNPPar":
+            raise ValueError(
+                "non-SNPPar event supplied to SNPPar recurrence adapter"
+            )
+
+        edge_id = (event.get("edge_id") or "").strip()
+        if not edge_id:
+            raise ValueError("SNPPar branch event lacks edge_id")
+
+        try:
+            position = int(event["position"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(
+                "SNPPar branch event has invalid position"
+            ) from exc
+
+        if position < 1:
+            raise ValueError(
+                "SNPPar branch event position must be positive"
+            )
+
+        event_key = (edge_id, position)
+        if event_key in seen:
+            raise ValueError("duplicate SNPPar branch event")
+        seen.add(event_key)
+
+        counts[position] = counts.get(position, 0) + 1
+
+    return [
+        {
+            "position": str(position),
+            "reported_recurrence_count_if_available": str(count),
+        }
+        for position, count in sorted(counts.items())
+        if count >= 2
+    ]
+
+
 def treetime_recurrent_sites_from_branch_events(
     events: Iterable[dict[str, str]],
 ) -> list[dict[str, str]]:
