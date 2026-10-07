@@ -179,12 +179,12 @@
       "output_contract": [
         "ancestral_sequences.fasta",
         "annotated_tree.nexus",
-        "homoplasy stdout/output"
+        "recurrent-site calls derived from normalized ancestral branch events"
       ],
       "release": "v0.12.1",
       "run_contract_branch": "treetime ancestral --aln {alignment_fasta} --tree {tree_newick} --gtr JC69 --method-anc probabilistic --rng-seed {scenario_seed} --outdir {out_dir}",
-      "run_contract_homoplasy": "treetime homoplasy --aln {alignment_fasta} --tree {tree_newick} --gtr JC69 --rng-seed {scenario_seed} --outdir {out_dir}",
-      "source_pin": "17da461f9299706b99a90e622183772f00c5076d"
+      "source_pin": "17da461f9299706b99a90e622183772f00c5076d",
+      "homoplasy_scoring_contract": "Do not execute or score treetime homoplasy stdout. Normalize branch changes from the frozen treetime ancestral output, then call a genomic position recurrent when at least two normalized branch changes occur at that position; reported_recurrence_count_if_available is that branch-change count."
     }
   },
   "recipe_schema": "COMPARATOR_BENCHMARK_EXECUTION_V1_ENVIRONMENT_RECIPES",

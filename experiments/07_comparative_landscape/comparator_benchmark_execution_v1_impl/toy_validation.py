@@ -544,6 +544,43 @@ def main():
         "missing-sequence ARPIP mapping did not fail closed",
     )
 
+    # TreeTime recurrent-site derivation from normalized branch events.
+    treetime_events = [
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e1", "position": "10", "ancestral_state": "A", "derived_state": "G"},
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e2", "position": "20", "ancestral_state": "A", "derived_state": "G"},
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e3", "position": "20", "ancestral_state": "A", "derived_state": "G"},
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e4", "position": "30", "ancestral_state": "A", "derived_state": "G"},
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e5", "position": "30", "ancestral_state": "C", "derived_state": "G"},
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e6", "position": "40", "ancestral_state": "A", "derived_state": "G"},
+        {"scenario_id": "TOY", "method": "TreeTime", "edge_id": "e7", "position": "40", "ancestral_state": "G", "derived_state": "A"},
+    ]
+    require(
+        adapters.treetime_recurrent_sites_from_branch_events(treetime_events)
+        == [
+            {"position": "20", "reported_recurrence_count_if_available": "2"},
+            {"position": "30", "reported_recurrence_count_if_available": "2"},
+            {"position": "40", "reported_recurrence_count_if_available": "2"},
+        ],
+        "TreeTime recurrent-site derivation fixture differs",
+    )
+
+    require_value_error(
+        lambda: adapters.treetime_recurrent_sites_from_branch_events([
+            {"method": "SNPPar", "edge_id": "e1", "position": "20"}
+        ]),
+        "non-TreeTime event",
+        "TreeTime recurrence adapter accepted another method",
+    )
+
+    require_value_error(
+        lambda: adapters.treetime_recurrent_sites_from_branch_events([
+            {"method": "TreeTime", "edge_id": "e1", "position": "20"},
+            {"method": "TreeTime", "edge_id": "e1", "position": "20"},
+        ]),
+        "duplicate TreeTime branch event",
+        "TreeTime recurrence adapter accepted a duplicate branch event",
+    )
+
     print("PASS | synthetic tool-output parser fixtures")
 
     print("PASS | no third-party comparator installed or executed")

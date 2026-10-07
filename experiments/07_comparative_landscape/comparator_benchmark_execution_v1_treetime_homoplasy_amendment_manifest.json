@@ -1,0 +1,43 @@
+{
+  "after_sha256": {
+    "environment_recipes": "7aeede3e317bbe02d50b065cd0da91316c77da5d408c01c2eee428d72ac23bd9",
+    "adapters": "bd79d8a856fe923dd9b19820ea35cc197c3377f72b621eff6f83b6ed70654ac1",
+    "toy_validation": "8625285c92f53a46db5cf2a906ea1879d0ec81d4144f70d7203c698037bc8889"
+  },
+  "authorization_consumed": true,
+  "before_sha256": {
+    "environment_recipes": "9a236919ac350dca7e2da48a1dd6aa4f1f15edfeaa7693a5207e33c5fe5b7b8a",
+    "adapters": "c4d351b041c68d9d1a142e3f532d353042374b416f5d03da29378a79672779e5",
+    "toy_validation": "7f087232c8beefbf6ca4351cd4e87d728a2b62838890275f60e8e26d9490f339"
+  },
+  "changed_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_TREETIME_HOMOPLASY_AMENDMENT_V1",
+  "parent_authorization_commit": "5ca5c9e8df205a5225a892da58650de56876d91d",
+  "treetime_homoplasy_contract": {
+    "function": "treetime_recurrent_sites_from_branch_events",
+    "scored_source": "normalized branch changes from the frozen TreeTime ancestral reconstruction output",
+    "homoplasy_cli_scored": false,
+    "recurrent_site_minimum_branch_changes": 2,
+    "group_by_genomic_position": true,
+    "transition_identity_required_to_match": false,
+    "reported_recurrence_count_if_available": "number of normalized reconstructed branch changes at the position"
+  },
+  "benchmark_executed": false,
+  "benchmark_dataset_changed": false,
+  "benchmark_truth_accessed_for_implementation": false,
+  "comparator_version_changed": false,
+  "metric_changed": false,
+  "scenario_changed": false,
+  "source_pin_changed": false,
+  "treetime_ancestral_parameter_changed": false,
+  "treetime_executable_changed": false,
+  "other_comparator_changed": false,
+  "other_parser_changed": false,
+  "production_bridge": false,
+  "status": "FROZEN_AMENDMENT_V1",
+  "next_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V1"
+}

@@ -869,3 +869,43 @@ def parse_tabular_node_states(
         )
 
     return out
+
+
+def treetime_recurrent_sites_from_branch_events(
+    events: Iterable[dict[str, str]],
+) -> list[dict[str, str]]:
+    """Derive TreeTime recurrent-site calls from normalized branch events."""
+    counts: dict[int, int] = {}
+    seen: set[tuple[str, int]] = set()
+
+    for event in events:
+        if event.get("method") != "TreeTime":
+            raise ValueError("non-TreeTime event supplied to TreeTime recurrence adapter")
+
+        edge_id = (event.get("edge_id") or "").strip()
+        if not edge_id:
+            raise ValueError("TreeTime branch event lacks edge_id")
+
+        try:
+            position = int(event["position"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError("TreeTime branch event has invalid position") from exc
+
+        if position < 1:
+            raise ValueError("TreeTime branch event position must be positive")
+
+        event_key = (edge_id, position)
+        if event_key in seen:
+            raise ValueError("duplicate TreeTime branch event")
+        seen.add(event_key)
+
+        counts[position] = counts.get(position, 0) + 1
+
+    return [
+        {
+            "position": str(position),
+            "reported_recurrence_count_if_available": str(count),
+        }
+        for position, count in sorted(counts.items())
+        if count >= 2
+    ]
