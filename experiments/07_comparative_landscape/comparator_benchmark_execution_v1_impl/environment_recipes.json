@@ -17,8 +17,8 @@
       "build_recipe": [
         "clone exact source pin",
         "build pinned dependencies in isolated prefix",
-        "cmake --target ARPIP -- -DCMAKE_BUILD_TYPE=Release CMakeLists.txt",
-        "make"
+        "cmake -S {arpip_source} -B {arpip_build_dir} -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH={dependency_prefix}",
+        "cmake --build {arpip_build_dir} --target ARPIP -j 4"
       ],
       "build_status": "READY_FOR_AUTHORIZED_SMOKE_BUILD",
       "dependencies": [
