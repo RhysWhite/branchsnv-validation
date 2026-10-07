@@ -1,0 +1,146 @@
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/ffeee55f.json" was modified by another program
+bioconda/linux-64                                           Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/2a957770.json" was modified by another program
+bioconda/noarch                                             Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/497deca9.json" was modified by another program
+conda-forge/linux-64                                        Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/09cdf8bf.json" was modified by another program
+conda-forge/noarch                                          Using cache
+Transaction
+
+  Prefix: /home/rwhite/branchsnv-comparator-envs/pastml-1.9.51
+
+  Updating specs:
+
+   - python=3.10
+   - pip
+
+
+  Package               Version  Build                 Channel           Size
+───────────────────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────────────────
+
+  + libzlib               1.3.2  h25fd6f3_3            conda-forge     Cached
+  + libgomp              16.2.0  he0feb66_7            conda-forge     Cached
+  + zstd                  1.5.7  hb78ec9c_7            conda-forge     Cached
+  + _openmp_mutex           4.5  20_gnu                conda-forge     Cached
+  + ld_impl_linux-64     2.46.1  default_hbd61a6d_102  conda-forge     Cached
+  + libgcc               16.2.0  ha9f2e26_7            conda-forge     Cached
+  + tk                   8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + ncurses                 6.6  hdb14827_1            conda-forge     Cached
+  + libuuid              2.42.4  hcfc3c73_0            conda-forge     Cached
+  + libsqlite            3.53.4  h0737f62_102          conda-forge     Cached
+  + libnsl                2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + liblzma               5.8.3  hb03c661_1            conda-forge     Cached
+  + libexpat              2.8.5  hd2095e1_0            conda-forge     Cached
+  + libffi                3.7.0  h81df57d_1            conda-forge     Cached
+  + bzip2                 1.0.8  hda65f42_10           conda-forge     Cached
+  + libxcrypt            4.4.38  h280c20c_0            conda-forge     Cached
+  + readline                8.3  hd6e31c0_1            conda-forge     Cached
+  + tzdata                2026c  h151e31d_0            conda-forge     Cached
+  + ca-certificates   2026.7.22  hbd8a1cb_0            conda-forge     Cached
+  + openssl               3.6.5  h781a0a9_0            conda-forge     Cached
+  + python              3.10.21  h267e890_0_cpython    conda-forge     Cached
+  + packaging              26.3  pyhc364b38_0          conda-forge     Cached
+  + setuptools           84.0.0  pyh332efcf_0          conda-forge     Cached
+  + wheel                0.48.0  pyhd8ed1ab_0          conda-forge     Cached
+  + pip                  26.2.1  pyh8b19718_0          conda-forge     Cached
+
+  Summary:
+
+  Install: 25 packages
+
+  Total download: 0 B
+
+───────────────────────────────────────────────────────────────────────────────
+
+
+
+Looking for: ['python=3.10', 'pip']
+
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+
+To activate this environment, use
+
+     $ mamba activate /home/rwhite/branchsnv-comparator-envs/pastml-1.9.51
+
+To deactivate an active environment, use
+
+     $ mamba deactivate
+
+Cloning into '/home/rwhite/branchsnv-comparator-src/pastml-1.9.51'...
+Updating files:  35% (184/514)Updating files:  36% (186/514)Updating files:  37% (191/514)Updating files:  38% (196/514)Updating files:  39% (201/514)Updating files:  40% (206/514)Updating files:  41% (211/514)Updating files:  42% (216/514)Updating files:  43% (222/514)Updating files:  44% (227/514)Updating files:  45% (232/514)Updating files:  46% (237/514)Updating files:  47% (242/514)Updating files:  48% (247/514)Updating files:  49% (252/514)Updating files:  50% (257/514)Updating files:  51% (263/514)Updating files:  52% (268/514)Updating files:  53% (273/514)Updating files:  54% (278/514)Updating files:  55% (283/514)Updating files:  56% (288/514)Updating files:  57% (293/514)Updating files:  57% (298/514)Updating files:  58% (299/514)Updating files:  59% (304/514)Updating files:  60% (309/514)Updating files:  61% (314/514)Updating files:  62% (319/514)Updating files:  63% (324/514)Updating files:  64% (329/514)Updating files:  65% (335/514)Updating files:  66% (340/514)Updating files:  67% (345/514)Updating files:  68% (350/514)Updating files:  69% (355/514)Updating files:  70% (360/514)Updating files:  71% (365/514)Updating files:  71% (367/514)Updating files:  72% (371/514)Updating files:  73% (376/514)Updating files:  74% (381/514)Updating files:  75% (386/514)Updating files:  76% (391/514)Updating files:  77% (396/514)Updating files:  78% (401/514)Updating files:  79% (407/514)Updating files:  80% (412/514)Updating files:  81% (417/514)Updating files:  82% (422/514)Updating files:  83% (427/514)Updating files:  84% (432/514)Updating files:  85% (437/514)Updating files:  86% (443/514)Updating files:  87% (448/514)Updating files:  88% (453/514)Updating files:  89% (458/514)Updating files:  90% (463/514)Updating files:  90% (466/514)Updating files:  91% (468/514)Updating files:  92% (473/514)Updating files:  93% (479/514)Updating files:  94% (484/514)Updating files:  95% (489/514)Updating files:  96% (494/514)Updating files:  97% (499/514)Updating files:  98% (504/514)Updating files:  99% (509/514)Updating files: 100% (514/514)Updating files: 100% (514/514), done.
+HEAD is now at 1654471 changed python version from 3.10.16 to 3.10.17 in ci
+Processing /home/rwhite/branchsnv-comparator-src/pastml-1.9.51
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting ete3>=3.1.1 (from pastml==1.9.51)
+  Downloading ete3-3.1.3.tar.gz (4.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 4.5 MB/s  0:00:01
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: pandas>=1.0.0 in /home/rwhite/.local/lib/python3.10/site-packages (from pastml==1.9.51) (2.2.3)
+Requirement already satisfied: numpy>=1.22 in /home/rwhite/.local/lib/python3.10/site-packages (from pastml==1.9.51) (2.2.6)
+Requirement already satisfied: jinja2>=2.11.0 in /home/rwhite/.local/lib/python3.10/site-packages (from pastml==1.9.51) (3.1.6)
+Collecting scipy==1.14.0 (from pastml==1.9.51)
+  Downloading scipy-1.14.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting itolapi>=4.0.0 (from pastml==1.9.51)
+  Downloading itolapi-4.1.6-py3-none-any.whl.metadata (5.0 kB)
+Requirement already satisfied: biopython>=1.70 in /home/rwhite/.local/lib/python3.10/site-packages (from pastml==1.9.51) (1.86)
+Collecting requests<3.0,>=2.0 (from itolapi>=4.0.0->pastml==1.9.51)
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3.0,>=2.0->itolapi>=4.0.0->pastml==1.9.51)
+  Downloading charset_normalizer-3.5.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests<3.0,>=2.0->itolapi>=4.0.0->pastml==1.9.51)
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests<3.0,>=2.0->itolapi>=4.0.0->pastml==1.9.51)
+  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests<3.0,>=2.0->itolapi>=4.0.0->pastml==1.9.51)
+  Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/rwhite/.local/lib/python3.10/site-packages (from jinja2>=2.11.0->pastml==1.9.51) (3.0.3)
+Requirement already satisfied: python-dateutil>=2.8.2 in /home/rwhite/.local/lib/python3.10/site-packages (from pandas>=1.0.0->pastml==1.9.51) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /home/rwhite/.local/lib/python3.10/site-packages (from pandas>=1.0.0->pastml==1.9.51) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /home/rwhite/.local/lib/python3.10/site-packages (from pandas>=1.0.0->pastml==1.9.51) (2025.2)
+Requirement already satisfied: six>=1.5 in /home/rwhite/.local/lib/python3.10/site-packages (from python-dateutil>=2.8.2->pandas>=1.0.0->pastml==1.9.51) (1.17.0)
+Downloading scipy-1.14.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (41.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 41.1/41.1 MB 44.5 MB/s  0:00:00
+Downloading itolapi-4.1.6-py3-none-any.whl (7.3 kB)
+Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (271 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+Building wheels for collected packages: pastml, ete3
+  Building wheel for pastml (pyproject.toml): started
+  Building wheel for pastml (pyproject.toml): finished with status 'done'
+  Created wheel for pastml: filename=pastml-1.9.51-py3-none-any.whl size=464982 sha256=28ead4382a4fdf3d2085535d86bb07cc15a531916b47214201e751226f7838b0
+  Stored in directory: /tmp/pip-ephem-wheel-cache-1g6i0zo5/wheels/7a/f9/9f/d3d008bcb3a01bb8ba5789d52626d2753a592c56c7e8e1f648
+  Building wheel for ete3 (pyproject.toml): started
+  Building wheel for ete3 (pyproject.toml): finished with status 'done'
+  Created wheel for ete3: filename=ete3-3.1.3-py3-none-any.whl size=2273900 sha256=35d19c5be2a6166057d40e7b1bc02b6174eea918cabb3b2bb60840c51e93606a
+  Stored in directory: /home/rwhite/.cache/pip/wheels/a0/72/00/1982bd848e52b03079dbf800900120bc1c20e92e9a1216e525
+Successfully built pastml ete3
+Installing collected packages: ete3, urllib3, scipy, idna, charset_normalizer, certifi, requests, itolapi, pastml
+  Attempting uninstall: scipy
+    Found existing installation: scipy 1.15.3
+    Uninstalling scipy-1.15.3:
+      Successfully uninstalled scipy-1.15.3
+
+Successfully installed certifi-2026.7.22 charset_normalizer-3.5.2 ete3-3.1.3 idna-3.20 itolapi-4.1.6 pastml-1.9.51 requests-2.34.2 scipy-1.14.0 urllib3-2.8.0

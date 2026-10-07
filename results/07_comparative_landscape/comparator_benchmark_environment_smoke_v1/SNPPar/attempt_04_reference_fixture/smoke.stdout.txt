@@ -1,0 +1,64 @@
+
+Log started: (results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/2026-10-06_23-29-21.028861_log.txt)
+
+SNPPar:	Parallel SNP Finder V1.0
+	(utilising TreeTime for ASR and intermediate sorting)
+
+User command: snppar -m results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/snps.fasta -l results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/positions.txt -t results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/tree.nwk -g results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/reference.gb -d results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output -A -i
+
+
+Reading SNPs from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/snps.fasta and SNP positions from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/positions.txt
+
+Finished reading 1 SNPs in total
+...keeping 1 variable SNPs and ignoring 0 SNPs
+that are non-variable among the 4 isolates
+
+Reading Genbank file from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/reference.gb
+Found 1 genes
+
+Reading tree from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/toy/tree.nwk...
+Tree and SNP table have same isolates
+
+Parsing SNPs to find bi-, tri- and quadallelic SNPs...
+Also testing if biallelic SNPs are homoplasic
+
+Biallelic SNPs (>1 one isolate): 0
+Biallelic SNPs (>1 one isolate, no missing calls): 0
+Biallelic SNP patterns tested (no missing calls): 0
+Paraphyletic SNPs found: 0
+Triallelic SNPs found: 0
+Quadallelic SNPs found: 0
+
+Total SNPs for mapping: 0
+
+Assigning monophyletic SNPs to genes
+
+Of the 1 monophyletic SNPs for testing, 1 are intergenic, and 0 are intragenic
+
+Assigning SNPs to map to genes
+
+Of the 0 SNPs to map for testing, 0 are intergenic, and 0 are intragenic
+
+Running TreeTime: treetime ancestral --aln results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/snps_to_map.mfasta --tree results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/input_tree_nodeNames.nwk --outdir results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/treetime_out/ --report-ambiguous --verbose 2
+
+Failed to run command: treetime ancestral --aln results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/snps_to_map.mfasta --tree results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/input_tree_nodeNames.nwk --outdir results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_04_reference_fixture/smoke_output/treetime_out/ --report-ambiguous --verbose 2
+stdout: 
+0.00	-TreeAnc: set-up
+
+stderr: /home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/treetime/seq_utils.py:191: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  gaps = np.where(seq_array != '-')[0]
+Traceback (most recent call last):
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/treetime", line 12, in <module>
+    return_code = params.func(params)
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/treetime/wrappers.py", line 653, in ancestral_reconstruction
+    treeanc = TreeAnc(params.tree, aln=aln, ref=ref, gtr=gtr, verbose=1,
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/treetime/treeanc.py", line 154, in __init__
+    self.data = SequenceData(aln, ref=ref, logger=self.logger, compress=compress,
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/treetime/sequence_data.py", line 111, in __init__
+    self.aln = aln
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/treetime/sequence_data.py", line 175, in aln
+    self._aln[tmp_name] = seq2array(s, convert_upper=self.convert_upper,
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/treetime/seq_utils.py", line 193, in seq2array
+    seq_array[:gaps[0]] = ambiguous
+ValueError: could not convert string to float: 'N'
+

@@ -1,0 +1,58 @@
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/README.md:48:  * [Tree file format and representations of tree topology](https://github.com/abacus-gene/paml/wiki/Data-formatting#tree-file-format-and-representations-of-tree-topology)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/README.md:50:    * [Tree files produced by `PAUP` and `MacClade`](https://github.com/abacus-gene/paml/wiki/Data-formatting#tree-files-produced-by-paup-and-macclade)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:28:wrong tree, different from the tree specified in the tree file.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:42:are in the tree file, with the program analysing the first tree
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:53:I have fixed the bug.  Note that some of the trees in the tree file
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:81:old versions, all trees are read from the tree file for each dataset.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:82:Now for each dataset, one block is read from the tree file.  This
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:131:(*) codeml, clade labels in the tree file.  A bug introduced in 4.9i
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:150:using labels in the tree file: #1, #2, ....  I have yet to update the
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:254:to those given in the tree file, and the proportionality factor is
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:292:program to read the fossil calibration information in the tree file
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:320:(*) codeml.  When two or more trees are in the tree file and the
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:349:reading trees from the tree file.  This is now fixed.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:459:of reading species indexes in the tree file (for example, the number
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:460:19, instead of the sequence name, may be used in the tree file to mean
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:652:the partitions have the same number of species/sequences, the
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:909:format for specifying fossil calibrations in the tree file has been
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:1981:following line in the file trees.5s (the tree file for 5 species)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/doc/pamlHistory.txt:1991:(small) number of species.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README.txt:10:points are specified using the symbol '@' in the tree file; the symbol
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README.txt:56:The tree in the tree file has seven @ specifying seven calibration
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README.txt:67:tree file.  So clock = 1 above means that the model is a global clock
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README.txt:99:the first line of the sequence data file.  The tree in the tree file
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README2.txt:40:baseml.ctl or codeml.ctl.  Prepare a tree file, including a tree for
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README2.txt:42:species tree or master tree.  The beginning of the tree file should
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README2.txt:43:have the number of species and the number of trees (which is usually
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README2.txt:177: 4.  Only rooted binary trees are accepted in the tree file.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MouseLemurs/README2.txt:190:     in older versions of the programs, if the coccrect tree files are
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/lysin/README.txt:7:    lysin.trees (tree file)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/lysin/README.txt:17:    that the tree file is shared as above, but the sequence data file is 
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/lysin/README.txt:31:the tree file for demonstrating codon models that assign different
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/README.txt:6:data files, tree files, and control files that have been used in my
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/mtCDNA/AAcodon.result.txt:7:     treefile = mtCDNApri.trees  * tree file name
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/mtCDNA/README.txt:7:      mtCDNApri.trees: tree file for the data
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/lysozyme/README.txt:8:the tree file for demonstrating codon models that use different dN/dS
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/lysozyme/README.txt:12:(1998).  Also look at the tree file about specifying the branches of
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/lysozyme/README.txt:72:Look at the tree file lysozymeLarge.trees for specification of the
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/TipDate.HIV2/README.txt:43:the seqfile and treefile are specified as follows.  These are set up
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/TipDate.HIV2/README.txt:48:       treefile = ../HIV2ge.tre
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/dating-cross-bracing/README.txt:8:notation used in the tree file to identify specific nodes.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/dating-cross-bracing/README.txt:13:tree file by using node labels such as #1, #2, etc.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/dating-cross-bracing/README.txt:15:The following Newick trees show how this notation would be
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/dating-cross-bracing/README.txt:39:(specified by the user via the input tree file), while the
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/dating-cross-bracing/README.txt:60:"duplication = 0" in "mcmctree.ctl", see input tree file "6s.trees").
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/dating-cross-bracing/README.txt:63:Newick tree in "6s-bracing.trees":
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/MHC.Swanson2002MBE/README.txt:13:the tree file, which are the MLEs under M0.  Thus if you run codeml
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/nhomo/README.txt:23:the tree file tree-nhomo5.txt.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:21:respectively.  The tree files are 4s.trees, etc.  
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:27:(c) ndata = 3 maintree    # this uses the maintree file to generate the subtrees and runs the ML analysis
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:28:(c) ndata = 3 maintree 1  # this uses the maintree file to generate the subtrees and runs the ML analysis
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:29:    baseml baseml-ndata-maintree-ml.ctl
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:30:    codeml codeml-ndata-maintree-ml.ctl
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:32:(d) ndata = 3 maintree 0  # this generates the genetrees.trees file but does not run ML
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:33:    baseml baseml-ndata-maintree.ctl
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:34:    codeml codeml-ndata-maintree.ctl
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:37:The tree file 4s-ndata.trees has the following:
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:46:In case (c), the tree file 4s-ndata-maintree.trees includes only one
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/examples/ndata/README.txt:48:alignments.  The "maintree" keyword is used to instruct

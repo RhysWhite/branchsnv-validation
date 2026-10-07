@@ -1,0 +1,10 @@
+node	site1	site2
+root	A	C
+root		T
+n0	A	C
+n0	G	
+n00	A	T
+A	A	C
+B	G	C
+C	A	T
+D	A	T

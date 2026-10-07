@@ -1,0 +1,34 @@
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/ffeee55f.json" was modified by another program
+bioconda/linux-64                                           Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/2a957770.json" was modified by another program
+bioconda/noarch                                             Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/497deca9.json" was modified by another program
+conda-forge/linux-64                                        Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/09cdf8bf.json" was modified by another program
+conda-forge/noarch                                          Using cache
+
+Looking for: ['python=3.10', 'pip', "biopython[version='>=1.67,<=1.76']", 'phylo-treetime==0.8.5', 'ete3']
+
+Could not solve for environment specs
+The following packages are incompatible
+├─ biopython >=1.67,<=1.76  is installable with the potential options
+│  ├─ biopython [1.67|1.68|...|1.76] would require
+│  │  └─ python [2.7* |>=2.7,<2.8.0a0 ], which can be installed;
+│  ├─ biopython [1.67|1.68|...|1.72] would require
+│  │  └─ python [3.5* |>=3.5,<3.6.0a0 ], which can be installed;
+│  ├─ biopython [1.67|1.69|1.70|1.71] would require
+│  │  └─ python 3.6* , which can be installed;
+│  ├─ biopython 1.68 would require
+│  │  └─ python 3.4* , which can be installed;
+│  ├─ biopython [1.72|1.73|1.74|1.75|1.76] would require
+│  │  └─ python >=3.6,<3.7.0a0 , which can be installed;
+│  ├─ biopython [1.72|1.73|1.74|1.75|1.76] would require
+│  │  └─ python >=3.7,<3.8.0a0 , which can be installed;
+│  └─ biopython [1.74|1.75|1.76] would require
+│     └─ python >=3.8,<3.9.0a0 , which can be installed;
+├─ phylo-treetime 0.8.5  does not exist (perhaps a typo or a missing channel);
+└─ python 3.10**  is not installable because it conflicts with any installable versions previously reported.

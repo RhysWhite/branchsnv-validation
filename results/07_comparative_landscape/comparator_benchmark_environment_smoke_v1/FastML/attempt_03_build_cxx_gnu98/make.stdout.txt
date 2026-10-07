@@ -1,0 +1,381 @@
+cd libs;make all
+make[1]: Entering directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs'
+cd phylogeny && make all
+make[2]: Entering directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs/phylogeny'
+making depend
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o AddLog.o AddLog.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o NNiProp.o NNiProp.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o NNiSep.o NNiSep.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o Nni.o Nni.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o aaJC.o aaJC.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o allTrees.o allTrees.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o allTreesSeparateModel.o allTreesSeparateModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o alphabet.o alphabet.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o amino.o amino.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestAlpha.o bestAlpha.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestAlphaManyTrees.o bestAlphaManyTrees.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestHKYparam.o bestHKYparam.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bootstrap.o bootstrap.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEM.o bblEM.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMfixRoot.o bblEMfixRoot.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMProprtional.o bblEMProprtional.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMProportionalEB.o bblEMProportionalEB.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblLSProportionalEB.o bblLSProportionalEB.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMSeperate.o bblEMSeperate.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o chebyshevAccelerator.o chebyshevAccelerator.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o clustalFormat.o clustalFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o codon.o codon.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o codonJC.o codonJC.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeCounts.o computeCounts.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeDownAlg.o computeDownAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeMarginalAlg.o computeMarginalAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computePijComponent.o computePijComponent.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeUpAlg.o computeUpAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeUpAlgFactors.o computeUpAlgFactors.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeSubstitutionCounts.o computeSubstitutionCounts.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computePosteriorExpectationOfSubstitutions.o computePosteriorExpectationOfSubstitutions.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computePosteriorExpectationOfSubstitutions_nonReversibleSp.o computePosteriorExpectationOfSubstitutions_nonReversibleSp.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o ConversionUtils.o ConversionUtils.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o countTableComponent.o countTableComponent.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o datMatrixHolder.o datMatrixHolder.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distanceTable.o distanceTable.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distribution.o distribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o errorMsg.o errorMsg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o evaluateCharacterFreq.o evaluateCharacterFreq.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fastStartTree.o fastStartTree.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fastaFormat.o fastaFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o findRateOfGene.o findRateOfGene.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromCountTableComponentToDistance.o fromCountTableComponentToDistance.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromCountTableComponentToDistancefixRoot.o fromCountTableComponentToDistancefixRoot.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromCountTableComponentToDistanceProp.o fromCountTableComponentToDistanceProp.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromCountTableComponentToDistancePropEB.o fromCountTableComponentToDistancePropEB.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromQtoPt.o fromQtoPt.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o generalGammaDistributionFixedCategories.o generalGammaDistributionFixedCategories.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gammaDistribution.o gammaDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gammaUtilities.o gammaUtilities.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o generalGammaDistribution.o generalGammaDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o getRandomWeights.o getRandomWeights.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o goldmanYangModel.o goldmanYangModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o granthamChemicalDistances.o granthamChemicalDistances.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o hky.o hky.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o simulateWithDependence.o simulateWithDependence.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o KH_calculation.o KH_calculation.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likeDist.o likeDist.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likeDistfixRoot.o likeDistfixRoot.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likeDistProp.o likeDistProp.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likeDistPropEB.o likeDistPropEB.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likelihoodComputation.o likelihoodComputation.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likelihoodComputationFactors.o likelihoodComputationFactors.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o logFile.o logFile.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o maseFormat.o maseFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o molphyFormat.o molphyFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o nexusFormat.o nexusFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o nj.o nj.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o njConstrain.o njConstrain.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o nucJC.o nucJC.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o nucleotide.o nucleotide.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o numRec.o numRec.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o Parameters.o Parameters.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o phylipFormat.o phylipFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o pijAccelerator.o pijAccelerator.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o readDatMatrix.o readDatMatrix.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o readTree.o readTree.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o recognizeFormat.o recognizeFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o replacementModel.o replacementModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o searchStatus.o searchStatus.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o seqContainerTreeMap.o seqContainerTreeMap.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o sequence.o sequence.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o sequenceContainer.o sequenceContainer.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o simulateTree.o simulateTree.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o siteSpecificRate.o siteSpecificRate.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o someUtil.o someUtil.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o split.o split.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o splitMap.o splitMap.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o splitTreeUtil.o splitTreeUtil.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o stochasticProcess.o stochasticProcess.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o suffStatComponent.o suffStatComponent.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o talRandom.o talRandom.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o tree.o tree.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o treeIt.o treeIt.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o treeUtil.o treeUtil.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o uniDistribution.o uniDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o uniformDistribution.o uniformDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o cmdline2EvolObjs.o cmdline2EvolObjs.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o generalGammaDistributionLaguerre.o generalGammaDistributionLaguerre.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gammaDistributionLaguerre.o gammaDistributionLaguerre.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o GLaguer.o GLaguer.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o givenRatesMLDistance.o givenRatesMLDistance.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distanceBasedSeqs2Tree.o distanceBasedSeqs2Tree.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o posteriorDistance.o posteriorDistance.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o pairwiseGammaDistance.o pairwiseGammaDistance.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o doubleRep.o doubleRep.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o logRep.o logRep.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o indel.o indel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o indelModel.o indelModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o mulAlphabet.o mulAlphabet.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o replacementModelSSRV.o replacementModelSSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o stochasticProcessSSRV.o stochasticProcessSSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestAlphaAndNu.o bestAlphaAndNu.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o C_evalParamUSSRV.o C_evalParamUSSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o matrixUtils.o matrixUtils.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o betaOmegaDistribution.o betaOmegaDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o betaUtilities.o betaUtilities.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o betaDistribution.o betaDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o geneticCodeHolder.o geneticCodeHolder.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o samplingSequences.o samplingSequences.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEM2USSRV.o bblEM2USSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestParamUSSRV.o bestParamUSSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likeDist2USSRV.o likeDist2USSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o ussrvModel.o ussrvModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likelihoodComputation2USSRV.o likelihoodComputation2USSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromCountTableComponentToDistance2USSRV.o fromCountTableComponentToDistance2USSRV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o normalDist.o normalDist.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o tamura92.o tamura92.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestTamura92param.o bestTamura92param.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o phylipSequentialFormat.o phylipSequentialFormat.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o simulateCodonsJumps.o simulateCodonsJumps.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o simulateJumpsAbstract.o simulateJumpsAbstract.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o ssrvDistanceSeqs2Tree.o ssrvDistanceSeqs2Tree.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o multipleStochasticProcess.o multipleStochasticProcess.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distributionPlusInvariant.o distributionPlusInvariant.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o extremeValDistribution.o extremeValDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gammaDistributionFixedCategories.o gammaDistributionFixedCategories.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o generalGammaDistributionPlusInvariant.o generalGammaDistributionPlusInvariant.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gammaDistributionPlusInvariant.o gammaDistributionPlusInvariant.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distributionPlusCategory.o distributionPlusCategory.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o simulateJumps.o simulateJumps.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeJumps.o computeJumps.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o seqeuncesFilter.o seqeuncesFilter.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o optGammaMixtureLS.o optGammaMixtureLS.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o mixtureDistribution.o mixtureDistribution.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o suffStatGammaMixture.o suffStatGammaMixture.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o GamMixtureOptimizer.o GamMixtureOptimizer.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o optGammaMixtureEM.o optGammaMixtureEM.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gainLossAlphabet.o gainLossAlphabet.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o wYangModel.o wYangModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o codonUtils.o codonUtils.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likelihoodComputation2Codon.o likelihoodComputation2Codon.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likeDist2Codon.o likeDist2Codon.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o unObservableData.o unObservableData.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o likelihoodComputationGL.o likelihoodComputationGL.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o threeStateModel.o threeStateModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o threeStateAlphabet.o threeStateAlphabet.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o oneTwoMoreModel.o oneTwoMoreModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o betaDistributionFixedCategories.o betaDistributionFixedCategories.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o betaDistributionFixedCategoriesWithOmegaUniform.o betaDistributionFixedCategoriesWithOmegaUniform.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEM2codon.o bblEM2codon.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestAlphaAndK.o bestAlphaAndK.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o fromCountTableComponentToDistance2Codon.o fromCountTableComponentToDistance2Codon.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o gtrModel.o gtrModel.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestGtrModelParams.o bestGtrModelParams.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o simulateRateShiftJumps.o simulateRateShiftJumps.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o integerAlphabet.o integerAlphabet.cpp
+ar rv libEvolTree.a AddLog.o NNiProp.o NNiSep.o Nni.o aaJC.o allTrees.o allTreesSeparateModel.o alphabet.o amino.o bestAlpha.o bestAlphaManyTrees.o bestHKYparam.o bootstrap.o bblEM.o bblEMfixRoot.o bblEMProprtional.o bblEMProportionalEB.o bblLSProportionalEB.o bblEMSeperate.o chebyshevAccelerator.o clustalFormat.o codon.o codonJC.o computeCounts.o computeDownAlg.o computeMarginalAlg.o computePijComponent.o computeUpAlg.o computeUpAlgFactors.o computeSubstitutionCounts.o computePosteriorExpectationOfSubstitutions.o computePosteriorExpectationOfSubstitutions_nonReversibleSp.o ConversionUtils.o countTableComponent.o datMatrixHolder.o distanceTable.o distribution.o errorMsg.o evaluateCharacterFreq.o fastStartTree.o fastaFormat.o findRateOfGene.o fromCountTableComponentToDistance.o fromCountTableComponentToDistancefixRoot.o fromCountTableComponentToDistanceProp.o fromCountTableComponentToDistancePropEB.o fromQtoPt.o generalGammaDistributionFixedCategories.o gammaDistribution.o gammaUtilities.o generalGammaDistribution.o getRandomWeights.o goldmanYangModel.o granthamChemicalDistances.o hky.o simulateWithDependence.o KH_calculation.o likeDist.o likeDistfixRoot.o likeDistProp.o likeDistPropEB.o likelihoodComputation.o likelihoodComputationFactors.o logFile.o maseFormat.o molphyFormat.o nexusFormat.o nj.o njConstrain.o nucJC.o nucleotide.o numRec.o Parameters.o phylipFormat.o pijAccelerator.o readDatMatrix.o readTree.o recognizeFormat.o replacementModel.o searchStatus.o seqContainerTreeMap.o sequence.o sequenceContainer.o simulateTree.o siteSpecificRate.o someUtil.o split.o splitMap.o splitTreeUtil.o stochasticProcess.o suffStatComponent.o talRandom.o tree.o treeIt.o treeUtil.o uniDistribution.o uniformDistribution.o cmdline2EvolObjs.o generalGammaDistributionLaguerre.o gammaDistributionLaguerre.o GLaguer.o givenRatesMLDistance.o distanceBasedSeqs2Tree.o posteriorDistance.o pairwiseGammaDistance.o doubleRep.o logRep.o indel.o indelModel.o mulAlphabet.o replacementModelSSRV.o stochasticProcessSSRV.o bestAlphaAndNu.o C_evalParamUSSRV.o matrixUtils.o betaOmegaDistribution.o betaUtilities.o betaDistribution.o geneticCodeHolder.o samplingSequences.o bblEM2USSRV.o bestParamUSSRV.o likeDist2USSRV.o ussrvModel.o likelihoodComputation2USSRV.o fromCountTableComponentToDistance2USSRV.o normalDist.o tamura92.o bestTamura92param.o phylipSequentialFormat.o simulateCodonsJumps.o simulateJumpsAbstract.o ssrvDistanceSeqs2Tree.o multipleStochasticProcess.o distributionPlusInvariant.o extremeValDistribution.o gammaDistributionFixedCategories.o generalGammaDistributionPlusInvariant.o gammaDistributionPlusInvariant.o distributionPlusCategory.o simulateJumps.o computeJumps.o seqeuncesFilter.o optGammaMixtureLS.o mixtureDistribution.o suffStatGammaMixture.o GamMixtureOptimizer.o optGammaMixtureEM.o gainLossAlphabet.o wYangModel.o codonUtils.o likelihoodComputation2Codon.o likeDist2Codon.o unObservableData.o likelihoodComputationGL.o threeStateModel.o threeStateAlphabet.o oneTwoMoreModel.o betaDistributionFixedCategories.o betaDistributionFixedCategoriesWithOmegaUniform.o bblEM2codon.o bestAlphaAndK.o fromCountTableComponentToDistance2Codon.o gtrModel.o bestGtrModelParams.o simulateRateShiftJumps.o integerAlphabet.o
+a - AddLog.o
+a - NNiProp.o
+a - NNiSep.o
+a - Nni.o
+a - aaJC.o
+a - allTrees.o
+a - allTreesSeparateModel.o
+a - alphabet.o
+a - amino.o
+a - bestAlpha.o
+a - bestAlphaManyTrees.o
+a - bestHKYparam.o
+a - bootstrap.o
+a - bblEM.o
+a - bblEMfixRoot.o
+a - bblEMProprtional.o
+a - bblEMProportionalEB.o
+a - bblLSProportionalEB.o
+a - bblEMSeperate.o
+a - chebyshevAccelerator.o
+a - clustalFormat.o
+a - codon.o
+a - codonJC.o
+a - computeCounts.o
+a - computeDownAlg.o
+a - computeMarginalAlg.o
+a - computePijComponent.o
+a - computeUpAlg.o
+a - computeUpAlgFactors.o
+a - computeSubstitutionCounts.o
+a - computePosteriorExpectationOfSubstitutions.o
+a - computePosteriorExpectationOfSubstitutions_nonReversibleSp.o
+a - ConversionUtils.o
+a - countTableComponent.o
+a - datMatrixHolder.o
+a - distanceTable.o
+a - distribution.o
+a - errorMsg.o
+a - evaluateCharacterFreq.o
+a - fastStartTree.o
+a - fastaFormat.o
+a - findRateOfGene.o
+a - fromCountTableComponentToDistance.o
+a - fromCountTableComponentToDistancefixRoot.o
+a - fromCountTableComponentToDistanceProp.o
+a - fromCountTableComponentToDistancePropEB.o
+a - fromQtoPt.o
+a - generalGammaDistributionFixedCategories.o
+a - gammaDistribution.o
+a - gammaUtilities.o
+a - generalGammaDistribution.o
+a - getRandomWeights.o
+a - goldmanYangModel.o
+a - granthamChemicalDistances.o
+a - hky.o
+a - simulateWithDependence.o
+a - KH_calculation.o
+a - likeDist.o
+a - likeDistfixRoot.o
+a - likeDistProp.o
+a - likeDistPropEB.o
+a - likelihoodComputation.o
+a - likelihoodComputationFactors.o
+a - logFile.o
+a - maseFormat.o
+a - molphyFormat.o
+a - nexusFormat.o
+a - nj.o
+a - njConstrain.o
+a - nucJC.o
+a - nucleotide.o
+a - numRec.o
+a - Parameters.o
+a - phylipFormat.o
+a - pijAccelerator.o
+a - readDatMatrix.o
+a - readTree.o
+a - recognizeFormat.o
+a - replacementModel.o
+a - searchStatus.o
+a - seqContainerTreeMap.o
+a - sequence.o
+a - sequenceContainer.o
+a - simulateTree.o
+a - siteSpecificRate.o
+a - someUtil.o
+a - split.o
+a - splitMap.o
+a - splitTreeUtil.o
+a - stochasticProcess.o
+a - suffStatComponent.o
+a - talRandom.o
+a - tree.o
+a - treeIt.o
+a - treeUtil.o
+a - uniDistribution.o
+a - uniformDistribution.o
+a - cmdline2EvolObjs.o
+a - generalGammaDistributionLaguerre.o
+a - gammaDistributionLaguerre.o
+a - GLaguer.o
+a - givenRatesMLDistance.o
+a - distanceBasedSeqs2Tree.o
+a - posteriorDistance.o
+a - pairwiseGammaDistance.o
+a - doubleRep.o
+a - logRep.o
+a - indel.o
+a - indelModel.o
+a - mulAlphabet.o
+a - replacementModelSSRV.o
+a - stochasticProcessSSRV.o
+a - bestAlphaAndNu.o
+a - C_evalParamUSSRV.o
+a - matrixUtils.o
+a - betaOmegaDistribution.o
+a - betaUtilities.o
+a - betaDistribution.o
+a - geneticCodeHolder.o
+a - samplingSequences.o
+a - bblEM2USSRV.o
+a - bestParamUSSRV.o
+a - likeDist2USSRV.o
+a - ussrvModel.o
+a - likelihoodComputation2USSRV.o
+a - fromCountTableComponentToDistance2USSRV.o
+a - normalDist.o
+a - tamura92.o
+a - bestTamura92param.o
+a - phylipSequentialFormat.o
+a - simulateCodonsJumps.o
+a - simulateJumpsAbstract.o
+a - ssrvDistanceSeqs2Tree.o
+a - multipleStochasticProcess.o
+a - distributionPlusInvariant.o
+a - extremeValDistribution.o
+a - gammaDistributionFixedCategories.o
+a - generalGammaDistributionPlusInvariant.o
+a - gammaDistributionPlusInvariant.o
+a - distributionPlusCategory.o
+a - simulateJumps.o
+a - computeJumps.o
+a - seqeuncesFilter.o
+a - optGammaMixtureLS.o
+a - mixtureDistribution.o
+a - suffStatGammaMixture.o
+a - GamMixtureOptimizer.o
+a - optGammaMixtureEM.o
+a - gainLossAlphabet.o
+a - wYangModel.o
+a - codonUtils.o
+a - likelihoodComputation2Codon.o
+a - likeDist2Codon.o
+a - unObservableData.o
+a - likelihoodComputationGL.o
+a - threeStateModel.o
+a - threeStateAlphabet.o
+a - oneTwoMoreModel.o
+a - betaDistributionFixedCategories.o
+a - betaDistributionFixedCategoriesWithOmegaUniform.o
+a - bblEM2codon.o
+a - bestAlphaAndK.o
+a - fromCountTableComponentToDistance2Codon.o
+a - gtrModel.o
+a - bestGtrModelParams.o
+a - simulateRateShiftJumps.o
+a - integerAlphabet.o
+ranlib libEvolTree.a
+make[2]: Leaving directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs/phylogeny'
+make[1]: Leaving directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs'
+cd programs;make all
+make[1]: Entering directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs'
+cd fastml && make all
+make[2]: Entering directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml'
+making depend
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o fastml.o fastml.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbAlg.o bbAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbComputeDownAlg.o bbComputeDownAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbComputeUpAlg.o bbComputeUpAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbEvaluateSpecificAV.o bbEvaluateSpecificAV.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbfindBestAVDynProg.o bbfindBestAVDynProg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbNodeOrderAlg.o bbNodeOrderAlg.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bb_options.o bb_options.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o bbReport.o bbReport.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o computeMarginalReconstruction.o computeMarginalReconstruction.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o jointNoGamma.o jointNoGamma.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o mainbb.o mainbb.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o sequenceDataDiff.o sequenceDataDiff.cpp
+g++ -std=gnu++98  -O3 -Wall -Wno-sign-compare -I. -I../../libs/phylogeny -DLOG -ftemplate-depth-32  -c -o suffStatComponentJointNoGamma.o suffStatComponentJointNoGamma.cpp
+ar rv libfastml.a fastml.o bbAlg.o bbComputeDownAlg.o bbComputeUpAlg.o bbEvaluateSpecificAV.o bbfindBestAVDynProg.o bbNodeOrderAlg.o bb_options.o bbReport.o computeMarginalReconstruction.o jointNoGamma.o mainbb.o sequenceDataDiff.o suffStatComponentJointNoGamma.o
+a - fastml.o
+a - bbAlg.o
+a - bbComputeDownAlg.o
+a - bbComputeUpAlg.o
+a - bbEvaluateSpecificAV.o
+a - bbfindBestAVDynProg.o
+a - bbNodeOrderAlg.o
+a - bb_options.o
+a - bbReport.o
+a - computeMarginalReconstruction.o
+a - jointNoGamma.o
+a - mainbb.o
+a - sequenceDataDiff.o
+a - suffStatComponentJointNoGamma.o
+ranlib libfastml.a
+g++ -std=gnu++98 -L../../libs/phylogeny  fastml.o libfastml.a ../../libs/phylogeny/libEvolTree.a   -o fastml
+make[2]: Leaving directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml'
+make[1]: Leaving directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs'

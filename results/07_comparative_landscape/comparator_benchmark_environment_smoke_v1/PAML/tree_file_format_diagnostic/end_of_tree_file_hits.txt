@@ -1,0 +1,6 @@
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:638:            zerror("end of tree file.");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:453:         zerror("end of tree file.");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:693:         puts("\nend of tree file."); break;
+Binary file /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml matches
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:163:         puts("err or end of tree file."); break;
+Binary file /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.o matches

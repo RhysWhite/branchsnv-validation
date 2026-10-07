@@ -1,0 +1,118 @@
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/ffeee55f.json" was modified by another program
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/2a957770.json" was modified by another program
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/497deca9.json" was modified by another program
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/09cdf8bf.json" was modified by another program
+Transaction
+
+  Prefix: /home/rwhite/branchsnv-comparator-envs/snppar-v1.2
+
+  Updating specs:
+
+   - python=3.10
+   - pip
+
+
+  Package               Version  Build                 Channel           Size
+───────────────────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────────────────
+
+  + libzlib               1.3.2  h25fd6f3_3            conda-forge     Cached
+  + libgomp              16.2.0  he0feb66_7            conda-forge     Cached
+  + zstd                  1.5.7  hb78ec9c_7            conda-forge     Cached
+  + _openmp_mutex           4.5  20_gnu                conda-forge     Cached
+  + ld_impl_linux-64     2.46.1  default_hbd61a6d_102  conda-forge     Cached
+  + libgcc               16.2.0  ha9f2e26_7            conda-forge     Cached
+  + tk                   8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + ncurses                 6.6  hdb14827_1            conda-forge     Cached
+  + libuuid              2.42.4  hcfc3c73_0            conda-forge     Cached
+  + libsqlite            3.53.4  h0737f62_102          conda-forge     Cached
+  + libnsl                2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + liblzma               5.8.3  hb03c661_1            conda-forge     Cached
+  + libexpat              2.8.5  hd2095e1_0            conda-forge     Cached
+  + libffi                3.7.0  h81df57d_1            conda-forge     Cached
+  + bzip2                 1.0.8  hda65f42_10           conda-forge     Cached
+  + libxcrypt            4.4.38  h280c20c_0            conda-forge     Cached
+  + readline                8.3  hd6e31c0_1            conda-forge     Cached
+  + tzdata                2026c  h151e31d_0            conda-forge     Cached
+  + ca-certificates   2026.7.22  hbd8a1cb_0            conda-forge     Cached
+  + openssl               3.6.5  h781a0a9_0            conda-forge     Cached
+  + python              3.10.21  h267e890_0_cpython    conda-forge     Cached
+  + packaging              26.3  pyhc364b38_0          conda-forge     Cached
+  + setuptools           84.0.0  pyh332efcf_0          conda-forge     Cached
+  + wheel                0.48.0  pyhd8ed1ab_0          conda-forge     Cached
+  + pip                  26.2.1  pyh8b19718_0          conda-forge     Cached
+
+  Summary:
+
+  Install: 25 packages
+
+  Total download: 0 B
+
+───────────────────────────────────────────────────────────────────────────────
+
+
+
+Looking for: ['python=3.10', 'pip']
+
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+
+To activate this environment, use
+
+     $ mamba activate /home/rwhite/branchsnv-comparator-envs/snppar-v1.2
+
+To deactivate an active environment, use
+
+     $ mamba deactivate
+
+Collecting phylo-treetime==0.8.5
+  Downloading phylo_treetime-0.8.5-py3-none-any.whl.metadata (13 kB)
+Requirement already satisfied: biopython>=1.66 in /home/rwhite/.local/lib/python3.10/site-packages (1.86)
+Collecting ete3
+  Using cached ete3-3.1.3-py3-none-any.whl
+Requirement already satisfied: numpy>=1.10.4 in /home/rwhite/.local/lib/python3.10/site-packages (from phylo-treetime==0.8.5) (2.2.6)
+Requirement already satisfied: pandas>=0.17.1 in /home/rwhite/.local/lib/python3.10/site-packages (from phylo-treetime==0.8.5) (2.2.3)
+Collecting scipy>=0.16.1 (from phylo-treetime==0.8.5)
+  Using cached scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+Requirement already satisfied: matplotlib>=2.0 in /home/rwhite/.local/lib/python3.10/site-packages (from phylo-treetime==0.8.5) (3.10.8)
+Requirement already satisfied: contourpy>=1.0.1 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (1.3.2)
+Requirement already satisfied: cycler>=0.10 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (4.63.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (1.5.0)
+Requirement already satisfied: packaging>=20.0 in /home/rwhite/branchsnv-comparator-envs/snppar-v1.2/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (26.3)
+Requirement already satisfied: pillow>=8 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /home/rwhite/.local/lib/python3.10/site-packages (from matplotlib>=2.0->phylo-treetime==0.8.5) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /home/rwhite/.local/lib/python3.10/site-packages (from pandas>=0.17.1->phylo-treetime==0.8.5) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /home/rwhite/.local/lib/python3.10/site-packages (from pandas>=0.17.1->phylo-treetime==0.8.5) (2025.2)
+Requirement already satisfied: six>=1.5 in /home/rwhite/.local/lib/python3.10/site-packages (from python-dateutil>=2.7->matplotlib>=2.0->phylo-treetime==0.8.5) (1.17.0)
+Downloading phylo_treetime-0.8.5-py3-none-any.whl (126 kB)
+Using cached scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+Installing collected packages: ete3, scipy, phylo-treetime
+
+Successfully installed ete3-3.1.3 phylo-treetime-0.8.5 scipy-1.15.3
+Cloning into '/home/rwhite/branchsnv-comparator-src/snppar-v1.2'...
+HEAD is now at 0386df8 update for v1.2
+Processing /home/rwhite/branchsnv-comparator-src/snppar-v1.2
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: snppar
+  Building wheel for snppar (pyproject.toml): started
+  Building wheel for snppar (pyproject.toml): finished with status 'done'
+  Created wheel for snppar: filename=snppar-1.0-py3-none-any.whl size=48996 sha256=7de402c2959a1869aed7d8e6fb964c30e98ba25e47a68ffc7183460d694ab198
+  Stored in directory: /tmp/pip-ephem-wheel-cache-t1lm0f5x/wheels/ab/82/05/57cc831bed06c76468d406eabb161ce86cd4e685327ab2ea6a
+Successfully built snppar
+Installing collected packages: snppar
+Successfully installed snppar-1.0

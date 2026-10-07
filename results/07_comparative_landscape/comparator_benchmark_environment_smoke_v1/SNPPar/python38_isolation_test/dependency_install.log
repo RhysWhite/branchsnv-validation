@@ -1,0 +1,77 @@
+Collecting biopython==1.76
+  Downloading biopython-1.76-cp38-cp38-manylinux1_x86_64.whl.metadata (13 kB)
+Collecting phylo-treetime==0.8.5
+  Using cached phylo_treetime-0.8.5-py3-none-any.whl.metadata (13 kB)
+Collecting ete3==3.1.3
+  Using cached ete3-3.1.3.tar.gz (4.8 MB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting numpy (from biopython==1.76)
+  Downloading numpy-1.24.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.6 kB)
+Collecting pandas>=0.17.1 (from phylo-treetime==0.8.5)
+  Downloading pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)
+Collecting scipy>=0.16.1 (from phylo-treetime==0.8.5)
+  Downloading scipy-1.10.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (58 kB)
+Collecting matplotlib>=2.0 (from phylo-treetime==0.8.5)
+  Downloading matplotlib-3.7.5-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (5.7 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.9 kB)
+Collecting cycler>=0.10 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading fonttools-4.57.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (102 kB)
+Collecting kiwisolver>=1.0.1 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading kiwisolver-1.4.7-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl.metadata (6.3 kB)
+Collecting packaging>=20.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting pillow>=6.2.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading pillow-10.4.0-cp38-cp38-manylinux_2_28_x86_64.whl.metadata (9.2 kB)
+Collecting pyparsing>=2.3.1 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading pyparsing-3.1.4-py3-none-any.whl.metadata (5.1 kB)
+Collecting python-dateutil>=2.7 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting importlib-resources>=3.2.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading importlib_resources-6.4.5-py3-none-any.whl.metadata (4.0 kB)
+Collecting pytz>=2020.1 (from pandas>=0.17.1->phylo-treetime==0.8.5)
+  Downloading pytz-2026.5-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.1 (from pandas>=0.17.1->phylo-treetime==0.8.5)
+  Downloading tzdata-2026.5-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting zipp>=3.1.0 (from importlib-resources>=3.2.0->matplotlib>=2.0->phylo-treetime==0.8.5)
+  Downloading zipp-3.20.2-py3-none-any.whl.metadata (3.7 kB)
+Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading biopython-1.76-cp38-cp38-manylinux1_x86_64.whl (2.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 4.2 MB/s eta 0:00:00
+Using cached phylo_treetime-0.8.5-py3-none-any.whl (126 kB)
+Downloading matplotlib-3.7.5-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (9.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.2/9.2 MB 8.0 MB/s eta 0:00:00
+Downloading numpy-1.24.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.3/17.3 MB 4.7 MB/s eta 0:00:00
+Downloading pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.4/12.4 MB 4.6 MB/s eta 0:00:00
+Downloading scipy-1.10.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 34.5/34.5 MB 4.3 MB/s eta 0:00:00
+Downloading contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (301 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.57.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 4.4 MB/s eta 0:00:00
+Downloading importlib_resources-6.4.5-py3-none-any.whl (36 kB)
+Downloading kiwisolver-1.4.7-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 22.2 MB/s eta 0:00:00
+Downloading packaging-26.2-py3-none-any.whl (100 kB)
+Downloading pillow-10.4.0-cp38-cp38-manylinux_2_28_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 5.6 MB/s eta 0:00:00
+Downloading pyparsing-3.1.4-py3-none-any.whl (104 kB)
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2026.5-py2.py3-none-any.whl (506 kB)
+Downloading tzdata-2026.5-py2.py3-none-any.whl (347 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading zipp-3.20.2-py3-none-any.whl (9.2 kB)
+Building wheels for collected packages: ete3
+  Building wheel for ete3 (setup.py): started
+  Building wheel for ete3 (setup.py): finished with status 'done'
+  Created wheel for ete3: filename=ete3-3.1.3-py3-none-any.whl size=2273786 sha256=c8c79cd913e1390b25d1721473a952a99d11e60a88c9ee7aa0bbd752ab383efb
+  Stored in directory: /home/rwhite/.cache/pip/wheels/d4/56/47/60cad123d3de245a181b21bc302114dd7caf298c4b8f5a0b6a
+Successfully built ete3
+Installing collected packages: pytz, ete3, zipp, tzdata, six, pyparsing, pillow, packaging, numpy, kiwisolver, fonttools, cycler, scipy, python-dateutil, importlib-resources, contourpy, biopython, pandas, matplotlib, phylo-treetime
+Successfully installed biopython-1.76 contourpy-1.1.1 cycler-0.12.1 ete3-3.1.3 fonttools-4.57.0 importlib-resources-6.4.5 kiwisolver-1.4.7 matplotlib-3.7.5 numpy-1.24.4 packaging-26.2 pandas-2.0.3 phylo-treetime-0.8.5 pillow-10.4.0 pyparsing-3.1.4 python-dateutil-2.9.0.post0 pytz-2026.5 scipy-1.10.1 six-1.17.0 tzdata-2026.5 zipp-3.20.2

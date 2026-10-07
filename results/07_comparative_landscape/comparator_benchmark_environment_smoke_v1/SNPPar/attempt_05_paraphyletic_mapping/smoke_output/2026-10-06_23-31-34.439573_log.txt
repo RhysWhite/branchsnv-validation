@@ -1,0 +1,94 @@
+2026-10-06_23-31-34.439573: INFO : Log started: (results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/2026-10-06_23-31-34.439573_log.txt)
+2026-10-06_23:31:34.444215: INFO : SNPPar:	Parallel SNP Finder V1.0
+	(utilising TreeTime for ASR and intermediate sorting)
+2026-10-06_23:31:34.445539: INFO : User command: snppar -m results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/snps.fasta -l results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/positions.txt -t results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/tree.nwk -g results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/reference.gb -d results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output -A -i
+2026-10-06_23:31:34.446484: INFO : Reading SNPs from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/snps.fasta and SNP positions from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/positions.txt
+2026-10-06_23:31:34.447876: INFO : Finished reading 1 SNPs in total
+...keeping 1 variable SNPs and ignoring 0 SNPs
+that are non-variable among the 8 isolates
+2026-10-06_23:31:34.448663: INFO : Reading Genbank file from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/reference.gb
+2026-10-06_23:31:34.450813: INFO : Found 1 genes
+2026-10-06_23:31:34.451632: INFO : Reading tree from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/tree.nwk...
+2026-10-06_23:31:34.460160: INFO : Tree and SNP table have same isolates
+2026-10-06_23:31:34.461161: INFO : Parsing SNPs to find bi-, tri- and quadallelic SNPs...
+Also testing if biallelic SNPs are homoplasic
+2026-10-06_23:31:34.463077: INFO : Biallelic SNPs (>1 one isolate): 1
+Biallelic SNPs (>1 one isolate, no missing calls): 1
+Biallelic SNP patterns tested (no missing calls): 1
+Paraphyletic SNPs found: 1
+Triallelic SNPs found: 0
+Quadallelic SNPs found: 0
+
+Total SNPs for mapping: 1
+2026-10-06_23:31:34.464294: INFO : Assigning monophyletic SNPs to genes
+2026-10-06_23:31:34.465225: INFO : Of the 0 monophyletic SNPs for testing, 0 are intergenic, and 0 are intragenic
+2026-10-06_23:31:34.466014: INFO : Assigning SNPs to map to genes
+2026-10-06_23:31:34.466883: INFO : Of the 1 SNPs to map for testing, 1 are intergenic, and 0 are intragenic
+2026-10-06_23:31:34.472423: INFO : Running TreeTime: treetime ancestral --aln results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/snps_to_map.mfasta --tree results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/input_tree_nodeNames.nwk --outdir results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out/ --report-ambiguous --verbose 2
+2026-10-06_23:31:35.941083: INFO : stdout: 
+0.00	-TreeAnc: set-up
+
+0.03	WARNING: Previous versions of TreeTime (<0.7.0) RECONSTRUCTED sequences of
+    	tips at positions with AMBIGUOUS bases. This resulted in unexpected
+    	behavior is some cases and is no longer done by default. If you want to
+    	replace those ambiguous sites with their most likely state, rerun with
+    	`reconstruct_tip_states=True` or `--reconstruct-tip-states`.
+
+Inferred sequence evolution model (saved as results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out//sequence_evolution_model.txt):
+Substitution rate (mu): 1.0
+
+Equilibrium frequencies (pi_i):
+  A: 0.2679
+  C: 0.2326
+  G: 0.2547
+  T: 0.2326
+  -: 0.0122
+
+Symmetrized rates from j->i (W_ij):
+	A	C	G	T	-
+  A	0	1.2763	1.5263	1.2763	1.2763
+  C	1.2763	0	1.291	1.2934	1.2934
+  G	1.5263	1.291	0	1.291	1.291
+  T	1.2763	1.2934	1.291	0	1.2934
+  -	1.2763	1.2934	1.291	1.2934	0
+
+Actual rates from j->i (Q_ij):
+	A	C	G	T	-
+  A	0	0.3419	0.4089	0.3419	0.3419
+  C	0.2969	0	0.3003	0.3009	0.3009
+  G	0.3887	0.3287	0	0.3287	0.3287
+  T	0.2969	0.3009	0.3003	0	0.3009
+  -	0.0156	0.0158	0.0158	0.0158	0
+
+
+--- alignment including ancestral nodes saved as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out/ancestral_sequences.fasta
+
+--- tree saved in nexus format as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out/annotated_tree.nexus
+
+2026-10-06_23:31:35.943784: INFO : Extracting mutation events from ASR results...
+2026-10-06_23:31:35.946360: INFO : Extracting internal node sequences from ASR results...
+2026-10-06_23:31:35.948783: INFO : Processing mapped mutation events...
+2026-10-06_23:31:35.949835: INFO : Processing monophyletic mutation events...
+2026-10-06_23:31:35.950832: INFO : Combining monophyletic and mapped mutation events
+Also combining monophyletic and mapped node sequences...
+2026-10-06_23:31:35.952030: INFO : Writing node sequences to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/node_sequences.fasta
+2026-10-06_23:31:35.958363: INFO : Assigning coding consequenses to the mutation events...
+2026-10-06_23:31:35.959661: INFO : 0 non-synonymous changes, 0 synonymous changes, and 2 SNP events in non-coding regions
+2026-10-06_23:31:35.960905: INFO : Parsing all mutation events...
+2026-10-06_23:31:35.962109: INFO : Found 2 mutation events that are homoplasic
+2026-10-06_23:31:35.963503: INFO : Writing all calls at homoplasic event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/homoplasic_events_all_calls.tsv
+2026-10-06_23:31:35.968202: INFO : Found 2 mutation events that are parallel
+2026-10-06_23:31:35.969626: INFO : Writing all calls at parallel event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/parallel_events_all_calls.tsv
+2026-10-06_23:31:35.975083: INFO : Found 0 mutation events that are convergent
+2026-10-06_23:31:35.976201: INFO : Writing all calls at convergent event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/convergent_events_all_calls.tsv
+2026-10-06_23:31:35.978215: INFO : No output available... writing of file aborted!
+2026-10-06_23:31:35.979266: INFO : Found 0 mutation events that are revertant
+2026-10-06_23:31:35.980733: INFO : Writing all calls at revertant event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/revertant_events_all_calls.tsv
+2026-10-06_23:31:35.982237: INFO : No output available... writing of file aborted!
+2026-10-06_23:31:35.984058: INFO : Writing all mutation events to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/all_mutation_events.tsv
+2026-10-06_23:31:35.992231: INFO : Mapping mutation events to NEXUS tree: results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/node_labelled_nexus.tre
+2026-10-06_23:31:35.997581: INFO : Also mapping mutation events to Newick NHX tree: results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/node_labelled_newick.tre
+2026-10-06_23:31:36.006963: INFO : Cleaning up intermediate files...
+2026-10-06_23:31:36.063548: INFO : ...Finished

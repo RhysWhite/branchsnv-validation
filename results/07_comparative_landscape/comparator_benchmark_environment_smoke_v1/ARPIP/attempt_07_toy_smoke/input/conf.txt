@@ -1,0 +1,16 @@
+analysis_name=BRANCHSNV_ARPIP_SMOKE
+alphabet=DNA
+input.sequence.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/input/toy.fasta
+input.sequence.sites_to_use=all
+init.tree=user
+input.tree.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/input/toy.tree
+model=PIP(model=JC69,lambda=10,mu=0.01)
+opt.seed=1
+opt.likelihood=0
+opt.pip_param_estimate=0
+rate_distribution=Constant
+output.msa.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/msa.fasta
+output.tree.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/tree.nwk
+output.ancestral.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/anc.fasta
+output.node_rel.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/node_rel.txt
+output.mlindelpoints.file=/home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/mlindelpoints.txt

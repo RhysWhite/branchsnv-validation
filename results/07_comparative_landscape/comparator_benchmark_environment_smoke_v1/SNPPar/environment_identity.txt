@@ -1,0 +1,8 @@
+method=SNPPar
+source_pin=0386df8edcff26faf242bc268c5f8865b09c9de9
+python=Python 3.10.21
+SNPPar=1.0
+snppar=1.0
+phylo-treetime=0.8.5
+biopython=1.86
+ete3=3.1.3

@@ -1,0 +1,9 @@
+python = 3.8.20 | packaged by conda-forge | (default, Sep 30 2024, 17:52:49) 
+[GCC 13.3.0]
+biopython = 1.76
+phylo-treetime = 0.8.5
+ete3 = 3.1.3
+Bio file = /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python3.8/site-packages/Bio/__init__.py
+TreeTime file = /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python3.8/site-packages/treetime/__init__.py
+ETE3 file = /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python3.8/site-packages/ete3/__init__.py
+PASS | exact dependency versions loaded from isolated environment

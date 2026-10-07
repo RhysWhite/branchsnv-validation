@@ -1,0 +1,83 @@
+319-      printf("\n%9zu bytes for distance ", com.ns*(com.ns - 1) / 2 * (sizeof(double) + sizeof(int)));
+320-      printf("\n%9zu bytes for conP\n", com.sconP);
+321-      printf("%9zu bytes for fhK\n%9zu bytes for space\n", s2, com.sspace);
+322-
+323-      /* for(i=0; i<com.ns*2-1; i++) xtoy(com.pi,nodes[i].pi, 4);  check this? */
+324-
+325-      if (getdistance)
+326-         DistanceMatNuc(fout, fpair[0], com.model, com.alpha);
+327-
+328-
+329-#if(0)
+330-      /* Selecting the most divergent sequences using the distance matrix
+331-      */
+332-      {
+333-         char keep[NS];
+334-         FILE *ftmp = zfopen("newdata.txt", "w");
+335-         int is, js, i, j, nskeep, isbest = 0, isk, chosen[NS];
+336-         double dmax, dminmax, d, dbig = 9;
+337-
+338-         if (com.model == 0 && com.print == 0)
+339:            zerror("choose RateAncestor = 1 to print the seqs correctly.");
+340-         nskeep = 5;
+341-         printf("\nPicking up the most different sequences.\nHow many do you want? ");
+342-         scanf("%d", &nskeep);
+343-
+344-         if (nskeep >= com.ns) zerror("nothing to do");
+345-
+346-         for (is = 0; is < com.ns; is++) {
+347-            keep[is] = 0;
+348-            chosen[is] = -1;
+349-         }
+350-
+351-         for (is = 0, dmax = 0; is < com.ns; is++) {
+352-            for (js = 0; js < is; js++) {
+353-               d = SeqDistance[is*(is - 1) / 2 + js];
+354-               if (dmax < d) { dmax = d; chosen[1] = is; chosen[0] = js; }
+355-            }
+356-         }
+357-         keep[chosen[0]] = keep[chosen[1]] = 1;
+358-         printf("selected seq %3d %s\n", chosen[0] + 1, com.spname[chosen[0]]);
+359-         printf("selected seq %3d %s\n", chosen[1] + 1, com.spname[chosen[1]]);
+--
+940-         if (com.model == REVu) StepMatrix[b1*n + b2] = StepMatrix[b2*n + b1] = i + 1;
+941-         else                StepMatrix[b1*n + b2] = i + 1;
+942-      }
+943-      printf("rate %d: %d pairs\n", i + 1, k);
+944-   }
+945-   for (i = 0; i < n; i++) {
+946-      for (j = 0; j < n; j++)
+947-         printf("%3d", StepMatrix[i * n + j]);
+948-      printf("\n");
+949-   }
+950-
+951-   return(0);
+952-}
+953-
+954-int GetOptions(char* ctlf)
+955-{
+956-   int iopt, i, j, nopt = 31, lline = 4096;
+957-   char line[4096], * pline, opt[32], * comment = "*#", str[1024];
+958-   char* optstr[] = { "seqfile","outfile","treefile","noisy", "ndata", "cleandata",
+959-        "verbose","runmode", "method", "clock", "TipDate", "fix_rgene","Mgene", "nhomo",
+960:        "getSE","RateAncestor", "model","fix_kappa","kappa",
+961-        "fix_alpha","alpha","Malpha","ncatG", "fix_rho","rho",
+962-        "nparK", "bootstrap", "Small_Diff","icode", "fix_blength", "seqtype" };
+963-   double t;
+964-   FILE* fctl;
+965-   int ng = -1, markgenes[NGENE], it=1;
+966-
+967-   com.ndata_trees_opt = 0;
+968-   com.nalpha = 0;
+969-   fctl = zfopen(ctlf, "r");
+970-   if (noisy) printf("Reading options from %s..\n", ctlf);
+971-   for (; ; ) {
+972-      if (fgets(line, lline, fctl) == NULL) break;
+973-      for (i = 0, t = 0, pline = line; i < lline && line[i]; i++) {
+974-         if (isalnum(line[i])) {
+975-            t = 1; break;
+976-         }
+977-         else if (strchr(comment, line[i]))
+978-            break;
+979-      }
+980-      if (t == 0) continue;

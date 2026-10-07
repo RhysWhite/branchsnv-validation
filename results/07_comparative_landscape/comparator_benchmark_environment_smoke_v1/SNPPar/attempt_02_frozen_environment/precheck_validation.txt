@@ -1,0 +1,11 @@
+PASS | SNPPar environment amendment v1 validates
+PASS | only methods.SNPPar changed
+PASS | Python 3.8.20 frozen
+PASS | Biopython 1.76 frozen
+PASS | TreeTime 0.8.5 frozen
+PASS | ETE3 3.1.3 frozen
+PASS | PYTHONNOUSERSITE=1 required
+PASS | source pin unchanged
+PASS | run and output contracts unchanged
+PASS | other seven comparator recipes unchanged
+PASS | next gate = RERUN_SNPPAR_AUTHORIZED_TOY_SMOKE_WITH_FROZEN_ENVIRONMENT_V1

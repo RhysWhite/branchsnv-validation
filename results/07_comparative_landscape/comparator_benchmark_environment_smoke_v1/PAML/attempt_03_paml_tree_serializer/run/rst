@@ -1,0 +1,150 @@
+Supplemental results for BASEML
+
+seqf:  toy.phy
+treef: tree.nwk
+
+
+TREE #  1
+
+Ancestral reconstruction by BASEML.
+
+((A: 0.100000, B: 0.100000): 0.100000, (C: 0.100000, D: 0.100000): 0.100000);
+
+((1, 2), (3, 4));
+
+   5..6     6..1     6..2     5..7     7..3     7..4  
+
+tree with node labels for Rod Page's TreeView
+((1_A, 2_B) 6 , (3_C, 4_D) 7 ) 5 ;
+
+Nodes 5 to 7 are ancestral
+
+(1) Marginal reconstruction of ancestral sequences
+(eqn. 4 in Yang et al. 1995 Genetics 141:1641-1650).
+
+Prob of best state at each node, listed by site
+
+   site   Freq   Data: 
+
+   1     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   2     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   3     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   4     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   5     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   6     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   7     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   8     19   AAAA: A(0.996) A(1.000) A(1.000) 
+   9     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  10     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  11     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  12     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  13     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  14     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  15     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  16     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  17     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  18     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  19     19   AAAA: A(0.996) A(1.000) A(1.000) 
+  20      1   AGAA: A(0.959) A(0.928) A(0.998) 
+
+Summary of changes along branches.
+Check root of tree for directions of change.
+
+Branch 1:    5..6 
+
+
+
+Branch 2:    6..1  (A) 
+
+
+
+Branch 3:    6..2  (B) 
+
+	  20 A 0.928 -> G
+
+
+Branch 4:    5..7 
+
+
+
+Branch 5:    7..3  (C) 
+
+
+
+Branch 6:    7..4  (D) 
+
+
+
+
+
+List of extant and reconstructed sequences
+
+     7     20
+
+A                 AAAAAAAAAA AAAAAAAAAA 
+B                 AAAAAAAAAA AAAAAAAAAG 
+C                 AAAAAAAAAA AAAAAAAAAA 
+D                 AAAAAAAAAA AAAAAAAAAA 
+node #5           AAAAAAAAAA AAAAAAAAAA 
+node #6           AAAAAAAAAA AAAAAAAAAA 
+node #7           AAAAAAAAAA AAAAAAAAAA 
+
+
+Overall accuracy of the 3 ancestral sequences:
+  0.99433  0.99617  0.99968
+for a site.
+
+  0.89184  0.92373  0.99356
+for the sequence.
+
+
+Counts of changes at sites
+
+   1  (0)
+   2  (0)
+   3  (0)
+   4  (0)
+   5  (0)
+   6  (0)
+   7  (0)
+   8  (0)
+   9  (0)
+  10  (0)
+  11  (0)
+  12  (0)
+  13  (0)
+  14  (0)
+  15  (0)
+  16  (0)
+  17  (0)
+  18  (0)
+  19  (0)
+  20  AG (1)
+
+
+(2) Joint reconstruction of ancestral sequences
+(eqn. 2 in Yang et al. 1995 Genetics 141:1641-1650), using the algorithm of Pupko et al. (2000 Mol Biol Evol 17:890-896),
+modified to generate sub-optimal reconstructions.
+
+Reconstruction (prob.), listed by pattern (use the observed data to find the right site).
+
+Pattern Freq   Data:
+
+   1      19  AAAA: AAA (0.996) TAA (0.001) CAA (0.001) GAA (0.001) TTA (0.000) TAT (0.000)  (total  1.000)
+   2       1  AGAA: AAA (0.925) AGA (0.032) GGA (0.032) TGA (0.001) CGA (0.001) TTA (0.001) TAA (0.001) CCA (0.001) CAA (0.001) ATA (0.001) ACA (0.001) GAA (0.001) GGG (0.001) TGT (0.000)  (total  0.999)
+
+
+
+List of extant and reconstructed sequences
+
+     7     20
+
+A                 AAAAAAAAAA AAAAAAAAAA 
+B                 AAAAAAAAAA AAAAAAAAAG 
+C                 AAAAAAAAAA AAAAAAAAAA 
+D                 AAAAAAAAAA AAAAAAAAAA 
+node #5           AAAAAAAAAA AAAAAAAAAA 
+node #6           AAAAAAAAAA AAAAAAAAAA 
+node #7           AAAAAAAAAA AAAAAAAAAA 
+
+

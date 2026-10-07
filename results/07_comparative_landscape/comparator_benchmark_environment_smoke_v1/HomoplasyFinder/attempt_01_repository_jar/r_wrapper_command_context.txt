@@ -1,0 +1,180 @@
+41-#   #' @keywords data
+42-
+43-## Internal functions (not available to user)
+44-# remove @export
+45-# include @keywords internal for internal functions
+46-
+47-## Calling package functions
+48-# Always use packageName::function when calling external package functions
+49-# Add into Imports: in DESCRIPTION (separate with ", ")
+50-
+51-## Multithreading
+52-# added @export in for functions that are used during multithreading, these functions need to be available in the environment for this line
+53-#       parallel::clusterExport(cl=clusterOfThreads, list("getAllelesAtPosition", "getIsolatesWithNsAtPosition", "areSetsOfIsolatesTheSame"))
+54-#       which is necessary when multithreading is being conducted on a mac
+55-
+56-## Usage example
+57-# library(homoplasyFinder)
+58-# path <- "/home/josephcrispell/Desktop/Research/Homoplasy/"
+59-# treeFile <- paste0(path, "example-AFTER_10-08-18.tree")
+60-# fastaFile <- paste0(path, "example_10-08-18.fasta")
+61:# inconsistentPositions <- runHomoplasyFinderInJava(treeFile, fastaFile, path, verbose=TRUE)
+62-# tree <- readAnnotatedTree(path)
+63-# plotAnnotatedTree(tree, inconsistentPositions, fastaFile)
+64-
+65-#' Extract site information
+66-#'
+67-#' This function will gather information about each of the positions reported in the results table outputted by \code{homoplasyFinder}
+68:#' @param results A data.frame object produced by reading in the \code{homoplasyFinder} output file produced by \code{runHomoplasyFinderInJava} or \code{runHomoplasyFinderJarTool}
+69-#' @param fastaFile The full path to a FASTA formatted nucleotide sequence alignment. Defaults to "Not provided"
+70-#' @return A list containing information about each site reported in the \code{results} table
+71-#' @keywords homoplasyFinder results sites
+72-#' @export
+73-#' @examples
+74-#' # Find the FASTA and tree files attached to package
+75-#' fastaFile <- system.file("extdata", "example.fasta", package = "homoplasyFinder")
+76-#' treeFile <- system.file("extdata", "example.tree", package = "homoplasyFinder")
+77-#' 
+78-#' # Get the current working directory
+79-#' workingDirectory <- paste0(getwd(), "/")
+80-#' 
+81-#' # Run the HomoplasyFinder java code
+82:#' inconsistentPositions <- runHomoplasyFinderInJava(treeFile, fastaFile, path=workingDirectory)
+83-#' 
+84-#' # Get the current date
+85-#' date <- format(Sys.Date(), "%d-%m-%y")
+86-#'  
+87-#' # Read in the output table
+88-#' resultsFile <- paste0(workingDirectory, "consistencyIndexReport_", date, ".txt")
+89-#' results <- read.table(resultsFile, header=TRUE, sep="\t", stringsAsFactors=FALSE)
+90-#' 
+91-#' # Get the site information
+92-#' siteInfo <- assignSiteAlleles(results, fastaFile)
+93-#' 
+94-#' # Get the information for the first site
+95-#' siteInfo[[1]]
+96-assignSiteAlleles <- function(results, fastaFile){
+97-  
+98-  # Read in the fasta file
+99-  sequences <- ape::read.dna(fastaFile, format="fasta", as.character=TRUE)
+100-  samples <- rownames(sequences)
+101-  
+102-  # Initialise a list to store the samples of each allele at each position
+103-  siteInfo <- list()
+104-  
+105-  # Examine each of the positions in the results table
+106-  for(row in 1:nrow(results)){
+107-    
+108-    # Get the current position
+109-    position <- results[row, "Position"]
+110-    key <- as.character(position)
+111-    siteInfo[[key]]$Position <- position
+112-    
+113-    # Store the information already known
+114-    siteInfo[[key]]$ConsistencyIndex <- results[row, "ConsistencyIndex"]
+115-    siteInfo[[key]]$MinimumNumberChangesOnTree <- results[row, "MinimumNumberChangesOnTree"]
+116-    
+117-    # Store the allele counts
+118-    counts <- as.list(as.numeric(strsplit(results[row, "CountsACGT"], split=":")[[1]]))
+119-    names(counts) <- c("A", "C", "G", "T")
+120-    siteInfo[[key]]$Counts <- counts
+121-    
+122-    # Initialise a list to store the sample IDs with each allele
+123-    siteInfo[[key]]$Samples <- list("A"=samples[sequences[, position] == "a"],
+124-                                    "C"=samples[sequences[, position] == "c"],
+125-                                    "G"=samples[sequences[, position] == "g"],
+126-                                    "T"=samples[sequences[, position] == "t"])
+127-  }
+128-  
+129-  return(siteInfo)
+130-}
+131-
+132-#' Run HomoplasyFinder using Java jar file. Use if you can't get rJava to install properly :-)
+133-#'
+134-#' This function runs HomoplasyFinder as a command line jar tool to identify positions that are potentially homoplasious. Output(s) will appear in current working directory.
+135-#' @param treeFile The full path to the Newick formatted phylogenetic tree file
+136-#' @param fastaFile The full path to a FASTA formatted nucleotide sequence alignment. Defaults to NULL
+137-#' @param presenceAbsenceFile The full path to a CSV table file reporting the presence/absence of INDELs. Defaults to NULL
+138-#' @param createFasta Flag to tell HomoplasyFinder whether to create FASTA file without any inconsistent positions. Defaults to TRUE
+139-#' @param createAnnotatedNewickTree Flag to tell HomoplasyFinder whether to create annotated Newick formatted phylogenetic tree file. Defaults to TRUE
+140-#' @param includeConsistentSitesInReport Flag to tell HomoplasyFinder whether to include information about the consistent sites in the report. Defaults to TRUE
+141-#' @param verbose Flag to tell HomoplasyFinder to request detailed information. Defaults to true
+142-#' @param multithread Flag to tell HomoplasyFinder to use multiple threads. Defaults to false
+143-#' @keywords homoplasyFinder java
+144-#' @export
+145-#' @examples
+146-#' # Find the FASTA and tree files attached to package
+147-#' fastaFile <- system.file("extdata", "example.fasta", package = "homoplasyFinder")
+148-#' treeFile <- system.file("extdata", "example.tree", package = "homoplasyFinder")
+149-#' 
+150-#' # Run the HomoplasyFinder jar tool
+151-#' runHomoplasyFinderJarTool(treeFile, fastaFile)
+152-#' 
+153-#' # Get the current date
+154-#' date <- format(Sys.Date(), "%d-%m-%y")
+155-#' 
+156-#' # Get the current working directory
+157-#' workingDirectory <- paste0(getwd(), "/")
+158-#' 
+159-#' # Read in the output table
+160-#' resultsFile <- paste0(workingDirectory, "consistencyIndexReport_", date, ".txt")
+161-#' results <- read.table(resultsFile, header=TRUE, sep="\t", stringsAsFactors=FALSE)
+162-#' 
+--
+212-#' @param treeFile The full path to the Newick formatted phylogenetic tree file
+213-#' @param fastaFile The full path to a FASTA formatted nucleotide sequence alignment. Defaults to "Not provided"
+214-#' @param presenceAbsenceFile The full path to a CSV table file reporting the presence/absence of INDELs. Defaults to "Not provided"
+215-#' @param createFasta Flag to tell HomoplasyFinder whether to create FASTA file without any inconsistent positions. Defaults to TRUE
+216-#' @param createReport Flag to tell HomoplasyFinder whether to create report file detailing the inconsistent sites identified. Defaults to TRUE
+217-#' @param createAnnotatedNewickTree Flag to tell HomoplasyFinder whether to create annotated Newick formatted phylogenetic tree file. Defaults to TRUE
+218-#' @param includeConsistentSitesInReport Flag to tell HomoplasyFinder whether to include information about the consistent sites in the report. Defaults to TRUE
+219-#' @param verbose Flag to parse to HomoplasyFinder to request detailed information. Defaults to true
+220-#' @param multithread Flag to tell HomoplasyFinder to use multiple threads. Defaults to false
+221-#' @keywords homoplasyFinder java
+222-#' @export
+223-#' @examples
+224-#' # Find the FASTA and tree files attached to package
+225-#' fastaFile <- system.file("extdata", "example.fasta", package = "homoplasyFinder")
+226-#' treeFile <- system.file("extdata", "example.tree", package = "homoplasyFinder")
+227-#' 
+228-#' # Get the current working directory
+229-#' workingDirectory <- paste0(getwd(), "/")
+230-#' 
+231-#' # Run the HomoplasyFinder java code
+232:#' inconsistentPositions <- runHomoplasyFinderInJava(treeFile, fastaFile, path=workingDirectory)
+233-#' 
+234-#' # Get the current date
+235-#' date <- format(Sys.Date(), "%d-%m-%y")
+236-#'  
+237-#' # Read in the output table
+238-#' resultsFile <- paste0(workingDirectory, "consistencyIndexReport_", date, ".txt")
+239-#' results <- read.table(resultsFile, header=TRUE, sep="\t", stringsAsFactors=FALSE)
+240-#' 
+241-#' # Read in the annotated tree
+242-#' tree <- readAnnotatedTree(workingDirectory)
+243-#' 
+244-#' # Plot the annotated tree
+245-#' plotAnnotatedTree(tree, inconsistentPositions, fastaFile)
+246:runHomoplasyFinderInJava <- function(treeFile, fastaFile="Not provided", presenceAbsenceFile="Not provided", path, 
+247-                                     createFasta=TRUE,
+248-                                     createReport=TRUE,
+249-                                     createAnnotatedNewickTree=TRUE,
+250-                                     includeConsistentSitesInReport=FALSE,
+251-                                     verbose=TRUE, multithread=FALSE){
+252-
+253-  # Add the java class path (path to the jar file in R package)
+254-  rJava::.jaddClassPath('inst/java/HomoplasyFinder.jar')
+255-  
+256-  # Initialise the Java class - include package in path to class
+257-  javaHomoplasyFinderClass <- rJava::.jnew("homoplasyFinder/HomoplasyFinder")
+258-  
+259-  # Run HomoplasyFinder
+260-  result <- rJava::.jcall(javaHomoplasyFinderClass, # Loaded Java class
+261-                          method="runHomoplasyFinderFromR", # Method in Java class to be called
+262-                          returnSig="[I", # The return type for the method
+263-                          # Method arguments follow
+264-                          treeFile, fastaFile, presenceAbsenceFile, path, createFasta, createReport,
+265-                          createAnnotatedNewickTree, includeConsistentSitesInReport,
+266-                          verbose, multithread)
+267-  return(result)
+268-}

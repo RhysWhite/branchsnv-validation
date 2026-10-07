@@ -1,0 +1,363 @@
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:40:int  Forestry(FILE* fout, FILE* ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:256:   FILE* fseq = NULL, * ftree = NULL, * fpair[6] = { NULL };
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:339:   if (com.runmode != -2 && (ftree = fopen(com.treef, "r")) == NULL) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:340:      printf("\ntree file %s not found.\n", com.treef);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:344:      ReadMainTree(ftree, &stree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:345:      fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:570:         if (com.Mgene == 1)        MultipleGenes(fout, ftree, fpair, com.space);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:571:         else if (com.runmode == 0) Forestry(fout, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:590:   if (com.ndata_trees_opt <= 1 && ftree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:591:      fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:606:int Forestry(FILE* fout, FILE* ftree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:610:   int  status = 0, i, j = 0, k, itree, ntree=1, np, iteration = 1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:616:      if (com.ndata_trees_opt == 0) rewind(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:617:      j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:621:   if (ntree > 10 && com.npatt > 10000 && com.print)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:624:   fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:635:   for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:637:         if(ReadTreeN(ftree, &haslength, 0, 1))
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:646:         printf("\nTree is \n");  OutTreeN(stdout, 1, PrLabel);  printf("\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:687:         printf("\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:688:         fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:690:         if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:691:         fprintf(frub, "\n\nTREE #%2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:870:         fprintf(fout, "\ntree length = %9.6f%s\n", tl, com.ngene > 1 ? " (1st gene)" : "");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:914:   if (ntree == -1)  ntree = itree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:916:   if (ntree > 1) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:918:      rell(flnf, fout, ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:1425:         fprintf(fout, "\ntree length for dN: %12.4f\ntree length for dS: %12.4f\n", dNt, dSt);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:1698:   char *optstr[] = { "seqfile", "outfile", "treefile", "seqtype", "noisy",
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:1743:               else if (strstr(str, "maintree")) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:6026:      /* Forestry(fout, ftree); */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:45:int GetTreeI(int itree, int ns, int rooted)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:120:   int NTrees, NTreeRoot = 3;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:125:      for (i = 4, NTrees = 1; i <= com.ns; i++)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:126:         printf("%20d%20d%20d\n", i, (NTrees *= 2 * i - 5), (NTreeRoot *= 2 * i - 3));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:127:      fprintf(fout, "%10d %10d\n", com.ns, (!rooted ? NTrees : NTreeRoot));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:136:   for (NTrees = 0; ; ) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:140:      if (rooted) fprintf(fout, " [%7d %6d LHs]\n", NTrees++, CountLHsTree());
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:141:      else fprintf(fout, " [%7d]\n", NTrees++);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:158:int GetIofTree(int rooted, int keeptree, double space[])
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:172:   if (tree.nnode - com.ns != com.ns - 1 - !rooted) zerror("GetIofTree");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:173:   if (com.ns > 15) zerror("ns too large in GetIofTree");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treespace.c:317:      GetTreeI which returns the I_th rooted or unrooted tree topology.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:31:int Forestry(FILE *fout, FILE* ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:145:   FILE* fout, * fseq = NULL, * ftree = NULL, * fpair[6];
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:183:   fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:200:   if ((ftree = fopen(com.treef, "r")) == NULL) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:201:      printf("\ntree file %s not found.\n", com.treef);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:205:      ReadMainTree(ftree, &stree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:206:      fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:392:      if (com.Mgene == 1)        MultipleGenes(fout, ftree, fpair, com.space);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:393:      else if (com.runmode == 0) Forestry(fout, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:414:   if (com.ndata_trees_opt <= 1 && ftree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:415:      fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:428:void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:430:int Forestry(FILE *fout, FILE *ftree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:433:   int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:440:      if (com.ndata_trees_opt == 0) rewind(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:441:      j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:449:   fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:451:   for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:452:      if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:460:      if (noisy) printf("\nTREE # %2d: ", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:461:      fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:462:      fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:463:      if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:620:         fprintf(fout, "\ntree length = %9.5f%s\n", tl, (com.ngene > 1 ? " (1st gene)" : ""));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:650:         fputs("\nTree with branch lengths for codon models:\n", fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:670:   if (ntree > 1) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:672:      PrintBestTree(frst1, ftree, btree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:677:   if (ntree == -1)  ntree = itree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:678:   if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:685:void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:687:   int itree, ntree, i;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:689:   rewind(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:690:   GetTreeFileType(ftree, &ntree, &i, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:691:   for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:692:      if (ReadTreeN(ftree, &i, 0, 1)) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:826:         fprintf(fout, "\ntree length (eq. 6 in Matsumoto et al. 2015) = %9.6f\n", treelength);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:958:   char* optstr[] = { "seqfile","outfile","treefile","noisy", "ndata", "cleandata",
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:998:               else if (strstr(str, "maintree")) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:69:   FILE *ftree, *fout, *fseq;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:72:   int itree, ntree, i, s3;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:113:   ftree = zfopen(com.treef, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:114:   fscanf(ftree, "%d%d", &i, &ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:117:   for (itree = 0; itree < ntree; itree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:119:      printf("\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:120:      fprintf(fout, "\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:122:      if (ReadTreeN(ftree, &i, 0, 1)) zerror("err tree..");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:151:   char *optstr[] = { "seqfile","outfile","treefile", "seqtype", "ncatG", "nhomo" };
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/pamp.c:363:   fprintf(fout, "\ntree length: %9.5f\n", sum(branch, tree.nbranch));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2752:   double i, ntree = 1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2754:   if (ns > 70) zerror("ns too large in NumberofTrees().");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2756:      ntree *= 2 * i - 5;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2757:   return (ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2829:int ReadTreeB(FILE* ftree, int popline)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2840:   fscanf(ftree, "%d", &tree.nbranch);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2843:         if (fscanf(ftree, "%d", &tree.branches[j][i]) != 1) state = -1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2846:            zerror("ReadTreeB: node numbers out of range");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2855:   if (popline) fgets(line, 254, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2892:int GetTreeFileType(FILE* ftree, int* ntree, int* pauptree, int shortform);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2894:int GetTreeFileType(FILE* ftree, int* ntree, int* pauptree, int shortform)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2905:   k = fscanf(ftree, "%d%d", &i, ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2910:   else if (k == 1) { *ntree = i; return(0); }           /* phylip & molphy style */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2912:      ch = fgetc(ftree);  /* treeview style */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2914:      *ntree = -1;  ungetc(ch, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2920:      if (fgets(line, lline, ftree) == NULL) zerror("tree err1: EOF");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2922:      if (strstr(line, paupstart)) { *pauptree = 1; *ntree = -1; break; }
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2926:      if (fgets(line, lline, ftree) == NULL) zerror("tree err2: EOF");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2931:      if ((ch = fgetc(ftree)) == EOF) zerror("tree err3: EOF");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2934:   if (fgets(line, lline, ftree) == NULL) zerror("tree err4: EOF");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2939:int PopPaupTree(FILE* ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2940:int PopPaupTree(FILE* ftree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2948:      ch = fgetc(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2951:         ungetc(ch, ftree); return(0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2960:void DownTreeCladeLabel(int inode, int label)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:2975:      DownTreeCladeLabel(nodes[inode].sons[i], label);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3024:/* Read a newick tree from ftree.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3028:nodes[].label in the routine DownTreeCladeLabel().
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3048:int ReadTreeN(FILE* ftree, int* haslength, int copyname, int popline)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3079:      ch = fgetc(ftree);  /* skip spaces */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3080:   ungetc(ch, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3082:      ReadTreeB(ftree, popline); return(0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3084:   if (PopPaupTree(ftree) == -1) return(-1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3087:      ch = fgetc(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3091:            zerror("; in treefile");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3125:         fscanf(ftree, "%lf", &nodes[inode].branch);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3130:         ungetc(ch, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3131:         ReadUntil(ftree, line, delimitersN, lline);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3166:            k = ReadUntil(ftree, line, quote[1], lline);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3167:            ch = fgetc(ftree);   /* pop off ' "  */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3170:            ungetc(ch, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3171:            k = ReadUntil(ftree, line, delimitersL, lline);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3195:      fgets(line, lline, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:3632:int ReadMainTree(FILE* ftree, struct SPECIESTREE* stree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4241:int GetNSfromTreeFile(FILE* ftree, int* ns, int* ntree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4249:   *ns = *ntree = -1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4250:   k = fscanf(ftree, "%d%d", ns, ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4253:      *ntree = *ns; *ns = -1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4257:      while ((c = fgetc(ftree)) != ';') {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4261:               fscanf(ftree, "%lf", &y);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4270:      rewind(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4275:void CladeSupport(FILE* fout, char treef[], int getSnames, char maintreef[], int pick1tree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4286:   int i, j, k, i1, ntreeM, ntree, itreeM, sizetree, found, lline = 1024;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4303:      GetNSfromTreeFile(ft, &com.ns, &k);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4321:   for (ntree = 0; ; ntree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4323:         maxnptree = (int)(maxnptree * (ntree < 1000 ? 2 : 1.2));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4338:      if (ReadTreeN(ft, &i, (getSnames && ntree == 0), 1)) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4339:      if (debug || (ntree + 1) % 5000 == 0) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4340:         printf("\rtree %5d  ", ntree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4369:      if (ntree > 0 && strcmp(ptree0, ptree))
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4394:   printf("\n%6d trees read, %d distinct trees.\n", ntree, nptree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4415:      printf(" %6.0f %8.6f %8.6f  ", y, y / ntree, (cdf += y / ntree));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4420:      fprintf(fout, " %6.0f %8.6f %8.6f  ", y, y / ntree, cdf);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4428:      if (k > 9 && cdf > 0.99 && y / ntree < 0.001) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4435:      printf(" %6.0f %9.6f  %s\n", y, y / ntree, splits + j * lsplit);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4436:      if (k > 9 && y / ntree < 0.001) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4441:      fprintf(fout, " %6.0f %9.6f  %s\n", y, y / ntree, splits + j * lsplit);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4442:      if (k > 9 && y / ntree < 0.001) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4447:      if (countsplits[k] / ntree >= 0.5) nsplit50++;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4449:      if (countsplits[k] / ntree > 0.5) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4451:         Psplit50[nsplit50++] = countsplits[k] / ntree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4461:   if (maintreef) fM = fopen(maintreef, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4470:   fscanf(fM, "%d%d", &i, &ntreeM);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4471:   if (i != s || ntreeM < 1) zerror("<ns> <ntree> on the first line in main tree.");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4473:   splitM = (char*)malloc(ntreeM * (s - 2) * lsplit * sizeof(char));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4474:   Psame = (double*)malloc(ntreeM * sizeof(double));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4476:   zero(Psame, ntreeM);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4477:   if (pick1tree >= 1 && pick1tree <= ntreeM && (f1tree = (FILE*)fopen(pick1treef, "w")) == NULL)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4479:   for (itreeM = 0, pM = splitM; itreeM < ntreeM; itreeM++, pM += (s - 2) * lsplit) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4480:      if (ReadTreeN(fM, &i, 0, 1)) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4490:   if ((MAPtreeID = (double*)malloc(ntree * sizeof(double))) == NULL)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4492:   memset(MAPtreeID, 0, ntree * sizeof(double));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4496:   for (ntree = 0; ; ntree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4497:      if (ReadTreeN(ft, &i, 0, 0)) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4500:      for (itreeM = 0, pM = splitM; itreeM < ntreeM; itreeM++, pM += (s - 2) * lsplit) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4508:            if (itreeM == 0) MAPtreeID[ntree] = 1;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4516:   printf("\n(D) Best tree (or trees from the maintree file) with support values\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4517:   fprintf(fout, "\n(D) Best tree (or trees from the maintree file) with support values\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4520:   fscanf(fM, "%d%d", &s, &ntreeM);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4521:   for (itreeM = 0; itreeM < ntreeM; itreeM++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4522:      if (ReadTreeN(fM, &i, 0, 1)) break;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4527:         if (found) nodes[i].label = countsplits[j] / ntree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4531:      printf("  [P = %8.6f]\n", Psame[itreeM] / ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4533:      fprintf(fout, "  [P = %8.6f]\n", Psame[itreeM] / ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4535:   if (pick1tree) printf("\ntree #%d collected into %s\n", pick1tree, pick1treef);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4538:   Eff_MAPtree = Eff_IntegratedCorrelationTime(MAPtreeID, ntree, &mMAPtree, &vMAPtree, &rho1MAPtree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4540:   Eff_MAPtree = Eff_IntegratedCorrelationTime2(MAPtreeID, ntree, (int)sqrt(ntree) / 2, &mMAPtree, &vMAPtree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4548:   printf("\nPjump =       %12.9f\nEff_MAPtree = %12.9f\n", Pjump / (ntree - 1), Eff_MAPtree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4648:   int step = 0, ntree = 0, nmove = 0, improve = 0, ineighb, i;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4651:   FILE* ftree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4666:      if ((ftree = fopen(com.treef, "r")) == NULL) zerror("treefile not exist?");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4667:      fscanf(ftree, "%d%d", &i, &ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4669:      if (ReadTreeN(ftree, &i, 0, 1)) zerror("err tree..");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4670:      fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4691:            printf("\nTrying tree # %d (%d move[s]) \n", ++ntree, nmove);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4965:   int status = 0, stage = 0, i, j, itree, ntree = 0, ntreet, best = 0, improve = 1, collaps = 0;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4969:   FILE* ftree, * fsum = frst;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4972:      if ((ftree = fopen(com.treef, "r")) == NULL)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4973:         zerror("no treefile");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4974:      fscanf(ftree, "%d%d", &i, &ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4975:      if (ReadTreeN(ftree, &i, 0, 1)) zerror("err tree file");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:4976:      fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5004:   for (ntree = 0, stage = 1; ; stage++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5054:      ntreet = nson * (nson - 1) / 2;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5055:      if (!com.clock && inode == treestar.tree.root && nson == 4)  ntreet = 3;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5060:            stage, ntreet, com.ntime, com.np);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5066:            stage, ntreet, com.ntime, com.np);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5071:         fprintf(fout, "\n\nstage %d:%6d trees\nstar tree: ", stage, ntreet);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5078:         for (ison2 = ison1 + 1; ison2 < nson && itree < ntreet; ison2++, itree++, ntree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5089:               printf("\nS=%d:%3d/%d  T=%4d  ", stage, itree + 1, ntreet, ntree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5093:               fprintf(fsum, "\nS=%d:%3d/%d  T=%4d  ", stage, itree + 1, ntreet, ntree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5097:               fprintf(fout, "\nS=%d:%4d/%4d  T=%4d ", stage, itree + 1, ntreet, ntree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5170:int MultipleGenes(FILE* fout, FILE* ftree, FILE* fpair[], double space[])
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5217:      if (com.runmode == 0)  Forestry(fout, ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5844:int rell(FILE* flnf, FILE* fout, int ntree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5857:    com.space[ntree*(npatt+nr+5)]:
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5858:    lnf[ntree*npatt] lnL0[ntree] lnL[ntree*nr] pRELL[ntree] pSH[ntree] vdl[ntree]
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5859:    btrees[ntree]
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5864:   int lline = 16000, ntree0, ns0 = com.ns, ls0, npatt0;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5871:   puts("\nTree comparisons (Kishino & Hasegawa 1989; Shimodaira & Hasegawa 1999)");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5872:   fputs("\nTree comparisons (Kishino & Hasegawa 1989; Shimodaira & Hasegawa 1999)\n", fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5875:   fscanf(flnf, "%d%d%d", &ntree0, &ls0, &npatt0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5876:   if (ntree0 != -1 && ntree0 != ntree)  zerror("rell: input data file strange.  Check.");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5879:   s = ntree * (com.npatt + nr + 5) * sizeof(double);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5886:   lnf = com.space; lnL0 = lnf + ntree * com.npatt; lnL = lnL0 + ntree; pRELL = lnL + ntree * nr;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5887:   pSH = pRELL + ntree; vdl = pSH + ntree; btrees = (int*)(vdl + ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5897:   for (itree = 0, mltree = 0; itree < ntree; itree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5922:   for (itree = 0; itree < ntree; itree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5940:   zero(pRELL, ntree); zero(pSH, ntree); zero(lnL, ntree * nr);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5952:            for (itree = 0; itree < ntree; itree++)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5957:      for (j = 1, nbtree = 1, btrees[0] = 0, y = lnL[ir]; j < ntree; j++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5974:   if (fabs(1 - sum(pRELL, ntree)) > 1e-6) zerror("sum pRELL != 1.");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5976:   /* Shimodaira & Hasegawa correction (1999), working on lnL[ntree*nr] */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5979:   for (j = 0; j < ntree; j++)  /* step 3: centering */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5982:      for (j = 1, lnLmSH[ir] = lnL[ir]; j < ntree; j++)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5985:   for (itree = 0; itree < ntree; itree++) {  /* steps 4 & 5 */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:5993:   for (j = 0; j < ntree; j++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:6002:   for (j = 0; j < ntree; j++) fprintf(frst1, " %5.3f", pRELL[j]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:6004:    for(j=0;j<ntree;j++) if(j!=mltree) fprintf(frst1,"%9.6f",pSH[j]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:7093:   fputs("\ntree with node labels for Rod Page's TreeView\n", fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8665:      ReadTreeN can read node labels such as #, $ anyway.
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8862:         DownTreeCladeLabel(tree.root, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8897:int ReadMainTree( FILE*ftree, struct SPECIESTREE *stree)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8901:   int haslength, j, ntree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8904:   j = fscanf(ftree, "%d%d", &stree->nspecies, &ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8905:   if (ntree!=1) zerror("maintree file can have only one tree");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8913:   ReadTreeN(ftree, &haslength, 1, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8933:int ReadTreeSeqs(FILE* fout)
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8941:   FILE* fseq, * ftree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8944:   ftree = zfopen(com.treef, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:8945:   ReadMainTree(ftree, &stree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:9029:   fclose(ftree); fclose(fseq);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:9043:   FILE* ftrees = zfopen(treesfilename, "w");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:9052:      fprintf(ftrees, "\n%d  1\n", com.ns);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:9053:      OutTreeN(ftrees, 1, PrLabel);  fprintf(ftrees, "\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:9055:   fclose(ftrees);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:10125:   ReadTreeSeqs(fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:10201:   fprintf(fout, "\n\nTree:  ");  OutTreeN(fout, 0, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/treesub.c:10215:   fprintf(fout, "\nTree with node ages for TreeView\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:182:int rell(FILE*flnf, FILE*fout, int ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:184:int MultipleGenes (FILE* fout, FILE* ftree, FILE*fpair[], double space[]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:298:int ReadTreeN (FILE *ftree, int *haslength, int copyname, int popline);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:299:int ReadTreeB (FILE *ftree, int popline);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:326:void CladeSupport (FILE *fout, char treef[], int getSnames, char maintreef[], int pick1tree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:327:int GetNSfromTreeFile(FILE *ftree, int *ns, int *ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:345:int GetTreeI (int itree, int ns, int rooted);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:350:int GetIofTree (int rooted, int keeptree, double space[]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/paml.h:367:int ReadTreeSeqs(FILE*fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:18:     evolver 9 <TreesFile> <MainTreeFile>
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:91:void CladeMrBayesProbabilities(char treefile[]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:110:   char* MCctlf = NULL, outf[512] = "evolver.out", treefile[512] = "mcmc.txt", maintreefile[512] = "\0";
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:111:   int i, option = -1, ntree = 1, rooted, BD = 0, gotoption = 0, pick1tree = 0;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:131:      strcpy(treefile, argv[2]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:132:      if (argc > 3) strcpy(maintreefile, argv[3]);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:166:         printf("\t(9) Calculate clade support values (evolver 9 treefile maintreefile <pick1tree>)?\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:184:            scanf("%d%d", &ntree, &i);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:209:            for (i = 0; i < ntree; i++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:213:               if (com.ns < 20 && ntree < 10) { OutTreeN(F0, 0, BD); puts("\n"); }
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:229:            scanf("%s%s", treefile, maintreefile);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:244:      CladeSupport(fout, treefile, 1, maintreefile, pick1tree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:278:   FILE* ftree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:289:   ftree = zfopen(treef, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:290:   fscanf(ftree, "%d%d", &com.ns, &j);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:301:   ReadTreeN(ftree, &haslength, 1, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:302:   fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:401:   int i, j, ntree, k, * nib, nsame, IBsame[NS], lpart = 0;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:403:   FILE* ftree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:409:   ftree = zfopen(treef, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:410:   fscanf(ftree, "%d%d", &com.ns, &ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:411:   printf("%2d sequences %2d trees.\n", com.ns, ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:416:   i = ntree * lpart;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:419:   nib = (int*)malloc(ntree * sizeof(int));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:422:   puts("\ntree #: mean prop of tree pairs with 0 1 2 ... shared bipartitions\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:423:   fputs("\ntree #: prop of tree pairs with 0 1 2 ... shared bipartitions\n", fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:424:   for (i = 0; i < ntree; i++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:425:      ReadTreeN(ftree, &j, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:430:   for (i = 0; i < ntree; i++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:432:      for (j = 0; j < ntree; j++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:437:      for (k = 0; k < com.ns - 3; k++) PD1[k] /= (ntree - 1.);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:439:      printf("%8d (%5.1f%%):", i + 1, (i + 1.) / ntree * 100);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:445:   free(partition); free(nodes); free(nib); fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:454:   int i, j, ntree, k, * nib, parti2B[NS] = { 0 }, nsame, IBsame[NS], nIBsame[NS], lpart = 0;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:456:   FILE* ftree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:463:   puts("\nNumber of identical bi-partitions between trees.\nTree file name?");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:466:   ftree = zfopen(treef, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:467:   fscanf(ftree, "%d%d", &com.ns, &ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:468:   printf("%2d sequences %2d trees.\n", com.ns, ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:472:   if (ntree < 2) zerror("ntree");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:473:   printf("\n%d species, %d trees\n", com.ns, ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:479:   i = (k == 1 ? 2 : ntree) * lpart;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:482:   nib = (int*)malloc(ntree * sizeof(int));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:487:      for (i = 0; i < ntree; i++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:488:         ReadTreeN(ftree, &j, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:492:      for (i = 0; i < ntree; i++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:505:      ReadTreeN(ftree, &j, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:525:      for (i = 1, mp = vp = 0; i < ntree; i++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:526:         ReadTreeN(ftree, &j, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:541:      vp = (ntree <= 2 ? 0 : sqrt(vp / ((ntree - 1 - 1) * (ntree - 1.))));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:543:      fprintf(fout, "between the 1st and all the other %d trees ", ntree - 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:545:      fprintf(fout, "\nNumbers of times, out of %d, ", ntree - 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:551:            k + 1, i, j, nIBsame[k], nIBsame[k] * 100. / (ntree - 1.));
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:554:   free(partition);  free(nodes); free(nib);  fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:871:      if (ReadTreeN(fin, &i, 1, 1))  /* might overwrite spname */
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:960:            ReadTreeN(fin, &i, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1120:            printf("\ntree used: ");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1336:void CladeMrBayesProbabilities(char treefile[])
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1338:   /* This reads a tree from treefile and then scans a set of MrBayes output files
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1351:   FILE* ftree, * fmb[20];
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1356:   printf("tree file is %s\nmb output files:\n", treefile);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1357:   ftree = zfopen(treefile, "r");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1364:   fscanf(ftree, "%d%d", &i, &k);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1368:   ReadTreeN(ftree, &i, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/evolver.c:1414:   fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:14:#define NTREE       20    
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:143:   int i, j, itree, ntree, np;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:145:   double x[NP], xb[NP][2], lnL[NTREE] = { 0 }, e = 1e-6, * var = space + NP, det;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:146:   FILE* ftree;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:148:   if ((ftree = fopen(com.treef, "r")) == NULL)   zerror("treefile err.");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:149:   GetTreeFileType(ftree, &ntree, &pauptree, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:151:   fprintf(flfh, "%6d%6d%6d\n", ntree, com.ls, com.npatt);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:152:   fprintf(frate, "Rates for sites, from BASEMLG, %d tree(s)\n\n", ntree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:154:   for (itree = 0; itree < ntree; itree++) {
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:155:      printf("\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:156:      fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:158:      fprintf(frub, "\n\nTREE # %2d", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:159:      fprintf(frate, "\nTREE # %2d\n", itree + 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:161:      if (ReadTreeN(ftree, &haslength, 0, 1))
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:228:   fclose(ftree);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:794:   char* optstr[] = { "seqfile","outfile","treefile", "noisy",
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:44:int ReadTreeSeqs(FILE*fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:265:   ReadTreeSeqs(fout);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1298:      if (ReadTreeN(fBGH, &i, 0, 1))
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1430:   FILE *fseq, *ftree, *fctl;
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1443:      ftree = zfopen(tmptreef, "w");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1457:      fprintf(ftree, "  1\n\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1458:      OutTreeN(ftree, 1, 0);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1459:      fprintf(ftree, "\n\n");
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1462:      fprintf(fctl, "treefile = %s\n", tmptreef);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1480:      fclose(fseq);  fclose(ftree);  fclose(fctl);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1499:   char *optstr[] = { "seed", "seqfile","treefile", "outfile", "mcmcfile", "checkpoint", "BayesFactorBeta",
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:1894:      ReadTreeN(fin, &i, 0, 1);
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/mcmctree.c:3062:      nodes, as is the case if the node numbers are assigned by ReadTreeN().

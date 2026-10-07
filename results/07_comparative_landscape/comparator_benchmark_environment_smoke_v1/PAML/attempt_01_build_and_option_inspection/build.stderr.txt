@@ -1,0 +1,4 @@
+baseml.c: In function ‘main’:
+baseml.c:407:7: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
+       memset(com.spname, 0, NS * sizeof(char));
+       ^~~~~~

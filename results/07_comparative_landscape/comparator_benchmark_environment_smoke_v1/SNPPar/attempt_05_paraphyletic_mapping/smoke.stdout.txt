@@ -1,0 +1,133 @@
+
+Log started: (results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/2026-10-06_23-31-34.439573_log.txt)
+
+SNPPar:	Parallel SNP Finder V1.0
+	(utilising TreeTime for ASR and intermediate sorting)
+
+User command: snppar -m results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/snps.fasta -l results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/positions.txt -t results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/tree.nwk -g results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/reference.gb -d results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output -A -i
+
+
+Reading SNPs from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/snps.fasta and SNP positions from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/positions.txt
+
+Finished reading 1 SNPs in total
+...keeping 1 variable SNPs and ignoring 0 SNPs
+that are non-variable among the 8 isolates
+
+Reading Genbank file from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/reference.gb
+Found 1 genes
+
+Reading tree from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/toy/tree.nwk...
+Tree and SNP table have same isolates
+
+Parsing SNPs to find bi-, tri- and quadallelic SNPs...
+Also testing if biallelic SNPs are homoplasic
+
+Biallelic SNPs (>1 one isolate): 1
+Biallelic SNPs (>1 one isolate, no missing calls): 1
+Biallelic SNP patterns tested (no missing calls): 1
+Paraphyletic SNPs found: 1
+Triallelic SNPs found: 0
+Quadallelic SNPs found: 0
+
+Total SNPs for mapping: 1
+
+Assigning monophyletic SNPs to genes
+
+Of the 0 monophyletic SNPs for testing, 0 are intergenic, and 0 are intragenic
+
+Assigning SNPs to map to genes
+
+Of the 1 SNPs to map for testing, 1 are intergenic, and 0 are intragenic
+
+Running TreeTime: treetime ancestral --aln results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/snps_to_map.mfasta --tree results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/input_tree_nodeNames.nwk --outdir results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out/ --report-ambiguous --verbose 2
+
+stdout: 
+0.00	-TreeAnc: set-up
+
+0.03	WARNING: Previous versions of TreeTime (<0.7.0) RECONSTRUCTED sequences of
+    	tips at positions with AMBIGUOUS bases. This resulted in unexpected
+    	behavior is some cases and is no longer done by default. If you want to
+    	replace those ambiguous sites with their most likely state, rerun with
+    	`reconstruct_tip_states=True` or `--reconstruct-tip-states`.
+
+Inferred sequence evolution model (saved as results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out//sequence_evolution_model.txt):
+Substitution rate (mu): 1.0
+
+Equilibrium frequencies (pi_i):
+  A: 0.2679
+  C: 0.2326
+  G: 0.2547
+  T: 0.2326
+  -: 0.0122
+
+Symmetrized rates from j->i (W_ij):
+	A	C	G	T	-
+  A	0	1.2763	1.5263	1.2763	1.2763
+  C	1.2763	0	1.291	1.2934	1.2934
+  G	1.5263	1.291	0	1.291	1.291
+  T	1.2763	1.2934	1.291	0	1.2934
+  -	1.2763	1.2934	1.291	1.2934	0
+
+Actual rates from j->i (Q_ij):
+	A	C	G	T	-
+  A	0	0.3419	0.4089	0.3419	0.3419
+  C	0.2969	0	0.3003	0.3009	0.3009
+  G	0.3887	0.3287	0	0.3287	0.3287
+  T	0.2969	0.3009	0.3003	0	0.3009
+  -	0.0156	0.0158	0.0158	0.0158	0
+
+
+--- alignment including ancestral nodes saved as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out/ancestral_sequences.fasta
+
+--- tree saved in nexus format as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/treetime_out/annotated_tree.nexus
+
+
+
+Extracting mutation events from ASR results...
+
+Extracting internal node sequences from ASR results...
+
+Processing mapped mutation events...
+
+Processing monophyletic mutation events...
+
+Combining monophyletic and mapped mutation events
+Also combining monophyletic and mapped node sequences...
+
+Writing node sequences to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/node_sequences.fasta
+
+Assigning coding consequenses to the mutation events...
+0 non-synonymous changes, 0 synonymous changes, and 2 SNP events in non-coding regions
+
+Parsing all mutation events...
+
+Found 2 mutation events that are homoplasic
+
+Writing all calls at homoplasic event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/homoplasic_events_all_calls.tsv
+
+Found 2 mutation events that are parallel
+
+Writing all calls at parallel event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/parallel_events_all_calls.tsv
+
+Found 0 mutation events that are convergent
+
+Writing all calls at convergent event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/convergent_events_all_calls.tsv
+No output available... writing of file aborted!
+
+Found 0 mutation events that are revertant
+
+Writing all calls at revertant event positions to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/revertant_events_all_calls.tsv
+No output available... writing of file aborted!
+
+Writing all mutation events to results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/all_mutation_events.tsv
+
+Mapping mutation events to NEXUS tree: results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/node_labelled_nexus.tre
+
+Also mapping mutation events to Newick NHX tree: results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_05_paraphyletic_mapping/smoke_output/node_labelled_newick.tre
+
+Cleaning up intermediate files...
+
+...Finished
+

@@ -1,0 +1,7 @@
+PASS | PastML ambiguity-adapter amendment v1 validates
+PASS | change restricted to the authorized parser
+PASS | singleton states retained
+PASS | absent or multi-state calls encoded as N
+PASS | uncertain endpoints do not emit discrete events
+PASS | existing toy validation still passes
+PASS | next gate = RESUME_COMPARATOR_BENCHMARK_ENVIRONMENT_AND_SMOKE_TEST_V1

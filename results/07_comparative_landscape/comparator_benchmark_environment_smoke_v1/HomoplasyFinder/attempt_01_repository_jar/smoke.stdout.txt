@@ -1,0 +1,18 @@
+HomoplasyFinder: a tool to identify homoplasies within a phylogenetic tree and alignment
+
+Necessary command line arguments:
+	--tree [fullPathToTreeFile]	The input Newick formatted tree file
+One of the following:
+	--fasta [fullPathToFASTAFile]	The input FASTA containing a nucleotide alignment (sequential format)
+	--presenceAbsence [fullPathToPresenceAbsenceFile]	The input CSV containing presence/absence matrix: (0=absent, 1=present
+									start,end,isolateA,isolateB,isolateC,...
+									7,53,1,0,1,...
+									1045,1054,1,0,0,...
+
+Optional command line arguments:
+	--verbose		A flag to turn on detailed progress information
+	--createFasta		A flag to create a FASTA file without inconsistent sites
+	--createAnnotatedTree	A flag to create an annotated Newick formatted tree file
+	--includeConsistent	A flag to include information about sites that are consistent (non-homoplasious) in report
+	--multithread		A flag to turn on multithreading
+	--help			A flag to print this information and exit

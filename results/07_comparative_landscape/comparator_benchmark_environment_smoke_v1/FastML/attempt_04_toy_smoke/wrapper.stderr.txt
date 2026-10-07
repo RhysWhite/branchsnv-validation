@@ -1,0 +1,4 @@
+
+	FASTML EXIT ON ERROR:
+FASTML failed to run, one of the files seq.marginal.txt or prob.marginal.txt were not created...
+

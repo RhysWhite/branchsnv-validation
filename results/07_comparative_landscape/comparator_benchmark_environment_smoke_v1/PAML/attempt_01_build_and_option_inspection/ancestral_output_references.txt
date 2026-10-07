@@ -1,0 +1,21 @@
+28:extern int noisy, NFunCall, NEigenQ, NPMatUVRoot, *ancestor, GeneticCode[][64];
+110:/* all trees are binary & rooted, with ancestors unknown. */
+128:FILE *frub, *flnf, *frst, *frst1, *frst2 = NULL, *finitials = NULL;
+147:   char rstf[2048] = "rst", ctlf[4096] = "baseml.ctl", timestr[64];
+176:   frub = zfopen("rub", "w");  frst = zfopen(rstf, "w"); frst1 = zfopen("rst1", "w");
+221:         fprintf(frst1, "%4d", com.idata + 1);
+282:         ancestor = (int*)realloc(ancestor, i * sizeof(int));
+283:         if (SeqDistance == NULL || ancestor == NULL) zerror("oom distance&ancestor");
+401:         fprintf(frst1, "\t");
+402:         OutTreeN(frst1, 1, 0);
+404:      fprintf(frst1, "\n"); 
+405:      fflush(frst1);
+567:      for(i=0;i<np;i++) fprintf(frst1,"\t%.6f", x[i]);
+568:      fprintf(frst1,"\t%.4f", -lnL);
+666:            AncestralSeqs(frst, x);
+671:      fprintf(frst1, "\t%d\t", btree + 1);
+672:      PrintBestTree(frst1, ftree, btree);
+1525:   if (inode < com.ns) {  /* young ancestor */
+1532:   if (com.cleandata && inode < com.ns) /* young ancestor */
+1777:      com.ntime = (#ancestral nodes) - 1 + (#rates) - 1
+1780:      x[1..(nid-1)]: ti/t0 ancestral node times expressed as ratios

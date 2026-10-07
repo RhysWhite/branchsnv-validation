@@ -1,0 +1,11 @@
+python = 3.8.20 | packaged by conda-forge | (default, Sep 30 2024, 17:52:49) 
+[GCC 13.3.0]
+executable = /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/bin/python
+ENABLE_USER_SITE = False
+sys.path:
+  
+  /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python38.zip
+  /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python3.8
+  /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python3.8/lib-dynload
+  /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip/lib/python3.8/site-packages
+PASS | no user-site paths visible

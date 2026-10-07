@@ -1,0 +1,10 @@
+START OF LOG FILE
+END OF LOG FILE
+Using homogenous model (no among site rate variation)
+Nucleotide substitution model is Jukes and Cantor
+Optimizing Model parametrs no branch lengths (Homogenuos model)...
+No models parametrs need to be optimaized
+The tree in 'Newick tree format' (with the internal nodes labeled)
+was written to a file name called tree.newick.txt
+The tree in 'ANCESTOR tree format' was written to a file name called tree.ancestor.txt
+doing position (joint): 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
