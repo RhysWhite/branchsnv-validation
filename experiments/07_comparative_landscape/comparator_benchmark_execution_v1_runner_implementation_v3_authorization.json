@@ -1,0 +1,129 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_runner.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_runner_validation.py",
+    "experiments/07_comparative_landscape/COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION.md"
+  ],
+  "baseline_sha256": {
+    "adapters": "5c4e8d95fa104882952116e35c060df0f6bff87547fc9cae7c838b7247eaa49d",
+    "dataset_results_design": "3d364079e25065a55410e471f0f2378696c06ac3772afc8ff9dc86c1f1392ae5",
+    "dataset_results_sha256": "9a40075006a32d7e46d97d5b90045b307bf53f829ede30e41edc8e4472327ca3",
+    "environment_recipes": "957ab67424610c774d2d863ef2e0ab0797cff715221232547dfcd49c53b58668",
+    "method_matrix": "2f38fb573597ce70b612b9ac72e29c4bcf84f331a158d645df55457d4f55822b",
+    "metrics": "b6d3ca91702e79a8a1b2dc36591616fa1519f59bd342a005e9cf646c8e8475de",
+    "output_normalization_freeze": "cc96b27ee6d7be671a2b6c4edb3b4754b02b11e101b8ef1f5a86c0c8f7181bfe",
+    "output_normalization_manifest": "6079a89301596166de129eae3c34665d28d6b6694620a69ff39776d99bf56ea7",
+    "poutine_map_serialization_freeze": "43bfd047925cc0cedf148e26afc4b99eaeeea6f12975c2f8dbddaf1f3a582444",
+    "poutine_map_serialization_manifest": "0ddb0a621c7b495b6613a444df1046d347b6aad6feb76e2198fa8808bcabd76f",
+    "scenario_matrix": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+    "source_pins": "b1f5d81a33ac407e9cdf3d15dfa6bcd6e45c676808e3f5232bab9d9c1dcf1365",
+    "toy_validation": "7058dd7f8a490274cb49c49109b892923613f59916f77d7fa736926d92b5eb03",
+    "treetime_homoplasy_manifest": "a9631ee4398a50530e12967fad5c2b60d033365fef482d6a511d9843d35511aa"
+  },
+  "explicitly_not_authorized": {
+    "adapter_change": true,
+    "benchmark_dataset_mutation": true,
+    "benchmark_truth_access_for_runner_implementation": true,
+    "benchmark_truth_debugging": true,
+    "canonical_benchmark_execution": true,
+    "comparator_parameter_change": true,
+    "comparator_version_change": true,
+    "environment_recipe_change": true,
+    "generator_change": true,
+    "method_matrix_change": true,
+    "metric_change": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "scenario_definition_change": true,
+    "source_pin_change": true,
+    "third_party_comparator_execution": true
+  },
+  "frozen_normalization_contracts": {
+    "POUTINE": {
+      "dummy_phenotype": "poutine_dummy_phenotype_text",
+      "output_parser": "parse_poutine_result",
+      "physical_positions_map": "poutine_physical_positions_map_text",
+      "physical_positions_map_format": "1<TAB>markerN<TAB>0<TAB>GENOMIC_POSITION",
+      "variant_fasta": "poutine_variant_fasta_text"
+    },
+    "PastML": {
+      "ambiguity_rule": "N at either endpoint emits no discrete branch event",
+      "event_normalization": "events_from_projected_node_sequences",
+      "node_mapping": "map_node_sequences_by_descendant_tips",
+      "state_output": "reconstructed_states.tsv",
+      "tree_output": "named.tree_tree.nwk"
+    },
+    "SNPPar": {
+      "branch_parser": "parse_snppar_mutation_events",
+      "homoplasy_source": "homoplasic_events_all_calls.tsv",
+      "recurrent_site_normalizer": "snppar_recurrent_sites_from_branch_events"
+    },
+    "TreeTime": {
+      "homoplasy_cli_scored": false,
+      "node_mapping": "map_node_sequences_by_descendant_tips",
+      "recurrent_site_normalizer": "treetime_recurrent_sites_from_branch_events"
+    }
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_COMPARATOR_BENCHMARK_RUNNER_V3",
+  "one_time_runner_implementation_authorization": true,
+  "parent_commit": "7cc3cac6bd7a70843f494354c262eedba5e4ab66",
+  "reason": "Runner implementation authorizations v1 and v2 were both superseded before use by frozen upstream interface amendments. Output normalization and the final POUTINE physical-position map serializer are now frozen. This v3 authorization pins the complete comparator input/output adapter layer and authorizes implementation of the reusable truth-blind comparator benchmark runner.",
+  "required_final_identities": {
+    "adapters": "5c4e8d95fa104882952116e35c060df0f6bff87547fc9cae7c838b7247eaa49d",
+    "poutine_map_serialization_freeze_commit": "7cc3cac6bd7a70843f494354c262eedba5e4ab66",
+    "toy_validation": "7058dd7f8a490274cb49c49109b892923613f59916f77d7fa736926d92b5eb03"
+  },
+  "requirements": [
+    "Implement one reusable runner covering exactly ARPIP, FastML, HomoplasyFinder, PAML, PastML, POUTINE, SNPPar and TreeTime.",
+    "Do not execute any frozen canonical S001-S150 benchmark scenario during runner implementation or validation.",
+    "Do not execute any third-party comparator during runner implementation or validation.",
+    "Do not read canonical benchmark truth during runner implementation or validation.",
+    "Comparator execution and prediction normalization must be structurally truth-blind.",
+    "Truth paths, truth objects and truth-derived values must not enter comparator command construction, subprocess environments, comparator execution, native-output parsing or prediction normalization.",
+    "Use only frozen environment/run contracts and frozen adapter functions for comparator-specific input serialization and output normalization.",
+    "Do not duplicate scientific adapter logic inside the runner.",
+    "Executable, environment, source and build paths must be runtime supplied; do not hard-code /home/rwhite/branchsnv-comparator-* locations.",
+    "Use isolated method-by-scenario working directories.",
+    "Fail closed if a requested result root already exists.",
+    "Preserve executed command metadata, exit status, stdout, stderr and native comparator outputs.",
+    "Record timeout, non-zero exit status, missing required output, malformed output and normalization failure as explicit completion failures.",
+    "Never convert comparator execution or normalization failure into a zero-accuracy prediction.",
+    "Separate comparator execution and prediction normalization from truth scoring.",
+    "Normalized predictions must be finalized before truth is supplied to any later scoring phase.",
+    "Use the frozen metric functions unchanged.",
+    "Synthetic runner validation must use temporary synthetic fixtures only and must not reference S001-S150.",
+    "Fail closed on unknown methods, missing comparator-facing inputs, malformed runtime configuration, unexpected native-output state or frozen-identity mismatch.",
+    "Cross-tool branch identity must use the frozen canonical descendant-tip edge identity; comparator-specific internal node labels must never be treated as cross-tool branch identifiers.",
+    "PastML must use reconstructed_states.tsv plus named.tree_tree.nwk, map nodes by descendant-tip identity, and normalize projected states back to genomic positions using events_from_projected_node_sequences().",
+    "POUTINE projected FASTA input must use poutine_variant_fasta_text().",
+    "POUTINE phenotype input must use poutine_dummy_phenotype_text().",
+    "POUTINE physical-position map input must use poutine_physical_positions_map_text().",
+    "POUTINE homoplasy output must be normalized using parse_poutine_result().",
+    "SNPPar branch events must use parse_snppar_mutation_events().",
+    "SNPPar recurrent-site calls must use snppar_recurrent_sites_from_branch_events() on normalized events originating from homoplasic_events_all_calls.tsv.",
+    "TreeTime ancestral node sequences may be mapped using map_node_sequences_by_descendant_tips().",
+    "TreeTime recurrent-site calls must use treetime_recurrent_sites_from_branch_events() on normalized ancestral branch events.",
+    "Do not execute or score TreeTime homoplasy top-N output.",
+    "PAML, ARPIP and FastML ancestral reconstructions must use their frozen node-sequence normalization helpers rather than raw internal node labels.",
+    "HomoplasyFinder recurrent-site output must use the frozen HomoplasyFinder parser.",
+    "Runner validation may mock subprocess execution but must not invoke real comparator binaries."
+  ],
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "superseded_unconsumed_runner_authorizations": [
+    {
+      "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_001",
+      "commit": "a8606655af34b3cadd944a87b3cdb8aa447d033d",
+      "consumed": false,
+      "must_not_be_consumed": true
+    },
+    {
+      "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V2_001",
+      "commit": "8c7c68715e2d2caa26e4115e9c4f315825d0932f",
+      "consumed": false,
+      "must_not_be_consumed": true
+    }
+  ],
+  "triggering_gate": "REAUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V3"
+}
