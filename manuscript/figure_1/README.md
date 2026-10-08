@@ -41,7 +41,7 @@ From this directory, run:
 python make_figure_1.py
 ```
 
-The script writes the PDF, SVG, PNG, and RGBA TIFF outputs into the same directory. The separate RGB production TIFF is generated from the RGBA TIFF by flattening transparency onto a white background with Pillow.
+The script writes the PDF, SVG, PNG, and RGBA TIFF outputs into the same directory. The separate RGB production TIFF is generated from the TIFF export by Pillow’s `convert("RGB")` call. The generator sets a white figure background; it does not perform a separate explicit alpha-compositing operation. Inspect the RGB export before production use.
 
 ## Figure specifications
 
@@ -50,7 +50,7 @@ The final artwork is:
 - 180 × 135 mm;
 - a single multi-panel figure with lower-case bold panel labels `a`, `b` and `c`;
 - predominantly vector line art;
-- approximately 6–10 pt text at final size;
+- 7 pt body text, 16 pt answer callouts, and smaller 5.15–5.70 pt safeguard labels (to be inspected at print size);
 - consistent publication-scale line weights;
 - restrained semantic colour encoding on a white background;
 - supplied as vector PDF and editable SVG;
@@ -62,7 +62,7 @@ The figure title and legend are kept outside the artwork so that the image file 
 
 ### Font note
 
-The exact script uses **Arimo** because Microsoft Arial was not available in the environment used for the locked render. Arimo is metrically compatible with Arial, and the PDF/SVG retain editable text. If a production workflow requires Arial, replace Arimo with Arial in the editable vector artwork or script, then verify that no labels shift or overlap before exporting the final production files.
+The committed generator pins **DejaVu Sans** (`FONT = "DejaVu Sans"`); the previous Arimo statement did not describe the current script. Independent inspection of the archived PDF confirms embedded, Unicode-mapped DejaVu Sans and DejaVu Sans Bold subsets. This verifies font-family identity, not the exact installed font-file version. The editable SVG is configured to retain text as text. If a production process substitutes a typeface, regenerate the figure, inspect every label at final size, and update the artwork checksums.
 
 ## Scientific logic of the illustrative example
 
@@ -89,6 +89,10 @@ A→G only
 ```
 
 The focal-edge substitution is therefore unambiguous even though the derived G state is not clade-exclusive. This is the conceptual distinction BRANCHSNV is designed to preserve.
+
+## Relevant primary methods
+
+The rooted minimum-change reconstruction illustrated in panels b–c follows the classical parsimony framework of [Fitch (1971)](https://doi.org/10.1093/sysbio/20.4.406) and [Sankoff (1975)](https://doi.org/10.1137/0128004). The plotting script is an illustration, not an implementation or independent test of the reconstruction. See [`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md) for the distinction between observed-tip exclusivity and inferred focal-edge changes.
 
 ## Editing policy
 
