@@ -1,1719 +1,2433 @@
-# Figure 1 code walkthrough
+# Figure 1 — scientific and code walkthrough
 
-This document explains `make_figure_1.py` line by line in plain English. It assumes no prior knowledge of Python or Matplotlib.
+This document explains the scientific choices, drawing logic and reproducibility controls in [`make_figure_1.py`](make_figure_1.py). **The script draws a conceptual figure; it does not run BRANCHSNV, perform ancestral-state reconstruction or generate benchmark results.** Its labels encode a worked example whose inference must be established independently of the illustration.
 
-## The whole script in one sentence
+## Scientific question
 
-The script creates a blank page, divides it into invisible drawing regions, draws Panels A–C from simple vector lines/circles/text, adds the safeguard strip, and exports the finished artwork in four formats.
+BRANCHSNV distinguishes two properties of a nucleotide site relative to a specified branch:
 
-## Five Python ideas used repeatedly
+1. **Clade exclusivity** is a statement about observed tip states: the focal descendants share a state that is absent from sampled non-descendants.
+2. **Focal-edge substitution** is a statement about ancestral states: every globally minimum-cost reconstruction assigns a change to the selected parent–child edge, or only some do.
 
-- `name = value` stores a value under a useful name.
-- `[a, b, c]` creates a list.
-- `for ...:` repeats the indented lines below it.
-- `ax.plot(...)` draws a line and `ax.text(...)` writes text.
-- Coordinates inside each drawing region run from 0 (left/bottom) to 1 (right/top).
+The second is an inference conditional on the topology, rooting, observed states and cost model; it cannot be read directly from a tip-state pattern. Minimum-change ancestral reconstruction is rooted in the methods of Fitch (1971) and Sankoff (1975). These citations support the parsimony framework, **not** an independent validation of the figure's particular example.
 
-## Line-by-line explanation
+**Primary methods:** Fitch WM. *Toward defining the course of evolution: minimum change for a specific tree topology*. *Systematic Zoology* **20**, 406–416 (1971), [doi:10.1093/sysbio/20.4.406](https://doi.org/10.1093/sysbio/20.4.406); Sankoff D. *Minimal mutation trees of sequences*. *SIAM Journal on Applied Mathematics* **28**, 35–42 (1975), [doi:10.1137/0128004](https://doi.org/10.1137/0128004).
+
+### Panel a — the observed pattern and the focal edge
+
+The script draws a rooted topology with nine tips arranged in three three-tip groups. The following is an **explanatory topology sketch**, not a Newick export or a scaled tree:
+
+```text
+root
+├── upper split
+│   ├── [focal edge] ── G  G  G
+│   └────────────────── A  A  A
+└────────────────────── A  A  G
+```
+
+The focal descendants are all `G`, but a non-descendant also carries `G`. Thus `G` is fixed within the focal clade but **not fixed-exclusive**. The red focal edge and blue descendant bracket serve different purposes: one identifies the transition under study, the other identifies the taxa defining that branch.
+
+### Panel b — inference is not exclusivity
+
+On the depicted topology, unordered equal-cost parsimony gives a minimum of **two** changes at this site. In the globally optimal solution the parent of the focal edge is `A` and its child is `G`, so the focal-edge pair set is `{A→G}`. This conclusion is conditional on the stated rooted topology and reconstruction model. The code **draws the label** for this result; it does not calculate it, and therefore cannot serve as its own computational proof.
+
+```text
+Observed tip question                 Reconstructed edge question
+Does G occur only below the edge?    Is A→G required on the focal edge?
+                 │                                    │
+             NO: G outside                      YES: {A→G}
+```
+
+The illustration therefore separates a descriptive property of sampled tips from an inferred historical event.
+
+### Panel c — interpreting complete optimal-pair sets
+
+The four rows show **possible output categories**, not four reconstructions of panel a. A complete set of attainable parent–child pairs distinguishes:
+
+| Example pair set | Interpretation | Reason |
+|---|---|---|
+| `{A→G}` | Unambiguous change | All optimal assignments place the same change on the edge. |
+| `{A→G, C→G}` | State ambiguity | A change is required, but the ancestral nucleotide differs. |
+| `{A→G, G→G}` | Placement ambiguity | Some optimal assignments change on this edge; others do not. |
+| `{G→G}` | No change | The edge is unchanged in every optimal assignment. |
+
+An arbitrary single optimal reconstruction would lose these distinctions. The lower safeguard strip records the prerequisites for interpreting the result: an explicit root, an exact focal-descendant set, tree–alignment taxon identity, complete optimal state-pair retention and traceable provenance.
+
+## How the source constructs the figure
+
+```text
+Fixed drawing configuration (lines 1–55)
+           │
+           ▼
+Reusable shapes and text helpers (56–110)
+           │
+           ├─► Panel a: tree and observed states (111–185)
+           ├─► Panel b: observed vs inferred (186–234)
+           └─► Panel c: pair sets and safeguards (235–284)
+           │
+           ▼
+Compose one canvas, export files and print hashes (285–362)
+```
+
+All placement coordinates use Matplotlib's `ax.transAxes`: `0` and `1` refer to the lower/upper or left/right limits of the figure canvas, independent of data units. This keeps the layout explicit but **does not** imply the branch lengths or nucleotide rows represent measured evolutionary distances.
+
+## Rendering decisions and limitations
+
+| Choice | Why it is made | What it does not guarantee |
+|---|---|---|
+| 180 × 135 mm single canvas | Controls printed size and panel proportions. | Compliance with every journal's current artwork specification. |
+| DejaVu Sans, declared in the script | Avoids silent font substitutions when using the pinned environment. | Identical typography in unpinned Matplotlib/font installations. |
+| Relative panel geometry and fixed palette | Keeps layouts and encodings reproducible. | Perceptual accessibility without separate visual inspection. |
+| SVG text output and TrueType-compatible PDF fonts | Preserves vector artwork and supports editing. | Identical text rendering if font substitution occurs downstream. |
+| Fixed PDF/SVG metadata and SVG identifier salt | Reduces unnecessary byte-level differences between renders. | Byte-for-byte identity across different software versions or operating systems. |
+| Separate vector, preview and TIFF outputs | Serves manuscript, inspection and production workflows. | That all journal production constraints have been independently checked. |
+| SHA-256 printed for each export | Makes generated outputs comparable to the archived release. | Scientific correctness of the example. |
+
+For the committed Figure 1 revision reviewed here, the rendering dependencies listed in [`README.md`](README.md) are Python 3.10.14, Matplotlib 3.10.8 and Pillow 12.2.0. The script uses **DejaVu Sans**, not Arimo. The 1000-dpi RGB TIFF is produced using Pillow's `convert("RGB")`; the code does not perform a separate explicit alpha-compositing step. Inspect any production export at its intended physical size, especially the small safeguard-strip labels.
+
+**Reproduction:** In a clean copy of the pinned source and environment, run `python make_figure_1.py`, then compare the printed output SHA-256 digests with the hashes documented in `README.md`. Re-rendering in an existing release checkout overwrites files, so use a disposable copy if byte-level preservation matters. Run `python verify_publication_snapshot.py` from the repository root to check the committed snapshot and source-to-walkthrough mapping.
+
+## Line-indexed source reference
+
+The verifier requires a verbatim, individually numbered copy of all 362 source lines, including empty lines. The index below preserves that contract. **Explanations are attached to meaningful operations and design choices, not every blank line or syntactic delimiter.** Section-level explanations above provide the rationale for groups of related operations.
+
+<details>
+<summary>Expand the exact 362-line source index</summary>
+
+## Configuration and reproducible typography (lines 1–55)
+
+The imports, fixed canvas dimensions, named palette and font settings establish an explicit render environment. The mm-to-inch conversion matters because Matplotlib expects figure dimensions in inches, while journal artwork is sized in millimetres.
 
 ### Line 1
 
 ```python
-import matplotlib.pyplot as plt
+#!/usr/bin/env python3
 ```
-Imports Matplotlib's plotting interface. `plt` is the short name used to create and export the figure.
 
 ### Line 2
 
 ```python
-from matplotlib.patches import Circle
+from pathlib import Path
 ```
-Imports the `Circle` shape used for the root, tip markers, and the A/G endpoint circles.
 
 ### Line 3
 
 ```python
-from matplotlib.lines import Line2D
+import hashlib
 ```
-Imports `Line2D`, used for the long horizontal separators between major figure sections.
 
 ### Line 4
 
 ```python
-import matplotlib as mpl
+from datetime import datetime, timezone
 ```
-Imports Matplotlib itself as `mpl` so global font and export settings can be configured.
 
 ### Line 5
 
 ```python
-from pathlib import Path
+import matplotlib as mpl
 ```
-Imports `Path`, which is used to construct output-file paths.
 
 ### Line 6
 
 ```python
-
+import matplotlib.pyplot as plt
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 7
 
 ```python
-# Final publication figure dimensions
+from matplotlib.patches import Circle, FancyBboxPatch, Polygon
 ```
-Comment marking the final figure dimensions.
 
 ### Line 8
 
 ```python
-FIG_W, FIG_H = 6.50, 5.10  # 16.5 × 13.0 cm
+from matplotlib import font_manager
 ```
-Sets the final page size to 6.50 × 5.10 inches, equivalent to 16.5 × 13.0 cm.
 
 ### Line 9
 
 ```python
-
+from PIL import Image
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 10
 
 ```python
-mpl.rcParams.update({
+
 ```
-Starts the global Matplotlib settings block.
 
 ### Line 11
 
 ```python
-    "font.family": "Arimo",  # Arial-compatible preview; SVG/PDF text remains editable
+HERE = Path(__file__).resolve().parent
 ```
-Uses Arimo for the locked render. It is metrically compatible with Arial and preserves the figure layout.
+
+Use the script directory, not the caller’s current directory, to locate the five output files.
 
 ### Line 12
 
 ```python
-    "font.size": 7.0,
+
 ```
-Sets the default text size to 7 pt.
 
 ### Line 13
 
 ```python
-    "svg.fonttype": "none",
+# Nature-style production dimensions: 180 mm wide, double-column figure.
 ```
-Keeps SVG text editable instead of converting letters into vector outlines.
 
 ### Line 14
 
 ```python
-    "pdf.fonttype": 42,
+MM = 1 / 25.4
 ```
-Uses TrueType-style font embedding in PDF output.
+
+Matplotlib accepts inches; converting millimetres here keeps the physical production size explicit.
 
 ### Line 15
 
 ```python
-    "ps.fonttype": 42,
+FIG_W_MM = 180.0
 ```
-Applies the same font embedding choice to PostScript-based output.
+
+Use 180 mm width for the artwork, with no silent rescaling by the plotting functions.
 
 ### Line 16
 
 ```python
-})
+FIG_H_MM = 135.0
 ```
-Closes the list, function call, or settings block opened on the preceding lines.
+
+The 135 mm height accommodates three panels and the safeguard strip in a 4:3 landscape canvas.
 
 ### Line 17
 
 ```python
 
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 18
 
 ```python
-INK = "#222222"
+# Pin the font so the same generator does not silently change typography
 ```
-Defines the near-black colour used for most text and tree lines.
 
 ### Line 19
 
 ```python
-GREY = "#666666"
+# according to whichever system fonts happen to be installed.
 ```
-Defines the secondary grey text colour.
 
 ### Line 20
 
 ```python
-LIGHT = "#D9D9D9"
+# DejaVu Sans is distributed with Matplotlib and is therefore available
 ```
-Defines the pale grey used for dividers and table rules.
 
 ### Line 21
 
 ```python
-BLUE = "#1F5AA6"
+# in the declared rendering environment.
 ```
-Defines blue for the observed/clade-exclusivity side of the figure.
 
 ### Line 22
 
 ```python
-ORANGE = "#D95F02"
+FONT = "DejaVu Sans"
 ```
-Defines orange for the inferred focal-edge substitution side.
+
+The pinned family used by this generator is DejaVu Sans; update the README if this changes.
 
 ### Line 23
 
 ```python
-RED = "#B2182B"
+
 ```
-Defines red for the focal edge and the recurrent outside G.
 
 ### Line 24
 
 ```python
-PURPLE = "#7B3294"
+mpl.rcParams.update({
 ```
-Defines purple for placement ambiguity.
+
+Global rendering settings are centralized so exports cannot silently diverge across panels.
 
 ### Line 25
 
 ```python
-
+    "font.family": FONT,
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+Font selection affects text widths and label collision risk, not only appearance.
 
 ### Line 26
 
 ```python
-fig = plt.figure(figsize=(FIG_W, FIG_H), facecolor="white")
+    "font.size": 7.2,
 ```
-Creates the blank white figure canvas.
 
 ### Line 27
 
 ```python
-
+    "pdf.fonttype": 42,
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+Type 42 output embeds/uses TrueType-compatible font representations in vector-oriented exports.
 
 ### Line 28
 
 ```python
-# Main layout grid
+    "ps.fonttype": 42,
 ```
-Comment marking the start of the fixed layout grid.
 
 ### Line 29
 
 ```python
-axA = fig.add_axes([0.055, 0.61, 0.89, 0.34])
+    "svg.fonttype": "none",
 ```
-Creates Panel A's drawing area. The four numbers are left position, bottom position, width, and height as fractions of the whole figure.
+
+Keeping SVG lettering as text makes later editorial adjustments possible without outlining every glyph.
 
 ### Line 30
 
 ```python
-axB1 = fig.add_axes([0.075, 0.325, 0.34, 0.235])
+    "svg.hashsalt": "branchsnv-figure1-nature-methods-v1",
 ```
-Creates the observed half of Panel B.
+
+A fixed SVG identifier salt controls automatically generated element IDs, reducing avoidable diff noise.
 
 ### Line 31
 
 ```python
-axBmid = fig.add_axes([0.455, 0.325, 0.08, 0.235])
+    "axes.linewidth": 0.7,
 ```
-Creates the narrow middle strip in Panel B containing the ≠ symbol.
 
 ### Line 32
 
 ```python
-axB2 = fig.add_axes([0.575, 0.325, 0.35, 0.235])
+    "lines.solid_capstyle": "round",
 ```
-Creates the inferred half of Panel B.
 
 ### Line 33
 
 ```python
-
+    "lines.solid_joinstyle": "round",
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 34
 
 ```python
-# Panel C: dedicated header and body axes
+})
 ```
-Comment explaining that Panel C has a separate header and body so the table rule sits in the correct place.
 
 ### Line 35
 
 ```python
-axChead = fig.add_axes([0.075, 0.230, 0.835, 0.045])
+
 ```
-Creates the header strip for Panel C.
 
 ### Line 36
 
 ```python
-axC1 = fig.add_axes([0.075, 0.135, 0.47, 0.095])
+# Restrained semantic palette.
 ```
-Creates the left body of Panel C, containing the pair-set table.
 
 ### Line 37
 
 ```python
-axC2 = fig.add_axes([0.60, 0.135, 0.31, 0.095])
+INK = "#1F2328"
 ```
-Creates the right body of Panel C, containing the tie-breaking explanation.
 
 ### Line 38
 
 ```python
-
+MUTED = "#687078"
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 39
 
 ```python
-axF = fig.add_axes([0.055, 0.025, 0.89, 0.085])
+RULE = "#C9CDD2"
 ```
-Creates the bottom Design Safeguards strip.
 
 ### Line 40
 
 ```python
-
+LIGHT = "#EEF3F7"
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 41
 
 ```python
-for ax in (axA, axB1, axBmid, axB2, axChead, axC1, axC2, axF):
+LIGHT_BLUE = "#F2F7FC"
 ```
-Starts a loop over every panel/axes object.
 
 ### Line 42
 
 ```python
-    ax.set_xlim(0, 1)
+LIGHT_ORANGE = "#FFF5EC"
 ```
-Sets each panel's horizontal coordinate system to run from 0 to 1.
 
 ### Line 43
 
 ```python
-    ax.set_ylim(0, 1)
+BLUE = "#1565C0"
 ```
-Sets each panel's vertical coordinate system to run from 0 to 1.
 
 ### Line 44
 
 ```python
-    ax.axis("off")
+RED = "#D71920"
 ```
-Hides ordinary chart axes, ticks, and borders because this is a schematic.
 
 ### Line 45
 
 ```python
-
+ORANGE = "#F05A00"
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 46
 
 ```python
-# Major section separators
+PURPLE = "#7B2CBF"
 ```
-Human-readable comment: Major section separators.
 
 ### Line 47
 
 ```python
-for y in [0.595, 0.305, 0.122]:
+WHITE = "#FFFFFF"
 ```
-Loops over the three major section-divider heights.
 
 ### Line 48
 
 ```python
-    fig.add_artist(Line2D([0.055, 0.945], [y, y], transform=fig.transFigure,
+
 ```
-Draws a long horizontal separator across the figure.
 
 ### Line 49
 
 ```python
-                          color=LIGHT, lw=0.7))
+PANEL_FS = 8.0
 ```
-Sets that separator to pale grey with a thin line weight.
 
 ### Line 50
 
 ```python
-
+TITLE_FS = 9.7
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 51
 
 ```python
-# ======================================================
+SUBHEAD_FS = 7.4
 ```
-Human-readable comment: ======================================================.
 
 ### Line 52
 
 ```python
-# Panel A
+BODY_FS = 7.0
 ```
-Human-readable comment: Panel A.
 
 ### Line 53
 
 ```python
-# ======================================================
+SMALL_FS = 6.2
 ```
-Human-readable comment: ======================================================.
 
 ### Line 54
 
 ```python
-axA.text(-0.035, 1.02, "A", fontsize=10.5, fontweight="bold", va="top", color=INK)
+BIG_FS = 16.0
 ```
-Adds the capital panel label A.
 
 ### Line 55
 
 ```python
-axA.text(0.005, 1.015, "One branch, one site", fontsize=8.6, fontweight="bold",
+
 ```
-Starts the Panel A heading, `One branch, one site`.
+
+## Reusable drawing primitives (lines 56–110)
+
+Text, rule, patch and icon helpers work in axis coordinates; this avoids repeating coordinate transforms and reduces inconsistencies between panels. Icon paths are decorative labels, not analytical data.
 
 ### Line 56
 
 ```python
-         va="top", color=INK)
+def T(ax, x, y, s, **kwargs):
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
+
+All visible labels pass through one helper instead of redefining defaults at each call site.
 
 ### Line 57
 
 ```python
-
+    base = dict(transform=ax.transAxes, color=INK, ha="left", va="center")
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+`transAxes` gives every label the same normalized coordinate system as the panels.
 
 ### Line 58
 
 ```python
-xR, xX, xF, xO, xY, xTip = 0.08, 0.22, 0.38, 0.38, 0.25, 0.51
+    base.update(kwargs)
 ```
-Defines the horizontal coordinates of the root, internal nodes, focal node, sister node, lower node, and terminal tips.
 
 ### Line 59
 
 ```python
-ys = [0.89, 0.80, 0.71, 0.54, 0.45, 0.36, 0.19, 0.10, 0.01]
+    return ax.text(x, y, s, **base)
 ```
-Defines the nine tip heights from top to bottom.
+
+Forward keyword overrides to `ax.text`; callers can adjust font, alignment and line spacing while inheriting defaults.
 
 ### Line 60
 
 ```python
-yF = sum(ys[:3]) / 3
+
 ```
-Calculates the vertical centre of the three focal descendants.
 
 ### Line 61
 
 ```python
-yO = sum(ys[3:6]) / 3
+def HLINE(ax, y):
 ```
-Calculates the vertical centre of their outside sister group.
+
+The horizontal rule helper divides sections without changing the data coordinate limits.
 
 ### Line 62
 
 ```python
-yY = sum(ys[6:]) / 3
+    ax.plot([0.015, 0.985], [y, y], transform=ax.transAxes, color=RULE, lw=0.75, clip_on=False)
 ```
-Calculates the vertical centre of the lower outside group.
 
 ### Line 63
 
 ```python
-yX = (yF + yO) / 2
+
 ```
-Places internal node X halfway between the focal group and its sister group.
 
 ### Line 64
 
 ```python
-yR = (yX + yY) / 2
+def panel_label(ax, letter, title, y):
 ```
-Places the root halfway between the upper and lower major groups.
+
+Panel letters remain lower-case and visually separate from panel titles.
 
 ### Line 65
 
 ```python
-
+    T(ax, 0.016, y, letter, fontsize=PANEL_FS, fontweight="bold", va="top")
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 66
 
 ```python
-lw_tree = 0.8
+    T(ax, 0.064, y, title, fontsize=TITLE_FS, fontweight="bold", va="top")
 ```
-Stores the standard tree line width.
 
 ### Line 67
 
 ```python
-axA.plot([xR, xR], [yY, yX], color=INK, lw=lw_tree)
+
 ```
-Draws the vertical part of the root connection.
 
 ### Line 68
 
 ```python
-axA.plot([xR, xX], [yX, yX], color=INK, lw=lw_tree)
+def rounded_box(ax, x, y, w, h, fc, ec="none", radius=0.012):
 ```
-Draws the upper root branch.
+
+Rounded cards encode categorical groupings; the patch is added to the same axes as the text.
 
 ### Line 69
 
 ```python
-axA.plot([xR, xY], [yY, yY], color=INK, lw=lw_tree)
+    p = FancyBboxPatch((x, y), w, h, transform=ax.transAxes,
 ```
-Draws the lower root branch.
 
 ### Line 70
 
 ```python
-axA.plot([xX, xX], [yO, yF], color=INK, lw=lw_tree)
+                       boxstyle=f"round,pad=0.004,rounding_size={radius}",
 ```
-Draws the vertical connector at the upper internal node.
 
 ### Line 71
 
 ```python
-axA.plot([xX, xF], [yO, yO], color=INK, lw=lw_tree)
+                       facecolor=fc, edgecolor=ec, linewidth=0.6)
 ```
-Draws the branch from the upper internal node to the outside sister group.
 
 ### Line 72
 
 ```python
-axA.plot([xX, xF], [yF, yF], color=RED, lw=1.5)
+    ax.add_patch(p)
 ```
-Draws the focal edge in red and slightly thicker than the rest of the tree.
 
 ### Line 73
 
 ```python
-
+    return p
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 74
 
 ```python
-axA.plot([xF, xF], [ys[2], ys[0]], color=INK, lw=lw_tree)
+
 ```
-Draws the vertical connector joining the three focal descendants.
 
 ### Line 75
 
 ```python
-for yy in ys[:3]:
+def draw_tag_icon(ax, x, y, s=0.018):
 ```
-Starts a loop over the three focal tip heights.
+
+The tag pictogram is assembled from a polygon and open circle, not an external image asset.
 
 ### Line 76
 
 ```python
-    axA.plot([xF, xTip], [yy, yy], color=INK, lw=lw_tree)
+    pts = [(x-s, y), (x-0.2*s, y+s), (x+s, y+s), (x+s, y-0.2*s),
 ```
-Draws each focal terminal branch.
 
 ### Line 77
 
 ```python
-
+           (x-0.2*s, y-s)]
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 78
 
 ```python
-axA.plot([xO, xO], [ys[5], ys[3]], color=INK, lw=lw_tree)
+    ax.add_patch(Polygon(pts, closed=True, fill=False, ec=INK, lw=0.75, transform=ax.transAxes))
 ```
-Draws the connector joining the three taxa in the outside sister group.
 
 ### Line 79
 
 ```python
-for yy in ys[3:6]:
+    ax.add_patch(Circle((x+0.55*s, y+0.55*s), 0.16*s, transform=ax.transAxes,
 ```
-Starts a loop over those three tip heights.
 
 ### Line 80
 
 ```python
-    axA.plot([xO, xTip], [yy, yy], color=INK, lw=lw_tree)
+                        fill=False, ec=INK, lw=0.7))
 ```
-Draws each sister-group terminal branch.
 
 ### Line 81
 
 ```python
 
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 82
 
 ```python
-axA.plot([xY, xY], [ys[8], ys[6]], color=INK, lw=lw_tree)
+def draw_stack_icon(ax, x, y, s=0.016):
 ```
-Draws the connector joining the three lower outside taxa.
+
+Three offset diamond shapes form the stack icon; there is no dependency on icon fonts.
 
 ### Line 83
 
 ```python
-for yy in ys[6:]:
+    for dy in (0.010, 0.000, -0.010):
 ```
-Starts a loop over those three tip heights.
 
 ### Line 84
 
 ```python
-    axA.plot([xY, xTip], [yy, yy], color=INK, lw=lw_tree)
+        pts = [(x-s, y+dy), (x, y+dy+s*0.7), (x+s, y+dy), (x, y+dy-s*0.7)]
 ```
-Draws each lower terminal branch.
 
 ### Line 85
 
 ```python
-
+        ax.add_patch(Polygon(pts, closed=True, fill=False, ec=INK, lw=0.72, transform=ax.transAxes))
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 86
 
 ```python
-axA.add_patch(Circle((xR, yR), 0.010, ec=INK, fc=INK, lw=0.7))
+
 ```
-Draws the filled black root marker.
 
 ### Line 87
 
 ```python
-axA.text(xR-0.02, yR-0.06, "root", fontsize=6.1, color=GREY, ha="right")
+def draw_doc_icon(ax, x, y, w=0.022, h=0.034):
 ```
-Places the small `root` label beside it.
+
+The document symbol is vector geometry, so it scales with the artwork.
 
 ### Line 88
 
 ```python
-
+    rounded_box(ax, x-w/2, y-h/2, w, h, WHITE, INK, 0.003)
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 89
 
 ```python
-for i, yy in enumerate(ys):
+    ax.plot([x+w*0.18, x+w*0.34], [y+h*0.50, y+h*0.28], transform=ax.transAxes, color=INK, lw=0.7)
 ```
-Loops over all nine tip positions.
 
 ### Line 90
 
 ```python
-    ec = BLUE if i < 3 else GREY
+    ax.plot([x-w*0.28, x+w*0.20], [y+0.005, y+0.005], transform=ax.transAxes, color=INK, lw=0.6)
 ```
-Uses blue outlines for focal tips and grey outlines for outside tips.
 
 ### Line 91
 
 ```python
-    axA.add_patch(Circle((xTip, yy), 0.010, ec=ec, fc="white", lw=0.8))
+    ax.plot([x-w*0.28, x+w*0.12], [y-0.003, y-0.003], transform=ax.transAxes, color=INK, lw=0.6)
 ```
-Draws the open circle at each tip.
 
 ### Line 92
 
 ```python
-
+    ax.plot([x-w*0.28, x+w*0.05], [y-0.011, y-0.011], transform=ax.transAxes, color=INK, lw=0.6)
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 93
 
 ```python
-axA.text((xX+xF)/2, yF+0.075, "focal edge", fontsize=6.3, fontweight="bold",
+
 ```
-Begins the red `focal edge` label above the focal branch.
 
 ### Line 94
 
 ```python
-         color=RED, ha="center")
+def draw_tree_icon(ax, x, y, descendants=False):
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
+
+The branch/tree symbol changes shape according to whether it denotes descendants.
 
 ### Line 95
 
 ```python
-
+    lw = 0.72
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 96
 
 ```python
-bx = 0.545
+    if descendants:
 ```
-Stores the x-position of the blue bracket marking the focal descendants.
+
+The descendant variant draws a small cluster of terminal taxa.
 
 ### Line 97
 
 ```python
-axA.plot([bx, bx], [ys[2]-0.022, ys[0]+0.022], color=BLUE, lw=0.8)
+        ax.plot([x-0.020, x-0.008], [y, y], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Draws the vertical part of the bracket.
 
 ### Line 98
 
 ```python
-axA.plot([bx-0.012, bx], [ys[0]+0.022, ys[0]+0.022], color=BLUE, lw=0.8)
+        ax.plot([x-0.008, x-0.008], [y-0.014, y+0.014], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Draws the upper bracket cap.
 
 ### Line 99
 
 ```python
-axA.plot([bx-0.012, bx], [ys[2]-0.022, ys[2]-0.022], color=BLUE, lw=0.8)
+        for yy in (y-0.014, y, y+0.014):
 ```
-Draws the lower bracket cap.
 
 ### Line 100
 
 ```python
-axA.text(bx+0.02, yF, "focal\ndescendants", fontsize=6.2, fontweight="bold",
+            ax.plot([x-0.008, x+0.012], [yy, yy], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Begins the two-line `focal descendants` label.
 
 ### Line 101
 
 ```python
-         color=BLUE, va="center", linespacing=1.0)
+            ax.add_patch(Circle((x+0.014, yy), 0.004, transform=ax.transAxes, fill=False, ec=INK, lw=0.7))
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 102
 
 ```python
-
+    else:
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 103
 
 ```python
-state_x = 0.69
+        ax.add_patch(Circle((x-0.020, y-0.015), 0.0045, transform=ax.transAxes, fc=INK, ec=INK))
 ```
-Stores the x-position of the nucleotide-state column.
+
+The other variant includes a dark root marker to emphasize orientation.
 
 ### Line 104
 
 ```python
-axA.text(state_x, 0.99, "one site", fontsize=6.4, fontweight="bold",
+        ax.plot([x-0.016, x-0.016], [y-0.015, y+0.015], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Begins the `one site` heading above that column.
 
 ### Line 105
 
 ```python
-         ha="center", va="top")
+        ax.plot([x-0.016, x+0.006], [y+0.006, y+0.006], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 106
 
 ```python
-states = ["G","G","G","A","A","A","A","A","G"]
+        ax.plot([x+0.006, x+0.006], [y-0.006, y+0.016], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Defines the nine observed nucleotide states shown next to the tips: G/G/G in the focal clade and A/A/A/A/A/G outside.
 
 ### Line 107
 
 ```python
-for i, (yy, s) in enumerate(zip(ys, states)):
+        for yy in (y-0.006, y+0.016):
 ```
-Loops through the tip heights and states together.
 
 ### Line 108
 
 ```python
-    c = BLUE if i < 3 else (RED if i == 8 else INK)
+            ax.plot([x+0.006, x+0.022], [yy, yy], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Colours focal G states blue, the recurrent outside G red, and the outside A states black.
 
 ### Line 109
 
 ```python
-    axA.text(state_x, yy, s, fontsize=7.0, fontweight="bold", color=c,
+            ax.add_patch(Circle((x+0.024, yy), 0.004, transform=ax.transAxes, fill=False, ec=INK, lw=0.7))
 ```
-Begins drawing each nucleotide letter at the matching tip height.
 
 ### Line 110
 
 ```python
-             ha="center", va="center")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
+
+## Panel a — topology and observed nucleotides (lines 111–185)
+
+The tree is drawn segment by segment so the focal edge, root and descendant set remain visually distinct. The nine nucleotide states are specified explicitly; none are read from an alignment.
 
 ### Line 111
 
 ```python
-
+def draw_panel_a(ax):
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+Panel a is a fixed explanatory topology, not a tree inferred from sequence data.
 
 ### Line 112
 
 ```python
-axA.text(0.80, 0.73, "Focal clade: G G G", fontsize=6.6, fontweight="bold",
+    panel_label(ax, "a", "One branch, one site", 0.982)
 ```
-Adds the concise blue summary `Focal clade: G G G`.
 
 ### Line 113
 
 ```python
-         color=BLUE, ha="left")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 114
 
 ```python
-axA.text(0.80, 0.53, "Outside includes G", fontsize=6.6, fontweight="bold",
+    # Tree geometry
 ```
-Adds the concise red summary `Outside includes G`.
 
 ### Line 115
 
 ```python
-         color=RED, ha="left")
+    x0 = 0.165
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 116
 
 ```python
-
+    x1 = 0.285
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 117
 
 ```python
-# ======================================================
+    x2 = 0.420
 ```
-Human-readable comment: ======================================================.
 
 ### Line 118
 
 ```python
-# Panel B
+    xt = 0.535
 ```
-Human-readable comment: Panel B.
 
 ### Line 119
 
 ```python
-# ======================================================
+    ys = [0.930, 0.898, 0.866, 0.800, 0.768, 0.736, 0.665, 0.633, 0.601]
 ```
-Human-readable comment: ======================================================.
+
+One y-coordinate per tip ensures the branch segments and nucleotide columns align.
 
 ### Line 120
 
 ```python
-fig.text(0.055, 0.575, "B", fontsize=10.5, fontweight="bold", color=INK, va="top")
+    y_focal = ys[1]
 ```
-Adds the capital panel label B.
+
+The selected focal edge joins the upper split to the three-`G` clade.
 
 ### Line 121
 
 ```python
-fig.text(0.095, 0.575, "Two questions, different answers",
+    y_mid = ys[4]
 ```
-Begins the Panel B heading `Two questions, different answers`.
 
 ### Line 122
 
 ```python
-         fontsize=8.6, fontweight="bold", color=INK, va="top")
+    y_bot = ys[7]
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 123
 
 ```python
-
+    y_upper_split = (y_focal + y_mid) / 2
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 124
 
 ```python
-axB1.text(0.00, 0.90, "OBSERVED", fontsize=6.3, fontweight="bold",
+    y_root = (y_upper_split + y_bot) / 2
 ```
-Adds the blue category label `OBSERVED`.
+
+The root marker is placed on the main trunk; its location establishes orientation in this diagram.
 
 ### Line 125
 
 ```python
-          color=BLUE, va="top")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 126
 
 ```python
-axB1.text(0.00, 0.74, "Clade-exclusive?", fontsize=8.2, fontweight="bold",
+    lw = 0.90
 ```
-Adds the observed question `Clade-exclusive?`.
 
 ### Line 127
 
 ```python
-          color=INK, va="top")
+    # Root / main tree
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 128
 
 ```python
-axB1.text(0.00, 0.48, "focal", fontsize=6.0, color=GREY, va="center")
+    ax.plot([x0, x0], [y_bot, y_upper_split], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Adds the small grey `focal` label.
 
 ### Line 129
 
 ```python
-for j in range(3):
+    ax.plot([x0, x1], [y_upper_split, y_upper_split], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Starts a three-iteration loop for the three focal G states.
 
 ### Line 130
 
 ```python
-    axB1.text(0.16+0.11*j, 0.48, "G", fontsize=7.5, fontweight="bold",
+    ax.plot([x0, x2-0.115], [y_bot, y_bot], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Places those three G letters across the row.
 
 ### Line 131
 
 ```python
-              color=BLUE, ha="center", va="center")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 132
 
 ```python
-axB1.text(0.00, 0.31, "outside", fontsize=6.0, color=GREY, va="center")
+    # Upper split
 ```
-Adds the small grey `outside` label.
 
 ### Line 133
 
 ```python
-for j, s in enumerate(["A","A","A","A","A","G"]):
+    ax.plot([x1, x1], [y_mid, y_focal], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Loops across the six outside states.
 
 ### Line 134
 
 ```python
-    axB1.text(0.16+0.09*j, 0.31, s, fontsize=7.1, fontweight="bold",
+
 ```
-Places each outside nucleotide.
 
 ### Line 135
 
 ```python
-              color=(RED if s == "G" else INK), ha="center", va="center")
+    # focal edge
 ```
-Colours only the outside G red.
 
 ### Line 136
 
 ```python
-axB1.text(0.00, 0.06, "NO", fontsize=13.0, fontweight="bold",
+    ax.plot([x1, x2], [y_focal, y_focal], transform=ax.transAxes, color=RED, lw=1.65)
 ```
-Begins the large blue result `NO`.
+
+Only the focal connecting segment is highlighted red, avoiding confusion with the entire clade.
 
 ### Line 137
 
 ```python
-          color=BLUE, va="bottom")
+    T(ax, (x1+x2)/2, y_focal+0.028, "focal edge", fontsize=SMALL_FS, fontweight="bold",
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 138
 
 ```python
-axB1.text(0.23, 0.085, "not fixed-exclusive", fontsize=6.9, fontweight="bold",
+      color=RED, ha="center")
 ```
-Begins the bold explanation `not fixed-exclusive`.
 
 ### Line 139
 
 ```python
-          color=INK, va="bottom")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 140
 
 ```python
-axB1.text(0.00, 0.005, "G occurs outside the clade", fontsize=6.0,
+    # Focal clade
 ```
-Begins the grey reason `G occurs outside the clade`.
 
 ### Line 141
 
 ```python
-          color=GREY, va="bottom")
+    ax.plot([x2, x2], [ys[2], ys[0]], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 142
 
 ```python
-
+    for y in ys[:3]:
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+Three `G` terminals define the focal sampled descendants.
 
 ### Line 143
 
 ```python
-axBmid.text(0.50, 0.54, "≠", fontsize=28, ha="center", va="center", color=INK)
+        ax.plot([x2, xt], [y, y], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Places the large ≠ symbol between observed and inferred analyses.
 
 ### Line 144
 
 ```python
-axBmid.text(0.50, 0.24, "kept separate", fontsize=5.9, ha="center",
+
 ```
-Adds the phrase `kept separate` below it.
 
 ### Line 145
 
 ```python
-            va="center", color=GREY)
+    # Middle clade
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 146
 
 ```python
-
+    ax.plot([x1, x2], [y_mid, y_mid], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 147
 
 ```python
-axB2.text(0.00, 0.90, "INFERRED", fontsize=6.3, fontweight="bold",
+    ax.plot([x2, x2], [ys[5], ys[3]], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Adds the orange category label `INFERRED`.
 
 ### Line 148
 
 ```python
-          color=ORANGE, va="top")
+    for y in ys[3:6]:
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
+
+The middle clade contains three `A` tips.
 
 ### Line 149
 
 ```python
-axB2.text(0.00, 0.74, "Substitution on the focal edge?", fontsize=8.2,
+        ax.plot([x2, xt], [y, y], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Begins the inferred question `Substitution on the focal edge?`.
 
 ### Line 150
 
 ```python
-          fontweight="bold", color=INK, va="top")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 151
 
 ```python
-axB2.text(0.26, 0.46, "parent", fontsize=5.9, color=GREY, ha="center")
+    # Bottom clade
 ```
-Labels the left endpoint as the parent state.
 
 ### Line 152
 
 ```python
-axB2.text(0.74, 0.46, "child", fontsize=5.9, color=GREY, ha="center")
+    xb = x2 - 0.115
 ```
-Labels the right endpoint as the child state.
 
 ### Line 153
 
 ```python
-axB2.text(0.50, 0.55, "all optimal reconstructions", fontsize=5.9, color=GREY, ha="center")
+    ax.plot([xb, xb], [ys[8], ys[6]], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Adds `all optimal reconstructions` above the endpoint relationship.
 
 ### Line 154
 
 ```python
-for x, state, edge in [(0.26, "A", ORANGE), (0.74, "G", BLUE)]:
+    for y in ys[6:9]:
 ```
-Loops over the parent A and child G endpoint states.
+
+The lower clade contains `A`, `A` and an external `G`.
 
 ### Line 155
 
 ```python
-    axB2.add_patch(Circle((x, 0.31), 0.055, ec=edge, fc="white", lw=1.0))
+        ax.plot([xb, xt], [y, y], transform=ax.transAxes, color=INK, lw=lw)
 ```
-Draws the current endpoint circle.
 
 ### Line 156
 
 ```python
-    axB2.text(x, 0.31, state, fontsize=7.2, fontweight="bold",
+
 ```
-Begins placing the nucleotide letter inside that circle.
 
 ### Line 157
 
 ```python
-              ha="center", va="center", color=INK)
+    # tips
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 158
 
 ```python
-axB2.annotate("", xy=(0.66,0.31), xytext=(0.34,0.31),
+    for y in ys:
 ```
-Begins drawing the A→G arrow.
 
 ### Line 159
 
 ```python
-              arrowprops=dict(arrowstyle="-|>", lw=0.9, color=INK,
+        ax.add_patch(Circle((xt, y), 0.0055, transform=ax.transAxes,
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 160
 
 ```python
-                              mutation_scale=8.5))
+                            fc=WHITE, ec=INK, lw=0.75))
 ```
-Part of the current drawing command or data definition; it supplies values used by the surrounding lines.
 
 ### Line 161
 
 ```python
-axB2.text(0.00, 0.06, "YES", fontsize=13.0, fontweight="bold",
+
 ```
-Begins the large orange result `YES`.
 
 ### Line 162
 
 ```python
-          color=ORANGE, va="bottom")
+    # root
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 163
 
 ```python
-axB2.text(0.23, 0.085, "unambiguous A→G", fontsize=6.9, fontweight="bold",
+    ax.add_patch(Circle((x0, y_root), 0.006, transform=ax.transAxes, fc=INK, ec=INK))
 ```
-Begins the bold interpretation `unambiguous A→G`.
+
+A filled circle identifies the root separately from hollow tip markers.
 
 ### Line 164
 
 ```python
-          color=INK, va="bottom")
+    T(ax, x0-0.014, y_root-0.005, "root", fontsize=SMALL_FS, color=MUTED, ha="right")
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 165
 
 ```python
-axB2.text(0.00, 0.005, "Only optimal focal-edge pair: A→G", fontsize=6.2,
+
 ```
-Adds the plain-language statement `Only optimal focal-edge pair: A→G`.
 
 ### Line 166
 
 ```python
-          color=GREY, va="bottom")
+    # focal descendants bracket
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 167
 
 ```python
-
+    bx = 0.562
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 168
 
 ```python
-# ======================================================
+    ax.plot([bx, bx], [ys[2]-0.008, ys[0]+0.008], transform=ax.transAxes, color=BLUE, lw=0.9)
 ```
-Human-readable comment: ======================================================.
+
+The blue bracket spans exactly the three focal tips rather than all nearby tips.
 
 ### Line 169
 
 ```python
-# Panel C — corrected table hierarchy
+    ax.plot([bx-0.010, bx], [ys[0]+0.008, ys[0]+0.008], transform=ax.transAxes, color=BLUE, lw=0.9)
 ```
-Human-readable comment: Panel C — corrected table hierarchy.
 
 ### Line 170
 
 ```python
-# ======================================================
+    ax.plot([bx-0.010, bx], [ys[2]-0.008, ys[2]-0.008], transform=ax.transAxes, color=BLUE, lw=0.9)
 ```
-Human-readable comment: ======================================================.
 
 ### Line 171
 
 ```python
-fig.text(0.055, 0.292, "C", fontsize=10.5, fontweight="bold", color=INK, va="top")
+    T(ax, bx+0.013, y_focal, "focal\ndescendants", fontsize=SMALL_FS, fontweight="bold",
 ```
-Adds the capital panel label C.
 
 ### Line 172
 
 ```python
-fig.text(0.095, 0.292, "Retain all optimal focal-edge solutions",
+      color=BLUE, ha="left", linespacing=0.95)
 ```
-Begins the heading `Retain all optimal focal-edge solutions`.
 
 ### Line 173
 
 ```python
-         fontsize=8.6, fontweight="bold", color=INK, va="top")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 174
 
 ```python
-
+    # site-state column
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 175
 
 ```python
-# Column headers — no floating divider above them
+    ax.plot([0.665, 0.665], [0.585, 0.947], transform=ax.transAxes, color=RULE, lw=0.7)
 ```
-Human-readable comment: Column headers — no floating divider above them.
 
 ### Line 176
 
 ```python
-axChead.text(0.00, 0.72, "Optimal parent→child pair(s)", fontsize=5.9, color=GREY,
+    T(ax, 0.720, 0.952, "one site", fontsize=SUBHEAD_FS, fontweight="bold", ha="center")
 ```
-Adds the left table header `Optimal parent→child pair(s)`.
 
 ### Line 177
 
 ```python
-             va="center", ha="left")
+
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 178
 
 ```python
-axChead.text(0.49, 0.72, "BRANCHSNV reports", fontsize=5.9, color=GREY,
+    states = ["G","G","G","A","A","A","A","A","G"]
 ```
-Adds the right table header `BRANCHSNV reports`.
+
+This is the entire observed tip-state dataset used by the illustration: `GGG / AAA / AAG`.
 
 ### Line 179
 
 ```python
-             va="center", ha="left")
+    for i, (y, base) in enumerate(zip(ys, states)):
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 180
 
 ```python
-
+        color = BLUE if i < 3 else (RED if i == 8 else INK)
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+The external `G` is red to demonstrate non-exclusivity; focal `G` labels are blue.
 
 ### Line 181
 
 ```python
-# Proper table rule: immediately UNDER the column headers.
+        T(ax, 0.720, y, base, fontsize=BODY_FS, fontweight="bold", color=color, ha="center")
 ```
-Human-readable comment: Proper table rule: immediately UNDER the column headers..
 
 ### Line 182
 
 ```python
-axChead.plot([0.00, 0.84], [0.28, 0.28], color=LIGHT, lw=0.6)
+
 ```
-Draws the single subtle rule immediately beneath the two Panel C column headers.
 
 ### Line 183
 
 ```python
-
+    T(ax, 0.800, 0.875, "Focal clade:  G G G", fontsize=BODY_FS, fontweight="bold", color=BLUE)
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 184
 
 ```python
-# Table rows
+    T(ax, 0.800, 0.815, "Outside includes G", fontsize=BODY_FS, fontweight="bold", color=RED)
 ```
-Human-readable comment: Table rows.
 
 ### Line 185
 
 ```python
-rows = [
+
 ```
-Starts the list of four illustrative reconstruction classes.
+
+## Panel b — two separate tests (lines 186–234)
+
+The left card displays observed tip states; the right card depicts the inferred A→G pair. These two outputs are deliberately drawn separately. The inference itself is not computed by this script.
 
 ### Line 186
 
 ```python
-    ("A→G only", "Unambiguous change", BLUE),
+def draw_panel_b(ax):
 ```
-Defines the unambiguous-change example: only A→G is optimal.
+
+The central panel compares observations and inference, not two algorithms or measured scores.
 
 ### Line 187
 
 ```python
-    ("A→G or C→G", "State ambiguity", ORANGE),
+    panel_label(ax, "b", "Two questions, different answers", 0.552)
 ```
-Defines the state-ambiguity example: A→G and C→G are both optimal and both imply a change.
 
 ### Line 188
 
 ```python
-    ("A→G or G→G", "Placement ambiguity", PURPLE),
+
 ```
-Defines the placement-ambiguity example: A→G and G→G are both optimal, so the change may or may not lie on the focal edge.
 
 ### Line 189
 
 ```python
-    ("G→G only", "No change", GREY),
+    # left / right anchors
 ```
-Defines the no-change example: only G→G is optimal.
 
 ### Line 190
 
 ```python
-]
+    lx, rx = 0.065, 0.640
 ```
-Closes the list, function call, or settings block opened on the preceding lines.
 
 ### Line 191
 
 ```python
-ysC = [0.87, 0.61, 0.35, 0.09]
+    cx = 0.505
 ```
-Defines the four row heights.
 
 ### Line 192
 
 ```python
-for i, (lhs, rhs, c) in enumerate(rows):
+
 ```
-Loops through the four Panel C rows.
 
 ### Line 193
 
 ```python
-    if i > 0:
+    T(ax, lx, 0.505, "OBSERVED", fontsize=SUBHEAD_FS, fontweight="bold", color=BLUE)
 ```
-Checks whether the current row is not the first.
+
+The left-hand question can be answered without ancestral-state reconstruction.
 
 ### Line 194
 
 ```python
-        axC1.plot([0, 1], [ysC[i]+0.13, ysC[i]+0.13], color="#EEEEEE", lw=0.5)
+    T(ax, lx, 0.474, "Clade-exclusive?", fontsize=BODY_FS, fontweight="bold")
 ```
-Adds a very faint separator above rows 2–4.
 
 ### Line 195
 
 ```python
-    axC1.text(0.00, ysC[i], lhs, fontsize=6.3, color=INK, va="center")
+
 ```
-Places the optimal pair-set expression in the left column.
 
 ### Line 196
 
 ```python
-    axC1.text(0.58, ysC[i], rhs, fontsize=6.3, fontweight="bold",
+    # Left observation card
 ```
-Begins placing the BRANCHSNV classification in the right column.
 
 ### Line 197
 
 ```python
-              color=c, va="center")
+    rounded_box(ax, lx, 0.354, 0.345, 0.095, LIGHT_BLUE)
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 198
 
 ```python
-
+    T(ax, lx+0.018, 0.415, "focal", fontsize=SMALL_FS, color=MUTED)
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 199
 
 ```python
-axC2.text(0.00, 0.64, "No arbitrary tie-breaking",
+    for x in (lx+0.098, lx+0.137, lx+0.176):
 ```
-Begins the bold statement `No arbitrary tie-breaking`.
 
 ### Line 200
 
 ```python
-          fontsize=7.2, fontweight="bold", color=INK, va="center")
+        T(ax, x, 0.415, "G", fontsize=BODY_FS, fontweight="bold", color=BLUE, ha="center")
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 201
 
 ```python
-axC2.text(0.00, 0.32,
+
 ```
-Starts the explanatory text under that statement.
 
 ### Line 202
 
 ```python
-          "All globally optimal focal-edge\nstate pairs are retained.",
+    T(ax, lx+0.018, 0.375, "outside", fontsize=SMALL_FS, color=MUTED)
 ```
-Part of the current drawing command or data definition; it supplies values used by the surrounding lines.
 
 ### Line 203
 
 ```python
-          fontsize=6.1, color=GREY, va="center", linespacing=1.25)
+    bases = [("A",INK),("A",INK),("A",INK),("A",INK),("A",INK),("G",RED)]
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
+
+The external list includes a single `G`; this is sufficient to reject exclusivity.
 
 ### Line 204
 
 ```python
-
+    for i,(b,c) in enumerate(bases):
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 205
 
 ```python
-# ======================================================
+        T(ax, lx+0.098+i*0.039, 0.375, b, fontsize=BODY_FS, fontweight="bold", color=c, ha="center")
 ```
-Human-readable comment: ======================================================.
 
 ### Line 206
 
 ```python
-# Design safeguards
+
 ```
-Human-readable comment: Design safeguards.
 
 ### Line 207
 
 ```python
-# ======================================================
+    T(ax, lx, 0.318, "NO", fontsize=BIG_FS, fontweight="bold", color=BLUE)
 ```
-Human-readable comment: ======================================================.
+
+The “NO” is specific to *fixed exclusivity*, not to existence of a substitution.
 
 ### Line 208
 
 ```python
-axF.text(0.00, 0.96, "DESIGN SAFEGUARDS", fontsize=6.2, fontweight="bold",
+    T(ax, lx+0.093, 0.322, "not fixed-exclusive", fontsize=BODY_FS, fontweight="bold")
 ```
-Begins the `DESIGN SAFEGUARDS` heading.
 
 ### Line 209
 
 ```python
-         color=GREY, va="top")
+    T(ax, lx+0.093, 0.295, "G occurs outside the clade", fontsize=SMALL_FS, color=MUTED)
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 210
 
 ```python
 
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 211
 
 ```python
-safeguards = [
+    # center separator
 ```
-Starts the list of the five safeguards.
 
 ### Line 212
 
 ```python
-    ("Explicit root", "defines direction"),
+    ax.plot([cx, cx], [0.285, 0.495], transform=ax.transAxes, color=RULE, lw=0.7)
 ```
-Defines `Explicit root — defines direction`.
+
+A vertical separator keeps the two logical questions distinct.
 
 ### Line 213
 
 ```python
-    ("Exact descendants", "defines branch"),
+    T(ax, cx, 0.392, "≠", fontsize=21, fontweight="bold", ha="center")
 ```
-Defines `Exact descendants — defines branch`.
 
 ### Line 214
 
 ```python
-    ("Exact taxon labels", "defines correspondence"),
+    T(ax, cx, 0.337, "kept separate", fontsize=SMALL_FS, color=MUTED, ha="center")
 ```
-Defines `Exact taxon labels — defines correspondence`.
 
 ### Line 215
 
 ```python
-    ("Complete optimal set", "retains uncertainty"),
+
 ```
-Defines `Complete optimal set — retains uncertainty`.
 
 ### Line 216
 
 ```python
-    ("Deterministic provenance", "supports auditability"),
+    # right
 ```
-Defines `Deterministic provenance — supports auditability`.
 
 ### Line 217
 
 ```python
-]
+    T(ax, rx, 0.505, "INFERRED", fontsize=SUBHEAD_FS, fontweight="bold", color=ORANGE)
 ```
-Closes the list, function call, or settings block opened on the preceding lines.
+
+The right-hand question concerns a specific parent–child edge in the optimal reconstruction.
 
 ### Line 218
 
 ```python
-centres = [0.10, 0.30, 0.50, 0.70, 0.90]
+    T(ax, rx, 0.474, "Substitution on the focal edge?", fontsize=BODY_FS, fontweight="bold")
 ```
-Defines five evenly spaced column centres for the safeguards.
 
 ### Line 219
 
 ```python
-for i, (x, (title, subtitle)) in enumerate(zip(centres, safeguards)):
+    rounded_box(ax, rx, 0.354, 0.325, 0.095, LIGHT_ORANGE)
 ```
-Loops through the five safeguards and their positions.
 
 ### Line 220
 
 ```python
-    axF.text(x, 0.49, title, fontsize=6.1, fontweight="bold",
+
 ```
-Begins drawing each bold safeguard title.
 
 ### Line 221
 
 ```python
-             ha="center", va="center", color=INK)
+    px, gx, y = rx+0.082, rx+0.255, 0.382
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 222
 
 ```python
-    axF.text(x, 0.16, subtitle, fontsize=5.9,
+    T(ax, px, y+0.040, "parent", fontsize=SMALL_FS, color=MUTED, ha="center")
 ```
-Begins drawing the smaller explanatory subtitle.
 
 ### Line 223
 
 ```python
-             ha="center", va="center", color=GREY)
+    T(ax, gx, y+0.040, "child", fontsize=SMALL_FS, color=MUTED, ha="center")
 ```
-Continues the appearance and alignment settings for the drawing command started on the preceding line.
 
 ### Line 224
 
 ```python
-    if i < 4:
+    ax.add_patch(Circle((px, y), 0.021, transform=ax.transAxes, fill=False, ec=ORANGE, lw=1.0))
 ```
-Checks whether a vertical separator is needed after the current safeguard.
+
+Open circles represent inferred parent/child states, not sampled tips.
 
 ### Line 225
 
 ```python
-        sep = (centres[i]+centres[i+1])/2
+    ax.add_patch(Circle((gx, y), 0.021, transform=ax.transAxes, fill=False, ec=BLUE, lw=1.0))
 ```
-Calculates the midpoint between this safeguard and the next one.
 
 ### Line 226
 
 ```python
-        axF.plot([sep, sep], [0.12, 0.65], color=LIGHT, lw=0.6)
+    T(ax, px, y, "A", fontsize=BODY_FS, fontweight="bold", ha="center")
 ```
-Draws the pale vertical separator.
 
 ### Line 227
 
 ```python
-
+    T(ax, gx, y, "G", fontsize=BODY_FS, fontweight="bold", color=BLUE, ha="center")
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 228
 
 ```python
-# ---------- Export ----------
+    ax.annotate("", xy=(gx-0.030,y), xytext=(px+0.030,y), xycoords=ax.transAxes,
 ```
-Human-readable comment: ---------- Export ----------.
+
+The arrow indicates direction from parent `A` to child `G`.
 
 ### Line 229
 
 ```python
-outdir = Path(__file__).resolve().parent
+                arrowprops=dict(arrowstyle="-|>", color=INK, lw=0.9))
 ```
-Sets the output directory to the directory containing this script.
 
 ### Line 230
 
 ```python
-pdf = outdir / "Figure_1.pdf"
+
 ```
-Creates the output filename `Figure_1.pdf`.
 
 ### Line 231
 
 ```python
-svg = outdir / "Figure_1_editable.svg"
+    T(ax, rx, 0.318, "YES", fontsize=BIG_FS, fontweight="bold", color=ORANGE)
 ```
-Creates the editable SVG filename.
+
+“YES” encodes the worked parsimony conclusion; it is not computed inside this drawing function.
 
 ### Line 232
 
 ```python
-png = outdir / "Figure_1_preview_600dpi.png"
+    T(ax, rx+0.093, 0.322, "unambiguous A→G", fontsize=BODY_FS, fontweight="bold")
 ```
-Creates the 600-dpi PNG preview filename.
 
 ### Line 233
 
 ```python
-tif = outdir / "Figure_1_1000dpi.tiff"
+    T(ax, rx+0.093, 0.295, "Only optimal focal-edge pair: A→G", fontsize=SMALL_FS, color=MUTED)
 ```
-Creates the 1000-dpi TIFF filename.
 
 ### Line 234
 
 ```python
 
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
+
+## Panel c — uncertainty classes and safeguards (lines 235–284)
+
+The table is an interpretive key for sets of globally optimal focal-edge pairs. It is not four observations from panel a. The bottom strip states conditions required to interpret a branch-level result.
 
 ### Line 235
 
 ```python
-fig.savefig(pdf, bbox_inches="tight", pad_inches=0.02)
+def draw_panel_c(ax):
 ```
-Exports the vector PDF.
+
+These rows are an explanatory taxonomy of possible pair sets, not alternative outcomes for panel a.
 
 ### Line 236
 
 ```python
-fig.savefig(svg, bbox_inches="tight", pad_inches=0.02)
+    panel_label(ax, "c", "Retain all optimal focal-edge state pairs", 0.258)
 ```
-Exports the editable SVG.
 
 ### Line 237
 
 ```python
-fig.savefig(png, dpi=600, bbox_inches="tight", pad_inches=0.02)
+
 ```
-Exports the PNG preview at 600 dpi.
 
 ### Line 238
 
 ```python
-fig.savefig(tif, dpi=1000, bbox_inches="tight", pad_inches=0.02,
+    x0, x1, x2 = 0.065, 0.390, 0.665
 ```
-Begins exporting the TIFF at 1000 dpi.
 
 ### Line 239
 
 ```python
-            pil_kwargs={"compression":"tiff_lzw"})
+    rounded_box(ax, x0, 0.194, x2-x0, 0.036, LIGHT)
 ```
-Uses lossless LZW compression for the TIFF.
 
 ### Line 240
 
 ```python
-
+    T(ax, x0+0.012, 0.212, "Optimal parent→child pair(s)", fontsize=SMALL_FS, fontweight="bold")
 ```
-Blank line used only to separate logical blocks and make the script easier to read.
 
 ### Line 241
 
 ```python
-plt.show()
+    T(ax, x1+0.012, 0.212, "BRANCHSNV reports", fontsize=SMALL_FS, fontweight="bold")
 ```
-Displays the figure when the script is run interactively.
 
 ### Line 242
 
 ```python
-print("Figure 1 exported.")
+    ax.plot([x1, x1], [0.095, 0.231], transform=ax.transAxes, color=RULE, lw=0.55)
 ```
-Prints a confirmation message after export.
 
-## What can be changed safely
+### Line 243
 
-Text wording, output filenames, and colours can be changed without changing the scientific topology. Layout coordinates can also be adjusted, but every change should be checked visually at final print size.
+```python
 
-## What must be re-checked if changed
+```
 
-The topology coordinates and the nine nucleotide states in Panel A jointly define the scientific example. If the tree topology or any of the states are changed, independently re-check that the only optimal focal-edge pair is still `A→G` before using the revised figure.
+### Line 244
+
+```python
+    rows = [
+```
+
+Store the four pair sets with their distinct reporting categories for consistent row drawing.
+
+### Line 245
+
+```python
+        ("A→G only", "Unambiguous change", BLUE),
+```
+
+### Line 246
+
+```python
+        ("A→G or C→G", "State ambiguity", ORANGE),
+```
+
+### Line 247
+
+```python
+        ("A→G or G→G", "Placement ambiguity", PURPLE),
+```
+
+### Line 248
+
+```python
+        ("G→G only", "No change", MUTED),
+```
+
+### Line 249
+
+```python
+    ]
+```
+
+### Line 250
+
+```python
+    ys = [0.179,0.153,0.127,0.101]
+```
+
+### Line 251
+
+```python
+    for i,(lhs,rhs,c) in enumerate(rows):
+```
+
+Render the rows from one structured list to prevent labels and colours becoming misaligned.
+
+### Line 252
+
+```python
+        T(ax, x0+0.012, ys[i], lhs, fontsize=BODY_FS)
+```
+
+### Line 253
+
+```python
+        T(ax, x1+0.012, ys[i], rhs, fontsize=BODY_FS, fontweight="bold", color=c)
+```
+
+### Line 254
+
+```python
+        if i < 3:
+```
+
+### Line 255
+
+```python
+            ax.plot([x0, x2], [ys[i]-0.014, ys[i]-0.014], transform=ax.transAxes,
+```
+
+### Line 256
+
+```python
+                    color="#E1E5E8", lw=0.5)
+```
+
+### Line 257
+
+```python
+
+```
+
+### Line 258
+
+```python
+    ax.plot([0.685,0.685], [0.100,0.228], transform=ax.transAxes, color=RULE, lw=0.65)
+```
+
+### Line 259
+
+```python
+    T(ax, 0.710, 0.186, "No arbitrary tie-breaking", fontsize=BODY_FS, fontweight="bold")
+```
+
+This statement makes clear why silently choosing one equally parsimonious assignment would be misleading.
+
+### Line 260
+
+```python
+    T(ax, 0.710, 0.149, "All globally optimal focal-edge\nstate pairs are retained.",
+```
+
+### Line 261
+
+```python
+      fontsize=SMALL_FS, color=MUTED, va="center", linespacing=1.1)
+```
+
+### Line 262
+
+```python
+
+```
+
+### Line 263
+
+```python
+    # Safeguards
+```
+
+### Line 264
+
+```python
+    HLINE(ax, 0.084)
+```
+
+Separate the safeguards from the uncertainty table; they concern prerequisites, not additional output classes.
+
+### Line 265
+
+```python
+    T(ax, 0.015, 0.066, "DESIGN SAFEGUARDS", fontsize=SMALL_FS, fontweight="bold", color=MUTED)
+```
+
+### Line 266
+
+```python
+
+```
+
+### Line 267
+
+```python
+    bounds = [0.015, 0.209, 0.403, 0.597, 0.791, 0.985]
+```
+
+### Line 268
+
+```python
+    modules = [
+```
+
+Five safeguard items correspond to rooting, branch definition, taxon identity, tie retention and provenance.
+
+### Line 269
+
+```python
+        ("Explicit root", "defines direction"),
+```
+
+### Line 270
+
+```python
+        ("Exact descendant set", "defines branch"),
+```
+
+### Line 271
+
+```python
+        ("Exact taxon labels", "define correspondence"),
+```
+
+### Line 272
+
+```python
+        ("Complete optimal set", "retains uncertainty"),
+```
+
+### Line 273
+
+```python
+        ("Deterministic provenance", "supports auditability"),
+```
+
+### Line 274
+
+```python
+    ]
+```
+
+### Line 275
+
+```python
+    for i, (head, sub) in enumerate(modules):
+```
+
+### Line 276
+
+```python
+        left, right = bounds[i], bounds[i+1]
+```
+
+### Line 277
+
+```python
+        if i > 0:
+```
+
+### Line 278
+
+```python
+            ax.plot([left, left], [0.012, 0.065], transform=ax.transAxes, color=RULE, lw=0.55)
+```
+
+### Line 279
+
+```python
+        x = (left + right) / 2
+```
+
+### Line 280
+
+```python
+        head_fs = 5.45 if head == "Deterministic provenance" else 5.70
+```
+
+Long safeguard text uses a smaller fixed font size; check it at final physical dimensions.
+
+### Line 281
+
+```python
+        sub_fs = 5.15 if head == "Deterministic provenance" else 5.35
+```
+
+### Line 282
+
+```python
+        T(ax, x, 0.043, head, fontsize=head_fs, fontweight="bold", ha="center")
+```
+
+### Line 283
+
+```python
+        T(ax, x, 0.023, sub, fontsize=sub_fs, color=MUTED, ha="center")
+```
+
+### Line 284
+
+```python
+
+```
+
+## Output assembly and immutable metadata (lines 285–362)
+
+The three panels share one figure canvas. Export settings and fixed metadata reduce accidental differences across renders; the final hashes are the means of verifying the exact produced files.
+
+### Line 285
+
+```python
+def build():
+```
+
+The build function assembles the complete deliverable and records its hashes.
+
+### Line 286
+
+```python
+    fig = plt.figure(figsize=(FIG_W_MM*MM, FIG_H_MM*MM), facecolor=WHITE)
+```
+
+Physical width/height is converted to inches once; exports use the same Figure object.
+
+### Line 287
+
+```python
+    ax = fig.add_axes([0,0,1,1])
+```
+
+### Line 288
+
+```python
+    ax.set_xlim(0,1); ax.set_ylim(0,1); ax.axis("off")
+```
+
+Hide axes: all line art is explanatory geometry, not a quantitative plot.
+
+### Line 289
+
+```python
+
+```
+
+### Line 290
+
+```python
+    draw_panel_a(ax)
+```
+
+Draw panel a first so its tree and nucleotide pattern establish the context for the later conclusions.
+
+### Line 291
+
+```python
+    HLINE(ax, 0.570)
+```
+
+A horizontal rule marks the transition from the observed-tip diagram to the two questions.
+
+### Line 292
+
+```python
+    draw_panel_b(ax)
+```
+
+### Line 293
+
+```python
+    HLINE(ax, 0.270)
+```
+
+### Line 294
+
+```python
+    draw_panel_c(ax)
+```
+
+Panel c completes the logic with uncertainty classes and safeguards.
+
+### Line 295
+
+```python
+
+```
+
+### Line 296
+
+```python
+    fixed_dt = datetime(2026, 10, 5, 0, 0, 0, tzinfo=timezone.utc)
+```
+
+Use a fixed UTC instant for PDF creation and modification metadata instead of wall-clock timestamps.
+
+### Line 297
+
+```python
+    fixed_date = "2026-10-05T00:00:00Z"
+```
+
+### Line 298
+
+```python
+    creator = "BRANCHSNV Figure 1 reproducible generator"
+```
+
+### Line 299
+
+```python
+
+```
+
+### Line 300
+
+```python
+    fig.savefig(
+```
+
+The first export is a vector PDF with explicitly pinned provenance metadata.
+
+### Line 301
+
+```python
+        HERE/"Figure_1.pdf",
+```
+
+### Line 302
+
+```python
+        facecolor=WHITE,
+```
+
+### Line 303
+
+```python
+        metadata={
+```
+
+### Line 304
+
+```python
+            "Title": "BRANCHSNV Figure 1",
+```
+
+### Line 305
+
+```python
+            "Author": "Rhys T. White et al.",
+```
+
+### Line 306
+
+```python
+            "Subject": "Analytical design of BRANCHSNV",
+```
+
+### Line 307
+
+```python
+            "Creator": creator,
+```
+
+### Line 308
+
+```python
+            "CreationDate": fixed_dt,
+```
+
+### Line 309
+
+```python
+            "ModDate": fixed_dt,
+```
+
+### Line 310
+
+```python
+        },
+```
+
+### Line 311
+
+```python
+    )
+```
+
+### Line 312
+
+```python
+
+```
+
+### Line 313
+
+```python
+    fig.savefig(
+```
+
+SVG provides an editable vector version; text remains text because of the global rendering setting.
+
+### Line 314
+
+```python
+        HERE/"Figure_1_editable.svg",
+```
+
+### Line 315
+
+```python
+        facecolor=WHITE,
+```
+
+### Line 316
+
+```python
+        metadata={
+```
+
+### Line 317
+
+```python
+            "Title": "BRANCHSNV Figure 1",
+```
+
+### Line 318
+
+```python
+            "Creator": creator,
+```
+
+### Line 319
+
+```python
+            "Date": fixed_date,
+```
+
+### Line 320
+
+```python
+        },
+```
+
+### Line 321
+
+```python
+    )
+```
+
+### Line 322
+
+```python
+
+```
+
+### Line 323
+
+```python
+    fig.savefig(
+```
+
+The 600-dpi PNG is for review/preview, not the editable source.
+
+### Line 324
+
+```python
+        HERE/"Figure_1_preview_600dpi.png",
+```
+
+### Line 325
+
+```python
+        dpi=600,
+```
+
+### Line 326
+
+```python
+        facecolor=WHITE,
+```
+
+### Line 327
+
+```python
+        metadata={
+```
+
+### Line 328
+
+```python
+            "Title": "BRANCHSNV Figure 1",
+```
+
+### Line 329
+
+```python
+            "Author": "Rhys T. White et al.",
+```
+
+### Line 330
+
+```python
+            "Software": creator,
+```
+
+### Line 331
+
+```python
+        },
+```
+
+### Line 332
+
+```python
+    )
+```
+
+### Line 333
+
+```python
+
+```
+
+### Line 334
+
+```python
+    fig.savefig(
+```
+
+The 1000-dpi LZW TIFF is a high-resolution raster deliverable.
+
+### Line 335
+
+```python
+        HERE/"Figure_1_1000dpi.tiff",
+```
+
+### Line 336
+
+```python
+        dpi=1000,
+```
+
+### Line 337
+
+```python
+        facecolor=WHITE,
+```
+
+### Line 338
+
+```python
+        pil_kwargs={"compression":"tiff_lzw"},
+```
+
+### Line 339
+
+```python
+    )
+```
+
+### Line 340
+
+```python
+
+```
+
+### Line 341
+
+```python
+    plt.close(fig)
+```
+
+Close the Matplotlib figure before post-processing exported files to release resources.
+
+### Line 342
+
+```python
+
+```
+
+### Line 343
+
+```python
+    # Normalize Matplotlib SVG whitespace so the generated source is
+```
+
+### Line 344
+
+```python
+    # byte-stable and passes git diff --check.
+```
+
+### Line 345
+
+```python
+    svg_path = HERE/"Figure_1_editable.svg"
+```
+
+Normalize whitespace after SVG export for a stable committed text representation.
+
+### Line 346
+
+```python
+    svg_text = svg_path.read_text(encoding="utf-8")
+```
+
+### Line 347
+
+```python
+    svg_text = "\n".join(line.rstrip() for line in svg_text.splitlines()) + "\n"
+```
+
+Strip trailing whitespace without changing geometric SVG elements or text content.
+
+### Line 348
+
+```python
+    svg_path.write_text(svg_text, encoding="utf-8")
+```
+
+### Line 349
+
+```python
+
+```
+
+### Line 350
+
+```python
+    with Image.open(HERE/"Figure_1_1000dpi.tiff") as im:
+```
+
+Open the TIFF produced above for a second RGB-specific export.
+
+### Line 351
+
+```python
+        im.convert("RGB").save(HERE/"Figure_1_1000dpi_RGB.tiff",
+```
+
+Convert RGB channels with Pillow; this is not an explicit alpha compositing operation.
+
+### Line 352
+
+```python
+                               compression="tiff_lzw", dpi=(1000,1000))
+```
+
+### Line 353
+
+```python
+
+```
+
+### Line 354
+
+```python
+    print(f"Font: {FONT}")
+```
+
+Print the chosen font to make the effective render configuration visible in the build log.
+
+### Line 355
+
+```python
+    print(f"Figure size: {FIG_W_MM:.1f} × {FIG_H_MM:.1f} mm")
+```
+
+### Line 356
+
+```python
+    for name in ["Figure_1.pdf","Figure_1_editable.svg","Figure_1_preview_600dpi.png",
+```
+
+### Line 357
+
+```python
+                 "Figure_1_1000dpi.tiff","Figure_1_1000dpi_RGB.tiff"]:
+```
+
+### Line 358
+
+```python
+        p=HERE/name
+```
+
+### Line 359
+
+```python
+        print(f"{name}\t{hashlib.sha256(p.read_bytes()).hexdigest()}")
+```
+
+Digest each final output only after TIFF conversion and SVG normalization have completed.
+
+### Line 360
+
+```python
+
+```
+
+### Line 361
+
+```python
+if __name__ == "__main__":
+```
+
+Prevent an import of this script from automatically overwriting the release artwork.
+
+### Line 362
+
+```python
+    build()
+```
+
+Invoke the builder when called as a standalone program.
+
+</details>

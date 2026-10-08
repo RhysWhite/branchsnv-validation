@@ -1,2 +1,2 @@
 matplotlib==3.10.8
-Pillow==12.3.0
+Pillow==12.2.0
