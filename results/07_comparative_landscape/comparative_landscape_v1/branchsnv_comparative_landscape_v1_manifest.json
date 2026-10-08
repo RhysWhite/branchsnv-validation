@@ -1,0 +1,64 @@
+{
+  "boundaries": {
+    "event_ledger_mutation": false,
+    "production_authority": false,
+    "production_proposal": false,
+    "repo_mutation": false
+  },
+  "identity_consolidation": {
+    "consolidations": [
+      "CODEML consolidated into PAML",
+      "ProtASR2 consolidated into ProtASR",
+      "chARNement canonical identity corrected and near-direct assessment restored",
+      "PHYLOSPECT SSRN record consolidated to published Molecular Phylogenetics and Evolution article",
+      "ML-guided tree-search preprint consolidated to Nature Communications version of record",
+      "Tree-decomposition ncRNA ASR conference record linked to 2026 Journal of Computational Biology version"
+    ],
+    "direct": 3,
+    "excluded_noncomparators": 29,
+    "included_landscape_identities": 218,
+    "master_distinct_identities": 247,
+    "near_direct": 26,
+    "new_all_lanes_source_backed_identities": [
+      "CURE",
+      "Orthoscape",
+      "PHYLOSPECT",
+      "Tree-decomposition ncRNA ASR",
+      "PPN",
+      "ML-guided phylogenetic tree search"
+    ],
+    "role_counts": {
+      "branch_change_reconstruction": 27,
+      "clade_lineage_marker_discovery": 4,
+      "general_phylogenetic_parsimony_infrastructure": 130,
+      "homoplasy_recurrent_state_analysis": 11,
+      "marker_deployment_genotyping": 20,
+      "upstream_variant_recombination_phylogeny_workflows": 91
+    },
+    "supporting_relevant": 189
+  },
+  "interpretation": {
+    "classification_is_method_level_not_publication_level": true,
+    "direct_comparators_remain_frozen_prior_anchors": true,
+    "direct_plus_near_direct_total": 29,
+    "no_new_direct_comparator_found_outside_frozen_prior_anchors": true
+  },
+  "record_review": {
+    "active_review_packets": 25,
+    "active_review_rows": 12156,
+    "excluded_records": 7036,
+    "prior_anchor_carry_forwards": 6,
+    "retained_records": 5120,
+    "review_complete": true,
+    "source_escalations": 0
+  },
+  "sha256": {
+    "branchsnv_all_lanes_method_identity_master_v1.tsv": "f45170bd89ed88f136b665ffc7ea5bf2700ca0fdc78ebec0e3866208b6929524",
+    "branchsnv_comparative_landscape_v1.tsv": "d2bfa9d5b44eced6583ae58df074af0d0da04849d8f8ccf51553c9ac20a84808",
+    "branchsnv_comparative_landscape_v1_summary.md": "7a19e3c7872c45dffa921ab28e2e763559a7d3a5c850eb1103e5544f536ed3cf",
+    "branchsnv_direct_near_comparators_v1.tsv": "d9cb7454707fe243a6088dba309063fdfcfe3c71cf4d89ae0836a9b7adb70229",
+    "branchsnv_noncomparators_v1.tsv": "7d24a5fddd8d5734b0af534808d7f9200982449d0ce6f72c5fb246e66761c47d",
+    "branchsnv_supporting_methods_v1.tsv": "744155be2b6020ccccb8542f89fad1d33de966b2003d0244a1c46bd391f67885"
+  },
+  "status": "ALL_LANES_COMPARATIVE_LANDSCAPE_V1"
+}

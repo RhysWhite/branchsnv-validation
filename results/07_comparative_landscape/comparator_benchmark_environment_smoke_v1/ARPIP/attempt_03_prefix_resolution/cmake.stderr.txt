@@ -1,0 +1,11 @@
+-- Compilation will be performed with the following release of the software:
+	branch   
+	ref      ee32c10b49407728b1ab00b5f98f792ca6dc2e1a
+	time     07 Oct 2026 12:48:51
+	current   (latest version)
+CMake Error at CMakeLists.txt:140 (MESSAGE):
+  bpp-core required but not found.
+Call Stack (most recent call first):
+  CMakeLists.txt:174 (IMPROVED_FIND_LIBRARY)
+
+

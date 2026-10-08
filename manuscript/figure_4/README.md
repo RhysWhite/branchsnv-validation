@@ -121,7 +121,7 @@ The blue/orange encoding is functional rather than decorative: blue is wall time
 
 ### Font note
 
-The locked render uses **Arimo**, matching the existing Figure 1 package, because Microsoft Arial was not available in the rendering environment. The SVG and PDF retain editable text. If final production requires Arial, change the font in the editable vector artwork or plotting script and verify that labels have not shifted or collided before re-exporting.
+The locked Figure 4 render uses **Arimo** because Microsoft Arial was unavailable in its rendering environment. Figure 1 uses **DejaVu Sans**, so the two figures do not share a locked font family. The SVG and PDF are supplied as vector artwork; verify text editability in the target editor if downstream changes are required. Any font substitution requires visual inspection for shifted or overlapping labels before re-exporting.
 
 ## Editing policy
 

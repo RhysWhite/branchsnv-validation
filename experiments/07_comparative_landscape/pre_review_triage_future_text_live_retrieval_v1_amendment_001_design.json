@@ -1,0 +1,207 @@
+{
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_LIVE_RETRIEVAL_V1_AMENDMENT_001",
+  "amends": {
+    "commit": "54e1b0404bf6ed87315b55f320495360e7ce1524",
+    "design_path": "experiments/07_comparative_landscape/pre_review_triage_future_text_live_retrieval_v1_design.json",
+    "design_sha256": "826e400faccf7481219cd04661a4e7e785903ec2876e1384ef5cfda3b10dd9e5"
+  },
+  "authorization_contract_amendment": {
+    "authorization_created_by_this_amendment": false,
+    "execution_authority_created_by_this_amendment": false,
+    "explicit_human_authorization_required": true,
+    "future_authorization_must_bind": [
+      "wave_id",
+      "amended_wave_a_request_manifest_sha256",
+      "amendment_design_sha256",
+      "base_design_sha256",
+      "design_parent_commit",
+      "authorized_execution_commit",
+      "normalizer_sha256",
+      "transport_source_hashes",
+      "maximum_request_count",
+      "execution_output_root"
+    ],
+    "maximum_request_count": 12147,
+    "network_authority_created_by_this_amendment": false
+  },
+  "corrected_wave_a": {
+    "execution_order": "ascending request_sequence",
+    "execution_output_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a",
+    "maximum_request_count": 12147,
+    "request_counts": {
+      "openalex_exact_doi": 34,
+      "openalex_exact_work_id": 3574,
+      "pubmed_exact_pmid_efetch": 8539,
+      "total": 12147
+    },
+    "request_manifest": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a_request_manifest_amendment_001.tsv",
+      "rows": 12147,
+      "sha256": "9c5a1b7cda465f0f4a88fc06c612c979af3093f0cecabbe4d8b42576cac30e73"
+    },
+    "wave_id": "TRIAGE_FUTURE_TEXT_LIVE_WAVE_A"
+  },
+  "frozen_source_hashes": {
+    "future_offline_runner": {
+      "path": "experiments/07_comparative_landscape/pre_review_triage_future_text_offline_runner_v1.py",
+      "sha256": "47773112682532ef473c33ef28db276dede01d115961f50f699c46a283d1d018"
+    },
+    "input_manifest": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/input_manifest.tsv",
+      "sha256": "345c90522a44f9f548fb164618943cac24fb87f7820d52a9048bcfe7a4eec6cf"
+    },
+    "normalizer": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py",
+      "sha256": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d"
+    },
+    "offline_cache_resolution": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_cache_resolution.tsv",
+      "sha256": "72ac4012dc1643b56a9d0f0fd089f3c78fd8d272aca8775447c85105c7a49ed0"
+    },
+    "offline_cache_summary": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_cache_summary.json",
+      "sha256": "262498d1159f7dbe24f0daf200801034a134f50fdf17d4dae6cbcc570bc811e7"
+    },
+    "offline_cached_normalized_text": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_cached_normalized_text.tsv",
+      "sha256": "971cd9df8ea9e945922bbaca4f0747ae014fc20930efd9079dcd3d412cfb63ab"
+    },
+    "offline_network_requirements": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_network_requirements.tsv",
+      "sha256": "19d0c9ce7049c35e10cfbb9e56be8b0c012256d9329a39300f94f5584b8ed25f"
+    },
+    "offline_selected_cache_provenance": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_selected_cache_provenance.tsv",
+      "sha256": "0b053cfbdc189e1000a8307eb3a88cd6d7560ccae1bb55d033bbf6d549d77165"
+    },
+    "transport_evidence_adapter": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_transport_evidence_adapter_v1.py",
+      "sha256": "30a311626b3e99e6520601585b87df3b600991094d7724cd358b52159d902bac"
+    },
+    "transport_sources": [
+      {
+        "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+        "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+        "sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+      }
+    ]
+  },
+  "historical_base_wave_a": {
+    "execution_status": "SUPERSEDED_BY_AMENDMENT_001",
+    "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a_request_manifest.tsv",
+    "rows": 12162,
+    "sha256": "90a5bc130b51305ff88b020a90a7fd9dc5c88f6dde190cf8752f630905facbec"
+  },
+  "historical_cache_dependency": {
+    "checksum_manifest": {
+      "entry_count": 8666,
+      "path": "results/07_comparative_landscape/metadata_resolution_retrieval/checksums.sha256",
+      "sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86"
+    },
+    "checksum_path_convention": "checksum_root_relative",
+    "multiple_equivalent_archive_matches": 0,
+    "root": "results/07_comparative_landscape/metadata_resolution_retrieval",
+    "selected_archive_file_count": 45,
+    "selected_cache_provenance": {
+      "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/offline_selected_cache_provenance.tsv",
+      "sha256": "0b053cfbdc189e1000a8307eb3a88cd6d7560ccae1bb55d033bbf6d549d77165"
+    },
+    "selected_lookup_count": 15
+  },
+  "human_gate_after_implementation": {
+    "next_gate": "COMMIT_CORRECTED_FUTURE_WAVE_A_IMPLEMENTATION_THEN_STOP_FOR_EXPLICIT_HUMAN_AUTHORIZATION",
+    "real_authorization_creation_permitted_before_that_gate": false,
+    "real_network_execution_permitted_before_that_gate": false
+  },
+  "implementation_gate": {
+    "next_gate": "REGENERATE_AND_HOSTILE_TEST_FUTURE_WAVE_A_GUARD_RUNNER_AND_ENTRYPOINT_AGAINST_AMENDMENT_001_WITHOUT_NETWORK",
+    "requirements": [
+      "future guard binds Amendment 001 rather than the superseded base design as execution authority",
+      "future guard binds the amended 12,147-row request manifest",
+      "future guard maximum request count is exactly 12,147",
+      "future guard verifies the frozen offline partition and selected-cache provenance",
+      "request outside amended manifest fails closed",
+      "authorization absent fails closed before network",
+      "all hostile implementation tests perform zero real network requests",
+      "completed development retrieval artifacts remain untouched"
+    ]
+  },
+  "offline_partition": {
+    "cached_sources_no_usable_abstract": 1,
+    "cached_usable_openalex": 14,
+    "input_rows": 12162,
+    "network_requirement_rows": 12147,
+    "network_route_counts": {
+      "openalex_exact_doi": 34,
+      "openalex_exact_work_id": 3574,
+      "pubmed_exact_pmid_efetch": 8539
+    },
+    "resolution_status_counts": {
+      "cached_sources_no_usable_abstract": 1,
+      "requires_openalex_lookup": 3608,
+      "requires_pubmed_lookup": 8539,
+      "resolved_cached_openalex": 14
+    },
+    "terminal_without_network": 15
+  },
+  "parent_commit": "54e1b0404bf6ed87315b55f320495360e7ce1524",
+  "reason": "The base future live-retrieval freeze promoted all 12,162 supported future records directly into live Wave A and omitted the pre-Wave-A offline-cache partition used by the frozen development retrieval workflow. Reapplying the same exact-cache semantics resolves 15 records without live network and leaves 12,147 exact Wave A requests.",
+  "replaces": {
+    "authorization_contract.maximum_request_count": {
+      "amended": 12147,
+      "base": 12162
+    },
+    "implementation_gate.request_count_ceiling": {
+      "amended": 12147,
+      "base": 12162
+    },
+    "offline_partition": {
+      "amended": "REQUIRED_AND_FROZEN",
+      "base": "OMITTED"
+    },
+    "wave_a.request_counts": {
+      "amended": {
+        "openalex_exact_doi": 34,
+        "openalex_exact_work_id": 3574,
+        "pubmed_exact_pmid_efetch": 8539,
+        "total": 12147
+      },
+      "base": {
+        "openalex_exact_doi": 47,
+        "openalex_exact_work_id": 3576,
+        "pubmed_exact_pmid_efetch": 8539,
+        "total": 12162
+      }
+    },
+    "wave_a.request_manifest": {
+      "amended_path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a_request_manifest_amendment_001.tsv",
+      "amended_sha256": "9c5a1b7cda465f0f4a88fc06c612c979af3093f0cecabbe4d8b42576cac30e73",
+      "base_path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a_request_manifest.tsv",
+      "base_sha256": "90a5bc130b51305ff88b020a90a7fd9dc5c88f6dde190cf8752f630905facbec"
+    }
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "automated_exclusion_authorized": false,
+    "blind_validation_sample_in_scope": false,
+    "blind_validation_scientific_content_authorized": false,
+    "future_universe_scoring_authorized": false,
+    "model_fitting_authorized": false,
+    "production_screening_protocol_changed": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized": false
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "unchanged_base_contract": {
+    "execution_output_root_changed": false,
+    "input_manifest_sha256": "345c90522a44f9f548fb164618943cac24fb87f7820d52a9048bcfe7a4eec6cf",
+    "normalizer_semantics_changed": false,
+    "supported_future_input_rows": 12162,
+    "transport_semantics_changed": false,
+    "wave_b_authorized": false,
+    "wave_id": "TRIAGE_FUTURE_TEXT_LIVE_WAVE_A"
+  }
+}

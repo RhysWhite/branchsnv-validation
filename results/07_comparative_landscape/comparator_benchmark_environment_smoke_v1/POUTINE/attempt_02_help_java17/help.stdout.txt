@@ -1,0 +1,33 @@
+
+Usage: poutine [-DhsuVX] [-a=<anc_recon_dir>] [-c=<count>] [-d=<output_dir>] [-l=<log_file>] [-o=<output_file>] [-r=<# replicates>] [-T=<# threads>] ((-v=<vcf_filename> | -f=<msa_fasta_filename>)
+               (-p=<pheno_filename> -t=<newick_filename> -m=<map_filename>))
+
+  -h, --help                                Show this help message and exit.
+  -V, --version                             Print version information and exit.
+
+Input genotype file: vcf or fasta format
+  -v, --vcf=<vcf_filename>                  Multi-sample vcf file (this option is currently not in use/available)
+  -f, --fasta=<msa_fasta_filename>          Multi-fasta file (ancestral fasta file if -u in use). Variable sites only. Sites must be in the same order as in the physical position file.
+
+Other input files
+  -p, --phenos=<pheno_filename>             Phenotype file (case = 1, control = 0. Format is two columns tab-delimited with no header: column one is sample id, column two is phenotype)
+  -t, --tree=<newick_filename>              Newick file (ancestral newick file if -u in use)
+  -m, --map=<map_filename>                  Physical positions file (PLINK map format or tab-delimited with no header: last column represents physical positions, all other columns not used)
+
+Algorithm parameters
+  -r, --replicates=<# replicates>           # Replicates used for resampling (default: 100000)
+  -c, --min_hcount=<count>                  Minimum # homoplasic mutations required at each allele (default: 1)
+  -u, --use-precomputed-anc-recon           Use precomputed ancestral reconstruction as input. Specify --fasta for ancestral fasta file and --tree for ancestral newick file.
+
+Runtime options
+  -T, --threads=<# threads>                 # Threads used for parallel processing (default: max # logical processors)
+
+Output files and options
+  -d, --out-dir=<output_dir>                Output directory for all output files (default: poutine_session_current_time)
+  -o, --out=<output_file>                   Output file (relative to --out-dir) containing association results (default: out-dir/poutine_session_current_time.out)
+  -l, --log=<log_file>                      Log file (relative to --out-dir) containing this session's log ouput and any runtime errors that may occur (default: out-dir/poutine_session_current_time.log)
+  -a, --anc-recon-out-dir=<anc_recon_dir>   Output directory (relative to --out-dir) for all files related to ancestral reconstruction (default: out-dir/ancestral_reconstruction_current_time)
+  -s, --timestamp                           Add current session's start timestamp to user-specified dir and filenames (default: no timestamp)
+  -X, --force-overwrite                     Allow overwriting of existing files having the same user-specified filenames (default: program safely exits if existing files detected)
+  -D, --debug                               Turns debug mode on: output all debugging information to debug file out-dir/poutine_session_current_time.debug (this option is likely temporary for testing purposes)
+

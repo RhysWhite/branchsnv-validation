@@ -1,0 +1,57 @@
+      4     20
+
+A                               AAAAAAAAAA AAAAAAAAAA 
+B                               AAAAAAAAAA AAAAAAAAAG 
+C                               AAAAAAAAAA AAAAAAAAAA 
+D                               AAAAAAAAAA AAAAAAAAAA 
+
+
+
+Printing out site pattern counts
+
+
+         4          2  P
+
+A                               AA
+B                               AG
+C                               AA
+D                               AA
+
+
+
+   19    1
+
+
+BASEML (in paml version 4.10.10, 29 Jan 2026)  toy.phy  JC69 
+Frequencies..
+                                    T      C      A      G
+A                              0.00000 0.00000 1.00000 0.00000 GC = 0.000
+B                              0.00000 0.00000 0.95000 0.05000 GC = 0.050
+C                              0.00000 0.00000 1.00000 0.00000 GC = 0.000
+D                              0.00000 0.00000 1.00000 0.00000 GC = 0.000
+
+Homogeneity statistic: X2 = 0.15190 G = 0.14054 
+
+Average                        0.00000 0.00000 0.98750 0.01250
+
+# constant sites:     19 (95.00%)
+ln Lmax (unconstrained) = -3.970305
+
+Distances: JC69 (alpha set at 0.00)
+This matrix is not used in later m.l. analysis.
+
+A                
+B                  0.051745
+C                  0.000000  0.051745
+D                  0.000000  0.051745  0.000000
+
+TREE #  1:  ((1, 2), (3, 4));  MP score: 1.00
+This is a rooted tree.  Please check!
+lnL(ntime:  0  np:  0):    -42.734927    +0.000000
+
+
+tree length =   0.60000
+
+((A, B), (C, D));
+
+((A: 0.100000, B: 0.100000): 0.100000, (C: 0.100000, D: 0.100000): 0.100000);

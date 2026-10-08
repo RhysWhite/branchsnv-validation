@@ -47,7 +47,7 @@ it:
 ```bash
 python experiments/02_deliberate_faults/run.py \
   --branchsnv-root ../branchsnv \
-  --output-dir results/02_deliberate_faults
+  --output-dir reproduced_results/02_deliberate_faults
 ```
 
 The script requires only Python 3.10 or later and the local BRANCHSNV source

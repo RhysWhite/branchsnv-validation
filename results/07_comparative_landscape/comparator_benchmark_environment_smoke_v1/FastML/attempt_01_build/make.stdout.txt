@@ -1,0 +1,45 @@
+cd libs;make all
+make[1]: Entering directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs'
+cd phylogeny && make all
+make[2]: Entering directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs/phylogeny'
+making depend
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o AddLog.o AddLog.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o NNiProp.o NNiProp.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o NNiSep.o NNiSep.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o Nni.o Nni.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o aaJC.o aaJC.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o allTrees.o allTrees.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o allTreesSeparateModel.o allTreesSeparateModel.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o alphabet.o alphabet.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o amino.o amino.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestAlpha.o bestAlpha.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestAlphaManyTrees.o bestAlphaManyTrees.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bestHKYparam.o bestHKYparam.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bootstrap.o bootstrap.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEM.o bblEM.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMfixRoot.o bblEMfixRoot.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMProprtional.o bblEMProprtional.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMProportionalEB.o bblEMProportionalEB.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblLSProportionalEB.o bblLSProportionalEB.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o bblEMSeperate.o bblEMSeperate.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o chebyshevAccelerator.o chebyshevAccelerator.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o clustalFormat.o clustalFormat.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o codon.o codon.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o codonJC.o codonJC.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeCounts.o computeCounts.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeDownAlg.o computeDownAlg.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeMarginalAlg.o computeMarginalAlg.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computePijComponent.o computePijComponent.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeUpAlg.o computeUpAlg.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeUpAlgFactors.o computeUpAlgFactors.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computeSubstitutionCounts.o computeSubstitutionCounts.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computePosteriorExpectationOfSubstitutions.o computePosteriorExpectationOfSubstitutions.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o computePosteriorExpectationOfSubstitutions_nonReversibleSp.o computePosteriorExpectationOfSubstitutions_nonReversibleSp.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o ConversionUtils.o ConversionUtils.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o countTableComponent.o countTableComponent.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o datMatrixHolder.o datMatrixHolder.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distanceTable.o distanceTable.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o distribution.o distribution.cpp
+g++  -O3 -Wall -Wno-sign-compare -I. -DLOG -ftemplate-depth-32  -c -o errorMsg.o errorMsg.cpp
+make[2]: Leaving directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs/phylogeny'
+make[1]: Leaving directory '/home/rwhite/branchsnv-comparator-build/fastml-smoke/libs'

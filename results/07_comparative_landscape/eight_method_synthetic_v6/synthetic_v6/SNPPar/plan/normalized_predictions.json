@@ -1,0 +1,37 @@
+{
+  "branch_events": [
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "9cbd897e3aa5f2b908ce6906122814e549c983ed0b4c88e581611454df8e8468",
+      "method": "SNPPar",
+      "position": "40",
+      "scenario_id": "SYNTHETIC_EXP07_SNPPar"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "ce149fa1c5179b5e569fb357c9633bfbcbebeebc7abf0890cf717fe7b1d8cd75",
+      "method": "SNPPar",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_SNPPar"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "dac8c4e1b434ba7a34cb835dcdce9e7d305c2e761bccf455001993f0a9d2aad7",
+      "method": "SNPPar",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_SNPPar"
+    }
+  ],
+  "method": "SNPPar",
+  "recurrent_sites": [
+    {
+      "position": "200",
+      "reported_recurrence_count_if_available": "2"
+    }
+  ],
+  "scenario_id": "SYNTHETIC_EXP07_SNPPar",
+  "schema_version": 1
+}

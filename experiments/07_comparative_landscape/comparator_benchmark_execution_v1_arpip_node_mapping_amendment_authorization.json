@@ -1,0 +1,55 @@
+{
+    "authorization_id": "ARPIP_NODE_MAPPING_AMENDMENT_001",
+    "authorized_change": {
+        "behaviour": [
+            "parse ARPIP reconstructed internal-node sequences",
+            "combine reconstructed internal-node sequences with observed tip sequences",
+            "derive descendant-tip sets from ARPIP and benchmark trees",
+            "map ARPIP node labels to benchmark node labels by identical descendant-tip sets",
+            "require complete one-to-one tree coverage",
+            "require a sequence for every ARPIP tree node",
+            "return benchmark-labeled node sequences for the existing events_from_node_sequences function"
+        ],
+        "event_logic_changed": false,
+        "helper": "arpip_node_sequences_for_tree",
+        "inputs": [
+            "ARPIP ancestral FASTA text",
+            "ARPIP labeled output Newick",
+            "benchmark Newick",
+            "observed tip sequences"
+        ],
+        "scientific_settings_changed": false,
+        "tests": [
+            "successful ARPIP internal-node mapping",
+            "single expected nucleotide event after existing event normalization",
+            "different tip sets fail closed",
+            "ambiguous descendant-tip mapping fails closed",
+            "missing reconstructed internal-node sequence fails closed"
+        ]
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+    ],
+    "baseline_sha256": {
+        "adapters.py": "eb52ae27e0b4a63a7ee589dbdb9663cda893c15ffc1daf2af2838c9ab508026a",
+        "toy_validation.py": "5d36884573dc8bfde5887e9f0534abe0da41b75c52e0e9b46da7565ea1e00e6b"
+    },
+    "arpip_source_pin": "ee32c10b49407728b1ab00b5f98f792ca6dc2e1a",
+    "smoke_evidence": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke",
+    "next_gate": "IMPLEMENT_ARPIP_NODE_MAPPING_AMENDMENT_001",
+    "not_authorized": [
+        "ARPIP source modification",
+        "ARPIP source pin change",
+        "ARPIP build-contract change",
+        "ARPIP run-contract change",
+        "events_from_node_sequences modification",
+        "generator change",
+        "metric change",
+        "truth change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "a641ef2912422f7b005e670ada24f21f612dd0e9",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}

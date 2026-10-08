@@ -1,0 +1,66 @@
+{
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1_IMPLEMENTATION_AMENDMENT_001",
+  "amendment_parent_commit": "e628e47112a7c714b6a7820b875a1dda0e3a2b8f",
+  "correction": {
+    "current_ledger_must_still_validate_semantically": true,
+    "downstream_review_artifacts_do_not_invalidate_original_freeze": true,
+    "immutable_upstream_contracts_must_still_validate": true,
+    "later_valid_append_only_ledger_advancement_does_not_invalidate_original_freeze": true,
+    "original_freeze_checksum_closure_remains_required": true,
+    "original_freeze_evidence_remains_historical": true,
+    "original_seven_freeze_files_remain_immutable": true,
+    "production_authority_granted": false,
+    "review_artifacts_remain_subject_to_frozen_review_protocol": true
+  },
+  "defect": {
+    "class": "archival_validator_lifecycle",
+    "description": "The original implementation-freeze validator correctly marked review-root absence, zero target overlap, event count, and ledger SHA as freeze-time conditions, but continued enforcing those conditions while HEAD remained exactly the implementation-freeze commit. The authorized next gate materialized priority_001 as an untracked review artifact without moving HEAD, causing the archival validator to reject a valid downstream state.",
+    "event_semantics_defect": false,
+    "implementation_runtime_defect": false,
+    "operator_validation_defect": false,
+    "scientific_logic_defect": false
+  },
+  "failed_review_attempt_recovery_evidence": {
+    "blank_review_rows_after_rollback": 500,
+    "completed_review_rows_after_rollback": 0,
+    "evidence_is_amendment_time_only": true,
+    "ledger_mutated": false,
+    "observed_event_count": 2011,
+    "observed_ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "packet_id": "priority_001",
+    "scientific_decision_survived_failure": false,
+    "source_packet_sha256": "665edd7eb4c00535ce1fb531460faa1e7c8193e6ef86814cad40fa0772435f05",
+    "working_packet_sha256_after_rollback": "665edd7eb4c00535ce1fb531460faa1e7c8193e6ef86814cad40fa0772435f05"
+  },
+  "next_gate": "RETRY_PRIORITY_001_ROWS_001_010_WITH_EXPLICIT_OPERATOR_PROVENANCE",
+  "operator_provenance_note": {
+    "failed_attempt_rejected_because_operator_id_was_not_supplied_to_validation": true,
+    "frozen_implementation_correctly_requires_operator_provenance": true,
+    "implementation_change_required": false,
+    "retry_must_supply_explicit_operator_id": true,
+    "retry_must_supply_operator_type": "human_with_assistance"
+  },
+  "original_freeze": {
+    "checksum_manifest_sha256": "d7da34cf2ab7c822bedc342e3fa952e0e68a90a049879cd0093ff1538532adc5",
+    "commit": "e628e47112a7c714b6a7820b875a1dda0e3a2b8f",
+    "hostile_test_sha256": "f117e4d654b72fcf50bcb7b9127d6deca30a3feb69279a9920c936c0ca86398e",
+    "implementation_design_sha256": "3257be42ef27e72ea95293dc120c038c8051c29af9a74d11ffeb2468a4c3d5c3",
+    "implementation_document_sha256": "7ef7c3120f57c95d454e728b67b595a2f608a19fc3ba9eab47295d561697813c",
+    "implementation_sha256": "0318df533ae757d35408f50c4a4729c9ecfeed064aea687f8b5638f154f13222",
+    "original_files_rewritten": false,
+    "parent_commit": "0097bbc5c343f4e824bb56221d4fbb4a4b90df94",
+    "unit_test_sha256": "e10c0db7d66ea5790fe8f36253007eaf4e8bc2ad4c1209385cb70c99ad24a796",
+    "validator_sha256": "e067bfb87be9a3db61a86099b48696e067d4476d23dd27a5ac2e9dc60189407d"
+  },
+  "schema_version": 1,
+  "scientific_effect": {
+    "human_scientific_review_performed": false,
+    "live_event_authorization_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "production_proposal_generated": false,
+    "review_packet_approved": false,
+    "scientific_decision_made": false
+  },
+  "status": "FROZEN_IMPLEMENTATION_AMENDMENT_001"
+}

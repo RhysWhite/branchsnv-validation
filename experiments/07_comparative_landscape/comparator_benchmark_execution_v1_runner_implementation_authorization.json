@@ -1,0 +1,59 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_001",
+  "authorized_implementation_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_runner.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_runner_validation.py",
+    "experiments/07_comparative_landscape/COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION.md"
+  ],
+  "explicitly_not_authorized": {
+    "adapter_mutation": true,
+    "benchmark_dataset_mutation": true,
+    "benchmark_truth_access_for_runner_implementation": true,
+    "benchmark_truth_use_for_debugging": true,
+    "canonical_benchmark_execution": true,
+    "comparator_parameter_change": true,
+    "comparator_version_change": true,
+    "environment_recipe_mutation": true,
+    "method_matrix_mutation": true,
+    "metric_mutation": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "scenario_matrix_mutation": true,
+    "source_pin_mutation": true,
+    "third_party_comparator_execution": true
+  },
+  "frozen_artifacts": {
+    "adapters_sha256": "bd79d8a856fe923dd9b19820ea35cc197c3377f72b621eff6f83b6ed70654ac1",
+    "dataset_generation_results_design_sha256": "3d364079e25065a55410e471f0f2378696c06ac3772afc8ff9dc86c1f1392ae5",
+    "dataset_generation_results_ledger_sha256": "9a40075006a32d7e46d97d5b90045b307bf53f829ede30e41edc8e4472327ca3",
+    "environment_recipes_sha256": "7aeede3e317bbe02d50b065cd0da91316c77da5d408c01c2eee428d72ac23bd9",
+    "method_matrix_sha256": "2f38fb573597ce70b612b9ac72e29c4bcf84f331a158d645df55457d4f55822b",
+    "metrics_sha256": "b6d3ca91702e79a8a1b2dc36591616fa1519f59bd342a005e9cf646c8e8475de",
+    "scenario_matrix_sha256": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+    "source_pins_sha256": "b1f5d81a33ac407e9cdf3d15dfa6bcd6e45c676808e3f5232bab9d9c1dcf1365",
+    "treetime_homoplasy_amendment_manifest_sha256": "a9631ee4398a50530e12967fad5c2b60d033365fef482d6a511d9843d35511aa"
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_COMPARATOR_BENCHMARK_RUNNER_V1",
+  "one_time_runner_implementation_authorization": true,
+  "parent_commit": "78833297e429c21b210b2258c5157e4c3c450a20",
+  "requirements": [
+    "Implement a reusable comparator benchmark runner for the eight frozen workflows ARPIP, FastML, HomoplasyFinder, PAML, PastML, POUTINE, SNPPar and TreeTime.",
+    "Do not execute any of the frozen 150 benchmark scenarios during runner implementation or validation.",
+    "Do not execute any third-party comparator during runner implementation or validation.",
+    "Do not read benchmark truth during runner implementation or validation.",
+    "Keep comparator execution truth-blind: the execution phase may read only comparator-facing scenario inputs and frozen execution metadata.",
+    "Do not permit a truth path or truth object to enter comparator command construction, comparator subprocess environments, output parsing or prediction normalization.",
+    "Use only the frozen environment/run contracts and frozen adapters; the runner must orchestrate them rather than reimplement their scientific logic.",
+    "Require executable, environment, source or build locations to be supplied at runtime; do not hard-code machine-specific /home/rwhite/branchsnv-comparator-* paths in reusable runner code.",
+    "Create isolated method-by-scenario working directories and preserve command, exit status, stdout, stderr and native comparator outputs.",
+    "Normalize predictions only through the frozen adapters after the corresponding comparator invocation has completed.",
+    "Record completion failures explicitly; do not convert execution or parsing failures into zero-accuracy predictions.",
+    "Separate execution/normalization from truth scoring. Benchmark truth may become readable only in a later scoring phase after normalized predictions and their identities have been finalized.",
+    "Use the frozen metric implementation without changing metric definitions.",
+    "Runner validation at this stage must use synthetic temporary fixtures that are not any of the frozen S001-S150 benchmark scenarios.",
+    "Fail closed on unknown methods, missing required inputs, unexpected output contracts, pre-existing output roots, or inconsistent frozen artifact identities."
+  ],
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V1"
+}

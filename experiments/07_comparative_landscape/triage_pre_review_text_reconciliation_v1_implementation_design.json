@@ -1,0 +1,67 @@
+{
+  "candidate_file_hashes": {
+    "experiments/07_comparative_landscape/test_triage_pre_review_text_reconciliation_hostile_v1.py": "b7be01254ee62bf13e35c8805af690b2301567522558efae16a6885cf0d40bd1",
+    "experiments/07_comparative_landscape/test_triage_pre_review_text_reconciliation_v1.py": "fb43dde98b8da8e9964ff672fca598141d70d366357f57755774175e97a95014",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1.py": "2383ef19b895056d3b66c78019d1cbd62e830bffa034dffb70424c921244ddad"
+  },
+  "canonical_output_root": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1",
+  "canonical_write_confirmation": "WRITE-FROZEN-RECONCILIATION-V1",
+  "dependency_hashes": {
+    "experiments/07_comparative_landscape/TRIAGE_PRE_REVIEW_TEXT_RECONCILIATION_V1.md": "a40a57e9b1b1a2aeb2da7e36e2ea8a34d2abce8d2a8060c21945f1983e8eb5c7",
+    "experiments/07_comparative_landscape/TRIAGE_PRE_REVIEW_TEXT_RECONCILIATION_V1_AMENDMENT_001.md": "18ae1d8a17be0428cda172bafeafb7ff02e6c295ff659ca42073e9dbc89fa0a1",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_amendment_001_design.json": "7c670aba3e85b62e16cf391bf41ba8501fbae7548308fec58b39906b95330360",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_design.json": "a4bad21a4cdafc0e8ad958726e1c694b0a6cab6e568febb71773eedda93eba89",
+    "results/07_comparative_landscape/metadata_resolution_retrieval/checksums.sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86"
+  },
+  "expected_canonical_output_sha256": {
+    "reconciled_normalized_text.tsv": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "reconciled_resolution.tsv": "cb2a5d32d6eabcde6ba7aa5db52bfcc813fc52e45a897cac7ec13a632ce016d5",
+    "reconciliation_outputs.sha256": "62aa1bed45d5bfc77b190247d94a1a9e4bb7be772d14fb55f2cbf03f3ab3f5cf",
+    "reconciliation_summary.json": "c43385e506a7d37c5290fdb3842c2991c0398efcf944f57be68ffadd51d5c802"
+  },
+  "freeze_id": "TRIAGE_PRE_REVIEW_TEXT_RECONCILIATION_V1_IMPLEMENTATION",
+  "freeze_parent_commit": "53644804724a064acdc4a7b04870497091ed0c8f",
+  "next_gate": "CONTROLLED_CANONICAL_RECONCILIATION_OUTPUT_GENERATION_WITH_EXACT_FROZEN_HASH_MATCH",
+  "original_reconciliation_design_commit": "1aa32f02387e4c5638b18b951bd5bc7a231c0b5f",
+  "reconciliation_amendment_001_commit": "53644804724a064acdc4a7b04870497091ed0c8f",
+  "safety_boundaries": {
+    "abstract_absence_as_exclusion_evidence_permitted": false,
+    "blind_validation_content_use_permitted": false,
+    "model_fit_permitted": false,
+    "network_execution_permitted": false,
+    "production_write_permitted": false,
+    "raw_archive_mutation_permitted": false,
+    "scientific_decision_permitted": false,
+    "scientific_label_addition_permitted": false,
+    "threshold_selection_permitted": false,
+    "wave_a_mutation_permitted": false,
+    "wave_b_mutation_permitted": false
+  },
+  "schema_version": 1,
+  "status": "FROZEN_IMPLEMENTATION_PRE_OUTPUT",
+  "validated_reconciliation_counts": {
+    "abstract_absent": 309,
+    "normalized_text_rows": 4190,
+    "total_records": 4499,
+    "usable_abstract_openalex": 259,
+    "usable_abstract_pubmed": 3931,
+    "wave_b_fallback_total": 25
+  },
+  "validated_terminal_source_counts": {
+    "offline_cache_openalex": 9,
+    "wave_a_openalex": 534,
+    "wave_a_pubmed": 3931,
+    "wave_b_openalex_after_pubmed_abstract_absent": 24,
+    "wave_b_openalex_after_pubmed_verified_not_found": 1
+  },
+  "validation_evidence": {
+    "applicable_lower_layer_regression_total": 62,
+    "both_temporary_builds_structurally_validated": true,
+    "full_4499_record_dry_run": "PASS",
+    "independent_temporary_build_count": 2,
+    "independent_temporary_builds_byte_identical": true,
+    "obsolete_pre_live_wave_b_test_excluded": "test_triage_pre_review_text_wave_b_execution_v1.WaveBExecutionTests.test_no_authorization_exists",
+    "reconciliation_fast_suite_total": 25,
+    "reconciliation_hostile_suite_total": 16
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/plan/generated/baseml.ctl"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/plan/native",
+  "elapsed_seconds": 0.06601019483059645,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "baseml {baseml_control_file}",
+  "method": "PAML",
+  "native_outputs": [
+    {
+      "path": "2base.t",
+      "sha256": "db6ffa721aa3d5490b9b961870582fd993c5449845328fc3a79c9387719ccc6c",
+      "size_bytes": 137
+    },
+    {
+      "path": "lnf",
+      "sha256": "5d005beaf54cfdd1ae3529709c4525d4455db24c175ae147d88297f0c9e4e564",
+      "size_bytes": 428
+    },
+    {
+      "path": "main.out",
+      "sha256": "e2d4e695a81e54992e2057241764e961892a35bcf710bfbb12eb471674777c0f",
+      "size_bytes": 2494
+    },
+    {
+      "path": "rst",
+      "sha256": "7161f4a20a79a248b12920f9a80ed10a35f1883ff57cd1917592798ef9657d73",
+      "size_bytes": 17318
+    },
+    {
+      "path": "rst1",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size_bytes": 1
+    },
+    {
+      "path": "rub",
+      "sha256": "4d91440052b01222a9c2b2b78764ade4d3078d6376d7a9da81e544901bde24e3",
+      "size_bytes": 12
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "7ce4a2a72df3afc9ef64abcb8b0f02bd428b9a72785d435d6d403cf796ec9515",
+  "required_output_patterns": [
+    "rst",
+    "main.out"
+  ],
+  "runtime": {
+    "executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml",
+      "sha256": "bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e",
+      "size_bytes": 509976
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_PAML",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

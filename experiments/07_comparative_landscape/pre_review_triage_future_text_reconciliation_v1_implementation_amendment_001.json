@@ -1,0 +1,57 @@
+{
+  "amended_implementation": {
+    "canonical_confirmation": "WRITE-FROZEN-RECONCILIATION-V1",
+    "canonical_destination_permitted_with_exact_confirmation": true,
+    "canonical_destination_rejected_without_exact_confirmation": true,
+    "existing_output_overwrite_permitted": false,
+    "implementation_sha256": "636705a79d75ec1ea1bf0a3fccff0c4fbcc30b560018dabe6600b04518f48b18",
+    "test_sha256": "5d09c5c983528cb5640e1713ed77b58ec3e06b93a5d43e1b6f877b4938dbd9a9"
+  },
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_RECONCILIATION_V1_IMPLEMENTATION_AMENDMENT_001",
+  "authority_boundary": {
+    "canonical_output_generation_authorized_by_this_amendment": false,
+    "canonical_write_requires_committed_amendment": true,
+    "canonical_write_requires_exact_confirmation": true,
+    "network_execution_authorized": false,
+    "raw_archive_mutation_authorized": false,
+    "scientific_decisions_authorized": false,
+    "scientific_labels_authorized": false,
+    "threshold_selection_authorized": false,
+    "wave_a_mutation_authorized": false,
+    "wave_b_mutation_authorized": false
+  },
+  "expected_canonical_output_sha256": {
+    "reconciled_normalized_text.tsv": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+    "reconciled_resolution.tsv": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7",
+    "reconciliation_outputs.sha256": "237fd7080a3ff0617a486673ab122234edfbd6bfe12dc1734e5e16ea9e153279",
+    "reconciliation_summary.json": "14b8099cecff8787a3a62efe5c796beebddf8635a66a38588f089435fdd14209"
+  },
+  "next_gate": "CONTROLLED_CANONICAL_RECONCILIATION_OUTPUT_GENERATION_WITH_EXACT_FROZEN_HASH_MATCH",
+  "original_implementation": {
+    "commit": "2d791a0c186144397706b0b0e556a8cef6c8ee7e",
+    "implementation_freeze_sha256": "f966e8b524f5636378b11bf04fa012c39e07b94e113cbe583197c4444c1a15e5",
+    "implementation_sha256": "534b48e3db1eeccdb0c39f37c92a5542e13686418f198c5e6bc05ebb02e7a139",
+    "status": "SUPERSEDED_FOR_CANONICAL_WRITE_GUARD_ONLY"
+  },
+  "reason": {
+    "canonical_outputs_existed_when_identified": false,
+    "frozen_destination_guard_ignored_confirmation_argument": true,
+    "frozen_implementation_exposed_confirmation_argument": true,
+    "historical_reference_requires_exact_confirmation": true,
+    "identified_before_canonical_output_generation": true,
+    "reconciliation_generation_logic_changed": false,
+    "scientific_semantics_changed": false
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_CANONICAL_RECONCILIATION_OUTPUT_GENERATION",
+  "unchanged_reconciliation_counts": {
+    "abstract_absent": 246,
+    "normalized_text_rows": 11905,
+    "openalex_position_gap": 1,
+    "provider_not_found": 10,
+    "resolution_rows": 12162,
+    "usable_abstract_openalex": 3406,
+    "usable_abstract_pubmed": 8499,
+    "wave_b_fallback_total": 40
+  }
+}

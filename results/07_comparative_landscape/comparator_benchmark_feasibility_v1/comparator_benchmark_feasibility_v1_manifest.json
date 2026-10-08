@@ -1,0 +1,120 @@
+{
+  "artifacts": {
+    "comparator_benchmark_feasibility_v1.tsv": {
+      "bytes": 41274,
+      "sha256": "528b810b296faf58d4801372dc2f6965e84aad8669a7ec478e86e94e93379c0e"
+    },
+    "comparator_benchmark_feasibility_v1_summary.md": {
+      "bytes": 2086,
+      "sha256": "0689deaac7d3e2ac8f19f5f044a46874bbb185e7ceafb11ab163984df7465e31"
+    }
+  },
+  "assessment_id": "COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1_EXECUTION_001",
+  "authorization": {
+    "authorization_commit": "2b4a7131c98283da65af79846d694cd147d0dda5",
+    "authorization_id": "COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1_EXECUTION_001",
+    "one_time_execution_consumed": true,
+    "rerun_authorized": false
+  },
+  "authorization_commit": "2b4a7131c98283da65af79846d694cd147d0dda5",
+  "automation_status_counts": {
+    "automatable": 10,
+    "automatable_with_wrapper": 13,
+    "manual_or_interactive_only": 4,
+    "unresolved": 2
+  },
+  "benchmark_candidate_count": 8,
+  "benchmark_candidates": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "PastML",
+    "POUTINE",
+    "SNPPar",
+    "TreeTime"
+  ],
+  "comparative_landscape_commit": "836fcc816c761ccc945365fb2783e25e66edcc2b",
+  "completion": {
+    "all_29_method_families_assessed": true,
+    "canonical_assessment_complete": true,
+    "pre_execution_only": true
+  },
+  "contextual_comparators": [
+    "BetaReconstruct",
+    "chARNement",
+    "ConDor",
+    "EREM",
+    "F1ALA",
+    "FireProtASR",
+    "FUSE-PhyloTree",
+    "GASP",
+    "GLADX",
+    "GRASP",
+    "PastView",
+    "PhyloBot",
+    "ProtASR",
+    "ProtParCon",
+    "Shine",
+    "SpacerPlacer",
+    "SubRecon",
+    "Topiary",
+    "Tree-decomposition ncRNA ASR",
+    "TreeProfiler",
+    "WGCCRR"
+  ],
+  "design_commit": "e31ae97a8b230b4f94cf9bac17768168b639b528",
+  "endpoint_specific_benchmark_candidates": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "PastML",
+    "POUTINE"
+  ],
+  "execution_boundary": {
+    "benchmark_dataset_executed": false,
+    "environment_built": false,
+    "production_bridge_performed": false,
+    "production_ledger_mutated": false,
+    "scientific_direct_near_classes_changed": false,
+    "software_executed": false,
+    "software_installed": false
+  },
+  "feasibility_class_counts": {
+    "contextual_comparator_only": 21,
+    "endpoint_specific_benchmark_candidate": 6,
+    "quantitative_benchmark_candidate": 2
+  },
+  "frozen_scientific_classes": {
+    "direct": 3,
+    "near_direct": 26
+  },
+  "interpretation": {
+    "benchmark_candidates_require_separate_execution_design_and_authorization": true,
+    "dependency_nonindependence_note": "SNPPar uses TreeTime by default for ASR; POUTINE also incorporates TreeTime. Benchmark reporting must not present these three as algorithmically independent.",
+    "direct_scientific_comparator_not_equal_to_executable_benchmark_candidate": true,
+    "snppar_and_treetime_are_native_nucleotide_quantitative_candidates": true,
+    "subrecon_direct_but_contextual_for_nucleotide_benchmark": true
+  },
+  "license_status_counts": {
+    "explicit_open_source": 14,
+    "not_applicable": 3,
+    "restricted_or_nonredistributable": 2,
+    "source_visible_terms_unclear": 8,
+    "unresolved": 2
+  },
+  "method_family_count": 29,
+  "next_gate": "FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_RESULTS_V1",
+  "quantitative_benchmark_candidates": [
+    "SNPPar",
+    "TreeTime"
+  ],
+  "software_availability_counts": {
+    "available": 18,
+    "paper_only_or_code_not_located": 2,
+    "source_available_but_legacy": 6,
+    "web_service_only": 3
+  },
+  "status": "ASSESSMENT_COMPLETE_PRE_EXECUTION"
+}

@@ -1,0 +1,65 @@
+Parsing file /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/generated/arpip.params for options.
+------------------------------------------------------------------------------
+ARPIP 
+ARPIP: Ancestral Sequence Reconstruction with insertions and deletions under the Poisson Indel Process
+Authors: Gholamhossein Jowkar
+Build on commit:  ee32c10b49407728b1ab00b5f98f792ca6dc2e1a
+On date: 07 Oct 2026, 13:45:29
+------------------------------------------------------------------------------
+Execution started on:..................: kscprod-bio8.esr.cri.nz
+Random seed set to.....................: 271828182
+Log files location.....................: current execution path
+Analysis name is.......................: BRANCHSNV_BENCH
+This model works with constant rate distribution for DNA/AA.
+The alphabet is........................: DNA
+
+[Preparing input sequences]
+Sites to use...........................: all
+Number of sequences....................: 4
+Number of sites........................: 200
+WARNING!!! The unknown character would be treated as gap in this program.
+Removing gap only sites if exists......: [>                                     ]   3%[>>                                    ]   6%[>>>                                   ]   9%[>>>>                                  ]  12%[>>>>>                                 ]  15%[>>>>>>                                ]  18%[>>>>>>>                               ]  21%[>>>>>>>>>                             ]  24%[>>>>>>>>>>                            ]  27%[>>>>>>>>>>>                           ]  30%[>>>>>>>>>>>>                          ]  33%[>>>>>>>>>>>>>                         ]  36%[>>>>>>>>>>>>>>                        ]  39%[>>>>>>>>>>>>>>>                       ]  42%[>>>>>>>>>>>>>>>>>                     ]  45%[>>>>>>>>>>>>>>>>>>                    ]  48%[>>>>>>>>>>>>>>>>>>>                   ]  51%[>>>>>>>>>>>>>>>>>>>>                  ]  54%[>>>>>>>>>>>>>>>>>>>>>                 ]  57%[>>>>>>>>>>>>>>>>>>>>>>                ]  60%[>>>>>>>>>>>>>>>>>>>>>>>               ]  63%[>>>>>>>>>>>>>>>>>>>>>>>>>             ]  66%[>>>>>>>>>>>>>>>>>>>>>>>>>>            ]  69%[>>>>>>>>>>>>>>>>>>>>>>>>>>>           ]  72%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>          ]  75%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         ]  78%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>        ]  81%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       ]  84%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>     ]  87%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    ]  90%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ]  93%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ]  96%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ]  99%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 100%
+New number of sites....................: 200
+
+[Preparing initial tree]
+Initial tree...........................: user
+Input tree file .......................: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/tree.nwk
+Input tree format .....................: Newick
+The tree root is node number...........: 6
+Number of nodes........................: 7
+Number of leaves.......................: 4
+Total tree length, aka tau.............: 0.6
+Output tree file.......................: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/tree.nwk
+Output node relation name file.........: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/node_rel.txt
+
+[Setting up substitution model]
+Base substitution model................: JC69
+Substitution model.....................: PIP13
+Indel parameter initial value..........: fixed
+PIP13.mu...............................: 0.01
+PIP13.intensity........................: 0.1
+Equilibrium frequency of substitution model:
+eq.freq(Adenine).......................: 0.25
+eq.freq(Cytosine)......................: 0.25
+eq.freq(Guanine).......................: 0.25
+eq.freq(Thymine).......................: 0.25
+eq.freq( Gap/- ).......................: 0
+Among site rate variation (ASVR).......: Constant
+
+[Setting up Tree Likelihood]
+Initializing iota and beta parameters..: Done.
+Initializing data structure............: Done.
+Initializing set A for all sites.......: Done.
+Initializing set G for all sites.......: Done.
+86Number of distinct sites...............: 6
+
+[Extracting Indel Points]
+Extracting the Indel Points............: Done.
+Display the progress...................: false.
+Output IndelPoint file.................: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/mlindelpoints.txt
+
+[Computing join ancestral sequences reconstruction]
+Ancestral sequence reconstruction......: Done.
+Output ancestral sequence file.........: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/anc.fasta
+Output MSA file........................: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/msa.fasta
+Total execution time: 0.000000d, 0.000000h, 0.000000m, 0.000000s.

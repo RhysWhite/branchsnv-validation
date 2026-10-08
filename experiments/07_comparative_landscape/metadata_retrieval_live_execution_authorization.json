@@ -1,0 +1,40 @@
+{
+  "amendment_34_implementation_commit": "311851468f57e579fd03b33d1cab1ccf3d93b331",
+  "amendment_number": 35,
+  "authorized_production_entrypoint": "metadata_resolution_transport_archive.py --execute-live",
+  "completion_terminal_statuses": [
+    "success",
+    "not_found"
+  ],
+  "credential_values_may_be_printed": false,
+  "first_network_request_policy": "must_be_frozen_archived_logical_lookup",
+  "fresh_first_run_requires_absent_archive": true,
+  "frozen_dependency_sha256": {
+    "amendment_34_implementation_manifest": "60f6a3553ab3b9f790e6bf2401d6ec0d1228be0cbe8ef4b232e25795db220ef6",
+    "amendment_34_source_contract_manifest": "8203c01825228f946588a175d1c6df6827b0153eb731e5996080d608e9d6171f",
+    "metadata_resolution_queue_manifest": "e6e674bb1d8cd132bb06c34a1a4d7751e7caa630bde83b3f47b09ad7d119bdfc"
+  },
+  "live_state_at_authorization_freeze": {
+    "LIVE_EXECUTION_ENABLED": false,
+    "production_archive_present": false,
+    "production_requests_made": false
+  },
+  "logical_lookup_count": 1731,
+  "manual_connectivity_probe_permitted": false,
+  "optional_credentials": [
+    "OPENALEX_API_KEY",
+    "OPENCITATIONS_ACCESS_TOKEN"
+  ],
+  "production_archive": "results/07_comparative_landscape/metadata_resolution_retrieval",
+  "repository_commit_before_authorization_freeze": "311851468f57e579fd03b33d1cab1ccf3d93b331",
+  "required_independent_gates": [
+    "LIVE_EXECUTION_ENABLED=True",
+    "--execute-live",
+    "BRANCHSNV_ALLOW_METADATA_NETWORK=YES",
+    "valid NCBI_EMAIL",
+    "frozen dependency checksums",
+    "exact frozen queue full-set validation"
+  ],
+  "scientific_screening_permitted_during_retrieval": false,
+  "status": "FROZEN_PRE_LIVE_ENABLEMENT"
+}

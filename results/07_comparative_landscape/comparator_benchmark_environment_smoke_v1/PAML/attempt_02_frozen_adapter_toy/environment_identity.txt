@@ -1,0 +1,8 @@
+source_pin=4c7902fe972737ef5e80bb18f159a6e6acace3d3
+source_actual=4c7902fe972737ef5e80bb18f159a6e6acace3d3
+build_actual=4c7902fe972737ef5e80bb18f159a6e6acace3d3
+binary=/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml
+binary_sha256=bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e
+
+gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-28)
+GNU Make 4.2.1

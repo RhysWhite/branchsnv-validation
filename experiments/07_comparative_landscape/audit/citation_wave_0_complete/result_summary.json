@@ -1,0 +1,28 @@
+{
+  "anchor_count": 8,
+  "audit_status": "COMPLETE",
+  "citation_edge_count": 33071,
+  "failed_runs_part_of_production": false,
+  "implementation_git_head": "6c719d4be574901f243a53294c755c27dbfcf581",
+  "manifest_git_head": "6c719d4be574901f243a53294c755c27dbfcf581",
+  "neighbour_record_count": 33071,
+  "opencitations_max_snapshot_attempts": 5,
+  "production_directory": "results/07_comparative_landscape/citation_wave_0",
+  "raw_responses_tracked_in_git": false,
+  "retrieval_manifest_schema_version": 3,
+  "retrieval_manifest_status": "COMPLETE",
+  "scientific_decision_ledger": "experiments/07_comparative_landscape/SCIENTIFIC_DECISION_LEDGER.md",
+  "scientific_decision_ledger_sha256": "45917c708eb15f4be0da21444c908b5582d353f77bad97f2864a2c05bac7cd44",
+  "source_direction_operation_count": 32,
+  "source_status_counts": {
+    "complete": 31,
+    "complete_provider_reconciled": 1
+  },
+  "w0a07_forward_accepted_attempt": 3,
+  "w0a07_forward_stable_snapshot_attempts": [
+    1,
+    2,
+    3
+  ],
+  "wave": 0
+}

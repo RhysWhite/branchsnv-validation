@@ -1,0 +1,46 @@
+{
+  "frozen_counts": {
+    "component_count": 1342,
+    "evidence_row_count": 1847,
+    "identifier_status_counts": {
+      "identifier_conflict_hold": 117,
+      "not_applicable": 723,
+      "provider_identity_anchored": 311,
+      "provider_identity_confirmed_unanchored": 183,
+      "provider_identity_not_found": 8
+    },
+    "logical_lookup_count": 1731,
+    "title_status_counts": {
+      "not_applicable": 275,
+      "title_conflict_hold": 2,
+      "title_equivalent_variants": 8,
+      "title_resolved_exact": 575,
+      "title_unresolved": 482
+    }
+  },
+  "hostile_tests": {
+    "path": "experiments/07_comparative_landscape/test_post_retrieval_reconciliation.py",
+    "sha256": "eb5bd820ce4ef24ef26e8f09f5bf7aa17a25d571cfad562b6bbbf54a2be09fb7"
+  },
+  "implementation": {
+    "path": "experiments/07_comparative_landscape/post_retrieval_reconciliation.py",
+    "sha256": "20dd03cf4eed2aed7d246f47a7999372b4c4adc5c4f82831e115c092b6dad29f"
+  },
+  "next_gate": "RUN_CONTROLLED_POST_RETRIEVAL_RECONCILIATION_PRODUCTION",
+  "parent_reconciliation_design_commit": "d516127a947f600e140dbb7382f161a6fdd1acf1",
+  "production_boundary": {
+    "component_merge_performed": false,
+    "network_access_performed": false,
+    "production_output_created": false,
+    "raw_retrieval_archive_modified": false,
+    "scientific_screening_performed": false
+  },
+  "required_production_outputs": [
+    "component_reconciliation.tsv",
+    "reconciliation_evidence.tsv",
+    "manifest.json",
+    "checksums.sha256"
+  ],
+  "schema_version": 1,
+  "status": "FROZEN_PRE_PRODUCTION"
+}

@@ -1,0 +1,54 @@
+{
+  "authorization_commit": "423d0b1b98a207c4287aadf56ab28c18e5003f96",
+  "authorization_consumed": true,
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_ENVIRONMENT_SMOKE_001",
+  "completion": {
+    "all_eight_environment_smokes_closed": true,
+    "failed_and_remediated_attempts_preserved": true,
+    "final_toy_implementation_validation_passed": true,
+    "result_tree_checksum_entry_count": 319
+  },
+  "execution_boundary": {
+    "benchmark_executed": false,
+    "dataset_generated": false,
+    "production_bridge_performed": false,
+    "truth_used_for_parameter_tuning": false
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_ENVIRONMENT_AND_SMOKE_RESULTS_V1",
+  "freeze_parent_commit": "5f92bceda58f5828d238007c1859b5c2636536fa",
+  "implementation": {
+    "authorized_amendment_count": 15,
+    "base_freeze_commit": "f48bd14048866820c7a252d935ed2d26cb9407e5",
+    "final_amended_commit": "5f92bceda58f5828d238007c1859b5c2636536fa",
+    "final_environment_recipes_sha256": "9a236919ac350dca7e2da48a1dd6aa4f1f15edfeaa7693a5207e33c5fe5b7b8a"
+  },
+  "method_count": 8,
+  "methods": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "PastML",
+    "POUTINE",
+    "SNPPar",
+    "TreeTime"
+  ],
+  "next_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_DATASET_GENERATION_V1",
+  "next_gate_note": "Authorize generation of the frozen 150-scenario benchmark dataset as a separate one-use step. Benchmark execution remains unauthorized until the generated dataset is independently frozen.",
+  "rerun_authorized": false,
+  "result_artifacts": {
+    "checksums.sha256": {
+      "bytes": 61228,
+      "sha256": "260a4da3417f261ec7478ee1b931ecc2219c60676430a268fa08e8029b94bcbc"
+    },
+    "comparator_benchmark_environment_smoke_v1_manifest.json": {
+      "bytes": 2274,
+      "sha256": "4acecf961ab98391b97e9ac73739c2e674984d5ff3831f43c7775e7c46da1c56"
+    },
+    "implementation_amendment_chain.tsv": {
+      "bytes": 1895,
+      "sha256": "d261a157950ecf05e3a9740f1f6650bca58fa6be673d9f06035a68fc40c51ed2"
+    }
+  },
+  "status": "FROZEN_PRE_DATASET_GENERATION"
+}

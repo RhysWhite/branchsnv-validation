@@ -1,0 +1,137 @@
+{
+  "artifact_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_A_RETRIEVAL_FREEZE_V1",
+  "artifact_trees": {
+    "checkpoints": {
+      "byte_count": 13427370,
+      "file_count": 24294,
+      "tree_sha256": "c17723ef55f76a7bb2c1548844737a56e96c51129256199b900fb0ae5353aa98"
+    },
+    "live_wave_a": {
+      "byte_count": 424408828,
+      "file_count": 109331,
+      "tree_sha256": "bb69cff648d90b2b57afbd2b8d6defb7b3f8e22c4427665bfc038add5ce22d9d"
+    },
+    "raw": {
+      "byte_count": 399259402,
+      "file_count": 60736,
+      "tree_sha256": "0ea8c4b7d1c4070735234cd0f1b97a3836d9b4e5a2b3f3343701cd5e9910168c"
+    },
+    "transport_evidence": {
+      "byte_count": 11718296,
+      "file_count": 24294,
+      "tree_sha256": "6324aa1c13e188ae24eba1075b31bc8a2bcd5ac1cc9ebf779665dcdc8750b207"
+    }
+  },
+  "authority": {
+    "amended_request_manifest_sha256": "9c5a1b7cda465f0f4a88fc06c612c979af3093f0cecabbe4d8b42576cac30e73",
+    "amendment_design_sha256": "576c45e6294031980e56f63bd1f9c272701f11c89ec1afa7dd8aad999ddaf968",
+    "maximum_request_count": 12147
+  },
+  "checksum_manifest": {
+    "checksum_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1",
+    "expected_entries": 109395,
+    "path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/checksums.sha256",
+    "path_convention": "checksum_root_relative",
+    "self_excluded": true
+  },
+  "execution": {
+    "authorization_claim_sha256": "ec913d7eef8fe6cce81e1f73d6016c3150f840417ce2d59001dfa7fd3851966c",
+    "authorization_id": "FUTURE-WAVE-A-HUMAN-AUTH-20260930-01",
+    "authorization_sha256": "2e3d81fe8f76d510dba4769e73124b43879eeade7acf3e8a11a46d3804889117",
+    "checkpoint_chain_sha256": "ba5694adff587455e3273c46f29fc10429f3b2fde946562cf528352a854cf8d7",
+    "completed_request_count": 12147,
+    "completion_receipt_sha256": "d7055ac868a662625f4aef5d3a9eb60ad1f1d9b1a58f476c568a9f321466d131",
+    "execution_id": "FUTURE-WAVE-A-EXEC-20260930-01",
+    "execution_state_sha256": "feaeec484d5b7ea90a013f47409b5ea8b524123a6d85b3fd4af4e1c0aa143736",
+    "execution_status": "COMPLETED",
+    "next_request_sequence": 12148
+  },
+  "live_outcomes": {
+    "canonical_adapter_status_counts": {
+      "response_integrity_failure": 1,
+      "verified_not_found": 12,
+      "verified_success": 12134
+    },
+    "canonical_checkpoint_ineligible_sequences": [
+      10083
+    ],
+    "canonical_missing_terminal_sequences": [
+      10083
+    ],
+    "checkpoint_terminal_status_counts": {
+      "success": 1,
+      "verified_not_found": 12,
+      "verified_success": 12134
+    },
+    "ordinary_raw_archives": 12146,
+    "raw_lookup_directories": 12147
+  },
+  "manifest_defect_exception": {
+    "network_reissued": false,
+    "request_sequence": 10083,
+    "selected_provider_record_id": "37878119",
+    "target_doi": "10.1007/s00285-023-02006-3",
+    "tree": {
+      "byte_count": 52287,
+      "file_count": 18,
+      "tree_sha256": "0e635cf9d05df981398f9acac926df9b7ef06a99223c11a64199e29ca2a5f1c4"
+    }
+  },
+  "next_gate": "DESIGN_AND_VALIDATE_FUTURE_TEXT_POST_RETRIEVAL_RECONCILIATION_BEFORE_EXECUTION",
+  "partition": {
+    "live_wave_a_rows": 12147,
+    "provider_route_counts": {
+      "openalex_exact_doi": 34,
+      "openalex_exact_work_id": 3574,
+      "pubmed_exact_pmid_efetch": 8539
+    },
+    "supported_future_input_rows": 12162,
+    "terminal_offline_rows": 15
+  },
+  "prefreeze_result_tree": {
+    "byte_count": 437067015,
+    "file_count": 109394,
+    "tree_sha256": "4106d4ab3687467e0d7d86b21d7b33f2962738c71afd68bf142bea4802ee7a82"
+  },
+  "replay_exceptions": {
+    "count": 5,
+    "requests": {
+      "request_0049": {
+        "byte_count": 4611,
+        "file_count": 5,
+        "tree_sha256": "668f3e42021b9b89dfe7d344e26c58f5356ca04182c4c5a46bdd24782868d6da"
+      },
+      "request_1574": {
+        "byte_count": 7352,
+        "file_count": 8,
+        "tree_sha256": "1290a1c173c69c90b8a3234636562ebba22619fd0dea2c084642ef686b581a4a"
+      },
+      "request_1676": {
+        "byte_count": 7352,
+        "file_count": 8,
+        "tree_sha256": "7ebcbc6578197c7e5d246c8359464a6f3378a4e61834f6f4a825d7af7b59544d"
+      },
+      "request_6102": {
+        "byte_count": 7352,
+        "file_count": 8,
+        "tree_sha256": "2220bbd4274d71cb17de786ec093097370697242142c8806701e73717c07019a"
+      },
+      "request_9797": {
+        "byte_count": 7352,
+        "file_count": 8,
+        "tree_sha256": "4435435bad7af08931b90a38afa1fce7e3fdd69c7aa229f194603bc96a0755ca"
+      }
+    }
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "blind_validation_scientific_content_inspected": false,
+    "future_scoring_performed": false,
+    "model_fitting_performed": false,
+    "reconciliation_performed": false,
+    "scientific_screening_decisions_created": false,
+    "threshold_selection_performed": false
+  },
+  "source_commit": "c5a33d8676e4a95cdc03a8443d6ff73a507d7525",
+  "status": "FROZEN_COMPLETED_RETRIEVAL"
+}

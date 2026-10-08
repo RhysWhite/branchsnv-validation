@@ -1,0 +1,38 @@
+{
+  "amendment_number": 34,
+  "authorized_changes": {
+    "ncbi_api_key_used": false,
+    "openalex_authentication": "api_key_query_parameter",
+    "openalex_bearer_authentication": false,
+    "openalex_redirect_preserves_api_key": true,
+    "opencitations_behavior_changed": false,
+    "pubmed_email_environment_variable": "NCBI_EMAIL",
+    "pubmed_email_persisted": false,
+    "pubmed_email_required_before_live_execution": true,
+    "pubmed_tool_parameter": "branchsnv_validation_experiment_07"
+  },
+  "frozen_dependencies_sha256": {
+    "logical_queue": "7d4873f463315e98a3d5fd14358c015eeca65ad7f08fe74af906a90bbb928e1f",
+    "transport_implementation_manifest": "4da0a2ad4d315f1cd05338f83d2502b6b653f5561910992243a9750bc4487dea",
+    "transport_specification": "7dd711188dbdee4648c4cb5b48881366bd771c3e8e1e0cd9cab0a528781c8f93"
+  },
+  "frozen_transport_implementation_commit": "f6c0edb96d95b5e83fa74bf47db00386e5b1c136",
+  "live_state": {
+    "live_execution_enabled": false,
+    "live_metadata_requests_made": false,
+    "production_retrieval_directory_present": false
+  },
+  "repository_commit_before_amendment_freeze": "f6c0edb96d95b5e83fa74bf47db00386e5b1c136",
+  "source_contract_checked_date": "2026-09-24",
+  "status": "FROZEN_PRE_IMPLEMENTATION_SOURCE_CONTRACT_CORRECTION",
+  "unchanged_contract": {
+    "batching_enabled": false,
+    "component_merge_permitted": false,
+    "logical_lookup_count": 1731,
+    "logical_lookups_per_primary_operation": 1,
+    "max_redirect_hops": 5,
+    "max_transport_attempts": 5,
+    "maximum_request_initiation_rate_per_provider_per_second": 2,
+    "scientific_screening_permitted": false
+  }
+}

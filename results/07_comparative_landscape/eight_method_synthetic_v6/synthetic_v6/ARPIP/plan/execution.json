@@ -1,0 +1,89 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP",
+    "params=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/generated/arpip.params"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native",
+  "elapsed_seconds": 0.07973130885511637,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "./ARPIP params={arpip_config}",
+  "method": "ARPIP",
+  "native_outputs": [
+    {
+      "path": "anc.fasta",
+      "sha256": "b7e32c8b84d02a60e4529364d1892c715cbd75073536b20db500c9a0eb49058e",
+      "size_bytes": 623
+    },
+    {
+      "path": "mlindelpoints.txt",
+      "sha256": "bd878d0e3bcb623290c1ef5d6f100286690923abcfeea09ee988dc0b87092fa7",
+      "size_bytes": 1601
+    },
+    {
+      "path": "msa.fasta",
+      "sha256": "89d7e3c7e8ff26b8202adfb747984b798b98af88fd99b5322c9056ec3a98b076",
+      "size_bytes": 836
+    },
+    {
+      "path": "node_rel.txt",
+      "sha256": "046164afbd7bff3fad3d44b213cfe3a36a91a065a410c02c2922cd3c33a9d01b",
+      "size_bytes": 105
+    },
+    {
+      "path": "tree.nwk",
+      "sha256": "d74029985ec5b000af683f11debcc5a43307db7773347a82dd6c9ac8baac3d3a",
+      "size_bytes": 88
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "6b236bd9519ad70d81c4403826fa0606002c11fcf08d55c309ba2dbb3f95c5ce",
+  "required_output_patterns": [
+    "anc.fasta",
+    "tree.nwk",
+    "node_rel.txt"
+  ],
+  "runtime": {
+    "executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP",
+      "sha256": "7e1ecc859ac862be9de5e31d71991d483f73840143fdae7ba367ae7d9fc62502",
+      "size_bytes": 831440
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_ARPIP",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

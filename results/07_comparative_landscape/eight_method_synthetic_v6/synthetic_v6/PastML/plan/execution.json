@@ -1,0 +1,113 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml",
+    "--tree",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/public_input/tree.nwk",
+    "--data",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/plan/generated/states.tsv",
+    "--columns",
+    "site_40",
+    "site_200",
+    "--data_sep",
+    "\t",
+    "--out_data",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/plan/native/reconstructed_states.tsv",
+    "--work_dir",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/plan/native"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PastML/plan/native",
+  "elapsed_seconds": 2.591354572214186,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "pastml --tree {tree_newick} --data {pastml_table} --columns {site_columns} --data_sep '\\t' --out_data {out_dir}/reconstructed_states.tsv --work_dir {out_dir}",
+  "method": "PastML",
+  "native_outputs": [
+    {
+      "path": "marginal_probabilities.character_site_200.model_F81.tab",
+      "sha256": "639b1dd860f656fcccfd16796215514b06e5764d3685ec469e0294851d0379b1",
+      "size_bytes": 97
+    },
+    {
+      "path": "marginal_probabilities.character_site_40.model_F81.tab",
+      "sha256": "520e72a88296cba2923de32f8f95d3d743a4bfa3ff5d5b0cb41ae1e037389a20",
+      "size_bytes": 159
+    },
+    {
+      "path": "named.tree_tree.nexus",
+      "sha256": "affbcbe2cc35daee18ae2c8302b5ee33e7c684f7a2a6607a7bcbbbd4a751f6f1",
+      "size_bytes": 428
+    },
+    {
+      "path": "named.tree_tree.nwk",
+      "sha256": "cfa13b324263fb77b9fbdc6c76d6baa370bac9c7490feb37e81588200845435f",
+      "size_bytes": 326
+    },
+    {
+      "path": "params.character_site_200.method_MPPA.model_F81.tab",
+      "sha256": "0dab64ffdba8bf71c3e312b2e6378a641940c67aae3b7bb4e58233f43206fc7f",
+      "size_bytes": 532
+    },
+    {
+      "path": "params.character_site_40.method_MPPA.model_F81.tab",
+      "sha256": "9706a92e294609fe59f08e7925c25179f10f40750cb1c41acf8206591f1d4c1a",
+      "size_bytes": 534
+    },
+    {
+      "path": "reconstructed_states.tsv",
+      "sha256": "8e07a505a310286f5256216e7d499f585bacd71db3815989f8caea4a44aa999f",
+      "size_bytes": 104
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "99b7121f206cfce85757bf19f2ed72222800743e74b5b268dd0189a3937c0ea1",
+  "required_output_patterns": [
+    "reconstructed_states.tsv",
+    "named.tree_tree.nwk"
+  ],
+  "runtime": {
+    "environment_dir": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51"
+    },
+    "executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml",
+      "sha256": "57334fb47075a1b916f901af2ca6df3a8a98aacd8a80a335307dc4a86c1ad3e1",
+      "size_bytes": 204
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_PastML",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

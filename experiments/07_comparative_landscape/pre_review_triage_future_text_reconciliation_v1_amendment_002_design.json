@@ -1,0 +1,77 @@
+{
+  "amendment_name": "pre_review_triage_future_text_reconciliation_v1_amendment_002",
+  "amends_commit": "3e7f1707630054652a68bae1208a5be4202b8c56",
+  "dependency_hashes": {
+    "amendment_001_design_sha256": "538cf8fbe78129ddba34495dd489749f9a5bec2e4332cdabc243eec4a4a03309",
+    "original_reconciliation_design_sha256": "95dd5938b9cbd4659a7f4d8fe98b4c63e8ced9c8c88efaa9e6b2656506b3395c",
+    "wave_a_amended_manifest_sha256": "9c5a1b7cda465f0f4a88fc06c612c979af3093f0cecabbe4d8b42576cac30e73"
+  },
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_FUTURE_TEXT_RECONCILIATION_V1_AGAINST_DESIGN_PLUS_AMENDMENTS_001_002_WITH_TWO_INDEPENDENT_TEMPORARY_BUILDS",
+  "openalex_position_gap_exception": {
+    "abstract_status": "openalex_position_gap",
+    "count": 1,
+    "duplicate_position_count": 0,
+    "frozen_route": "exact_work_id",
+    "identifier": "W2119850564",
+    "identifier_namespace": "openalex",
+    "missing_position_count": 6,
+    "missing_positions": [
+      86,
+      110,
+      215,
+      217,
+      250,
+      251
+    ],
+    "parser_status": "ok",
+    "position_max": 261,
+    "position_min": 0,
+    "position_occurrence_count": 256,
+    "provider": "openalex",
+    "provider_record_id": "https://openalex.org/W2119850564",
+    "request_identity_sha256": "0ce8b2384745cddbd10549afeb55642d781f067fd7d5c612b75006a1dd0bf1e2",
+    "request_sequence": 9180,
+    "retrieval_record_index": 9191,
+    "screening_entity_id": "publication_component:citation:publication:doi:10.5897/ajb11.773",
+    "terminal_body_sha256": "30228dfcd8815a4e8dfbbefc810d9033a579b2733cb7091c6314e514178943a1",
+    "terminal_json_sha256": "bbd96db32cb050c863fcb71974a75939a93a6098b54e1fda7c2ba772a8a804f0",
+    "terminal_path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_a/raw/triage_text_wave_a_9180_0ce8b2384745cddb/terminal.json",
+    "transport_route": "work_by_openalex_id",
+    "unique_position_count": 256
+  },
+  "resolution_semantics": {
+    "abstract_status": "openalex_position_gap",
+    "fallback_reason": "",
+    "included_in_reconciled_normalized_text": false,
+    "included_in_reconciled_resolution": true,
+    "normalized_text_present": false,
+    "parser_status": "ok",
+    "provider_identity_status": "matched",
+    "provider_lookup_type": "exact_work_id",
+    "provider_record_id": "https://openalex.org/W2119850564",
+    "provider_used": "openalex",
+    "resolution_lane": "wave_a_primary",
+    "scientific_exclusion_evidence": false,
+    "source_body_sha256": "30228dfcd8815a4e8dfbbefc810d9033a579b2733cb7091c6314e514178943a1",
+    "wave_b_request_identity_sha256": "",
+    "wave_b_request_sequence": ""
+  },
+  "safety_semantics": {
+    "abstract_reconstruction_permitted": false,
+    "exception_is_exact_record_only": true,
+    "missing_token_inference_permitted": false,
+    "network_reretrieval_permitted": false,
+    "position_repair_permitted": false,
+    "scientific_exclusion_permitted": false,
+    "wave_b_fallback_permitted": false
+  },
+  "schema_version": 1,
+  "scope": "Authorize deterministic provenance-only resolution of the single frozen successful OpenAlex record whose abstract inverted index contains verified position gaps.",
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "validation_amendments": {
+    "final_population_equation": "usable_abstract_total + abstract_absent_total + provider_not_found_total + openalex_position_gap_total = 12162",
+    "openalex_position_gap_count": 1,
+    "parser_failure_count": 0,
+    "provider_not_found_count": 10
+  }
+}

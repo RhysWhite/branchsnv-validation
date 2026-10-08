@@ -1,0 +1,94 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml/fastml",
+    "-s",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/public_input/alignment.fasta",
+    "-mn",
+    "-qf",
+    "-t",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/public_input/tree.nwk",
+    "-b"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/FastML/plan/native",
+  "elapsed_seconds": 0.06638146657496691,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "cd {out_dir} && {fastml_binary} -s {alignment_fasta} -mn -qf -t {tree_newick} -b",
+  "method": "FastML",
+  "native_outputs": [
+    {
+      "path": "log.txt",
+      "sha256": "804901e885e72a5300782cbca07aa51467c5ec897848bb95ffb2fedd9e58c738",
+      "size_bytes": 675
+    },
+    {
+      "path": "prob.joint.txt",
+      "sha256": "bb4b0fe2e8d422782cfeee6951e6813ddfb9cb2b1d862c35856bfca6de052d80",
+      "size_bytes": 14485
+    },
+    {
+      "path": "seq.joint.txt",
+      "sha256": "b0c7c6f4e733e845b985a81105fce8abef3243201e002a52d5ec192d90901bf5",
+      "size_bytes": 1443
+    },
+    {
+      "path": "tree.ancestor.txt",
+      "sha256": "9899de959a47db7ea252cacea3a944042bb281ca2540792a63da41cf7322c2da",
+      "size_bytes": 175
+    },
+    {
+      "path": "tree.newick.txt",
+      "sha256": "75597db7bf5e5a24f0d49c8085901121d011709ee9c06a5cd196c8a7aa55b52d",
+      "size_bytes": 87
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "0a1d15fc4569abc44a1b32475371222d25fb474e2e710e34fa2648ecd9a6883b",
+  "required_output_patterns": [
+    "seq.joint.txt",
+    "tree.newick.txt"
+  ],
+  "runtime": {
+    "executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml/fastml",
+      "sha256": "f5b7acaaabb77b9c39c6dcde5b602b019c60d1a1d569acd3e9450f72f6b9bee6",
+      "size_bytes": 1590760
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_FastML",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

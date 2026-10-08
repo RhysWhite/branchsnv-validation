@@ -1,0 +1,100 @@
+{
+  "event_ledger_state": {
+    "append_only_after_future_authorization": true,
+    "bytes": 338,
+    "event_entry_authorized": false,
+    "included_directly_in_completion_checksum_manifest": false,
+    "row_count": 0,
+    "sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f"
+  },
+  "execution_population": {
+    "active_screening_entities": 94622,
+    "batch_count": 190,
+    "blocked_metadata_entities": 484,
+    "in_baseline_carry_forwards": 7,
+    "last_batch_entity_count": 122,
+    "out_of_baseline_prior_anchors": 1
+  },
+  "genesis_package": {
+    "active_ordered_entity_ids_sha256": "d0970cbd5a582ce05585926bc1e81acba502b01a96acc4b84ab8db454a0ea4c1",
+    "artifact_count": 8,
+    "artifacts": {
+      "batch_manifest.tsv": {
+        "bytes": 44568,
+        "sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0"
+      },
+      "batch_membership.tsv": {
+        "bytes": 15395408,
+        "sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91"
+      },
+      "event_ledger.tsv": {
+        "bytes_at_genesis": 338,
+        "genesis_sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+        "mutability": "append_only_after_future_authorization"
+      },
+      "event_ledger_genesis.json": {
+        "bytes": 995,
+        "sha256": "89486b47eb83f896259b84a5dd90b8ae3a41083637bd331261167e1165e113be"
+      },
+      "immutable_checksums.sha256": {
+        "bytes": 541,
+        "sha256": "3ea3cc193f47da8a32e817579c31f4ca294de615e1e0e29e4eb37963e374f13c"
+      },
+      "manifest.json": {
+        "bytes": 2908,
+        "sha256": "66cfa32ffd93dbfbaf98f6a48a1587797bb6a1497b4b4fbc4115e6956983302a"
+      },
+      "out_of_baseline_prior_anchor.tsv": {
+        "bytes": 441,
+        "sha256": "fb6fb842b7be6d63796accc8b8bd01e3a50fcbc21fc6c6326f23e5554975befe"
+      },
+      "prior_anchor_carry_forwards.tsv": {
+        "bytes": 2723,
+        "sha256": "5db8663c9dbf0915ea56430caba40bc87d5781ac1704a90f2eb563ca39c259b7"
+      }
+    },
+    "package_identity_sha256": "5e4de148fe431402276d2f06f0305071fefc1be9a9be1fc1498b6bfe114ea39d",
+    "total_bytes": 15447922
+  },
+  "immutable_dependencies": {
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "production_artifact_design_freeze_sha256": "73ee17afe132bb831f6882becfd77e9a6e08f341e8c4a0e43e799b7c75f3c5ec",
+    "scientific_screening_production_checksums_sha256": "8b73918e39e2e718553856ccfbc146f77fa4d8c27bb997b68cd3f945504bd591",
+    "writer_implementation_freeze_sha256": "8954a854548548006bdbe691a6956dc714ef252e06c73735780fd539fb2ec36f"
+  },
+  "immutable_production_artifacts": [
+    "batch_manifest.tsv",
+    "batch_membership.tsv",
+    "prior_anchor_carry_forwards.tsv",
+    "out_of_baseline_prior_anchor.tsv",
+    "event_ledger_genesis.json",
+    "manifest.json",
+    "immutable_checksums.sha256"
+  ],
+  "next_gate": "DESIGN_CONTROLLED_BASELINE_SCIENTIFIC_SCREENING_EVENT_ENTRY",
+  "parent_writer_implementation_commit": "3a172fadacf8ed2a1e328cb66f0878a08fca7d45",
+  "production_root": "results/07_comparative_landscape/baseline_scientific_screening_execution",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "event_ledger_rows": 0,
+    "method_assessments": 0,
+    "new_record_level_scientific_decisions": 0,
+    "role_assignments": 0,
+    "wave1_promotions": 0
+  },
+  "scientific_screening_started": false,
+  "status": "FROZEN_PRE_EVENT_ENTRY_AUTHORIZATION",
+  "validation": {
+    "event_ledger_genesis_validation_passed": true,
+    "exact_artifact_set_passed": true,
+    "exact_hash_and_size_validation_passed": true,
+    "frozen_writer_revalidation_passed": true,
+    "git_object_count_unchanged_by_production": true,
+    "immutable_checksum_validation_passed": true,
+    "independent_byte_identical_rebuild_passed": true,
+    "independent_structural_audit_passed": true,
+    "tracked_repository_unchanged_by_production": true,
+    "upstream_evidence_unchanged": true
+  }
+}

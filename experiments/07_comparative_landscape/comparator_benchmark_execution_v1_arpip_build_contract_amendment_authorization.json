@@ -1,0 +1,37 @@
+{
+    "authorization_id": "ARPIP_BUILD_CONTRACT_AMENDMENT_001",
+    "authorized_change": {
+        "from": "cmake --target ARPIP -- -DCMAKE_BUILD_TYPE=Release CMakeLists.txt; make",
+        "reason": "the documented CMake invocation writes configuration artifacts into the pinned source checkout and does not explicitly bind the isolated dependency prefix; the corrected out-of-source invocation configured successfully with all pinned dependencies resolved from the isolated prefix",
+        "scientific_settings_changed": false,
+        "source_modification": false,
+        "source_pin_change": false,
+        "to": "cmake -S {arpip_source} -B {arpip_build_dir} -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH={dependency_prefix}; cmake --build {arpip_build_dir} --target ARPIP -j 4"
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json"
+    ],
+    "baseline_environment_recipe_sha256": "4140359018f9fcde31c570f65a542ba8a8380fd2a0bcf7103a05d461edf688e1",
+    "arpip_source_pin": "ee32c10b49407728b1ab00b5f98f792ca6dc2e1a",
+    "smoke_evidence": {
+        "documented_syntax_probe": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_01_documented_cmake_syntax",
+        "out_of_source_probe": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_02_out_of_source_cmake",
+        "full_dependency_resolution": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_05_full_dependency_resolution"
+    },
+    "next_gate": "IMPLEMENT_ARPIP_BUILD_CONTRACT_AMENDMENT_001",
+    "not_authorized": [
+        "ARPIP source modification",
+        "ARPIP source pin change",
+        "dependency version change",
+        "run contract change",
+        "output contract change",
+        "adapter or parser change",
+        "benchmark parameter change",
+        "truth change",
+        "metric change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "89b530ec4646975ce7aec296172e8d7a2fd82eff",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}

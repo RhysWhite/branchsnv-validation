@@ -1,0 +1,447 @@
+{
+  "authority_separation": {
+    "design_itself_creates_no_authority": true,
+    "live_authorization_must_be_separately_tracked": true,
+    "live_authorization_must_pin_exact_event_ids": true,
+    "live_authorization_must_pin_exact_target_identity": true,
+    "live_authorization_must_pin_expected_pre_event_count": true,
+    "live_authorization_must_pin_expected_pre_ledger_sha256": true,
+    "live_authorization_must_pin_fixed_transaction_timestamp": true,
+    "live_authorization_must_pin_projected_post_ledger_sha256": true,
+    "live_authorization_must_pin_proposal_sha256": true,
+    "live_authorization_one_use": true,
+    "no_intervening_tracked_commit_between_live_authorization_and_execution": true,
+    "review_stage_must_precede_live_authorization": true,
+    "review_work_and_live_production_authority_separate": true,
+    "scientific_proposal_must_be_frozen_before_live_authorization": true
+  },
+  "checkpoint_contract": {
+    "append_success_checkpoint_failure_requires_recovery": true,
+    "exact_three_file_checkpoint": true,
+    "final_files": [
+      "authorization.json",
+      "proposal.tsv",
+      "receipt.json"
+    ],
+    "final_transaction_directory": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000006",
+    "retry_after_partial_completion": false,
+    "rollback_after_successful_append": false,
+    "root": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts",
+    "transaction_id": "T000006"
+  },
+  "continuation_strategy": {
+    "automatic_scaling": false,
+    "further_tranche_authority": false,
+    "post_transaction_reconciliation_required": true,
+    "rationale": "The one-record canary, ten-record multi-event tranche, source escalation, authoritative-source continuation, superseding terminal decisions, one-use authorization, checkpoint recovery semantics and replay rejection have all been exercised. A bounded 25-record tranche expands operational scale while retaining a mandatory stop before any larger continuation. No retain_for_method_assessment production outcome has yet been exercised.",
+    "strategy": "bounded_post_pilot_validation_tranche",
+    "tranche_size": 25
+  },
+  "design_id": "B000001_T000006_POST_PILOT_CONTINUATION_DESIGN",
+  "next_gate": "IMPLEMENT_GENERIC_POST_PILOT_TRANCHE_GUARD_WITHOUT_EVENTS_OR_REVIEW_MUTATION",
+  "operator_contract": {
+    "allowed_operator_types": [
+      "human",
+      "human_with_assistance"
+    ],
+    "explicit_nonempty_operator_id_required": true,
+    "human_remains_scientific_decision_maker": true,
+    "operator_identity_must_not_be_inferred": true
+  },
+  "parent_commit": "3e0171417b8844045df781a39c0a35e8fbe26364",
+  "parent_production_state": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 11,
+    "event_count": 22,
+    "initial_positions_1_to_11_terminal": true,
+    "ledger_sha256": "85eabc27f89cc215b75b4b48611e6131f8ef1f7e7d5a022b1229d1241bd960ac",
+    "ready": 94611
+  },
+  "post_transaction_gate": {
+    "further_authorization_before_freeze": false,
+    "mandatory_completion_reconciliation_freeze": true,
+    "must_reconcile_all_25_events": true,
+    "must_reconcile_checkpoint": true,
+    "must_verify_positions_37_to_500_unchanged": true,
+    "must_verify_replay_rejection": true
+  },
+  "projected_state_invariants": {
+    "exact_complete_and_awaiting_counts_depend_on_human_outcomes": true,
+    "new_terminal_plus_awaiting_count": 25,
+    "post_blocked_metadata": 484,
+    "post_complete_plus_awaiting": 36,
+    "post_event_count": 47,
+    "post_ready": 94586
+  },
+  "review_packet_contract": {
+    "human_entry_fields": [
+      "proposed_event_type",
+      "proposed_record_decision",
+      "proposed_exclusion_reason_code",
+      "proposed_candidate_method_flag",
+      "proposed_evidence_basis",
+      "proposed_evidence_source_locator",
+      "proposed_evidence_escalation_status",
+      "proposed_notes"
+    ],
+    "model_preclassification": false,
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/review_packet.tsv",
+    "positions_12_to_36_target": true,
+    "positions_12_to_500_currently_blank": true,
+    "positions_37_to_500_must_remain_blank": true,
+    "pre_t000006_bytes": 314642,
+    "pre_t000006_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6",
+    "software_preclassification": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "completed_positions_at_design": 11,
+    "new_canonical_publication_decisions": 0,
+    "new_method_assessments": 0,
+    "new_role_assignments": 0,
+    "new_wave1_promotions": 0,
+    "positions_37_to_500_authorized": false,
+    "production_events_at_design": 22,
+    "target_positions_decided": false,
+    "target_positions_live_authorized": false,
+    "target_positions_reviewed": false
+  },
+  "scientific_review_contract": {
+    "allowed_exclusion_reason_codes": [
+      "application_only_no_reusable_method",
+      "unrelated_variant_or_data_type",
+      "duplicate_record_same_method_no_distinct_capability",
+      "unsupported_by_primary_or_stable_authoritative_source"
+    ],
+    "allowed_initial_event_types": [
+      "record_decision",
+      "source_escalation"
+    ],
+    "allowed_terminal_record_decisions": [
+      "exclude",
+      "retain_for_method_assessment"
+    ],
+    "autonomous_model_decision_prohibited": true,
+    "human_review_required_for_every_target_position": true,
+    "source_escalation_requires_nonempty_evidence_basis": true,
+    "source_escalation_source_locator_may_be_blank": true,
+    "source_escalation_status": "awaiting_source_escalation",
+    "source_escalation_terminal_fields_blank": true,
+    "terminal_decision_requires_nonempty_evidence_basis": true,
+    "terminal_decision_requires_nonempty_evidence_source_locator": true,
+    "terminal_exclude_requires_candidate_method_false": true,
+    "terminal_retain_requires_candidate_method_true": true,
+    "title_only_preclassification_prohibited": true,
+    "uncertainty_retained_for_source_checking": true
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "t000006": {
+    "batch_id": "B000001",
+    "expected_first_event_id": "E000000023",
+    "expected_last_event_id": "E000000047",
+    "expected_post_event_count": 47,
+    "expected_pre_event_count": 22,
+    "expected_pre_ledger_sha256": "85eabc27f89cc215b75b4b48611e6131f8ef1f7e7d5a022b1229d1241bd960ac",
+    "initial_events_only": true,
+    "live_authorized_by_this_design": false,
+    "partial_transaction_permitted": false,
+    "positions_37_to_500_authorized": false,
+    "review_packet_edit_authorized_by_this_design": false,
+    "scientific_decisions_preselected": false,
+    "superseding_events_permitted": false,
+    "target_event_count": 25,
+    "target_position_end": 36,
+    "target_position_start": 12,
+    "target_positions": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ],
+    "transaction_id": "T000006"
+  },
+  "target_identity": {
+    "batch_id": "B000001",
+    "canonical_baseline_queue_rows_sha256": "1fbad740eb36d57838f46f60a4ff7cf81fe7d448ee7e8e0950fad72638bc5c59",
+    "canonical_membership_rows_sha256": "0ea1bb77b778a8105389da08336eed90f6163c41f4fd7d8c1eb559a788f3c126",
+    "canonical_target_identity_sha256": "2c558ee5be00441beefffdb8632b1daaee6f427d384879dbdad5e85497316647",
+    "entities": [
+      {
+        "baseline_row_sha256": "0a1276a5ef94e990f3ba0fbd99c8249beb82fd6a8f82ca5345968887bde15ff9",
+        "doi": "10.1002/9780470015902.a0022872",
+        "global_active_index": 12,
+        "pmid": "",
+        "position_in_batch": 12,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0022872",
+        "title_or_software_name": "Evolution of Eukaryotic RNA Polymerases",
+        "year": "2010"
+      },
+      {
+        "baseline_row_sha256": "6425916665d0d410ee6b7fe5b6248e958b4a0d6d4cbe73cb2ab106e6c3a9a1b8",
+        "doi": "10.1002/9780470015902.a0022889",
+        "global_active_index": 13,
+        "pmid": "",
+        "position_in_batch": 13,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0022889",
+        "title_or_software_name": "Evolution of Immune Proteins in Insects",
+        "year": "2010"
+      },
+      {
+        "baseline_row_sha256": "52acf9fd06cb4aad4970592c08d2b4493bf92afc30b30f3de7893bc609c5adbb",
+        "doi": "10.1002/9780470600122.ch3",
+        "global_active_index": 14,
+        "pmid": "",
+        "position_in_batch": 14,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470600122.ch3",
+        "title_or_software_name": "Sequence‐Based Analysis of Bacterial Population Structures",
+        "year": "2010"
+      },
+      {
+        "baseline_row_sha256": "0d09efab4ea8a37e7908ee40aea387977dfd9c50c875b5d322990eb130bf6df8",
+        "doi": "10.1002/9780470600122.ch5",
+        "global_active_index": 15,
+        "pmid": "",
+        "position_in_batch": 15,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470600122.ch5",
+        "title_or_software_name": "Statistical Methods for Detecting the Presence of Natural Selection in Bacterial Populations",
+        "year": "2010"
+      },
+      {
+        "baseline_row_sha256": "193cfd334594367ff93247b7b2f90d43adf62e5ad2df3c0d879a38e31d5e2361",
+        "doi": "10.1002/9780470741894.ch1",
+        "global_active_index": 16,
+        "pmid": "",
+        "position_in_batch": 16,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470741894.ch1",
+        "title_or_software_name": "The Basics of Protein Sequence Analysis",
+        "year": "2008"
+      },
+      {
+        "baseline_row_sha256": "896af0e6cf7779fc5e68bb73a4e3172969eaf1472288d3e1f1789a8e9b4f8fc7",
+        "doi": "10.1002/9780470892107.ch25",
+        "global_active_index": 17,
+        "pmid": "",
+        "position_in_batch": 17,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470892107.ch25",
+        "title_or_software_name": "Phylogenetic Search Algorithms for Maximum Likelihood",
+        "year": "2010"
+      },
+      {
+        "baseline_row_sha256": "6d311bda6e75fd95ee02d3709352c8b24a5fa5ccd7311d457d7941f11eca84e0",
+        "doi": "10.1002/9781118860526.ch7",
+        "global_active_index": 18,
+        "pmid": "",
+        "position_in_batch": 18,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781118860526.ch7",
+        "title_or_software_name": "Adaptation of Flower Form: An Evo‐Devo Approach to Study Adaptive Evolution in Flower Morphology",
+        "year": "2015"
+      },
+      {
+        "baseline_row_sha256": "8ed7108e273139e328a7963ed1f618fbcf9ee24134069c860746e9f4caf21d6f",
+        "doi": "10.1002/9781119053095.ch80",
+        "global_active_index": 19,
+        "pmid": "",
+        "position_in_batch": 19,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781119053095.ch80",
+        "title_or_software_name": "LegumeIP: An Integrative Platform for Comparative Genomics and Transcriptomics of Model Legumes",
+        "year": "2015"
+      },
+      {
+        "baseline_row_sha256": "76c6ac287de1f4ae842a4157b1b4dc9c2cbf8f579da993f2441ba80364340746",
+        "doi": "10.1002/9781119072799.ch16",
+        "global_active_index": 20,
+        "pmid": "",
+        "position_in_batch": 20,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781119072799.ch16",
+        "title_or_software_name": "COMPARATIVE GENOMICS IN THE ASTERACEAE REVEALS LITTLE EVIDENCE FOR PARALLEL EVOLUTIONARY CHANGE IN INVASIVE TAXA",
+        "year": "2016"
+      },
+      {
+        "baseline_row_sha256": "dc36174b700ee08267b582d698535779f291a85ef77878fe6cf2b1e6a93296a2",
+        "doi": "10.1002/9781119127291.ch26",
+        "global_active_index": 21,
+        "pmid": "",
+        "position_in_batch": 21,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781119127291.ch26",
+        "title_or_software_name": "Genomic and Epigenetic Aspects of Sex Determination in Half‐Smooth Tongue Sole",
+        "year": "2018"
+      },
+      {
+        "baseline_row_sha256": "d57244f1ee82b29b5afac1c83cf131b5455e6190847971f32408ab6b44d6e2e1",
+        "doi": "10.1002/9781119487845.ch14",
+        "global_active_index": 22,
+        "pmid": "",
+        "position_in_batch": 22,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781119487845.ch14",
+        "title_or_software_name": "Detecting Natural Selection",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "6b42f51ede5773b397eb434c961229c990c7c16f9d008ae9480f9ea4d0f142db",
+        "doi": "10.1002/9781119487845.ch36",
+        "global_active_index": 23,
+        "pmid": "",
+        "position_in_batch": 23,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781119487845.ch36",
+        "title_or_software_name": "Bacterial Population Genomics",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "debc6bb7d70a6895d4bd991a2e6b6b73a309b7ca7a8cb2ead020761f0438cfae",
+        "doi": "10.1002/9781119990475.ch12",
+        "global_active_index": 24,
+        "pmid": "",
+        "position_in_batch": 24,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781119990475.ch12",
+        "title_or_software_name": "Evolving Perceptions on the Antiquity of the Modern Avian Tree",
+        "year": "2011"
+      },
+      {
+        "baseline_row_sha256": "50b43bdc7e4ce1a10d74cb2d9577134bd7ccb5d40ac270ce7cc16e66199719c0",
+        "doi": "10.1002/9781394284252.ch11",
+        "global_active_index": 25,
+        "pmid": "",
+        "position_in_batch": 25,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9781394284252.ch11",
+        "title_or_software_name": "Phylodynamics",
+        "year": "2024"
+      },
+      {
+        "baseline_row_sha256": "18c23854ea023e0b86975874d50621f7f32ee4253679a84b35be49ddb3d552df",
+        "doi": "10.1002/9783527844340.ch18",
+        "global_active_index": 26,
+        "pmid": "",
+        "position_in_batch": 26,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9783527844340.ch18",
+        "title_or_software_name": "Recent Trends in Computational Tools for Industrially Important Enzymes",
+        "year": "2024"
+      },
+      {
+        "baseline_row_sha256": "c7588c4c10eec9b2a4bddd5c0981994615b8797254b264c209b5b90deec7f6a5",
+        "doi": "10.1002/adbi.202200002",
+        "global_active_index": 27,
+        "pmid": "35521969",
+        "position_in_batch": 27,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/adbi.202200002",
+        "title_or_software_name": "3D Bioprinted Neural‐Like Tissue as a Platform to Study Neurotropism of Mouse‐Adapted SARS‐CoV‐2",
+        "year": "2022"
+      },
+      {
+        "baseline_row_sha256": "9160b73b466b42658d25fc12a30017b92262dcb6ac70e6386814e899dea3c2d0",
+        "doi": "10.1002/advs.201901672",
+        "global_active_index": 28,
+        "pmid": "32099754",
+        "position_in_batch": 28,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.201901672",
+        "title_or_software_name": "Comparison of Arachis monticola with Diploid and Cultivated Tetraploid Genomes Reveals Asymmetric Subgenome Evolution and Improvement of Peanut",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "11e8259c9cbe55d44cc91ca0b289d69bac522dd995140ca2a17c439be1f4f367",
+        "doi": "10.1002/advs.201901850",
+        "global_active_index": 29,
+        "pmid": "31921561",
+        "position_in_batch": 29,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.201901850",
+        "title_or_software_name": "Mesostigma viride Genome and Transcriptome Provide Insights into the Origin and Evolution of Streptophyta",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "b1bd19f24480c462286113436b3ea9f2f3b8836919a14eea2d8391557e04e527",
+        "doi": "10.1002/advs.202205445",
+        "global_active_index": 30,
+        "pmid": "37267926",
+        "position_in_batch": 30,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202205445",
+        "title_or_software_name": "Optimization and Deoptimization of Codons in SARS‐CoV‐2 and Related Implications for Vaccine Development",
+        "year": "2023"
+      },
+      {
+        "baseline_row_sha256": "acd97ffb988945214b153d9143385d653bf48d25509c3825f93faf766cf7cd57",
+        "doi": "10.1002/advs.202309990",
+        "global_active_index": 31,
+        "pmid": "38477432",
+        "position_in_batch": 31,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202309990",
+        "title_or_software_name": "Lineage‐Specific CYP80 Expansion and Benzylisoquinoline Alkaloid Diversity in Early‐Diverging Eudicots",
+        "year": "2024"
+      },
+      {
+        "baseline_row_sha256": "c78d42d70e4c451b04e156a4948540d212afefbc1800e70fe4104d27e2a9a15e",
+        "doi": "10.1002/advs.202402644",
+        "global_active_index": 32,
+        "pmid": "39229940",
+        "position_in_batch": 32,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202402644",
+        "title_or_software_name": "De novo Whole‐Genome Assembly of the 10‐Gigabase Fokienia Hodginsii Genome to Reveal Differential Epigenetic Events Between Callus and Xylem",
+        "year": "2024"
+      },
+      {
+        "baseline_row_sha256": "152effe770173e27335077c734f23a9deb92a0d1e96ceb3d9b907392bd184630",
+        "doi": "10.1002/advs.202408861",
+        "global_active_index": 33,
+        "pmid": "39731323",
+        "position_in_batch": 33,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202408861",
+        "title_or_software_name": "Chromatin Topological Domains Associate With the Rapid Formation of Tandem Duplicates in Plants",
+        "year": "2024"
+      },
+      {
+        "baseline_row_sha256": "068553f9cf1ddddbff7124b72fe4ded61cc33f548a50e775e05d5723fe3d541c",
+        "doi": "10.1002/advs.202413023",
+        "global_active_index": 34,
+        "pmid": "40009528",
+        "position_in_batch": 34,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202413023",
+        "title_or_software_name": "Genomic Insights into Post‐Domestication Expansion and Selection of Body Size in Ponies",
+        "year": "2025"
+      },
+      {
+        "baseline_row_sha256": "c09eed1358a38586660b00a52f7ea1cf899409c614708a3d318c67166048eebb",
+        "doi": "10.1002/advs.202417054",
+        "global_active_index": 35,
+        "pmid": "40135786",
+        "position_in_batch": 35,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202417054",
+        "title_or_software_name": "Chromosome‐Level Genome Assembly of the Leafcutter Bee Megachile rotundata Reveals Its Ecological Adaptation and Pollination Biology",
+        "year": "2025"
+      },
+      {
+        "baseline_row_sha256": "266aad7a5753c7d4f5d8463eeef312efab40d410308ce3fdeb5d6796e9c88d71",
+        "doi": "10.1002/advs.202503974",
+        "global_active_index": 36,
+        "pmid": "40470693",
+        "position_in_batch": 36,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/advs.202503974",
+        "title_or_software_name": "Subgenome Dominance in Allotetraploid Actinidia valvata Regulates RNA m 6 A Modification for Waterlogging Tolerance",
+        "year": "2025"
+      }
+    ],
+    "ordered_entity_ids_sha256": "a169877057cf928be5c945a266405406ae15833271daef89c0179d3d5260b5f2",
+    "target_event_count": 25,
+    "target_position_end": 36,
+    "target_position_start": 12
+  }
+}

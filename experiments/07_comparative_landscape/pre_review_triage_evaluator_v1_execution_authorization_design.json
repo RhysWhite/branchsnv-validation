@@ -1,0 +1,72 @@
+{
+  "authorization_artifact": {
+    "authorization_scope": "ONE_TIME_FROZEN_DEVELOPMENT_EVALUATION",
+    "authorization_status": "AUTHORIZED_DEVELOPMENT_EVALUATION",
+    "execution_id": "TRIAGE-DEV-EVAL-V1-001",
+    "path": "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_execution_authorization.json",
+    "sha256": "42a23c5a0694912c55940805757bc877c36b15592d1ac0b6fca6868543dd2765"
+  },
+  "bound_execution_state": {
+    "authorized_output_rel": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1",
+    "canonical_output_absent_at_authorization_freeze": true,
+    "canonical_text_sha256": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "environment_state_design_sha256": "748f32d6af113ff1c0b945d484d03723493d8fa95e173a322c2fda01c0c6986d",
+    "implementation_freeze_commit": "38f2934b48bef39f62657cbb3360e2daf61e17e2",
+    "implementation_sha256": "bd5520bbbb7bad1bc33cab131d21ce90701815a927076fee159ede3045843a10"
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_environment_state_v1.sha256": "98eef6587a78bcc74f2853a1ef6302d1b3b4c9606f9d5f3f3888bda47959b054",
+    "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_implementation.sha256": "115a5d08f00be48367b2d6c968892ab63e6be40d5bf0b854f9f6df1839ced699",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1.sha256": "124604ec4667db15072f12883abc2cd0cbed29b424ea47ad78577758f2250b75",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_amendment_001.sha256": "4b74fa09e029d69deb9661c4ec0eee8ebc6a92074b324f6026755091bfc18110",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "development_evaluation_contract": {
+    "candidate_count": 3,
+    "development_records": 4190,
+    "expected_fit_partitions": 252,
+    "hard_predictions_generated": false,
+    "inner_folds_per_outer": 8,
+    "negative_records": 4022,
+    "outer_folds": 9,
+    "positive_records": 168,
+    "threshold_selected": false
+  },
+  "execution_authority": {
+    "blind_validation_content_use_authorized": false,
+    "future_scoring_authorized": false,
+    "hyperparameter_selection_authorized": false,
+    "model_fit_authorized": true,
+    "production_mutation_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "scope": "frozen_development_evaluation_only",
+    "threshold_selection_authorized": false,
+    "vectorizer_fit_authorized": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_EVALUATOR_V1_EXECUTION_AUTHORIZATION",
+  "freeze_parent_commit": "38f2934b48bef39f62657cbb3360e2daf61e17e2",
+  "next_gate": "EXECUTE_ONCE_FROZEN_PRE_REVIEW_TRIAGE_DEVELOPMENT_EVALUATION",
+  "one_time_execution_contract": {
+    "automatic_cleanup_after_failure": false,
+    "automatic_retry_after_failure": false,
+    "canonical_output_must_be_absent_before_execution": true,
+    "completion_file": "execution_completion.json",
+    "completion_required_for_success": true,
+    "exact_authorization_commit_required_for_execution": true,
+    "execution_claim_file": "execution_claim.json",
+    "execution_claim_written_before_first_fit": true,
+    "existing_claim_or_output_blocks_automatic_retry": true
+  },
+  "pre_authorization_execution_state": {
+    "blind_validation_content_used": false,
+    "future_scoring_performed": false,
+    "hyperparameter_selection_performed": false,
+    "model_fit_performed": false,
+    "production_mutated": false,
+    "scientific_screening_decisions_made": false,
+    "threshold_selection_performed": false,
+    "vectorizer_fit_performed": false
+  },
+  "schema_version": 1,
+  "status": "FROZEN_ONE_TIME_DEVELOPMENT_EVALUATION_AUTHORIZATION_PRE_FIRST_FIT"
+}

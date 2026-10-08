@@ -1,0 +1,65 @@
+Parsing file /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/input/conf.txt for options.
+------------------------------------------------------------------------------
+ARPIP 
+ARPIP: Ancestral Sequence Reconstruction with insertions and deletions under the Poisson Indel Process
+Authors: Gholamhossein Jowkar
+Build on commit:  ee32c10b49407728b1ab00b5f98f792ca6dc2e1a
+On date: 07 Oct 2026, 13:45:29
+------------------------------------------------------------------------------
+Execution started on:..................: kscprod-bio8.esr.cri.nz
+Random seed set to.....................: 1
+Log files location.....................: current execution path
+Analysis name is.......................: BRANCHSNV_ARPIP_SMOKE
+This model works with constant rate distribution for DNA/AA.
+The alphabet is........................: DNA
+
+[Preparing input sequences]
+Sites to use...........................: all
+Number of sequences....................: 4
+Number of sites........................: 20
+WARNING!!! The unknown character would be treated as gap in this program.
+Removing gap only sites if exists......: [>                                     ]   5%[>>>                                   ]  10%[>>>>>                                 ]  15%[>>>>>>>                               ]  20%[>>>>>>>>>                             ]  25%[>>>>>>>>>>>                           ]  30%[>>>>>>>>>>>>>                         ]  35%[>>>>>>>>>>>>>>>                       ]  40%[>>>>>>>>>>>>>>>>>                     ]  45%[>>>>>>>>>>>>>>>>>>>                   ]  50%[>>>>>>>>>>>>>>>>>>>>                  ]  55%[>>>>>>>>>>>>>>>>>>>>>>                ]  60%[>>>>>>>>>>>>>>>>>>>>>>>>              ]  65%[>>>>>>>>>>>>>>>>>>>>>>>>>>            ]  70%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>          ]  75%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>        ]  80%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>      ]  85%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    ]  90%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ]  95%[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 100%
+New number of sites....................: 20
+
+[Preparing initial tree]
+Initial tree...........................: user
+Input tree file .......................: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/input/toy.tree
+Input tree format .....................: Newick
+The tree root is node number...........: 6
+Number of nodes........................: 7
+Number of leaves.......................: 4
+Total tree length, aka tau.............: 0.6
+Output tree file.......................: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/tree.nwk
+Output node relation name file.........: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/node_rel.txt
+
+[Setting up substitution model]
+Base substitution model................: JC69
+Substitution model.....................: PIP13
+Indel parameter initial value..........: fixed
+PIP13.mu...............................: 0.01
+PIP13.intensity........................: 0.1
+Equilibrium frequency of substitution model:
+eq.freq(Adenine).......................: 0.25
+eq.freq(Cytosine)......................: 0.25
+eq.freq(Guanine).......................: 0.25
+eq.freq(Thymine).......................: 0.25
+eq.freq( Gap/- ).......................: 0
+Among site rate variation (ASVR).......: Constant
+
+[Setting up Tree Likelihood]
+Initializing iota and beta parameters..: Done.
+Initializing data structure............: Done.
+Initializing set A for all sites.......: Done.
+Initializing set G for all sites.......: Done.
+20Number of distinct sites...............: 2
+
+[Extracting Indel Points]
+Extracting the Indel Points............: Done.
+Display the progress...................: false.
+Output IndelPoint file.................: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/mlindelpoints.txt
+
+[Computing join ancestral sequences reconstruction]
+Ancestral sequence reconstruction......: Done.
+Output ancestral sequence file.........: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/anc.fasta
+Output MSA file........................: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/ARPIP/attempt_07_toy_smoke/output/msa.fasta
+Total execution time: 0.000000d, 0.000000h, 0.000000m, 0.000000s.

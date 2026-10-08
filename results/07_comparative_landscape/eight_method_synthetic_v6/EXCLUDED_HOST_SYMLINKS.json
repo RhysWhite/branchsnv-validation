@@ -1,0 +1,11 @@
+{
+  "schema": "BRANCHSNV_EXP07_OMITTED_NONPORTABLE_SYMLINK_V1",
+  "items": [
+    {
+      "relative_path": "synthetic_v6/POUTINE/plan/native/compiled",
+      "original_target": "/home/rwhite/branchsnv-comparator-src/poutine-smoke/compiled",
+      "reason": "absolute host-specific symlink outside the self-contained evidence tree; its referenced external payload is not preserved or independently verified"
+    }
+  ],
+  "no_symlinks_in_published_snapshot": true
+}

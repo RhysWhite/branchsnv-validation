@@ -1,0 +1,53 @@
+{
+  "amended_builder_sha256": "7eea07f6a2214915ff84d6bd2bfc9618380934fee54684f118cbcdf065df3916",
+  "amendment_001_checksum_manifest_sha256": "5b75eb743aaf7d4cdbbad54275b21344652e321f2dd1c7880fd37e3a21bc7de2",
+  "authority": {
+    "one_use": true,
+    "priority_scored_rows": 5483,
+    "queue_generation": true,
+    "residual_scored_rows": 6422,
+    "total_human_review_rows": 12162,
+    "unscored_manual_review_rows": 257
+  },
+  "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_002",
+  "authorization_sha256": "6f9e37e10bcab07ee7d22d3ff52b64cf474f48b373c07c3fddbcfdea780fa9ab",
+  "consumed_generation_001": {
+    "authorization_checksum_manifest_sha256": "b3e248e3e0841e68f0531e868dd40a0430a57eb5429cb8f51222e5845128ff13",
+    "authorization_sha256": "f6b018056fdf4ffb9e7a404dcc08ae1f6993ca8ad73b008be67aa2c503b05018",
+    "consumed": true,
+    "reuse_permitted": false
+  },
+  "execution_contract": {
+    "amendment_001_identity_must_validate_before_generation": true,
+    "atomic_generation_required": true,
+    "atomic_staging_contract": "mkdtemp_parent_then_nonexistent_payload_child_then_os_replace",
+    "authorization_002_identity_must_validate_before_generation": true,
+    "canonical_output_root": "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1",
+    "canonical_output_root_absent_at_authorization": true,
+    "confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-QUEUE-V1"
+  },
+  "explicitly_not_authorized": {
+    "blind_validation_content_use": true,
+    "cross_lane_priority_selection": true,
+    "future_label_use": true,
+    "hard_prediction_generation": true,
+    "network_access": true,
+    "production_ledger_mutation": true,
+    "raw_score_threshold_selection": true,
+    "scientific_exclusion": true,
+    "scientific_inclusion": true
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_AUTHORIZATION_002",
+  "freeze_parent_commit": "08632ef628ef5eacdd965e8ce17f42f44b50e4e4",
+  "future_scoring_results_checksum_manifest_sha256": "8be5645fb71f557306be11ae132f1d655013d6a6d573beb50380399cad9bc939",
+  "next_gate": "EXECUTE_ONCE_FROZEN_PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_002",
+  "pre_execution_state": {
+    "blind_validation_content_used": false,
+    "future_labels_used": false,
+    "queue_generated": false,
+    "scientific_decision_made": false
+  },
+  "queue_design_checksum_manifest_sha256": "319ce18f144b97acc1d6c5b277420bd7b9f66fce0e99b2b8207a657559ea1e26",
+  "schema_version": 1,
+  "status": "FROZEN_ONE_USE_GENERATION_AUTHORIZATION_002_PRE_EXECUTION"
+}

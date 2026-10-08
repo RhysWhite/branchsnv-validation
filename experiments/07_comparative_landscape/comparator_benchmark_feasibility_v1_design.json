@@ -1,0 +1,163 @@
+{
+  "assessment_dimensions": [
+    "primary_source_identity",
+    "canonical_software_or_code_locator",
+    "current_code_availability",
+    "license_or_reuse_terms",
+    "installability",
+    "version_or_commit_pin",
+    "environment_reproducibility",
+    "documented_input_contract",
+    "documented_output_contract",
+    "required_tree_or_alignment_preconditions",
+    "supported_character_or_variant_type",
+    "frozen_branchsnv_endpoint_overlap",
+    "endpoint_output_mappability",
+    "automatable_execution",
+    "manual_intervention_requirement",
+    "small_validation_run_feasibility",
+    "known_platform_or_dependency_constraints",
+    "benchmark_fairness"
+  ],
+  "controlled_values": {
+    "automation_status": [
+      "automatable",
+      "automatable_with_wrapper",
+      "manual_or_interactive_only",
+      "unresolved"
+    ],
+    "feasibility_class": [
+      "quantitative_benchmark_candidate",
+      "endpoint_specific_benchmark_candidate",
+      "contextual_comparator_only",
+      "blocked_reproducibility",
+      "unresolved"
+    ],
+    "license_status": [
+      "explicit_open_source",
+      "source_visible_terms_unclear",
+      "restricted_or_nonredistributable",
+      "not_applicable",
+      "unresolved"
+    ],
+    "small_validation_run_status": [
+      "not_run_pre_execution",
+      "authorized_later_pass",
+      "authorized_later_fail",
+      "blocked"
+    ],
+    "software_availability_status": [
+      "available",
+      "source_available_but_legacy",
+      "web_service_only",
+      "paper_only_or_code_not_located",
+      "unresolved"
+    ]
+  },
+  "decision_rules": {
+    "blocked_reproducibility": "A scientifically benchmarkable task is present, but executable access, installation, licensing, dependencies, or stable invocation prevents a reproducible benchmark.",
+    "contextual_comparator_only": "Scientifically relevant direct/near-direct comparator, but quantitative head-to-head comparison would be invalid, task-mismatched, or dependent on fundamentally different character types or assumptions.",
+    "endpoint_specific_benchmark_candidate": "Method can be benchmarked quantitatively for one or more overlapping endpoints, but not as a whole-tool substitute for BRANCHSNV.",
+    "quantitative_benchmark_candidate": "Requires reproducible executable access, sufficiently documented inputs and outputs, and output semantics that can be mapped fairly to the same pre-specified BRANCHSNV endpoint(s).",
+    "unresolved": "Evidence is insufficient for a terminal feasibility class; uncertainty must remain explicit rather than being converted to exclusion."
+  },
+  "evidence_policy": {
+    "benchmark_dataset_execution_pre_authorized": false,
+    "code_execution_pre_authorized": false,
+    "installation_pre_authorized": false,
+    "preferred_order": [
+      "primary method publication",
+      "official software repository or release archive",
+      "official documentation",
+      "archived project page or package registry",
+      "stable secondary authoritative source"
+    ],
+    "source_backed_required": true,
+    "web_search_may_be_used_during_assessment": true
+  },
+  "execution_boundary": {
+    "this_freeze_authorizes_benchmark_execution": false,
+    "this_freeze_authorizes_installation": false,
+    "this_freeze_authorizes_production_bridge": false,
+    "this_freeze_authorizes_scientific_reclassification_of_29": false,
+    "this_freeze_authorizes_software_execution": false,
+    "this_freeze_authorizes_source_research": false
+  },
+  "fairness_rules": [
+    "Do not require every direct/near-direct comparator to be executed.",
+    "Do not classify a method as unsuitable merely because it is old, slow, unpopular, or inconvenient.",
+    "Do not compare outputs that answer materially different scientific questions under a single accuracy metric.",
+    "Where only one BRANCHSNV endpoint overlaps, restrict any quantitative comparison to that endpoint.",
+    "Do not silently substitute successor software, forks, wrappers, or reimplementations for the frozen method family; document any such mapping explicitly.",
+    "Do not treat generic phylogenetic tree inference accuracy as a BRANCHSNV benchmark endpoint.",
+    "Do not use publication citation count, repository popularity, or recency as feasibility criteria.",
+    "No failed installation or unavailable URL alone changes scientific comparator status; it changes benchmark feasibility only."
+  ],
+  "freeze_id": "COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_V1",
+  "frozen_branchsnv_endpoints": [
+    {
+      "description": "Discovery of nucleotide sites/markers associated with a defined clade or lineage, including strict clade-exclusive site behaviour where supported by the comparator.",
+      "endpoint_id": "clade_lineage_marker_discovery"
+    },
+    {
+      "description": "Inference or reporting of state/substitution changes associated with a specified phylogenetic branch, focal edge, ancestor-to-descendant transition, or equivalent lineage transition.",
+      "endpoint_id": "branch_change_reconstruction"
+    },
+    {
+      "description": "Detection or interpretation of homoplasy, convergence, parallel change, recurrence, reversal, or repeated character-state change.",
+      "endpoint_id": "homoplasy_recurrent_state_analysis"
+    },
+    {
+      "description": "Deployment of discovered markers or phylogenetic states for lineage/clade assignment or genotyping.",
+      "endpoint_id": "marker_deployment_genotyping"
+    }
+  ],
+  "next_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1",
+  "next_gate_note": "After this design is frozen, separately authorize source-backed feasibility assessment of all 29 method families. That assessment may research software availability and documentation but must not install or execute comparator software unless a later execution authorization explicitly permits it.",
+  "parent_result_freeze_commit": "836fcc816c761ccc945365fb2783e25e66edcc2b",
+  "planned_outputs_after_separate_authorization": [
+    "comparator_benchmark_feasibility_v1.tsv",
+    "comparator_benchmark_feasibility_v1_manifest.json",
+    "comparator_benchmark_feasibility_v1_summary.md"
+  ],
+  "required_assessment_fields": [
+    "canonical_name",
+    "final_comparator_class",
+    "source_doi_or_primary_locator",
+    "software_or_code_locator",
+    "software_availability_status",
+    "license_status",
+    "version_pin",
+    "installation_strategy",
+    "environment_strategy",
+    "documented_inputs",
+    "documented_outputs",
+    "required_preconditions",
+    "character_or_variant_type",
+    "overlapping_branchsnv_endpoints",
+    "output_mapping_notes",
+    "automation_status",
+    "manual_intervention_notes",
+    "small_validation_run_status",
+    "blocking_constraints",
+    "feasibility_class",
+    "feasibility_rationale",
+    "evidence_locators"
+  ],
+  "scientific_scope": {
+    "direct_count": 3,
+    "direct_set": [
+      "SNPPar",
+      "SubRecon",
+      "TreeTime"
+    ],
+    "method_family_count": 29,
+    "near_direct_count": 26,
+    "noncomparators_in_scope": false,
+    "purpose": "Determine which of the 29 frozen direct/near-direct method families can support a fair, reproducible quantitative benchmark against one or more BRANCHSNV analytical endpoints, and which should remain contextual comparators.",
+    "source_set": "branchsnv_direct_near_comparators_v1.tsv",
+    "supporting_methods_in_scope": false,
+    "unit_of_assessment": "distinct_method_family"
+  },
+  "status": "FROZEN_PRE_ASSESSMENT"
+}

@@ -1,0 +1,167 @@
+{
+  "analytical_roles": [
+    "clade_lineage_marker_discovery",
+    "branch_change_reconstruction",
+    "homoplasy_recurrent_state_analysis",
+    "marker_deployment_genotyping",
+    "general_phylogenetic_parsimony_infrastructure",
+    "upstream_variant_recombination_phylogeny_workflows"
+  ],
+  "baseline_completion_blockers": [
+    "required_reconciliation_unfinished",
+    "screening_relevant_identity_conflict",
+    "missing_required_screenable_metadata",
+    "unscreened_entity",
+    "required_source_escalation_pending",
+    "candidate_method_assessment_pending",
+    "direct_near_direct_canonical_publication_unresolved"
+  ],
+  "baseline_universe": {
+    "attention_overlay_entities": 1342,
+    "publication_entities": 94898,
+    "screening_entities": 95113,
+    "software_registry_entities": 215
+  },
+  "canonical_publication_statuses": [
+    "established",
+    "no_distinct_primary_publication",
+    "unresolved"
+  ],
+  "completed_record_decisions": [
+    "retain_for_method_assessment",
+    "exclude"
+  ],
+  "criterion_values": [
+    "yes",
+    "no",
+    "not_established"
+  ],
+  "directness_roles": [
+    "direct",
+    "near_direct",
+    "other_landscape_role",
+    "not_established"
+  ],
+  "exclusion_reason_codes": [
+    "application_only_no_reusable_method",
+    "unrelated_variant_or_data_type",
+    "duplicate_record_same_method_no_distinct_capability",
+    "unsupported_by_primary_or_stable_authoritative_source"
+  ],
+  "frozen_dependencies": {
+    "cross_stage_screening_entity_baseline_sha256": "c89c8bebb46f9a045f172f2a168361568372fae3d582eb1e498917b10615d40b",
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "reconciliation_completion_sha256": "baa7e9fdf64ead734d2a4a1a36bbf0f7b7ae423d27b1ab7a813e8c08a2148084",
+    "reconciliation_component_output_sha256": "74159ff88bbd07f94547112de617caebb8339d03ecfc8a451ebb7b11d0a4fe8b",
+    "screening_entity_identity_baseline_sha256": "c6494ecc009b63dddaefd4154a35f063aa941d153999ba18fb5ffcdf023868fe"
+  },
+  "initial_screenability": {
+    "blocked_metadata_entities": 484,
+    "blocked_title_conflict": 2,
+    "blocked_title_unresolved": 482,
+    "identifier_conflict_entities": 117,
+    "identifier_conflict_entities_with_screenable_title_evidence": 115,
+    "identifier_conflict_is_exclusion": false,
+    "screenable_entities": 94629,
+    "screenable_publication_entities": 94414,
+    "screenable_software_registry_entities": 215
+  },
+  "landscape_criteria": {
+    "L1_documentation_exists": "publication or stable public documentation describing the method exists",
+    "L2_software_implementation_exists": "identifiable software implementation exists or existed",
+    "L3_relevant_data_scope": "tool operates on sequence, SNP, genotype or phylogenetic data",
+    "L4_analytical_role": "tool addresses at least one frozen analytical role"
+  },
+  "landscape_decisions": [
+    "include",
+    "exclude",
+    "pending"
+  ],
+  "method_identity_statuses": [
+    "confirmed",
+    "false_positive_only",
+    "not_established"
+  ],
+  "minimum_screening_fields": [
+    "screening_entity_id",
+    "screening_entity_class",
+    "publication_reconciliation_key",
+    "database_dedup_keys",
+    "biotools_id",
+    "citation_provenance_ids",
+    "discovery_stages",
+    "citation_wave_provenance",
+    "title_or_software_name",
+    "title_variants",
+    "year",
+    "doi",
+    "pmid",
+    "openalex_id",
+    "omid",
+    "identity_attention_status",
+    "metadata_screenability",
+    "screening_state",
+    "record_decision",
+    "exclusion_reason_code",
+    "candidate_method_flag",
+    "evidence_escalation_status",
+    "operator",
+    "decision_batch",
+    "notes"
+  ],
+  "next_gate": "IMPLEMENT_FROZEN_SCIENTIFIC_SCREENING_INFRASTRUCTURE_WITHOUT_MAKING_DECISIONS",
+  "normative_sources": {
+    "CITATION_ANCHOR_ROLE_RUBRIC.md": {
+      "sha256": "061840b9fa67a67f230513fda823bcd1ada4d1acb2f52c324dc29d3b67449624"
+    },
+    "CITATION_ANCHOR_SCREENING_SPEC.md": {
+      "sha256": "071110c907f422c1697ce7e1a352c9f07228c2f07dbeffbaf300aed83360e6d5"
+    },
+    "CITATION_CHAINING_PROTOCOL.md": {
+      "sha256": "83a5e8a5907dd8a432b275ac4914d16bb1ff8518aab7812f48136748e258ef06"
+    },
+    "CITATION_PUBLICATION_RECONCILIATION_SPEC.md": {
+      "sha256": "0fef87b96bf04e4eda3f824867891c475f94c5b63a755217f6c7fbfaf6cabeb4"
+    },
+    "PROTOCOL.md": {
+      "sha256": "0197704daad2b79900b523a102d7f1cf98e77f577d429a3bca5aac1a20ea3991"
+    },
+    "UNIFIED_SCREENING_AND_WAVE_PROMOTION_SPEC.md": {
+      "sha256": "cbe0c03ef96812fd0375a049b63d17a7aae160ba788abcb1f403ad34b42c4810"
+    }
+  },
+  "parent_reconciliation_completion_commit": "9c175bfc0430c64154b039b6aff0e12652a1a996",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "historical_screening_log_rows": 0,
+    "method_assessments_made": 0,
+    "new_role_assignments_made": 0,
+    "screening_decisions_made": 0,
+    "wave1_promotions_made": 0
+  },
+  "screening_rules": {
+    "citation_count_is_criterion": false,
+    "discovery_route_is_criterion": false,
+    "historical_screening_log_repurposed": false,
+    "identifier_conflict_is_exclusion": false,
+    "missing_metadata_is_exclusion": false,
+    "provider_not_found_is_exclusion": false,
+    "seed_status_is_criterion": false,
+    "silent_prefilter_permitted": false,
+    "uncertainty_resolved_toward_retention": true
+  },
+  "screening_states": [
+    "blocked_metadata",
+    "ready",
+    "awaiting_source_escalation",
+    "complete"
+  ],
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "wave1_requirements": [
+    "method_identity_confirmed",
+    "landscape_decision_include",
+    "direct_or_near_direct",
+    "canonical_publication_established",
+    "canonical_publication_not_previously_expanded"
+  ]
+}

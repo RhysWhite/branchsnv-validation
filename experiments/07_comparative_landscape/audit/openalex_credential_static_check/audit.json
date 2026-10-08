@@ -1,0 +1,15 @@
+{
+  "authorization_header_dictionary_count": 2,
+  "build_url_api_key_parameter_dicts": [],
+  "credential_hardening_commit": "58543f3e5221eead2af8fe635016b182bca01c79",
+  "failed_check": "literal source substring api_key=",
+  "failure_classification": "false_positive",
+  "false_positive_cause": "ordinary Python keyword argument api_key=api_key matched a source-text substring check",
+  "production_citation_retrieval_performed": false,
+  "retrieval_implementation_changed": false,
+  "retriever_sha256": "326786243e561162bfe2d1665ac41d927247ef032daa7b0b1fb4327a62b285b4",
+  "schema_version": 1,
+  "scientific_protocol_changed": false,
+  "status": "RESOLVED_PRE_PRODUCTION",
+  "url_function_api_key_parameters": []
+}

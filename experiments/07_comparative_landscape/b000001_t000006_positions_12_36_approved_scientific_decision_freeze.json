@@ -1,0 +1,87 @@
+{
+  "approved_review_artifacts": {
+    "checksums_sha256": "fc946fcb4765f53fa9b069df99a50a4a0bcaf9756eaeaad8793358654afd8c32",
+    "decision_summary_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/T000006_positions_12_36_approved_decisions/decision_summary.json",
+    "decision_summary_sha256": "3784dd3a2b9e8e359327bd1caad3a986a9a95e5983b6845c35c9298cc5e77545",
+    "proposal_path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/T000006_positions_12_36_approved_decisions/proposal.tsv",
+    "proposal_sha256": "dde6ad0df9506c2c468ff933d72723fe5a0eb621ae16f944b5b07d54f6c36e6f"
+  },
+  "batch_id": "B000001",
+  "decision_counts": {
+    "exclude": 16,
+    "retain_for_method_assessment": 9,
+    "source_escalation": 0
+  },
+  "exclusion_reason_counts": {
+    "application_only_no_reusable_method": 13,
+    "duplicate_record_same_method_no_distinct_capability": 0,
+    "unrelated_variant_or_data_type": 3,
+    "unsupported_by_primary_or_stable_authoritative_source": 0
+  },
+  "frozen_dependencies": {
+    "generic_guard_implementation_freeze_sha256": "b26998f24893087612f2a19d0da4661a958d71bcbfd1e957575d9d63a6412509",
+    "generic_guard_sha256": "598c14c595a4bc5c1faff6c5411cae1b7fe898dbfeb5227a15d707d76fea6575",
+    "tranche_design_manifest_sha256": "0b3ef74719ca8720897e1013a65756e0a483bb85f537252022c4e347989bfcbe",
+    "tranche_design_sha256": "b8deb91c62f9387aa745a956e3b289286f5d8c527e9dfcc4fc680e2e6b50708c"
+  },
+  "human_approval_text": "approve T000006 review",
+  "next_gate": "CREATE_T000006_ONE_USE_LIVE_AUTHORIZATION",
+  "operator_id": "Rhys",
+  "operator_type": "human_with_assistance",
+  "parent_commit": "90820fc346a21869dccb281b2dad7fed39b2fdfb",
+  "positions": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "production_boundary": {
+    "ledger_mutated": false,
+    "ledger_mutation_authorized": false,
+    "live_authorization_created": false,
+    "pre_event_count": 22,
+    "pre_ledger_sha256": "85eabc27f89cc215b75b4b48611e6131f8ef1f7e7d5a022b1229d1241bd960ac"
+  },
+  "retain_positions": [
+    14,
+    15,
+    16,
+    17,
+    19,
+    22,
+    23,
+    24,
+    25
+  ],
+  "review_packet": {
+    "approved_post_review_sha256": "d49d162191ba4737aeaecbf0934130a7a8816ad203504b2603a709ceec8a8b7a",
+    "historical_positions_1_to_11_locked": true,
+    "positions_12_to_36_exactly_reviewed": true,
+    "positions_37_to_500_blank": true,
+    "pre_review_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6"
+  },
+  "schema_version": 1,
+  "status": "FROZEN_T000006_APPROVED_SCIENTIFIC_DECISIONS_PRE_LIVE_AUTHORIZATION",
+  "transaction_id": "T000006"
+}

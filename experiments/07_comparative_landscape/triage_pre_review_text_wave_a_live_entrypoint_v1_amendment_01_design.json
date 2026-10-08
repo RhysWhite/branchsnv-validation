@@ -1,0 +1,95 @@
+{
+  "amendment_id": "TRIAGE_PRE_REVIEW_TEXT_WAVE_A_LIVE_ENTRYPOINT_V1_AMENDMENT_01",
+  "authorization_path_observation": {
+    "canonical_path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a/authorization.json",
+    "gitignore_change_required": false,
+    "observed_gitignored_at_freeze": false,
+    "observed_tracked_at_freeze": false,
+    "reason": "The frozen guard's clean-tree check ignores untracked files. The live entrypoint separately requires the authorization itself to remain untracked. Being gitignored is not part of the authorization contract.",
+    "tracked_authorization_must_fail_closed": true
+  },
+  "base_design": {
+    "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_live_entrypoint_v1_design.json",
+    "sha256": "84078785db79d2016739e8d4dd003917edf8ba79a5092b96a9f72d4fcd724e77"
+  },
+  "behavioral_equivalence_contract": {
+    "deliberate_live_difference": {
+      "live": "Only the live entrypoint may inject default_http_executor into the new live core after authorization preflight.",
+      "mock": "Frozen mock runner rejects default_http_executor."
+    },
+    "live_core_must_preserve": [
+      "manifest sequence selection",
+      "state refresh and validation",
+      "durable adapter evidence before checkpoint",
+      "verified raw archive recovery",
+      "partial archive fail-closed behavior",
+      "provider identity mismatch fail-closed behavior",
+      "noncheckpointing transport fault behavior",
+      "no automatic request replay after ambiguous evidence",
+      "checkpoint receipt construction",
+      "adapter and transport archive verification",
+      "credential sanitization inherited from frozen transport"
+    ],
+    "source_of_semantics": "Frozen mock runner plus base adapter/guard/live retrieval contracts."
+  },
+  "human_gate_after_implementation": {
+    "next_gate": "COMMIT_FINAL_LIVE_CORE_AND_ENTRYPOINT_THEN_STOP_FOR_EXPLICIT_HUMAN_WAVE_A_NETWORK_AUTHORIZATION",
+    "real_authorization_creation_permitted_before_that_gate": false,
+    "real_network_execution_permitted_before_that_gate": false
+  },
+  "pacing_contract": {
+    "cold_start_seconds": 0.5,
+    "live_core_accepts_prebuilt_paced_executor": true,
+    "live_entrypoint_constructs_paced_executor_once": true,
+    "live_entrypoint_constructs_provider_pacer_once": true,
+    "provider_maximum_initiation_rate_per_second": 2.0,
+    "redirects_and_retries_share_same_paced_executor": true,
+    "same_paced_executor_reused_for_entire_process": true
+  },
+  "parent_commit": "044aa94b22d9dfb4915bfdaeadc43b7397e94af4",
+  "preserved_frozen_mock": {
+    "existing_checksum_boundary_must_remain_passing": true,
+    "existing_hostile_suite_must_remain_passing": true,
+    "modification_permitted": false,
+    "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_mock_runner_v1.py",
+    "sha256": "21c67dd6791aac29d995ab33828ec6ff444fd4e52d911a10fd20809d30ca5242"
+  },
+  "reason": "The base live-entrypoint design proposed refactoring the already committed mock runner into a thin wrapper over a shared core. The mock runner is itself pinned by the previously committed transport-adapter/runner checksum boundary. Modifying it would invalidate that earlier frozen implementation boundary. Amendment 01 preserves the proven mock implementation byte-for-byte and adds the live shared core without rewriting history.",
+  "replaces": {
+    "implementation_architecture.core_rule": true,
+    "implementation_architecture.mock_wrapper": true,
+    "required_hostile_tests.shared_core_refactor_requirement": true
+  },
+  "revised_implementation_architecture": {
+    "adapter_modification_permitted": false,
+    "exact_transport_modification_permitted": false,
+    "existing_mock_runner": "triage_pre_review_text_wave_a_mock_runner_v1.py",
+    "existing_mock_runner_role": "Frozen proven mock implementation retained byte-identically as an independent regression oracle.",
+    "guard_modification_permitted": false,
+    "live_entrypoint": "triage_pre_review_text_wave_a_live_entrypoint_v1.py",
+    "live_entrypoint_role": "Sole wrapper permitted to bind the new live core to the frozen default_http_executor after all preclaim authorization checks succeed.",
+    "mock_runner_modification_permitted": false,
+    "new_independent_http_stack_permitted": false,
+    "new_live_core": "triage_pre_review_text_wave_a_runner_core_v1.py",
+    "new_live_core_role": "Transport-injected implementation of the same frozen state/archive/evidence/checkpoint orchestration used for live execution. It has no default network executor and creates no authorization."
+  },
+  "revised_required_hostile_tests": [
+    "Previously committed mock runner SHA remains exactly 21c67dd6791aac29d995ab33828ec6ff444fd4e52d911a10fd20809d30ca5242.",
+    "Previously committed adapter/mock checksum manifest continues to verify.",
+    "Existing 26-test adapter/mock hostile suite remains passing without modification.",
+    "Live core behavior is tested independently against the same success, recovery and fail-closed cases.",
+    "Live core has no default executor and cannot initiate a request unless an executor is injected.",
+    "Live entrypoint is the only new module that references default_http_executor for execution.",
+    "One ProviderPacer and one paced executor are constructed per live process and reused across manifest requests.",
+    "Missing authorization, noncanonical path, tracked authorization, wrong execution commit, dirty tracked tree, missing NCBI_EMAIL, NCBI_API_KEY presence, and wrong confirmation all fail before claim/network.",
+    "Synthetic test authorization fixtures may exist only inside temporary test directories; no production authorization.json is created by implementation or tests.",
+    "All live-entrypoint network tests replace the exact default_http_executor object with a synthetic executor before execution.",
+    "Same execution ID resume does not duplicate a verified transport request.",
+    "Different execution ID remains rejected by the frozen guard.",
+    "Credential sentinels never appear in claim, state, checkpoint, adapter evidence or archived metadata.",
+    "Wave B is never generated or invoked.",
+    "Production boundary remains byte-identical."
+  ],
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}

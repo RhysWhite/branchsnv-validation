@@ -1,0 +1,51 @@
+{
+  "authorization": {
+    "authorization_commit": "423d0b1b98a207c4287aadf56ab28c18e5003f96",
+    "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_ENVIRONMENT_SMOKE_001",
+    "one_time_environment_smoke_consumed": true,
+    "rerun_authorized": false
+  },
+  "completion": {
+    "all_eight_environment_smokes_closed": true,
+    "failed_and_remediated_attempts_preserved": true,
+    "final_toy_implementation_validation_passed": true,
+    "method_count": 8
+  },
+  "execution_boundary": {
+    "canonical_150_scenario_dataset_generated": false,
+    "canonical_benchmark_executed": false,
+    "production_bridge_performed": false,
+    "truth_used_for_parameter_tuning": false
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_ENVIRONMENT_AND_SMOKE_RESULTS_V1",
+  "implementation": {
+    "amendment_chain_file": "implementation_amendment_chain.tsv",
+    "amendment_chain_sha256": "d261a157950ecf05e3a9740f1f6650bca58fa6be673d9f06035a68fc40c51ed2",
+    "amendment_count": 15,
+    "base_freeze_commit": "f48bd14048866820c7a252d935ed2d26cb9407e5",
+    "final_amended_commit": "5f92bceda58f5828d238007c1859b5c2636536fa",
+    "final_artifact_sha256": {
+      "IMPLEMENTATION.md": "55128020c7812698d005a9786bd745ae77f150c2b6926961b0326819720b6b07",
+      "adapters.py": "c4d351b041c68d9d1a142e3f532d353042374b416f5d03da29378a79672779e5",
+      "environment_recipes.json": "9a236919ac350dca7e2da48a1dd6aa4f1f15edfeaa7693a5207e33c5fe5b7b8a",
+      "generator.py": "229ed49c541023d6d439967ca184dd82430a4b3592d42657131fac08c9f3f560",
+      "implementation_manifest.json": "ef8338083aa53da20aa66e50d0183d40e69d2d2a8270d91e4eb4ae9e033f4c94",
+      "metrics.py": "b6d3ca91702e79a8a1b2dc36591616fa1519f59bd342a005e9cf646c8e8475de",
+      "source_pins.tsv": "b1f5d81a33ac407e9cdf3d15dfa6bcd6e45c676808e3f5232bab9d9c1dcf1365",
+      "toy_validation.py": "7f087232c8beefbf6ca4351cd4e87d728a2b62838890275f60e8e26d9490f339"
+    },
+    "final_environment_recipes_sha256": "9a236919ac350dca7e2da48a1dd6aa4f1f15edfeaa7693a5207e33c5fe5b7b8a"
+  },
+  "methods": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "PastML",
+    "POUTINE",
+    "SNPPar",
+    "TreeTime"
+  ],
+  "next_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_DATASET_GENERATION_V1",
+  "status": "ENVIRONMENT_AND_SMOKE_COMPLETE"
+}

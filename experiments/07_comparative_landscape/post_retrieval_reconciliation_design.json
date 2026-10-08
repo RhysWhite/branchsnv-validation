@@ -1,0 +1,64 @@
+{
+  "amendment_36_policy": {
+    "adjudicated_success_is_retrieval_evidence": true,
+    "creates_metadata_precedence": false
+  },
+  "audit_summary": {
+    "path": "experiments/07_comparative_landscape/post_retrieval_reconciliation_audit_summary.json",
+    "sha256": "186db848788ae73109854bf1e255179d780b764c018b6cf96f67a581c1b3c290"
+  },
+  "identifier_conflict_policy": {
+    "automatic_resolution": false,
+    "component_count": 117,
+    "merge_permitted": false,
+    "status": "identifier_conflict_hold",
+    "title_agreement_can_override": false
+  },
+  "implementation_requirements": {
+    "component_rows": 1342,
+    "evidence_ledger_required": true,
+    "hostile_tests_required": true,
+    "network_permitted": false,
+    "raw_archive_mutation_permitted": false
+  },
+  "inputs": {
+    "assignment_count": 1847,
+    "component_count": 1342,
+    "logical_lookup_count": 1731,
+    "not_found_count": 33,
+    "success_count": 1698
+  },
+  "native_provider_identity_policy": {
+    "anchored_component_count": 311,
+    "component_count": 502,
+    "confirmed_unanchored_component_count": 183,
+    "cross_component_merge_permitted": false,
+    "multiple_anchor_component_count": 0,
+    "not_found_component_count": 8,
+    "self_confirmation_failure_count": 0
+  },
+  "next_gate": "IMPLEMENT_FROZEN_POST_RETRIEVAL_RECONCILIATION_WITHOUT_SCREENING",
+  "not_found_policy": {
+    "delete_identifier": false,
+    "route_specific_negative_evidence_only": true,
+    "scientific_exclusion": false,
+    "trigger_fuzzy_matching": false
+  },
+  "parent_metadata_retrieval_completion_commit": "247251cf0cc8c45c5daec0f6e4145540f3d81e8c",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "component_merge_performed": false,
+    "metadata_reconciliation_performed": false,
+    "scientific_screening_performed": false
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "title_recovery_policy": {
+    "component_count": 1067,
+    "conflict_hold_count": 2,
+    "equivalent_variant_count": 8,
+    "infer_missing_title": false,
+    "resolved_exact_count": 575,
+    "select_exact_variant_from_equivalent_set": false,
+    "unresolved_count": 482
+  }
+}

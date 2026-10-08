@@ -1,0 +1,74 @@
+{
+  "amendment_number": 34,
+  "frozen_dependencies": {
+    "logical_lookup_count": 1731,
+    "metadata_resolution_queue_manifest_sha256": "e6e674bb1d8cd132bb06c34a1a4d7751e7caa630bde83b3f47b09ad7d119bdfc",
+    "original_transport_implementation_manifest_sha256": "4da0a2ad4d315f1cd05338f83d2502b6b653f5561910992243a9750bc4487dea",
+    "source_contract_amendment_manifest_sha256": "8203c01825228f946588a175d1c6df6827b0153eb731e5996080d608e9d6171f"
+  },
+  "implementation_files_sha256": {
+    "metadata_resolution_transport_archive.py": "d6cda76c42509c8ac8225fc1987fc881dbb4bf35515ef7dec8eea610913bdcac",
+    "retrieve_metadata_resolution_queue.py": "10acf0d96b5aa8eb834a1c12a7a1f021b131358c159175a3a00f030958c3c7da",
+    "test_metadata_resolution_transport.py": "86c1d5f913658278f75f6c270ffe23a98b71b6dc0e0535bd0e953df7a40d946e",
+    "test_metadata_resolution_transport_archive.py": "1401dca31f0c51dc0d2cbf4acdcec45b959977bafd698009b92c3d7f3702a67d"
+  },
+  "implemented_corrections": {
+    "archive_non_sensitive_query_parameters_remain_exact": true,
+    "archive_reconstructs_redacted_operational_parameters": true,
+    "openalex_api_key_url_redaction": true,
+    "openalex_authentication": "api_key_query_parameter",
+    "openalex_bearer_authentication": false,
+    "openalex_location_header_url_redaction": true,
+    "openalex_redirect_credential_substitution_fails_closed": true,
+    "openalex_redirect_preserves_existing_api_key": true,
+    "opencitations_behavior_changed": false,
+    "pubmed_email_environment_variable": "NCBI_EMAIL",
+    "pubmed_email_required_before_live_execution": true,
+    "pubmed_email_url_redaction": true,
+    "pubmed_tool": "branchsnv_validation_experiment_07"
+  },
+  "interpretation": {
+    "classification": "post-freeze operational source-contract correction",
+    "live_execution_authorized_by_this_freeze": false,
+    "publication_identity_rules_changed": false,
+    "scientific_evidence_plan_reopened": false,
+    "screening_rules_changed": false
+  },
+  "live_state": {
+    "LIVE_EXECUTION_ENABLED": false,
+    "NCBI_EMAIL_required_before_live_execution": true,
+    "network_authorization_required": true
+  },
+  "original_transport_implementation_freeze_commit": "f6c0edb96d95b5e83fa74bf47db00386e5b1c136",
+  "repository_commit_before_amendment_implementation_freeze": "1f8bd90bd98de81e519f9c3c343f48a263f849f4",
+  "source_contract_amendment_commit": "1f8bd90bd98de81e519f9c3c343f48a263f849f4",
+  "status": "FROZEN_PRE_LIVE_EXECUTION_AMENDMENT_34_IMPLEMENTATION",
+  "unchanged_contract": {
+    "accepted_terminal_statuses": [
+      "success",
+      "not_found"
+    ],
+    "batching_enabled": false,
+    "component_merge_permitted": false,
+    "logical_lookup_count": 1731,
+    "logical_lookups_per_primary_operation": 1,
+    "max_redirect_hops": 5,
+    "max_transport_attempts": 5,
+    "maximum_request_initiation_rate_per_provider_per_second": 2,
+    "scientific_screening_permitted": false
+  },
+  "validation": {
+    "amendment_34_hostile_archive_tests_passed": true,
+    "amendment_34_hostile_transport_tests_passed": true,
+    "complete_current_offline_stack_passed": true,
+    "frozen_queue_checksum_passed": true,
+    "historical_experiment_07_regressions_passed": true,
+    "hostile_coverage_verified_via_ast": true,
+    "live_metadata_requests_made": false,
+    "original_implementation_freeze_auditable_in_history": true,
+    "production_retrieval_directory_present": false,
+    "repository_neutrality_passed": true,
+    "scientific_screening_performed": false,
+    "source_contract_amendment_checksum_passed": true
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "candidate_models": [
+    {
+      "candidate_id": "logistic_regression_balanced_l2_v1",
+      "class": "sklearn.linear_model.LogisticRegression",
+      "continuous_score": "predict_proba_positive_class",
+      "parameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "penalty": "l2",
+        "random_state": 0,
+        "solver": "liblinear"
+      }
+    },
+    {
+      "candidate_id": "linear_svc_balanced_l2_v1",
+      "class": "sklearn.svm.LinearSVC",
+      "continuous_score": "decision_function_positive_direction",
+      "parameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "dual": true,
+        "loss": "squared_hinge",
+        "max_iter": 10000,
+        "penalty": "l2",
+        "random_state": 0,
+        "tol": 0.0001
+      }
+    },
+    {
+      "candidate_id": "complement_nb_v1",
+      "class": "sklearn.naive_bayes.ComplementNB",
+      "continuous_score": "predict_proba_positive_class",
+      "parameters": {
+        "alpha": 1.0,
+        "norm": false
+      }
+    }
+  ],
+  "candidate_set_boundary": {
+    "additional_model_family_permitted_without_amendment": false,
+    "candidate_count": 3,
+    "character_ngram_candidate_permitted": false,
+    "embedding_candidate_permitted": false,
+    "grid_search_permitted": false,
+    "hyperparameter_search_permitted": false,
+    "transformer_candidate_permitted": false
+  },
+  "development_contract": {
+    "batch_ids": [
+      "B000001",
+      "B000002",
+      "B000003",
+      "B000004",
+      "B000005",
+      "B000006",
+      "B000007",
+      "B000008",
+      "B000009"
+    ],
+    "negative_label": "exclude",
+    "negative_numeric_encoding": 0,
+    "negative_records": 4022,
+    "positive_label": "retain_for_method_assessment",
+    "positive_numeric_encoding": 1,
+    "positive_records": 168,
+    "records": 4190
+  },
+  "environment_contract": {
+    "api_compatibility_checked_without_fit": true,
+    "api_reference_versions": {
+      "numpy": "1.26.4",
+      "python_major_minor": "3.10",
+      "scikit_learn": "1.9.0",
+      "scipy": "1.12.0"
+    },
+    "candidate_constructors_instantiated_without_fit": true,
+    "dedicated_branchsnv_environment_required": true,
+    "dedicated_environment_exists": false,
+    "existing_mixed_sample_environment_may_be_used_for_model_fit": false,
+    "package_installation_authorized_by_this_freeze": false
+  },
+  "final_family_selection": {
+    "candidate_metric": "macro_mean_batch_average_precision",
+    "performed_only_after_nested_development_evaluation": true,
+    "reason_full_fit_not_yet_authorized": "Environment and evaluator implementation must first be frozen and validated; threshold selection remains a later separate gate.",
+    "scheme": "leave_one_whole_batch_out_across_all_nine_development_batches",
+    "selected_family_may_be_fit_to_all_4190_records_after_selection": false,
+    "tie_break_sequence": [
+      "higher_minimum_batch_average_precision",
+      "higher_median_batch_average_precision",
+      "candidate_order"
+    ]
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_MODEL_CANDIDATES_V1",
+  "freeze_parent_commit": "970a6048d9c18050084ade44d8c346f00a450732",
+  "metric_contract": {
+    "acceptable_recall_threshold_defined": false,
+    "batch_metrics_reported_individually": true,
+    "default_model_decision_boundary_used": false,
+    "hard_predictions_generated": false,
+    "macro_mean_across_batches_reported": true,
+    "median_across_batches_reported": true,
+    "metric_function": "sklearn.metrics.average_precision_score",
+    "minimum_across_batches_reported": true,
+    "positive_label": 1,
+    "precision_at_threshold_computed": false,
+    "primary_ranking_metric": "average_precision",
+    "recall_at_threshold_computed": false,
+    "threshold_optimization_permitted": false
+  },
+  "nested_validation": {
+    "candidate_model_refit_for_every_fold": true,
+    "candidate_order_for_final_tie_break": [
+      "logistic_regression_balanced_l2_v1",
+      "linear_svc_balanced_l2_v1",
+      "complement_nb_v1"
+    ],
+    "inner_candidate_selection_metric": "macro_mean_batch_average_precision",
+    "inner_fold_count_per_outer_fold": 8,
+    "inner_metric_definition": "Compute sklearn.metrics.average_precision_score separately on each held-out inner batch using retain_for_method_assessment as positive class, then take the unweighted arithmetic mean across inner batches.",
+    "inner_scheme": "leave_one_whole_batch_out_within_outer_training_batches",
+    "inner_tie_break_sequence": [
+      "higher_minimum_inner_batch_average_precision",
+      "higher_median_inner_batch_average_precision",
+      "candidate_order"
+    ],
+    "no_test_batch_information_used_during_fit": true,
+    "outer_fold_count": 9,
+    "outer_holdout_unit": "entire_batch",
+    "outer_metric_is_acceptance_threshold": false,
+    "outer_primary_metric": "macro_mean_outer_batch_average_precision",
+    "outer_procedure": "For each outer held-out batch, select one candidate family using only the eight outer-training batches via the frozen inner procedure; refit that selected family and a newly fitted TF-IDF vectorizer on all eight outer-training batches; emit continuous scores only for the untouched outer batch.",
+    "outer_results_authorize_future_scoring": false,
+    "outer_scheme": "leave_one_whole_batch_out",
+    "vectorizer_refit_for_every_inner_fold": true,
+    "vectorizer_refit_for_every_outer_fold": true
+  },
+  "next_gate": "CREATE_AND_FREEZE_DEDICATED_BRANCHSNV_TRIAGE_V1_MODELLING_ENVIRONMENT_BEFORE_MODEL_IMPLEMENTATION",
+  "parent_development_freeze_hashes": {
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_DEVELOPMENT_V1.md": "87714693cdb4424091de5c2ca09f7b65c997a2d63d7bacc63623e32aaabd7af7",
+    "experiments/07_comparative_landscape/pre_review_triage_development_v1.sha256": "8f6d390f8b4ce83471add5e3a9d1c26241da467c0383a35ae6fa6756037b4e87",
+    "experiments/07_comparative_landscape/pre_review_triage_development_v1_design.json": "080b392e363bfa60232be7bcc4c478175163726703f3382b694643a46602bf26",
+    "experiments/07_comparative_landscape/pre_review_triage_development_v1_freeze.py": "b6a27689655738a4ff060fdb8e5840c325121a82fa03f40b8675371e5eeda68b"
+  },
+  "purpose": "Freeze the exact pre-review text-model candidate set, feature representation, nested whole-batch validation procedure, candidate-selection metric, and environment requirements before any vectorizer or model fitting.",
+  "schema_version": 1,
+  "scientific_authority": {
+    "abstract_absent_records_remain_human_review": true,
+    "blind_validation_content_use_authorized": false,
+    "future_scoring_authorized_by_this_freeze": false,
+    "model_fit_authorized_by_this_freeze": false,
+    "production_auto_exclusion_authorized": false,
+    "production_ledger_write_authorized": false,
+    "scientific_screening_decisions_authorized": false,
+    "threshold_selection_authorized_by_this_freeze": false,
+    "unsupported_future_strata_remain_outside_model_authority": true,
+    "vectorizer_fit_authorized_by_this_freeze": false
+  },
+  "status": "FROZEN_PRE_MODEL_IMPLEMENTATION",
+  "text_representation": {
+    "abstract_weighting": "none",
+    "document_construction": "title_text + '\\n\\n' + abstract_text",
+    "input_fields": [
+      "title_text",
+      "abstract_text"
+    ],
+    "source_artifact": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_normalized_text.tsv",
+    "source_sha256": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "title_weighting": "none",
+    "vectorizer": {
+      "class": "sklearn.feature_extraction.text.TfidfVectorizer",
+      "fit_scope": "training_partition_only",
+      "held_out_text_may_affect_vocabulary": false,
+      "parameters": {
+        "analyzer": "word",
+        "dtype": "numpy.float64",
+        "lowercase": true,
+        "max_df": 1.0,
+        "max_features": null,
+        "min_df": 2,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "norm": "l2",
+        "smooth_idf": true,
+        "stop_words": null,
+        "strip_accents": "unicode",
+        "sublinear_tf": true,
+        "token_pattern": "(?u)\\b\\w\\w+\\b",
+        "use_idf": true
+      }
+    }
+  }
+}

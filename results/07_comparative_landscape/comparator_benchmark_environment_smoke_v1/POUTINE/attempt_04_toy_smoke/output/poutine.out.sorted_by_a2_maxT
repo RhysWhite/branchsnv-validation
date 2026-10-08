@@ -1,0 +1,5 @@
+segsite_ID	physical_pos	allele1	allele2	a1_count	a2_count	a1_count_extant_only	a2_count_extant_only	obs_homoplasy_counts	r_a1	r_a2	pointwise_pvalue_a1	pointwise_pvalue_a2	obs_binom_pvalue_a1	obs_binom_pvalue_a2	r_maxT_a1	r_maxT_a2	familywise_pvalue_a1	familywise_pvalue_a2
+2	20	A	G	0	2	0	2	[0, 0, 1, 1]	10	6	1.0	0.6363636363636364	1.0	0.75	10	6	1.0	0.6363636363636364
+1	10	A	C	0	0	0	0	[0, 0, 0, 0]	10	10	1.0	1.0	1.0	1.0	10	10	1.0	1.0
+3	30	C	T	0	0	0	0	[0, 0, 0, 0]	10	10	1.0	1.0	1.0	1.0	10	10	1.0	1.0
+4	40	G	C	0	0	0	0	[0, 0, 0, 0]	10	10	1.0	1.0	1.0	1.0	10	10	1.0	1.0

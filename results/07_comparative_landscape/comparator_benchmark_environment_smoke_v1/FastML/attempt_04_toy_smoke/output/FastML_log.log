@@ -1,0 +1,16 @@
+
+
+========================================= NEW FASTML RUN STARTED ===========================================
+COMMAND: perl /home/rwhite/branchsnv-comparator-build/fastml-smoke/www/fastml/FastML_Wrapper.pl --MSA_File /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/input/toy.fasta --seqType nuc --outDir /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output --Tree /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/input/toy.tree --SubMatrix JC_Nuc --OptimizeBL no --UseGamma no --jointReconstruction yes
+FULL RUNNING PARAMETERS (INCLUDING DEFAULTS):
+--MSA_File /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.fasta --outDir /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/ --seqType nuc --Tree /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.tree --TreeAlg NJ --SubMatrix JC_Nuc --OptimizeBL NO --UseGamma NO --Alpha  --jointReconstruction YES --indelReconstruction BOTH --indelCutOff 0.5
+
+RunFastML: running cd /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/; /home/rwhite/branchsnv-comparator-build/fastml-smoke/www/fastml/../../programs/fastml/fastml -s /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.fasta -mn -qf -t /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.tree -b > /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/fastml.std
+
+The file seq.marginal.txt or prob.marginal.txt was not created.
+
+	FASTML EXIT ON ERROR:
+FASTML failed to run, one of the files seq.marginal.txt or prob.marginal.txt were not created...
+
+
+Exit Time: 09:52:16 07-10-2026

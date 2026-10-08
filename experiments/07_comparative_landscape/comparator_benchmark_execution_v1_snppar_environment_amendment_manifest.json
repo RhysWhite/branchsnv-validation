@@ -1,0 +1,33 @@
+{
+  "authorization_consumed": true,
+  "benchmark_scenarios_changed": false,
+  "changed_section": "methods.SNPPar",
+  "environment": {
+    "PYTHONNOUSERSITE": "1",
+    "biopython": "1.76",
+    "ete3": "3.1.3",
+    "phylo_treetime": "0.8.5",
+    "python": "3.8.20"
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_SNPPAR_ENVIRONMENT_AMENDMENT_V1",
+  "metrics_changed": false,
+  "next_gate": "RERUN_SNPPAR_AUTHORIZED_TOY_SMOKE_WITH_FROZEN_ENVIRONMENT_V1",
+  "other_comparator_recipes_changed": false,
+  "output_contract_changed": false,
+  "parent_authorization_commit": "73305654e20a7d2e9b62a73166bb5c7de8c25a54",
+  "recipe_after_sha256": "bfda0a3e1b5244ee3642f843cc22f56ac8efc61f0caaf6642ed4521d735b3b20",
+  "recipe_before_sha256": "743af4effea96e8afbba6be87b9796ee89471f024789c60fc74487d4ad6f9921",
+  "recipe_file": "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+  "run_contract_changed": false,
+  "semantic_checks": {
+    "global_policy_unchanged": true,
+    "other_methods_unchanged": true,
+    "recipe_schema_unchanged": true,
+    "status_unchanged": true
+  },
+  "source_changed": false,
+  "source_pin": "0386df8edcff26faf242bc268c5f8865b09c9de9",
+  "source_ref": "v1.2",
+  "status": "FROZEN_AMENDMENT_V1",
+  "truth_generator_changed": false
+}

@@ -1,0 +1,32 @@
+{
+  "authorization_consumed": true,
+  "benchmark_scenarios_changed": false,
+  "change": {
+    "after_sha256": "5745112944c348081a7260d57428fbf561c831b2615902a138fee0a42e839d42",
+    "before_sha256": "b5b6dae15008d403d8e408ea44220651b390c12f24a3902dfb7c5312daa01b16",
+    "file": "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "function": "parse_tabular_node_states",
+    "rule": "Exactly one distinct A/C/G/T state per node-site is retained; zero or multiple reported nucleotide states are encoded as N."
+  },
+  "existing_toy_validation": "PASS",
+  "focused_test": {
+    "file": "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_pastml_ambiguity_amendment_test.py",
+    "sha256": "c5f9c7c249fb8cc2c0f8b2d0e5f6862d339c0e64945a30c00ab71f4f37967e48",
+    "status": "PASS"
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_PASTML_AMBIGUITY_ADAPTER_AMENDMENT_V1",
+  "metrics_changed": false,
+  "next_gate": "RESUME_COMPARATOR_BENCHMARK_ENVIRONMENT_AND_SMOKE_TEST_V1",
+  "other_adapters_changed": false,
+  "parent_authorization_commit": "c4d9b63c32c5760c61997e6ea709da8e65374300",
+  "pastml": {
+    "machine_readable_interface": "--out_data",
+    "multi_row_ambiguity_observed": true,
+    "source_pin": "1654471801c8104b51ac45eda625c289d8e3f1ac",
+    "version": "1.9.51"
+  },
+  "pastml_inference_settings_changed": false,
+  "pastml_source_or_version_changed": false,
+  "status": "FROZEN_AMENDMENT_V1",
+  "truth_generator_changed": false
+}

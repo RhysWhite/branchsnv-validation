@@ -1,0 +1,132 @@
+{
+  "artifact_contract": {
+    "artifact_count": 7,
+    "artifact_sha256": {
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/execution_claim.json": "237920630d50e436ef7b5b390b091f0bcbe86ec9c80495409e8c37865c21cec5",
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/execution_completion.json": "61341cbb2bf36dd9c62d9de533bcda5d323cc05cc77a023e7b43e1eed68b38e3",
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/final_candidate_batch_metrics.tsv": "dacfaf079b33d20e95ec95021b7b6bb481ed9e4117d3e0de7a25793e98f253ec",
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/inner_metrics.tsv": "835a822048479a7ece99a5184bb7480e60119426179aefb0d6bf0364f2200ff1",
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/outer_metrics.tsv": "49a71cd13bafd0f11308e7a51b42a2c4f4dcf176c8fdc886fe2608169829ee81",
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/outer_scores.tsv": "1da5b38902d893a91cb99b7d9965f179717667c42b66ff80f63313ac50251c47",
+      "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/summary.json": "dc44be6039cdef5b473dfaf4f619fb214e875f5b928ea4673463437fce5604d8"
+    },
+    "result_directory": "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1"
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_environment_state_v1.sha256": "98eef6587a78bcc74f2853a1ef6302d1b3b4c9606f9d5f3f3888bda47959b054",
+    "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_execution_authorization.sha256": "2938c9137aa0a132317914248529d22cec2a3098f608025add35283a670e32c1",
+    "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_implementation.sha256": "115a5d08f00be48367b2d6c968892ab63e6be40d5bf0b854f9f6df1839ced699",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "candidate_result": {
+    "all_nine_outer_folds_selected_final_family": true,
+    "candidate_aggregates": [
+      {
+        "candidate_id": "logistic_regression_balanced_l2_v1",
+        "macro_mean_ap": 0.6880426563807389,
+        "median_ap": 0.7109827565823919,
+        "minimum_ap": 0.44326554671382257
+      },
+      {
+        "candidate_id": "linear_svc_balanced_l2_v1",
+        "macro_mean_ap": 0.7165093450310815,
+        "median_ap": 0.7101188144666406,
+        "minimum_ap": 0.5286143286143286
+      },
+      {
+        "candidate_id": "complement_nb_v1",
+        "macro_mean_ap": 0.30979572753382134,
+        "median_ap": 0.3134920634920635,
+        "minimum_ap": 0.10310962591664347
+      }
+    ],
+    "candidate_order": [
+      "logistic_regression_balanced_l2_v1",
+      "linear_svc_balanced_l2_v1",
+      "complement_nb_v1"
+    ],
+    "outer_selected_candidates": {
+      "B000001": {
+        "outer_average_precision": 0.8067979644645097,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000002": {
+        "outer_average_precision": 0.9480519480519478,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000003": {
+        "outer_average_precision": 0.5286143286143286,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000004": {
+        "outer_average_precision": 0.7101188144666406,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000005": {
+        "outer_average_precision": 0.8266666666666667,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000006": {
+        "outer_average_precision": 0.6854245908889871,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000007": {
+        "outer_average_precision": 0.7575757575757576,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000008": {
+        "outer_average_precision": 0.6195286195286195,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      },
+      "B000009": {
+        "outer_average_precision": 0.5658054150222767,
+        "selected_candidate_id": "linear_svc_balanced_l2_v1"
+      }
+    },
+    "selected_candidate_id": "linear_svc_balanced_l2_v1",
+    "selection_basis": "unweighted_macro_mean_batch_average_precision_then_minimum_then_median_then_frozen_candidate_order"
+  },
+  "development_population": {
+    "exclude": 4022,
+    "records": 4190,
+    "retain_for_method_assessment": 168,
+    "whole_batches": 9
+  },
+  "execution_identity": {
+    "authorization_commit": "a354aea5baf6cefb2d8e3aa45d20c19db79594c5",
+    "claim_status": "CLAIMED_BEFORE_FIRST_FIT",
+    "completion_status": "DEVELOPMENT_EVALUATION_COMPLETED",
+    "execution_id": "TRIAGE-DEV-EVAL-V1-001",
+    "one_time_execution_consumed": true,
+    "rerun_authorized": false
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_DEVELOPMENT_EVALUATION_RESULTS_V1",
+  "freeze_parent_commit": "a354aea5baf6cefb2d8e3aa45d20c19db79594c5",
+  "independent_audit": {
+    "artifact_hashes_reproduced": true,
+    "final_candidate_selection_reproduced": true,
+    "fixed_family_aggregates_reproduced": true,
+    "nested_inner_selections_reproduced": true,
+    "outer_score_candidate_assignments_reproduced": true
+  },
+  "next_gate": "FREEZE_PRE_REVIEW_TRIAGE_OPERATING_POINT_DESIGN_V1_BEFORE_ANY_THRESHOLD_SELECTION_OR_FUTURE_SCORING",
+  "result_structure": {
+    "fixed_candidate_batch_metric_rows": 27,
+    "inner_metric_rows": 216,
+    "outer_metric_rows": 9,
+    "outer_score_rows": 4190,
+    "unique_outer_score_entities": 4190
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "blind_validation_content_used": false,
+    "development_evidence_only": true,
+    "future_scoring_performed": false,
+    "hard_predictions_generated": false,
+    "production_mutated": false,
+    "scientific_screening_decisions_made": false,
+    "selected_family_establishes_future_performance": false,
+    "threshold_selected": false
+  },
+  "status": "FROZEN_DEVELOPMENT_EVALUATION_RESULTS_V1"
+}

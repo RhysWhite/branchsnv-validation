@@ -1,0 +1,50 @@
+{
+    "authorization_id": "FASTML_NODE_MAPPING_AMENDMENT_001",
+    "authorized_change": {
+        "behaviour": [
+            "parse FastML node sequences",
+            "derive descendant-tip sets from FastML and benchmark trees",
+            "map FastML node labels to benchmark node labels by identical descendant-tip sets",
+            "require complete one-to-one tree coverage",
+            "require a reconstructed sequence for every mapped FastML node",
+            "return benchmark-labeled node sequences for the existing events_from_node_sequences function"
+        ],
+        "event_logic_changed": false,
+        "helper": "fastml_node_sequences_for_tree",
+        "inputs": [
+            "FastML joint-reconstruction FASTA text",
+            "FastML labeled output Newick",
+            "benchmark Newick"
+        ],
+        "scientific_settings_changed": false,
+        "tests": [
+            "successful arbitrary-internal-label mapping",
+            "single expected nucleotide event after existing event normalization",
+            "different tip sets fail closed",
+            "ambiguous descendant-tip mapping fails closed",
+            "missing reconstructed node sequence fails closed"
+        ]
+    },
+    "authorized_files": [
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+        "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+    ],
+    "baseline_sha256": {
+        "adapters.py": "504094c58a9c1d9ccaed0515e3a6a6950d1d245823f4037a27342f08a24e5019",
+        "toy_validation.py": "ac31145fb1006cb1aac8ac7346e9d51fffbb2ea86461e246c909e500ea877a1a"
+    },
+    "next_gate": "IMPLEMENT_FASTML_NODE_MAPPING_AMENDMENT_001",
+    "not_authorized": [
+        "FastML source modification",
+        "FastML run-contract change",
+        "FastML rebuild or execution",
+        "events_from_node_sequences modification",
+        "generator change",
+        "metric change",
+        "truth change",
+        "scenario change",
+        "full benchmark execution"
+    ],
+    "parent_commit": "8898c603edeb5feb166475eadb94e24c9d68f8a7",
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}

@@ -1,0 +1,55 @@
+{
+  "authorization_commit": "e79d47fce7e60fc1af1c36a45904a23b272b3055",
+  "authorization_consumed": true,
+  "authorization_id": "COMPARATOR_BENCHMARK_DATASET_GENERATION_V1_001",
+  "completion": {
+    "scenario_count": 150,
+    "comparator_input_file_count": 600,
+    "truth_file_count": 300,
+    "manifest_recorded_file_count": 900,
+    "result_tree_checksum_entry_count": 901,
+    "generation_exit_code": 0,
+    "generation_stderr_empty": true,
+    "independent_dataset_validation_passed": true
+  },
+  "dataset": {
+    "root": "results/07_comparative_landscape/comparator_benchmark_dataset_v1",
+    "generated_payload_bytes_are_not_committed_to_git": true,
+    "generated_payloads_are_preserved_for_external_release_archive": true,
+    "inputs_and_truth_are_stored_separately": true
+  },
+  "execution_boundary": {
+    "benchmark_executed": false,
+    "third_party_comparators_executed": false,
+    "truth_used_for_comparator_parameter_tuning": false,
+    "production_bridge_performed": false
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_DATASET_GENERATION_RESULTS_V1",
+  "freeze_parent_commit": "e79d47fce7e60fc1af1c36a45904a23b272b3055",
+  "next_gate": "AUTHORIZE_COMPARATOR_BENCHMARK_EXECUTION_V1",
+  "next_gate_note": "Benchmark execution remains blocked until a separate one-use execution authorization is frozen against this dataset-generation result.",
+  "rerun_authorized": false,
+  "result_artifacts": {
+    "benchmark_dataset_manifest.tsv": {
+      "bytes": 149900,
+      "sha256": "e24b9eac940da5db304c2855698d2969974b7102d4dad8bda5120996a315e310"
+    },
+    "checksums.sha256": {
+      "bytes": 142662,
+      "sha256": "893216511f5e77bf7fd78671cd9c02f6878ebda88a4462fc3ebc773b2a6dd233"
+    },
+    "run.stdout.txt": {
+      "bytes": 284,
+      "sha256": "7ae3648efcd501caccdc655ebef30b2609dc14e17bbe99b2956075a8c4191a59"
+    },
+    "run.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run.exit.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    }
+  },
+  "status": "FROZEN_PRE_BENCHMARK_EXECUTION"
+}

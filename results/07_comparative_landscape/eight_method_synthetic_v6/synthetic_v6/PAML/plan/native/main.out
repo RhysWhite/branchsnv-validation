@@ -1,0 +1,57 @@
+      4    200
+
+tipA                            ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+tipB                            ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA 
+tipC                            ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+tipD                            ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA 
+
+
+
+Printing out site pattern counts
+
+
+         4          6  P
+
+tipA                            ACGTTT
+tipB                            ACGATT
+tipC                            ACGTAT
+tipD                            ACGAAT
+
+
+
+   50   50   50    1    1   48
+
+
+BASEML (in paml version 4.10.10, 29 Jan 2026)  /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/plan/generated/alignment.phy  JC69 
+Frequencies..
+                                    T      C      A      G
+tipA                           0.25000 0.25000 0.25000 0.25000 GC = 0.500
+tipB                           0.24500 0.25000 0.25500 0.25000 GC = 0.500
+tipC                           0.24500 0.25000 0.25500 0.25000 GC = 0.500
+tipD                           0.24000 0.25000 0.26000 0.25000 GC = 0.500
+
+Homogeneity statistic: X2 = 0.00040 G = 0.00040 
+
+Average                        0.24500 0.25000 0.25500 0.25000
+
+# constant sites:    198 (99.00%)
+ln Lmax (unconstrained) = -287.042374
+
+Distances: JC69 (alpha set at 0.00)
+This matrix is not used in later m.l. analysis.
+
+tipA             
+tipB               0.005017
+tipC               0.005017  0.010067
+tipD               0.010067  0.005017  0.005017
+
+TREE #  1:  ((1, 2), (3, 4));  MP score: 3.00
+This is a rooted tree.  Please check!
+lnL(ntime:  0  np:  0):   -402.977540    +0.000000
+
+
+tree length =   0.60000
+
+((tipA, tipB), (tipC, tipD));
+
+((tipA: 0.100000, tipB: 0.100000): 0.100000, (tipC: 0.100000, tipD: 0.100000): 0.100000);

@@ -1,0 +1,192 @@
+PASS | comparative landscape v1 result freeze validates
+PASS | self-contained approved-decision ledger = 12,156 rows
+PASS | 247 distinct method/tool identities
+PASS | 218 comparative-landscape identities
+PASS | 3 direct / 26 near-direct / 189 supporting / 29 noncomparators
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | six frozen prior-anchor carry-forwards preserved
+PASS | CODEML->PAML and ProtASR2->ProtASR consolidations enforced
+PASS | archival validation does not require mutable local review workspace
+PASS | no benchmark execution or production-bridge authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION
+PASS | comparative landscape v1 result freeze validates
+PASS | self-contained approved-decision ledger = 12,156 rows
+PASS | 247 distinct method/tool identities
+PASS | 218 comparative-landscape identities
+PASS | 3 direct / 26 near-direct / 189 supporting / 29 noncomparators
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | six frozen prior-anchor carry-forwards preserved
+PASS | CODEML->PAML and ProtASR2->ProtASR consolidations enforced
+PASS | archival validation does not require mutable local review workspace
+PASS | no benchmark execution or production-bridge authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION
+PASS | comparator benchmark feasibility design v1 validates
+PASS | frozen source universe = 29 direct/near method families
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | 26 near-direct method families
+PASS | feasibility separated from scientific comparator status
+PASS | no installation/software execution/benchmark authority granted
+PASS | no production-bridge authority granted
+PASS | next gate = AUTHORIZE_COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1
+PASS | comparative landscape v1 result freeze validates
+PASS | self-contained approved-decision ledger = 12,156 rows
+PASS | 247 distinct method/tool identities
+PASS | 218 comparative-landscape identities
+PASS | 3 direct / 26 near-direct / 189 supporting / 29 noncomparators
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | six frozen prior-anchor carry-forwards preserved
+PASS | CODEML->PAML and ProtASR2->ProtASR consolidations enforced
+PASS | archival validation does not require mutable local review workspace
+PASS | no benchmark execution or production-bridge authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION
+PASS | comparator benchmark feasibility design v1 validates
+PASS | frozen source universe = 29 direct/near method families
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | 26 near-direct method families
+PASS | feasibility separated from scientific comparator status
+PASS | no installation/software execution/benchmark authority granted
+PASS | no production-bridge authority granted
+PASS | next gate = AUTHORIZE_COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1
+PASS | comparator benchmark feasibility assessment authorization validates
+PASS | source-backed assessment authorized for all 29 frozen method families
+PASS | feasibility classification + assessment artifact generation authorized
+PASS | software installation/execution remains unauthorized
+PASS | benchmark execution remains unauthorized
+PASS | frozen direct/near scientific classifications remain immutable
+PASS | production bridge and production ledger mutation remain unauthorized
+comparator_benchmark_feasibility_v1.tsv: OK
+comparator_benchmark_feasibility_v1_manifest.json: OK
+comparator_benchmark_feasibility_v1_summary.md: OK
+PASS | comparator benchmark feasibility v1 result freeze validates
+PASS | 29 method families complete
+PASS | 2 quantitative / 6 endpoint-specific / 21 contextual
+PASS | benchmark candidate set = 8 methods
+PASS | frozen direct/near comparator status unchanged
+PASS | authorization consumed exactly once; rerun unauthorized
+PASS | no installation/software execution/benchmark execution occurred
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_EXECUTION_DESIGN_BEFORE_EXECUTION
+PASS | comparator benchmark execution design v1 validates
+PASS | exact 8-method executable universe
+PASS | branch-change arm = 6 external workflows
+PASS | homoplasy arm = 4 external workflows
+PASS | exact 150-scenario truth design
+PASS | marker/genotyping endpoints explicitly not force-benchmarked
+PASS | TreeTime/SNPPar/POUTINE dependency family explicit
+PASS | no installation/environment build/software execution/benchmark authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_BEFORE_EXECUTION
+PASS | comparative landscape v1 result freeze validates
+PASS | self-contained approved-decision ledger = 12,156 rows
+PASS | 247 distinct method/tool identities
+PASS | 218 comparative-landscape identities
+PASS | 3 direct / 26 near-direct / 189 supporting / 29 noncomparators
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | six frozen prior-anchor carry-forwards preserved
+PASS | CODEML->PAML and ProtASR2->ProtASR consolidations enforced
+PASS | archival validation does not require mutable local review workspace
+PASS | no benchmark execution or production-bridge authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION
+PASS | comparative landscape v1 result freeze validates
+PASS | self-contained approved-decision ledger = 12,156 rows
+PASS | 247 distinct method/tool identities
+PASS | 218 comparative-landscape identities
+PASS | 3 direct / 26 near-direct / 189 supporting / 29 noncomparators
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | six frozen prior-anchor carry-forwards preserved
+PASS | CODEML->PAML and ProtASR2->ProtASR consolidations enforced
+PASS | archival validation does not require mutable local review workspace
+PASS | no benchmark execution or production-bridge authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION
+PASS | comparator benchmark feasibility design v1 validates
+PASS | frozen source universe = 29 direct/near method families
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | 26 near-direct method families
+PASS | feasibility separated from scientific comparator status
+PASS | no installation/software execution/benchmark authority granted
+PASS | no production-bridge authority granted
+PASS | next gate = AUTHORIZE_COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1
+PASS | comparative landscape v1 result freeze validates
+PASS | self-contained approved-decision ledger = 12,156 rows
+PASS | 247 distinct method/tool identities
+PASS | 218 comparative-landscape identities
+PASS | 3 direct / 26 near-direct / 189 supporting / 29 noncomparators
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | six frozen prior-anchor carry-forwards preserved
+PASS | CODEML->PAML and ProtASR2->ProtASR consolidations enforced
+PASS | archival validation does not require mutable local review workspace
+PASS | no benchmark execution or production-bridge authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_DESIGN_BEFORE_EXECUTION
+PASS | comparator benchmark feasibility design v1 validates
+PASS | frozen source universe = 29 direct/near method families
+PASS | direct set = SNPPar + SubRecon + TreeTime
+PASS | 26 near-direct method families
+PASS | feasibility separated from scientific comparator status
+PASS | no installation/software execution/benchmark authority granted
+PASS | no production-bridge authority granted
+PASS | next gate = AUTHORIZE_COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1
+PASS | comparator benchmark feasibility assessment authorization validates
+PASS | source-backed assessment authorized for all 29 frozen method families
+PASS | feasibility classification + assessment artifact generation authorized
+PASS | software installation/execution remains unauthorized
+PASS | benchmark execution remains unauthorized
+PASS | frozen direct/near scientific classifications remain immutable
+PASS | production bridge and production ledger mutation remain unauthorized
+comparator_benchmark_feasibility_v1.tsv: OK
+comparator_benchmark_feasibility_v1_manifest.json: OK
+comparator_benchmark_feasibility_v1_summary.md: OK
+PASS | comparator benchmark feasibility v1 result freeze validates
+PASS | 29 method families complete
+PASS | 2 quantitative / 6 endpoint-specific / 21 contextual
+PASS | benchmark candidate set = 8 methods
+PASS | frozen direct/near comparator status unchanged
+PASS | authorization consumed exactly once; rerun unauthorized
+PASS | no installation/software execution/benchmark execution occurred
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_EXECUTION_DESIGN_BEFORE_EXECUTION
+PASS | comparator benchmark execution design v1 validates
+PASS | exact 8-method executable universe
+PASS | branch-change arm = 6 external workflows
+PASS | homoplasy arm = 4 external workflows
+PASS | exact 150-scenario truth design
+PASS | marker/genotyping endpoints explicitly not force-benchmarked
+PASS | TreeTime/SNPPar/POUTINE dependency family explicit
+PASS | no installation/environment build/software execution/benchmark authority granted
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_BEFORE_EXECUTION
+PASS | comparator benchmark execution implementation authorization validates
+PASS | implementation of generator/adapters/metrics/recipes authorized
+PASS | exact-version/source-pin research authorized
+PASS | noncanonical toy fixtures + unit tests authorized
+PASS | third-party install/execution remains unauthorized
+PASS | canonical 150-scenario generation remains unauthorized
+PASS | canonical benchmark execution remains unauthorized
+PASS | production bridge remains unauthorized
+===== TOY-ONLY IMPLEMENTATION VALIDATION =====
+PASS | canonical generation fail-closed
+PASS | deterministic independent toy generator
+PASS | canonical descendant-tip edge identifiers
+PASS | exact 5% variable-site missingness
+PASS | event ledger nucleotide-state invariants
+PASS | static input-adapter contracts
+PASS | output-tree canonical edge mapping
+PASS | truth-blind metric engine
+PASS | synthetic tool-output parser fixtures
+PASS | no third-party comparator installed or executed
+TOY_IMPLEMENTATION_VALIDATION=PASS
+PASS | comparator benchmark execution implementation v1 validates
+PASS | exact 8 comparator source pins frozen
+PASS | master seed = 20261005012417
+PASS | canonical generator remains fail-closed
+PASS | independent generator/adapters/metrics toy validation
+PASS | POUTINE/PastML smoke-resolution boundaries explicit
+PASS | no third-party install, comparator execution, or canonical generation
+PASS | next gate = AUTHORIZE_COMPARATOR_BENCHMARK_ENVIRONMENT_BUILD_AND_SMOKE_TEST_V1
+PASS | comparator environment-build + smoke authorization validates
+PASS | exact 8-method frozen universe
+PASS | isolated environment construction authorized
+PASS | pinned-source/dependency network retrieval authorized
+PASS | third-party execution restricted to noncanonical smoke fixtures
+PASS | POUTINE CLI resolution authorized
+PASS | PastML machine-readable output resolution authorized
+PASS | canonical 150-scenario generation remains unauthorized
+PASS | canonical benchmark execution remains unauthorized
+PASS | frozen design and source pins remain immutable
+PASS | production bridge remains unauthorized
+PASS | next gate = FREEZE_COMPARATOR_BENCHMARK_ENVIRONMENT_AND_SMOKE_RESULTS_V1

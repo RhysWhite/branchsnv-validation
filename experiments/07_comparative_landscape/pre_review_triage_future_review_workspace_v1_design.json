@@ -1,0 +1,197 @@
+{
+  "authoritative_identity_contract": {
+    "existing_b000xxx_membership_mutated": false,
+    "new_scientific_batch_ids_created": false,
+    "scientific_batch_membership": "existing_baseline_batch_membership.tsv",
+    "scientific_event_history": "existing_baseline_scientific_screening_execution/event_ledger.tsv",
+    "screening_entity_id": "existing_frozen_baseline_screening_entity_id"
+  },
+  "design_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1",
+  "design_parent_commit": "115fcf11c81a72e54cd390036fa2bf448c1b9712",
+  "downstream_projection_contract": {
+    "cross_batch_production_transaction_authorized": false,
+    "future_live_events_must_use_existing_append_only_event_machinery": true,
+    "human_review_work_and_live_event_authority_separate": true,
+    "review_results_must_later_be_projected_back_to_existing_b000xxx_membership": true,
+    "review_workspace_is_not_primary_scientific_history": true
+  },
+  "generation_invariants": {
+    "accepted_scientific_event_overlap_must_equal": 0,
+    "active_membership_exactly_equals_review_work_universe": true,
+    "all_proposed_scientific_fields_initially_blank": true,
+    "all_six_carry_forwards_must_remain_priority_provenance": true,
+    "carry_forward_entity_count": 6,
+    "carry_forward_reassessment_must_equal": false,
+    "future_entity_count": 12162,
+    "production_ledger_must_remain_unmodified": true,
+    "raw_model_score_must_not_enter_workspace": true,
+    "review_work_entity_count": 12156,
+    "selected_candidate_id_must_not_enter_workspace": true
+  },
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_WITHOUT_SCIENTIFIC_DECISIONS_OR_PRODUCTION_MUTATION",
+  "observed_production_state_at_design_freeze": {
+    "event_count": 2011,
+    "event_ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "future_entity_event_rows": 0,
+    "note": "The event ledger is append-only and may legitimately advance outside this future-review universe. Workspace generation must revalidate zero accepted event overlap for the target future entities rather than require this whole-ledger SHA to remain unchanged."
+  },
+  "packet_contract": {
+    "manual_packet_ids": [
+      "manual_001"
+    ],
+    "packet_membership_is_review_work_order": true,
+    "packet_membership_is_scientifically_authoritative": false,
+    "packet_scientific_decision_fields_initially_blank": true,
+    "priority_packet_ids": [
+      "priority_001",
+      "priority_002",
+      "priority_003",
+      "priority_004",
+      "priority_005",
+      "priority_006",
+      "priority_007",
+      "priority_008",
+      "priority_009",
+      "priority_010",
+      "priority_011"
+    ],
+    "residual_packet_ids": [
+      "residual_001",
+      "residual_002",
+      "residual_003",
+      "residual_004",
+      "residual_005",
+      "residual_006",
+      "residual_007",
+      "residual_008",
+      "residual_009",
+      "residual_010",
+      "residual_011",
+      "residual_012",
+      "residual_013"
+    ]
+  },
+  "planned_outputs": {
+    "checksums": "checksums.sha256",
+    "output_root": "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1",
+    "packet_directory": "packets",
+    "packet_filename_rule": "<lane>_<three_digit_lane_local_packet_index>.tsv",
+    "packet_manifest": "packet_manifest.tsv",
+    "prior_carry_forwards": "prior_carry_forwards.tsv",
+    "review_work_membership": "review_work_membership.tsv",
+    "workspace_manifest": "workspace_manifest.json"
+  },
+  "purpose": "Define a deterministic human-review workspace overlay for the frozen future-triage queue without creating a new scientific-screening universe, scientific batch system, scientific decision, or production-ledger mutation.",
+  "review_lanes": {
+    "global_cross_lane_order_defined": false,
+    "manual": {
+      "final_packet_rows": 257,
+      "full_packet_count": 0,
+      "packet_count": 1,
+      "review_rows": 257
+    },
+    "manual_vs_scored_priority_defined": false,
+    "maximum_packet_size": 500,
+    "packet_numbering": "lane_local",
+    "priority": {
+      "final_packet_rows": 477,
+      "full_packet_count": 10,
+      "packet_count": 11,
+      "review_rows": 5477
+    },
+    "priority_vs_residual_contract": "Priority is the frozen scored prefix; residual is the remaining scored queue. Both remain human-review lanes.",
+    "residual": {
+      "final_packet_rows": 422,
+      "full_packet_count": 12,
+      "packet_count": 13,
+      "review_rows": 6422
+    },
+    "total_packet_count": 25
+  },
+  "review_workspace_schema": {
+    "baseline_row_sha256_semantics": "Authoritative immutable baseline-row identity copied from existing baseline batch membership.",
+    "blank_human_entry_fields_in_review_packets": [
+      "proposed_event_type",
+      "proposed_record_decision",
+      "proposed_exclusion_reason_code",
+      "proposed_candidate_method_flag",
+      "evidence_basis",
+      "evidence_source_locator",
+      "evidence_escalation_status",
+      "notes"
+    ],
+    "candidate_row_sha256_semantics": "Opaque retrieval-candidate provenance copied from input_manifest.tsv; it is not interpreted as or compared for equality with baseline_row_sha256.",
+    "membership_fields": [
+      "workspace_lane",
+      "source_queue_position",
+      "review_work_position",
+      "packet_index_within_lane",
+      "position_in_packet",
+      "screening_entity_id",
+      "retrieval_record_index",
+      "baseline_batch_id",
+      "baseline_batch_index",
+      "baseline_position_in_batch",
+      "global_active_index",
+      "baseline_row_sha256",
+      "retrieval_candidate_row_sha256",
+      "doi",
+      "pmid",
+      "openalex_id",
+      "omid",
+      "provider_used",
+      "provider_lookup_type",
+      "provider_record_id",
+      "source_body_sha256",
+      "provider_identity_status",
+      "parser_status",
+      "abstract_status",
+      "normalized_text_present",
+      "baseline_title_or_software_name",
+      "normalized_title_text",
+      "normalized_abstract_text"
+    ],
+    "raw_continuous_score_exposed": false,
+    "selected_candidate_id_exposed": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "cross_lane_priority_inference_authorized": false,
+    "human_scientific_review_authorized": false,
+    "live_event_authorization_created": false,
+    "new_scientific_batch_membership_authorized": false,
+    "production_event_authorized": false,
+    "production_ledger_mutation_authorized": false,
+    "scientific_decision_authorized": false,
+    "scientific_reassessment_of_carry_forwards_authorized": false,
+    "workspace_generation_authorized": false
+  },
+  "source_contract": {
+    "artifacts": {
+      "results/07_comparative_landscape/baseline_scientific_screening_execution/batch_membership.tsv": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+      "results/07_comparative_landscape/baseline_scientific_screening_execution/prior_anchor_carry_forwards.tsv": "5db8663c9dbf0915ea56430caba40bc87d5781ac1704a90f2eb563ca39c259b7",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/priority_scored_queue.tsv": "295868d5bb1812d6d5926abdda782df51149afebf54a35bd7538924d597aba0d",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/queue_manifest.json": "b8dc1f3589a1b96d646f74df57c450de5d514e74cc135542b0454bcb951b4734",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/residual_scored_queue.tsv": "91dcc176d20357ea162ede8a63591a4890419c4190b1754311c76016e4e62c72",
+      "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/unscored_manual_review_queue.tsv": "084dd93f02d8cf7a8adcccf08352cef2767ed3325b0a3b903defd6cfd296ee5d",
+      "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/input_manifest.tsv": "345c90522a44f9f548fb164618943cac24fb87f7820d52a9048bcfe7a4eec6cf",
+      "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_normalized_text.tsv": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+      "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_resolution.tsv": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7",
+      "results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58"
+    },
+    "baseline_execution_immutable_checksum_manifest_sha256": "3ea3cc193f47da8a32e817579c31f4ca294de615e1e0e29e4eb37963e374f13c",
+    "future_text_reconciliation_completion_checksum_manifest_sha256": "0798d80b10c6fa4beb53cf1074bef959283c2cb0ef2e2be998c6ead4bbc048b1",
+    "prior_carry_forward_rows": 6,
+    "queue_result_freeze_checksum_manifest_sha256": "d9c6690e4bf1dbeeb93c0360691daf807651b1415315b0071a20ff4cc2d6bc3f",
+    "review_work_rows": 12156,
+    "scientific_screening_design_checksum_manifest_sha256": "7514f7ca65d2b9df6aa13d3e38395d749c39fc1a3dc1df882efa822bc2c3fab8",
+    "triage_universe_rows": 12162
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "universe_partition": {
+    "carry_forward_policy": "Preserve prior frozen adjudication and triage provenance; do not perform a new record-level scientific reassessment.",
+    "frozen_triage_rows": 12162,
+    "new_human_review_tasks": 12156,
+    "prior_wave0_carry_forwards": 6
+  }
+}

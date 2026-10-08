@@ -1,0 +1,32 @@
+{
+  "branch_events": [
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "9cbd897e3aa5f2b908ce6906122814e549c983ed0b4c88e581611454df8e8468",
+      "method": "ARPIP",
+      "position": "40",
+      "scenario_id": "SYNTHETIC_EXP07_ARPIP"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "1c500a7df699b57457b4fd9a35f9cc2e302d0cb5ec2e229bfda702106eade223",
+      "method": "ARPIP",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_ARPIP"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "ec923a364165ae5e67e8adc99f0a2e9d3f385a61072ead7c4b88d64251189d3c",
+      "method": "ARPIP",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_ARPIP"
+    }
+  ],
+  "method": "ARPIP",
+  "recurrent_sites": [],
+  "scenario_id": "SYNTHETIC_EXP07_ARPIP",
+  "schema_version": 1
+}

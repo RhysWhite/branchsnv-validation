@@ -1,0 +1,11 @@
+Processing /home/rwhite/branchsnv-comparator-src/snppar-v1.2
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Building wheels for collected packages: snppar
+  Building wheel for snppar (setup.py): started
+  Building wheel for snppar (setup.py): finished with status 'done'
+  Created wheel for snppar: filename=snppar-1.0-py3-none-any.whl size=48923 sha256=d9c19fd572c35bc47a4587132189bfc0c27b65f0bd3b565dc0f4e95097db8539
+  Stored in directory: /home/rwhite/.cache/pip/wheels/85/64/27/47820ba77b75538a230d919e31853b2673a5f369ee9ff7184f
+Successfully built snppar
+Installing collected packages: snppar
+Successfully installed snppar-1.0

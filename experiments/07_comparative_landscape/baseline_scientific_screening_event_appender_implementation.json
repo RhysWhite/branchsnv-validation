@@ -1,0 +1,94 @@
+{
+  "immutable_dependencies": {
+    "batch_manifest_sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0",
+    "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "event_entry_design_freeze_sha256": "73555f0c8aadc37caa3dbe2110be439b0cb13a48398e5d597168492a65ed82b9",
+    "event_entry_design_json_sha256": "98f73c921f371a60f959dc630b7028026a5983b41efbd11b911e6e73c0f5e09d",
+    "event_ledger_genesis_json_sha256": "89486b47eb83f896259b84a5dd90b8ae3a41083637bd331261167e1165e113be",
+    "immutable_execution_checksum_ledger_sha256": "3ea3cc193f47da8a32e817579c31f4ca294de615e1e0e29e4eb37963e374f13c",
+    "production_completion_freeze_sha256": "177957adcfae13becb2fd856fc82b12a41a218dea6fa75419e79548dedef205d",
+    "production_completion_json_sha256": "62f02aec61103d67bfe74d6539fb3b54e6bce7422027a5cf314feaa2c860611e"
+  },
+  "implementation": {
+    "path": "experiments/07_comparative_landscape/baseline_scientific_screening_event_appender.py",
+    "sha256": "abf4c15e9c993bcb96c73ccb53ff3dae56e229c533e9df25056c37cfd5eda98b",
+    "test_path": "experiments/07_comparative_landscape/test_baseline_scientific_screening_event_appender.py",
+    "test_sha256": "fad1928184c43521afb77a340cc02fe953c8baa0af7c4edf42c6bc9a17fee87e"
+  },
+  "implemented_contract": {
+    "atomic_publication": true,
+    "authoritative_event_field_count": 20,
+    "autonomous_scientific_classification": false,
+    "compare_and_swap_required": true,
+    "deterministic_event_ids": true,
+    "event_id_format": "E#########",
+    "max_one_proposal_event_per_entity": true,
+    "network_access": false,
+    "post_publication_validation": true,
+    "proposal_field_count": 13,
+    "review_adjudication_fields_forced_blank": true,
+    "single_batch_per_transaction": true,
+    "single_current_unsuperseded_event_per_entity": true,
+    "strict_prefix_extension_required": true
+  },
+  "live_event_entry_authorized": false,
+  "next_gate": "DESIGN_CONTROLLED_B000001_LIVE_EVENT_ENTRY_AUTHORIZATION",
+  "parent_event_entry_design_commit": "584134c97af6816629f5434bf9ad2199a828eb0b",
+  "production_ledger_state": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 0,
+    "event_count": 0,
+    "ready": 94622,
+    "scientific_screening_started": false,
+    "sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f"
+  },
+  "production_mutation_boundary": {
+    "B000001_live_authorized": false,
+    "allow_production_switch_is_authorization": false,
+    "cli_allows_real_production_mutation": false,
+    "first_recommended_live_batch": "B000001",
+    "future_separate_authorization_required": true,
+    "library_contains_allow_production_switch": true
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "accepted_production_events": 0,
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "new_record_level_scientific_decisions": 0,
+    "production_source_escalation_events": 0,
+    "role_assignments": 0,
+    "wave1_promotions": 0
+  },
+  "scientific_screening_started": false,
+  "status": "FROZEN_PRE_LIVE_AUTHORIZATION",
+  "supported_event_types": [
+    "record_decision",
+    "source_escalation",
+    "superseding_record_decision"
+  ],
+  "supported_terminal_decisions": [
+    "exclude",
+    "retain_for_method_assessment"
+  ],
+  "supported_transitions": [
+    "ready_to_terminal",
+    "ready_to_source_escalation",
+    "source_escalation_to_terminal",
+    "terminal_to_corrected_terminal"
+  ],
+  "validation": {
+    "branching_event_chain_rejected": true,
+    "cross_batch_transaction_rejected": true,
+    "hostile_tests_passed": true,
+    "invalid_field_hygiene_rejected": true,
+    "network_capability_absent": true,
+    "production_cli_mutation_rejected": true,
+    "real_production_genesis_read_only_validation_passed": true,
+    "real_production_ledger_unchanged": true,
+    "stale_sha_replay_rejected": true,
+    "temporary_atomic_append_passed": true,
+    "temporary_post_append_validation_passed": true
+  }
+}

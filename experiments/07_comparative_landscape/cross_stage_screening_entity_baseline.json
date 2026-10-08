@@ -1,0 +1,169 @@
+{
+  "combined_screening_universe": {
+    "publication_components": 94898,
+    "screening_components": 95113,
+    "software_registry_components": 215
+  },
+  "cross_stage": {
+    "automatic_link_basis_counts": {
+      "exact_doi": 2251,
+      "exact_unique_pmid": 3
+    },
+    "automatic_links": 2254,
+    "citation_entities_without_cross_stage_link": 15347,
+    "citation_input_entities": 17605,
+    "cross_stage_conflict_records": [
+      {
+        "citation_doi_values": [
+          "10.1016/j.tplants.2018.05.006"
+        ],
+        "citation_entity": "publication:doi:10.1016/j.tplants.2018.05.006",
+        "citation_pmid_values": [
+          "28763051"
+        ],
+        "conflict_key": "cross_stage_conflict:citation_doi_absent_from_database_but_pmid_links_database_entity:publication:doi:10.1016/j.tplants.2018.05.006",
+        "database_doi_entity_keys": [],
+        "database_pmid_entity_keys": [
+          "publication:doi:10.1038/ncomms16047"
+        ],
+        "reason": "citation_doi_absent_from_database_but_pmid_links_database_entity"
+      },
+      {
+        "citation_doi_values": [
+          "10.12688/f1000research.76068.4"
+        ],
+        "citation_entity": "publication:doi:10.12688/f1000research.76068.4",
+        "citation_pmid_values": [
+          "39554852"
+        ],
+        "conflict_key": "cross_stage_conflict:citation_doi_absent_from_database_but_pmid_links_database_entity:publication:doi:10.12688/f1000research.76068.4",
+        "database_doi_entity_keys": [],
+        "database_pmid_entity_keys": [
+          "publication:doi:10.12688/f1000research.76068.5"
+        ],
+        "reason": "citation_doi_absent_from_database_but_pmid_links_database_entity"
+      },
+      {
+        "citation_doi_values": [
+          "10.1093/sysbio/syag038"
+        ],
+        "citation_entity": "publication:doi:10.1093/sysbio/syag038",
+        "citation_pmid_values": [
+          "40060389"
+        ],
+        "conflict_key": "cross_stage_conflict:doi_and_pmid_cross_stage_disagreement:publication:doi:10.1093/sysbio/syag038",
+        "database_doi_entity_keys": [
+          "publication:doi:10.1093/sysbio/syag038"
+        ],
+        "database_pmid_entity_keys": [
+          "publication:doi:10.1101/2025.02.25.640207"
+        ],
+        "reason": "doi_and_pmid_cross_stage_disagreement"
+      },
+      {
+        "citation_doi_values": [
+          "10.1101/014928"
+        ],
+        "citation_entity": "publication:doi:10.1101/014928",
+        "citation_pmid_values": [
+          "26194102"
+        ],
+        "conflict_key": "cross_stage_conflict:doi_and_pmid_cross_stage_disagreement:publication:doi:10.1101/014928",
+        "database_doi_entity_keys": [
+          "publication:doi:10.1101/014928"
+        ],
+        "database_pmid_entity_keys": [
+          "publication:doi:10.1101/gr.190538.115"
+        ],
+        "reason": "doi_and_pmid_cross_stage_disagreement"
+      }
+    ],
+    "cross_stage_conflict_types": {
+      "citation_doi_absent_from_database_but_pmid_links_database_entity": 2,
+      "doi_and_pmid_cross_stage_disagreement": 2
+    },
+    "cross_stage_conflicts": 4,
+    "database_input_entities": 79762,
+    "database_publications_with_multiple_citation_links": 2,
+    "multi_link_database_entities": {
+      "publication:doi:10.1017/s0031182025100723": [
+        "publication:doi:10.1017/s0031182025100723",
+        "publication:pmid:40874486"
+      ],
+      "publication:doi:10.24272/j.issn.2095-8137.2024.440": [
+        "publication:doi:10.24272/j.issn.2095-8137.2024.440",
+        "publication:pmid:40709535"
+      ]
+    },
+    "unique_database_publications_linked": 2252
+  },
+  "derived_sha256": {
+    "automatic_links": "17546d0593289e7daca4e3ccdd04ded896904698fb2752f31b034dc6511ab326",
+    "complete_result": "71a9e23a4a8a57b03f7fb08a6d8ef0a41905f766b9960d0aa57f4df586ef2a11",
+    "cross_stage_conflicts": "a8e0d91f4bd32ff36c8973de96a88a3bf3c6cd0ef3b2eec1c1aa873a3f472932",
+    "publication_components": "2349f72507590150a7999d8c6faf889d8a3a571d02c2c3058acc6d6564c38507",
+    "software_registry_components": "8c28a6804c002e91ebfddcb203ed75a1bd7416cb8acceb7482c9c797cbc29617"
+  },
+  "frozen_dependency": {
+    "expected_identity_implementation_sha256": "9ebf57ddeef7e4f5fb4d5ed2250f261e81fcc476d51114281bee6b41961c097a",
+    "identity_implementation_commit": "c62452570d1b0dd922b5d83ada3eedb0626d303e",
+    "identity_implementation_sha256": "9ebf57ddeef7e4f5fb4d5ed2250f261e81fcc476d51114281bee6b41961c097a"
+  },
+  "frozen_input_sha256": {
+    "citation_wave_0_neighbours": "16f8c48ea0757452ab2489b3952d5b8193a5cd9c46494f6852c0733220419de2",
+    "historical_screening_log": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "merged_database_universe": "618e42658a5734fede70c62b772582c15354b7d9ed6f2cef426dc0dce79ad42a"
+  },
+  "implementation_sha256": {
+    "cross_stage_screening_entities.py": "956b4b55721479460c667486649c6ffd3bfbe3abbb509b725f958c898222d220",
+    "test_cross_stage_screening_entities.py": "3079bc140eee74b49a2f9178e68c8afcafd881910723fe29de466d4f15e56e31"
+  },
+  "interpretation": {
+    "attention_set_is_not_api_request_count": true,
+    "cross_stage_construction_is_not_scientific_screening": true,
+    "derived_counts_are_regression_baselines_not_target_sample_sizes": true,
+    "screening_component_count_is_provisional_before_identity_resolution": true
+  },
+  "offline_title_aggregation": {
+    "initial_titleless_citation_entities": 747,
+    "initial_titleless_database_publications": 390,
+    "publication_components_missing_title": 1067,
+    "titleless_citation_entities_receiving_link": 70,
+    "titleless_citation_entities_rescued": 70,
+    "titleless_database_publications_receiving_link": 0,
+    "titleless_database_publications_rescued": 0
+  },
+  "pre_screening_attention": {
+    "attention_reason_combinations": {
+      "citation_identity_conflict": 58,
+      "citation_identity_conflict|cross_stage_conflict_citation_side": 1,
+      "citation_identity_conflict|cross_stage_conflict_database_side": 1,
+      "citation_identity_conflict|missing_title": 9,
+      "cross_stage_conflict_citation_side": 2,
+      "cross_stage_conflict_citation_side|missing_title": 1,
+      "cross_stage_conflict_database_side": 5,
+      "database_identity_conflict": 40,
+      "missing_title": 723,
+      "provider_specific_unresolved": 168,
+      "provider_specific_unresolved|missing_title": 334
+    },
+    "publication_components_requiring_any_attention": 1342,
+    "publication_components_requiring_identity_attention": 619,
+    "screening_components_requiring_any_attention": 1342,
+    "software_registry_components_requiring_attention": 0
+  },
+  "repository_commit_before_cross_stage_freeze": "c62452570d1b0dd922b5d83ada3eedb0626d303e",
+  "status": "FROZEN_OFFLINE_CROSS_STAGE_IMPLEMENTATION",
+  "validation": {
+    "all_citation_identity_entities_represented_exactly_once": true,
+    "all_database_identity_entities_represented_exactly_once": true,
+    "cross_stage_conflicts_preserved_not_merged": true,
+    "cross_stage_construction_order_independent": true,
+    "frozen_identity_implementation_modified": false,
+    "historical_screening_rows": 0,
+    "network_capable_cross_stage_code": false,
+    "production_results_written": false,
+    "scientific_screening_performed": false,
+    "software_registry_components_remain_independent": true
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "amendment_name": "triage_pre_review_text_reconciliation_v1_amendment_001",
+  "amends_design_commit": "1aa32f02387e4c5638b18b951bd5bc7a231c0b5f",
+  "dependency_hashes": {
+    "historical_checksum_manifest_sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86",
+    "original_reconciliation_design_sha256": "a4bad21a4cdafc0e8ad958726e1c694b0a6cab6e568febb71773eedda93eba89",
+    "original_reconciliation_document_sha256": "a40a57e9b1b1a2aeb2da7e36e2ea8a34d2abce8d2a8060c21945f1983e8eb5c7"
+  },
+  "historical_cache_dependency": {
+    "checksum_manifest": "results/07_comparative_landscape/metadata_resolution_retrieval/checksums.sha256",
+    "checksum_manifest_entry_count": 8666,
+    "checksum_manifest_sha256": "f51080de3383cae1981e19c57687e4c8ea0e7f9832316a3936728a23995e8b86",
+    "root": "results/07_comparative_landscape/metadata_resolution_retrieval",
+    "selected_lookup_count": 9,
+    "selected_lookups": [
+      {
+        "abstract_status": "abstract_absent",
+        "logical_lookup_id": "lookup:6545dbb87a2570148bd1077c372b9655a3a1af5230aa24ecfe68788babac641c",
+        "retrieval_record_index": 321,
+        "source_body_sha256": "afd40665d46e08066c8ecafdcdfb976bb4a230b9413c2c5430f4abdca8c14ba8"
+      },
+      {
+        "abstract_status": "abstract_absent",
+        "logical_lookup_id": "lookup:4a6aba3275ab89eba9e726d3b70a7e80e85e3a969c49d979e4fcd2d75635c143",
+        "retrieval_record_index": 1004,
+        "source_body_sha256": "bd5c3ad8726fe545705e3bce9d0aa5801ce2bbf398f80e2637b111d4110f17e9"
+      },
+      {
+        "abstract_status": "abstract_absent",
+        "logical_lookup_id": "lookup:33181558a23ef6da7bb492335f76d0686f08f1762511625e85fbfd4b65ae453e",
+        "retrieval_record_index": 1005,
+        "source_body_sha256": "a7037168721208862368681513a2d55f79e0ed2f3a5f29fea81440d1b4609b5f"
+      },
+      {
+        "abstract_status": "abstract_absent",
+        "logical_lookup_id": "lookup:d32229000e6c7db51843210877aed9c16ea957a3b2d65877bc98264afdc3a45a",
+        "retrieval_record_index": 1006,
+        "source_body_sha256": "d751a3db9df5ef810ff26969f19953fb39de1c12bc6cded6337c4439e9040218"
+      },
+      {
+        "abstract_status": "abstract_absent",
+        "logical_lookup_id": "lookup:6a4e30ab0d2b24c6efb791d351c828cc240f91d1413b73005000e0d5ee57b9cf",
+        "retrieval_record_index": 1034,
+        "source_body_sha256": "34f68eb411a935d721d85e5558ea3f5dd75d9c805347139379b3ee2bed50f5b6"
+      },
+      {
+        "abstract_status": "abstract_absent",
+        "logical_lookup_id": "lookup:a10060aac1e98a4e6c3450837628a9cfb4360c838d3cd613d0ff4544b7c18959",
+        "retrieval_record_index": 1068,
+        "source_body_sha256": "abb46b56e0d90fe023707de5dac6d7ddba983939892991c33025ca8675386558"
+      },
+      {
+        "abstract_status": "usable_abstract_openalex",
+        "logical_lookup_id": "lookup:eb42dd088c7cd2365ec8c6d948b92e3c5d1dc8f60d601aac88c210017851bc72",
+        "retrieval_record_index": 2595,
+        "source_body_sha256": "0d2ad7e6623670cd7f9f62c53b66aa96a3c42bac8d2911f31a6fb0a84053ce09"
+      },
+      {
+        "abstract_status": "usable_abstract_openalex",
+        "logical_lookup_id": "lookup:e616bacbe37c450647221da56be8bd171b133e6e85f512f14371f1ffb40fc9a0",
+        "retrieval_record_index": 4164,
+        "source_body_sha256": "479553f7093c5fb9af94a0459fe765d63caa201b5ef0f9297bdb1e89a04e60c5"
+      },
+      {
+        "abstract_status": "usable_abstract_openalex",
+        "logical_lookup_id": "lookup:b40bd4ad49ded8971296d1f2e2a5e9de7028d93acf42d3fb495fb193f57ecf08",
+        "retrieval_record_index": 4248,
+        "source_body_sha256": "1e8f482b73d147e6daa929c463d7d3bd042745fa2f9f1a14b885c7b448624f6b"
+      }
+    ]
+  },
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_OFFLINE_TRIAGE_PRE_REVIEW_TEXT_RECONCILIATION_V1_AGAINST_DESIGN_PLUS_AMENDMENT_001",
+  "offline_cache_semantics": {
+    "abstract_absent_cached_row_count": 6,
+    "abstract_absent_rows": {
+      "abstract_status_required": "abstract_absent",
+      "derived_provenance": {
+        "1004": {
+          "provider_identity_status": "transport_validated",
+          "provider_record_id": "https://openalex.org/W1972189965"
+        },
+        "1005": {
+          "provider_identity_status": "transport_validated",
+          "provider_record_id": "https://openalex.org/W2046435207"
+        },
+        "1006": {
+          "provider_identity_status": "transport_validated",
+          "provider_record_id": "https://openalex.org/W4210633230"
+        },
+        "1034": {
+          "provider_identity_status": "transport_validated",
+          "provider_record_id": "https://openalex.org/W1534406401"
+        },
+        "1068": {
+          "provider_identity_status": "transport_validated",
+          "provider_record_id": "https://openalex.org/W2594042085"
+        },
+        "321": {
+          "provider_identity_status": "transport_validated",
+          "provider_record_id": "https://openalex.org/W4205666856"
+        }
+      },
+      "included_in_reconciled_normalized_text": false,
+      "included_in_reconciled_resolution": true,
+      "parser_status_required": "ok",
+      "provider_identity_status_source": "frozen normalize_openalex output over checksum-verified historical body",
+      "provider_record_id_source": "frozen normalize_openalex output over checksum-verified historical body"
+    },
+    "blank_provider_identity_status_convention_permitted": false,
+    "blank_provider_record_id_convention_permitted": false,
+    "fabricated_provider_identity_permitted": false,
+    "usable_cached_row_count": 3,
+    "usable_rows": {
+      "frozen_normalizer_status_must_reproduce": "usable_abstract_openalex",
+      "historical_raw_body_must_also_verify": true,
+      "normalized_text_source": "offline_cached_normalized_text.tsv"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Pin the historical metadata-resolution cache archive required to reconstruct the nine frozen offline-cache reconciliation rows.",
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "unchanged_original_contract": {
+    "abstract_absent_total": 309,
+    "blind_validation_content_used": false,
+    "model_fit_permitted": false,
+    "network_permitted": false,
+    "production_ledger_write_permitted": false,
+    "raw_archive_modification_permitted": false,
+    "scientific_decisions_permitted": false,
+    "total_records": 4499,
+    "usable_abstract_total": 4190
+  },
+  "verification_requirements": [
+    "verify the historical checksum-manifest SHA before reading selected archive bodies",
+    "verify all required files for each of the nine lookups against the historical checksum manifest",
+    "verify selected body SHA against offline_cache_resolution.tsv",
+    "verify terminal archive through frozen transport verification before normalization",
+    "apply only the frozen triage_pre_review_text_normalizer_v1",
+    "fail closed if any of the six absent rows does not reproduce its pinned provider provenance",
+    "do not alter the three existing usable cached normalized-text rows",
+    "do not convert abstract absence into scientific exclusion evidence"
+  ]
+}

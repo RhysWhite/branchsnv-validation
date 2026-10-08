@@ -1,0 +1,57 @@
+{
+  "blind_validation_content_used": false,
+  "existing_archive_scan": {
+    "distinct_openalex_dois": 813,
+    "distinct_openalex_pmids": 324,
+    "distinct_openalex_work_ids": 990,
+    "distinct_pubmed_pmids": 62,
+    "provider_counts": {
+      "openalex": 1149,
+      "pubmed": 62
+    },
+    "successful_exact_provider_payloads": 1211
+  },
+  "future_universe_scored": false,
+  "manifest": {
+    "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/input_manifest.tsv",
+    "rows": 4499,
+    "sha256": "4e5ba0313e008a58e968a9368ea90b6fdb70049b866003742ed1c967c31120ba"
+  },
+  "model_fitted": false,
+  "network_performed": false,
+  "outputs": {
+    "offline_cache_resolution": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_cache_resolution.tsv",
+      "sha256": "0301c8711a5d9c86a3507c84084956c73fe475e0b3846ffd201b18cea0e3f3fb"
+    },
+    "offline_cached_normalized_text": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_cached_normalized_text.tsv",
+      "sha256": "f73e166a2f8946a967aaf79072186e287d1b4556d2a168903ec9425df75219c1"
+    },
+    "offline_network_requirements": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_network_requirements.tsv",
+      "sha256": "87b9786c1928773d51708b2bc93cea137d1eb7b36af43d0d26ab5a29487d0dc9"
+    }
+  },
+  "resolution": {
+    "cached_usable_text_rows": 3,
+    "network_requirement_rows": 4490,
+    "next_network_route_counts": {
+      "openalex:exact_doi": 8,
+      "openalex:exact_work_id": 526,
+      "pubmed:exact_pmid_efetch": 3956
+    },
+    "provider_used_counts": {
+      "openalex": 9
+    },
+    "rows": 4499,
+    "status_counts": {
+      "cached_sources_no_usable_abstract": 6,
+      "requires_openalex_lookup": 534,
+      "requires_pubmed_lookup": 3956,
+      "resolved_cached_openalex": 3
+    }
+  },
+  "runner": "TRIAGE_PRE_REVIEW_TEXT_OFFLINE_RUNNER_V1",
+  "schema_version": 1
+}

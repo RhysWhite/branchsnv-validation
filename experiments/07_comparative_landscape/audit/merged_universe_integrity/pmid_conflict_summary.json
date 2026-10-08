@@ -1,0 +1,18 @@
+{
+  "all_pmid_conflicts_doi_keyed": true,
+  "capability_classification_performed": false,
+  "classification": {
+    "multiple_pubmed_records": 2,
+    "pubmed_openalex_disagreement": 12
+  },
+  "conflict_table_candidate_value_mismatches": 0,
+  "dedup_key_namespaces": {
+    "doi": 14
+  },
+  "eligibility_decisions_made": false,
+  "pmid_conflict_rows": 14,
+  "pubmed_source_record_pmid_mismatches": 0,
+  "schema_version": 1,
+  "screening_performed": false,
+  "status": "PASS"
+}

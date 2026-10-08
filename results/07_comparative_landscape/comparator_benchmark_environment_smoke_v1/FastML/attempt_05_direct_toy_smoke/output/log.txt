@@ -1,0 +1,11 @@
+START OF LOG FILE
+*******************************************************************************
+B&B: A Branch and Bound algorithm for Ancestral Sequence Reconstruction.       
+For information, please send email to Tal Pupko: talp@post.tau.ac.il           
+Ref: Pupko, T., Pe'er, I., Graur, D. Hasegawa, M., and Friedman N. 2002.       
+A branch-and-bound algorithm for the inference of ancestral amino-acid         
+sequences when the replacement rate varies among sites: Application to the     
+evolution of five gene families. Bioinformatics 18: 1116-1123.                 
+*******************************************************************************
+
+END OF LOG FILE

@@ -1,0 +1,10 @@
+# created on Thu Oct  8 07:58:39 2026
+name 	parent  child 
+tipA N2     
+tipB N2     
+tipC N3     
+tipD N3     
+N1   root! N2 N3
+N2   N1      tipA tipB
+N3   N1      tipC tipD
+

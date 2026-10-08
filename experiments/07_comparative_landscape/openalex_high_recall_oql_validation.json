@@ -1,0 +1,43 @@
+{
+  "purpose": "pre_retrieval_high_recall_oql_validation",
+  "queries": [
+    {
+      "canonical_oql": "works where title/abstract has ((clade or lineage or branch or node or phylogenetic) and (SNP or SNV or stemmed \"single nucleotide polymorphism\" or stemmed \"single nucleotide variant\") and (specific or unique or defining or diagnostic or marker or canonical or supporting or associated))",
+      "query_id": "HR01",
+      "submitted_oql": "works where title/abstract has ((clade or lineage or branch or node or phylogenetic) and (SNP or SNV or stemmed \"single nucleotide polymorphism\" or stemmed \"single nucleotide variant\") and (specific or unique or defining or diagnostic or marker or canonical or supporting or associated))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((branch or edge or node) and (mutation or substitution or SNP or SNV) and (ancestral or reconstruct or infer or map or mapping or change or event) and (phylogeny or phylogenetic or tree))",
+      "query_id": "HR02",
+      "submitted_oql": "works where title/abstract has ((branch or edge or node) and (mutation or substitution or SNP or SNV) and (ancestral or reconstruct or infer or map or mapping or change or event) and (phylogeny or phylogenetic or tree))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((ancestral or ancestor) and (state or sequence or character or nucleotide or residue) and (reconstruct or infer or estimate) and (phylogeny or phylogenetic or evolution))",
+      "query_id": "HR03",
+      "submitted_oql": "works where title/abstract has ((ancestral or ancestor) and (state or sequence or character or nucleotide or residue) and (reconstruct or infer or estimate) and (phylogeny or phylogenetic or evolution))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((homoplasy or homoplastic or recurrent mutation or convergent or parallel) and (mutation or substitution or SNP or SNV or variant) and (phylogeny or phylogenetic or tree or lineage))",
+      "query_id": "HR04",
+      "submitted_oql": "works where title/abstract has ((homoplasy or homoplastic or recurrent mutation or convergent or parallel) and (mutation or substitution or SNP or SNV or variant) and (phylogeny or phylogenetic or tree or lineage))",
+      "valid": true,
+      "warnings": []
+    },
+    {
+      "canonical_oql": "works where title/abstract has ((genotype or typing or barcode or classification) and (SNP or SNV or phylogenetic) and (lineage or clade or canonical or hierarchical))",
+      "query_id": "HR05",
+      "submitted_oql": "works where title/abstract has ((genotype or typing or barcode or classification) and (SNP or SNV or phylogenetic) and (lineage or clade or canonical or hierarchical))",
+      "valid": true,
+      "warnings": []
+    }
+  ],
+  "query_count": 5,
+  "schema_version": 1,
+  "search_executed": false
+}

@@ -1,0 +1,28 @@
+{
+  "citation_count_filter": null,
+  "citation_retrieval_performed_at_freeze": false,
+  "citation_sources": [
+    "openalex",
+    "opencitations"
+  ],
+  "directions": [
+    "backward",
+    "forward"
+  ],
+  "edge_union_rule": "retain_if_reported_by_either_source",
+  "language_filter": null,
+  "lexical_prefilter_before_screening": false,
+  "new_anchor_rule": "included direct/near-direct method with frozen canonical publication",
+  "primary_database_search_retuning_permitted": false,
+  "publication_date_filter": null,
+  "publication_type_filter": null,
+  "saturation_rule": "complete wave yields zero new eligible direct/near-direct anchors",
+  "schema_version": 1,
+  "status": "FROZEN_PRE_RETRIEVAL",
+  "wave_0_anchor_count": 8,
+  "wave_0_role_counts": {
+    "direct": 4,
+    "near_direct": 4
+  },
+  "within_wave_cascading": false
+}

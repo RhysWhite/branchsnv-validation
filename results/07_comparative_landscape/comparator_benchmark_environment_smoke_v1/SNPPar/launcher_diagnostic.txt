@@ -1,0 +1,8 @@
+command -v time:
+time
+
+type -a time:
+time is a shell keyword
+
+/usr/bin/time:
+ABSENT

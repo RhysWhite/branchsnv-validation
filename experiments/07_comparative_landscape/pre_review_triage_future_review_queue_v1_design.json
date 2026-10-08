@@ -1,0 +1,74 @@
+{
+  "cross_lane_contract": {
+    "cross_lane_priority_defined": false,
+    "implementation_must_not_merge_lanes_into_an_invented_global_order": true,
+    "reason": "The frozen repository defines score ranking and residual human review but does not define where unscoreable records sit relative to scored lanes."
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_DESIGN",
+  "freeze_parent_commit": "5f9162dedbca1161b581fac2f7aa6e577de3917c",
+  "generation_authorized": false,
+  "lane_contract": {
+    "priority_scored_queue": {
+      "membership_rule": "first_5483_rows_of_exact_score_ranking",
+      "ranking_policy": "continuous_score_descending_then_screening_entity_id_ascending",
+      "rows": 5483,
+      "scientific_decision": false
+    },
+    "residual_scored_queue": {
+      "membership_rule": "remaining_scoreable_rows_after_priority_prefix",
+      "ranking_policy": "continuous_score_descending_then_screening_entity_id_ascending",
+      "rows": 6422,
+      "scientific_decision": false,
+      "source_policy": "records_below_boundary_remain_residual_human_review_queue"
+    },
+    "unscored_manual_review_queue": {
+      "deterministic_order": "retrieval_record_index_ascending",
+      "membership_rule": "coverage_status_equals_no_normalized_text",
+      "reason": "No continuous score exists; automatic scientific exclusion is not authorized.",
+      "rows": 257,
+      "scientific_decision": false
+    }
+  },
+  "next_gate": "FREEZE_PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_IMPLEMENTATION_BEFORE_GENERATION",
+  "operating_point_contract": {
+    "candidate_fraction_denominator": 76,
+    "candidate_fraction_numerator": 35,
+    "candidate_review_fraction": "35/76",
+    "prefix_count_rule": "ceil_exact_fraction_times_scoreable_population",
+    "priority_scored_rows": 5483,
+    "raw_score_threshold_selected": false,
+    "residual_scored_rows": 6422
+  },
+  "planned_outputs": [
+    "priority_scored_queue.tsv",
+    "residual_scored_queue.tsv",
+    "unscored_manual_review_queue.tsv",
+    "queue_manifest.json"
+  ],
+  "population_contract": {
+    "all_future_records_remain_in_human_review_universe": true,
+    "future_resolution_rows": 12162,
+    "no_normalized_text_rows": 257,
+    "scoreable_rows": 11905
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "automatic_scientific_exclusion": false,
+    "automatic_scientific_inclusion": false,
+    "blind_validation_content_used": false,
+    "future_labels_used": false,
+    "hard_prediction": false,
+    "production_ledger_mutation": false,
+    "raw_score_threshold": false
+  },
+  "source_contract": {
+    "future_coverage_sha256": "8dde17ef13648cfee4bbec80322377202eb769cd11e5f3249d59de978e3824b7",
+    "future_scored_records_sha256": "70164b0e345d2df0e0fa0c765a293e725096ef50096c6bb1025ed72ca06f7d67",
+    "future_scoring_results_checksum_manifest_sha256": "8be5645fb71f557306be11ae132f1d655013d6a6d573beb50380399cad9bc939",
+    "operating_point_base_design_sha256": "66dadfdae8edab917c55e115bc8148b7fae8bb7ce7e954c67d22468b1eeca96e",
+    "operating_point_result_sha256": "dc563ca888aac6e0b17aedda9b5fabe29d3ccbb25864e7045f4ba76b0f362a10",
+    "operating_point_selection_checksum_manifest_sha256": "bee96c78923dd53f49543193af076440fb8813c8ed989701bbe519e7d8851df3",
+    "operating_point_selection_design_sha256": "34a5da2dbfe59312199171139208520d41bb0214105c8668aa45c2d8fcdbe6cc"
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}

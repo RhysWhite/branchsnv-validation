@@ -1,0 +1,33 @@
+wave	anchor_id	anchor_tool	source	direction	status	reported_count	retrieved_count	response_files	terminal_detail
+0	W0A01	CLASSICO/Evidente	openalex	backward	complete	35	35	1	resolved via referenced_works
+0	W0A01	CLASSICO/Evidente	openalex	forward	complete	5	5	1	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A01	CLASSICO/Evidente	opencitations	backward	complete	28	28	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A01	CLASSICO/Evidente	opencitations	forward	complete	3	3	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A02	SNPPar	openalex	backward	complete	44	44	1	resolved via referenced_works
+0	W0A02	SNPPar	openalex	forward	complete	26	26	1	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A02	SNPPar	opencitations	backward	complete	42	42	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A02	SNPPar	opencitations	forward	complete	16	16	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A03	SubRecon	openalex	backward	complete	12	12	1	resolved via referenced_works
+0	W0A03	SubRecon	openalex	forward	complete	6	6	1	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A03	SubRecon	opencitations	backward	complete	10	10	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A03	SubRecon	opencitations	forward	complete	6	6	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A04	TreeTime	openalex	backward	complete	33	33	1	resolved via referenced_works
+0	W0A04	TreeTime	openalex	forward	complete	1383	1383	14	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A04	TreeTime	opencitations	backward	complete	29	29	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A04	TreeTime	opencitations	forward	complete	1297	1297	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A05	FastML	openalex	backward	complete	37	37	1	resolved via referenced_works
+0	W0A05	FastML	openalex	forward	complete	379	379	4	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A05	FastML	opencitations	backward	complete	33	33	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A05	FastML	opencitations	forward	complete	353	353	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A06	kSNP3.0	openalex	backward	complete	9	9	1	resolved via referenced_works
+0	W0A06	kSNP3.0	openalex	forward	complete	643	643	7	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A06	kSNP3.0	opencitations	backward	complete	8	8	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A06	kSNP3.0	opencitations	forward	complete	605	605	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A07	PAML	openalex	backward	complete	104	104	1	resolved via referenced_works
+0	W0A07	PAML	openalex	forward	complete	14318	14318	144	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A07	PAML	opencitations	backward	complete	58	58	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A07	PAML	opencitations	forward	complete_provider_reconciled	12846	12846	111	three forward snapshots produced byte-identical OCI-plus-verified-missing-work reconciliation; all unique discrepant OCIs directly verified; accepted attempt 3
+0	W0A08	PastML	openalex	backward	complete	89	89	1	resolved via referenced_works
+0	W0A08	PastML	openalex	forward	complete	281	281	3	cursor pagination complete; accepted forward snapshot attempt 1
+0	W0A08	PastML	opencitations	backward	complete	82	82	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1
+0	W0A08	PastML	opencitations	forward	complete	251	251	24	stable counts and exact dual-axis row/OCI agreement; accepted attempt 1

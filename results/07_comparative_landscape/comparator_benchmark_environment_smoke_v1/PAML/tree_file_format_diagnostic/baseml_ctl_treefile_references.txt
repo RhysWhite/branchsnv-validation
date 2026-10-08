@@ -1,0 +1,12 @@
+examples/MouseLemurs/baseml.ctl :: treefile = MouseLemurs.trees
+examples/MouseLemurs/baseml2.ctl :: treefile = MouseLemurs.trees
+examples/TipDate.FluH1/baseml.ctl :: treefile = H1.tre
+examples/TipDate.HIV2/baseml.ctl :: treefile = HIV2ge.tre
+examples/baseml.ctl :: treefile = brown.trees
+examples/ndata/baseml-ndata-maintree-ml.ctl :: treefile = 4s-ndata-maintree.trees * tree Structure file name
+examples/ndata/baseml-ndata-maintree.ctl :: treefile = 4s-ndata-maintree.trees * tree Structure file name
+examples/ndata/baseml-ndata.ctl :: treefile = 4s-ndata.trees      * tree structure file name
+examples/ndata/baseml.ctl :: treefile = 5s-mc.trees      * tree structure file name
+examples/nhomo/baseml-nhomo4.ctl :: treefile = tree-nhomo4.txt
+examples/nhomo/baseml-nhomo5.ctl :: treefile = tree-nhomo5.txt
+src/baseml.ctl :: treefile = ../examples/ndata/4s-ndata-maintree.trees * tree Structure file name

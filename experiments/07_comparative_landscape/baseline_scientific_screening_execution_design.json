@@ -1,0 +1,155 @@
+{
+  "append_only_event_model": {
+    "conflicting_unsuperseded_terminal_events_fail": true,
+    "corrections_require_superseding_event": true,
+    "current_state_is_derived_projection": true,
+    "events_may_be_deleted": false,
+    "events_may_be_edited": false
+  },
+  "baseline_population": {
+    "blocked_metadata": 484,
+    "blocked_title_conflict": 2,
+    "blocked_title_unresolved": 482,
+    "publication_entities": 94898,
+    "ready": 94629,
+    "screening_entities": 95113,
+    "software_registry_entities": 215
+  },
+  "batching": {
+    "batch_id_format": "B%06d",
+    "batch_membership_must_be_hash_pinned": true,
+    "default_max_batch_size": 500,
+    "exact_batch_count": null,
+    "population": "active_ready_entities_after_validated_prior_adjudication_carry_forward",
+    "sort_key": "screening_entity_id",
+    "sort_order": "lexicographic_ascending"
+  },
+  "blocked_metadata_policy": {
+    "included_in_active_batches": false,
+    "remains_baseline_completion_blocker": true,
+    "resolution_requires_separately_frozen_metadata_or_reconciliation_procedure": true,
+    "scientific_decision_allowed": false
+  },
+  "decision_event_minimum_fields": [
+    "event_id",
+    "event_type",
+    "screening_entity_id",
+    "baseline_queue_sha256",
+    "baseline_row_sha256",
+    "batch_id",
+    "record_decision",
+    "exclusion_reason_code",
+    "candidate_method_flag",
+    "evidence_basis",
+    "evidence_source_locator",
+    "evidence_escalation_status",
+    "operator_id",
+    "operator_type",
+    "decision_timestamp_utc",
+    "supersedes_event_id",
+    "reviewer_id",
+    "review_status",
+    "adjudication_status",
+    "notes"
+  ],
+  "decision_invariants": {
+    "awaiting_source_escalation": {
+      "candidate_method_flag": "",
+      "exclusion_reason_code": "",
+      "record_decision": ""
+    },
+    "exclude": {
+      "candidate_method_flag": "false",
+      "requires_exactly_one_exclusion_reason": true
+    },
+    "retain_for_method_assessment": {
+      "candidate_method_flag": "true",
+      "exclusion_reason_code": ""
+    }
+  },
+  "evidence_rule": {
+    "absence_of_abstract_is_exclusion": false,
+    "citation_frequency_is_eligibility_criterion": false,
+    "discovery_route_is_eligibility_criterion": false,
+    "missing_metadata_is_scientific_exclusion": false,
+    "provider_count_is_eligibility_criterion": false,
+    "uncertainty_resolved_toward_source_checking": true
+  },
+  "exclusion_reason_codes": [
+    "application_only_no_reusable_method",
+    "duplicate_record_same_method_no_distinct_capability",
+    "unrelated_variant_or_data_type",
+    "unsupported_by_primary_or_stable_authoritative_source"
+  ],
+  "execution_scope": "record_level_screening_only",
+  "forbidden_in_this_phase": [
+    "canonical_publication_selection",
+    "directness_assignment",
+    "landscape_method_level_decision",
+    "method_identity_consolidation",
+    "role_assignment",
+    "saturation_claim",
+    "search_reopening",
+    "wave1_promotion"
+  ],
+  "full_baseline_completion": {
+    "all_screenable_entities_terminal": true,
+    "blocked_metadata_entities": 0,
+    "completion_state": "BASELINE_RECORD_SCREENING_COMPLETE",
+    "unresolved_decision_conflicts": 0,
+    "unresolved_source_escalations": 0
+  },
+  "future_execution_root": "results/07_comparative_landscape/baseline_scientific_screening_execution",
+  "immutable_baseline": {
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "production_checksums_sha256": "8b73918e39e2e718553856ccfbc146f77fa4d8c27bb997b68cd3f945504bd591",
+    "production_completion_freeze_sha256": "9cd2f6389b294f49d4082f334c1bcb05c97346f09d0c0fa08b3cd1d564b4fa29",
+    "production_path": "results/07_comparative_landscape/scientific_screening",
+    "queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58"
+  },
+  "implementation_may_make_scientific_decisions": false,
+  "next_gate": "IMPLEMENT_CONTROLLED_BASELINE_SCIENTIFIC_SCREENING_EXECUTION_WITHOUT_DECISIONS",
+  "operator_types": [
+    "human",
+    "human_with_assistance"
+  ],
+  "parent_production_completion_commit": "4287580270a8fd3e867008824526eadde7edaaf3",
+  "prior_anchor_carry_forward": {
+    "ambiguous_mapping_fails_closed": true,
+    "carry_forward_counts_as_new_decision": false,
+    "expected_prior_anchor_count": 8,
+    "fuzzy_title_matching_allowed": false,
+    "mapping_must_be_unique": true,
+    "required_by_frozen_protocol": true,
+    "successful_mapping_count": null
+  },
+  "ready_subset_completion": {
+    "all_active_ready_entities_terminal": true,
+    "all_active_source_escalations_resolved": true,
+    "baseline_queue_sha_unchanged": true,
+    "completion_state": "READY_SUBSET_COMPLETE_WITH_METADATA_BLOCKERS",
+    "metadata_blockers_may_remain": 484,
+    "no_partial_active_batches": true,
+    "no_unsuperseded_conflicting_decisions": true,
+    "prior_adjudication_carry_forwards_accounted": true
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "role_assignments": 0,
+    "scientific_screening_decisions": 0,
+    "wave1_promotions": 0
+  },
+  "state_transitions": [
+    "ready->complete",
+    "ready->awaiting_source_escalation",
+    "awaiting_source_escalation->complete",
+    "complete->complete_via_explicit_supersession_only"
+  ],
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "terminal_record_decisions": [
+    "exclude",
+    "retain_for_method_assessment"
+  ]
+}

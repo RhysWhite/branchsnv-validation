@@ -1,0 +1,67 @@
+Joint log likelihood of position 1: -1.97607
+Joint log likelihood of position 2: -1.97607
+Joint log likelihood of position 3: -1.97607
+Joint log likelihood of position 4: -1.97607
+Joint log likelihood of position 5: -1.97607
+Joint log likelihood of position 6: -1.97607
+Joint log likelihood of position 7: -1.97607
+Joint log likelihood of position 8: -1.97607
+Joint log likelihood of position 9: -1.97607
+Joint log likelihood of position 10: -1.97607
+Joint log likelihood of position 11: -1.97607
+Joint log likelihood of position 12: -1.97607
+Joint log likelihood of position 13: -1.97607
+Joint log likelihood of position 14: -1.97607
+Joint log likelihood of position 15: -1.97607
+Joint log likelihood of position 16: -1.97607
+Joint log likelihood of position 17: -1.97607
+Joint log likelihood of position 18: -1.97607
+Joint log likelihood of position 19: -1.97607
+Joint log likelihood of position 20: -5.3449
+total log likelihood of joint reconstruction: -42.8903
+
+++++++++++++++++++++++++ joing log likelihood +++++++++++++++++++++++++++++++
+
+1,-1.97607
+2,-1.97607
+3,-1.97607
+4,-1.97607
+5,-1.97607
+6,-1.97607
+7,-1.97607
+8,-1.97607
+9,-1.97607
+10,-1.97607
+11,-1.97607
+12,-1.97607
+13,-1.97607
+14,-1.97607
+15,-1.97607
+16,-1.97607
+17,-1.97607
+18,-1.97607
+19,-1.97607
+20,-5.3449
+
+++++++++++++++++++++++++ joint probs +++++++++++++++++++++++++++++++
+
+1,0.138612
+2,0.138612
+3,0.138612
+4,0.138612
+5,0.138612
+6,0.138612
+7,0.138612
+8,0.138612
+9,0.138612
+10,0.138612
+11,0.138612
+12,0.138612
+13,0.138612
+14,0.138612
+15,0.138612
+16,0.138612
+17,0.138612
+18,0.138612
+19,0.138612
+20,0.00477242

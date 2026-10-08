@@ -1,0 +1,60 @@
+{
+  "campaign_id": "C000001",
+  "campaign_scope": {
+    "batches": [
+      "B000005",
+      "B000006",
+      "B000007",
+      "B000008",
+      "B000009"
+    ],
+    "global_active_index_end": 4500,
+    "global_active_index_start": 2001,
+    "record_count": 2500,
+    "transactions": [
+      "T000014",
+      "T000015",
+      "T000016",
+      "T000017",
+      "T000018"
+    ]
+  },
+  "design_freeze_sha256": "24514c2c5acb3c85daed0556f54a83dad92b694ef4ccdd998efde035b9ee3652",
+  "design_sha256": "3667a57177d42b3ccceed5d3f3cf7116407d571fb2f27c10832e96e84818d7c2",
+  "hostile_test_sha256": "a39ba366cb2e333ceec95cd646c8c0e5a0c0610d297abf2361e919c937d8b6e9",
+  "implementation_id": "BASELINE_SCIENTIFIC_SCREENING_CAMPAIGN_ORCHESTRATION_V4",
+  "implementation_sha256": "6b48d80e60dc5dd9343467c0dcbce86176eab0871e88d7550b53395d04c22016",
+  "implemented_scope": {
+    "blank_review_packet_generation": true,
+    "campaign_design_validation": true,
+    "checkpoint_publication": false,
+    "combined_2500_record_review_bundle_generation": true,
+    "event_execution": false,
+    "event_projection": false,
+    "five_batch_scope_reconstruction": true,
+    "live_authorization": false,
+    "pre_review_snapshot_generation": true,
+    "production_boundary_validation": true,
+    "review_workspace_atomic_materialization": true,
+    "review_workspace_deterministic_validation": true,
+    "review_workspace_overwrite_protection": true
+  },
+  "next_gate": "BUILD_C000001_REVIEW_WORKSPACE",
+  "parent_commit": "f8bf9a55ce86bde8c22d834f6fbeb05eae9f751b",
+  "production_state_preserved": {
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "production_mutation_during_implementation": false
+  },
+  "safety_contract": {
+    "campaign_checkpoints_not_created": true,
+    "canonical_review_workspace_not_created_during_tests": true,
+    "controller_has_no_event_appender_publication_call": true,
+    "controller_has_no_execute_transaction_call": true,
+    "controller_has_no_git_mutation_call": true,
+    "cross_batch_transactions_remain_prohibited": true,
+    "live_authorization_not_created": true
+  },
+  "schema_version": 1,
+  "status": "FROZEN_NON_PRODUCTION_REVIEW_LAYER_IMPLEMENTATION"
+}

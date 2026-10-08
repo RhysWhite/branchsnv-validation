@@ -1,0 +1,26 @@
+{
+  "attempt": "04",
+  "candidate_record_rows": 113448,
+  "capability_classification_performed": false,
+  "corpus_file_count": 1005,
+  "corpus_total_bytes": 354306316,
+  "deduplicated_record_rows": 78962,
+  "eligibility_decisions_made": false,
+  "hr05_pubmed": {
+    "envelope": 12654,
+    "leaf_count": 8,
+    "reported": 12654,
+    "retrieved": 12654,
+    "scientific_query_modified": false,
+    "terminal_sum": 12654,
+    "unique": 12654
+  },
+  "largest_file": "candidate_records.tsv",
+  "largest_file_bytes": 30543433,
+  "query_count": 5,
+  "repository_commit": "6b3e5338f97f79bcdf0ee51af89862986f1178b8",
+  "schema_version": 1,
+  "screening_performed": false,
+  "source_query_retrievals": 15,
+  "status": "COMPLETE"
+}

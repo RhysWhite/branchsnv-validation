@@ -1,0 +1,100 @@
+{
+  "amendment_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HARNESS_SECURITY_AMENDMENT_002",
+  "authorization_basis": "Explicit user approval to prepare Amendment 002 for truth isolation and production-harness implementation; canonical execution and scoring remain prohibited.",
+  "authorization_parent_commit": "10981a2c4e34ebfc14350f74b84b35d5775216d0",
+  "explicit_prohibitions": {
+    "automatic_comparator_rerun_authorized": false,
+    "benchmark_truth_access_authorized": false,
+    "canonical_benchmark_execution_authorized": false,
+    "canonical_input_access_authorized": false,
+    "canonical_result_root_creation_authorized": false,
+    "scoring_authorized": false,
+    "third_party_comparator_execution_authorized": false
+  },
+  "frozen_dependencies": {
+    "frozen_runner_sha256": "63a5e45a4082a5709e385e57f3af389769bc4520b5e2a4310bb20fb86e964a33",
+    "original_authorization_sha256": "934bf529136b34b5d39c1f22816aed19dedcd4b4c1aeddd34d1341e54e752cb5",
+    "original_design_sha256": "1306af08f69d27a80990203bd7d803d2c907a1cdeb56bfd2fe0174bf4a416cde",
+    "scenario_matrix_sha256": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+    "timeout_amendment_001_sha256": "c1f3e01988d2535085618f33f1131f2238cfb8ebbe21ee4af53989a1a9081a81"
+  },
+  "future_execution_gate": "SEPARATE_EXPLICIT_CANONICAL_EXECUTION_AUTHORIZATION_REQUIRED",
+  "implementation_scope": {
+    "authorized_existing_implementation_files": [
+      "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_harness.py",
+      "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_harness_validation.py",
+      "experiments/07_comparative_landscape/COMPARATOR_BENCHMARK_EXECUTION_V1_HARNESS_IMPLEMENTATION.md"
+    ],
+    "comparator_sources_and_runtimes_unchanged": true,
+    "frozen_design_unchanged": true,
+    "frozen_runner_unchanged": true,
+    "original_authorization_unchanged": true,
+    "scenario_matrix_unchanged": true,
+    "timeout_amendment_001_unchanged": true
+  },
+  "next_gate": "IMPLEMENT_VALIDATE_AND_FREEZE_TRUTH_ISOLATED_PRODUCTION_HARNESS",
+  "preserved_sandbox_properties": {
+    "host_root_must_not_be_mounted": true,
+    "network_disabled": true,
+    "only_authorized_invocation_workspace_writable": true,
+    "private_tmp": true,
+    "process_lifetime_bound_to_parent": true
+  },
+  "production_harness_contract": {
+    "core_invocations": 800,
+    "core_timeout_seconds": 3600,
+    "dispatch_order": "frozen_method_major",
+    "execution_gate": "A future separately frozen, independently validated canonical execution authorization is mandatory before launching any actual comparator command.",
+    "failure_continuation_policy": "Continue after classified comparator completion failures. Stop on infrastructure, integrity or authorization failures; preserve partial records without a false completion manifest.",
+    "method_count": 8,
+    "planned_invocations": 1200,
+    "preauthorization_behavior": "Production comparator dispatch must fail closed. Synthetic fixtures and explicitly allowlisted mock executors alone may be exercised.",
+    "provenance_policy": "Create durable, non-overwriting per-invocation execution records, output checksums, explicit failure classifications and a completion manifest only after all scheduled invocations are accounted for.",
+    "rerun_policy": "No automatic comparator reruns. Any subsequent attempt requires separately recorded authorization.",
+    "resource_policy": "Record wall time and fresh-worker Linux RUSAGE_CHILDREN.ru_maxrss in KiB and bytes; identify the measurement as maximum child RSS, not concurrent process-tree aggregate RSS.",
+    "runner_policy": "Use the existing frozen runner for command construction, subprocess execution and native-output normalization. Do not modify frozen runner code.",
+    "scale_invocations": 400,
+    "scale_timeout_seconds": 14400,
+    "scenario_count": 150,
+    "scoring_policy": "Execution and native-output normalization remain separate from truth-based scientific scoring.",
+    "worker_policy": "A fresh isolated worker is required for every invocation."
+  },
+  "status": "FROZEN_SCOPE_PRE_IMPLEMENTATION",
+  "superseded_original_sandbox_clauses": [
+    "$.sandbox_contract.host_root_read_only",
+    "$.sandbox_contract.required_arguments[0]",
+    "$.sandbox_contract.required_arguments[1]"
+  ],
+  "supersession_explanation": "The original host-root read-only bind permits reading the entire host filesystem. For production-shaped comparator isolation, replace that mount layout with a private filesystem root and explicitly verified mounts. The original sandbox remains frozen historically; existing synthetic validation interfaces may be retained while the replacement is developed.",
+  "truth_isolation_contract": {
+    "descriptor_policy": "Close unintended inherited file descriptors, prohibit inherited truth descriptors, and validate /proc and process-namespace isolation against descriptor-based and process-root access paths.",
+    "environment_policy": "Supply a strict environment allowlist. No truth path, secret, unapproved loader path or unvalidated runtime search path may enter the child environment.",
+    "filesystem_policy": "Use an empty private mount root. Bind only independently validated operating-system dependencies, pinned runtime dependencies, the single permitted input view and the designated invocation workspace.",
+    "host_root_bind_prohibited": true,
+    "input_policy": "Expose only the permitted per-invocation input view. Do not bind the canonical dataset parent, truth directory, event ledger, scoring data or another scenario's inputs.",
+    "namespace_policy": "Disable networking, isolate process IDs and construct a private /proc view without host process visibility.",
+    "negative_tests_required": [
+      "synthetic_truth_direct_path",
+      "synthetic_truth_parent_directory",
+      "synthetic_truth_symlink_escape",
+      "synthetic_truth_proc_fd",
+      "synthetic_truth_proc_root",
+      "mount_source_ancestor_overlap",
+      "mount_destination_overlap",
+      "unapproved_runtime_mount",
+      "unexpected_inherited_descriptor",
+      "path_identity_change",
+      "host_root_bind_attempt",
+      "repository_bind_attempt"
+    ],
+    "path_policy": "Reject symlink escapes, path traversal, noncanonical paths, mount destination collisions, unsafe ancestor mounts and changes to validated source paths. Recheck at the execution boundary; fail closed if path stability cannot be established.",
+    "private_root_required": true,
+    "required_failure_behavior": "Any successful synthetic truth read or isolation uncertainty fails validation and blocks execution authorization.",
+    "runtime_dependency_policy": "Resolve executable, interpreter, shared-library, environment and runtime-data dependencies before authorization. Verify mount sources, canonical destinations, expected identities and truth-disjointness. Do not accept arbitrary user-supplied read-only mount roots.",
+    "test_dataset_policy": "Use synthetic public inputs and private synthetic truth sentinels only. Never inspect canonical truth to conduct the isolation test.",
+    "unrestricted_dataset_parent_bind_prohibited": true,
+    "unrestricted_home_bind_prohibited": true,
+    "unrestricted_repository_bind_prohibited": true,
+    "unrestricted_runtime_parent_bind_prohibited": true
+  }
+}

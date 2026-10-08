@@ -1,0 +1,66 @@
+{
+  "asr000001": {
+    "checksums_sha256": "d030cc0c326d18a827ad5f643b42b374b8bb4753293051833b26db74a7a44569",
+    "status": "COMPLETE",
+    "summary_sha256": "f2d5867b7b26bce33303c0374cc931c79fcd4086334ce1e963d40a2bde57c97d"
+  },
+  "asr000002": {
+    "authorization_sha256": "59fb42fe7f915ef95c8e1470fcdc1ab1e05c79006e9f8163007d0f5f24120eb9",
+    "checksums_sha256": "532f0ae0677a9d1913bebdaee5bdee1aa7c77abbb72e42bf2a5f7587d5e6a251",
+    "continuation_queue_sha256": "d0a50b1610f0dcc5f61412cb2285b23391c38dd527890e1542c1b25ade7b3ca2",
+    "discovered_child_routes": 90,
+    "dynamic_child_routes_executed": 0,
+    "final_transport_status_counts": {
+      "retrieved": 16
+    },
+    "manifest_sha256": "3234662ea5a6e4576dd4ed49f596c35df131541a9888e4a19774768881bcf593",
+    "status": "COMPLETE",
+    "summary_sha256": "9f522e4d881bf4c52528d38b38fddef68af7e4a28624f057ed3e635be35d2df3",
+    "tasks_considered": 16,
+    "transport_attempts": 32
+  },
+  "authorization_commit": "369f117c4b65e8d35f95824a3500e6ddfda8d069",
+  "next_gate": "HUMAN_SCIENTIFIC_REVIEW_B000001_POSITIONS_2_TO_11",
+  "review_packet_build_recovery": {
+    "failure_reason": "Markdown renderer referenced record['abstract'] instead of record['pubmed_abstract']",
+    "initial_json_complete": true,
+    "initial_markdown_complete": false,
+    "initial_tsv_complete": true,
+    "production_evidence_affected": false,
+    "recovery": "validated completed TSV/JSON and rendered Markdown from frozen JSON using pubmed_abstract",
+    "scientific_state_affected": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "all_ten_records_awaiting_source_escalation": true,
+    "candidate_method_decisions_added": 0,
+    "event_ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "review_packet_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6",
+    "terminal_decisions_added": 0
+  },
+  "source_review_packet": {
+    "abstracts_available": 8,
+    "packet_checksums_sha256": "a9cc5ea36cb5187820e301c5ee8ec9f2122bc8f7ed9236f9c59cdf91b28c6905",
+    "packet_json_sha256": "f3fb68cb08f03c255daf13ee0d72222b14528cf41920b31e0af57c6d3a005928",
+    "packet_md_sha256": "399d60f54ffe1f3273eb75ba7dceca2cab4c2e99d15af7deee79a458334f0952",
+    "packet_tsv_sha256": "602e8c68995aa6fa26bfc28772b8568463ec664991c55f1b2c54b58d7b1522e0",
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/ASR000002_source_review",
+    "positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "positions_with_pmc_links": 8,
+    "pubmed_primary_records_retrieved": 8,
+    "record_count": 10,
+    "scientific_decisions_present": false
+  },
+  "status": "FROZEN_PRE_HUMAN_SOURCE_REVIEW"
+}

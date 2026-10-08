@@ -1,0 +1,32 @@
+tool	category	comparison_role_candidate	audit_status
+BRANCHSNV	focal-edge interpretation	reference	internal_reference
+CLASSICO/Evidente	clade-specific SNP discovery	direct_candidate	pending_full_audit
+Clade-O-Matic	canonical SNP / typing-scheme discovery	direct_candidate	pending_full_audit
+SNPPar	branch mutation mapping / homoplasy	direct_candidate	pending_full_audit
+TreeTime	ancestral sequence reconstruction / mutation mapping	direct_candidate	pending_full_audit
+PastML	ancestral-state reconstruction	near_direct_candidate	pending_full_audit
+FastML	ancestral sequence reconstruction	near_direct_candidate	pending_full_audit
+IQ-TREE 2	phylogenetic inference / ancestral reconstruction	near_direct_candidate	pending_full_audit
+HomoplasyFinder	homoplasy detection	diagnostic_panel_candidate	pending_full_audit
+phangorn	general parsimony / phylogenetics	diagnostic_panel_candidate	pending_full_audit
+PAUP*	general parsimony / phylogenetics	diagnostic_panel_candidate	pending_full_audit
+PHYLIP DNAPARS	nucleotide parsimony	diagnostic_panel_candidate	pending_full_audit
+BioHansel	hierarchical SNP genotyping	context	pending_full_audit
+CanSNPer	canonical SNP genotyping	context	pending_full_audit
+KvarQ	SNP-marker genotyping	context	pending_full_audit
+GenoTyphi	SNP lineage scheme / genotyping	context	pending_full_audit
+TB-Profiler	SNP-barcode lineage typing	context	pending_full_audit
+fastlin	SNP-barcode lineage typing	context	pending_full_audit
+SKA	split-kmer analysis / genotyping	context	pending_full_audit
+SPANDx	variant calling / phylogenomics	upstream	pending_full_audit
+Snippy	variant calling / core SNP phylogeny	upstream	pending_full_audit
+SNVPhyl	variant calling / phylogenomics	upstream	pending_full_audit
+vSNP	variant calling / phylogenomics	upstream	pending_full_audit
+Gubbins	recombination detection	upstream	pending_full_audit
+ClonalFrameML	recombination inference	upstream	pending_full_audit
+RAxML	phylogeny inference	upstream	pending_full_audit
+FastTree	phylogeny inference	upstream	pending_full_audit
+ETE 3	tree manipulation / analysis	infrastructure	pending_full_audit
+SubRecon	single-branch ancestral substitution reconstruction	direct_candidate	pending_full_audit
+kSNP3.0	SNP discovery / phylogeny / node-associated SNP mapping	near_direct_candidate	pending_full_audit
+PAML	model-based ancestral sequence reconstruction	near_direct_candidate	pending_full_audit

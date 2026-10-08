@@ -1,0 +1,111 @@
+{
+  "blind_validation_boundary": {
+    "blind_validation_content_used_by_this_design": false,
+    "blind_validation_labels_may_be_joined_during_scoring": false,
+    "blind_validation_labels_may_be_read_during_scoring": false,
+    "future_outcomes_may_be_used_for_model_selection": false,
+    "future_outcomes_may_be_used_for_thresholding": false,
+    "separate_post_scoring_unblinding_design_required": true,
+    "unblinding_permitted_before_score_freeze": false
+  },
+  "design_id": "PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1",
+  "design_parent_commit": "b0e7f9ef0624759a2969173a36e4443128028be3",
+  "execution_boundary": {
+    "future_scoring_performed_by_this_design": false,
+    "network_access_permitted": false,
+    "production_ledger_mutation_permitted": false,
+    "raw_retrieval_archive_mutation_permitted": false,
+    "reconciliation_output_mutation_permitted": false,
+    "scientific_decisions_permitted": false,
+    "scientific_screening_permitted": false,
+    "separate_execution_authorization_required": true
+  },
+  "frozen_scoring_contract": {
+    "candidate_comparison_permitted": false,
+    "decision_rule_must_be_frozen_development_rule": true,
+    "duplicate_scoring_results_permitted": false,
+    "exact_scoreable_row_count": 11905,
+    "exact_total_resolution_row_count": 12162,
+    "feature_selection_permitted": false,
+    "future_score_dependent_design_change_permitted": false,
+    "future_text_dependent_design_change_permitted": false,
+    "hyperparameter_tuning_permitted": false,
+    "missing_scoring_results_permitted": false,
+    "model_fit_permitted": false,
+    "model_must_be_frozen_development_model": true,
+    "model_refit_permitted": false,
+    "no_text_rows_must_not_be_imputed": true,
+    "no_text_rows_must_not_receive_model_scores": true,
+    "no_text_rows_must_remain_explicit_in_coverage_output": true,
+    "one_scoring_result_per_normalized_text_row": true,
+    "post_hoc_calibration_permitted": false,
+    "preprocessing_must_be_frozen_development_preprocessing": true,
+    "preserve_retrieval_record_index": true,
+    "preserve_screening_entity_id": true,
+    "threshold_adjustment_permitted": false,
+    "threshold_must_be_frozen_development_threshold": true,
+    "threshold_selection_permitted": false
+  },
+  "implementation_requirements": [
+    "verify every frozen source binding before scoring",
+    "fail closed unless the canonical normalized-text SHA-256 is exact",
+    "fail closed unless exactly 11,905 normalized-text rows are present",
+    "reuse the frozen development evaluator/model without fitting or tuning",
+    "hostile-test missing, duplicated, reordered and identity-drifted inputs",
+    "hostile-test attempts to read blind-validation labels",
+    "hostile-test attempts to change model, preprocessing or threshold",
+    "hostile-test attempts to score any of the 257 no-text rows",
+    "produce deterministic output from identical frozen inputs",
+    "require a separate explicit execution authorization after implementation freeze"
+  ],
+  "input_contract": {
+    "canonical_normalized_text_sha256": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+    "canonical_resolution_sha256": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7",
+    "canonical_summary_sha256": "14b8099cecff8787a3a62efe5c796beebddf8635a66a38588f089435fdd14209",
+    "development_evaluation_completion_sha256": "61341cbb2bf36dd9c62d9de533bcda5d323cc05cc77a023e7b43e1eed68b38e3",
+    "future_normalized_text_rows": 11905,
+    "future_resolution_rows": 12162,
+    "future_unscored_no_text_rows": 257,
+    "no_text_population_definition": {
+      "abstract_absent": 246,
+      "openalex_position_gap": 1,
+      "provider_not_found": 10,
+      "total": 257
+    },
+    "reconciliation_completion_sha256": "0798d80b10c6fa4beb53cf1074bef959283c2cb0ef2e2be998c6ead4bbc048b1",
+    "scoreable_population_definition": "Every and only row present in reconciled_normalized_text.tsv."
+  },
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_PRE_REVIEW_TRIAGE_FUTURE_SCORING_V1_BEFORE_SEPARATE_EXECUTION_AUTHORIZATION",
+  "planned_output_contract": {
+    "completion_written_only_after_all_outputs_validate": true,
+    "coverage_population_rows": 12162,
+    "coverage_status_counts": {
+      "no_normalized_text": 257,
+      "scored": 11905
+    },
+    "output_root": "results/07_comparative_landscape/pre_review_triage_future_scoring_v1",
+    "required_artifacts": [
+      "scored_records.tsv",
+      "coverage.tsv",
+      "execution_manifest.json",
+      "checksums.sha256",
+      "execution_completion.json"
+    ],
+    "scored_population_rows": 11905
+  },
+  "purpose": "Apply the already frozen development-stage pre-review triage evaluator/model once to the canonical future normalized-text population while remaining blind to future validation labels.",
+  "schema_version": 1,
+  "source_bindings": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_evaluation_results_v1_design.json": "bcc245b13e79ef19cda43ffa5196bf99d506540fa3430704b3fe0bf366ef62e4",
+    "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1.py": "bd5520bbbb7bad1bc33cab131d21ce90701815a927076fee159ede3045843a10",
+    "experiments/07_comparative_landscape/pre_review_triage_evaluator_v1_implementation_design.json": "ee898f9c2dddabc8bc9639f54148a9f3d9fad2775d7d49062f51a4eb1f71cd44",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_reconciliation_completion.sha256": "0798d80b10c6fa4beb53cf1074bef959283c2cb0ef2e2be998c6ead4bbc048b1",
+    "experiments/07_comparative_landscape/pre_review_triage_model_candidates_v1_design.json": "708e6c597a83b54416b1d657fe424fabea78cfe490ba960e308eb9d0841389a3",
+    "results/07_comparative_landscape/pre_review_triage_evaluator_v1/development_evaluation_v1/execution_completion.json": "61341cbb2bf36dd9c62d9de533bcda5d323cc05cc77a023e7b43e1eed68b38e3",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_normalized_text.tsv": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciled_resolution.tsv": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciliation_outputs.sha256": "237fd7080a3ff0617a486673ab122234edfbd6bfe12dc1734e5e16ea9e153279",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/reconciliation_summary.json": "14b8099cecff8787a3a62efe5c796beebddf8635a66a38588f089435fdd14209"
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}

@@ -4,3 +4,17 @@ reproduced_results/
 public_inputs/
 experiments/04_scalability/inputs/
 .DS_Store
+
+# Experiment 07 large raw search archives (archived externally at release)
+results/07_comparative_landscape/archive/*.tar.gz
+results/07_comparative_landscape/high_recall_search/raw/
+results/07_comparative_landscape/high_recall_search/corpus_checksums.sha256
+
+# Experiment 07 citation-chain Wave 0 raw retrieval and development evidence
+results/07_comparative_landscape/citation_wave_0/raw/
+results/07_comparative_landscape/citation_wave_0_failed_*/
+results/07_comparative_landscape/citation_wave_0_successful_*/
+
+# Experiment 07 comparator benchmark generated payloads (archived externally at release)
+results/07_comparative_landscape/comparator_benchmark_dataset_v1/inputs/
+results/07_comparative_landscape/comparator_benchmark_dataset_v1/truth/

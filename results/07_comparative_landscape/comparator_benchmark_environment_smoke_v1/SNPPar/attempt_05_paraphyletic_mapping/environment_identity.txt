@@ -1,0 +1,8 @@
+python = 3.8.20 | packaged by conda-forge | (default, Sep 30 2024, 17:52:49) 
+[GCC 13.3.0]
+executable = /home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/python
+ENABLE_USER_SITE = False
+biopython = 1.76
+phylo-treetime = 0.8.5
+ete3 = 3.1.3
+snppar = 1.0

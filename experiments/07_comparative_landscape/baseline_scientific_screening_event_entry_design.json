@@ -1,0 +1,220 @@
+{
+  "authoritative_ledger": "results/07_comparative_landscape/baseline_scientific_screening_execution/event_ledger.tsv",
+  "automatic_event_fields": [
+    "event_id",
+    "baseline_queue_sha256",
+    "baseline_row_sha256",
+    "decision_timestamp_utc",
+    "reviewer_id",
+    "review_status",
+    "adjudication_status"
+  ],
+  "current_event_invariant": {
+    "branching_event_chains_allowed": false,
+    "classification": "conservative_operational_restriction",
+    "max_unsuperseded_events_per_entity": 1,
+    "superseding_target_must_be_current": true
+  },
+  "entity_eligibility": {
+    "blocked_metadata_allowed": false,
+    "historical_carry_forward_entities_allowed": false,
+    "must_be_in_batch_membership": true,
+    "out_of_baseline_anchor_allowed": false
+  },
+  "event_id_contract": {
+    "assigned_by_appender": true,
+    "example_first": "E000000001",
+    "regex": "^E[0-9]{9}$",
+    "sequential_by_ledger_row_count": true
+  },
+  "event_schema": [
+    "event_id",
+    "event_type",
+    "screening_entity_id",
+    "baseline_queue_sha256",
+    "baseline_row_sha256",
+    "batch_id",
+    "record_decision",
+    "exclusion_reason_code",
+    "candidate_method_flag",
+    "evidence_basis",
+    "evidence_source_locator",
+    "evidence_escalation_status",
+    "operator_id",
+    "operator_type",
+    "decision_timestamp_utc",
+    "supersedes_event_id",
+    "reviewer_id",
+    "review_status",
+    "adjudication_status",
+    "notes"
+  ],
+  "event_types": [
+    "record_decision",
+    "source_escalation",
+    "superseding_record_decision"
+  ],
+  "evidence_contract": {
+    "evidence_basis_required_all_events": true,
+    "model_reasoning_is_authoritative_source": false,
+    "resolved_source_escalation_requires_authoritative_locator": true,
+    "source_escalation_basis_must_explain_insufficiency": true,
+    "source_escalation_locator_may_be_empty": true,
+    "terminal_evidence_source_locator_required": true
+  },
+  "exclusion_reasons": [
+    "application_only_no_reusable_method",
+    "duplicate_record_same_method_no_distinct_capability",
+    "unrelated_variant_or_data_type",
+    "unsupported_by_primary_or_stable_authoritative_source"
+  ],
+  "field_hygiene": {
+    "newlines_inside_fields_allowed": false,
+    "notes_required": false,
+    "nul_inside_fields_allowed": false,
+    "tabs_inside_fields_allowed": false
+  },
+  "first_live_authorization": {
+    "authorized_by_this_design": false,
+    "later_batches_implicitly_authorized": false,
+    "recommended_initial_batch": "B000001"
+  },
+  "immutable_dependencies": {
+    "base_execution_engine_sha256": "6084faeffe6d5b28aaeb6150ad434bf7f723507efde1c67e336549ee61a5e97a",
+    "batch_manifest_sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0",
+    "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "event_ledger_genesis_json_sha256": "89486b47eb83f896259b84a5dd90b8ae3a41083637bd331261167e1165e113be",
+    "production_completion_freeze_sha256": "177957adcfae13becb2fd856fc82b12a41a218dea6fa75419e79548dedef205d",
+    "production_completion_json_sha256": "62f02aec61103d67bfe74d6539fb3b54e6bce7422027a5cf314feaa2c860611e"
+  },
+  "logical_append_only": {
+    "atomic_replacement_allowed_only_for_strict_prefix_extension": true,
+    "historical_rows_deletable": false,
+    "historical_rows_editable": false
+  },
+  "next_gate": "IMPLEMENT_CONTROLLED_BASELINE_SCIENTIFIC_SCREENING_EVENT_APPENDER_WITHOUT_EVENTS",
+  "operator_contract": {
+    "autonomous_model_authored_events_allowed": false,
+    "human_responsible_for_scientific_event": true,
+    "human_with_assistance_requires_human_source_check": true,
+    "operator_id_required": true,
+    "operator_type_required": true
+  },
+  "operator_types": [
+    "human",
+    "human_with_assistance"
+  ],
+  "parent_pre_decision_production_completion_commit": "39f9cfebee09bc93cd8d471fc0ddbe305aed725e",
+  "production_genesis": {
+    "event_count": 0,
+    "event_entry_authorized": false,
+    "event_ledger_sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+    "package_identity_sha256": "5e4de148fe431402276d2f06f0305071fefc1be9a9be1fc1498b6bfe114ea39d",
+    "scientific_screening_started": false
+  },
+  "proposal_schema": [
+    "screening_entity_id",
+    "batch_id",
+    "event_type",
+    "record_decision",
+    "exclusion_reason_code",
+    "candidate_method_flag",
+    "evidence_basis",
+    "evidence_source_locator",
+    "evidence_escalation_status",
+    "supersedes_event_id",
+    "operator_id",
+    "operator_type",
+    "notes"
+  ],
+  "review_contract_v1": {
+    "adjudication_status": "must_be_empty",
+    "future_review_requires_separate_contract": true,
+    "reason": "existing frozen validator does not define controlled review/adjudication vocabularies",
+    "review_status": "must_be_empty",
+    "reviewer_id": "must_be_empty"
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "new_record_level_scientific_decisions": 0,
+    "new_scientific_events": 0,
+    "role_assignments": 0,
+    "source_escalation_events": 0,
+    "wave1_promotions": 0
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "terminal_decisions": [
+    "exclude",
+    "retain_for_method_assessment"
+  ],
+  "terminal_field_contract": {
+    "exclude": {
+      "candidate_method_flag": "false",
+      "exclusion_reason_code": "exactly_one_frozen_exclusion_reason"
+    },
+    "retain_for_method_assessment": {
+      "candidate_method_flag": "true",
+      "exclusion_reason_code": ""
+    }
+  },
+  "timestamp_contract": {
+    "assigned_by_appender": true,
+    "one_timestamp_per_transaction": true,
+    "precision": "whole_seconds",
+    "suffix": "Z",
+    "timezone": "UTC"
+  },
+  "transaction_contract": {
+    "compare_and_swap": true,
+    "exactly_one_batch_per_transaction": true,
+    "expected_pre_ledger_sha256_required": true,
+    "intra_transaction_supersession": false,
+    "max_one_proposed_event_per_entity": true,
+    "post_ledger_must_have_pre_ledger_as_exact_byte_prefix": true,
+    "revalidate_immediately_before_publication": true,
+    "sort_proposals_by_position_in_batch": true,
+    "supersession_target_must_preexist_transaction": true,
+    "validate_after_publication": true
+  },
+  "transaction_receipt_required_fields": [
+    "batch_id",
+    "proposal_sha256",
+    "pre_append_ledger_sha256",
+    "post_append_ledger_sha256",
+    "pre_append_event_count",
+    "post_append_event_count",
+    "first_assigned_event_id",
+    "last_assigned_event_id",
+    "transaction_timestamp_utc",
+    "event_type_counts",
+    "terminal_decision_counts",
+    "derived_state_counts_after_append"
+  ],
+  "transition_contract": {
+    "ready_to_source_escalation": {
+      "candidate_method_flag": "",
+      "event_type": "source_escalation",
+      "evidence_escalation_status": "awaiting_source_escalation",
+      "exclusion_reason_code": "",
+      "record_decision": "",
+      "supersedes_event_id": ""
+    },
+    "ready_to_terminal": {
+      "event_type": "record_decision",
+      "evidence_escalation_status": "",
+      "supersedes_event_id": ""
+    },
+    "source_escalation_to_terminal": {
+      "event_type": "superseding_record_decision",
+      "evidence_escalation_status": "resolved",
+      "supersedes": "current_source_escalation"
+    },
+    "terminal_correction": {
+      "event_type": "superseding_record_decision",
+      "evidence_escalation_status": "preserve_prior_terminal_value",
+      "supersedes": "current_terminal_event"
+    }
+  }
+}

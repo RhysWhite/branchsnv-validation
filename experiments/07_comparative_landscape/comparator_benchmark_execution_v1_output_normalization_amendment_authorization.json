@@ -1,0 +1,74 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_OUTPUT_NORMALIZATION_AMENDMENT_001",
+  "authorized_change": {
+    "pastml": [
+      "Add named.tree_tree.nwk to the frozen PastML output contract; this artifact already exists in the authorized successful smoke evidence.",
+      "Add a generic descendant-tip-set node-sequence mapping helper that maps a source output tree onto the frozen benchmark tree without relying on tool-specific internal node labels.",
+      "Add projected-events normalization that converts the nth projected categorical state back to the nth frozen genomic variable position before emitting edge_site_state_change calls.",
+      "Use canonical descendant-tip edge identity exactly as already frozen.",
+      "Preserve the existing PastML ambiguity rule: unresolved or multi-state node-site calls remain N and do not emit discrete events."
+    ],
+    "snppar": [
+      "Add a recurrent-site adapter for normalized SNPPar events parsed from homoplasic_events_all_calls.tsv.",
+      "A SNPPar recurrent-site call is a genomic position represented by at least two distinct normalized branch events in the native homoplasic-event output.",
+      "reported_recurrence_count_if_available is the number of distinct normalized branch events at that genomic position."
+    ],
+    "treetime_support": [
+      "The generic descendant-tip-set node mapping helper may also be used by the runner for TreeTime ancestral_sequences.fasta plus annotated_tree.nexus.",
+      "Do not change the already frozen TreeTime ancestral parameters or TreeTime recurrent-site definition."
+    ],
+    "validation": [
+      "Extend only the existing toy validation with synthetic fixtures.",
+      "Verify projected positions such as 253 and 9964 are emitted as 253 and 9964, never as projected indices 1 and 2.",
+      "Verify source-tree internal labels may differ while descendant-tip sets map one-to-one onto the benchmark tree.",
+      "Verify differing tip sets, ambiguous mappings and missing node sequences fail closed.",
+      "Verify SNPPar two-branch recurrence produces one recurrent-site call with count 2; a single event is not recurrent; duplicate edge-position events fail closed."
+    ]
+  },
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "baseline_sha256": {
+    "adapters": "bd79d8a856fe923dd9b19820ea35cc197c3377f72b621eff6f83b6ed70654ac1",
+    "dataset_generation_results_design": "3d364079e25065a55410e471f0f2378696c06ac3772afc8ff9dc86c1f1392ae5",
+    "dataset_generation_results_ledger": "9a40075006a32d7e46d97d5b90045b307bf53f829ede30e41edc8e4472327ca3",
+    "environment_recipes": "7aeede3e317bbe02d50b065cd0da91316c77da5d408c01c2eee428d72ac23bd9",
+    "method_matrix": "2f38fb573597ce70b612b9ac72e29c4bcf84f331a158d645df55457d4f55822b",
+    "pastml_ambiguity_manifest": "1ee4dcad057f42bc6a805eb38372ea44b175df3c86c9f59ce90499f7f5ba8770",
+    "runner_implementation_authorization_v1": "d5db6826e9297b089aac09716bba7ece37af7bf022345708ca1bcd945f977a98",
+    "scenario_matrix": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+    "toy_validation": "8625285c92f53a46db5cf2a906ea1879d0ec81d4144f70d7203c698037bc8889",
+    "treetime_homoplasy_manifest": "a9631ee4398a50530e12967fad5c2b60d033365fef482d6a511d9843d35511aa"
+  },
+  "explicitly_not_authorized": {
+    "benchmark_dataset_mutation": true,
+    "benchmark_truth_access": true,
+    "benchmark_truth_use_for_debugging": true,
+    "canonical_benchmark_execution": true,
+    "comparator_inference_parameter_change": true,
+    "comparator_version_change": true,
+    "generator_change": true,
+    "metric_definition_change": true,
+    "other_comparator_adapter_change": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "runner_implementation": true,
+    "scenario_definition_change": true,
+    "source_pin_change": true,
+    "third_party_comparator_execution": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_COMPARATOR_BENCHMARK_OUTPUT_NORMALIZATION_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "a8606655af34b3cadd944a87b3cdb8aa447d033d",
+  "reason": "Runner preflight identified incomplete frozen output normalization contracts: PastML reconstructed states are projected onto variable sites but the existing event converter emits projected indices rather than genomic coordinates; PastML node identity should be normalized through descendant-tip sets rather than assumed labels; and SNPPar's native homoplasic-event output lacks a frozen recurrent-site adapter.",
+  "rerun_authorized": false,
+  "runner_authorization_v1": {
+    "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_001",
+    "must_not_be_consumed_after_this_amendment_changes_frozen_hashes": true,
+    "required_followup": "REAUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V2",
+    "status_before_amendment": "AUTHORIZED_NOT_YET_CONSUMED"
+  },
+  "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}

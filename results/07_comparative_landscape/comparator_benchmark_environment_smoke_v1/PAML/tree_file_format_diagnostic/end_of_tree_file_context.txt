@@ -1,0 +1,721 @@
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/codeml.c:638 =====
+  588:    for (i = 0; i < 6; i++) if (fpair[i]) fclose(fpair[i]);
+  589:    if (com.ndata > 1 && fseq) fclose(fseq);
+  590:    if (com.ndata_trees_opt <= 1 && ftree)
+  591:       fclose(ftree);
+  592:    fclose(fout);  fclose(frub);
+  593:    if (finitials)  fclose(finitials);
+  594:    FreeMemPUVR();
+  595:    free(com.pose);
+  596:    for (i = 0; i < com.ns; i++) free(com.z[i]);
+  597: 
+  598:    return (0);
+  599: }
+  600: 
+  601: 
+  602: /* x[]: t[ntime]; rgene[ngene-1]; kappa; p[](NSsites); omega[];
+  603:         { alpha(for NSsites) !! alpha, rho || rK[], fK[] || rK[], MK[] }
+  604: */
+  605: 
+  606: int Forestry(FILE* fout, FILE* ftree)
+  607: {
+  608:    static int ages = 0;
+  609:    FILE *frate = NULL;
+  610:    int  status = 0, i, j = 0, k, itree, ntree=1, np, iteration = 1;
+  611:    int pauptree = 0, haslength;
+  612:    double x[NP], xb[NP][2], xcom[NP - NBRANCH], lnL = 0, lnL0 = 0, e = 1e-8, tl = 0, nchange = -1;
+  613:    double *g = NULL, *H = NULL, det;
+  614: 
+  615:    if (com.ndata_trees_opt <= 1) {
+  616:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  617:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  618:    }
+  619:    if (com.alpha)
+  620:       frate = (FILE*)zfopen(ratef, "w");
+  621:    if (ntree > 10 && com.npatt > 10000 && com.print)
+  622:       puts("\nlnf file may be large");
+  623:    flnf = zfopen("lnf", "w+");
+  624:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  625: 
+  626:    if (com.seqtype == 1 && com.aaDist >= FIT1) {
+  627:       xtoy(com.pi, pcodon0, 64);
+  628:       zero(paa0, 20);
+  629:       for (i = 0; i < com.ncode; i++)
+  630:          paa0[GeneticCode[com.icode][FROM61[i]]] += pcodon0[i];
+  631:       pcodonClass = (double*)malloc(com.ncatG * 64 * sizeof(double));
+  632:       if (pcodonClass == NULL) zerror("oom pcodonClass");
+  633:    }
+  634: 
+  635:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  636:       if (com.ndata_trees_opt <= 1)
+  637:          if(ReadTreeN(ftree, &haslength, 0, 1))
+  638:             zerror("end of tree file.");
+  639:       if (com.ndata_trees_opt>=2) {
+  640:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata+1);
+  641:          GenerateGtree_locus(com.idata, com.ns, 0);
+  642:       }
+  643:       if (com.seqtype == 1 && com.model) {
+  644:          if(1 || com.ndata_trees_opt==0)
+  645:             ProcessNodeAnnotation(&k);
+  646:          printf("\nTree is \n");  OutTreeN(stdout, 1, PrLabel);  printf("\n");
+  647:          if (com.nbtype > NBTYPE)
+  648:             zerror("nbtype too large.  Raise NBTYPE");
+  649:          if (com.seqtype == 1 && com.NSsites == 0 && com.model == 2 && com.nbtype <= 1) {
+  650:             zerror("we need more than 1 branch type to fit the branch model.");
+  651:          }
+  652:          else if (com.seqtype == 1 && com.NSsites && com.model == 2 && com.nbtype != 2) {
+  653:             zerror("We need 2 branch types in the tree for branch-site models.");
+  654:          }
+  655:       }
+  656: 
+  657:       for (insmodel = 0; insmodel < nnsmodels; insmodel++) {
+  658:          if (nnsmodels > 1) {
+  659:             com.NSsites = nsmodels[insmodel];
+  660:             if (com.NSsites <= NSpselection)
+  661:                com.ncatG = com.NSsites + 1;
+  662:             else if (com.NSsites == NSM2aRel || com.NSsites == NSdiscrete)
+  663:                com.ncatG = 3;
+  664:             else if (com.NSsites == NSfreqs)
+  665:                com.ncatG = 5;
+  666:             else if (com.NSsites == NSbetaw || com.NSsites == NS02normal)
+  667:                com.ncatG = ncatG0 + 1;
+  668:             else
+  669:                com.ncatG = ncatG0;
+  670: 
+  671:             com.nrate = com.nkappa = (com.hkyREV ? 5 : !com.fix_kappa);
+  672:             if (com.NSsites == 0 || com.NSsites == NSbetaw)  com.nrate += !com.fix_omega;
+  673:             else if (com.NSsites == NSnneutral)              com.nrate++;
+  674:             else if (com.NSsites == NSpselection || com.NSsites == NSM2aRel)
+  675:                com.nrate += 1 + !com.fix_omega;
+  676:             else if (com.NSsites == NSdiscrete)
+  677:                com.nrate += com.ncatG;
+  678: 
+  679:             printf("\n\nNSsites Model %d: %s\n", com.NSsites, NSsitesmodels[com.NSsites]);
+  680:             fprintf(fout, "\n\nNSsites Model %d: %s", com.NSsites, NSsitesmodels[com.NSsites]);
+  681:             fprintf(frst, "\n\nNSsites Model %d: %s", com.NSsites, NSsitesmodels[com.NSsites]);
+  682:             fprintf(frub, "\n\nNSsites Model %d: %s", com.NSsites, NSsitesmodels[com.NSsites]);
+  683:             if (com.NSsites) fprintf(fout, " (%d categories)", com.ncatG);
+  684:             fprintf(fout, "\n");
+  685:          }
+  686: 
+  687:          printf("\nTREE # %2d\n", itree + 1);
+  688:          fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:453 =====
+  403:       }
+  404:       fprintf(frst1, "\n"); 
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+  478:                   if ((x[nodes[i].ibranch] = nodes[i].branch) < 0)
+  479:                      x[nodes[i].ibranch] = 1e-5;
+  480:             }
+  481:          }
+  482:       }
+  483: 
+  484:       if (com.cleandata)
+  485:          nchange = MPScore(com.space);
+  486:       if (noisy&&com.ns < 99)  {
+  487:          OutTreeN(F0, 0, 0); printf(" MP score: %.2f\n", nchange);
+  488:       }
+  489:       OutTreeN(fout, 0, 0);  fprintf(fout, "  MP score: %.2f", nchange);
+  490:       if (!com.clock && com.model <= REV && com.nhomo <= 2
+  491:          && nodes[tree.root].nson <= 2 && com.ns > 2) {
+  492:          puts("\nThis is a rooted tree, without clock.  Check.");
+  493:          if (com.verbose) fputs("\nThis is a rooted tree.  Please check!", fout);
+  494:       }
+  495: 
+  496:       fflush(fout);  fflush(flnf);
+  497: 
+  498:       GetInitials(x, &i);
+  499: 
+  500:       if (i == -1) iteration = 0;
+  501: 
+  502:       if ((np = com.np) > NP) zerror("raise NP and recompile");
+  503: 
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.c:693 =====
+  643:          for (i = 0; i < np - com.ntime; i++) xcom[i] = xcom[i] * .8 + x[com.ntime + i] * 0.2;
+  644:       /*
+  645:             TestModel(fout,x,1,com.space);
+  646:             fprintf(fout,"\n\n# of lfun calls:%10d\n", NFunCall);
+  647:       */
+  648: 
+  649:       if (com.coding && com.Mgene != 1 && !AbsoluteRate) {
+  650:          fputs("\nTree with branch lengths for codon models:\n", fout);
+  651:          for (i = 0; i < tree.nnode; i++)
+  652:             nodes[i].branch *= (1 + com.rgene[1] + com.rgene[2]);
+  653:          fprintf(fout, "\n"); OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  654:          for (i = 0; i < tree.nnode; i++)
+  655:             nodes[i].branch /= (1 + com.rgene[1] + com.rgene[2]);
+  656:       }
+  657: 
+  658:       com.print -= 9;  com.plfun(x, np);  com.print += 9;
+  659:       if (com.print) {
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+  730:    double EXij[NCODE * NCODE] = { 0 }, * Q = PMat, p0[NCODE], c[NCODE], ya;
+  731:    double tnew, treelength;
+  732: 
+  733:    fprintf(fout, "\nDetailed output identifying parameters\n");
+  734:    if (com.clock) OutputTimesRates(fout, x, var);
+  735:    k = com.ntime;
+  736: 
+  737:    if (com.nrgene) { /* this used to be:  if (com.nrgene && !com.clock) */
+  738:       fprintf(fout, "\nrates for %d genes:%6.0f", com.ngene, 1.);
+  739:       for (i = 0; i < com.nrgene; i++)
+  740:          fprintf(fout, " %8.5f", x[k++]);
+  741:       fprintf(fout, "\n");
+  742:    }
+  743: 
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml:4898 =====
+ 4848: did sample #%d %c (%d):  ns = %d  	ls = %d
+ 4849:  oom z oom line ReadSeq: first line oom pose option C? expecting #gene here.. raise NGENE? EOF at lgene 
+ 4850: %6d != %d 
+ 4851: gene mark %d at %d?
+ 4852:  sequence file, gene marks EOF? Reading seq #%2d: %s       %s 
+ 4853: EOF at site %d, seq %d
+ 4854:  
+ 4855: %d, seq %d group %d empty line. Reading seq #%2d: %s     
+ 4856:  err: . in 1st seq, group %d.
+ 4857:  
+ 4858: block %3d:  %6d boot.txt 
+ 4859: Sequences read.. no sites. Got nothing to do fpatth[%d] = %.6g
+ 4860:  
+ 4861: Site-to-pattern map:  Number of replicates: %d
+ 4862:  %d%d%d oom space oom fpattB in rell. oom rell 
+ 4863: 	Reading lnf for tree # %d 
+ 4864: err: lnf, reading tree %d. %d%d%lf 
+ 4865: lnf, patt %d. sum pRELL != 1. 
+ 4866: now doing S-H test oom in rell  +- SE Dli 
+ 4867: %6s %12s %9s %9s%8s%10s%9s
+ 4868: 
+ 4869:  pRELL pSH pKH %3d %12.6f (-1 for P values means N/A)
+ 4870:  , done. %6d %6d
+ 4871: 
+ 4872:  %6d %6d  P
+ 4873: 
+ 4874:  %-*s    node #%-*d   ** , listed by pattern  %3s.%3s   - p =%6.3f %s  + p =%6.3f %s  %c%c  (%d)
+ 4875:   (%5.3f)  oom oom nscale oom space in HessianSKT2004 oom minB2 minB2: should not come here 
+ 4876: locus %2d:  
+ 4877: %d  1
+ 4878:  (ipop) father 
+ 4879: %7s%7s %8s %7s%7s 
+ 4880: %7d%7d   (%2d) %7d   branch label in the tree. %3.0f needs fossil calibrations 
+ 4881: Reading main tree. raise NS? number of species <2? 
+ 4882: 
+ 4883: *** Locus %d ***
+ 4884:  clean %3d patterns, %s
+ 4885:  messy time name 
+ 4886: %7s%7s  %-*s %9s %8s%16s
+ 4887:  fossil %7d%7d  %-*s %8.5f   (%2d %2d) 
+ 4888: %5zu bytes for conP
+ 4889:  oom conP 
+ 4890: Initials (np=%d)
+ 4891:   %10.5f need fossils for this locus nLR = -1 y!=0 not considered Rooted trees Unrooted trees Taxa %20s%20s%20s
+ 4892:  %20d%20d%20d
+ 4893:  %10d %10d
+ 4894:   [%7d %6d LHs]
+ 4895:   [%7d]
+ 4896:  ns too large in GetIofTree rooooot 
+ 4897: ijk%6d%6d%6d IofLH 
+ 4898: end of tree file. expecting ( bases out of range. pair %c%c already specified.
+ 4899:  rate %d: %d pairs
+ 4900:  seqfile outfile noisy cleandata verbose runmode method TipDate fix_rgene nhomo getSE RateAncestor fix_kappa fix_alpha Malpha ncatG fix_rho bootstrap Small_Diff icode fix_blength seqtype Reading options from %s..
+ 4901:  %s%*s%lf *# option file. 
+ 4902: %3d %15s | %-20s %6.2f %d%s%d separate_trees maintree seqtype? fix rho to 0 if alpha=0. nhomo & nparK init kappa.. init alpha.. init rho reset nhomo & model nhomo & method. nhomo=1 and model clock=2 & nhomo imcompatible model & clock imcompatible runmode & clock? ndata=1 for bootstrap. Mgene options SetPar: MK[K-1][j]=%.5f<0
+ 4903:  too small: fh[%d] = %10.6e
+ 4904:  small fh[%d] = %10.6e
+ 4905:  
+ 4906: Bounds (np=%d):
+ 4907:  (%d)   %6.0f    (total %6.3f)
+ 4908:  Joint reconstruction. oom PMatTips oom charNode oom combScore 
+ 4909: Pattern Freq   Data:
+ 4910: 
+ 4911:  
+ 4912: 	Down pass. don't need this? par err. 
+ 4913: par err.. BASE CODON Pattern Site par err. lfunRates 
+ 4914: rate: 
+ 4915: freq: oom fhsite  %5d    %9.4f %7d %5.0f    %8.3f%6.0f
+ 4916:  
+ 4917: Site Freq  Data  Rates
+ 4918: 
+ 4919:  %4d %5.0f   
+ 4920: lnL =%14.6f
+ 4921:  h,fh%6d %12.4e
+ 4922:  
+ 4923: fh = %.6f negative
+ 4924:  lfun: h=%4d  fh=%9.6e
+ 4925: Data:  	lnL0 =    %14.6f
+ 4926:  	Cycle %2d: %14.6f
+ 4927:  oom minB minB: should not come here %8s%s
+ 4928:   %11.6f %4d %12.5f x  local clock in TreeScore no treefile err tree file 
+ 4929: 
+ 4930: stage 0:  
+ 4931: lnL:%14.6f%6d 
+ 4932: 
+ 4933: best tree:     lnL:%14.6f
+ 4934:    lnL:%10.3f
+ 4935:    lnL:%10.6f
+ 4936:  
+ 4937: S=%d:%3d/%d  T=%4d   
+ 4938: S=%d:%4d/%4d  T=%4d  %6d%2c %+8.6f %6d%2c %7.3f strange in.BV RateDist.txt in.ClockStep1 in.ClockStep2 oom AHRS 
+ 4939: Locus %d (%d sequences)
+ 4940:  
+ 4941: 
+ 4942: Locus %d
+ 4943:  
+ 4944: lnL = %.6f
+ 4945: 
+ 4946:   %12.9f 
+ 4947: f0 = %12.6f
+ 4948:  Node %2d   Time %9.5f
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/basemlg.c:163 =====
+  113: 
+  114:    fprintf(fout, "BASEMLG %15s %8s + Gamma", com.seqf, models[com.model]);
+  115:    if (com.clock) fprintf(fout, ", Clock");
+  116:    if (com.model != JC69 && com.model != F81 && com.fix_kappa)
+  117:       fprintf(fout, "\nkappa =%7.3f given\n", com.kappa);
+  118:    if (com.ngene > 1) fprintf(fout, " (%d genes)  ", com.ngene);
+  119: 
+  120:    SeqDistance = (double*)malloc(com.ns * (com.ns - 1) / 2 * sizeof(double));
+  121:    ancestor = (int*)malloc(com.ns * (com.ns - 1) / 2 * sizeof(int));
+  122:    if (SeqDistance == NULL || ancestor == NULL) zerror("oom");
+  123: 
+  124:    InitializeBaseAA(fout);
+  125:    if (com.model == JC69) {
+  126:       PatternWeightJC69like();
+  127:       fprintf(fout, "\n\nPrinting out site pattern counts\n");
+  128:       printPatterns(fout);
+  129:    }
+  130:    DistanceMatNuc(fout, fpair[0], com.model, com.alpha);
+  131:    if (com.model <= HKY85)
+  132:       eigenTN93(com.model, com.kappa, com.kappa, com.pi, &nR, Root, Cijk);
+  133:    Forestry(fout, space);
+  134:    fclose(fseq);  fclose(fpair[0]);
+  135:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  136:    return (0);
+  137: }
+  138: 
+  139: /* x[] is arranged in order of t[ntime], rgene[], kappa and alpha (if any) */
+  140: 
+  141: int Forestry(FILE* fout, double space[])
+  142: {
+  143:    int i, j, itree, ntree, np;
+  144:    int pauptree = 0, haslength, iteration = 1;
+  145:    double x[NP], xb[NP][2], lnL[NTREE] = { 0 }, e = 1e-6, * var = space + NP, det;
+  146:    FILE* ftree;
+  147: 
+  148:    if ((ftree = fopen(com.treef, "r")) == NULL)   zerror("treefile err.");
+  149:    GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  150: 
+  151:    fprintf(flfh, "%6d%6d%6d\n", ntree, com.ls, com.npatt);
+  152:    fprintf(frate, "Rates for sites, from BASEMLG, %d tree(s)\n\n", ntree);
+  153: 
+  154:    for (itree = 0; itree < ntree; itree++) {
+  155:       printf("\nTREE # %2d\n", itree + 1);
+  156:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  157:       fprintf(flfh, "\n\n%2d\n", itree + 1);
+  158:       fprintf(frub, "\n\nTREE # %2d", itree + 1);
+  159:       fprintf(frate, "\nTREE # %2d\n", itree + 1);
+  160: 
+  161:       if (ReadTreeN(ftree, &haslength, 0, 1))
+  162:       {
+  163:          puts("err or end of tree file."); break;
+  164:       }
+  165: 
+  166:       com.ntime = com.clock ? tree.nnode - com.ns : tree.nbranch;
+  167: 
+  168:       OutTreeN(F0, 0, 0);
+  169:       OutTreeN(fout, 0, 0);
+  170:       fflush(fout);  fflush(flfh);
+  171: 
+  172:       i = (com.clock || com.model > HKY85 ? 2 : 2 + !com.fix_alpha);
+  173:       GetMem(tree.nbranch, nR, i);
+  174:       GetInitials(x, &i);
+  175:       if (i == -1) iteration = 0;
+  176:       np = com.np;
+  177:       printf("\nnp =%6d\n", np);
+  178:       NFunCall = 0;
+  179:       /*
+  180:             TestFunction (fout, x, space);
+  181:       */
+  182:       if (itree == 0 && i == 0) {
+  183:          printf("\a");
+  184:          printf("\n\nSuggest using BASEML to get initial values..");
+  185:          for (j = 0; j < com.ntime; j++) fprintf(fout, "%9.5f", x[j]);
+  186:       }
+  187: 
+  188:       for (i = 0; i < np; i++) 
+  189:          printf("%9.5f", x[i]);
+  190:       printf("\n");
+  191:       if (!iteration) puts("parameters are fixed, calculating lnL . . .");
+  192:       lnL[itree] = lfunG(x, np);
+  193:       if (noisy) printf("\nlnL0 = %12.6f", -lnL[itree]);
+  194: 
+  195:       if (iteration) {
+  196:          if (com.clock || com.model == REV) {
+  197:             SetxBound(np, xb);
+  198:             i = ming2(frub, &lnL[itree], lfunG,
+  199:                ((com.clock || com.model > HKY85) ? NULL : lfunG_d), x, xb, space, e, np);
+  200:             Hessian(np, x, lnL[itree], space, var, lfunG, var + np * np);
+  201:             matinv(var, np, np, &det, var + np * np);
+  202:          }
+  203:          else
+  204:             i = Newton(frub, &lnL[itree], lfunG, lfunG_dd, testx, x, var, e, np);
+  205:          if (i)
+  206:             printf("\ncheck convergence..\n");
+  207:       }
+  208:       if (noisy) printf("\nOut...\nlnL:%14.6f\n", -lnL[itree]);
+  209: 
+  210:       fprintf(fout, "\nlnL(np:%3d):%14.6f%+12.6f\n", com.np, -lnL[itree], -lnL[itree] + lnL[0]);
+  211:       OutTreeB(fout);
+  212:       fprintf(fout, "\n");
+  213: 
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.o:2663 =====
+ 2613: %6d != %d 
+ 2614: gene mark %d at %d?
+ 2615:  sequence file, gene marks EOF? Reading seq #%2d: %s       %s 
+ 2616: EOF at site %d, seq %d
+ 2617:  
+ 2618: %d, seq %d group %d empty line. Reading seq #%2d: %s     
+ 2619:  err: . in 1st seq, group %d.
+ 2620:  EOF 
+ 2621: block %3d:  %6d end;  %6d %6d
+ 2622:  boot.txt 
+ 2623: Sequences read.. no sites. Got nothing to do fpatth[%d] = %.6g
+ 2624:  
+ 2625: Site-to-pattern map:  Number of replicates: %d
+ 2626:  %d%d%d oom space oom fpattB in rell. oom rell 
+ 2627: 	Reading lnf for tree # %d 
+ 2628: err: lnf, reading tree %d. %d%d%lf 
+ 2629: lnf, patt %d. , %s
+ 2630:  sum pRELL != 1. 
+ 2631: now doing S-H test oom in rell  +- SE Dli li tree 
+ 2632: %6s %12s %9s %9s%8s%10s%9s
+ 2633: 
+ 2634:  pRELL pSH pKH %3d %12.6f  %5.3f (-1 for P values means N/A)
+ 2635:  , done. %6d %6d
+ 2636: 
+ 2637:  %6d %6d  P
+ 2638: 
+ 2639:  %-*s    node #%-*d   pattern site ** * , listed by pattern %4d   %3s.%3s   - p =%6.3f %s  + p =%6.3f %s  %c%c  (%d)
+ 2640:   (%5.3f)  oom oom nscale oom space in HessianSKT2004 oom minB2 minB2: should not come here 
+ 2641: locus %2d:  
+ 2642: %d  1
+ 2643:  (ipop) father 
+ 2644: %7s%7s %8s %7s%7s 
+ 2645: %7d%7d   (%2d) %7d   branch label in the tree. %3.0f needs fossil calibrations 
+ 2646: Reading main tree. raise NS? number of species <2? r 
+ 2647: 
+ 2648: *** Locus %d ***
+ 2649:  clean %3d patterns, %s
+ 2650:  messy time name 
+ 2651: %7s%7s  %-*s %9s %8s%16s
+ 2652:  fossil %7d%7d  %-*s %8.5f   (%2d %2d) 
+ 2653: %5zu bytes for conP
+ 2654:  oom conP 
+ 2655: Initials (np=%d)
+ 2656:   %10.5f need fossils for this locus nLR = -1 y!=0 not considered Rooted trees Unrooted trees Taxa %20s%20s%20s
+ 2657:  %20d%20d%20d
+ 2658:  %10d %10d
+ 2659:   [%7d %6d LHs]
+ 2660:   [%7d]
+ 2661:  GetIofTree ns too large in GetIofTree rooooot 
+ 2662: ijk%6d%6d%6d IofLH 
+ 2663: end of tree file. expecting ( bases out of range. pair %c%c already specified.
+ 2664:  rate %d: %d pairs
+ 2665:  seqfile outfile treefile noisy ndata cleandata verbose runmode method clock TipDate fix_rgene Mgene nhomo getSE RateAncestor model fix_kappa kappa fix_alpha alpha Malpha ncatG fix_rho rho nparK bootstrap Small_Diff icode fix_blength seqtype Reading options from %s..
+ 2666:  %s%*s%lf *# option file. 
+ 2667: %3d %15s | %-20s %6.2f %s %d%s%d separate_trees maintree %d%lf seqtype? fix rho to 0 if alpha=0. nhomo & nparK init kappa.. init alpha.. init rho reset nhomo & model nhomo & method. nhomo=1 and model clock=2 & nhomo imcompatible model & clock imcompatible runmode & clock? ndata=1 for bootstrap. Mgene options SetPar: MK[K-1][j]=%.5f<0
+ 2668:  too small: fh[%d] = %10.6e
+ 2669:  small fh[%d] = %10.6e
+ 2670:  
+ 2671: Bounds (np=%d):
+ 2672:   %10.6f (%d)   %6.0f   :   (total %6.3f)
+ 2673:  Joint reconstruction. oom PMatTips oom charNode oom combScore 
+ 2674: Pattern Freq   Data:
+ 2675: 
+ 2676:  
+ 2677: 	Down pass. conP don't need this? par err. 
+ 2678: par err.. Data:  AA BASE CODON Pattern Site par err. lfunRates 
+ 2679: rate: 
+ 2680: freq: oom fhsite  %5d    %9.4f %7d %5.0f    %8.3f%6.0f
+ 2681:  
+ 2682: Site Freq  Data  Rates
+ 2683: 
+ 2684:  %4d %5.0f   lnL =%14.6f
+ 2685:  
+ 2686: lnL =%14.6f
+ 2687:  h,fh%6d %12.4e
+ 2688:  
+ 2689: fh = %.6f negative
+ 2690:  lfun: h=%4d  fh=%9.6e
+ 2691: Data:  	lnL0 =    %14.6f
+ 2692:  	Cycle %2d: %14.6f
+ 2693:  oom minB minB: should not come here %8s%s
+ 2694:   %11.6f %4d %12.5f x  
+ 2695: lnL  = %12.6f
+ 2696:  local clock in TreeScore no treefile err tree file 
+ 2697: 
+ 2698: stage 0:  
+ 2699: lnL:%14.6f%6d %9.5f 
+ 2700: 
+ 2701: best tree:     lnL:%14.6f
+ 2702:    lnL:%10.3f
+ 2703:    lnL:%10.6f
+ 2704:   lnL:%14.6f
+ 2705:  
+ 2706: S=%d:%3d/%d  T=%4d   
+ 2707: S=%d:%4d/%4d  T=%4d  %6d%2c %+8.6f %6d%2c  %+8.6f %7.3f strange in.BV RateDist.txt in.ClockStep1 in.ClockStep2 oom AHRS 
+ 2708: Locus %d (%d sequences)
+ 2709:  
+ 2710: 
+ 2711: Locus %d
+ 2712:  
+ 2713: lnL = %.6f
+
+===== /home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml.o:2792 =====
+ 2742:  
+ 2743: alpha for genes
+ 2744:  SEs for parameters:
+ 2745:  treefile not exist? ns in the tree file err tree.. 
+ 2746:  lnL = %.4f
+ 2747:  	parameters:  moving to this tree 
+ 2748: A better tree:
+ 2749:  
+ 2750: lnL = %.4f
+ 2751:  
+ 2752: 
+ 2753: Best tree found: 
+ 2754: 
+ 2755: Best tree found:
+ 2756:  
+ 2757:   %12.3f 
+ 2758: 
+ 2759: Added sp. %d, %s [%.3f]
+ 2760:  PostProbNode: sum!=1 Marginal reconstruction. oom pnode oom pbestAA 	Node %3d: lnL = %12.6f
+ 2761:  
+ 2762: %7s  Freq   Data
+ 2763: 
+ 2764:  %7d%7.0f    %s(%5.3f)  AncestralMarginal strange?  %s(%c)  %1c (%5.3f) 
+ 2765: 
+ 2766: %7s (g) Freq  Data: 
+ 2767:  
+ 2768: 
+ 2769: %7s   Freq   Data: 
+ 2770:  
+ 2771: %4d  (%d)  %5.0f    %c(%5.3f)  
+ 2772: 	printing, %d sites done for a site.
+ 2773:  for the sequence.
+ 2774:  
+ 2775: Branch %d:%5d..%-2d  (%s)   (n=%4.1f s=%4.1f) 	%4d  %c %.3f -> %1c
+ 2776:  %c %.3f -> %1c %.3f
+ 2777:  oom fhsiteAnc oom ScaleC in AncestralSeqs abcde (kappa) 
+ 2778: rates for %d genes:%6.0f 
+ 2779: Base frequencies:
+ 2780:  
+ 2781: Note: node %d is root.
+ 2782:  Node #%2d  (  %8.6f    [  GC = %5.3f ] Node #%2d   %-10s   (blength = %9.6f, %9.6f) 
+ 2783: %s:      
+ 2784: pi source:   %9.6f   %8.1f 
+ 2785: Gene #%d:  
+ 2786: alpha (gamma, K=%d) = %8.5f 
+ 2787: rate:  
+ 2788: freq:  
+ 2789: Exij
+ 2790:  
+ 2791: pi model :   (1st gene) in.basemlg w+ lnf %6d %6d %6d
+ 2792:  end of tree file. 
+ 2793: TREE # %2d:  
+ 2794: TREE # %2d:   
+ 2795: 
+ 2796: TREE # %2d
+ 2797:  
+ 2798: 
+ 2799: %2d
+ 2800:   MP score: %.2f
+ 2801:    MP score: %.2f raise NP and recompile oom space for SE 
+ 2802:  %d
+ 2803: 
+ 2804:  
+ 2805: Hessian
+ 2806: 
+ 2807:   %10.4g 
+ 2808: tree length = %9.5f%s
+ 2809:  convergence? check convergence..
+ 2810:  	%d	 
+ 2811: Gene %2d  ls:%4d  npatt:%4d
+ 2812:  %d	%d	%d diff. rate separate data diff. rate & pi diff. rate & kappa diff. rate & pi & kappa --stdout-no-buf BASEML in %s
+ 2813:  rub rst1 in.baseml rst2 
+ 2814: tree file %s not found.
+ 2815:  genetrees.trees 
+ 2816: Data set %4d
+ 2817:  
+ 2818: 
+ 2819: Data set %4d
+ 2820:  %4d oom blengths0 option Mgene for 1 gene? nhomo for mutliple genes? Malpha or rho model || Mgene 
+ 2821: BASEML (in %s)  %s  %s   %s  dGamma (ncatG=%d)   Auto- (%d gamma)  (%d genes: %s)   
+ 2822: Nonhomo:%2d  fix_kappa%2d
+ 2823:  
+ 2824: nparK:%4d  K:%4d
+ 2825:  oom distance&ancestor 
+ 2826: %6d %6d
+ 2827:  
+ 2828: %-30s   
+ 2829: %9zu bytes for distance  
+ 2830: %9zu bytes for conP
+ 2831:  %2d Global clock Local clock ClockCombined JC69 K80 F81 F84 HKY85 T92 TN93 REV UNREST REVu UNRESTu rates   L U B     
+ 2832: %12d patterns at %8d / %8d sites (%.1f%%), %s  Counting site patterns again, for JC69.. %s
+ 2833:     PatternWeightJC69like does not work for codon seqs      PatternWeightJC69like does not work when ngene > 1      
+ 2834: Compressing, %6d patterns at %6d / %6d sites (%.1f%%), %s      
+ 2835: Collecting fpatt[] & pose[], %6d patterns at %6d / %6d sites (%.1f%%), %s      rewrite PatternWeightJC69like to deal with partitioned data     The seq file appears to be in fasta format, but not aligned?    
+ 2836: seq file is not paml/phylip format.  Trying nexus format.      
+ 2837: This locus has nothing left after empty sequences are removed.  Use cleandata = 0.
+ 2838:     strange character %c in seq %d site %d
+ 2839:  Seqs. %3d & %3d (%s & %s) are identical!
+ 2840:        
+ 2841: Unique sequences collected in %s.
+ 2842:      %3d species, %d site patterns

@@ -1,0 +1,6 @@
+sourcedocumentation_versionevidence_used
+OpenCitations Index REST API v22.2.0 (2025-04-15)filter parameter without comparison operator is interpreted as a regular expression
+OpenCitations Index REST API v22.2.0 (2025-04-15)OCI is the citation identifier and has numeric-numeric lexical form
+OpenCitations Index REST API v22.2.0 (2025-04-15)citations operation returns incoming citation data for an identified bibliographic entity
+OpenCitations Index REST API v22.2.0 (2025-04-15)references operation returns outgoing reference data for an identified bibliographic entity
+OpenCitations Index REST API v22.2.0 (2025-04-15)API rate limit documented as 180 requests per minute per IP address

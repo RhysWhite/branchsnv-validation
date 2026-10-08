@@ -1,0 +1,27 @@
+{
+  "all_retrievals_complete": true,
+  "candidate_record_rows": 113448,
+  "completed_utc": "2026-09-22T19:47:02.997948+00:00",
+  "deduplicated_record_rows": 78962,
+  "experiment": "07_comparative_landscape_high_recall_search",
+  "ncbi_contact_email_supplied": true,
+  "openalex_authentication": "Bearer API key used; key not recorded",
+  "platform": "Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "python_version": "3.10.14",
+  "query_count": 5,
+  "raw_metadata_only": true,
+  "repository_commit": "6b3e5338f97f79bcdf0ee51af89862986f1178b8",
+  "retrieval_script": "experiments/07_comparative_landscape/retrieve_high_recall_corpus.py",
+  "retrieval_script_sha256": "92508561c30d03c5b30b035ac6da50657a4ebf68406437759fc57f6b5b9aa973",
+  "schema_version": 1,
+  "search_queries": "experiments/07_comparative_landscape/high_recall_queries.tsv",
+  "search_queries_sha256": "6f4752cb07e2897ecaca8ff4fcd2802df6d9a9166c3b252cab8fdcc0565ce7f1",
+  "source_query_retrievals": 15,
+  "sources": [
+    "PubMed",
+    "OpenAlex",
+    "bio.tools"
+  ],
+  "started_utc": "2026-09-22T19:16:30.153423+00:00",
+  "status": "COMPLETE"
+}

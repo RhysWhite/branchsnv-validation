@@ -1,0 +1,36 @@
+{
+  "base_guard_sha256": "7de73aa421d1930fc7da9a87c568e36f289c3da1e0eb0c7ad1f6c01c73fa94c5",
+  "event_appender_regression_maintenance": {
+    "frozen_genesis_sha_still_verified": true,
+    "live_production_must_remain_byte_identical": true,
+    "live_production_state_hard_coded": false,
+    "production_event_appender_changed": false,
+    "reason": "The historical integration test assumed that the live production ledger remained the zero-event genesis ledger. After legitimate production screening advanced the ledger, the test was generalized so current production is validated read-only, mutation tests reconstruct the frozen genesis fixture from the immutable ledger header, and live production is required to remain byte-identical throughout the test.",
+    "temporary_mutation_fixture_is_genesis": true
+  },
+  "event_appender_regression_test_sha256": "c0ace2345ad2badf7df05fa487924698f7e0f706f7dffac7920efebde2aad3bd",
+  "event_appender_sha256": "abf4c15e9c993bcb96c73ccb53ff3dae56e229c533e9df25056c37cfd5eda98b",
+  "generalizations": {
+    "B000002_500_row_behavior_validated": true,
+    "B000190_122_row_behavior_validated": true,
+    "authorization_status_batch_derived": true,
+    "batch_id_derived_from_frozen_design": true,
+    "batch_scope_reconstructed_from_frozen_membership": true,
+    "checkpoint_semantics_unchanged": true,
+    "one_use_authorization_semantics_unchanged": true,
+    "production_event_appender_unchanged": true,
+    "replay_protection_semantics_unchanged": true,
+    "review_packet_path_batch_bound": true,
+    "review_packet_size_batch_derived": true,
+    "target_identity_independently_reconstructed": true
+  },
+  "historical_v2_preserved": true,
+  "implementation_id": "BASELINE_SCIENTIFIC_SCREENING_TRANCHE_GUARD_V3",
+  "next_gate": "VALIDATE_AND_FREEZE_B000002_T000011_DESIGN",
+  "parent_commit": "2165475b7b9e4cb444cfdd579f65123aa9db5ad4",
+  "regression_test_sha256": "6d5e36b6f7706064bb8016acd2480689a0d4474ee7f5ce4e697ca034ae2b0533",
+  "schema_version": 1,
+  "status": "FROZEN_PRE_T000011_REVIEW",
+  "v2_sha256": "68cc5c501f89a389a842e0bc716e58801b56188a7621a887dcc2c349a8427ba5",
+  "v3_sha256": "469273c1d2ed9f5ca7ca01efb636b5a045b7e785de6812814780f1c3d73a5aec"
+}

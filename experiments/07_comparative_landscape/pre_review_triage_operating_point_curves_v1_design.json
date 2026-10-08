@@ -1,0 +1,78 @@
+{
+  "artifact_contract": {
+    "artifact_count": 3,
+    "artifacts": {
+      "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1/cross_batch_review_fraction_curve.tsv": "e6eeef6d8236c1062126c8d69a40f92c2c71e272840a653b9f14dca4505d4e1b",
+      "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1/per_batch_prefix_curve.tsv": "fc31fe946c3b41ccb197650e6c6434a74c379d2bb3221897e7e9af1d8c7da68b",
+      "results/07_comparative_landscape/pre_review_triage_operating_point_curve_v1/summary.json": "70cc7bd3ae86e3996950cd11e8891c77c618e1ff33a9a80e5b62220412cd5310"
+    },
+    "cross_batch_exact_fraction_rows": 4047,
+    "per_batch_prefix_rows": 4199
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_development_evaluation_results_v1.sha256": "9a002f7e66dc18717c7280a28bec4bfe2c474d24a54024295b852fd401ef46b6",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_amendment_001.sha256": "a089c3c53e3e44c49803ed355ad60977f547ecc0e4e86348eb35caad6384bcbe",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_implementation.sha256": "0f7d762e80b11f2696845974d1c3705ced162aa8220cebe4b99422843bf02525",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_v1.sha256": "503d99d651a20ddbd3de9437ffd2d630cf3a1a8ac2509287a6383dcf217b8244",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427"
+  },
+  "curve_contract": {
+    "batch_review_count_rule": "ceil_exact_fraction_times_batch_size",
+    "candidate_fraction_grid": "exact_union_of_rational_k_over_n",
+    "ranking": "continuous_score_descending_then_screening_entity_id_ascending"
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_OPERATING_POINT_CURVES_V1",
+  "freeze_parent_commit": "a33001f2cb2f4d333d841d125f409520e86afeac",
+  "generation_contract": {
+    "amended_executable_path": "experiments/07_comparative_landscape/pre_review_triage_operating_point_curve_v1_amendment_001.py",
+    "amended_executable_sha256": "6e2edf8e625d769d8de85c4e4957d708ea7774c23d160976fe0030a323f46acd",
+    "base_implementation_modified": false,
+    "failed_attempt_001_preserved": true,
+    "generator": "AMENDMENT_001",
+    "regeneration_after_successful_amended_generation": false
+  },
+  "independent_audit": {
+    "all_4047_cross_batch_rows_reproduced": true,
+    "all_nine_prefix_curves_validated": true,
+    "artifact_sha256_rechecked_after_audit": true,
+    "exact_4047_point_fraction_grid_reproduced": true,
+    "full_workload_endpoint_validated": true,
+    "minimum_mean_pooled_recall_monotonicity_validated": true,
+    "workload_monotonicity_validated": true,
+    "zero_workload_endpoint_validated": true
+  },
+  "input_contract": {
+    "development_negatives": 4022,
+    "development_positives": 168,
+    "development_records": 4190,
+    "input_score_sha256": "1da5b38902d893a91cb99b7d9965f179717667c42b66ff80f63313ac50251c47",
+    "selected_family": "linear_svc_balanced_l2_v1"
+  },
+  "next_gate": "FREEZE_PRE_REVIEW_TRIAGE_OPERATING_POINT_ACCEPTANCE_CRITERION_V1_BEFORE_ANY_OPERATING_POINT_SELECTION",
+  "next_selection_gate": {
+    "acceptance_criterion_or_workload_constraint_required": true,
+    "criterion_must_be_frozen_before_selection": true,
+    "criterion_must_not_be_reverse_engineered_from_preferred_curve_point": true,
+    "curve_may_directly_choose_operating_point": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "blind_validation_content_used": false,
+    "calibration_fit_performed": false,
+    "development_evidence_only": true,
+    "future_scoring_performed": false,
+    "model_fit_performed": false,
+    "production_mutated": false,
+    "scientific_screening_decisions_made": false,
+    "vectorizer_fit_performed": false
+  },
+  "selection_boundary": {
+    "acceptable_recall_target_defined": false,
+    "automatic_scientific_exclusion_authorized": false,
+    "operating_point_selected": false,
+    "raw_score_threshold_selected": false,
+    "review_fraction_selected": false,
+    "workload_target_defined": false
+  },
+  "status": "FROZEN_DEVELOPMENT_OPERATING_POINT_CURVES_NO_SELECTION"
+}

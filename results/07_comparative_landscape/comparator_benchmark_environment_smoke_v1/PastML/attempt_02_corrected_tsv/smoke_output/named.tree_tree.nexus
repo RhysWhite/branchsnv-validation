@@ -1,0 +1,8 @@
+#NEXUS
+Begin Taxa;
+ Dimensions NTax=4;
+ TaxLabels A B C D;
+End;
+Begin Trees;
+ Tree tree1=((A:0.10000[&date=0.2,site1=A,site2=C],B:0.10000[&date=0.2,site1=G,site2=C])n0:0.10000[&date=0.1,site1=A|G,site2=C],(C:0.10000[&date=0.2,site1=A,site2=T],D:0.10000[&date=0.2,site1=A,site2=T])n00:0.10000[&date=0.1,site1=A,site2=T])root:0.00000[&date=0,site1=A,site2=T|C];
+End;

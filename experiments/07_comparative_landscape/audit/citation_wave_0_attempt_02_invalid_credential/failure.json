@@ -1,0 +1,23 @@
+{
+  "anchors_sha256": "362b0a25d68f68b29a936a92b3a9f6e11aefd539e4c0678480ce99abc2789ae4",
+  "attempt": 2,
+  "citation_records_observed": false,
+  "console_log_contains_malformed_shell_text": true,
+  "current_environment_used_as_historical_evidence": false,
+  "failure_class": "malformed_openalex_environment_credential",
+  "failure_exception": "ValueError: Invalid header value",
+  "failure_location": "http.client.putheader",
+  "historical_credential_state_source": "contemporaneous_console_log",
+  "historical_value_reconstructed": false,
+  "production_execution_head": "1a1a689b73c858ad91f97370779fe2a86d1f8d25",
+  "production_output_directory_created": true,
+  "production_output_file_count": 0,
+  "retrieval_implementation_changed": false,
+  "retriever_exit_code": 1,
+  "retriever_sha256": "326786243e561162bfe2d1665ac41d927247ef032daa7b0b1fb4327a62b285b4",
+  "schema_version": 1,
+  "scientific_protocol_changed": false,
+  "status": "FAILED_PRE_TRANSMISSION",
+  "usable_citation_api_response_observed": false,
+  "wave": 0
+}

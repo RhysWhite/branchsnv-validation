@@ -1,0 +1,9 @@
+outDir: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/
+Copy and analyse MSA: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.fasta
+Copy and analyse tree: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.tree
+LOG: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/FastML_log.log
+cd /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/; /home/rwhite/branchsnv-comparator-build/fastml-smoke/www/fastml/../../programs/fastml/fastml -s /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.fasta -mn -qf -t /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/toy.tree -b > /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_04_toy_smoke/output/fastml.std
+
+	FASTML EXIT ON ERROR:
+FASTML failed to run, one of the files seq.marginal.txt or prob.marginal.txt were not created...
+

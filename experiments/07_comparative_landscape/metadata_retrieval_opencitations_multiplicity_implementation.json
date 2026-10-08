@@ -1,0 +1,56 @@
+{
+  "amendment_freeze_commit": "b0c56466ae575fee194c35fd38af547f7f2776e7",
+  "amendment_number": 36,
+  "classifier_rule": {
+    "canonical_equivalence_after_exclusions_required": true,
+    "common_exact_identifier_bundle_required": true,
+    "first_row_selection": false,
+    "fuzzy_matching": false,
+    "majority_selection": false,
+    "permitted_varying_fields": [
+      "pub_date",
+      "venue"
+    ],
+    "provider": "opencitations_meta",
+    "requested_exact_identifier_required_in_every_row": true,
+    "routes": [
+      "metadata_by_doi",
+      "metadata_by_omid"
+    ]
+  },
+  "implementation": {
+    "adjudication_filename": "adjudication.json",
+    "adjudication_reconstructed_from_raw_evidence": true,
+    "eligible_historical_failure_requires_new_provider_request": false,
+    "historical_attempt_preserved": true,
+    "historical_failure_adjudication": true,
+    "historical_failure_preserved": true,
+    "multi_record_classifier": true,
+    "synthetic_success_attempt_created": false,
+    "terminal_json_created_for_historical_failure": false
+  },
+  "next_gate": "APPLY_FROZEN_AMENDMENT_36_IMPLEMENTATION_TO_PRODUCTION_ARCHIVE",
+  "production_archive_at_freeze": {
+    "adjudication_count": 0,
+    "checksums_manifest_sha256": "a01c746b75181273e993640f81ade38ca3c98bc0f7726bbbf6bf857d639236e8",
+    "logical_lookup_count": 1731,
+    "not_found": 33,
+    "response_integrity_failure": 7,
+    "status": "INCOMPLETE",
+    "success": 1691
+  },
+  "scientific_boundary": {
+    "component_merge_performed": false,
+    "descriptive_metadata_reconciled": false,
+    "scientific_screening_performed": false
+  },
+  "status": "FROZEN_PRE_PRODUCTION_ADJUDICATION",
+  "validation": {
+    "complete_current_offline_stack": "PASS",
+    "eligible_historical_adjudication_executor_calls": 0,
+    "existing_adjudication_reuse_executor_calls": 0,
+    "focused_amendment_36_tests": "PASS",
+    "historical_experiment_07_regressions": "PASS",
+    "rechecksummed_adjudication_forgery_fails_semantic_validation": true
+  }
+}

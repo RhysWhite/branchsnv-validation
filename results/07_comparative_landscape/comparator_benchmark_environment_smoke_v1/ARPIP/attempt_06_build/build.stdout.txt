@@ -1,0 +1,11 @@
+Scanning dependencies of target ARPIP
+[ 44%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/Likelihood/PIPDRHomogeneousTreeLikelihood.cpp.o
+[ 44%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/Likelihood/PIPMLIndelPoints.cpp.o
+[ 44%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/AncestralStateReconstruction/PIPAncestralStateReconstruction.cpp.o
+[ 44%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/Likelihood/PIPDRTreeLikelihoodData.cpp.o
+[ 55%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/SubstitutionModel/PIP13.cpp.o
+[ 66%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/Utils/ARPIPTools.cpp.o
+[ 77%] Building CXX object CMakeFiles/ARPIP.dir/src/PIP/Utils/PIPIndelRateInference.cpp.o
+[ 88%] Building CXX object CMakeFiles/ARPIP.dir/src/main.cpp.o
+[100%] Linking CXX executable ARPIP
+[100%] Built target ARPIP

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml", line 6, in <module>
+    sys.exit(main())
+  File "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/lib/python3.10/site-packages/pastml/acr.py", line 1091, in main
+    pastml_pipeline(**vars(params))
+  File "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/lib/python3.10/site-packages/pastml/acr.py", line 531, in pastml_pipeline
+    _validate_input(tree, columns, name_column if html_compressed or html_mixed else None, data, data_sep, id_index,
+  File "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/lib/python3.10/site-packages/pastml/acr.py", line 702, in _validate_input
+    raise ValueError('{} of the specified columns ({}) {} not found among the annotation columns: {}.'
+ValueError: Some of the specified columns ("site1", "site2") are not found among the annotation columns: .

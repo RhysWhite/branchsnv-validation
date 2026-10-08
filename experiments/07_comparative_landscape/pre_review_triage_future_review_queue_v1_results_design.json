@@ -1,0 +1,94 @@
+{
+  "completion": {
+    "canonical_result_set_complete": true,
+    "canonical_result_set_frozen": true,
+    "generation_status": "FUTURE_REVIEW_QUEUE_GENERATED_PRE_REVIEW",
+    "semantic_partition_audit": "PASS"
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_RESULTS",
+  "freeze_parent_commit": "8250212715a5d105113cd5891caf42794789d451",
+  "generation": {
+    "active_builder_sha256": "7eea07f6a2214915ff84d6bd2bfc9618380934fee54684f118cbcdf065df3916",
+    "active_implementation_amendment_checksum_manifest_sha256": "5b75eb743aaf7d4cdbbad54275b21344652e321f2dd1c7880fd37e3a21bc7de2",
+    "active_implementation_amendment_commit": "08632ef628ef5eacdd965e8ce17f42f44b50e4e4",
+    "authorization_checksum_manifest_sha256": "6bb37f3739df82e0f1be082a90fa2e1cde4fbc9c3191b306adf107a6e370f2ee",
+    "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_QUEUE_V1_GENERATION_002",
+    "exact_confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-QUEUE-V1",
+    "one_time_generation_consumed": true,
+    "producing_commit": "8250212715a5d105113cd5891caf42794789d451",
+    "rerun_authorized": false
+  },
+  "next_gate": null,
+  "next_gate_note": "Resolve the repository-defined post-queue human-review gate separately; this result freeze grants no scientific screening decision, threshold, unblinding, future-label, blind-validation, or production-ledger authority.",
+  "production_artifacts": {
+    "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/priority_scored_queue.tsv": {
+      "bytes": 702934,
+      "sha256": "295868d5bb1812d6d5926abdda782df51149afebf54a35bd7538924d597aba0d"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/queue_manifest.json": {
+      "bytes": 1810,
+      "sha256": "b8dc1f3589a1b96d646f74df57c450de5d514e74cc135542b0454bcb951b4734"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/residual_scored_queue.tsv": {
+      "bytes": 814402,
+      "sha256": "91dcc176d20357ea162ede8a63591a4890419c4190b1754311c76016e4e62c72"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_queue_v1/unscored_manual_review_queue.tsv": {
+      "bytes": 30022,
+      "sha256": "084dd93f02d8cf7a8adcccf08352cef2767ed3325b0a3b903defd6cfd296ee5d"
+    }
+  },
+  "queue_contract": {
+    "candidate_fraction_denominator": 76,
+    "candidate_fraction_numerator": 35,
+    "cross_lane_priority_defined": false,
+    "prefix_count_rule": "ceil_exact_fraction_times_scoreable_population",
+    "priority_scored_rows": 5483,
+    "ranking_policy": "continuous_score_descending_then_screening_entity_id_ascending",
+    "raw_score_threshold_selected": false,
+    "residual_scored_rows": 6422,
+    "selected_candidate_id": "linear_svc_balanced_l2_v1",
+    "total_human_review_rows": 12162,
+    "unscored_manual_review_rows": 257,
+    "unscored_ordering": "retrieval_record_index_ascending"
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "automatic_scientific_exclusion": false,
+    "automatic_scientific_inclusion": false,
+    "blind_validation_content_used": false,
+    "cross_lane_priority_selected": false,
+    "downstream_scientific_decision_authority_granted": false,
+    "downstream_unblinding_authority_granted": false,
+    "future_labels_used": false,
+    "hard_predictions_generated": false,
+    "production_ledger_mutated": false,
+    "raw_score_threshold_selected": false,
+    "scientific_screening_decisions_made": false
+  },
+  "source_identity": {
+    "coverage_sha256": "8dde17ef13648cfee4bbec80322377202eb769cd11e5f3249d59de978e3824b7",
+    "future_scoring_results_checksum_manifest_sha256": "8be5645fb71f557306be11ae132f1d655013d6a6d573beb50380399cad9bc939",
+    "queue_design_checksum_manifest_sha256": "319ce18f144b97acc1d6c5b277420bd7b9f66fce0e99b2b8207a657559ea1e26",
+    "scored_records_sha256": "70164b0e345d2df0e0fa0c765a293e725096ef50096c6bb1025ed72ca06f7d67"
+  },
+  "status": "FROZEN_FUTURE_REVIEW_QUEUE_V1_RESULTS",
+  "upstream_freezes": {
+    "future_scoring_results_checksum_manifest_sha256": "8be5645fb71f557306be11ae132f1d655013d6a6d573beb50380399cad9bc939",
+    "queue_design_checksum_manifest_sha256": "319ce18f144b97acc1d6c5b277420bd7b9f66fce0e99b2b8207a657559ea1e26"
+  },
+  "validation": {
+    "artifact_hashes_match_manifest": true,
+    "manual_lane_equals_unscored_universe": true,
+    "manual_metadata_matches_source": true,
+    "manual_order_exact": true,
+    "prefix_rule_exact": true,
+    "queue_positions_exact": true,
+    "queue_union_equals_coverage_universe": true,
+    "scored_lanes_equal_scored_records_universe": true,
+    "scored_order_exact": true,
+    "scores_copied_byte_for_byte": true,
+    "source_identity_hashes_match": true,
+    "three_lanes_mutually_disjoint": true
+  }
+}

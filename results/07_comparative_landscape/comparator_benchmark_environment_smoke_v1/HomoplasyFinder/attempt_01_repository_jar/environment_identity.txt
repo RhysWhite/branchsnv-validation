@@ -1,0 +1,9 @@
+source_pin=faed16f2ff1602a2a939663a942e0b8640b9bc50
+actual_pin=faed16f2ff1602a2a939663a942e0b8640b9bc50
+jar=/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar
+jar_sha256=20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b
+
+java_version:
+openjdk version "1.8.0_504"
+OpenJDK Runtime Environment (build 1.8.0_504-b01)
+OpenJDK 64-Bit Server VM (build 25.504-b01, mixed mode)

@@ -1,0 +1,167 @@
+{
+  "envelope": {
+    "end": "3000-12-31",
+    "reported_count": 12654,
+    "start": "1000-01-01"
+  },
+  "leaf_count": 8,
+  "leaves": [
+    {
+      "count": 337,
+      "end": "2000-07-01",
+      "start": "1000-01-01"
+    },
+    {
+      "count": 4344,
+      "end": "2016-02-18",
+      "start": "2000-07-02"
+    },
+    {
+      "count": 7973,
+      "end": "2031-10-07",
+      "start": "2016-02-19"
+    },
+    {
+      "count": 0,
+      "end": "2063-01-12",
+      "start": "2031-10-08"
+    },
+    {
+      "count": 0,
+      "end": "2125-07-25",
+      "start": "2063-01-13"
+    },
+    {
+      "count": 0,
+      "end": "2250-08-17",
+      "start": "2125-07-26"
+    },
+    {
+      "count": 0,
+      "end": "2500-10-01",
+      "start": "2250-08-18"
+    },
+    {
+      "count": 0,
+      "end": "3000-12-31",
+      "start": "2500-10-02"
+    }
+  ],
+  "max_ids_per_esearch": 10000,
+  "node_count": 15,
+  "nodes": [
+    {
+      "count": 12654,
+      "depth": 0,
+      "end": "3000-12-31",
+      "start": "1000-01-01",
+      "terminal": false
+    },
+    {
+      "count": 337,
+      "depth": 1,
+      "end": "2000-07-01",
+      "start": "1000-01-01",
+      "terminal": true
+    },
+    {
+      "count": 12317,
+      "depth": 1,
+      "end": "3000-12-31",
+      "start": "2000-07-02",
+      "terminal": false
+    },
+    {
+      "count": 12317,
+      "depth": 2,
+      "end": "2500-10-01",
+      "start": "2000-07-02",
+      "terminal": false
+    },
+    {
+      "count": 12317,
+      "depth": 3,
+      "end": "2250-08-17",
+      "start": "2000-07-02",
+      "terminal": false
+    },
+    {
+      "count": 12317,
+      "depth": 4,
+      "end": "2125-07-25",
+      "start": "2000-07-02",
+      "terminal": false
+    },
+    {
+      "count": 12317,
+      "depth": 5,
+      "end": "2063-01-12",
+      "start": "2000-07-02",
+      "terminal": false
+    },
+    {
+      "count": 12317,
+      "depth": 6,
+      "end": "2031-10-07",
+      "start": "2000-07-02",
+      "terminal": false
+    },
+    {
+      "count": 4344,
+      "depth": 7,
+      "end": "2016-02-18",
+      "start": "2000-07-02",
+      "terminal": true
+    },
+    {
+      "count": 7973,
+      "depth": 7,
+      "end": "2031-10-07",
+      "start": "2016-02-19",
+      "terminal": true
+    },
+    {
+      "count": 0,
+      "depth": 6,
+      "end": "2063-01-12",
+      "start": "2031-10-08",
+      "terminal": true
+    },
+    {
+      "count": 0,
+      "depth": 5,
+      "end": "2125-07-25",
+      "start": "2063-01-13",
+      "terminal": true
+    },
+    {
+      "count": 0,
+      "depth": 4,
+      "end": "2250-08-17",
+      "start": "2125-07-26",
+      "terminal": true
+    },
+    {
+      "count": 0,
+      "depth": 3,
+      "end": "2500-10-01",
+      "start": "2250-08-18",
+      "terminal": true
+    },
+    {
+      "count": 0,
+      "depth": 2,
+      "end": "3000-12-31",
+      "start": "2500-10-02",
+      "terminal": true
+    }
+  ],
+  "partition_field": "edat",
+  "query_id": "HR05",
+  "retrieved_pmid_count": 12654,
+  "schema_version": 1,
+  "scientific_query_modified": false,
+  "terminal_count_sum": 12654,
+  "unbounded_reported_count": 12654,
+  "unique_pmid_count": 12654
+}

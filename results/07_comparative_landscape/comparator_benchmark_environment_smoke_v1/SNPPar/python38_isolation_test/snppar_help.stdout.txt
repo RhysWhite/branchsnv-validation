@@ -1,0 +1,49 @@
+usage: snppar [-h] [-s SNPTABLE] [-m MFASTA] [-l SNP_POSITION_LIST] [-t TREE]
+              [-g GENBANK] [-E SORTING] [-M MUTATION_EVENTS] [-d DIRECTORY]
+              [-p PREFIX] [-P] [-S] [-C] [-R] [-A] [-a] [-n] [-e] [-u] [-f]
+              [-i] [-x FASTML_EXECUTE]
+
+SNPPar: Parallel/homoplasic SNP Finder V1.0
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s SNPTABLE, --snptable SNPTABLE
+                        SNP table (i.e. RedDog output)
+  -m MFASTA, --mfasta MFASTA
+                        SNPs in MFASTA format
+  -l SNP_POSITION_LIST, --snp_position_list SNP_POSITION_LIST
+                        SNP position list (required for MFASTA input)
+  -t TREE, --tree TREE  Phylogenetic tree (required)
+  -g GENBANK, --genbank GENBANK
+                        Genbank reference (required)
+  -E SORTING, --sorting SORTING
+                        Type of sorting (options: "complex" - slower, less
+                        memory; "simple" - faster, more memory; default -
+                        intermediate)
+  -M MUTATION_EVENTS, --mutation_events MUTATION_EVENTS
+                        Mutation events file (previous results)
+  -d DIRECTORY, --directory DIRECTORY
+                        Output directory
+  -p PREFIX, --prefix PREFIX
+                        Prefix to add to output files
+  -P, --parallel        Flag for reporting of parallel calls
+  -S, --strict          Flag to output strict parallel calls (for testing,
+                        sets '-P' to True")
+  -C, --convergent      Flag for reporting of convergent calls
+  -R, --revertant       Flag for reporting of revertant calls
+  -A, --all_homoplasic_types
+                        Flag for reporting of all three homoplasic types
+  -a, --no_all_calls    Flag to turn off reporting of all events at each call
+                        position (homoplasic reporting)
+  -n, --no_homoplasic   Flag to turn off homoplasic calls output
+  -e, --no_all_events   Flag to turn off reporting of all mutation events
+  -u, --no_clean_up     Flag to turn off deletion of intermediate files on
+                        completion of run
+  -f, --fastml          Flag to use fastML for ASR (default ASR: TreeTime)
+  -i, --include_missing
+                        Turn on analysis of sites with missing calls
+                        (otherwise these are excluded, as can cause problems
+                        and extend runtime)
+  -x FASTML_EXECUTE, --fastml_execute FASTML_EXECUTE
+                        Command to execute fastML (default command: "fastml"
+                        i.e. on PATH)

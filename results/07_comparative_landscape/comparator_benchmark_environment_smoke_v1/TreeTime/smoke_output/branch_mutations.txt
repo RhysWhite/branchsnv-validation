@@ -1,0 +1,2 @@
+node	state1	pos	state2
+B	A	20	G

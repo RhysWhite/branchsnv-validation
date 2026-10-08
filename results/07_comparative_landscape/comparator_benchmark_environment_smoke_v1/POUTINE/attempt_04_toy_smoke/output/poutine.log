@@ -1,0 +1,45 @@
+poutine 1.0.0 session start time: 2026-October-07 Wednesday 11h:27m:11s GMT+13
+
+Command line options used:
+genotype file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.fasta
+phenotype file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.phenotypes.tsv
+tree file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.tree
+plink map file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.map
+# replicates: 10
+min # homoplasic mutations required at each segregating site: 0
+Is --use-precomputed-anc-recon in use?: false
+# threads used: 1
+ouput directory: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output
+     log file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/poutine.log
+     results file (sorted by physical position): /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/poutine.out
+     results file by major allele (sorted by maxT pvalue): /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/poutine.out.sorted_by_a1_maxT
+     results file by minor allele (sorted by maxT pvalue): /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/poutine.out.sorted_by_a2_maxT
+ancestral reconstruction output directory: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/ancestral_reconstruction
+     ancestral genotypes file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/ancestral_reconstruction/ancestral_sequences.fasta
+     ancestral tree file: /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/ancestral_reconstruction/ancestral_tree.newick
+Is --timestamp option in use?: false
+Is --force-overwrite option in use?: false
+DEBUG MODE: false
+
+Warning: # replicates has been set to a potentially low value of 10.  Please consider a higher value (the default is 100000 replicates).
+
+treetime command: [treetime, ancestral, --aln, /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.fasta, --tree, /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.tree, --outdir, /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/output/ancestral_reconstruction, --gtr, infer]
+
+tree file: # of leaves = 8
+
+genotype file: # segregating sites in each sample = 4
+
+plink map file: # segregating sites = 4
+
+phenotype file: cases = 4, controls = 4, samples missing phenotype = 0, total sample size (cases + controls) = 8
+
+# bi-allelic sites: 4
+# monomorphic sites: 0
+# tri-allelic sites: 0
+# quad-allelic sites: 0
+
+# segregating sites with at least 0 homoplasic mutations: 4
+
+Ending poutine session: 2026-October-07 Wednesday 11h:27m:13s GMT+13
+Wall clock time elapsed = 0h 00m 02s
+CLEAN EXIT

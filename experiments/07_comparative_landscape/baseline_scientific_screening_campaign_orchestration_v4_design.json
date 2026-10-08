@@ -1,0 +1,235 @@
+{
+  "campaign_execution_contract": {
+    "authorization_generation": "just_in_time_per_batch_from_frozen_campaign_authorization",
+    "authorization_must_be_current_head_at_execution": true,
+    "automatic_rollback_after_successful_append": false,
+    "continue_after_failed_batch": false,
+    "execute_transaction_one_batch_at_a_time": true,
+    "execution_order": "ascending_batch_order",
+    "freeze_completion_before_advancing": true,
+    "per_batch_authorization_committed_immediately_before_execution": true,
+    "per_batch_authorization_must_be_v3_compatible": true,
+    "per_batch_dry_run_required": true,
+    "per_batch_fixed_transaction_timestamp_required": true,
+    "per_batch_pre_ledger_sha_chained_from_previous_validated_post_ledger": true,
+    "per_batch_projected_post_ledger_sha_required": true,
+    "replay_completed_transaction": false,
+    "resume_campaign_only_from_validated_next_batch_boundary": true,
+    "stop_immediately_on_any_failure": true,
+    "validate_checkpoint_before_advancing": true
+  },
+  "campaign_policy": {
+    "campaign_width_auto_scaling": false,
+    "campaign_width_change_requires_separate_frozen_amendment": true,
+    "final_partial_batch_id": "B000190",
+    "final_partial_batch_size": 122,
+    "final_partial_batch_supported": true,
+    "full_batch_size": 500,
+    "initial_campaign_capacity_records": 2500,
+    "initial_campaign_width_batches": 5
+  },
+  "design_id": "BASELINE_SCIENTIFIC_SCREENING_CAMPAIGN_ORCHESTRATION_V4",
+  "failure_semantics": {
+    "fail_closed": true,
+    "failed_or_unstarted_later_transactions_remain_unpublished": true,
+    "no_best_effort_continuation": true,
+    "no_skip_on_failure": true,
+    "recovery_state_must_be_resolved_before_resume": true,
+    "successful_prior_transactions_remain_final": true
+  },
+  "first_campaign": {
+    "batch_end": "B000009",
+    "batch_start": "B000005",
+    "batches": [
+      {
+        "batch_id": "B000005",
+        "cross_batch_event_transaction_permitted": false,
+        "event_end": "E000002511",
+        "event_start": "E000002012",
+        "global_end": 2500,
+        "global_start": 2001,
+        "independent_authorization_required": true,
+        "independent_completion_reconciliation_required": true,
+        "independent_proposal_required": true,
+        "independent_three_file_checkpoint_required": true,
+        "ordered_screening_entity_ids_sha256": "88baf36889b9646d6d0d209b16e895e39eb32c8f09f10a564c3afbf6bf15e93e",
+        "positions": [
+          1,
+          500
+        ],
+        "record_count": 500,
+        "transaction_id": "T000014"
+      },
+      {
+        "batch_id": "B000006",
+        "cross_batch_event_transaction_permitted": false,
+        "event_end": "E000003011",
+        "event_start": "E000002512",
+        "global_end": 3000,
+        "global_start": 2501,
+        "independent_authorization_required": true,
+        "independent_completion_reconciliation_required": true,
+        "independent_proposal_required": true,
+        "independent_three_file_checkpoint_required": true,
+        "ordered_screening_entity_ids_sha256": "0ab68dd2b4172d13212189572443bc5b47ee0066e437d1879c04c7beff780ccf",
+        "positions": [
+          1,
+          500
+        ],
+        "record_count": 500,
+        "transaction_id": "T000015"
+      },
+      {
+        "batch_id": "B000007",
+        "cross_batch_event_transaction_permitted": false,
+        "event_end": "E000003511",
+        "event_start": "E000003012",
+        "global_end": 3500,
+        "global_start": 3001,
+        "independent_authorization_required": true,
+        "independent_completion_reconciliation_required": true,
+        "independent_proposal_required": true,
+        "independent_three_file_checkpoint_required": true,
+        "ordered_screening_entity_ids_sha256": "c906c1a4e368f57c1d450bee0ecb14fa23a65234c260d45595a5046dda87c9f9",
+        "positions": [
+          1,
+          500
+        ],
+        "record_count": 500,
+        "transaction_id": "T000016"
+      },
+      {
+        "batch_id": "B000008",
+        "cross_batch_event_transaction_permitted": false,
+        "event_end": "E000004011",
+        "event_start": "E000003512",
+        "global_end": 4000,
+        "global_start": 3501,
+        "independent_authorization_required": true,
+        "independent_completion_reconciliation_required": true,
+        "independent_proposal_required": true,
+        "independent_three_file_checkpoint_required": true,
+        "ordered_screening_entity_ids_sha256": "8018fa583316b89006d579afed41916d235478a153672006cec3cff4730f0a83",
+        "positions": [
+          1,
+          500
+        ],
+        "record_count": 500,
+        "transaction_id": "T000017"
+      },
+      {
+        "batch_id": "B000009",
+        "cross_batch_event_transaction_permitted": false,
+        "event_end": "E000004511",
+        "event_start": "E000004012",
+        "global_end": 4500,
+        "global_start": 4001,
+        "independent_authorization_required": true,
+        "independent_completion_reconciliation_required": true,
+        "independent_proposal_required": true,
+        "independent_three_file_checkpoint_required": true,
+        "ordered_screening_entity_ids_sha256": "086a60ad59ae26e1c48ae585aa611a0c7f84fef88ae5b4d6365e800fb52a8d84",
+        "positions": [
+          1,
+          500
+        ],
+        "record_count": 500,
+        "transaction_id": "T000018"
+      }
+    ],
+    "campaign_id": "C000001",
+    "campaign_ordered_screening_entity_ids_sha256": "af90bd3e3971e74391961e3ef29dfc5ed9d7787a510eb7e72106384caf9e2240",
+    "expected_event_count_if_all_five_initial_transactions_publish": 4511,
+    "global_active_index_end": 4500,
+    "global_active_index_start": 2001,
+    "live_authorized": false,
+    "pre_campaign_event_count": 2011,
+    "pre_campaign_ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "production_mutated_by_design": false,
+    "record_count": 2500,
+    "scientific_decisions_frozen": false,
+    "transaction_end": "T000018",
+    "transaction_start": "T000014"
+  },
+  "human_gate_model": {
+    "campaign_build_requires_live_authorization": false,
+    "execution_scope": "whole_campaign",
+    "live_authorization_scope": "whole_campaign",
+    "per_batch_human_gate_repetition_required": false,
+    "required_explicit_human_gates_per_campaign": [
+      "APPROVE_CAMPAIGN_REVIEW",
+      "AUTHORIZE_CAMPAIGN",
+      "EXECUTE_CAMPAIGN"
+    ],
+    "scientific_review_and_live_authorization_remain_separate": true,
+    "scientific_review_approval_creates_production_authority": false,
+    "scientific_review_approval_scope": "whole_campaign"
+  },
+  "motivation": {
+    "completed_baseline_entities_before_v4": 2000,
+    "completed_batches_before_v4": [
+      "B000001",
+      "B000002",
+      "B000003",
+      "B000004"
+    ],
+    "manual_one_batch_gate_pattern_discontinued": true,
+    "remaining_blocked_metadata_entities": 484,
+    "remaining_ready_entities_before_v4": 92622
+  },
+  "next_gate": "IMPLEMENT_BASELINE_SCREENING_CAMPAIGN_ORCHESTRATION_V4_WITHOUT_PRODUCTION_MUTATION",
+  "non_authority_statement": {
+    "design_creates_no_event_ledger_mutation": true,
+    "design_creates_no_live_authorization": true,
+    "design_creates_no_review_packet_mutation": true,
+    "design_creates_no_scientific_decisions": true
+  },
+  "parent_commit": "82fdee36b43ff555e42a7890bcb80e0a9409201a",
+  "production_state_at_design": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 2000,
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "ready": 92622,
+    "universe_total": 95106
+  },
+  "provenance_contract": {
+    "campaign_completion_reconciliation_tracked": true,
+    "campaign_design_tracked": true,
+    "campaign_live_authorization_tracked": true,
+    "campaign_review_freeze_tracked": true,
+    "individual_transaction_authorizations_tracked": true,
+    "individual_transaction_completion_freezes_tracked": true,
+    "individual_transaction_receipts_persistent": true
+  },
+  "purpose": "Reduce repetitive human gating for the remaining Experiment 07 baseline scientific-screening universe while preserving the existing per-batch scientific, authorization, append, checkpoint, recovery, and provenance guarantees.",
+  "schema_version": 1,
+  "scientific_review_contract": {
+    "campaign_review_approval_freezes_all_batch_decisions_atomically": true,
+    "each_batch_retains_independent_decision_summary": true,
+    "each_batch_retains_independent_frozen_proposal": true,
+    "each_batch_retains_independent_review_packet": true,
+    "model_only_preclassification_prohibited": true,
+    "partial_campaign_scientific_freeze_permitted": false,
+    "screen_each_record_against_existing_frozen_eligibility_rules": true,
+    "six_frozen_roles_unchanged": true,
+    "terminal_decision_requires_nonempty_evidence_basis": true,
+    "terminal_decision_requires_nonempty_source_locator": true,
+    "title_only_preclassification_prohibited": true,
+    "uncertainty_requires_retention_or_source_escalation": true
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "transaction_contract": {
+    "cross_batch_transaction_permitted": false,
+    "deterministic_event_ids_per_transaction": true,
+    "exact_three_file_checkpoint_per_transaction": true,
+    "existing_event_appender_cross_batch_prohibition_preserved": true,
+    "one_transaction_per_batch": true,
+    "one_use_authorization_per_transaction": true,
+    "partial_batch_transaction_permitted": false,
+    "review_packet_mutation_after_authorization": false,
+    "strict_prefix_extension_per_transaction": true,
+    "superseding_events_in_initial_campaign_screen": false
+  }
+}

@@ -1,0 +1,13 @@
+/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/Bio/GenBank/Scanner.py:1540: BiopythonParserWarning: Attempting to parse malformed locus line:
+'LOCUS       BENCHREF                 20 bp    DNA     linear   BCT 01-JAN-2000\n'
+Found locus 'BENCHREF' size '20' residue_type 'DNA'
+Some fields may be wrong.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar", line 8, in <module>
+    sys.exit(main())
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar.py", line 2627, in main
+    slice_size, feature_slice, feature_list = makeGeneIndex(geneannot,len(sequence),log)
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar.py", line 1372, in makeGeneIndex
+    slice_size = len(record) +1
+NameError: name 'record' is not defined

@@ -1,0 +1,214 @@
+{
+  "archive_contract": {
+    "normalized_text_may_be_generated_only_after": [
+      "verified transport archive",
+      "provider identity validation"
+    ],
+    "raw_archive_mutation_by_adapter_permitted": false,
+    "raw_transport_archive_preserved": true,
+    "success_or_not_found_requires": [
+      "transport terminal.json exists",
+      "verify_terminal_archive passes",
+      "terminal request identity matches frozen manifest-derived transport request",
+      "final archived response body SHA matches transport terminal"
+    ]
+  },
+  "authority_boundary": {
+    "creates_live_authorization": false,
+    "creates_network_authority": false,
+    "performs_model_scoring": false,
+    "performs_network_requests": false,
+    "performs_scientific_decisions": false,
+    "permits_blind_validation_access": false,
+    "permits_production_ledger_mutation": false
+  },
+  "design_id": "TRIAGE_PRE_REVIEW_TEXT_WAVE_A_TRANSPORT_EVIDENCE_ADAPTER_V1",
+  "frozen_sources": {
+    "authoritative_transport_policy_source": {
+      "path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+      "sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+    },
+    "guard": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_guard_v1.py",
+      "sha256": "40dadd678bfe282e196ef007dbb443e4672c578055f1608d737625bae9c5b7af"
+    },
+    "live_design": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_live_retrieval_v1_design.json",
+      "sha256": "3dff9e1a41196343adc02951b7a88a2b1306e7df05838f3b2ab50ed53ce16172"
+    },
+    "normalizer": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py",
+      "sha256": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d"
+    },
+    "transport": {
+      "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+      "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+    },
+    "wave_a_manifest": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a_request_manifest.tsv",
+      "sha256": "91a87f2d8a2bfc00ead9a5f1b6e6fcaf850666573583bb07317a1416d446211d"
+    }
+  },
+  "manifest_to_transport_mapping": {
+    "allowed_routes": [
+      {
+        "identifier_namespace": "pmid",
+        "manifest_route": "exact_pmid_efetch",
+        "provider": "pubmed",
+        "transport_route": "record_by_pmid"
+      },
+      {
+        "identifier_namespace": "openalex",
+        "manifest_route": "exact_work_id",
+        "provider": "openalex",
+        "transport_route": "work_by_openalex_id"
+      },
+      {
+        "identifier_namespace": "doi",
+        "manifest_route": "exact_doi",
+        "provider": "openalex",
+        "transport_route": "work_by_doi"
+      }
+    ],
+    "identifier": "manifest.identifier",
+    "identifier_namespace": "manifest.identifier_namespace",
+    "logical_lookup_id": "triage_text_wave_a:{request_sequence:04d}:{request_identity_sha256_prefix16}",
+    "provider": "manifest.provider",
+    "route": "manifest.transport_route"
+  },
+  "mock_runner_gate": {
+    "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_PURE_ADAPTER_AND_MOCKED_SINGLE_REQUEST_RUNNER_WITH_ZERO_REAL_NETWORK",
+    "requirements": [
+      "OpenAlex DOI mismatch is rejected",
+      "OpenAlex Work-ID mismatch is rejected",
+      "PubMed PMID mismatch remains rejected",
+      "success archive tampering is rejected",
+      "not-found archive tampering is rejected",
+      "transport failure without terminal.json halts and never checkpoints",
+      "identity mismatch never checkpoints",
+      "pacer wraps every executor invocation including redirect hops",
+      "manifest order cannot be skipped or reordered",
+      "same manifest request cannot be checkpointed twice",
+      "guard checkpoint occurs only after verified adapter evidence is durable",
+      "all tests use injected synthetic executor",
+      "no test calls default_http_executor",
+      "no live authorization is created",
+      "production boundary remains unchanged"
+    ]
+  },
+  "parent_commit": "1150286b4c0ff43ef5533657d8c16456c68417db",
+  "provider_identity_validation": {
+    "not_found": {
+      "identity_status": "not_applicable_not_found",
+      "rule": "The exact request identity must still match the verified archived terminal record."
+    },
+    "openalex_doi_success": {
+      "mismatch_status": "provider_identity_mismatch",
+      "requested_normalization": "Trim whitespace, remove DOI URL or doi: prefix, and compare case-insensitively.",
+      "required": true,
+      "required_response_evidence": [
+        "ids is an object",
+        "ids.doi is present and non-empty",
+        "normalized ids.doi equals normalized requested DOI",
+        "top-level OpenAlex id is present and canonical"
+      ]
+    },
+    "openalex_work_id_success": {
+      "mismatch_status": "provider_identity_mismatch",
+      "requested_normalization": "Normalize requested value to canonical OpenAlex Work token W<digits>.",
+      "required": true,
+      "required_response_evidence": [
+        "top-level id is a canonical OpenAlex Work identifier",
+        "top-level id Work token equals requested Work token",
+        "ids is an object",
+        "if ids.openalex is present, its Work token also equals requested Work token"
+      ]
+    },
+    "pubmed_success": {
+      "required": true,
+      "rule": "Returned primary PMID must equal the exact requested PMID. The frozen transport and normalizer both enforce this condition."
+    }
+  },
+  "purpose": "Provide a pure evidence-validation layer between the frozen exact-identifier transport and the Wave A authorization guard without modifying either frozen transport implementation.",
+  "request_pacing": {
+    "implementation": "retrieve_metadata_resolution_queue.ProviderPacer",
+    "maximum_initiation_rate_per_provider_per_second": 2.0,
+    "minimum_interval_seconds": 0.5,
+    "reason": "Pacing at logical-lookup level alone does not cover redirect hops initiated internally by request_with_redirects.",
+    "required_location": "executor_wrapper",
+    "rule": "The injected executor must call ProviderPacer.wait(request.provider) immediately before every underlying HTTP executor invocation.",
+    "unpaced_underlying_executor_permitted": false
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "transport_outcome_policy": {
+    "automatic_resume_after_fault_permitted": false,
+    "automatic_retry_after_fault_permitted": false,
+    "checkpoint_eligible": [
+      "verified_success",
+      "verified_not_found"
+    ],
+    "fault_action": "halt_execution_without_advancing_guard_checkpoint",
+    "fault_recovery": "Requires a separately frozen recovery design before any further live request for the same manifest position.",
+    "non_checkpointing_execution_faults": [
+      "authentication_failure",
+      "redirect_failure",
+      "response_integrity_failure",
+      "retry_exhausted",
+      "provider_identity_mismatch",
+      "missing_terminal_archive",
+      "archive_verification_failure",
+      "unknown_transport_status"
+    ],
+    "rationale": "Several frozen transport failure paths return a status without writing terminal.json. They must not be silently promoted to verified terminal evidence or allowed to advance Wave A."
+  },
+  "transport_roles": {
+    "authoritative_transport_policy_source": {
+      "invoked_as_wave_a_request_executor": false,
+      "modification_permitted": false,
+      "path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+      "role": "Frozen provenance/safety-policy dependency; its independent live seed-run authorization machinery is not reused as Wave A authority.",
+      "sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+    },
+    "wave_a_execution_transport": {
+      "functions_reused": [
+        "build_request",
+        "transport_lookup",
+        "verify_terminal_archive",
+        "ProviderPacer"
+      ],
+      "modification_permitted": false,
+      "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+      "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+    }
+  },
+  "uniform_evidence_record": {
+    "credential_fields_permitted": false,
+    "filename": "{request_sequence:04d}.json",
+    "guard_terminal_receipt": {
+      "additional_required_field": "adapter_evidence_sha256",
+      "archived_terminal_sha256": "SHA256 of verified raw transport terminal.json"
+    },
+    "model_fields_permitted": false,
+    "output_subdirectory": "transport_evidence",
+    "required_fields": [
+      "schema_version",
+      "wave_id",
+      "request_sequence",
+      "request_identity_sha256",
+      "logical_lookup_id",
+      "provider",
+      "transport_route",
+      "identifier_namespace",
+      "identifier",
+      "transport_terminal_status",
+      "adapter_status",
+      "checkpoint_eligible",
+      "provider_record_id",
+      "provider_identity_status",
+      "transport_terminal_json_sha256",
+      "terminal_body_sha256"
+    ],
+    "scientific_fields_permitted": false
+  }
+}

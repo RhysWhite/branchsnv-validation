@@ -1,0 +1,226 @@
+{
+  "authority_boundary": {
+    "this_design_authorizes_benchmark_execution": false,
+    "this_design_authorizes_canonical_dataset_generation": false,
+    "this_design_authorizes_comparator_execution": false,
+    "this_design_authorizes_environment_build": false,
+    "this_design_authorizes_implementation": false,
+    "this_design_authorizes_production_bridge": false,
+    "this_design_authorizes_software_installation": false
+  },
+  "benchmark_endpoints": {
+    "branch_change_reconstruction": {
+      "canonical_scoring_unit": "edge_site_state_change",
+      "methods": [
+        "ARPIP",
+        "FastML",
+        "PAML",
+        "PastML",
+        "SNPPar",
+        "TreeTime"
+      ],
+      "primary_metrics": [
+        "precision",
+        "recall",
+        "f1",
+        "false_positive_count",
+        "false_negative_count"
+      ],
+      "secondary_metrics": [
+        "ancestral_state_accuracy_at_variable_sites",
+        "edge_stratified_f1_by_descendant_clade_size"
+      ],
+      "truth_definition": "A true event is a nucleotide state change explicitly recorded in the independent simulator event ledger on a uniquely identified rooted-tree edge and genomic site."
+    },
+    "homoplasy_recurrent_state_analysis": {
+      "canonical_scoring_unit": "recurrent_site",
+      "methods": [
+        "HomoplasyFinder",
+        "POUTINE",
+        "SNPPar",
+        "TreeTime"
+      ],
+      "primary_metrics": [
+        "site_precision",
+        "site_recall",
+        "site_f1",
+        "false_positive_site_count",
+        "false_negative_site_count"
+      ],
+      "secondary_metrics": [
+        "recurrence_count_absolute_error",
+        "subclass_recall_parallel",
+        "subclass_recall_convergent",
+        "subclass_recall_reversal"
+      ],
+      "truth_definition": "A true recurrent site contains two or more independent mutation events in the simulator event ledger; recurrence subclasses are parallel, convergent or reversal according to the exact state transitions."
+    }
+  },
+  "benchmark_method_universe": {
+    "contextual_comparators_executed": false,
+    "count": 8,
+    "endpoint_specific_benchmark_candidates": [
+      "ARPIP",
+      "FastML",
+      "HomoplasyFinder",
+      "PAML",
+      "PastML",
+      "POUTINE"
+    ],
+    "methods": [
+      "ARPIP",
+      "FastML",
+      "HomoplasyFinder",
+      "PAML",
+      "PastML",
+      "POUTINE",
+      "SNPPar",
+      "TreeTime"
+    ],
+    "quantitative_benchmark_candidates": [
+      "SNPPar",
+      "TreeTime"
+    ],
+    "scientific_comparator_status_changed": false
+  },
+  "canonical_input_contract": {
+    "edge_identity": "Each rooted edge is identified canonically by the sorted descendant-tip set SHA256; tool-specific node labels are never used as cross-tool identifiers.",
+    "pastml_adapter": "Only variable nucleotide sites are converted to one categorical column per site. A,C,G,T are literal states; N or missing observations are encoded as missing, never as a fifth biological state.",
+    "shared_inputs": [
+      "rooted_newick_tree_with_branch_lengths",
+      "tip_DNA_alignment",
+      "truth_hidden_from_comparators"
+    ],
+    "snp_only_adapters": "Where a tool accepts a SNP table/VCF rather than a full alignment, the adapter is derived deterministically from the same canonical tip alignment and root coordinates.",
+    "variable_site_coordinate_system": "1-based coordinates on the frozen 10,000-bp root sequence"
+  },
+  "canonical_output_contract": {
+    "adapter_unit_tests_required": true,
+    "ambiguous_or_probabilistic_calls": "Primary scoring requires a single discrete event/site call. If a method reports posterior probabilities, threshold selection must be frozen before canonical execution and must not be tuned on benchmark truth.",
+    "branch_event_row": [
+      "scenario_id",
+      "method",
+      "edge_id",
+      "position",
+      "ancestral_state",
+      "derived_state"
+    ],
+    "homoplasy_site_row": [
+      "scenario_id",
+      "method",
+      "position",
+      "reported_recurrence_count_if_available"
+    ],
+    "no_truth_access": true
+  },
+  "dependency_policy": {
+    "independent_algorithm_summary": "Any count/ranking of independent algorithm families must collapse TreeTime-dependent workflows into one dependency family while still showing workflow-level results.",
+    "primary_reporting": "Report all eight software workflows individually, but explicitly group TreeTime, SNPPar and POUTINE as a dependency-linked family. Do not interpret them as three algorithmically independent confirmations.",
+    "treetime_family": [
+      "TreeTime",
+      "SNPPar",
+      "POUTINE"
+    ]
+  },
+  "environment_and_version_policy": {
+    "dependency_versions_recorded": true,
+    "exact_version_or_commit_required": true,
+    "license_constraints_respected": true,
+    "method_specific_notes": {
+      "FastML": "Respect academic-use/modification terms; do not vendor restricted source into repository.",
+      "PAML": "Freeze the exact nucleotide ancestral-reconstruction subprogram/model.",
+      "POUTINE": "Pin its TreeTime dependency and isolate homoplasy output from phenotype-association output.",
+      "SNPPar": "Pin the documented TreeTime-compatible dependency set; do not silently upgrade TreeTime."
+    },
+    "network_disabled_during_canonical_benchmark_execution": true,
+    "one_isolated_environment_per_method": true,
+    "redistribute_third_party_binaries_or_source": false,
+    "source_archive_or_container_digest_required_where_licensing_permits": true,
+    "wrapper_commands_logged_verbatim": true
+  },
+  "explicitly_unbenchmarked_endpoints": {
+    "clade_lineage_marker_discovery": "No feasibility-qualified external comparator exposes a sufficiently equivalent strict clade-exclusive nucleotide-marker endpoint for a fair quantitative benchmark. This absence is reported rather than forcing a mismatched comparison.",
+    "marker_deployment_genotyping": "No feasibility-qualified method provides a like-for-like marker-deployment genotyping endpoint under the frozen benchmark universe."
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_DESIGN_V1",
+  "implementation_gates": {
+    "before_environment_build": [
+      "freeze exact comparator versions/commits",
+      "freeze source/release hashes or container digests where permitted",
+      "implement and unit-test canonical dataset generator",
+      "implement and unit-test each input/output adapter",
+      "implement truth-blind metric engine",
+      "prove no benchmark truth is supplied to comparator commands"
+    ],
+    "implementation_blocking_rule": "If exact reproducible installation/invocation cannot be implemented under the frozen scientific contract, mark the method IMPLEMENTATION_BLOCKED with evidence. Do not silently replace it with a fork/successor or alter the benchmark endpoint.",
+    "smoke_test_policy": "Implementation validation may later be authorized on dedicated noncanonical toy data. Canonical 150-scenario benchmark data must not be used for parameter tuning or debugging."
+  },
+  "metric_aggregation": {
+    "confidence_intervals": "Bootstrap scenario replicates only after the full frozen result exists; no resampling-based tuning.",
+    "no_global_rank_required": true,
+    "no_single_composite_score": true,
+    "overall_summary": "Macro-average cell-level metrics so large datasets do not dominate by event count.",
+    "primary_summary": "Report median and interquartile range across the five replicates within each size/regime/observation cell.",
+    "runtime_accuracy_separation": true,
+    "unit_first": "Compute metrics per scenario before aggregation."
+  },
+  "next_gate": "FREEZE_COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_BEFORE_EXECUTION",
+  "next_gate_note": "Implement the frozen generator, adapters, metric engine and per-method environment/install recipes under a separately frozen implementation. Canonical software installation or benchmark execution remains unauthorized until subsequent authorization.",
+  "parent_feasibility_result_commit": "558d62aa9e8126ceef27e5d8c0c756558071d98f",
+  "resource_and_failure_policy": {
+    "core_timeout_seconds": 3600,
+    "cpu_policy": "one_cpu_thread_per_method_run_where_the_tool_exposes_thread_control",
+    "memory_metric": "maximum_resident_set_size_bytes",
+    "nonzero_exit_handling": "Preserve stdout/stderr/command/environment metadata. Do not modify parameters after truth is inspected. Any remediation requires a separately recorded implementation amendment.",
+    "runtime_metric": "wall_clock_seconds",
+    "scale_timeout_seconds": 14400,
+    "timeout_handling": "A timeout is a completion failure and is reported separately; it is never scored as zero scientific accuracy.",
+    "unsupported_scenario_handling": "If a method's documented input contract cannot represent a frozen scenario, record UNSUPPORTED_BY_METHOD_CONTRACT rather than fabricating an adapter."
+  },
+  "result_outputs_planned": [
+    "benchmark_dataset_manifest.tsv",
+    "benchmark_method_environment_manifest.tsv",
+    "benchmark_run_manifest.tsv",
+    "branch_change_event_calls.tsv",
+    "homoplasy_site_calls.tsv",
+    "benchmark_metrics.tsv",
+    "benchmark_resource_metrics.tsv",
+    "benchmark_failures.tsv",
+    "benchmark_summary.json",
+    "checksums.sha256"
+  ],
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "truth_generation": {
+    "implementation_independence": "Truth generation must be implemented in repository code without importing, calling or reproducing algorithms from BRANCHSNV or any comparator.",
+    "mutation_generation": {
+      "event_ledger_required": true,
+      "indels": false,
+      "multi_hit_events": "forbidden_except_events_explicitly_required_by_the_frozen_recurrence_regime",
+      "recombination": false,
+      "tip_alignment_derived_from_event_ledger": true
+    },
+    "observation_conditions": [
+      "complete",
+      "missing_5pct"
+    ],
+    "replicates_per_cell": 5,
+    "root_sequence": {
+      "alphabet": "ACGT",
+      "generation": "deterministic_uniform_DNA_from_frozen_seed",
+      "length_bp": 10000
+    },
+    "scenario_count": 150,
+    "seed_policy": "A single master seed and all derived scenario seeds must be frozen in the implementation freeze before any canonical dataset generation.",
+    "tree_generation": {
+      "positive_branch_lengths": true,
+      "tip_counts": [
+        32,
+        128,
+        512
+      ],
+      "topology": "rooted_strictly_bifurcating",
+      "tree_inference_benchmarked": false,
+      "tree_truth_known": true
+    }
+  }
+}

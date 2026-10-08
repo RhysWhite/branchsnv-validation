@@ -1,0 +1,21 @@
+{
+  "approved_candidate_method_flag": false,
+  "approved_event_type": "superseding_record_decision",
+  "approved_evidence_escalation_status": "resolved",
+  "approved_exclusion_reason_code": "application_only_no_reusable_method",
+  "approved_record_decision": "exclude",
+  "approved_supersedes_event_id": "E000000010",
+  "batch_id": "B000001",
+  "current_event_id": "E000000010",
+  "evidence_freeze_sha256": "9e5be4661751d2af72d74e26f184478f3d2e5b1d9b6600d5b71df8b453a6800b",
+  "evidence_packet_sha256": "59d70f1a8dfea1042be3f48f03e09648ca173fe482841fd571e181ae56b928a5",
+  "human_approval_text": "APPROVE POSITION 10: exclude \u2014 application_only_no_reusable_method",
+  "operator_id": "Rhys",
+  "operator_type": "human_with_assistance",
+  "position_in_batch": 10,
+  "production_ledger_mutated": false,
+  "production_ledger_mutation_authorized": false,
+  "schema_version": 1,
+  "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859",
+  "status": "HUMAN_APPROVED_PRE_LIVE"
+}

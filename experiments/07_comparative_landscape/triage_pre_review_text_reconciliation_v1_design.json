@@ -1,0 +1,201 @@
+{
+  "design_name": "triage_pre_review_text_reconciliation_v1",
+  "design_parent_commit": "c767211bec514e3b5396e202aa2a40ccfb1dc138",
+  "execution_boundary": {
+    "network_permitted": false,
+    "production_ledger_write_permitted": false,
+    "raw_archive_modification_permitted": false,
+    "reconciliation_outputs_are_derived_only": true,
+    "wave_a_archive_modification_permitted": false,
+    "wave_b_archive_modification_permitted": false
+  },
+  "expected_reconciliation": {
+    "abstract_absent_total": 309,
+    "abstract_status_counts": {
+      "abstract_absent": 309,
+      "usable_abstract_openalex": 259,
+      "usable_abstract_pubmed": 3931
+    },
+    "parser_or_position_gap_count": 0,
+    "terminal_source_counts": {
+      "offline_cache_openalex": 9,
+      "wave_a_openalex": 534,
+      "wave_a_pubmed": 3931,
+      "wave_b_openalex_after_pubmed_abstract_absent": 24,
+      "wave_b_openalex_after_pubmed_verified_not_found": 1
+    },
+    "terminal_source_status_counts": {
+      "offline_cache_openalex": {
+        "abstract_absent": 6,
+        "usable_abstract_openalex": 3
+      },
+      "wave_a_openalex": {
+        "abstract_absent": 286,
+        "usable_abstract_openalex": 248
+      },
+      "wave_a_pubmed": {
+        "usable_abstract_pubmed": 3931
+      },
+      "wave_b_openalex_after_pubmed_abstract_absent": {
+        "abstract_absent": 17,
+        "usable_abstract_openalex": 7
+      },
+      "wave_b_openalex_after_pubmed_verified_not_found": {
+        "usable_abstract_openalex": 1
+      }
+    },
+    "total_records": 4499,
+    "usable_abstract_total": 4190,
+    "wave_b_fallback_reason_counts": {
+      "pubmed_abstract_absent": 24,
+      "pubmed_verified_not_found": 1
+    }
+  },
+  "implementation_gate": {
+    "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_OFFLINE_TRIAGE_PRE_REVIEW_TEXT_RECONCILIATION_V1",
+    "requirements": [
+      "reconstruct all 4,499 terminal cascade outcomes from frozen sources",
+      "verify Wave A and Wave B durable evidence through native frozen adapters before use",
+      "apply only the checksum-pinned frozen PubMed/OpenAlex normalizer",
+      "reproduce exactly 4,190 usable abstracts and 309 abstract-absent records",
+      "reproduce all frozen provider/lane/fallback counts exactly",
+      "write normalized text only for usable abstract statuses",
+      "preserve every abstract-absent record in the 4,499-row resolution table",
+      "fail closed on body/evidence/identity/checksum mismatch",
+      "prove deterministic byte-identical output across independent temporary rebuilds",
+      "prove implementation performs no network request",
+      "prove implementation does not read blind validation content",
+      "prove output contains no scientific labels, review evidence, scores, thresholds, notes or operator fields",
+      "prove Wave A/Wave B raw archives remain byte-identical",
+      "prove production ledger boundary remains unchanged",
+      "freeze implementation before controlled generation of final derived artifacts"
+    ]
+  },
+  "leakage_boundary": {
+    "batch_identifier_as_feature_permitted": false,
+    "blind_validation_content_used": false,
+    "future_universe_scored": false,
+    "model_scores_permitted": false,
+    "notes_fields_permitted": false,
+    "operator_fields_permitted": false,
+    "review_evidence_permitted": false,
+    "scientific_decisions_permitted": false,
+    "scientific_labels_permitted": false,
+    "thresholds_permitted": false
+  },
+  "output_contract": {
+    "checksums": {
+      "must_cover": [
+        "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_resolution.tsv",
+        "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_normalized_text.tsv",
+        "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciliation_summary.json"
+      ],
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciliation_outputs.sha256"
+    },
+    "normalized_text": {
+      "columns": [
+        "retrieval_record_index",
+        "screening_entity_id",
+        "provider_used",
+        "provider_lookup_type",
+        "provider_record_id",
+        "source_body_sha256",
+        "provider_identity_status",
+        "parser_status",
+        "abstract_status",
+        "title_text",
+        "abstract_text",
+        "abstract_section_metadata_json"
+      ],
+      "excluded_from_this_text_table": [
+        "abstract_absent"
+      ],
+      "included_abstract_statuses": [
+        "usable_abstract_pubmed",
+        "usable_abstract_openalex"
+      ],
+      "minimum_abstract_length_threshold": null,
+      "ordering": "ascending_retrieval_record_index",
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_normalized_text.tsv",
+      "row_count": 4190,
+      "title_only_rows_promoted_to_model_text": false
+    },
+    "resolution": {
+      "columns": [
+        "retrieval_record_index",
+        "screening_entity_id",
+        "resolution_lane",
+        "provider_used",
+        "provider_lookup_type",
+        "provider_record_id",
+        "source_body_sha256",
+        "provider_identity_status",
+        "parser_status",
+        "abstract_status",
+        "wave_a_request_sequence",
+        "wave_a_request_identity_sha256",
+        "wave_b_request_sequence",
+        "wave_b_request_identity_sha256",
+        "fallback_reason",
+        "normalized_text_present"
+      ],
+      "one_row_per_input_manifest_record": true,
+      "ordering": "ascending_retrieval_record_index",
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_resolution.tsv",
+      "row_count": 4499
+    },
+    "summary": {
+      "must_include": [
+        "source_hashes",
+        "output_hashes",
+        "row_counts",
+        "abstract_status_counts",
+        "terminal_source_counts",
+        "fallback_reason_counts",
+        "safety_boundaries"
+      ],
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciliation_summary.json",
+      "title_or_abstract_text_permitted": false
+    }
+  },
+  "purpose": "Offline deterministic reconciliation of the frozen 4,499-record pre-review text retrieval cascade after completed Wave A and Wave B.",
+  "resolution_semantics": {
+    "abstract_absence_is_scientific_exclusion_evidence": false,
+    "normalized_text_present_values": [
+      "0",
+      "1"
+    ],
+    "provider_not_found_is_scientific_exclusion_evidence": false,
+    "resolution_lane_values": [
+      "offline_cache",
+      "wave_a_primary",
+      "wave_b_fallback"
+    ],
+    "retrieval_failure_is_scientific_exclusion_evidence": false,
+    "wave_b_fallback_reason_values": [
+      "pubmed_abstract_absent",
+      "pubmed_verified_not_found"
+    ]
+  },
+  "schema_version": 1,
+  "source_hashes": {
+    "experiments/07_comparative_landscape/TRIAGE_PRE_REVIEW_TEXT_RETRIEVAL_V1.md": "0d280b9b732691775ab4354854f44bb6c182650a85f73942f270194b7fae9a44",
+    "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f",
+    "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d",
+    "experiments/07_comparative_landscape/triage_pre_review_text_retrieval_v1_design.json": "3a8107a845d2dcde9dfe2f4e714237cae353ba3762af1a76d61f7f5c171d66fc",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_guard_v1.py": "40dadd678bfe282e196ef007dbb443e4672c578055f1608d737625bae9c5b7af",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_a_transport_evidence_adapter_v1.py": "30a311626b3e99e6520601585b87df3b600991094d7724cd358b52159d902bac",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_b_guard_v1.py": "dfbd56b90ae47068f880328e21f3c3cc52aa86ef7c80db9c5f069342bc025cb3",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_b_transport_evidence_adapter_v1.py": "d6d04019521f1bec3d1d9b27014fb5718a774488d93b8a48852a483b51664a79",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/input_manifest.tsv": "4e5ba0313e008a58e968a9368ea90b6fdb70049b866003742ed1c967c31120ba",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a/completion_receipt.json": "1c97292c16ba75956db72499df1121943bf57e95dacd161af88deccf6a95e5eb",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a_request_manifest.tsv": "91a87f2d8a2bfc00ead9a5f1b6e6fcaf850666573583bb07317a1416d446211d",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_b/completion_receipt.json": "99b1b79ef2630786e9fd6f502bca9e361764e4b2e6ec0c86692ce6365731e5e7",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_b_derivation.tsv": "a58356439478ca27a48c3967dbbab6a16b275987dc4af7b19f67dd430eeab32b",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_b_request_manifest.tsv": "f099f86cce2321ab07d639aeef557014585faf49e2306a09f3fe40119535f0a6",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_cache_resolution.tsv": "0301c8711a5d9c86a3507c84084956c73fe475e0b3846ffd201b18cea0e3f3fb",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_cached_normalized_text.tsv": "f73e166a2f8946a967aaf79072186e287d1b4556d2a168903ec9425df75219c1",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_network_requirements.tsv": "87b9786c1928773d51708b2bc93cea137d1eb7b36af43d0d26ab5a29487d0dc9"
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}

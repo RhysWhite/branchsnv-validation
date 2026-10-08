@@ -1,0 +1,452 @@
+[
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 20,
+    "build_string": "20_gnu",
+    "channel": "conda-forge",
+    "dist_name": "_openmp_mutex-4.5-20_gnu",
+    "name": "_openmp_mutex",
+    "platform": "linux-64",
+    "version": "4.5"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 10,
+    "build_string": "hda65f42_10",
+    "channel": "conda-forge",
+    "dist_name": "bzip2-1.0.8-hda65f42_10",
+    "name": "bzip2",
+    "platform": "linux-64",
+    "version": "1.0.8"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "hbd8a1cb_0",
+    "channel": "conda-forge",
+    "dist_name": "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "name": "ca-certificates",
+    "platform": "noarch",
+    "version": "2026.7.22"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "pyhcf101f3_1",
+    "channel": "conda-forge",
+    "dist_name": "cloudpickle-3.1.2-pyhcf101f3_1",
+    "name": "cloudpickle",
+    "platform": "noarch",
+    "version": "3.1.2"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 2,
+    "build_string": "py310h44b86e0_2",
+    "channel": "conda-forge",
+    "dist_name": "icu-78.3-py310h44b86e0_2",
+    "name": "icu",
+    "platform": "linux-64",
+    "version": "78.3"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyhcf101f3_0",
+    "channel": "conda-forge",
+    "dist_name": "joblib-1.6.0-pyhcf101f3_0",
+    "name": "joblib",
+    "platform": "noarch",
+    "version": "1.6.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 102,
+    "build_string": "default_hbd61a6d_102",
+    "channel": "conda-forge",
+    "dist_name": "ld_impl_linux-64-2.46.1-default_hbd61a6d_102",
+    "name": "ld_impl_linux-64",
+    "platform": "linux-64",
+    "version": "2.46.1"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 11,
+    "build_string": "11_h4a7cf45_openblas",
+    "channel": "conda-forge",
+    "dist_name": "libblas-3.11.0-11_h4a7cf45_openblas",
+    "name": "libblas",
+    "platform": "linux-64",
+    "version": "3.11.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 11,
+    "build_string": "11_h0358290_openblas",
+    "channel": "conda-forge",
+    "dist_name": "libcblas-3.11.0-11_h0358290_openblas",
+    "name": "libcblas",
+    "platform": "linux-64",
+    "version": "3.11.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "hd2095e1_0",
+    "channel": "conda-forge",
+    "dist_name": "libexpat-2.8.5-hd2095e1_0",
+    "name": "libexpat",
+    "platform": "linux-64",
+    "version": "2.8.5"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "h81df57d_1",
+    "channel": "conda-forge",
+    "dist_name": "libffi-3.7.0-h81df57d_1",
+    "name": "libffi",
+    "platform": "linux-64",
+    "version": "3.7.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "ha9f2e26_7",
+    "channel": "conda-forge",
+    "dist_name": "libgcc-16.2.0-ha9f2e26_7",
+    "name": "libgcc",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "h69a702a_7",
+    "channel": "conda-forge",
+    "dist_name": "libgcc-ng-16.2.0-h69a702a_7",
+    "name": "libgcc-ng",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "h69a702a_7",
+    "channel": "conda-forge",
+    "dist_name": "libgfortran-16.2.0-h69a702a_7",
+    "name": "libgfortran",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "h69a702a_7",
+    "channel": "conda-forge",
+    "dist_name": "libgfortran-ng-16.2.0-h69a702a_7",
+    "name": "libgfortran-ng",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "h6b99dfc_7",
+    "channel": "conda-forge",
+    "dist_name": "libgfortran5-16.2.0-h6b99dfc_7",
+    "name": "libgfortran5",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "he0feb66_7",
+    "channel": "conda-forge",
+    "dist_name": "libgomp-16.2.0-he0feb66_7",
+    "name": "libgomp",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 11,
+    "build_string": "11_h47877c9_openblas",
+    "channel": "conda-forge",
+    "dist_name": "liblapack-3.11.0-11_h47877c9_openblas",
+    "name": "liblapack",
+    "platform": "linux-64",
+    "version": "3.11.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "hb03c661_1",
+    "channel": "conda-forge",
+    "dist_name": "liblzma-5.8.3-hb03c661_1",
+    "name": "liblzma",
+    "platform": "linux-64",
+    "version": "5.8.3"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "hb9d3cd8_1",
+    "channel": "conda-forge",
+    "dist_name": "libnsl-2.0.1-hb9d3cd8_1",
+    "name": "libnsl",
+    "platform": "linux-64",
+    "version": "2.0.1"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 2,
+    "build_string": "pthreads_hf13c14d_2",
+    "channel": "conda-forge",
+    "dist_name": "libopenblas-0.3.34-pthreads_hf13c14d_2",
+    "name": "libopenblas",
+    "platform": "linux-64",
+    "version": "0.3.34"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 2,
+    "build_string": "h0c77377_2_cpython",
+    "channel": "conda-forge",
+    "dist_name": "libpython-3.11.16-h0c77377_2_cpython",
+    "name": "libpython",
+    "platform": "linux-64",
+    "version": "3.11.16"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "h13e7031_1",
+    "channel": "conda-forge",
+    "dist_name": "libsqlite-3.53.4-h13e7031_1",
+    "name": "libsqlite",
+    "platform": "linux-64",
+    "version": "3.53.4"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "h934c35e_7",
+    "channel": "conda-forge",
+    "dist_name": "libstdcxx-16.2.0-h934c35e_7",
+    "name": "libstdcxx",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "hdf11a46_7",
+    "channel": "conda-forge",
+    "dist_name": "libstdcxx-ng-16.2.0-hdf11a46_7",
+    "name": "libstdcxx-ng",
+    "platform": "linux-64",
+    "version": "16.2.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "hcfc3c73_0",
+    "channel": "conda-forge",
+    "dist_name": "libuuid-2.42.4-hcfc3c73_0",
+    "name": "libuuid",
+    "platform": "linux-64",
+    "version": "2.42.4"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "h280c20c_0",
+    "channel": "conda-forge",
+    "dist_name": "libxcrypt-4.4.38-h280c20c_0",
+    "name": "libxcrypt",
+    "platform": "linux-64",
+    "version": "4.4.38"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 3,
+    "build_string": "h25fd6f3_3",
+    "channel": "conda-forge",
+    "dist_name": "libzlib-1.3.2-h25fd6f3_3",
+    "name": "libzlib",
+    "platform": "linux-64",
+    "version": "1.3.2"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyh5ded981_0",
+    "channel": "conda-forge",
+    "dist_name": "narwhals-2.26.0-pyh5ded981_0",
+    "name": "narwhals",
+    "platform": "noarch",
+    "version": "2.26.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "hdb14827_1",
+    "channel": "conda-forge",
+    "dist_name": "ncurses-6.6-hdb14827_1",
+    "name": "ncurses",
+    "platform": "linux-64",
+    "version": "6.6"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "py311h64a7726_0",
+    "channel": "conda-forge",
+    "dist_name": "numpy-1.26.4-py311h64a7726_0",
+    "name": "numpy",
+    "platform": "linux-64",
+    "version": "1.26.4"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "h781a0a9_0",
+    "channel": "conda-forge",
+    "dist_name": "openssl-3.6.4-h781a0a9_0",
+    "name": "openssl",
+    "platform": "linux-64",
+    "version": "3.6.4"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyhc364b38_0",
+    "channel": "conda-forge",
+    "dist_name": "packaging-26.3-pyhc364b38_0",
+    "name": "packaging",
+    "platform": "noarch",
+    "version": "26.3"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyh8b19718_0",
+    "channel": "conda-forge",
+    "dist_name": "pip-26.2.1-pyh8b19718_0",
+    "name": "pip",
+    "platform": "noarch",
+    "version": "26.2.1"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 2,
+    "build_string": "h5f976f7_2_cpython",
+    "channel": "conda-forge",
+    "dist_name": "python-3.11.16-h5f976f7_2_cpython",
+    "name": "python",
+    "platform": "linux-64",
+    "version": "3.11.16"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 9,
+    "build_string": "9_cp311",
+    "channel": "conda-forge",
+    "dist_name": "python_abi-3.11-9_cp311",
+    "name": "python_abi",
+    "platform": "noarch",
+    "version": "3.11"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 1,
+    "build_string": "hd6e31c0_1",
+    "channel": "conda-forge",
+    "dist_name": "readline-8.3-hd6e31c0_1",
+    "name": "readline",
+    "platform": "linux-64",
+    "version": "8.3"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "np2py311ha15b03d_0",
+    "channel": "conda-forge",
+    "dist_name": "scikit-learn-1.9.0-np2py311ha15b03d_0",
+    "name": "scikit-learn",
+    "platform": "linux-64",
+    "version": "1.9.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 2,
+    "build_string": "py311h64a7726_2",
+    "channel": "conda-forge",
+    "dist_name": "scipy-1.12.0-py311h64a7726_2",
+    "name": "scipy",
+    "platform": "linux-64",
+    "version": "1.12.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyh332efcf_0",
+    "channel": "conda-forge",
+    "dist_name": "setuptools-84.0.0-pyh332efcf_0",
+    "name": "setuptools",
+    "platform": "noarch",
+    "version": "84.0.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyhc455866_0",
+    "channel": "conda-forge",
+    "dist_name": "threadpoolctl-3.7.0-pyhc455866_0",
+    "name": "threadpoolctl",
+    "platform": "noarch",
+    "version": "3.7.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 104,
+    "build_string": "noxft_h1df4ec4_4",
+    "channel": "conda-forge",
+    "dist_name": "tk-8.6.13-noxft_h1df4ec4_4",
+    "name": "tk",
+    "platform": "linux-64",
+    "version": "8.6.13"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "h151e31d_0",
+    "channel": "conda-forge",
+    "dist_name": "tzdata-2026c-h151e31d_0",
+    "name": "tzdata",
+    "platform": "noarch",
+    "version": "2026c"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 0,
+    "build_string": "pyhd8ed1ab_0",
+    "channel": "conda-forge",
+    "dist_name": "wheel-0.48.0-pyhd8ed1ab_0",
+    "name": "wheel",
+    "platform": "noarch",
+    "version": "0.48.0"
+  },
+  {
+    "base_url": "https://conda.anaconda.org/conda-forge",
+    "build_number": 7,
+    "build_string": "hb78ec9c_7",
+    "channel": "conda-forge",
+    "dist_name": "zstd-1.5.7-hb78ec9c_7",
+    "name": "zstd",
+    "platform": "linux-64",
+    "version": "1.5.7"
+  }
+]

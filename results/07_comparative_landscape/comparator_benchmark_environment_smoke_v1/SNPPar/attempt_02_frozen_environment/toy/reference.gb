@@ -1,0 +1,10 @@
+LOCUS       BENCHREF                 20 bp    DNA     linear   BCT 01-JAN-2000
+DEFINITION  Synthetic benchmark reference.
+ACCESSION   BENCHREF
+VERSION     BENCHREF.1
+FEATURES             Location/Qualifiers
+     source          1..20
+                     /organism="synthetic construct"
+ORIGIN
+        1 aaaaaaaaaa aaaaaaaaaa
+//

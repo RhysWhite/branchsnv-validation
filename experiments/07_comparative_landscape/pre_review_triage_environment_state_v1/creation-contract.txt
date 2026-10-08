@@ -1,0 +1,15 @@
+environment_name=branchsnv-triage-v1
+channel=conda-forge
+override_channels=true
+strict_channel_priority=true
+python=3.11
+numpy=1.26.4
+scipy=1.12.0
+scikit-learn=1.9.0
+model_fit=false
+vectorizer_fit=false
+threshold_selection=false
+future_scoring=false
+blind_validation_content_used=false
+scientific_screening_decisions=false
+production_mutation=false

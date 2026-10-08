@@ -1,0 +1,14 @@
+BASEML in paml version 4.10.10, 29 Jan 2026
+
+       72 bytes for distance 
+      576 bytes for conP
+        0 bytes for fhK
+  8000000 bytes for space
+
+Branch lengths in tree are fixed.
+
+This is a rooted tree, without clock.  Check.
+
+     2304 bytes for conP, adjusted
+
+Time used:  0:00

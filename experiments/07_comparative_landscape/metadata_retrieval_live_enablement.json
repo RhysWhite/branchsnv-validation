@@ -1,0 +1,47 @@
+{
+  "amendment_34_implementation_commit": "311851468f57e579fd03b33d1cab1ccf3d93b331",
+  "authorization_amendment": 35,
+  "frozen_dependencies": {
+    "live_authorization_manifest_sha256": "ffd79a1d497707a75c3352448dbbf42d4e61186f58f92276b19ac021a874adee",
+    "metadata_resolution_queue_manifest_sha256": "e6e674bb1d8cd132bb06c34a1a4d7751e7caa630bde83b3f47b09ad7d119bdfc"
+  },
+  "implementation_files_sha256": {
+    "metadata_resolution_transport_archive.py": "32c634ff2180bf3c1b79128388b8c876236f5c311ba72e615043205fdaf38b19",
+    "retrieve_metadata_resolution_queue.py": "e224ddf85c58b3cd3f3527c786bd004423d5c315a064abfc1b2c1cbeb66afb27",
+    "test_metadata_resolution_transport.py": "fdd970542a289ff075cb023dbaa33aa10cefea5012c0171f6533382ab864fb54",
+    "test_metadata_resolution_transport_archive.py": "89c618cb882f8f7a58adbf1f5192aa1e86b7d0f3f1b5bc59b0a4a668d7c31c9f"
+  },
+  "interpretation": {
+    "first_network_execution_authorized_only_through_archive_runner": true,
+    "scientific_evidence_plan_changed": false,
+    "screening_rules_changed": false,
+    "source_capability_alone_authorizes_network": false,
+    "source_is_live_capable": true,
+    "transport_design_changed": false
+  },
+  "live_authorization_commit": "6704d2f0ce4340557981882eea34eb9c42bc2249",
+  "live_state": {
+    "LIVE_EXECUTION_ENABLED": true,
+    "execute_live_cli_flag_still_required": true,
+    "explicit_network_authorization_still_required": true,
+    "production_archive_present": false,
+    "production_requests_made": false,
+    "valid_NCBI_EMAIL_still_required": true
+  },
+  "logical_lookup_count": 1731,
+  "offline_validation": {
+    "complete_current_stack_passed": true,
+    "historical_experiment_07_regressions_passed": true,
+    "live_network_requests_made": false,
+    "missing_ncbi_email_fails_closed": true,
+    "missing_network_authorization_fails_closed": true,
+    "runner_preflight_failure_creates_no_archive": true,
+    "scientific_screening_performed": false,
+    "tests_ran_without_real_contact_environment": true,
+    "tests_ran_without_real_network_authorization_environment": true,
+    "tests_ran_without_real_provider_credentials": true,
+    "valid_authorization_helper_passes_without_io": true
+  },
+  "repository_commit_before_enablement_freeze": "6704d2f0ce4340557981882eea34eb9c42bc2249",
+  "status": "FROZEN_LIVE_CAPABLE_PRE_FIRST_NETWORK_EXECUTION"
+}

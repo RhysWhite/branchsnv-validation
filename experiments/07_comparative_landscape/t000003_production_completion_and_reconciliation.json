@@ -1,0 +1,87 @@
+{
+  "authorization_commit": "9be448af913a3ebfd83a56c65a66166f9c143989",
+  "authorization_sha256": "8efd0d4311f3fe6c519ce9721df62c5fccce93aab82eb53dec272c65bd248386",
+  "checkpoint": {
+    "appender_published": true,
+    "status": "COMPLETE",
+    "transaction_timestamp_utc": "2026-09-25T12:09:39Z"
+  },
+  "completion_freeze_recovery": {
+    "initial_failure": "completion-freeze wrapper requested transaction_timestamp_utc from the top-level checkpoint receipt although the checkpoint stores it in appender_receipt",
+    "production_ledger_mutated_during_recovery": false,
+    "production_transaction_affected": false,
+    "recovery_basis": "nested appender_receipt transaction timestamp verified byte-for-value against committed authorization",
+    "required": true
+  },
+  "decisions": {
+    "excluded_positions": [
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "exclusion_reason": "application_only_no_reusable_method",
+    "position_5_candidate_method_flag": true,
+    "retained_for_method_assessment_positions": [
+      5
+    ]
+  },
+  "derived_state_counts": {
+    "awaiting_source_escalation": 2,
+    "blocked_metadata": 484,
+    "complete": 9,
+    "ready": 94611
+  },
+  "event_count_after": 19,
+  "event_count_before": 11,
+  "first_new_event_id": "E000000012",
+  "last_new_event_id": "E000000019",
+  "new_event_count": 8,
+  "next_gate": "RESOLVE_POSITIONS_10_11_AND_METHOD_ASSESS_POSITION_5",
+  "post_ledger_sha256": "a1303b93bd70c2106582f2a5a8749fcdfd649c18ff31fc6c3712cce8dc2f54fe",
+  "pre_ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+  "proposal_sha256": "ebc3efe4aa43cdeee2d727a440e3ddf7919df5ca4ea4103c13027e69b6319593",
+  "receipt_sha256": "275ab0a5e700c0951deec71816c2a44afae492d591e298eb1f72fb6c7db73ecd",
+  "remaining_workstreams": [
+    "authoritative_source_resolution_positions_10_11",
+    "method_level_assessment_position_5"
+  ],
+  "safety": {
+    "checkpoint_complete": true,
+    "further_live_event_authority_created": false,
+    "one_use_authorization_consumed": true,
+    "staging_absent": true,
+    "stale_sha_replay_rejected": true,
+    "strict_prefix_extension": true
+  },
+  "schema_version": 1,
+  "status": "COMPLETE_RECONCILED",
+  "superseded_event_ids": [
+    "E000000002",
+    "E000000003",
+    "E000000004",
+    "E000000005",
+    "E000000006",
+    "E000000007",
+    "E000000008",
+    "E000000009"
+  ],
+  "transaction_id": "T000003",
+  "transaction_timestamp_utc": "2026-09-25T12:09:39Z",
+  "unresolved_positions": {
+    "current_event_ids": [
+      "E000000010",
+      "E000000011"
+    ],
+    "duplicate_or_version_relationship_inferred": false,
+    "positions": [
+      10,
+      11
+    ],
+    "state": "awaiting_source_escalation",
+    "terminal_decision_present": false
+  }
+}

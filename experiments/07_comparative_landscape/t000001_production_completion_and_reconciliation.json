@@ -1,0 +1,96 @@
+{
+  "additional_live_event_authority": false,
+  "authorization": {
+    "bytes": 2132,
+    "commit": "6a09448946a21f49d554e05382f5e9cf4e97e230",
+    "consumed": true,
+    "one_use": true,
+    "operator_id": "Rhys",
+    "operator_type": "human_with_assistance",
+    "positions_2_to_500_authorized": false,
+    "sha256": "b316feae227a6a5917fa77d64a0a72887931702ca3bb08ea85173ba7c8584e5d"
+  },
+  "derived_state_after_transaction": {
+    "awaiting_source_escalation": 0,
+    "blocked_metadata": 484,
+    "complete": 1,
+    "ready": 94621
+  },
+  "event_id": "E000000001",
+  "ledger_transition": {
+    "direct_path_checksum_frozen": false,
+    "post_bytes": 1288,
+    "post_event_count": 1,
+    "post_sha256": "33b49116d126f45cb54354b121eb69eb0abb212738794fef524a667ee0b2f2ba",
+    "pre_event_count": 0,
+    "pre_sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+    "reason_not_directly_checksummed": "append_only_future_mutable_production_ledger",
+    "strict_prefix_extension": true,
+    "transaction_timestamp_utc": "2026-09-25T07:08:47Z"
+  },
+  "next_gate": "DESIGN_CONTROLLED_B000001_POST_CANARY_CONTINUATION_AUTHORIZATION",
+  "proposal": {
+    "bytes": 1003,
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000001/proposal.tsv",
+    "rows": 1,
+    "sha256": "a4f262c77d1a469996c388916febd465f4ee107f25be4598afcdd82a0148891b"
+  },
+  "receipt": {
+    "bytes": 1706,
+    "checkpoint_status": "COMPLETE",
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000001/receipt.json",
+    "post_publication_validation_passed": true,
+    "published": true,
+    "sha256": "adc7b410a08d29ff3141300a3e40ee3f4ced3dbf9bcbe9967ac5513b1ef51733"
+  },
+  "reconciliation": {
+    "authorization_checkpoint_byte_identical": true,
+    "checkpoint_artifact_count": 3,
+    "frozen_guard_post_state_valid": true,
+    "post_replay_ledger_unchanged": true,
+    "proposal_matches_ledger_event": true,
+    "receipt_matches_ledger_transition": true,
+    "replay_rejected": true,
+    "review_packet_matches_proposal": true
+  },
+  "review_packet_at_transaction": {
+    "bytes": 306073,
+    "direct_path_checksum_frozen": false,
+    "path": "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000001/review_packet.tsv",
+    "position_1_decided": true,
+    "positions_2_to_500_decided": false,
+    "reason_not_directly_checksummed": "future_mutable_working_review_artifact",
+    "rows": 500,
+    "sha256": "bbaa8eeed4b60fa310434819dcf67ecf540d25112634818690bdb37cf5e0e286"
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "B000001_source_escalation_events": 0,
+    "B000001_terminal_exclusions": 1,
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "positions_2_to_500_authorized": false,
+    "positions_2_to_500_decided": false,
+    "production_events": 1,
+    "retained_candidate_method_decisions": 0,
+    "role_assignments": 0,
+    "wave1_promotions": 0
+  },
+  "scientific_event": {
+    "baseline_row_sha256": "bb8ef2c1e0fd980a70884709d3085b8e44b5b425500d390ae943f638f1d08048",
+    "candidate_method_flag": "false",
+    "event_type": "record_decision",
+    "evidence_basis": "Primary publication reports a cross-sectional web-based survey of skin self-examination and clinical skin-examination behaviour in 8,178 adults, analysing melanoma history, skin characteristics and psychosocial correlates. It does not describe or implement analysis of sequence, SNP, genotype or phylogenetic data and does not provide a relevant reusable analytical implementation.",
+    "evidence_escalation_status": "",
+    "evidence_source_locator": "PMID:22801744; DOI:10.1001/archdermatol.2012.1817; PMCID:PMC4965805",
+    "exclusion_reason_code": "unrelated_variant_or_data_type",
+    "notes": "Human-reviewed with assistance; primary publication record supports terminal exclusion as unrelated to the defined sequence/phylogenetic analytical landscape.",
+    "operator_id": "Rhys",
+    "operator_type": "human_with_assistance",
+    "record_decision": "exclude",
+    "screening_entity_id": "publication_component:citation:publication:doi:10.1001/archdermatol.2012.1817"
+  },
+  "scientific_screening_started": true,
+  "status": "FROZEN_POST_CANARY_COMPLETION",
+  "transaction_id": "T000001"
+}

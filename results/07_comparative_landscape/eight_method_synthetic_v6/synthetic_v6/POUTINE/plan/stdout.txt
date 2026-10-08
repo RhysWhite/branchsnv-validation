@@ -1,0 +1,25 @@
+
+Starting poutine session: 2026-October-08 Thursday 07h:58m:42s GMT
+
+Warning: # replicates has been set to a potentially low value of 10. Please consider a higher value (the default is 100000 replicates).
+
+Executing ancestral reconstruction . . . reconstruction complete.
+
+Constructing internal data structures for tree, segregating sites, phenotypes . . . structures complete.
+
+Counting all homoplasy events . . . homoplasy identification complete.
+
+Starting resampling . . . 
+New thread pool created.  Status: [Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0]
+replicate: 10     (time elapsed since start of resampling: 0h 00m 00s)
+All replicates processed, thread pool is shutting down.  Status: [Shutting down, pool size = 1, active threads = 0, queued tasks = 0, completed tasks = 10]
+Resampling complete.
+
+Calculating point-wise estimates . . . point-wise estimates complete.
+Calculating family-wise estimates . . . family-wise estimates complete.
+
+Writing results to file . . . writing complete.
+
+Ending poutine session: 2026-October-08 Thursday 07h:58m:44s GMT
+Wall clock time elapsed = 0h 00m 01s
+CLEAN EXIT

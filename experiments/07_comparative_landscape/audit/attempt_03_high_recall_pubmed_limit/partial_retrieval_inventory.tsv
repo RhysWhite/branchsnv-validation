@@ -1,0 +1,14 @@
+source	query_id	file_count
+biotools	HR01	1
+biotools	HR02	1
+biotools	HR03	2
+biotools	HR04	1
+openalex	HR01	151
+openalex	HR02	48
+openalex	HR03	120
+openalex	HR04	86
+pubmed	HR01	46
+pubmed	HR02	10
+pubmed	HR03	49
+pubmed	HR04	15
+pubmed	HR05	1

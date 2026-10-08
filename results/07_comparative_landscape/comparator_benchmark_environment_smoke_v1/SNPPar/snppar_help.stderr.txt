@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2/bin/snppar", line 3, in <module>
+    from snppar import main
+  File "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2/bin/snppar.py", line 38, in <module>
+    from Bio.Alphabet import IUPAC, generic_dna
+  File "/home/rwhite/.local/lib/python3.10/site-packages/Bio/Alphabet/__init__.py", line 20, in <module>
+    raise ImportError(
+ImportError: Bio.Alphabet has been removed from Biopython. In many cases, the alphabet can simply be ignored and removed from scripts. In a few cases, you may need to specify the ``molecule_type`` as an annotation on a SeqRecord for your script to work correctly. Please see https://biopython.org/wiki/Alphabet for more information.

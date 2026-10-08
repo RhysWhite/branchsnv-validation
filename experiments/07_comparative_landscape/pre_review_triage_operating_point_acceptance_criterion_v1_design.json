@@ -1,0 +1,34 @@
+{
+  "authority": {
+    "automatic_scientific_exclusion": false,
+    "blind_validation_content_use": false,
+    "future_scoring": false,
+    "production_mutation": false
+  },
+  "bound_prior_freeze_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_acceptance_criterion_provenance_v1.sha256": "cd66bca99939828362881be3ed07b3ee909cc4113349ecd484e65fbdee03e68e",
+    "experiments/07_comparative_landscape/pre_review_triage_operating_point_curves_v1.sha256": "c15f3ae564b99805f3a172d8a70fafff1d6da282a30523302e62715eafda396d"
+  },
+  "criterion": {
+    "comparison": "greater_than_or_equal",
+    "development_batches": 9,
+    "metric": "minimum_batch_recall",
+    "minimum_required": 0.95,
+    "selection_rule": "smallest_exact_candidate_review_fraction_meeting_minimum_batch_recall_at_least_0_95"
+  },
+  "freeze_parent_commit": "8e8ed29fb0e96103ba265001e233fb6d53ead760",
+  "next_gate": "SELECT_SMALLEST_QUALIFYING_FROZEN_REVIEW_FRACTION",
+  "provenance": {
+    "criterion_existed_upstream": false,
+    "defined_after_curve_generation": true,
+    "defined_before_curve_query": true,
+    "derived_from_preferred_curve_location": false,
+    "intended_use": "high_recall_pre_review_prioritisation"
+  },
+  "schema_version": 1,
+  "selection_state": {
+    "curve_queried": false,
+    "operating_point_selected": false
+  },
+  "status": "FROZEN_ACCEPTANCE_CRITERION_PRE_OPERATING_POINT_SELECTION"
+}

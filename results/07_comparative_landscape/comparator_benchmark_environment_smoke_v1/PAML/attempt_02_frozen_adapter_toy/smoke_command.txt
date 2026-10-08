@@ -1,0 +1,2 @@
+cd /home/rwhite/github/branchsnv-validation-exp07-finalize/results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/PAML/attempt_02_frozen_adapter_toy/run
+/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml baseml.ctl

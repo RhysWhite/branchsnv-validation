@@ -1,0 +1,61 @@
+{
+  "amendment_id": "PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1_DESIGN_AMENDMENT_001",
+  "amendment_parent_commit": "560615fb8ab8549b69ea76d4b92c9efc69ac9ed8",
+  "next_gate": "FREEZE_TESTED_PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1_IMPLEMENTATION",
+  "normative_production_bridge_contract": {
+    "additional_nontriage_positions_may_require_human_review": true,
+    "cross_batch_transaction_authorized": false,
+    "direct_triage_packet_to_production_proposal_projection_authorized": false,
+    "existing_B_membership_remains_authoritative": true,
+    "later_bridge_must_conform_to_then_applicable_separately_frozen_production_contract": true,
+    "later_bridge_must_use_explicit_reviewed_decisions_only": true,
+    "production_transaction_shape_is_deferred_to_later_gate": true,
+    "review_protocol_authorizes_live_production": false,
+    "review_protocol_authorizes_transaction_shape": false,
+    "scientific_review_approval_is_live_production_authorization": false,
+    "unreviewed_nontriage_positions_may_be_inferred": false
+  },
+  "original_design": {
+    "design_checksum_manifest_sha256": "79826c189788ac838175cfd45f76ba54d4f1625cb2dd20c39466a02b9e95ae08",
+    "design_json_sha256": "469a847ae5cfe742b04ad772f3355f178eccc703e95492db3206e979eeb50f5c",
+    "design_md_sha256": "c50944bc6b3bd2a58bb7a6b72b6cae7eb37e0597a18697bef7333b5e06826009",
+    "original_files_rewritten": false
+  },
+  "production_contract_evidence": {
+    "baseline_scientific_screening_tranche_guard_v3_sha256": "469273c1d2ed9f5ca7ca01efb636b5a045b7e785de6812814780f1c3d73a5aec",
+    "campaign_orchestration_v4_design_checksum_manifest_sha256": "24514c2c5acb3c85daed0556f54a83dad92b694ef4ccdd998efde035b9ee3652"
+  },
+  "purpose": "Clarify that the human-review protocol does not itself authorize or determine a future production transaction shape.",
+  "review_distribution_evidence": {
+    "contiguous_triage_subsets": 3,
+    "existing_B_batches": 155,
+    "full_500_future_only_batches": 0,
+    "noncontiguous_triage_subsets": 152,
+    "review_rows": 12156,
+    "review_work_membership_sha256": "d266a30e601d2609d3f845451e9161ac7e9e5d942137738c124438671f0ee728"
+  },
+  "review_protocol_effect": {
+    "approval_semantics_changed": false,
+    "packet_order_changed": false,
+    "packet_schema_changed": false,
+    "production_projection_implemented": false,
+    "review_universe_changed": false,
+    "scientific_event_semantics_changed": false
+  },
+  "schema_version": 1,
+  "scientific_effect": {
+    "carry_forward_reassessment_performed": false,
+    "live_event_authorization_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "production_proposal_generated": false,
+    "review_packet_approved": false,
+    "scientific_decision_made": false
+  },
+  "status": "FROZEN_DESIGN_AMENDMENT_001",
+  "superseded_interpretations": {
+    "later_bridge_must_satisfy_current_contiguous_transaction_contract": "Superseded as a universal statement. A later production bridge must instead satisfy the then-applicable separately frozen production contract.",
+    "one_production_transaction_per_existing_batch_or_valid_contiguous_tranche": "Superseded as a generally authorized transaction shape. This review protocol does not decide whether a later transaction is full-batch, contiguous-tranche, or another shape permitted by a separately frozen production contract."
+  },
+  "terminology_amendment_checksum_manifest_sha256": "0063552d35fe2fe50f99b5a880befcc08247a4a145cd9e576d927e795ef1e8fb"
+}

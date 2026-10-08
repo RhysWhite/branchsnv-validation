@@ -1,0 +1,213 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HARNESS_IMPLEMENTATION_001",
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_harness.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_harness_validation.py",
+    "experiments/07_comparative_landscape/COMPARATOR_BENCHMARK_EXECUTION_V1_HARNESS_IMPLEMENTATION.md"
+  ],
+  "canonical_input_root": "results/07_comparative_landscape/comparator_benchmark_dataset_v1/inputs",
+  "canonical_result_root": "results/07_comparative_landscape/comparator_benchmark_execution_v1",
+  "explicitly_not_authorized": {
+    "adapter_mutation": true,
+    "automatic_comparator_rerun": true,
+    "benchmark_scoring": true,
+    "benchmark_truth_access": true,
+    "canonical_benchmark_execution": true,
+    "canonical_result_root_creation": true,
+    "comparator_parameter_change": true,
+    "comparator_version_change": true,
+    "environment_recipe_mutation": true,
+    "generator_mutation": true,
+    "method_matrix_mutation": true,
+    "metric_mutation": true,
+    "production_bridge": true,
+    "runner_mutation": true,
+    "scenario_matrix_mutation": true,
+    "source_pin_mutation": true,
+    "third_party_comparator_execution": true
+  },
+  "failure_contract": {
+    "automatic_comparator_rerun": false,
+    "comparator_failure": "record explicit frozen-runner failure and continue",
+    "failed_run_becomes_zero_accuracy": false,
+    "harness_or_identity_failure": "stop immediately"
+  },
+  "frozen_artifacts": {
+    "adapters_sha256": "5c4e8d95fa104882952116e35c060df0f6bff87547fc9cae7c838b7247eaa49d",
+    "benchmark_design_sha256": "1306af08f69d27a80990203bd7d803d2c907a1cdeb56bfd2fe0174bf4a416cde",
+    "dataset_generation_results_design_sha256": "3d364079e25065a55410e471f0f2378696c06ac3772afc8ff9dc86c1f1392ae5",
+    "dataset_generation_results_ledger_sha256": "9a40075006a32d7e46d97d5b90045b307bf53f829ede30e41edc8e4472327ca3",
+    "environment_recipes_sha256": "957ab67424610c774d2d863ef2e0ab0797cff715221232547dfcd49c53b58668",
+    "generator_sha256": "229ed49c541023d6d439967ca184dd82430a4b3592d42657131fac08c9f3f560",
+    "method_matrix_sha256": "2f38fb573597ce70b612b9ac72e29c4bcf84f331a158d645df55457d4f55822b",
+    "runner_implementation_sha256": "59d8c0aa7f0a519f075817ca9103d1df47fcde4f52868598a3dcd76cb6677955",
+    "runner_sha256": "63a5e45a4082a5709e385e57f3af389769bc4520b5e2a4310bb20fb86e964a33",
+    "runner_validation_sha256": "47a53181b07575eebc8ff42e726c2c210d6500c27ee2f58cb8a6e6039b2f3f15",
+    "scenario_matrix_sha256": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+    "source_pins_sha256": "b1f5d81a33ac407e9cdf3d15dfa6bcd6e45c676808e3f5232bab9d9c1dcf1365"
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_COMPARATOR_BENCHMARK_EXECUTION_HARNESS_V1",
+  "one_time_harness_implementation_authorization": true,
+  "parent_commit": "f4417aed9cafd39c8a0d8c206f61f719b64a4a65",
+  "reason": "The frozen reusable runner has no batch CLI. A small truth-blind orchestration layer is required to execute the frozen 150-scenario by eight-method matrix under canonical network isolation while recording execution provenance and peak RSS.",
+  "requirements": [
+    "Create exactly the three authorized harness artifacts.",
+    "Do not modify the frozen runner or any existing scientific implementation artifact.",
+    "Harness implementation validation must use temporary synthetic inputs only.",
+    "Do not execute any third-party comparator during harness implementation or validation.",
+    "Do not execute any canonical S001-S150 scenario during harness implementation or validation.",
+    "Do not read or traverse benchmark truth.",
+    "Import frozen generator.scenario_seed rather than reimplementing seed derivation.",
+    "Call the frozen runner APIs rather than reimplementing comparator command construction or normalization.",
+    "Use exactly eight methods and exact frozen scenario order.",
+    "Future canonical execution must be serial and deterministic.",
+    "Use one fresh worker process for every method/scenario invocation.",
+    "Use only the exact runtime identities and source revisions recorded by this authorization.",
+    "Future canonical execution must occur under bubblewrap with the host filesystem read-only, the designated result root writable, a private /tmp, and an unshared network.",
+    "Record invocation-specific peak RSS from the fresh worker.",
+    "Preserve frozen runner command metadata, stdout, stderr, native outputs, failure state and normalized predictions.",
+    "Comparator completion failures remain failures and are never converted to zero-accuracy predictions.",
+    "Do not automatically rerun comparator failures.",
+    "Harness or frozen-identity failures fail closed.",
+    "No benchmark truth may enter command construction, execution, normalization or the prediction ledger.",
+    "No scoring or metric calculation is permitted.",
+    "Canonical execution remains separately gated after harness implementation is frozen."
+  ],
+  "rerun_authorized": false,
+  "resource_contract": {
+    "fresh_worker_per_invocation": true,
+    "peak_rss_source": "resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss",
+    "peak_rss_unit": "KiB on canonical Linux host",
+    "timeout_seconds_per_invocation": 86400
+  },
+  "runtime_config": {
+    "ARPIP": {
+      "executable": "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP"
+    },
+    "FastML": {
+      "executable": "/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml/fastml"
+    },
+    "HomoplasyFinder": {
+      "jar": "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+      "java": "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java"
+    },
+    "PAML": {
+      "executable": "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml"
+    },
+    "POUTINE": {
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke",
+      "script": "/home/rwhite/branchsnv-comparator-src/poutine-smoke/poutine.sh"
+    },
+    "PastML": {
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51",
+      "executable": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml"
+    },
+    "SNPPar": {
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38",
+      "executable": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar"
+    },
+    "TreeTime": {
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1",
+      "executable": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1/bin/treetime"
+    }
+  },
+  "runtime_files": {
+    "ARPIP_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP",
+      "sha256": "7e1ecc859ac862be9de5e31d71991d483f73840143fdae7ba367ae7d9fc62502"
+    },
+    "FastML_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml/fastml",
+      "sha256": "f5b7acaaabb77b9c39c6dcde5b602b019c60d1a1d569acd3e9450f72f6b9bee6"
+    },
+    "HomoplasyFinder_jar": {
+      "path": "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+      "sha256": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b"
+    },
+    "HomoplasyFinder_java": {
+      "path": "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+      "sha256": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96"
+    },
+    "PAML_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml",
+      "sha256": "bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e"
+    },
+    "POUTINE_java": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke/bin/java",
+      "sha256": "9966bf6337aec59196f96f95cf5acd509139688bbe8cf1b81aad112ffca4aaf2"
+    },
+    "POUTINE_script": {
+      "path": "/home/rwhite/branchsnv-comparator-src/poutine-smoke/poutine.sh",
+      "sha256": "a1b0991e4ad87bc6e4b3275b8c59d7636112172a2b8ac72322fd205ca2dc354c"
+    },
+    "POUTINE_treetime": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke/bin/treetime",
+      "sha256": "6f6b0757772d89b897af9562a8ea85e8f39c0761f329b008c8d53d31b53aa3f2"
+    },
+    "PastML_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml",
+      "sha256": "57334fb47075a1b916f901af2ca6df3a8a98aacd8a80a335307dc4a86c1ad3e1"
+    },
+    "SNPPar_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+      "sha256": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c"
+    },
+    "TreeTime_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1/bin/treetime",
+      "sha256": "52dec5fdf74b7d17215ea5124ff5fd89199864d260cc1fcc8ba743825e348abb"
+    },
+    "bubblewrap": {
+      "path": "/usr/bin/bwrap",
+      "sha256": "eb767688b8224d8d3dbe1f8cb30ac3dff9ae8b02ff0452eaec9f94874d4e0011"
+    },
+    "python": {
+      "path": "/opt/admin/bioinf/miniforge/24.3.0-0/bin/python3.10",
+      "sha256": "0f26ba0f808081e7dc60c26e3e13ac00665e4d9076282de29f053f2a8f8ba4ee"
+    }
+  },
+  "sandbox_contract": {
+    "host_root_read_only": true,
+    "network_disabled": true,
+    "only_designated_result_root_writable": true,
+    "private_tmp": true,
+    "required_arguments": [
+      "--ro-bind / /",
+      "--bind RESULT_ROOT RESULT_ROOT",
+      "--tmpfs /tmp",
+      "--dev /dev",
+      "--proc /proc",
+      "--unshare-net",
+      "--die-with-parent"
+    ],
+    "tool": "/usr/bin/bwrap"
+  },
+  "scenario_contract": {
+    "master_seed": 20261005012417,
+    "method_order": [
+      "ARPIP",
+      "FastML",
+      "HomoplasyFinder",
+      "PAML",
+      "PastML",
+      "POUTINE",
+      "SNPPar",
+      "TreeTime"
+    ],
+    "scenario_count": 150,
+    "scenario_order": "exact row order of comparator_benchmark_execution_v1_scenario_matrix.tsv",
+    "scenario_seed_source": "frozen generator.scenario_seed",
+    "total_invocations": 1200
+  },
+  "source_commits": {
+    "ARPIP": "ee32c10b49407728b1ab00b5f98f792ca6dc2e1a",
+    "FastML": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "HomoplasyFinder": "faed16f2ff1602a2a939663a942e0b8640b9bc50",
+    "PAML": "4c7902fe972737ef5e80bb18f159a6e6acace3d3",
+    "POUTINE": "8faeeb243a0f3ddc6f8274c81ce5ee79e8845f7d",
+    "PastML": "1654471801c8104b51ac45eda625c289d8e3f1ac",
+    "SNPPar": "0386df8edcff26faf242bc268c5f8865b09c9de9",
+    "TreeTime": "17da461f9299706b99a90e622183772f00c5076d"
+  },
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_gate": "FREEZE_COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_BEFORE_EXECUTION"
+}

@@ -1,0 +1,8 @@
+#NEXUS
+Begin Taxa;
+ Dimensions NTax=4;
+ TaxLabels tipA tipB tipC tipD;
+End;
+Begin Trees;
+ Tree tree1=((tipA:0.1000000[&mutations="A200T"],tipB:0.1000000)NODE_0000001:0.1000000[&mutations="A40T"],(tipC:0.1000000[&mutations="A200T"],tipD:0.1000000)NODE_0000002:0.1000000)NODE_0000000:0.0010000;
+End;

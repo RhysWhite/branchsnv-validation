@@ -1,0 +1,55 @@
+{
+  "amendment_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HARNESS_TIMEOUT_AMENDMENT_001",
+  "status": "APPROVED_FOR_IMPLEMENTATION_NOT_EXECUTION",
+  "authorization_parent_commit": "6dd22db80ea0f34fad868d196e65b3847749e403",
+  "original_authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_HARNESS_IMPLEMENTATION_001",
+  "original_authorization_sha256": "934bf529136b34b5d39c1f22816aed19dedcd4b4c1aeddd34d1341e54e752cb5",
+  "frozen_execution_design_sha256": "1306af08f69d27a80990203bd7d803d2c907a1cdeb56bfd2fe0174bf4a416cde",
+  "frozen_scenario_matrix_sha256": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+  "superseded_clause": {
+    "field": "resource_contract.timeout_seconds_per_invocation",
+    "original_value": 86400,
+    "reason": "The fixed 86400-second timeout has no basis in the frozen pre-harness execution design."
+  },
+  "effective_policy": {
+    "core_timeout_seconds": 3600,
+    "scale_timeout_seconds": 14400,
+    "core_tip_counts": [32, 128],
+    "scale_tip_counts": [512],
+    "classification_status": "NEWLY_APPROVED_INTERPRETATION",
+    "classification_approval": "Explicit user approval in the BRANCHSNV project conversation",
+    "selection_source": "tip_count column in the frozen scenario matrix",
+    "applicability": "All eight frozen comparator methods for each scenario"
+  },
+  "scenario_groups": {
+    "S001-S050": {
+      "tip_count": 32,
+      "class": "core",
+      "timeout_seconds": 3600
+    },
+    "S051-S100": {
+      "tip_count": 128,
+      "class": "core",
+      "timeout_seconds": 3600
+    },
+    "S101-S150": {
+      "tip_count": 512,
+      "class": "scale",
+      "timeout_seconds": 14400
+    }
+  },
+  "amendment_scope": {
+    "supersedes_only_original_timeout_clause": true,
+    "original_authorization_must_remain_unchanged": true,
+    "frozen_design_must_remain_unchanged": true,
+    "frozen_runner_must_remain_unchanged": true,
+    "frozen_scenario_matrix_must_remain_unchanged": true,
+    "harness_implementation_only": true,
+    "canonical_execution_authorized": false,
+    "third_party_comparator_execution_authorized": false,
+    "benchmark_truth_access_authorized": false,
+    "scoring_authorized": false,
+    "automatic_comparator_rerun_authorized": false
+  },
+  "next_gate": "APPLY_APPROVED_TIMEOUT_POLICY_AND_FREEZE_COMPARATOR_BENCHMARK_EXECUTION_HARNESS_V1"
+}

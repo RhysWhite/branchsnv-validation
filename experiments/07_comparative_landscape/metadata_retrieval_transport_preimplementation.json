@@ -1,0 +1,92 @@
+{
+  "completion_contract": {
+    "accepted_terminal_statuses": [
+      "not_found",
+      "success"
+    ],
+    "authentication_failure_blocks_complete": true,
+    "component_merge_permitted": false,
+    "partial_retrieval_can_be_complete": false,
+    "pending_lookup_blocks_complete": true,
+    "required_logical_lookup_count": 1731,
+    "response_integrity_failure_blocks_complete": true,
+    "retry_exhaustion_blocks_complete": true,
+    "scientific_screening_permitted": false
+  },
+  "explicit_redirect_statuses": [
+    301,
+    302,
+    303,
+    307,
+    308
+  ],
+  "frozen_queue_dependency": {
+    "commit": "63869a032b53009755d6bde000ded71406da304f",
+    "logical_lookup_count": 1731,
+    "logical_lookup_manifest_sha256": "7d4873f463315e98a3d5fd14358c015eeca65ad7f08fe74af906a90bbb928e1f",
+    "provider_counts": {
+      "openalex": 1169,
+      "opencitations_meta": 495,
+      "pubmed": 67
+    },
+    "queue_baseline_sha256": "1937f30fee71affe2d300b993f53e9e5f9a0327a6387a502f8030cd2f730dd03",
+    "route_counts": {
+      "openalex|work_by_doi": 115,
+      "openalex|work_by_openalex_id": 987,
+      "openalex|work_by_pmid": 67,
+      "opencitations_meta|metadata_by_doi": 115,
+      "opencitations_meta|metadata_by_omid": 380,
+      "pubmed|record_by_pmid": 67
+    }
+  },
+  "interpretation": {
+    "no_batching_is_a_provenance_choice_not_optimality_claim": true,
+    "planned_primary_operations_are_not_final_http_exchange_count": true,
+    "transport_does_not_reconcile_identity": true,
+    "transport_values_are_operational_not_scientific_thresholds": true
+  },
+  "provider_contract_snapshot_date": "2026-09-24",
+  "repository_commit_before_transport_design_freeze": "63869a032b53009755d6bde000ded71406da304f",
+  "retry_delay_seconds_after_attempt": {
+    "1": 1,
+    "2": 2,
+    "3": 4,
+    "4": 8
+  },
+  "retryable_http_statuses": [
+    408,
+    425,
+    429,
+    500,
+    502,
+    503,
+    504
+  ],
+  "status": "FROZEN_PRE_IMPLEMENTATION_METADATA_TRANSPORT",
+  "transport_design": {
+    "authorization_persisted": false,
+    "batching_enabled": false,
+    "logical_lookups_per_primary_operation": 1,
+    "maximum_redirect_hops": 5,
+    "maximum_request_initiation_rate_per_provider_per_second": 2,
+    "maximum_transport_attempts_per_lookup": 5,
+    "ncbi_api_key_used": false,
+    "negative_exact_results_terminal": true,
+    "openalex_api_key_required": false,
+    "openalex_automatic_redirect_following": false,
+    "opencitations_access_token_required": false,
+    "planned_openalex_primary_operations": 1169,
+    "planned_opencitations_primary_operations": 495,
+    "planned_primary_provider_operations": 1731,
+    "planned_pubmed_primary_operations": 67,
+    "raw_response_bytes_required": true
+  },
+  "validation": {
+    "frozen_queue_modified": false,
+    "live_metadata_requests_made": false,
+    "network_capable_transport_code_written": false,
+    "provider_responses_accepted": false,
+    "retrieval_result_directory_created": false,
+    "scientific_screening_performed": false
+  }
+}

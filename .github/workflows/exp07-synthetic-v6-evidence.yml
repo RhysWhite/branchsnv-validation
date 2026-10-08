@@ -1,0 +1,25 @@
+name: Experiment 07 synthetic-v6 evidence integrity
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify-synthetic-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Compile evidence sources and verifier
+        run: |
+          python -m py_compile \
+            experiments/07_comparative_landscape/synthetic_execution_v6/verify.py \
+            experiments/07_comparative_landscape/synthetic_execution_v6/test_verify.py \
+            experiments/07_comparative_landscape/synthetic_execution_v6/source/branchsnv_exp07_eight_method_synthetic_gate_v6.py \
+            experiments/07_comparative_landscape/synthetic_execution_v6/source/branchsnv_exp07_eight_method_v6_local_tests.py
+      - name: Independently verify synthetic execution evidence (offline; no comparators)
+        run: python experiments/07_comparative_landscape/synthetic_execution_v6/verify.py
+      - name: Negative integrity/tamper tests (offline; no comparators)
+        run: python experiments/07_comparative_landscape/synthetic_execution_v6/test_verify.py

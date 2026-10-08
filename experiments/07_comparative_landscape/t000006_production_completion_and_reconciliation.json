@@ -1,0 +1,83 @@
+{
+  "authorization": {
+    "commit": "2b6b0fcbc1b7af1dc27ad9c2683a37abd2a82a84",
+    "human_authorization_text": "AUTHORIZE T000006",
+    "human_execution_text": "EXECUTE T000006",
+    "one_use": true,
+    "sha256": "9f0b7e28e0741b04d1e78c557fa3c87050e73bc77b9559cc497a365e6a469961"
+  },
+  "batch_id": "B000001",
+  "checkpoint": {
+    "authorization_sha256": "9f0b7e28e0741b04d1e78c557fa3c87050e73bc77b9559cc497a365e6a469961",
+    "directory": "results/07_comparative_landscape/baseline_scientific_screening_event_receipts/T000006",
+    "exact_three_file_checkpoint": true,
+    "post_publication_validation_passed": true,
+    "proposal_sha256": "dde6ad0df9506c2c468ff933d72723fe5a0eb621ae16f944b5b07d54f6c36e6f",
+    "receipt_sha256": "febb3d981ab5eb295aab13100902189bd54ddb809cdef0f05af2c70f045af8d4",
+    "status": "COMPLETE"
+  },
+  "next_gate": "DEFINE_NEXT_POST_PILOT_SCREENING_TRANCHE_USING_FROZEN_GENERIC_GUARD",
+  "positions": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "production_transition": {
+    "first_event_id": "E000000023",
+    "last_event_id": "E000000047",
+    "new_event_count": 25,
+    "post_event_count": 47,
+    "post_ledger_sha256": "dd83022eff2d2b069b80a6db495c90991e823fad03ece61010484e6fa839525b",
+    "pre_event_count": 22,
+    "pre_ledger_sha256": "85eabc27f89cc215b75b4b48611e6131f8ef1f7e7d5a022b1229d1241bd960ac",
+    "strict_prefix_preserved": true
+  },
+  "reconciliation": {
+    "checkpoint_integrity_verified": true,
+    "decision_counts_verified": true,
+    "exact_event_ids_verified": true,
+    "full_ledger_validation_passed": true,
+    "original_22_event_ledger_is_exact_prefix": true,
+    "replay_state": "FINAL_CHECKPOINT_EXISTS",
+    "review_packet_integrity_verified": true
+  },
+  "review_state": {
+    "proposal_sha256": "dde6ad0df9506c2c468ff933d72723fe5a0eb621ae16f944b5b07d54f6c36e6f",
+    "review_packet_sha256": "d49d162191ba4737aeaecbf0934130a7a8816ad203504b2603a709ceec8a8b7a",
+    "review_packet_unchanged_by_execution": true
+  },
+  "schema_version": 1,
+  "scientific_outcomes": {
+    "awaiting_source_escalation_entities": 0,
+    "blocked_metadata_entities": 484,
+    "complete_baseline_entities": 36,
+    "exclude": 16,
+    "ready_baseline_entities": 94586,
+    "retain_for_method_assessment": 9,
+    "source_escalation": 0
+  },
+  "status": "T000006_PRODUCTION_COMPLETE_RECONCILED",
+  "transaction_id": "T000006"
+}

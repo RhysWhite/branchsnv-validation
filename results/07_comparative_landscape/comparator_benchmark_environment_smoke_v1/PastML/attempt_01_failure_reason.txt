@@ -1,0 +1,4 @@
+Attempt 01 failed before scientific execution because the toy annotation table
+was malformed during command transfer. The intended tab-delimited table
+contained zero tab bytes, so PastML detected no annotation columns. No PastML
+source, version, inference parameter, or adapter logic was changed in response.

@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "numpy": "1.26.4",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.12.0"
+  },
+  "platform": "Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "python_executable": "/home/rwhite/.conda/envs/branchsnv-triage-v1/bin/python",
+  "python_major_minor": "3.11",
+  "python_version": "3.11.16 (main, Sep  2 2026, 23:39:52) [GCC 15.3.0]"
+}

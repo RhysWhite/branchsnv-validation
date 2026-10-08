@@ -1,0 +1,22 @@
+-- Compilation will be performed with the following release of the software:
+	branch   
+	ref      ee32c10b49407728b1ab00b5f98f792ca6dc2e1a
+	time     07 Oct 2026 12:43:01
+	current   (latest version)
+CMake Error at CMakeLists.txt:165 (find_package):
+  By not providing "Findglog.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "glog", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "glog" (requested
+  version 0.5.0) with any of the following names:
+
+    glogConfig.cmake
+    glog-config.cmake
+
+  Add the installation prefix of "glog" to CMAKE_PREFIX_PATH or set
+  "glog_DIR" to a directory containing one of the above files.  If "glog"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+

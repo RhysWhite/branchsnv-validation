@@ -1,0 +1,54 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_TREETIME_HOMOPLASY_AMENDMENT_001",
+  "authorized_change": {
+    "reason": "The frozen TreeTime homoplasy CLI prints only the first n repeated mutation types, with n defaulting to 10, while the frozen benchmark endpoint is recurrent genomic sites and includes scenarios with 20 or 30 recurrent sites. The already-frozen TreeTime ancestral workflow uses the same joint maximum-likelihood ancestral reconstruction engine and exposes complete reconstructed branch changes without this top-n reporting limit.",
+    "requirements": [
+      "Do not use benchmark truth to derive or validate TreeTime calls.",
+      "Retain the frozen TreeTime ancestral reconstruction parameters and executable version.",
+      "Define a TreeTime recurrent-site call as a genomic position with at least two normalized reconstructed branch changes from the TreeTime ancestral output.",
+      "Set reported_recurrence_count_if_available to the number of normalized reconstructed branch changes at that position.",
+      "Count recurrence by genomic position regardless of whether repeated changes have identical or different ancestral/derived state pairs.",
+      "Do not treat TreeTime homoplasy stdout top-n reporting as the scored site call set.",
+      "Update the TreeTime environment/output contract to record that homoplasy scoring is derived from the frozen ancestral reconstruction output.",
+      "Add focused synthetic validation covering non-recurrent, parallel-like, convergent-like and reversal-like repeated branch events.",
+      "Do not execute any of the frozen 150 benchmark scenarios during implementation or validation."
+    ]
+  },
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/environment_recipes.json",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "baseline_sha256": {
+    "environment_recipes": "9a236919ac350dca7e2da48a1dd6aa4f1f15edfeaa7693a5207e33c5fe5b7b8a",
+    "adapters": "c4d351b041c68d9d1a142e3f532d353042374b416f5d03da29378a79672779e5",
+    "toy_validation": "7f087232c8beefbf6ca4351cd4e87d728a2b62838890275f60e8e26d9490f339"
+  },
+  "explicitly_not_authorized": {
+    "benchmark_execution": true,
+    "benchmark_dataset_mutation": true,
+    "benchmark_truth_access_for_implementation": true,
+    "comparator_version_change": true,
+    "metric_definition_change": true,
+    "scenario_definition_change": true,
+    "source_pin_change": true,
+    "treetime_ancestral_parameter_change": true,
+    "treetime_executable_change": true,
+    "other_comparator_change": true,
+    "other_parser_change": true,
+    "production_bridge": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_TREETIME_HOMOPLASY_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "089908a4cc12aa643de6594767d1206f5834f2af",
+  "rerun_authorized": false,
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "triggering_observation": {
+    "treetime_version": "0.12.1",
+    "homoplasy_cli_default_n": 10,
+    "maximum_frozen_recurrent_site_count_per_scenario": 30,
+    "frozen_endpoint": "recurrent genomic site",
+    "ancestral_and_homoplasy_reconstruction_equivalence": "Both use TreeAnc joint maximum-likelihood ancestral reconstruction under the frozen non-marginal settings; probabilistic and ml select the same joint reconstruction implementation.",
+    "observed_risk": "Scoring the homoplasy CLI stdout would truncate calls and reports repeated mutation types rather than the complete recurrent-site set."
+  }
+}

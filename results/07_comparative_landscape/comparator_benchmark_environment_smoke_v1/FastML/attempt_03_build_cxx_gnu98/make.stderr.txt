@@ -1,0 +1,526 @@
+bestAlpha.cpp: In constructor ‘bestAlphaAndBetaAndBBL::bestAlphaAndBetaAndBBL(tree&, const sequenceContainer&, stochasticProcess&, const Vdouble*, double, double, double, double, double, double, double, int, int)’:
+bestAlpha.cpp:371:10: warning: variable ‘oldA’ set but not used [-Wunused-but-set-variable]
+  MDOUBLE oldA=0;
+          ^~~~
+bestAlphaManyTrees.cpp: In function ‘void bestAlpha::optimizeAlphaNG_EM_PROP_n_alpha(tree&, std::vector<sequenceContainer>&, std::vector<stochasticProcess>&, const std::vector<std::vector<double>*>*, std::vector<double>&, double&, int, double)’:
+bestAlphaManyTrees.cpp:184:10: warning: variable ‘ax’ set but not used [-Wunused-but-set-variable]
+  MDOUBLE ax,bx,cx; // left, midle, right limit on alpha
+          ^~
+bestAlphaManyTrees.cpp:184:13: warning: variable ‘bx’ set but not used [-Wunused-but-set-variable]
+  MDOUBLE ax,bx,cx; // left, midle, right limit on alpha
+             ^~
+bestAlphaManyTrees.cpp:184:16: warning: variable ‘cx’ set but not used [-Wunused-but-set-variable]
+  MDOUBLE ax,bx,cx; // left, midle, right limit on alpha
+                ^~
+In file included from computeSubstitutionCounts.cpp:1:
+computeSubstitutionCounts.h: In constructor ‘computeSubstitutionCounts::computeSubstitutionCounts(const sequenceContainer&, const tree&, multipleStochasticProcess*, std::__cxx11::string&, VVVdouble&, int, double, bool)’:
+computeSubstitutionCounts.h:57:12: warning: ‘computeSubstitutionCounts::_LpostPerSpPerCat’ will be initialized after [-Wreorder]
+  VVVdouble _LpostPerSpPerCat; // _LpostPerSpPerCat[sp][rateCat][pos]
+            ^~~~~~~~~~~~~~~~~
+computeSubstitutionCounts.h:53:6: warning:   ‘int computeSubstitutionCounts::_simulationsIterNum’ [-Wreorder]
+  int _simulationsIterNum;
+      ^~~~~~~~~~~~~~~~~~~
+computeSubstitutionCounts.cpp:15:1: warning:   when initialized here [-Wreorder]
+ computeSubstitutionCounts::computeSubstitutionCounts(const sequenceContainer& sc, const tree& tr, multipleStochasticProcess* MultSpPtr, string& outDir, VVVdouble& LpostPerSpPerCat, const int simulationsIterNum, const MDOUBLE probCutOffSum, bool isSilent):
+ ^~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from computeSubstitutionCounts.cpp:1:
+computeSubstitutionCounts.h:54:10: warning: ‘computeSubstitutionCounts::_probCutOffSum’ will be initialized after [-Wreorder]
+  MDOUBLE _probCutOffSum;
+          ^~~~~~~~~~~~~~
+computeSubstitutionCounts.h:52:7: warning:   ‘bool computeSubstitutionCounts::_isSilent’ [-Wreorder]
+  bool _isSilent;
+       ^~~~~~~~~
+computeSubstitutionCounts.cpp:15:1: warning:   when initialized here [-Wreorder]
+ computeSubstitutionCounts::computeSubstitutionCounts(const sequenceContainer& sc, const tree& tr, multipleStochasticProcess* MultSpPtr, string& outDir, VVVdouble& LpostPerSpPerCat, const int simulationsIterNum, const MDOUBLE probCutOffSum, bool isSilent):
+ ^~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from fromCountTableComponentToDistancePropEB.cpp:3:
+fromCountTableComponentToDistancePropEB.h: In constructor ‘fromCountTableComponentToDistancePropEB::fromCountTableComponentToDistancePropEB(const std::vector<std::vector<countTableComponentGamProportional> >&, int, multipleStochasticProcess*, const gammaDistribution*, double, double)’:
+fromCountTableComponentToDistancePropEB.h:29:12: warning: ‘fromCountTableComponentToDistancePropEB::_nodeID’ will be initialized after [-Wreorder]
+  const int _nodeID;
+            ^~~~~~~
+fromCountTableComponentToDistancePropEB.h:28:27: warning:   ‘const gammaDistribution* fromCountTableComponentToDistancePropEB::_pProportionDist’ [-Wreorder]
+  const gammaDistribution* _pProportionDist;
+                           ^~~~~~~~~~~~~~~~
+fromCountTableComponentToDistancePropEB.cpp:6:1: warning:   when initialized here [-Wreorder]
+ fromCountTableComponentToDistancePropEB::fromCountTableComponentToDistancePropEB(
+ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+goldmanYangModel.cpp: In constructor ‘goldmanYangModel::goldmanYangModel(double, double, codon&, bool)’:
+goldmanYangModel.cpp:8:1: warning: ‘goldmanYangModel::_globalV’ is initialized with itself [-Winit-self]
+ goldmanYangModel::goldmanYangModel(const MDOUBLE inV, const MDOUBLE inK,codon & inCodonAlph, const bool globalV):
+ ^~~~~~~~~~~~~~~~
+goldmanYangModel.cpp: In constructor ‘goldmanYangModel::goldmanYangModel(double, double, codon&, const Vdouble&, bool)’:
+goldmanYangModel.cpp:18:1: warning: ‘goldmanYangModel::_globalV’ is initialized with itself [-Winit-self]
+ goldmanYangModel::goldmanYangModel(const MDOUBLE inV, const MDOUBLE inK, codon & inCodonAlph,const Vdouble& freq,const bool globalV):
+ ^~~~~~~~~~~~~~~~
+likeDist.cpp: In instantiation of ‘double myNRmethod(double, double, double, regF, dF, double, int, int&) [with regF = C_evalLikeDist_d; dF = C_evalLikeDist_d2]’:
+likeDist.cpp:274:18:   required from here
+likeDist.cpp:210:13: warning: variable ‘oldIntervalSize’ set but not used [-Wunused-but-set-variable]
+     MDOUBLE oldIntervalSize = currentIntervalSize;
+             ^~~~~~~~~~~~~~~
+nj.cpp: In member function ‘void NJalg::NJiterate(tree&, std::vector<tree::TreeNode*>&, VVdouble&, njConstraint&)’:
+nj.cpp:122:13: warning: ‘minCol’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  int minRaw,minCol;
+             ^~~~~~
+nj.cpp:133:36: warning: ‘minRaw’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  UpdateDistanceTableAndCurrentNodes(currentNodes,distanceTable,nodeI,nodeJ,theNewNode,minRaw,minCol);
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+nj.cpp: In member function ‘void NJalg::NJiterate(tree&, std::vector<tree::TreeNode*>&, VVdouble&)’:
+nj.cpp:100:41: warning: ‘minCol’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  tree::nodeP nodeJ = currentNodes[minCol];
+                                         ^
+nj.cpp:99:41: warning: ‘minRaw’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  tree::nodeP nodeI = currentNodes[minRaw];
+                                         ^
+numRec.cpp:306:2: warning: "/*" within comment [-Wcomment]
+ //* for (i=1;i<n;i++) e[i-1]=e[i];
+   
+numRec.cpp:307:2: warning: "/*" within comment [-Wcomment]
+ //* e[n-1]=0.0;
+   
+numRec.cpp:308:2: warning: "/*" within comment [-Wcomment]
+ //* e.push_back(0);//since in my algorithm I return an n-1 sized e
+   
+sequence.cpp: In constructor ‘sequence::sequence(const sequence&, const alphabet*)’:
+sequence.cpp:76:28: warning: suggest parentheses around ‘&&’ within ‘||’ [-Wparentheses]
+   || (inAlph->size() == 4) && (other._alphabet->size()%4 == 0))
+      ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sequenceContainer.cpp: In member function ‘void sequenceContainer::removeGapPositions()’:
+sequenceContainer.cpp:187:7: warning: variable ‘gapCol’ set but not used [-Wunused-but-set-variable]
+  bool gapCol;
+       ^~~~~~
+sequenceContainer.cpp: In member function ‘void sequenceContainer::removeGapPositionsAllSeqs()’:
+sequenceContainer.cpp:199:7: warning: variable ‘gapCol’ set but not used [-Wunused-but-set-variable]
+  bool gapCol;
+       ^~~~~~
+sequenceContainer.cpp: In member function ‘int sequenceContainer::getNumOfOccurancesPerPos(int, char)’:
+sequenceContainer.cpp:452:12: warning: unused variable ‘len’ [-Wunused-variable]
+  const int len = _seqDataVec[0].seqLen();
+            ^~~
+sequenceContainer.cpp: In member function ‘std::vector<std::__cxx11::basic_string<char> > sequenceContainer::getSeqNamesThatMatchPos(int, char)’:
+sequenceContainer.cpp:467:12: warning: unused variable ‘len’ [-Wunused-variable]
+  const int len = _seqDataVec[0].seqLen();
+            ^~~
+tree.cpp: In constructor ‘tree::tree(const string&)’:
+tree.cpp:180:4: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+    if (in.is_open())
+    ^~
+tree.cpp:182:3: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   create_names_to_internal_nodes();
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+treeUtil.cpp: In function ‘std::vector<tree> getNexusTreesFromFile(const string&)’:
+treeUtil.cpp:371:25: warning: variable ‘itStrStart’ set but not used [-Wunused-but-set-variable]
+  string::const_iterator itStrStart = it->begin();
+                         ^~~~~~~~~~
+treeUtil.cpp:372:25: warning: variable ‘itStrEnd’ set but not used [-Wunused-but-set-variable]
+  string::const_iterator itStrEnd = it->end();
+                         ^~~~~~~~
+In file included from distanceBasedSeqs2Tree.cpp:12:
+bestGtrModelParams.h: In constructor ‘C_evalGTRParamProportional::C_evalGTRParamProportional(GTRParam, const tree&, const sequenceContainer&, stochasticProcess&, const gammaDistribution*, const Vdouble*)’:
+bestGtrModelParams.h:175:21: warning: ‘C_evalGTRParamProportional::_sp’ will be initialized after [-Wreorder]
+  stochasticProcess& _sp;
+                     ^~~
+bestGtrModelParams.h:173:27: warning:   ‘const gammaDistribution* C_evalGTRParamProportional::_pProportionDist’ [-Wreorder]
+  const gammaDistribution* _pProportionDist;
+                           ^~~~~~~~~~~~~~~~
+bestGtrModelParams.h:162:3: warning:   when initialized here [-Wreorder]
+   C_evalGTRParamProportional( const GTRParam param,
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from betaDistribution.cpp:3:
+betaDistribution.h: In copy constructor ‘betaDistribution::betaDistribution(const betaDistribution&)’:
+betaDistribution.h:54:18: warning: ‘betaDistribution::_boundary’ will be initialized after [-Wreorder]
+  vector<MDOUBLE> _boundary;
+                  ^~~~~~~~~
+betaDistribution.h:47:10: warning:   ‘double betaDistribution::_alpha’ [-Wreorder]
+  MDOUBLE _alpha;
+          ^~~~~~
+betaDistribution.cpp:23:1: warning:   when initialized here [-Wreorder]
+ betaDistribution::betaDistribution(const betaDistribution& other) :
+ ^~~~~~~~~~~~~~~~
+In file included from computeJumps.cpp:1:
+computeJumps.h: In constructor ‘computeJumps::gFunc::gFunc(double, double, double)’:
+computeJumps.h:59:11: warning: ‘computeJumps::gFunc::_Lambda2’ will be initialized after [-Wreorder]
+   MDOUBLE _Lambda2;
+           ^~~~~~~~
+computeJumps.h:57:11: warning:   ‘double computeJumps::gFunc::_r’ [-Wreorder]
+   MDOUBLE _r;
+           ^~
+computeJumps.cpp:256:1: warning:   when initialized here [-Wreorder]
+ computeJumps::gFunc::gFunc(const MDOUBLE Lambda1, const MDOUBLE Lambda2 , const MDOUBLE r)
+ ^~~~~~~~~~~~
+seqeuncesFilter.cpp: In static member function ‘static void seqeuncesFilter::removeShortAndLongSequences(sequenceContainer&, int, int)’:
+seqeuncesFilter.cpp:141:18: warning: unused variable ‘pAlph’ [-Wunused-variable]
+  const alphabet* pAlph = sc.getAlphabet();
+                  ^~~~~
+In file included from seqeuncesFilter.h:6,
+                 from seqeuncesFilter.cpp:1:
+sequenceContainer.h: In static member function ‘static void seqeuncesFilter::removeSequencesWithInserts(sequenceContainer&, const sequenceContainer&, int, const string&, std::__cxx11::string)’:
+sequenceContainer.h:31:81: warning: ‘refID’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  const sequence& operator[](const int id) const {return _seqDataVec[_id2place[id]];}
+                                                                                 ^
+seqeuncesFilter.cpp:165:6: note: ‘refID’ was declared here
+  int refID;
+      ^~~~~
+mixtureDistribution.cpp: In member function ‘virtual const double mixtureDistribution::rates(int) const’:
+mixtureDistribution.cpp:210:6: warning: ‘componentNum’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  int componentNum, categoryInComponent, totalCat = 0;
+      ^~~~~~~~~~~~
+mixtureDistribution.cpp:221:41: warning: ‘categoryInComponent’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return _components[componentNum]->rates(categoryInComponent) * _globalRate;
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+mixtureDistribution.cpp: In member function ‘virtual const double mixtureDistribution::ratesProb(int) const’:
+mixtureDistribution.cpp:228:6: warning: ‘componentNum’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  int componentNum, categoryInComponent, totalCat = 0;
+      ^~~~~~~~~~~~
+In file included from mixtureDistribution.h:12,
+                 from mixtureDistribution.cpp:1:
+generalGammaDistribution.h:28:73: warning: ‘categoryInComponent’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  virtual const MDOUBLE ratesProb(const int i) const {return _ratesProb[i];}
+                                                                         ^
+mixtureDistribution.cpp:228:20: note: ‘categoryInComponent’ was declared here
+  int componentNum, categoryInComponent, totalCat = 0;
+                    ^~~~~~~~~~~~~~~~~~~
+suffStatGammaMixture.cpp: In member function ‘void suffStatGammaMixture::computeStatistics()’:
+suffStatGammaMixture.cpp:123:12: warning: variable ‘Exp_Rk’ set but not used [-Wunused-but-set-variable]
+    MDOUBLE Exp_Rk, Exp_LogRk, sum;
+            ^~~~~~
+suffStatGammaMixture.cpp: In member function ‘double suffStatGammaMixture::computeQ()’:
+suffStatGammaMixture.cpp:224:11: warning: unused variable ‘first’ [-Wunused-variable]
+   MDOUBLE first = _MkVec[comp] * log(P_k);
+           ^~~~~
+suffStatGammaMixture.cpp:225:11: warning: unused variable ‘second’ [-Wunused-variable]
+   MDOUBLE second = _MkVec[comp] * alpha_k*log(beta_k);
+           ^~~~~~
+suffStatGammaMixture.cpp:226:11: warning: unused variable ‘third’ [-Wunused-variable]
+   MDOUBLE third = -_MkVec[comp] * gammln(alpha_k);
+           ^~~~~
+suffStatGammaMixture.cpp:227:11: warning: unused variable ‘fourth’ [-Wunused-variable]
+   MDOUBLE fourth = -_AkVec[comp]*beta_k;
+           ^~~~~~
+suffStatGammaMixture.cpp:228:11: warning: unused variable ‘fifth’ [-Wunused-variable]
+   MDOUBLE fifth = _BkVec[comp]*(alpha_k-1.0);
+           ^~~~~
+suffStatGammaMixture.cpp:216:10: warning: variable ‘res2’ set but not used [-Wunused-but-set-variable]
+  MDOUBLE res2 = 0.0;
+          ^~~~
+In file included from GamMixtureOptimizer.cpp:3:
+optGammaMixtureEM.h: In member function ‘double C_evalAlphaEM::diGammaPlus(double) const’:
+optGammaMixtureEM.h:76:11: warning: unused variable ‘res1’ [-Wunused-variable]
+   MDOUBLE res1 = log(x) + (1/(2*x)) - (1/(12*x*x)) + (1/(120*pow(x, 4))) - (1/(252*pow(x, 6)));
+           ^~~~
+optGammaMixtureEM.h: In member function ‘double C_evalAlphaEM::diGamma(double) const’:
+optGammaMixtureEM.h:87:11: warning: unused variable ‘debugRes’ [-Wunused-variable]
+   MDOUBLE debugRes = log(x) - (1/(2*x)) - (1/(12*x*x)) + (1/(120*pow(x, 4))) - (1/(252*pow(x, 6))) + (1/(240*pow(x, 8))) - (1/(132*pow(x, 10)));
+           ^~~~~~~~
+In file included from optGammaMixtureEM.cpp:1:
+optGammaMixtureEM.h: In member function ‘double C_evalAlphaEM::diGammaPlus(double) const’:
+optGammaMixtureEM.h:76:11: warning: unused variable ‘res1’ [-Wunused-variable]
+   MDOUBLE res1 = log(x) + (1/(2*x)) - (1/(12*x*x)) + (1/(120*pow(x, 4))) - (1/(252*pow(x, 6)));
+           ^~~~
+optGammaMixtureEM.h: In member function ‘double C_evalAlphaEM::diGamma(double) const’:
+optGammaMixtureEM.h:87:11: warning: unused variable ‘debugRes’ [-Wunused-variable]
+   MDOUBLE debugRes = log(x) - (1/(2*x)) - (1/(12*x*x)) + (1/(120*pow(x, 4))) - (1/(252*pow(x, 6))) + (1/(240*pow(x, 8))) - (1/(132*pow(x, 10)));
+           ^~~~~~~~
+In file included from gtrModel.cpp:1:
+gtrModel.h: In constructor ‘gtrModel::gtrModel(const Vdouble&, double, double, double, double, double, double)’:
+gtrModel.h:54:10: warning: ‘gtrModel::_g2t’ will be initialized after [-Wreorder]
+  MDOUBLE _g2t;
+          ^~~~
+gtrModel.h:47:10: warning:   ‘Vdouble gtrModel::_freq’ [-Wreorder]
+  Vdouble _freq;
+          ^~~~~
+gtrModel.cpp:5:1: warning:   when initialized here [-Wreorder]
+ gtrModel::gtrModel(const Vdouble& freq,
+ ^~~~~~~~
+gtrModel.cpp: In member function ‘double gtrModel::get_a2c() const’:
+gtrModel.cpp:139:9: warning: ‘result’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return result;
+         ^~~~~~
+gtrModel.cpp: In member function ‘double gtrModel::get_a2g() const’:
+gtrModel.cpp:153:9: warning: ‘result’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return result;
+         ^~~~~~
+gtrModel.cpp: In member function ‘double gtrModel::get_a2t() const’:
+gtrModel.cpp:167:9: warning: ‘result’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return result;
+         ^~~~~~
+gtrModel.cpp: In member function ‘double gtrModel::get_c2g() const’:
+gtrModel.cpp:181:9: warning: ‘result’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return result;
+         ^~~~~~
+gtrModel.cpp: In member function ‘double gtrModel::get_c2t() const’:
+gtrModel.cpp:195:9: warning: ‘result’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return result;
+         ^~~~~~
+gtrModel.cpp: In member function ‘double gtrModel::get_g2t() const’:
+gtrModel.cpp:209:9: warning: ‘result’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  return result;
+         ^~~~~~
+In file included from bestGtrModelParams.cpp:3:
+bestGtrModelParams.h: In constructor ‘C_evalGTRParamProportional::C_evalGTRParamProportional(GTRParam, const tree&, const sequenceContainer&, stochasticProcess&, const gammaDistribution*, const Vdouble*)’:
+bestGtrModelParams.h:175:21: warning: ‘C_evalGTRParamProportional::_sp’ will be initialized after [-Wreorder]
+  stochasticProcess& _sp;
+                     ^~~
+bestGtrModelParams.h:173:27: warning:   ‘const gammaDistribution* C_evalGTRParamProportional::_pProportionDist’ [-Wreorder]
+  const gammaDistribution* _pProportionDist;
+                           ^~~~~~~~~~~~~~~~
+bestGtrModelParams.h:162:3: warning:   when initialized here [-Wreorder]
+   C_evalGTRParamProportional( const GTRParam param,
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+ar: creating libEvolTree.a
+In file included from bbAlg.h:8,
+                 from fastml.cpp:254:
+bbReport.h: In constructor ‘BandBReportAllPos::BandBReportAllPos(const string&, int)’:
+bbReport.h:14:16: warning: ‘BandBReportAllPos::_reportFileName’ will be initialized after [-Wreorder]
+  const string& _reportFileName;
+                ^~~~~~~~~~~~~~~
+bbReport.h:13:12: warning:   ‘const int BandBReportAllPos::_minNumOfNodesToVisit’ [-Wreorder]
+  const int _minNumOfNodesToVisit;
+            ^~~~~~~~~~~~~~~~~~~~~
+bbReport.h:10:11: warning:   when initialized here [-Wreorder]
+  explicit BandBReportAllPos(const string& reportFileName, int minNumOfNodesToVisit)
+           ^~~~~~~~~~~~~~~~~
+In file included from mainbb.h:4,
+                 from fastml.cpp:1:
+bb_options.h: At global scope:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+In file included from bbAlg.h:8,
+                 from bbAlg.cpp:1:
+bbReport.h: In constructor ‘BandBReportAllPos::BandBReportAllPos(const string&, int)’:
+bbReport.h:14:16: warning: ‘BandBReportAllPos::_reportFileName’ will be initialized after [-Wreorder]
+  const string& _reportFileName;
+                ^~~~~~~~~~~~~~~
+bbReport.h:13:12: warning:   ‘const int BandBReportAllPos::_minNumOfNodesToVisit’ [-Wreorder]
+  const int _minNumOfNodesToVisit;
+            ^~~~~~~~~~~~~~~~~~~~~
+bbReport.h:10:11: warning:   when initialized here [-Wreorder]
+  explicit BandBReportAllPos(const string& reportFileName, int minNumOfNodesToVisit)
+           ^~~~~~~~~~~~~~~~~
+In file included from bbAlg.cpp:1:
+bbAlg.h: In constructor ‘bbAlg::bbAlg(const tree&, std::vector<stochasticProcess>&, const sequenceContainer&, bbAlg::boundMethod, const string&, double, const distribution*)’:
+bbAlg.h:61:16: warning: ‘bbAlg::_reportFileName’ will be initialized after [-Wreorder]
+  const string& _reportFileName;
+                ^~~~~~~~~~~~~~~
+bbAlg.h:60:20: warning:   ‘BandBReportAllPos bbAlg::BandBReportAllPos1’ [-Wreorder]
+  BandBReportAllPos BandBReportAllPos1; // report for all positions.
+                    ^~~~~~~~~~~~~~~~~~
+bbAlg.cpp:7:1: warning:   when initialized here [-Wreorder]
+ bbAlg::bbAlg(const tree& et,
+ ^~~~~
+In file included from bbAlg.cpp:1:
+bbAlg.h:60:20: warning: ‘bbAlg::BandBReportAllPos1’ will be initialized after [-Wreorder]
+  BandBReportAllPos BandBReportAllPos1; // report for all positions.
+                    ^~~~~~~~~~~~~~~~~~
+bbAlg.h:29:14: warning:   ‘const tree& bbAlg::_et’ [-Wreorder]
+  const tree& _et;
+              ^~~
+bbAlg.cpp:7:1: warning:   when initialized here [-Wreorder]
+ bbAlg::bbAlg(const tree& et,
+ ^~~~~
+In file included from bbNodeOrderAlg.h:5,
+                 from bbAlg.h:5,
+                 from bbAlg.cpp:1:
+bb_options.h: At global scope:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+In file included from bbEvaluateSpecificAV.cpp:1:
+bbEvaluateSpecificAV.h: In constructor ‘bbEvaluateSpecificAV::bbEvaluateSpecificAV(const tree&, const stochasticProcess&, const sequenceContainer&, const computePijGam&)’:
+bbEvaluateSpecificAV.h:34:27: warning: ‘bbEvaluateSpecificAV::_sc’ will be initialized after [-Wreorder]
+  const sequenceContainer& _sc;
+                           ^~~
+bbEvaluateSpecificAV.h:31:23: warning:   ‘const computePijGam& bbEvaluateSpecificAV::_bbcpij’ [-Wreorder]
+  const computePijGam& _bbcpij;
+                       ^~~~~~~
+bbEvaluateSpecificAV.cpp:3:1: warning:   when initialized here [-Wreorder]
+ bbEvaluateSpecificAV::bbEvaluateSpecificAV(const tree& et,
+ ^~~~~~~~~~~~~~~~~~~~
+bbEvaluateSpecificAV.cpp: In member function ‘double bbEvaluateSpecificAV::recursiveEvaluateSpecificAv(int, tree::nodeP, int)’:
+bbEvaluateSpecificAV.cpp:65:12: warning: unused variable ‘rate’ [-Wunused-variable]
+    MDOUBLE rate = _sp.rates(categor); // the r.
+            ^~~~
+In file included from bbEvaluateSpecificAV.h:4,
+                 from bbEvaluateSpecificAV.cpp:1:
+bb_options.h: At global scope:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+In file included from bbfindBestAVDynProg.h:5,
+                 from bbfindBestAVDynProg.cpp:1:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+In file included from bbNodeOrderAlg.cpp:1:
+bbNodeOrderAlg.h: In constructor ‘bbNodeOrderAlg::bbNodeOrderAlg(const tree&, const stochasticProcess&, const sequenceContainer&, const computePijGam&, double)’:
+bbNodeOrderAlg.h:33:27: warning: ‘bbNodeOrderAlg::_sc’ will be initialized after [-Wreorder]
+  const sequenceContainer& _sc;
+                           ^~~
+bbNodeOrderAlg.h:32:23: warning:   ‘const computePijGam& bbNodeOrderAlg::_cpij’ [-Wreorder]
+  const computePijGam& _cpij;
+                       ^~~~~
+bbNodeOrderAlg.cpp:8:1: warning:   when initialized here [-Wreorder]
+ bbNodeOrderAlg::bbNodeOrderAlg(const tree& et,
+ ^~~~~~~~~~~~~~
+In file included from bbNodeOrderAlg.h:5,
+                 from bbNodeOrderAlg.cpp:1:
+bb_options.h: At global scope:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h: In constructor ‘bb_options::bb_options(int&, char**)’:
+bb_options.h:49:9: warning: ‘bb_options::reportFile’ will be initialized after [-Wreorder]
+  string reportFile;
+         ^~~~~~~~~~
+bb_options.h:44:9: warning:   ‘std::__cxx11::string bb_options::outFile_seq_joint’ [-Wreorder]
+  string outFile_seq_joint;
+         ^~~~~~~~~~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:45:9: warning: ‘bb_options::outFile_seq_marginal’ will be initialized after [-Wreorder]
+  string outFile_seq_marginal;
+         ^~~~~~~~~~~~~~~~~~~~
+bb_options.h:42:9: warning:   ‘std::__cxx11::string bb_options::outFile_prob_joint’ [-Wreorder]
+  string outFile_prob_joint;
+         ^~~~~~~~~~~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:43:9: warning: ‘bb_options::outFile_prob_marginal’ will be initialized after [-Wreorder]
+  string outFile_prob_marginal;
+         ^~~~~~~~~~~~~~~~~~~~~
+bb_options.h:24:9: warning:   ‘std::__cxx11::string bb_options::seqfile’ [-Wreorder]
+  string seqfile;
+         ^~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:30:21: warning: ‘bb_options::distributionName’ will be initialized after [-Wreorder]
+  distributionsNames distributionName;
+                     ^~~~~~~~~~~~~~~~
+bb_options.h:26:16: warning:   ‘bb_options::SeqFileFormat bb_options::seqOutputFormat’ [-Wreorder]
+  SeqFileFormat seqOutputFormat;
+                ^~~~~~~~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:41:9: warning: ‘bb_options::outTreeFileAncestor’ will be initialized after [-Wreorder]
+  string outTreeFileAncestor;
+         ^~~~~~~~~~~~~~~~~~~
+bb_options.h:32:15: warning:   ‘bb_options::boundMethods bb_options::boundMethod’ [-Wreorder]
+  boundMethods boundMethod;
+               ^~~~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:47:10: warning: ‘bb_options::gammaPar’ will be initialized after [-Wreorder]
+  MDOUBLE gammaPar;
+          ^~~~~~~~
+bb_options.h:28:7: warning:   ‘bool bb_options::userProvideAlpha’ [-Wreorder]
+  bool userProvideAlpha;
+       ^~~~~~~~~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:48:6: warning: ‘bb_options::gammaCategies’ will be initialized after [-Wreorder]
+  int gammaCategies;
+      ^~~~~~~~~~~~~
+bb_options.h:36:19: warning:   ‘bb_options::modelNameOptions bb_options::modelName’ [-Wreorder]
+  modelNameOptions modelName;
+                   ^~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h:39:7: warning: ‘bb_options::useChebyshev’ will be initialized after [-Wreorder]
+  bool useChebyshev;
+       ^~~~~~~~~~~~
+bb_options.h:27:9: warning:   ‘std::__cxx11::string bb_options::treeOutFile’ [-Wreorder]
+  string treeOutFile;
+         ^~~~~~~~~~~
+bb_options.cpp:6:1: warning:   when initialized here [-Wreorder]
+ bb_options::bb_options(int& argc, char *argv[]):
+ ^~~~~~~~~~
+In file included from bb_options.cpp:2:
+bb_options.h: At global scope:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+In file included from bbReport.cpp:1:
+bbReport.h: In constructor ‘BandBReportAllPos::BandBReportAllPos(const string&, int)’:
+bbReport.h:14:16: warning: ‘BandBReportAllPos::_reportFileName’ will be initialized after [-Wreorder]
+  const string& _reportFileName;
+                ^~~~~~~~~~~~~~~
+bbReport.h:13:12: warning:   ‘const int BandBReportAllPos::_minNumOfNodesToVisit’ [-Wreorder]
+  const int _minNumOfNodesToVisit;
+            ^~~~~~~~~~~~~~~~~~~~~
+bbReport.h:10:11: warning:   when initialized here [-Wreorder]
+  explicit BandBReportAllPos(const string& reportFileName, int minNumOfNodesToVisit)
+           ^~~~~~~~~~~~~~~~~
+bbReport.h: In constructor ‘BandBReport::BandBReport(const string&, int, int)’:
+bbReport.h:53:16: warning: ‘BandBReport::_reportFileName’ will be initialized after [-Wreorder]
+  const string& _reportFileName;
+                ^~~~~~~~~~~~~~~
+bbReport.h:51:12: warning:   ‘const int BandBReport::_position’ [-Wreorder]
+  const int _position;
+            ^~~~~~~~~
+bbReport.cpp:10:1: warning:   when initialized here [-Wreorder]
+ BandBReport::BandBReport( const string& reportFileName, const int position, const int alphabetSize ) :
+ ^~~~~~~~~~~
+computeMarginalReconstruction.cpp: In member function ‘void computeMarginalReconstruction::compute(const distribution*)’:
+computeMarginalReconstruction.cpp:67:11: warning: unused variable ‘likelihoodOfPos’ [-Wunused-variable]
+   MDOUBLE likelihoodOfPos = 0;
+           ^~~~~~~~~~~~~~~
+computeMarginalReconstruction.cpp:45:10: warning: unused variable ‘totalLikelihoodOfReconstruction’ [-Wunused-variable]
+  MDOUBLE totalLikelihoodOfReconstruction = 0;
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+jointNoGamma.cpp: In member function ‘void jointNoGamma::compute()’:
+jointNoGamma.cpp:23:10: warning: unused variable ‘totalLikelihoodOfReconstruction’ [-Wunused-variable]
+  MDOUBLE totalLikelihoodOfReconstruction = 0;
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+jointNoGamma.cpp: In member function ‘std::vector<int> jointNoGamma::computeJointAncestralFromSSC(int, const suffStatGlobalHomPos&, const suffStatGlobalHomPosJointNoGamma&, doubleRep&)’:
+jointNoGamma.cpp:108:12: warning: unused variable ‘maxL’ [-Wunused-variable]
+    MDOUBLE maxL = VERYSMALL;
+            ^~~~
+In file included from bbAlg.h:8,
+                 from mainbb.cpp:5:
+bbReport.h: In constructor ‘BandBReportAllPos::BandBReportAllPos(const string&, int)’:
+bbReport.h:14:16: warning: ‘BandBReportAllPos::_reportFileName’ will be initialized after [-Wreorder]
+  const string& _reportFileName;
+                ^~~~~~~~~~~~~~~
+bbReport.h:13:12: warning:   ‘const int BandBReportAllPos::_minNumOfNodesToVisit’ [-Wreorder]
+  const int _minNumOfNodesToVisit;
+            ^~~~~~~~~~~~~~~~~~~~~
+bbReport.h:10:11: warning:   when initialized here [-Wreorder]
+  explicit BandBReportAllPos(const string& reportFileName, int minNumOfNodesToVisit)
+           ^~~~~~~~~~~~~~~~~
+In file included from mainbb.cpp:31:
+../../libs/phylogeny/bestGtrModelParams.h: In constructor ‘C_evalGTRParamProportional::C_evalGTRParamProportional(GTRParam, const tree&, const sequenceContainer&, stochasticProcess&, const gammaDistribution*, const Vdouble*)’:
+../../libs/phylogeny/bestGtrModelParams.h:175:21: warning: ‘C_evalGTRParamProportional::_sp’ will be initialized after [-Wreorder]
+  stochasticProcess& _sp;
+                     ^~~
+../../libs/phylogeny/bestGtrModelParams.h:173:27: warning:   ‘const gammaDistribution* C_evalGTRParamProportional::_pProportionDist’ [-Wreorder]
+  const gammaDistribution* _pProportionDist;
+                           ^~~~~~~~~~~~~~~~
+../../libs/phylogeny/bestGtrModelParams.h:162:3: warning:   when initialized here [-Wreorder]
+   C_evalGTRParamProportional( const GTRParam param,
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from mainbb.h:4,
+                 from mainbb.cpp:1:
+bb_options.h: At global scope:
+bb_options.h:62:21: warning: ‘const string usege_splash_screen()’ defined but not used [-Wunused-function]
+ static const string usege_splash_screen() {
+                     ^~~~~~~~~~~~~~~~~~~
+mainbb.cpp: In member function ‘void mainbb::findAncestralSequencesGammaJoint()’:
+mainbb.cpp:429:101: warning: ‘bm’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  bbAlg bbAlg1(_et,_spVec,_sc,bm,_options->reportFile,_options->computeAgainExactTreshold,_forceDistr);
+                                                                                                     ^
+ar: creating libfastml.a

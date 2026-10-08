@@ -1,0 +1,3 @@
+gcc  -O3 -Wall -Wno-unused-variable -Wno-unused-result  -c baseml.c
+gcc  -O3 -Wall -Wno-unused-variable -Wno-unused-result  -c tools.c
+gcc  -O3 -Wall -Wno-unused-variable -Wno-unused-result  -o baseml baseml.o tools.o -lm

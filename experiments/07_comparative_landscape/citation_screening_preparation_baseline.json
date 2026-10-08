@@ -1,0 +1,108 @@
+{
+  "cross_stage_exact_identifier_diagnostic": {
+    "wave_rows_where_doi_and_pmid_map_to_different_merged_keys": 3,
+    "wave_rows_with_both_doi_and_pmid_overlap": 3120,
+    "wave_rows_with_doi_or_pmid_overlap": 4426,
+    "wave_rows_with_exact_doi_overlap": 4396,
+    "wave_rows_with_exact_pmid_overlap": 3150
+  },
+  "database_screening_entity_diagnostic": {
+    "biotools_keyed_records": 215,
+    "dois_associated_with_multiple_pmids": 0,
+    "dois_with_pmid_metadata": 44317,
+    "entity_type_counts": {
+      "publication": 79702,
+      "software_registry": 215
+    },
+    "frozen_merged_records": 79917,
+    "interpretation": {
+      "frozen_database_dedup_key_is_discovery_provenance_not_guaranteed_publication_identity": true,
+      "pmid_cannot_unconditionally_merge_multiple_doi_groups": true,
+      "software_registry_records_are_independent_screening_entities": true,
+      "title_year_is_not_automatic_identity": true
+    },
+    "normalized_title_year_groups": 75597,
+    "normalized_title_year_groups_spanning_multiple_frozen_keys": 3081,
+    "pmid_multi_key_classes": {
+      "multiple_doi": 20,
+      "one_doi_plus_pmid": 155,
+      "other": 38
+    },
+    "pmids_represented": 44713,
+    "pmids_spanning_multiple_frozen_keys": 213,
+    "source_class_counts": {
+      "biotools": 215,
+      "openalex": 47285,
+      "openalex;pubmed": 23886,
+      "pubmed": 8531
+    }
+  },
+  "merged_database_universe": {
+    "deduplicated_records_sha256": "618e42658a5734fede70c62b772582c15354b7d9ed6f2cef426dc0dce79ad42a",
+    "records": 79917
+  },
+  "protocol_amendment_freeze": {
+    "amendment_block_sha256": "c080017cba5c72b07df6dd609931c4be37e0a8f2fe2b96dc545d410d4c15af30",
+    "amendments": [
+      31,
+      32
+    ],
+    "whole_amendments_file_intentionally_not_frozen": true
+  },
+  "repository_commit": "11b16eee3a06b24899c46fa24ce792361189937d",
+  "scientific_interpretation": {
+    "connected_components_are_not_publication_identity": true,
+    "frozen_database_dedup_keys_are_not_modified": true,
+    "no_record_level_screening_performed": true,
+    "wave_0_anchor_count_is_not_assumed_complete": true
+  },
+  "screening_log": {
+    "rows_before_unified_screening_spec": 0,
+    "sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139"
+  },
+  "status": "FROZEN_PRE_RECONCILIATION_AND_SCREENING",
+  "wave_0": {
+    "components_with_multiple_ids_in_same_namespace": 245,
+    "metadata_by_source_direction": {
+      "openalex_backward": {
+        "doi_nonempty": 0,
+        "omid_nonempty": 0,
+        "openalex_id_nonempty": 363,
+        "pmid_nonempty": 0,
+        "rows": 363,
+        "title_nonempty": 0,
+        "year_nonempty": 0
+      },
+      "openalex_forward": {
+        "doi_nonempty": 16864,
+        "omid_nonempty": 0,
+        "openalex_id_nonempty": 17041,
+        "pmid_nonempty": 12595,
+        "rows": 17041,
+        "title_nonempty": 17037,
+        "year_nonempty": 17040
+      },
+      "opencitations_backward": {
+        "doi_nonempty": 287,
+        "omid_nonempty": 290,
+        "openalex_id_nonempty": 0,
+        "pmid_nonempty": 264,
+        "rows": 290,
+        "title_nonempty": 0,
+        "year_nonempty": 0
+      },
+      "opencitations_forward": {
+        "doi_nonempty": 15151,
+        "omid_nonempty": 15377,
+        "openalex_id_nonempty": 0,
+        "pmid_nonempty": 8722,
+        "rows": 15377,
+        "title_nonempty": 0,
+        "year_nonempty": 0
+      }
+    },
+    "neighbour_records_sha256": "16f8c48ea0757452ab2489b3952d5b8193a5cd9c46494f6852c0733220419de2",
+    "neighbour_rows": 33071,
+    "raw_identifier_connected_components": 17552
+  }
+}

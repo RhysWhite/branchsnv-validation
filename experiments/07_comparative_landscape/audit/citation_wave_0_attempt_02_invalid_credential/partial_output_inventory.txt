@@ -1,0 +1,10 @@
+# Partial output inventory
+
+Result files: 0
+
+Directories created before HTTP header validation failed:
+
+results/07_comparative_landscape/citation_wave_0
+results/07_comparative_landscape/citation_wave_0/raw
+results/07_comparative_landscape/citation_wave_0/raw/openalex
+results/07_comparative_landscape/citation_wave_0/raw/openalex/W0A01

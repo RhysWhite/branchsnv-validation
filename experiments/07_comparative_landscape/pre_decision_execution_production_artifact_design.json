@@ -1,0 +1,178 @@
+{
+  "artifact_count_at_genesis": 8,
+  "artifacts": {
+    "batch_manifest.tsv": {
+      "expected_sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0",
+      "fields": [
+        "batch_id",
+        "batch_index",
+        "entity_count",
+        "first_screening_entity_id",
+        "last_screening_entity_id",
+        "ordered_entity_ids_sha256"
+      ],
+      "mutability": "immutable",
+      "row_count": 190
+    },
+    "batch_membership.tsv": {
+      "fields": [
+        "batch_id",
+        "batch_index",
+        "position_in_batch",
+        "global_active_index",
+        "screening_entity_id",
+        "baseline_row_sha256"
+      ],
+      "mutability": "immutable",
+      "row_count": 94622,
+      "semantic_ordered_entity_ids_sha256": "d0970cbd5a582ce05585926bc1e81acba502b01a96acc4b84ab8db454a0ea4c1"
+    },
+    "event_ledger.tsv": {
+      "fields": [
+        "event_id",
+        "event_type",
+        "screening_entity_id",
+        "baseline_queue_sha256",
+        "baseline_row_sha256",
+        "batch_id",
+        "record_decision",
+        "exclusion_reason_code",
+        "candidate_method_flag",
+        "evidence_basis",
+        "evidence_source_locator",
+        "evidence_escalation_status",
+        "operator_id",
+        "operator_type",
+        "decision_timestamp_utc",
+        "supersedes_event_id",
+        "reviewer_id",
+        "review_status",
+        "adjudication_status",
+        "notes"
+      ],
+      "genesis_bytes": 338,
+      "genesis_row_count": 0,
+      "genesis_sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+      "mutability": "append_only_after_future_authorisation"
+    },
+    "event_ledger_genesis.json": {
+      "mutability": "immutable"
+    },
+    "immutable_checksums.sha256": {
+      "covered_artifacts": [
+        "batch_manifest.tsv",
+        "batch_membership.tsv",
+        "prior_anchor_carry_forwards.tsv",
+        "out_of_baseline_prior_anchor.tsv",
+        "event_ledger_genesis.json",
+        "manifest.json"
+      ],
+      "excluded_artifacts": [
+        "event_ledger.tsv",
+        "immutable_checksums.sha256"
+      ],
+      "mutability": "immutable"
+    },
+    "manifest.json": {
+      "mutability": "immutable"
+    },
+    "out_of_baseline_prior_anchor.tsv": {
+      "fields": [
+        "anchor_id",
+        "tool",
+        "canonical_doi",
+        "prior_anchor_decision",
+        "prior_landscape_decision",
+        "prior_confirmed_role",
+        "baseline_presence_status",
+        "screening_entity_id",
+        "preservation_status",
+        "source_resolution_sha256",
+        "scientific_reassessment_performed"
+      ],
+      "mutability": "immutable",
+      "row_count": 1
+    },
+    "prior_anchor_carry_forwards.tsv": {
+      "fields": [
+        "anchor_id",
+        "tool",
+        "canonical_doi",
+        "screening_entity_id",
+        "baseline_row_sha256",
+        "prior_anchor_decision",
+        "prior_landscape_decision",
+        "prior_confirmed_role",
+        "record_decision",
+        "candidate_method_flag",
+        "mapping_basis",
+        "source_resolution_sha256",
+        "scientific_reassessment_performed"
+      ],
+      "mutability": "immutable",
+      "row_count": 7
+    }
+  },
+  "atomic_publication_required": true,
+  "authoritative_membership_source": "batch_membership.tsv",
+  "batch_contract": {
+    "active_ordered_entity_ids_sha256": "d0970cbd5a582ce05585926bc1e81acba502b01a96acc4b84ab8db454a0ea4c1",
+    "active_ready_entities": 94622,
+    "batch_count": 190,
+    "batch_manifest_sha256": "f2cc2c7ccaf230a56f9aa27f991b12885b600338b68b81d660af895f48adbfe0",
+    "first_batch_id": "B000001",
+    "last_batch_entity_count": 122,
+    "last_batch_id": "B000190",
+    "max_batch_size": 500
+  },
+  "current_state_artifact_at_genesis": null,
+  "current_state_is_derived_projection": true,
+  "event_entry_authorized": false,
+  "immutable_baseline": {
+    "blocked_metadata_entities": 484,
+    "queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "ready_entities": 94629
+  },
+  "immutable_dependencies": {
+    "amendment_implementation_freeze_sha256": "78308b7ed5fec753a2e158de49a708d3bd477cbf312c232bf66bf20601db645d",
+    "contract_amendment_freeze_sha256": "927febb2d501324d01985fc8f268b08a6c83f50138eaddf677309a5d14cad471",
+    "historical_screening_log_sha256": "6a6e9fe2b76a89ba174d21e5a32f89632d5c61efcb2a04a27a6fedd6296fa139",
+    "original_execution_implementation_freeze_sha256": "65be8560a46e15f52f48dc68fc1bed2f43e0d35555e6d5bda4bdde3e461c7eb1",
+    "prior_anchor_resolution_freeze_sha256": "878a38c06075644c2bbef4418eefb81f6e4fd995a99371865b9f216930583f06"
+  },
+  "next_gate": "IMPLEMENT_CONTROLLED_PRE_DECISION_EXECUTION_PRODUCTION_WRITER_WITHOUT_DECISIONS",
+  "parent_amendment_implementation_commit": "8ffff79c51a7ce439e314daa5ea721095ea16f60",
+  "per_batch_files_authoritative": false,
+  "prior_anchor_contract": {
+    "ambiguous_prior_anchors": 0,
+    "historical_prior_anchors": 8,
+    "in_baseline_carry_forwards": 7,
+    "out_of_baseline_anchor_id": "W0A06",
+    "out_of_baseline_doi": "10.1093/bioinformatics/btv271",
+    "out_of_baseline_prior_anchors": 1,
+    "out_of_baseline_tool": "kSNP3.0"
+  },
+  "production_root": "results/07_comparative_landscape/baseline_scientific_screening_execution",
+  "production_root_must_be_absent_before_write": true,
+  "production_validation": {
+    "batch_coverage_must_be_exact": true,
+    "blocked_metadata_in_batches_allowed": false,
+    "carry_forward_targets_in_batches_allowed": false,
+    "duplicate_active_entities_allowed": false,
+    "event_ledger_must_be_header_only_at_genesis": true,
+    "exact_artifact_set_required": true,
+    "independent_byte_identical_rebuild_required": true,
+    "network_access_allowed": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "canonical_publication_decisions": 0,
+    "event_ledger_rows": 0,
+    "method_assessments": 0,
+    "production_execution_artifacts_created": 0,
+    "role_assignments": 0,
+    "scientific_screening_decisions": 0,
+    "wave1_promotions": 0
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}

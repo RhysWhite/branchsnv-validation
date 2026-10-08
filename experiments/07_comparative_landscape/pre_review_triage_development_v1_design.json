@@ -1,0 +1,195 @@
+{
+  "canonical_reconciliation_sha256": {
+    "reconciled_normalized_text.tsv": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "reconciled_resolution.tsv": "cb2a5d32d6eabcde6ba7aa5db52bfcc813fc52e45a897cac7ec13a632ce016d5",
+    "reconciliation_outputs.sha256": "62aa1bed45d5bfc77b190247d94a1a9e4bb7be772d14fb55f2cbf03f3ab3f5cf",
+    "reconciliation_summary.json": "c43385e506a7d37c5290fdb3842c2991c0398efcf944f57be68ffadd51d5c802"
+  },
+  "development_output_boundary": {
+    "future_scoring_authorized_by_this_freeze": false,
+    "model_fit_authorized_by_this_freeze": false,
+    "next_model_stage_may_create_only_development_only_artifacts": true,
+    "scientific_decisions_authorized_by_this_freeze": false,
+    "threshold_selection_authorized_by_this_freeze": false
+  },
+  "development_population": {
+    "abstract_absent_label_counts": {
+      "exclude": 274,
+      "retain_for_method_assessment": 35
+    },
+    "abstract_absent_records": 309,
+    "expanded_development_records": 4500,
+    "final_label_counts": {
+      "exclude": 4297,
+      "retain_for_method_assessment": 203
+    },
+    "protected_identity_attention_status": "identifier_conflict_hold",
+    "protected_identity_label": "exclude",
+    "protected_identity_records": 1,
+    "retrieval_lane_records": 4499,
+    "text_bearing_label_counts": {
+      "exclude": 4022,
+      "retain_for_method_assessment": 168
+    },
+    "text_bearing_records": 4190
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_DEVELOPMENT_V1",
+  "freeze_parent_commit": "bbbda0a27c5aa7c92f1bf632261e356a8955a863",
+  "label_contract": {
+    "labels_are_existing_human_scientific_decisions": true,
+    "model_output_is_not_a_scientific_decision": true,
+    "model_output_must_not_modify_existing_labels": true,
+    "negative_class": "exclude",
+    "positive_class": "retain_for_method_assessment"
+  },
+  "model_development_lane": {
+    "allowed_predictive_text_fields": [
+      "title_text",
+      "abstract_text"
+    ],
+    "allowed_source_artifact": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_normalized_text.tsv",
+    "batch_prohibited_as_predictive_feature": true,
+    "batch_retained_only_as_validation_group": true,
+    "eligible_record_count": 4190,
+    "forbidden_predictive_fields": [
+      "retrieval_record_index",
+      "screening_entity_id",
+      "provider_used",
+      "provider_lookup_type",
+      "provider_record_id",
+      "source_body_sha256",
+      "provider_identity_status",
+      "parser_status",
+      "abstract_status",
+      "abstract_section_metadata_json",
+      "batch_id",
+      "decision_batch",
+      "doi",
+      "pmid",
+      "openalex_id",
+      "year",
+      "discovery_stage",
+      "discovery_stages",
+      "identity_attention_status",
+      "record_decision",
+      "candidate_method_flag",
+      "exclusion_reason_code",
+      "operator",
+      "notes"
+    ],
+    "required_abstract_statuses": [
+      "usable_abstract_pubmed",
+      "usable_abstract_openalex"
+    ]
+  },
+  "next_gate": "FREEZE_PRE_REVIEW_TRIAGE_MODEL_CANDIDATE_SET_V1_BEFORE_ANY_MODEL_FIT",
+  "production_boundary": {
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "protected_review_lanes": {
+    "abstract_absent": {
+      "absence_may_be_used_as_negative_evidence": false,
+      "development_count": 309,
+      "eventual_route": "human_review",
+      "model_scoring_permitted": false,
+      "model_training_permitted": false,
+      "retained_positive_count": 35
+    },
+    "identity_attention_nonempty": {
+      "development_protected_count": 1,
+      "eventual_route": "human_review",
+      "model_training_permitted": false
+    },
+    "unsupported_discovery_stages": {
+      "formal": {
+        "development_count": 0,
+        "future_count": 2170
+      },
+      "future_model_scoring_authorized": false,
+      "high_recall": {
+        "development_count": 0,
+        "future_count": 78416
+      }
+    },
+    "unsupported_entity_class": {
+      "development_count": 0,
+      "future_count": 215,
+      "future_model_scoring_authorized": false,
+      "unsupported_value": "software_registry"
+    },
+    "unsupported_identity_attention_states": {
+      "future_model_scoring_authorized": false,
+      "provider_identity_anchored": {
+        "development_count": 0,
+        "future_count": 311
+      },
+      "provider_identity_confirmed_unanchored": {
+        "development_count": 0,
+        "future_count": 176
+      }
+    }
+  },
+  "purpose": "Freeze the development population, feature authority, validation separation, protected review lanes, and scientific authority boundaries before any pre-review triage model fitting.",
+  "schema_version": 1,
+  "scientific_authority": {
+    "autonomous_model_scientific_decision_permitted": false,
+    "existing_terminal_record_decisions": [
+      "exclude",
+      "retain_for_method_assessment"
+    ],
+    "future_scoring_authorized_by_this_design": false,
+    "production_auto_exclusion_permitted": false,
+    "production_ledger_write_permitted": false,
+    "production_queue_mutation_permitted": false,
+    "uncertainty_resolves_toward_retention_or_source_checking": true
+  },
+  "source_hashes": {
+    "experiments/07_comparative_landscape/b000001_post_canary_continuation_design.json": "4062fca08c7c3f6b8734dfe000dae654ab18164ecc4a6546924f1a4649270edc",
+    "experiments/07_comparative_landscape/b000001_t000007_post_pilot_continuation_design.json": "33359f4caa6746c3d52a0d79047e91927790ae5a6973ce8552b76bc28d918164",
+    "experiments/07_comparative_landscape/c000001_campaign_execution_v4.py": "ce072594dd4112560233361c8da056756b2f649e2526dde13365cceffcc0eb86",
+    "experiments/07_comparative_landscape/scientific_screening_design.json": "4a713bf1c91c69e86409e48b4f92ed497d3fb1f585ed0e4505cb217b0f266a25",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_implementation_design.json": "c35f7de39af4fe0cabb6fd345c08f0c0ae9eca11141fea0d9e859db9b72c7f94",
+    "experiments/07_comparative_landscape/triage_pre_review_text_reconciliation_v1_implementation_freeze.py": "ec7e61151a1014400859e8b534f508121206268da9fdfeda731b3044792732a3",
+    "experiments/07_comparative_landscape/triage_pre_review_text_retrieval_v1_design.json": "3a8107a845d2dcde9dfe2f4e714237cae353ba3762af1a76d61f7f5c171d66fc",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1.sha256": "a1cc4d544b46ae8f054e3adcbc891bb07be0726795893ef85a29d47e7b513427",
+    "experiments/07_comparative_landscape/triage_validation_sampling_v1_design.json": "fb66df4426c65ee20585ba550c4e501df3746d9b6e682e6b9eeecf276ccb60b3",
+    "results/07_comparative_landscape/baseline_scientific_screening_execution/batch_membership.tsv": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "results/07_comparative_landscape/baseline_scientific_screening_execution/event_ledger.tsv": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000005/T000014_c000001_approved_decisions/proposal.tsv": "596de8ff20ee370609341824eabb53b4a92d74241163b5bf6890b27448dfbf6e",
+    "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000006/T000015_c000001_approved_decisions/proposal.tsv": "e8d40bfd966e2d06b08c7e56aab6dce546cf27b277588fec07d78a5241287ffb",
+    "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000007/T000016_c000001_approved_decisions/proposal.tsv": "607082831e490b98ec247026b415f7bdb5614c6816f242fa7c76617442d3c6e5",
+    "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000008/T000017_c000001_approved_decisions/proposal.tsv": "cab86529055e17722f1cd35fb9821b13b8616e5b21ccea538e56e003afddde1a",
+    "results/07_comparative_landscape/baseline_scientific_screening_review_work/B000009/T000018_c000001_approved_decisions/proposal.tsv": "3c6d45337b95be9f9784ffbab06f5a1d8dece06503d06aadbaab7aab521f9c38",
+    "results/07_comparative_landscape/scientific_screening/baseline_screening_queue.tsv": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_normalized_text.tsv": "8c897444fe1a4d26226c8ecb798cd9d08bd3acc362aead972fdbee80d326785b",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciled_resolution.tsv": "cb2a5d32d6eabcde6ba7aa5db52bfcc813fc52e45a897cac7ec13a632ce016d5",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciliation_outputs.sha256": "62aa1bed45d5bfc77b190247d94a1a9e4bb7be772d14fb55f2cbf03f3ab3f5cf",
+    "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/reconciliation_summary.json": "c43385e506a7d37c5290fdb3842c2991c0398efcf944f57be68ffadd51d5c802"
+  },
+  "status": "FROZEN_PRE_MODEL_CANDIDATE_SELECTION",
+  "validation_contract": {
+    "blind_validation_content_may_be_used_for_model_development": false,
+    "blind_validation_labels_may_be_used_for_model_selection": false,
+    "blind_validation_labels_may_be_used_for_threshold_selection": false,
+    "current_design_selects_hyperparameters": false,
+    "current_design_selects_model_family": false,
+    "current_design_selects_recall_acceptance_threshold": false,
+    "current_design_selects_score_threshold": false,
+    "development_batches": [
+      "B000001",
+      "B000002",
+      "B000003",
+      "B000004",
+      "B000005",
+      "B000006",
+      "B000007",
+      "B000008",
+      "B000009"
+    ],
+    "prior_sampling_minimum_positive_rule_adopted_as_model_acceptance_rule": false,
+    "reason_no_acceptance_threshold": "The frozen retrieval design explicitly records that no acceptable recall threshold has yet been defined. This design therefore does not convert a prior sampling rule into a model-acceptance or deployment threshold.",
+    "row_random_split_permitted": false,
+    "whole_batch_validation_required": true
+  }
+}

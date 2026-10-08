@@ -1,0 +1,185 @@
+{
+  "completion": {
+    "canonical_result_set_complete": true,
+    "canonical_result_set_frozen": true,
+    "generation_status": "FUTURE_REVIEW_WORKSPACE_GENERATED_PRE_REVIEW",
+    "independent_byte_identical_rebuild": true,
+    "semantic_workspace_audit": "PASS"
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_RESULTS",
+  "freeze_parent_commit": "d6d2d874aa61bf429767469bec34ee5b6a57e5af",
+  "generation": {
+    "active_builder_sha256": "b347de8b56325a56b5bb62d000d567c367b75270aed1566bdd907463992c05a0",
+    "authorization_checksum_manifest_sha256": "8eac88baadd0faac123def9c6f51be65f5707279815c41f869aa18a3afc0c09a",
+    "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_001",
+    "authorization_json_sha256": "42fc9031cf1a684406b591fb976d6bd8cd3f3ac8d433a510f7a29f31fcf003ce",
+    "exact_confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-WORKSPACE-V1",
+    "generation_success": true,
+    "implementation_checksum_manifest_sha256": "884c8e45ac89cdcd6631579b00be02cab664b8c644c58aec9c725e4d917e7449",
+    "one_time_generation_consumed": true,
+    "producing_commit": "d6d2d874aa61bf429767469bec34ee5b6a57e5af",
+    "rerun_authorized": false,
+    "workspace_design_checksum_manifest_sha256": "754288330069b576dff1e68c7c99c6fb57279c4860c3913818984bb6f57cb484"
+  },
+  "next_gate": null,
+  "next_gate_note": "Resolve the repository-defined post-workspace human-review gate separately. This result freeze grants no scientific screening decision, human-review approval, live-event authorization, cross-lane scientific-priority, carry-forward reassessment, or production-ledger authority.",
+  "production_artifacts": {
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/checksums.sha256": {
+      "bytes": 2633,
+      "sha256": "510c175709947d3b2b30d90d08d4522798865815447f2290dc351abf616b43a0"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packet_manifest.tsv": {
+      "bytes": 2715,
+      "sha256": "0ca641ac9e669034c3d8fa5cf5464c5e2f0b0ac5821efcfb4607c8938cbc31b1"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/manual_001.tsv": {
+      "bytes": 148215,
+      "sha256": "9ce8e5a03468024aa6b66c7fdb6c099a6babf64e1c9a8f587a5eb717156214fd"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_001.tsv": {
+      "bytes": 1101383,
+      "sha256": "665edd7eb4c00535ce1fb531460faa1e7c8193e6ef86814cad40fa0772435f05"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_002.tsv": {
+      "bytes": 1112782,
+      "sha256": "99e3140fd63686786348f94243164bf899375acdf144f3b5113d14882673f5a0"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_003.tsv": {
+      "bytes": 1114774,
+      "sha256": "2d5039e0e232a83546adb4e8bd07aa3d60803c1fa100e5947af5676327a0c6fc"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_004.tsv": {
+      "bytes": 1086432,
+      "sha256": "1f29578d63aa44b6b1cf5881baeef4a0ae3036d13fcbfad64dc39d54785e8ce0"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_005.tsv": {
+      "bytes": 1095681,
+      "sha256": "e8c83b1f35199e294abb15e723f6534935358ce596ef2b88cae5c26dcbd99ab9"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_006.tsv": {
+      "bytes": 1070246,
+      "sha256": "3790a0414844fc2fbf041cbeefd0fb9285b9bd2af94fdc0da2546489056e692e"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_007.tsv": {
+      "bytes": 1094535,
+      "sha256": "f3bdbef0a41434e0e62517db338823e7bee1dc7e05e4f07a3b2cfac4f5b052c0"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_008.tsv": {
+      "bytes": 1107532,
+      "sha256": "f29b34326eeda9cea9540f4dd82fa062f0c0c4b71df70abff35866388ebda728"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_009.tsv": {
+      "bytes": 1116455,
+      "sha256": "3e00cb1d4c847a2ededab2192f1ab2e2ebfb378456cdceb5cca93c34c79decaa"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_010.tsv": {
+      "bytes": 1117057,
+      "sha256": "3ec4571cad8602fd7bc16c2a6770ba55f2feb18df857db3af734d21fdef2a640"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/priority_011.tsv": {
+      "bytes": 1084932,
+      "sha256": "ce2d241a5d0a06533b58ce316f78a1094e2c220beb6f0e687eee751803353300"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_001.tsv": {
+      "bytes": 1128609,
+      "sha256": "97536a71b51e658d5aabc38dbf9002395ac0fb5a9b1e097399d682644580dd7d"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_002.tsv": {
+      "bytes": 1140607,
+      "sha256": "d916030d911464d870ffde01c0c439b7f6c898c1177e4cb12a9ab5fd5bbe742f"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_003.tsv": {
+      "bytes": 1138758,
+      "sha256": "9d9b2e8492c8730bcd644d0cb63859832afbf581f2c6f1f5e6b9d85528d93a3a"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_004.tsv": {
+      "bytes": 1158029,
+      "sha256": "c27ba2ea2ae39a3723ce006c98363369f0d4d6964719b0923155097ed66776a6"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_005.tsv": {
+      "bytes": 1158121,
+      "sha256": "727a868f1b622eafddf806d9aabf21e44347d7b38a2728c01482d43aa8bb04d0"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_006.tsv": {
+      "bytes": 1149343,
+      "sha256": "dffaf81b03be3b716e6b10df616d836299e5898f71066f1dc089c373e5af9c79"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_007.tsv": {
+      "bytes": 1144605,
+      "sha256": "da4c7ffe02ff423a6fe2a81e1e907544f42cdc86bf9767cba18e794316c35ece"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_008.tsv": {
+      "bytes": 1165949,
+      "sha256": "b1183628ebe500917d6c3363fab1c97cbe6b1070a15b84224b38125648fcbf21"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_009.tsv": {
+      "bytes": 1184480,
+      "sha256": "042030ef04a93b0987a513c55c58bfa4e985d86cadae4098cf75a5ad6704fb40"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_010.tsv": {
+      "bytes": 1186406,
+      "sha256": "8089413b2db49669f23c510782bfbeffed42ee46de45cd20613f8f079c0a9f91"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_011.tsv": {
+      "bytes": 1204026,
+      "sha256": "05469cf53be7c604029e4056592130b53d0f7b8764d69c08664b8f8437cb31dc"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_012.tsv": {
+      "bytes": 1211521,
+      "sha256": "70f23786c841df6dd4a90ff9a53a2c67ef3266e47a93003237dfb1559cf0ea0a"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/packets/residual_013.tsv": {
+      "bytes": 1036967,
+      "sha256": "e9e6b1dcd86a8f2a5f08654ec66aebfdadd63379fe347501dbb8595e3294349e"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/prior_carry_forwards.tsv": {
+      "bytes": 2533,
+      "sha256": "f5fcb33af01e3bcaecd8628a1827a5ab9afad708fa0967a64200fe12276be12b"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/review_work_membership.tsv": {
+      "bytes": 27142786,
+      "sha256": "d266a30e601d2609d3f845451e9161ac7e9e5d942137738c124438671f0ee728"
+    },
+    "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1/workspace_manifest.json": {
+      "bytes": 6183,
+      "sha256": "a6bcbf482b32ded799d6d0ef48d53d7adb17042139d9ff1f7a088dc314622763"
+    }
+  },
+  "production_ledger_observation_at_generation": {
+    "event_count": 2011,
+    "future_entity_event_rows": 0,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "production_ledger_mutated_by_generation": false
+  },
+  "result_contract": {
+    "canonical_file_count": 30,
+    "canonical_tree_sha256": "4dc8ede8500339a7cbe70858b842239e56cab29d5e34ada3ef54ffb55d768d6f",
+    "frozen_triage_rows": 12162,
+    "global_cross_lane_order_defined": false,
+    "manual_packet_count": 1,
+    "manual_review_rows": 257,
+    "manual_vs_scored_priority_defined": false,
+    "maximum_packet_size": 500,
+    "new_review_work_rows": 12156,
+    "prior_carry_forward_rows": 6,
+    "priority_packet_count": 11,
+    "priority_review_rows": 5477,
+    "residual_packet_count": 13,
+    "residual_review_rows": 6422,
+    "total_packet_count": 25
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_performed": false,
+    "cross_lane_scientific_priority_inferred": false,
+    "human_scientific_review_performed": false,
+    "live_event_authorization_created": false,
+    "new_scientific_batch_membership_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "raw_continuous_score_exposed": false,
+    "scientific_decision_made": false,
+    "selected_candidate_id_exposed": false
+  },
+  "status": "FROZEN_FUTURE_REVIEW_WORKSPACE_V1_RESULTS"
+}

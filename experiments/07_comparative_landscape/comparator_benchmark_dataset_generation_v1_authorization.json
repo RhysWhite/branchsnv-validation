@@ -1,0 +1,52 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_DATASET_GENERATION_V1_001",
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "parent_environment_smoke_results_commit": "359e6881ef77485372579e90b59ca2ca527b5f38",
+  "frozen_artifacts": {
+    "benchmark_design_sha256": "1306af08f69d27a80990203bd7d803d2c907a1cdeb56bfd2fe0174bf4a416cde",
+    "scenario_matrix_sha256": "8e569a6fbad769de0aed087e882410f6f1dd7114cb060e13a956159ae0b39398",
+    "generator_sha256": "229ed49c541023d6d439967ca184dd82430a4b3592d42657131fac08c9f3f560",
+    "adapters_sha256": "c4d351b041c68d9d1a142e3f532d353042374b416f5d03da29378a79672779e5",
+    "generation_harness_sha256": "92d3558a56ae04341d2be65d20c76f9cdb1e69b2442d0df733eda0260905b9e4",
+    "environment_smoke_results_anchor_sha256": "1522ecb1b49bba2f09b960a74924c1d8b3e58a48ee9afcf9e1046b2d76e5882b"
+  },
+  "scope": {
+    "dataset_generation_authorized": true,
+    "generation_harness_execution_authorized": true,
+    "frozen_generator_execution_authorized": true,
+    "frozen_adapter_serialization_authorized": true,
+    "dataset_manifest_writing_authorized": true,
+    "dataset_checksum_writing_authorized": true,
+    "required_generation_guard_tokens_authorized": true
+  },
+  "requirements": [
+    "Generate exactly the 150 scenarios already frozen in comparator_benchmark_execution_v1_scenario_matrix.tsv, in S001 through S150 order.",
+    "Use master seed 20261005012417 and the already frozen deterministic scenario-seed derivation without modification.",
+    "Use only the frozen generator, adapters and dataset-generation harness whose SHA-256 identities are recorded in this authorization.",
+    "Set both required generation guard tokens only for this authorized generation execution.",
+    "Write generated comparator inputs beneath results/07_comparative_landscape/comparator_benchmark_dataset_v1/inputs/.",
+    "Write benchmark truth beneath results/07_comparative_landscape/comparator_benchmark_dataset_v1/truth/ and keep it separate from comparator inputs.",
+    "Write benchmark_dataset_manifest.tsv and checksums.sha256 using the frozen generation harness.",
+    "Do not overwrite an existing comparator_benchmark_dataset_v1 result tree.",
+    "Do not execute any comparator during dataset generation.",
+    "Do not inspect benchmark truth to change parameters, source pins, adapters, generator logic, scenario definitions or software behavior.",
+    "Any generation failure requiring implementation change must be preserved and handled through a separately frozen amendment before retry."
+  ],
+  "explicitly_not_authorized": {
+    "benchmark_execution": true,
+    "third_party_comparator_execution": true,
+    "parameter_tuning_against_benchmark_truth": true,
+    "benchmark_truth_use_for_debugging_comparators": true,
+    "frozen_benchmark_design_mutation": true,
+    "frozen_scenario_matrix_mutation": true,
+    "frozen_generator_mutation": true,
+    "frozen_adapter_mutation": true,
+    "frozen_source_pin_mutation": true,
+    "generation_harness_mutation_after_authorization_freeze": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true
+  },
+  "one_time_dataset_generation_authorization": true,
+  "rerun_authorized": false,
+  "next_gate_after_dataset_generation": "FREEZE_COMPARATOR_BENCHMARK_DATASET_GENERATION_RESULTS_V1"
+}

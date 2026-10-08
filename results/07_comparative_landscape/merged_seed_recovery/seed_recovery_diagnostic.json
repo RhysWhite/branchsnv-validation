@@ -1,0 +1,62 @@
+{
+  "candidate_evidence_rows": 101,
+  "candidate_name_recovery": 23,
+  "candidate_records_examined": 116556,
+  "capability_classification_performed": false,
+  "comparison_role_summary": {
+    "context": {
+      "candidate_match_found": 6,
+      "not_recovered_by_name": 1,
+      "total": 7
+    },
+    "diagnostic_panel_candidate": {
+      "candidate_match_found": 3,
+      "not_recovered_by_name": 1,
+      "total": 4
+    },
+    "direct_candidate": {
+      "candidate_match_found": 4,
+      "not_recovered_by_name": 1,
+      "total": 5
+    },
+    "infrastructure": {
+      "candidate_match_found": 0,
+      "not_recovered_by_name": 1,
+      "total": 1
+    },
+    "near_direct_candidate": {
+      "candidate_match_found": 5,
+      "not_recovered_by_name": 0,
+      "total": 5
+    },
+    "reference": {
+      "candidate_match_found": 1,
+      "not_recovered_by_name": 0,
+      "total": 1
+    },
+    "upstream": {
+      "candidate_match_found": 4,
+      "not_recovered_by_name": 4,
+      "total": 8
+    }
+  },
+  "diagnostic_only": true,
+  "eligibility_decisions_made": false,
+  "experiment": "07_comparative_landscape_merged_seed_recovery",
+  "human_confirmation": "pending for every candidate name match",
+  "matching_semantics": "imported from frozen check_seed_recovery.py",
+  "merged_candidate_records_sha256": "7413c8aaecfe1b6366b84bd46a4d2ffbcbabcfeae32e6a1c5cb6bab63c81a40a",
+  "merged_checksums_sha256": "d9cf550c3d46400639aee54a62b59b4d695fb2fe24e6594ed6888eeab04d9b5f",
+  "not_recovered_by_name": 8,
+  "original_checker_sha256": "c282af20ea7a6a09d3ec69e9298652836683ac13bb2120d34adf139d6d2b44bc",
+  "schema_version": 1,
+  "screening_performed": false,
+  "search_retuning_permitted": false,
+  "seed_registry_sha256": "df373f691df72a7a65de7067ef33ae5005a3a8e36a1165e0d467bad69082760c",
+  "seed_tools": 31,
+  "stage_recovery": {
+    "formal": 8,
+    "high_recall": 21
+  },
+  "status": "COMPLETE"
+}

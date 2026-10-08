@@ -1,0 +1,13 @@
+
+0.00	-TreeAnc: set-up
+GTR params are not specified. Creating GTR model with default parameters
+
+--- alignment including ancestral nodes saved as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/TreeTime/smoke_output/ancestral_sequences.fasta
+
+--- tree saved in nexus format as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/TreeTime/smoke_output/annotated_tree.nexus
+
+--- tree saved in auspice json format as  
+	 results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/TreeTime/smoke_output/auspice_tree.json
+

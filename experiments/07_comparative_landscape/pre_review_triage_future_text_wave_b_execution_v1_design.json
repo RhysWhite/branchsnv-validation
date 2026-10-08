@@ -1,0 +1,147 @@
+{
+  "authorization_contract": {
+    "authorization_created_by_this_freeze": false,
+    "authorization_must_bind_exact_executable_commit": true,
+    "authorization_statement": "AUTHORIZE_TRIAGE_FUTURE_TEXT_LIVE_WAVE_B",
+    "authorization_type": "TRIAGE_FUTURE_TEXT_LIVE_WAVE_B_AUTHORIZATION",
+    "canonical_path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b/authorization.json",
+    "completed_authorization_replay_permitted": false,
+    "execution_id_bound_at_first_start": true,
+    "explicit_human_authorization_required": true,
+    "must_be_untracked_at_execution_time": true,
+    "one_use": true,
+    "same_execution_id_resume_permitted": true,
+    "second_execution_id_with_same_authorization_permitted": false,
+    "wave_a_authorization_permitted": false
+  },
+  "design_id": "PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_B_EXECUTION_V1",
+  "design_parent_commit": "8a476d1183b03a42ec6d06df6fb6ddb4e9fb8bbe",
+  "execution_contract": {
+    "automatic_reissue_after_ambiguous_network_intent": false,
+    "cold_start_seconds_before_first_openalex_request": 0.5,
+    "concurrency": 1,
+    "cross_process_execution_lock_required": true,
+    "halt_on_first_unresolved_fault": true,
+    "logical_lookup_id_format": "triage_future_text_wave_b:{request_sequence:04d}:{request_identity_sha256_prefix16}",
+    "maximum_requests_per_second_per_provider": 2,
+    "ordering": "strict ascending request_sequence",
+    "output_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b",
+    "raw_archive_bundle_sha256_required_for_checkpoint": true,
+    "request_written_before_network": true,
+    "runtime_invariants_rechecked_between_requests": true,
+    "same_execution_id_resume_only": true,
+    "terminal_body_sha256_required": true,
+    "terminal_checkpoint_after_verified_terminal_only": true
+  },
+  "frozen_dependencies": {
+    "experiments/07_comparative_landscape/PRE_REVIEW_TRIAGE_FUTURE_TEXT_WAVE_B_MANIFEST_V1.md": "e69d281c47cb39f2568ebf8217b1b7da0985dc4ba383e2e8e4d76be92c174f3e",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_a_guard_v1.py": "79300875f7620afde503f70b27a78449d11fcda35c23b11dc44d2fe538bcb28c",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_manifest_v1_design.json": "aab3d23f6d7c4b4c155d924730e062d1a9fc14ff57e35a12a9a3df7c03077afd",
+    "experiments/07_comparative_landscape/pre_review_triage_future_text_wave_b_manifest_v1_freeze.py": "50267b7027e875ff04c7fdafe78815495661295c2a3e75edbdf0ce3fe6321007",
+    "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f",
+    "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962",
+    "experiments/07_comparative_landscape/test_triage_pre_review_text_wave_b_execution_v1.py": "48619aa35b016efe9d15926608a7c49e482b158b69cf07083faea8d7e13f8332",
+    "experiments/07_comparative_landscape/test_triage_pre_review_text_wave_b_live_hostile_v1.py": "0cb3ba9bdcb5f7efd10d16cdc69bc6cf59e53445191ce09e3d19940c5b408663",
+    "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_b_guard_v1.py": "dfbd56b90ae47068f880328e21f3c3cc52aa86ef7c80db9c5f069342bc025cb3",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_b_live_entrypoint_v1.py": "beb0bf427a0c4f935d9c58655aa80c0cbb859705b373fd901827c451b580c2e7",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_b_runner_core_v1.py": "3bdbf2d827eadc2c5d7d25593cba9231da65336722f70e01e59aeba3248f1b3f",
+    "experiments/07_comparative_landscape/triage_pre_review_text_wave_b_transport_evidence_adapter_v1.py": "d6d04019521f1bec3d1d9b27014fb5718a774488d93b8a48852a483b51664a79",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_derivation.tsv": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+    "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_request_manifest.tsv": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11"
+  },
+  "implementation_strategy": {
+    "create_future_wave_b_specific_guard": true,
+    "create_future_wave_b_specific_live_entrypoint": true,
+    "create_future_wave_b_specific_runner_core": true,
+    "create_future_wave_b_specific_tests": true,
+    "create_future_wave_b_specific_transport_evidence_adapter": true,
+    "development_wave_b_files_must_remain_byte_identical": true,
+    "future_wave_a_files_must_remain_byte_identical": true,
+    "reuse_low_level_transport_unchanged": true,
+    "reuse_normalizer_unchanged": true,
+    "reuse_transport_policy_module_as_execution_authority": false
+  },
+  "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_FUTURE_WAVE_B_GUARD_ADAPTER_RUNNER_AND_LIVE_ENTRYPOINT_THEN_FREEZE_EXECUTABLE_COMMIT_BEFORE_SEPARATE_HUMAN_AUTHORIZATION",
+  "openalex_identity_contract": {
+    "exact_doi": "Returned OpenAlex payload must carry the requested DOI identity after pinned DOI normalization.",
+    "exact_pmid": "Returned OpenAlex payload must carry the exact requested PMID identity in its provider identifier bundle. Absence, multiplicity incompatible with the exact request, or disagreement is a provider identity mismatch.",
+    "exact_work_id": "Returned OpenAlex Work identity must match the requested Work ID, subject only to the already validated canonical OpenAlex Work redirect contract.",
+    "position_gap": "OpenAlex normalization position-gap remains explicit and cannot be treated as an ordinary usable abstract."
+  },
+  "preservation_contract": {
+    "blind_validation_content_used": false,
+    "development_wave_b_sources_byte_identical": true,
+    "future_wave_a_archives_byte_identical": true,
+    "future_wave_a_sources_byte_identical": true,
+    "low_level_transport_byte_identical": true,
+    "scientific_decision_fields_permitted_in_transport_evidence": false
+  },
+  "request_contract": {
+    "ad_hoc_probe_permitted": false,
+    "allowed_exact_routes": [
+      {
+        "frozen_route": "exact_work_id",
+        "identifier_namespace": "openalex",
+        "transport_route": "work_by_openalex_id"
+      },
+      {
+        "frozen_route": "exact_doi",
+        "identifier_namespace": "doi",
+        "transport_route": "work_by_doi"
+      },
+      {
+        "frozen_route": "exact_pmid",
+        "identifier_namespace": "pmid",
+        "transport_route": "work_by_pmid"
+      }
+    ],
+    "crossref_permitted": false,
+    "derivation_path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_derivation.tsv",
+    "derivation_sha256": "7fc3bd6fee6c5a3539587223ef6459df1ecce41ad670de3929836eef7a6c4474",
+    "manifest_path": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1/live_wave_b_request_manifest.tsv",
+    "manifest_sha256": "e6b79c2fff3f31a8155dd7c37188d0ea2c4bd786c7e7de9950570288a2c62d11",
+    "maximum_request_count": 40,
+    "provider": "openalex",
+    "pubmed_provider_permitted": false,
+    "route_population": {
+      "exact_doi": 8,
+      "exact_pmid": 1,
+      "exact_work_id": 31
+    },
+    "search_or_list_endpoints_permitted": false
+  },
+  "required_hostile_tests": {
+    "authorization_byte_drift_rejected": true,
+    "concurrent_execution_rejected": true,
+    "different_execution_id_rejected": true,
+    "dirty_tree_rejected_before_claim": true,
+    "durable_evidence_resume_never_reissues": true,
+    "exact_doi_success_identity": true,
+    "exact_pmid_missing_requested_identity_fails_closed": true,
+    "exact_pmid_not_found_checkpointable": true,
+    "exact_pmid_success_identity": true,
+    "exact_pmid_wrong_requested_identity_fails_closed": true,
+    "exact_work_id_success_identity": true,
+    "non_openalex_provider_rejected": true,
+    "partial_archive_never_reissued": true,
+    "real_network_executor_blocked_in_tests": true,
+    "runtime_invariants_rechecked_between_requests": true,
+    "unlisted_route_rejected": true,
+    "wrong_head_rejected_before_claim": true
+  },
+  "safety_boundary": {
+    "authorization_created": false,
+    "blind_validation_scientific_content_used": false,
+    "future_scoring_performed": false,
+    "model_fit_permitted": false,
+    "network_authorized": false,
+    "network_execution_permitted": false,
+    "production_mutation_permitted": false,
+    "reconciliation_performed": false,
+    "threshold_selection_permitted": false
+  },
+  "schema_version": 1,
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "wave_id": "TRIAGE_FUTURE_TEXT_LIVE_WAVE_B"
+}

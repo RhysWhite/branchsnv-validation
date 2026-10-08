@@ -1,0 +1,40 @@
+{
+  "artifact_sha256": {
+    "priority_scored_queue.tsv": "295868d5bb1812d6d5926abdda782df51149afebf54a35bd7538924d597aba0d",
+    "residual_scored_queue.tsv": "91dcc176d20357ea162ede8a63591a4890419c4190b1754311c76016e4e62c72",
+    "unscored_manual_review_queue.tsv": "084dd93f02d8cf7a8adcccf08352cef2767ed3325b0a3b903defd6cfd296ee5d"
+  },
+  "cross_lane_priority_defined": false,
+  "lanes": {
+    "priority_scored_queue": 5483,
+    "residual_scored_queue": 6422,
+    "total_human_review_universe": 12162,
+    "unscored_manual_review_queue": 257
+  },
+  "operating_point": {
+    "candidate_fraction_denominator": 76,
+    "candidate_fraction_numerator": 35,
+    "prefix_count_rule": "ceil_exact_fraction_times_scoreable_population",
+    "raw_score_threshold_selected": false
+  },
+  "ranking_policy": "continuous_score_descending_then_screening_entity_id_ascending",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "automatic_scientific_exclusion": false,
+    "automatic_scientific_inclusion": false,
+    "blind_validation_content_used": false,
+    "future_labels_used": false,
+    "hard_prediction": false,
+    "production_ledger_mutated": false,
+    "raw_score_threshold": false
+  },
+  "selected_candidate_id": "linear_svc_balanced_l2_v1",
+  "source_identity": {
+    "coverage_sha256": "8dde17ef13648cfee4bbec80322377202eb769cd11e5f3249d59de978e3824b7",
+    "future_scoring_results_checksum_manifest_sha256": "8be5645fb71f557306be11ae132f1d655013d6a6d573beb50380399cad9bc939",
+    "queue_design_checksum_manifest_sha256": "319ce18f144b97acc1d6c5b277420bd7b9f66fce0e99b2b8207a657559ea1e26",
+    "scored_records_sha256": "70164b0e345d2df0e0fa0c765a293e725096ef50096c6bb1025ed72ca06f7d67"
+  },
+  "status": "FUTURE_REVIEW_QUEUE_GENERATED_PRE_REVIEW",
+  "unscored_ordering": "retrieval_record_index_ascending"
+}

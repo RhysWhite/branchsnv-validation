@@ -1,0 +1,123 @@
+{
+  "canonical_output_file_count": 4,
+  "canonical_output_files": {
+    "reconciled_normalized_text.tsv": {
+      "bytes": 37913981,
+      "sha256": "8ee30e1bbd94140710e943fc2227805819fa88e84e31207ff64965d67489a1d3"
+    },
+    "reconciled_resolution.tsv": {
+      "bytes": 3773351,
+      "sha256": "437f21bde9c29ddc2ef531a356bd56491fb088f3a37e35ee5aa9be1609ec31f7"
+    },
+    "reconciliation_outputs.sha256": {
+      "bytes": 283,
+      "sha256": "237fd7080a3ff0617a486673ab122234edfbd6bfe12dc1734e5e16ea9e153279"
+    },
+    "reconciliation_summary.json": {
+      "bytes": 8956,
+      "sha256": "14b8099cecff8787a3a62efe5c796beebddf8635a66a38588f089435fdd14209"
+    }
+  },
+  "canonical_output_root": "results/07_comparative_landscape/pre_review_triage_future_text_retrieval_v1",
+  "canonical_output_total_bytes": 41696571,
+  "implementation_chain": {
+    "active_implementation_amendment_commit": "315d829eae5e6ace1b6483eaac3429dc39c9f458",
+    "active_implementation_amendment_sha256": "b2c2716efdc8286d6f34e06b12622e131efe1e8973759ab7732663d40cf77d7b",
+    "implementation_freeze_commit": "2d791a0c186144397706b0b0e556a8cef6c8ee7e",
+    "original_reconciliation_design_commit": "3047e7b1aef8d479bd988a8779890877d056a173",
+    "reconciliation_amendment_001_commit": "3e7f1707630054652a68bae1208a5be4202b8c56",
+    "reconciliation_amendment_002_commit": "7a793f5a6b8aa3e0e99c1b0b3c49b1e4af46a4b7"
+  },
+  "next_gate": "FREEZE_DOWNSTREAM_FUTURE_TEXT_CONSUMER_DESIGN_BEFORE_EXECUTION",
+  "production_reconciliation": {
+    "abstract_status_counts": {
+      "abstract_absent": 246,
+      "openalex_position_gap": 1,
+      "provider_not_found": 10,
+      "usable_abstract_openalex": 3406,
+      "usable_abstract_pubmed": 8499
+    },
+    "fallback_reason_counts": {
+      "pubmed_abstract_absent": 38,
+      "pubmed_verified_not_found": 2
+    },
+    "parser_or_position_gap_count": 1,
+    "row_counts": {
+      "normalized_text": 11905,
+      "resolution": 12162
+    },
+    "terminal_source_counts": {
+      "offline_cache_openalex": 15,
+      "wave_a_openalex": 3598,
+      "wave_a_openalex_verified_not_found": 10,
+      "wave_a_pubmed": 8499,
+      "wave_b_openalex_after_pubmed_abstract_absent": 38,
+      "wave_b_openalex_after_pubmed_verified_not_found": 2
+    },
+    "terminal_source_status_counts": {
+      "offline_cache_openalex": {
+        "abstract_absent": 1,
+        "usable_abstract_openalex": 14
+      },
+      "wave_a_openalex": {
+        "abstract_absent": 234,
+        "openalex_position_gap": 1,
+        "usable_abstract_openalex": 3363
+      },
+      "wave_a_openalex_verified_not_found": {
+        "provider_not_found": 10
+      },
+      "wave_a_pubmed": {
+        "usable_abstract_pubmed": 8499
+      },
+      "wave_b_openalex_after_pubmed_abstract_absent": {
+        "abstract_absent": 11,
+        "usable_abstract_openalex": 27
+      },
+      "wave_b_openalex_after_pubmed_verified_not_found": {
+        "usable_abstract_openalex": 2
+      }
+    },
+    "wave_b_normalized_status_counts": {
+      "abstract_absent": 11,
+      "usable_abstract_openalex": 29
+    }
+  },
+  "reproducibility": {
+    "canonical_internal_checksum_validation": true,
+    "canonical_output_hashes_match_preproduction_freeze": true,
+    "controlled_canonical_write_completed": true,
+    "independent_preproduction_build_count": 2,
+    "independent_preproduction_builds_byte_identical": true,
+    "preproduction_complete_reconciliation_validation": true
+  },
+  "request_10083": {
+    "abstract_status": "usable_abstract_pubmed",
+    "canonical_fault_evidence_preserved": true,
+    "network_reissued": false,
+    "normalized_text_present": true,
+    "provider_record_id": "37878119",
+    "source_body_sha256": "7cffd5a4977e2b74058b3476e4d1d9bc5a85151d303f59acb8125c4f94e20e15",
+    "status": "FROZEN_MANIFEST_DEFECT_RECOVERY_CONSUMED"
+  },
+  "safety_boundary": {
+    "abstract_absence_used_as_exclusion_evidence": false,
+    "blind_validation_content_used": false,
+    "model_fit": false,
+    "network_used": false,
+    "production_ledger_modified": false,
+    "raw_archive_modified": false,
+    "scientific_decisions_made": false,
+    "scientific_labels_added": false,
+    "threshold_selected": false,
+    "wave_a_modified": false,
+    "wave_b_modified": false
+  },
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "write_control": {
+    "canonical_confirmation": "WRITE-FROZEN-RECONCILIATION-V1",
+    "producing_commit": "315d829eae5e6ace1b6483eaac3429dc39c9f458",
+    "single_controlled_write": true
+  }
+}

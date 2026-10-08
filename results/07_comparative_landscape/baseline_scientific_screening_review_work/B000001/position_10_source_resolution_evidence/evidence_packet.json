@@ -1,0 +1,58 @@
+{
+  "batch_id": "B000001",
+  "current_event_id": "E000000010",
+  "current_state": "awaiting_source_escalation",
+  "doi": "10.1002/9780470015902.a0020859",
+  "evidence_ids": [
+    "EV10R_001",
+    "EV10R_002",
+    "EV10R_003",
+    "EV10R_004"
+  ],
+  "network_capture": {
+    "crossref_rest": {
+      "curl_return_code": "0",
+      "effective_url": "https://api.crossref.org/works/10.1002%2F9780470015902.a0020859",
+      "http_code": "200",
+      "source": "crossref_rest"
+    },
+    "doi_csl": {
+      "curl_return_code": "0",
+      "effective_url": "https://api.crossref.org/v1/works/10.1002%2F9780470015902.a0020859/transform",
+      "http_code": "200",
+      "source": "doi_csl"
+    },
+    "doi_resolution": {
+      "curl_return_code": "0",
+      "effective_url": "https://onlinelibrary.wiley.com/doi/10.1002/9780470015902.a0020859",
+      "http_code": "403",
+      "source": "doi_resolution"
+    }
+  },
+  "position_in_batch": 10,
+  "production_ledger_mutated": false,
+  "production_ledger_mutation_authorized": false,
+  "registered_metadata": {
+    "abstract_chars": 407,
+    "abstract_present": true,
+    "abstract_sha256": "8842550d42e78e8469661e6add180d83162a0fee3c0a4cdd360deb8901eca820",
+    "authors": "Sankar Subramanian",
+    "container_title": "Encyclopedia of Life Sciences",
+    "published": {
+      "date-parts": [
+        [
+          2008,
+          3,
+          14
+        ]
+      ]
+    },
+    "publisher": "Wiley",
+    "record_type": "other",
+    "title": "Selection against Amino Acid Replacements in Human Proteins"
+  },
+  "schema_version": 1,
+  "scientific_decision_created": false,
+  "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859",
+  "status": "FROZEN_SOURCE_EVIDENCE_ONLY"
+}

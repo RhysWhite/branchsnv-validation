@@ -1,0 +1,10 @@
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py:160:    ctl = adapters.paml_baseml_ctl_text("seq.phy", "tree.nwk", "mlb")
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py:161:    require("RateAncestor = 1" in ctl and "fix_blength = 2" in ctl, "PAML contract differs")
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:147:def paml_phylip_text(observed_sequences: dict[str, str]) -> str:
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:151:        raise ValueError("PAML sequence lengths differ")
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:152:    # PAML accepts sequential format with names separated by whitespace.
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:160:def paml_baseml_ctl_text(seqfile: str, treefile: str, outfile: str) -> str:
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:493:def parse_paml_rst_sequences(text: str) -> dict[str, str]:
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:494:    # PAML rst contains a "List of extant and reconstructed sequences" block.
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:497:        raise ValueError("PAML rst lacks reconstructed-sequence block")
+experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py:524:        raise ValueError("no PAML sequences parsed")

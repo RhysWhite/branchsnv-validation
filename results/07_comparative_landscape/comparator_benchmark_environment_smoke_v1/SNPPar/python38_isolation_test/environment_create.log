@@ -1,0 +1,80 @@
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/ffeee55f.json" was modified by another program
+bioconda/linux-64                                           Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/2a957770.json" was modified by another program
+bioconda/noarch                                             Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/497deca9.json" was modified by another program
+conda-forge/linux-64                                        Using cache
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/09cdf8bf.json" was modified by another program
+conda-forge/noarch                                          Using cache
+Transaction
+
+  Prefix: /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip
+
+  Updating specs:
+
+   - python=3.8
+   - pip
+
+
+  Package               Version  Build                 Channel           Size
+───────────────────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────────────────
+
+  + libzlib               1.3.2  h25fd6f3_3            conda-forge     Cached
+  + libgomp              16.2.0  he0feb66_7            conda-forge     Cached
+  + zstd                  1.5.7  hb78ec9c_7            conda-forge     Cached
+  + _openmp_mutex           4.5  20_gnu                conda-forge     Cached
+  + ld_impl_linux-64     2.46.1  default_hbd61a6d_102  conda-forge     Cached
+  + libgcc               16.2.0  ha9f2e26_7            conda-forge     Cached
+  + tk                   8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + ncurses                 6.6  hdb14827_1            conda-forge     Cached
+  + libxcrypt            4.4.38  h280c20c_0            conda-forge     Cached
+  + libuuid              2.42.4  hcfc3c73_0            conda-forge     Cached
+  + libsqlite            3.53.4  h0737f62_102          conda-forge     Cached
+  + libnsl                2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + liblzma               5.8.3  hb03c661_1            conda-forge     Cached
+  + libffi                3.7.0  h81df57d_1            conda-forge     Cached
+  + bzip2                 1.0.8  hda65f42_10           conda-forge     Cached
+  + readline                8.3  hd6e31c0_1            conda-forge     Cached
+  + xz-tools              5.8.3  hb03c661_1            conda-forge     Cached
+  + xz-gpl-tools          5.8.3  ha02ee65_1            conda-forge     Cached
+  + liblzma-devel         5.8.3  hb03c661_1            conda-forge     Cached
+  + xz                    5.8.3  ha02ee65_1            conda-forge     Cached
+  + ca-certificates   2026.7.22  hbd8a1cb_0            conda-forge     Cached
+  + openssl               3.6.5  h781a0a9_0            conda-forge     Cached
+  + python               3.8.20  h4a871b0_2_cpython    conda-forge       22MB
+  + wheel                0.45.1  pyhd8ed1ab_0          conda-forge       63kB
+  + setuptools           75.3.0  pyhd8ed1ab_0          conda-forge      780kB
+  + pip                  24.3.1  pyh8b19718_0          conda-forge     Cached
+
+  Summary:
+
+  Install: 26 packages
+
+  Total download: 23MB
+
+───────────────────────────────────────────────────────────────────────────────
+
+
+
+Looking for: ['python=3.8', 'pip']
+
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+
+To activate this environment, use
+
+     $ mamba activate /home/rwhite/branchsnv-comparator-envs/snppar-resolution-py38-pip
+
+To deactivate an active environment, use
+
+     $ mamba deactivate
+

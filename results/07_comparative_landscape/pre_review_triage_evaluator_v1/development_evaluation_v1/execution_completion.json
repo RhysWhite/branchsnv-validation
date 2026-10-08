@@ -1,0 +1,13 @@
+{
+  "blind_validation_content_used": false,
+  "development_records": 4190,
+  "execution_id": "TRIAGE-DEV-EVAL-V1-001",
+  "final_selected_candidate_id": "linear_svc_balanced_l2_v1",
+  "future_scoring_performed": false,
+  "hard_predictions_generated": false,
+  "production_mutated": false,
+  "schema_version": 1,
+  "scientific_screening_decisions_made": false,
+  "status": "DEVELOPMENT_EVALUATION_COMPLETED",
+  "threshold_selected": false
+}

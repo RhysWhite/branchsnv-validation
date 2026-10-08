@@ -1,0 +1,4 @@
+Position	Type	Ancestor_Node	Derived_Node	Ancestor_Call	Derived_Call	Gene	Strand	Codon	Codon_Position	Ancestor_Codon	Derived_Codon	Ancestor_A.A.	Derived_A.A.	Change	Up_Gene	Up_Gene_Strand	Up_Gene_Distance	Down_Gene	Down_Gene_Strand	Down_Gene_Distance
+40	intergenic	N1	N2	A	T	-	-	-	-	-	-	-	-	-	SYNTH_CDS_001	1	37	SYNTH_CDS_001	1	161
+200	intergenic	N2	tipB	T	A	-	-	-	-	-	-	-	-	-	SYNTH_CDS_001	1	197	SYNTH_CDS_001	1	1
+200	intergenic	N3	tipD	T	A	-	-	-	-	-	-	-	-	-	SYNTH_CDS_001	1	197	SYNTH_CDS_001	1	1

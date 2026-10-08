@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 1703, in <module>
+    raise SystemExit(main())
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 1509, in main
+    ) = retrieve_openalex(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 690, in retrieve_openalex
+    work = fetcher(
+  File "/home/rwhite/github/branchsnv-validation/experiments/07_comparative_landscape/retrieve_citation_wave.py", line 390, in fetch_json
+    with urllib.request.urlopen(
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/urllib/request.py", line 1391, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/urllib/request.py", line 1348, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/http/client.py", line 1283, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/http/client.py", line 1324, in _send_request
+    self.putheader(hdr, value)
+  File "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/lib/python3.10/http/client.py", line 1261, in putheader
+    raise ValueError('Invalid header value %r' % (values[i],))
+ValueError: Invalid header value b'Bearer echo\rexport OPENALEX_API_KEY\r\rread -rp "NCBI contact email: " NCBI_EMAIL\rexport NCBI_EMAIL\r\recho\recho "===== VERIFY PRESENCE ONLY ====="\r\rtest -n "$OPENALEX_API_KEY" \\\r  && echo "PASS | OPENALEX_API_KEY is set" \\\r  || { echo "ERROR | OPENALEX_API_KEY missing"; exit 1; }\r\rtest -n "$NCBI_EMAIL" \\\r  && echo "PASS | NCBI_EMAIL is set" \\\r  || { echo "ERROR | NCBI_EMAIL missing"; exit 1; }\r\recho\recho "===== VERIFY NOTHING CHANGED ====="'

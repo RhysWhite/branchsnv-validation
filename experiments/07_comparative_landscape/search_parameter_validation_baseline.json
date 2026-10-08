@@ -1,0 +1,55 @@
+{
+  "absolute_recall_claimed": false,
+  "citation_chain_retrieval_performed_at_freeze": false,
+  "formal_search": {
+    "candidate_rows": 3108,
+    "deduplicated_records": 2204,
+    "priority_seed_name_recovery": {
+      "recovered": 4,
+      "roles": [
+        "diagnostic_panel_candidate",
+        "direct_candidate",
+        "near_direct_candidate"
+      ],
+      "total": 14
+    },
+    "query_blocks": 18,
+    "seed_name_recovery": {
+      "recovered": 8,
+      "total": 31
+    }
+  },
+  "high_recall_search": {
+    "candidate_rows": 113448,
+    "deduplicated_records": 78962,
+    "query_blocks": 5,
+    "seed_tools_with_stage_evidence": 21
+  },
+  "merged_database_search": {
+    "candidate_rows": 116556,
+    "deduplicated_records": 79917,
+    "direct_near_seed_name_recovery": {
+      "recovered": 9,
+      "total": 10
+    },
+    "seed_name_recovery": {
+      "recovered": 23,
+      "total": 31
+    }
+  },
+  "primary_search_retuning_permitted": false,
+  "schema_version": 1,
+  "search_optimality_claimed": false,
+  "status": "FROZEN_PRE_CITATION_CHAINING",
+  "validation_endpoints_frozen": [
+    "final_direct_near_relative_recall_formal",
+    "final_direct_near_relative_recall_high_recall",
+    "final_direct_near_relative_recall_combined_database",
+    "citation_only_yield",
+    "source_specific_coverage",
+    "query_family_contribution",
+    "individual_query_contribution",
+    "non_seed_generalization",
+    "structured_miss_analysis"
+  ]
+}

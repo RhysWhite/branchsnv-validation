@@ -1,0 +1,10 @@
+# created on Wed Oct  7 09:52:15 2026
+name	parent  child
+S1 N2     
+S2 N2     
+S3 N3     
+S4 N3     
+N1 root! N2 N3
+N2 N1      S1 S2
+N3 N1      S3 S4
+

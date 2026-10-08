@@ -1,0 +1,40 @@
+{
+  "after_sha256": {
+    "adapters": "78c04404c80f33ff3abd2c396eaf0f071133ad333d3568ab545e60beae7e58fa",
+    "toy_validation": "ee06b388b981e497305a25de2d3ba3d2115e93323e3e85b96b55cc7461db4238"
+  },
+  "authorization_consumed": true,
+  "before_sha256": {
+    "adapters": "5745112944c348081a7260d57428fbf561c831b2615902a138fee0a42e839d42",
+    "toy_validation": "646cd346931ccbe8f988c5ee17ffb4302fa5e2cf2c8d84cd1037621ae46ed3eb"
+  },
+  "benchmark_scenarios_changed": false,
+  "changed_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "event_truth_changed": false,
+  "fixture_contract": {
+    "locus_tag": "SYNTH_CDS_001",
+    "placement_rule": "first consecutive three-base interval containing no variable site",
+    "reference_sequence_preserved": true,
+    "synthetic_cds_count": 1,
+    "synthetic_cds_length_bp": 3,
+    "variable_positions_required": true,
+    "variable_site_overlap_forbidden": true
+  },
+  "freeze_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_SNPPAR_REFERENCE_FIXTURE_AMENDMENT_V1",
+  "metrics_changed": false,
+  "next_gate": "RERUN_SNPPAR_TOY_SMOKE_WITH_FROZEN_REFERENCE_FIXTURE_V1",
+  "parent_authorization_commit": "86eb4cc4529ad378ab1577e164e84574cdc55421",
+  "root_sequence_generation_changed": false,
+  "snppar_environment_changed": false,
+  "snppar_inference_settings_changed": false,
+  "snppar_output_parser_changed": false,
+  "snppar_run_contract_changed": false,
+  "snppar_source_changed": false,
+  "snppar_source_pin": "0386df8edcff26faf242bc268c5f8865b09c9de9",
+  "status": "FROZEN_AMENDMENT_V1",
+  "tree_generation_changed": false,
+  "variable_positions_changed": false
+}

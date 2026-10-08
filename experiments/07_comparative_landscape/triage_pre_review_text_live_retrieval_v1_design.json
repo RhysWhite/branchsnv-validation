@@ -1,0 +1,198 @@
+{
+  "authorization_contract": {
+    "authorization_created_by_this_freeze": false,
+    "checkpoint_after_each_terminal_lookup": true,
+    "completed_authorization_replay_permitted": false,
+    "completion_receipt_required": true,
+    "execution_authority_created_by_this_freeze": false,
+    "execution_id_bound_on_first_start": true,
+    "explicit_human_authorization_required": true,
+    "future_authorization_must_bind": [
+      "wave_id",
+      "wave_a_request_manifest_sha256",
+      "design_sha256",
+      "parent_commit",
+      "normalizer_sha256",
+      "transport_source_hashes",
+      "maximum_request_count",
+      "execution_output_root"
+    ],
+    "maximum_request_count": 4490,
+    "network_authority_created_by_this_freeze": false,
+    "one_use": true,
+    "request_outside_frozen_manifest_permitted": false,
+    "resume_same_execution_id_permitted": true,
+    "second_execution_id_with_same_authorization_permitted": false
+  },
+  "design_id": "TRIAGE_PRE_REVIEW_TEXT_LIVE_RETRIEVAL_V1",
+  "execution_output_contract": {
+    "credentials_or_unredacted_contact_values_preserved": false,
+    "model_scores_permitted": false,
+    "normalized_text_generated_only_from_verified_archived_bytes": true,
+    "production_ledger_write_permitted": false,
+    "raw_provider_bytes_preserved": true,
+    "request_and_response_metadata_preserved": true,
+    "review_evidence_permitted": false,
+    "root": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a",
+    "scientific_labels_permitted": false
+  },
+  "frozen_source_hashes": {
+    "input_manifest": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/input_manifest.tsv",
+      "sha256": "4e5ba0313e008a58e968a9368ea90b6fdb70049b866003742ed1c967c31120ba"
+    },
+    "normalizer": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_normalizer_v1.py",
+      "sha256": "cbe66fc9ab406fa5ee3745e099c16250c404a949c0f301e40a7397c285dc459d"
+    },
+    "offline_network_requirements": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/offline_network_requirements.tsv",
+      "sha256": "87b9786c1928773d51708b2bc93cea137d1eb7b36af43d0d26ab5a29487d0dc9"
+    },
+    "offline_runner": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_offline_runner_v1.py",
+      "sha256": "6411db365d6e64ef9a1d8e65378b1db95b6bb176dcfdf9419f5936f5a347c276"
+    },
+    "retrieval_design": {
+      "path": "experiments/07_comparative_landscape/triage_pre_review_text_retrieval_v1_design.json",
+      "sha256": "3a8107a845d2dcde9dfe2f4e714237cae353ba3762af1a76d61f7f5c171d66fc"
+    }
+  },
+  "implementation_gate": {
+    "next_gate": "IMPLEMENT_AND_HOSTILE_TEST_LIVE_WAVE_A_AUTHORIZATION_GUARD_AND_EXECUTION_RUNNER_WITHOUT_NETWORK",
+    "requirements": [
+      "authorization absent -> fail closed before network",
+      "manifest hash mismatch -> fail closed",
+      "design hash mismatch -> fail closed",
+      "parent/source hash mismatch -> fail closed",
+      "request outside manifest -> fail closed",
+      "request count cannot exceed 4490",
+      "second execution ID using consumed authorization -> fail closed",
+      "same execution ID may resume only from verified checkpoint",
+      "completed authorization replay -> fail closed",
+      "provider credentials must never enter archived evidence",
+      "all hostile tests perform zero real network requests",
+      "production boundary remains unchanged"
+    ]
+  },
+  "parent_commit": "0a49d448f98d20d40f8ef344d623e986f1d08a5d",
+  "production_boundary": {
+    "event_count": 2011,
+    "ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e"
+  },
+  "purpose": "Freeze the live-network authority boundary for development-only pre-review text retrieval without creating live network authority.",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "automated_exclusion_authorized": false,
+    "blind_validation_sample_in_scope": false,
+    "future_universe_scoring_authorized": false,
+    "model_fitting_authorized": false,
+    "production_screening_protocol_changed": false,
+    "threshold_selection_authorized": false
+  },
+  "status": "FROZEN_PRE_AUTHORIZATION",
+  "transport_contract": {
+    "credential_sanitization_inherited": true,
+    "new_independent_http_stack_permitted": false,
+    "openalex": {
+      "api_key_must_not_be_archived": true,
+      "api_key_optional": true
+    },
+    "provider_identity_validation_required": true,
+    "pubmed": {
+      "ncbi_api_key_permitted": false,
+      "ncbi_email_must_not_be_archived": true,
+      "ncbi_email_required_for_live_execution": true,
+      "tool_parameter_inherited_from_transport": true
+    },
+    "raw_response_archive_required": true,
+    "redirect_semantics_inherited": true,
+    "response_body_sha256_required": true,
+    "retry_semantics_inherited": true,
+    "reuse_existing_exact_identifier_transport": true,
+    "terminal_record_required": true,
+    "transport_sources": [
+      {
+        "path": "experiments/07_comparative_landscape/retrieve_metadata_resolution_queue.py",
+        "sha256": "9c8c11edbbec86e5cbf857f25c1bf576a0638ba5cdcf69d1fa2a8b8bfc1a994f"
+      },
+      {
+        "path": "experiments/07_comparative_landscape/t000002_authoritative_source_network_transport.py",
+        "sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+      }
+    ]
+  },
+  "wave_a": {
+    "ad_hoc_connectivity_probe_permitted": false,
+    "concurrency": 1,
+    "crossref_permitted": false,
+    "execution_order": "ascending request_sequence",
+    "maximum_request_initiation_rate_per_second": {
+      "openalex": 2.0,
+      "pubmed": 2.0
+    },
+    "purpose": "execute only frozen first-hop exact lookups",
+    "request_counts": {
+      "openalex_exact_doi": 8,
+      "openalex_exact_work_id": 526,
+      "pubmed_exact_pmid_efetch": 3956,
+      "total": 4490
+    },
+    "request_manifest": {
+      "path": "results/07_comparative_landscape/triage_pre_review_text_retrieval_v1/live_wave_a_request_manifest.tsv",
+      "rows": 4490,
+      "sha256": "91a87f2d8a2bfc00ead9a5f1b6e6fcaf850666573583bb07317a1416d446211d"
+    },
+    "search_or_list_endpoints_permitted": false,
+    "transport_mapping": {
+      "openalex:exact_doi": {
+        "identifier_namespace": "doi",
+        "transport_route": "work_by_doi"
+      },
+      "openalex:exact_work_id": {
+        "identifier_namespace": "openalex",
+        "transport_route": "work_by_openalex_id"
+      },
+      "pubmed:exact_pmid_efetch": {
+        "identifier_namespace": "pmid",
+        "transport_route": "record_by_pmid"
+      }
+    },
+    "wave_id": "TRIAGE_TEXT_LIVE_WAVE_A"
+  },
+  "wave_b": {
+    "authorized_by_wave_a_authorization": false,
+    "eligible_parent_records": "Wave A PubMed requests only",
+    "eligible_pubmed_outcomes": [
+      "verified successful exact PubMed payload normalized as abstract_absent",
+      "verified terminal provider not-found state under pinned transport semantics"
+    ],
+    "fallback_route_selection": [
+      "exact OpenAlex Work ID when frozen input manifest provides one",
+      "otherwise exact DOI",
+      "otherwise exact PMID"
+    ],
+    "ineligible_pubmed_outcomes": [
+      "usable_abstract_pubmed",
+      "provider_identity_mismatch",
+      "parser_failure",
+      "retrieval_failure",
+      "retry_exhausted",
+      "unverified_or_missing_archive"
+    ],
+    "manifest_exists": false,
+    "purpose": "OpenAlex fallback only after verified Wave A PubMed outcomes establish that the frozen PubMed first route did not yield usable abstract text.",
+    "separate_human_authorization_required": true,
+    "transport_route_mapping": {
+      "exact_doi": "work_by_doi",
+      "exact_pmid": "work_by_pmid",
+      "exact_work_id": "work_by_openalex_id"
+    },
+    "wave_b_manifest_must_be_derived_deterministically_from": [
+      "frozen input manifest",
+      "Wave A terminal evidence",
+      "pinned normalizer"
+    ],
+    "wave_id": "TRIAGE_TEXT_LIVE_WAVE_B"
+  }
+}

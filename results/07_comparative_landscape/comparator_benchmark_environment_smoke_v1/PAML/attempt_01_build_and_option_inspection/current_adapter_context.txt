@@ -1,0 +1,273 @@
+131-        f"     source          1..{len(seq)}",
+132-        "                     /organism=\"synthetic construct\"",
+133-        f"     CDS             {cds_start}..{cds_end}",
+134-        "                     /locus_tag=\"SYNTH_CDS_001\"",
+135-        "ORIGIN",
+136-    ]
+137-
+138-    for i in range(0, len(seq), 60):
+139-        chunk = seq[i:i+60]
+140-        groups = " ".join(chunk[j:j+10] for j in range(0, len(chunk), 10))
+141-        lines.append(f"{i+1:>9} {groups}")
+142-
+143-    lines.append("//")
+144-    return "\n".join(lines) + "\n"
+145-
+146-
+147-def paml_phylip_text(observed_sequences: dict[str, str]) -> str:
+148-    names = sorted(observed_sequences)
+149-    length = len(observed_sequences[names[0]])
+150-    if any(len(observed_sequences[x]) != length for x in names):
+151:        raise ValueError("PAML sequence lengths differ")
+152:    # PAML accepts sequential format with names separated by whitespace.
+153-    lines = [f"{len(names)} {length}"]
+154-    for name in names:
+155-        seq = observed_sequences[name].replace("N", "?")
+156-        lines.append(f"{name}  {seq}")
+157-    return "\n".join(lines) + "\n"
+158-
+159-
+160:def paml_baseml_ctl_text(seqfile: str, treefile: str, outfile: str) -> str:
+161-    # JC69, fixed input branch lengths, constant site rate, ancestral reconstruction.
+162-    return f"""seqfile = {seqfile}
+163-treefile = {treefile}
+164-outfile = {outfile}
+165-noisy = 0
+166-verbose = 1
+167-runmode = 0
+168-model = 0
+169-Mgene = 0
+170-clock = 0
+171-fix_kappa = 1
+172-kappa = 1
+173-fix_alpha = 1
+174-alpha = 0
+175-Malpha = 0
+176-ncatG = 4
+177-nparK = 0
+178-nhomo = 0
+179-getSE = 0
+180-RateAncestor = 1
+181-Small_Diff = 1e-8
+182-cleandata = 0
+183-fix_blength = 2
+184-method = 0
+185-"""
+186-
+187-
+188-def arpip_config_text(
+189-    alignment_path: str,
+190-    tree_path: str,
+191-    out_dir: str,
+192-    seed: int,
+193-) -> str:
+194-    # lambda/mu are taken from the official nucleotide example and are not truth-tuned.
+195-    return f"""analysis_name=BRANCHSNV_BENCH
+196-alphabet=DNA
+197-input.sequence.file={alignment_path}
+198-input.sequence.sites_to_use=all
+199-init.tree=user
+200-input.tree.file={tree_path}
+201-model=PIP(model=JC69,lambda=10,mu=0.01)
+202-opt.seed={seed}
+203-opt.likelihood=0
+204-opt.pip_param_estimate=0
+205-opt.tree.with_ans_node_names=1
+206-rate_distribution=Constant
+207-output.msa.file={out_dir}/msa.fasta
+208-output.tree.file={out_dir}/tree.nwk
+209-output.ancestral.file={out_dir}/anc.fasta
+210-output.node_rel.file={out_dir}/node_rel.txt
+211-output.mlindelpoints.file={out_dir}/mlindelpoints.txt
+212-"""
+213-
+214-
+215-def poutine_dummy_phenotype_text(tips: Iterable[str]) -> str:
+216-    # POUTINE's scored endpoint here is genotype homoplasy count, not association.
+217-    # A deterministic balanced dummy phenotype prevents phenotype choice from
+218-    # becoming an analysis degree of freedom.
+219-    lines = []
+220-    for i, tip in enumerate(sorted(tips)):
+221-        lines.append(f"{tip}\t{i % 2}")
+222-    return "\n".join(lines) + "\n"
+223-
+224-
+225-def poutine_variant_fasta_text(
+226-    observed_sequences: dict[str, str],
+227-    positions: Iterable[int],
+228-) -> str:
+229-    positions = list(positions)
+230-    projected = {}
+231-    for tip, seq in observed_sequences.items():
+232-        projected[tip] = "".join(seq[p - 1] for p in positions)
+233-    return fasta_text(projected)
+234-
+235-
+236-# ---------- lightweight tree parser for output normalization ----------
+237-
+238-class _Node:
+239-    def __init__(self, label: str = ""):
+240-        self.label = label
+241-        self.children: list["_Node"] = []
+242-
+243-
+244-def _strip_newick_comments(text: str) -> str:
+245-    return re.sub(r"\[[^\]]*\]", "", text)
+246-
+247-
+248-def extract_newick(text: str) -> str:
+249-    text = text.strip()
+250-    if text.lower().startswith("#nexus"):
+251-        matches = re.findall(r"(?im)^\s*tree\s+[^=]+=\s*(.+?;)\s*$", text)
+252-        if not matches:
+253-            raise ValueError("no tree statement in NEXUS")
+254-        text = matches[-1]
+255-        text = re.sub(r"^\s*\[&R\]\s*", "", text)
+256-    start = text.find("(")
+257-    end = text.rfind(";")
+258-    if start < 0 or end < start:
+259-        raise ValueError("cannot locate Newick tree")
+260-    return _strip_newick_comments(text[start:end+1])
+261-
+262-
+263-def parse_newick(text: str) -> _Node:
+264-    s = extract_newick(text)
+265-    i = 0
+266-    auto = [0]
+267-
+268-    def skip_ws():
+269-        nonlocal i
+270-        while i < len(s) and s[i].isspace():
+271-            i += 1
+272-
+273-    def read_label() -> str:
+274-        nonlocal i
+275-        skip_ws()
+276-        start = i
+277-        while i < len(s) and s[i] not in ",():;":
+278-            i += 1
+279-        return s[start:i].strip()
+280-
+281-    def skip_length():
+282-        nonlocal i
+283-        skip_ws()
+284-        if i < len(s) and s[i] == ":":
+285-            i += 1
+286-            while i < len(s) and s[i] not in ",();":
+287-                i += 1
+288-
+289-    def parse_node() -> _Node:
+290-        nonlocal i
+291-        skip_ws()
+292-        if s[i] == "(":
+293-            i += 1
+294-            node = _Node()
+295-            node.children.append(parse_node())
+296-            skip_ws()
+297-            while i < len(s) and s[i] == ",":
+298-                i += 1
+299-                node.children.append(parse_node())
+300-                skip_ws()
+--
+473-        raise ValueError("SNPPar mutation table lacks required columns")
+474-    edge_map = canonical_edge_ids_by_node(output_tree_newick)
+475-    out = []
+476-    for row in rd:
+477-        child = row["Derived_Node"]
+478-        if child not in edge_map:
+479-            raise ValueError(f"SNPPar derived node not found in tree: {child}")
+480-        a, d = row["Ancestor_Call"].upper(), row["Derived_Call"].upper()
+481-        if a in DNA and d in DNA and a != d:
+482-            out.append({
+483-                "scenario_id": scenario_id,
+484-                "method": "SNPPar",
+485-                "edge_id": edge_map[child],
+486-                "position": str(int(float(row["Position"]))),
+487-                "ancestral_state": a,
+488-                "derived_state": d,
+489-            })
+490-    return out
+491-
+492-
+493:def parse_paml_rst_sequences(text: str) -> dict[str, str]:
+494:    # PAML rst contains a "List of extant and reconstructed sequences" block.
+495-    marker = "List of extant and reconstructed sequences"
+496-    if marker not in text:
+497:        raise ValueError("PAML rst lacks reconstructed-sequence block")
+498-    block = text.split(marker, 1)[1]
+499-    stop_markers = [
+500-        "Prob of best state at each node, listed by site",
+501-        "Posterior probabilities",
+502-        "Overall accuracy",
+503-    ]
+504-    for marker2 in stop_markers:
+505-        if marker2 in block:
+506-            block = block.split(marker2, 1)[0]
+507-
+508-    out = {}
+509-    for raw in block.splitlines():
+510-        line = raw.strip()
+511-        if not line:
+512-            continue
+513-        m = re.match(r"(?:(node\s*#\s*\d+)|([A-Za-z0-9_.:-]+))\s+([ACGTUN?\s]+)$", line, re.I)
+514-        if not m:
+515-            continue
+516-        label = m.group(1) or m.group(2)
+517-        label = re.sub(r"\s+", "", label)
+518-        if label.lower().startswith("node#"):
+519-            label = "node#" + label.split("#", 1)[1]
+520-        seq = re.sub(r"\s+", "", m.group(3)).replace("U", "T").replace("?", "N").upper()
+521-        if seq and set(seq) <= set("ACGTN"):
+522-            out[label] = seq
+523-    if not out:
+524:        raise ValueError("no PAML sequences parsed")
+525-    return out
+526-
+527-
+528-def parse_tabular_node_states(
+529-    text: str,
+530-    site_columns: Iterable[int],
+531-) -> dict[str, str]:
+532-    """Parse generic tabular node-state output (used by PastML wrapper contract).
+533-
+534:    First column is node id; columns are named site_<1-based-position>.
+535-    PastML may represent uncertainty using multiple rows for the same node.
+536-    A node-site combination is retained only when exactly one distinct A/C/G/T
+537-    state is reported; absent or multi-state calls are encoded as N.
+538-    """
+539-    site_columns = list(site_columns)
+540-    rd = csv.DictReader(io.StringIO(text), delimiter="\t")
+541-    if not rd.fieldnames:
+542-        raise ValueError("empty state table")
+543-    node_field = rd.fieldnames[0]
+544-    needed = [f"site_{p}" for p in site_columns]
+545-    if not set(needed).issubset(rd.fieldnames):
+546-        raise ValueError("state table missing site columns")
+547-
+548-    states_by_node: dict[str, dict[str, set[str]]] = {}
+549-
+550-    for row in rd:
+551-        node = (row.get(node_field) or "").strip()
+552-        if not node:
+553-            raise ValueError("state table row lacks node id")
+554-
+555-        per_site = states_by_node.setdefault(
+556-            node,
+557-            {column: set() for column in needed},
+558-        )
+559-
+560-        for column in needed:
+561-            state = (row.get(column) or "").strip().upper()
+562-            if state in DNA:
+563-                per_site[column].add(state)
+564-
+565-    out = {}
+566-    for node, per_site in states_by_node.items():
+567-        out[node] = "".join(
+568-            sorted(per_site[column])[0]
+569-            if len(per_site[column]) == 1
+570-            else "N"
+571-            for column in needed
+572-        )
+573-
+574-    return out

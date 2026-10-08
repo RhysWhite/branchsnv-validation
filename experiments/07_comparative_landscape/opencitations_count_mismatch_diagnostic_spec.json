@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_PRE_EXECUTION",
+  "trigger_attempt": 5,
+  "target": {
+    "anchor_id": "W0A07",
+    "tool": "PAML",
+    "doi": "10.1093/molbev/msm088",
+    "direction": "forward",
+    "source": "OpenCitations Index v2"
+  },
+  "frozen_attempt_05": {
+    "reported_count": 12846,
+    "partition_rows": 12845,
+    "unique_oci_rows": 12845,
+    "duplicate_oci_rows": 0,
+    "root_partition_count": 10
+  },
+  "diagnostic_sequence": [
+    "citation-count-pre",
+    "citations-unfiltered-csv",
+    "citation-count-post"
+  ],
+  "citation_data_request": {
+    "operation": "citations",
+    "accept": "text/csv",
+    "filter": null,
+    "require": null,
+    "sort": null
+  },
+  "transport": {
+    "maximum_attempts": 5,
+    "incomplete_body_accepted": false,
+    "request_changed_between_retries": false
+  },
+  "comparison": {
+    "attempt_05_source": "committed_attempt_05_raw_archive",
+    "oci_regex": "^[0-9]+-[0-9]+$",
+    "empty_oci_retained": true,
+    "nonconforming_oci_retained": true,
+    "duplicate_oci_reported": true,
+    "set_difference_reported": true
+  },
+  "scientific_screening": false,
+  "production_acceptance_rule_changed": false,
+  "attempt_05_reclassified": false
+}

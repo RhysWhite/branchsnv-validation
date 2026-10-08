@@ -1,0 +1,2304 @@
+
+----- baseml.c lines 6-75 -----
+    6:    cc -o baseml -fast baseml.c tools.c -lm
+    7:    cl -O2 baseml.c tools.c
+    8:    baseml <ControlFileName>
+    9: */
+   10: 
+   11: #include "paml.h"
+   12: 
+   13: #define NS            7000
+   14: #define NBRANCH       (NS*2-2)
+   15: #define NNODE         (NS*2-1)
+   16: #define MAXNSONS      64
+   17: #define NGENE         500
+   18: #define LSPNAME       96
+   19: #define NCODE         5
+   20: #define NCATG         100
+   21: 
+   22: #define spaceming2(n) ((n)*((n)*2+9+2)*sizeof(double))
+   23: 
+   24: #define NP            (NBRANCH+NGENE+11)
+   25: /*
+   26: #define NP            (NBRANCH+3*NNODE+NGENE+11+NCATG*NCATG-1)
+   27: */
+   28: extern int noisy, NFunCall, NEigenQ, NPMatUVRoot, *ancestor, GeneticCode[][64];
+   29: extern double Small_Diff, *SeqDistance;
+   30: 
+   31: int Forestry(FILE *fout, FILE* ftree);
+   32: void DetailOutput(FILE *fout, double x[], double var[]);
+   33: int GetOptions(char *ctlf);
+   34: int GetInitials(double x[], int *fromfile);
+   35: int GetInitialsTimes(double x[]);
+   36: int SetxInitials(int np, double x[], double xb[][2]);
+   37: int SetParameters(double x[]);
+   38: int SetPGene(int igene, int _pi, int _UVRoot, int _alpha, double x[]);
+   39: int SetPSiteClass(int iclass, double x[]);
+   40: int testx(double x[], int np);
+   41: double GetBranchRate(int igene, int ibrate, double x[], int *ix);
+   42: int GetPMatBranch(double Pt[], double x[], double t, int inode);
+   43: int ConditionalPNode(int inode, int igene, double x[]);
+   44: 
+   45: int TransformxBack(double x[]);
+   46: int AdHocRateSmoothing(FILE*fout, double x[NS * 3], double xb[NS * 3][2], double space[]);
+   47: void DatingHeteroData(FILE* fout);
+   48: void InitializeNodeScale(void);
+   49: 
+   50: int TestModel(FILE *fout, double x[], int nsep, double space[]);
+   51: int OldDistributions(int inode, double AncientFreqs[]);
+   52: int SubData(int argc, char *argv[]);
+   53: int GroupDistances();
+   54: 
+   55: 
+   56: struct CommonInfo {
+   57:    char *z[NS];
+   58:    char *spname[NS], seqf[2048], outf[2048], treef[2048], cleandata;
+   59:    char oldconP[NNODE];  /* update conP for nodes to save computation (0 yes; 1 no) */
+   60:    int seqtype, ns, ls, ngene, posG[NGENE + 1], lgene[NGENE], *pose, npatt, readpattern;
+   61:    int np, ntime, nrgene, nrate, nalpha, npi, nhomo, ncatG, ncode, Mgene;
+   62:    size_t sspace, sconP;
+   63:    int fix_kappa, fix_rgene, fix_alpha, fix_rho, nparK, fix_blength;
+   64:    int clock, model, getSE, runmode, print, verbose, ndata, idata, bootstrap;
+   65:    int icode, coding, method, nbtype;
+   66:    int ndata_trees_opt;  /* 0 1 2 3 */
+   67:    double *fpatt, kappa, alpha, rho, rgene[NGENE], pi[4], piG[NGENE][4];
+   68:    double freqK[NCATG], rK[NCATG], MK[NCATG*NCATG];
+   69:    double *blengths0;
+   70:    double(*plfun)(double x[], int np), *conP, *fhK, *space;
+   71:    int conPSiteClass;        /* is conP memory allocated for each class? */
+   72:    int NnodeScale;
+   73:    char *nodeScale;          /* nScale[ns-1] for interior nodes */
+   74:    double *nodeScaleF;       /* nScaleF[npatt] for scale factors */
+   75:    int fix_omega;
+
+----- baseml.c lines 120-189 -----
+  120:    char *nodeScale[NGENE];    /* nScale[data.ns[locus]-1] for interior nodes */
+  121: }  data;
+  122: 
+  123: int nR = NCODE, LASTROUND, BayesEB;
+  124: double PMat[NCODE*NCODE], Cijk[NCODE*NCODE*NCODE], Root[NCODE];
+  125: int StepMatrix[NCODE*NCODE];
+  126: 
+  127: 
+  128: FILE *frub, *flnf, *frst, *frst1, *frst2 = NULL, *finitials = NULL;
+  129: char *ratef = "rates";
+  130: char *models[] = { "JC69","K80","F81","F84","HKY85","T92","TN93","REV","UNREST", "REVu","UNRESTu" };
+  131: enum { JC69, K80, F81, F84, HKY85, T92, TN93, REV, UNREST, REVu, UNRESTu } MODELS;
+  132: char *clockstr[] = { "", "Global clock", "Local clock", "ClockCombined" };
+  133: enum { GlobalClock = 1, LocalClock, ClockCombined } ClockModels;
+  134: 
+  135: double _rateSite = 1; /* rate for a site */
+  136: int N_PMatUVRoot = 0;
+  137: 
+  138: 
+  139: #define BASEML 1
+  140: #include "treesub.c"
+  141: #include "treespace.c"
+  142: 
+  143: int main (int argc, char *argv[])
+  144: {
+  145:    FILE* fout, * fseq = NULL, * ftree = NULL, * fpair[6];
+  146:    char pairfs[1][32] = { "2base.t" };
+  147:    char rstf[2048] = "rst", ctlf[4096] = "baseml.ctl", timestr[64];
+  148:    char *Mgenestr[] = { "diff. rate", "separate data", "diff. rate & pi",
+  149:                      "diff. rate & kappa", "diff. rate & pi & kappa" };
+  150:    int getdistance = 1, i, k;
+  151:    size_t s2 = 0;
+  152:    
+  153:    if (argc > 2 && !strcmp(argv[argc - 1], "--stdout-no-buf"))
+  154:       setvbuf(stdout, NULL, _IONBF, 0);
+  155: 
+  156:    starttimer();
+  157:    SetSeed(-1, 0);
+  158: 
+  159:    com.ndata = 1;
+  160:    com.cleandata = 0;  noisy = 0;  com.runmode = 0;
+  161: 
+  162:    com.clock = 0;
+  163:    com.fix_rgene = 0;  /* 0: estimate rate factors for genes */
+  164:    com.nhomo = 0;
+  165:    com.getSE = 0;      /* 1: want S.E.s of estimates;  0: don't want them */
+  166: 
+  167:    com.seqtype = 0;   com.model = 0;
+  168:    com.fix_kappa = 0; com.kappa = 5;
+  169:    com.fix_alpha = 1; com.alpha = 0.;  com.ncatG = 4;    /* alpha=0 := inf */
+  170:    com.fix_rho = 1;   com.rho = 0;     com.nparK = 0;
+  171:    com.ncode = 4;     com.icode = 0;
+  172:    com.print = 0;     com.verbose = 1;  com.fix_blength = 0;
+  173:    com.method = 0;    com.space = NULL;
+  174: 
+  175:    printf("BASEML in %s\n", pamlVerStr);
+  176:    frub = zfopen("rub", "w");  frst = zfopen(rstf, "w"); frst1 = zfopen("rst1", "w");
+  177: 
+  178:    if (argc > 1)  strncpy(ctlf, argv[1], 4095);
+  179:    GetOptions(ctlf);
+  180:    if (com.runmode != -2) finitials = fopen("in.baseml", "r");
+  181:    if (com.getSE == 2)    frst2 = fopen("rst2", "w");
+  182: 
+  183:    fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+  184:       com.seqf, com.treef);
+  185:    fout = zfopen(com.outf, "w");
+  186:    fpair[0] = (FILE*)zfopen(pairfs[0], "w");
+  187: 
+  188:    /* for stepwise addition, com.sspace should be calculated using com.ns. */
+  189:    com.sspace = 1000000 * sizeof(double);
+
+----- baseml.c lines 158-227 -----
+  158: 
+  159:    com.ndata = 1;
+  160:    com.cleandata = 0;  noisy = 0;  com.runmode = 0;
+  161: 
+  162:    com.clock = 0;
+  163:    com.fix_rgene = 0;  /* 0: estimate rate factors for genes */
+  164:    com.nhomo = 0;
+  165:    com.getSE = 0;      /* 1: want S.E.s of estimates;  0: don't want them */
+  166: 
+  167:    com.seqtype = 0;   com.model = 0;
+  168:    com.fix_kappa = 0; com.kappa = 5;
+  169:    com.fix_alpha = 1; com.alpha = 0.;  com.ncatG = 4;    /* alpha=0 := inf */
+  170:    com.fix_rho = 1;   com.rho = 0;     com.nparK = 0;
+  171:    com.ncode = 4;     com.icode = 0;
+  172:    com.print = 0;     com.verbose = 1;  com.fix_blength = 0;
+  173:    com.method = 0;    com.space = NULL;
+  174: 
+  175:    printf("BASEML in %s\n", pamlVerStr);
+  176:    frub = zfopen("rub", "w");  frst = zfopen(rstf, "w"); frst1 = zfopen("rst1", "w");
+  177: 
+  178:    if (argc > 1)  strncpy(ctlf, argv[1], 4095);
+  179:    GetOptions(ctlf);
+  180:    if (com.runmode != -2) finitials = fopen("in.baseml", "r");
+  181:    if (com.getSE == 2)    frst2 = fopen("rst2", "w");
+  182: 
+  183:    fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+  184:       com.seqf, com.treef);
+  185:    fout = zfopen(com.outf, "w");
+  186:    fpair[0] = (FILE*)zfopen(pairfs[0], "w");
+  187: 
+  188:    /* for stepwise addition, com.sspace should be calculated using com.ns. */
+  189:    com.sspace = 1000000 * sizeof(double);
+  190:    if ((com.space = (double*)malloc(com.sspace)) == NULL)
+  191:       zerror("oom space");
+  192: 
+  193:    if (com.clock == 5 || com.clock == 6)
+  194:       DatingHeteroData(fout);
+  195: 
+  196:    if (com.seqf[0] == '\0' || (fseq = fopen(com.seqf, "r")) == NULL) {
+  197:       printf("\n\nSequence file %s not found!\n", com.seqf);
+  198:       exit(-1);
+  199:    }
+  200:    if ((ftree = fopen(com.treef, "r")) == NULL) {
+  201:       printf("\ntree file %s not found.\n", com.treef);
+  202:       exit(-1);
+  203:    }
+  204:    if (com.ndata_trees_opt >= 2) {
+  205:       ReadMainTree(ftree, &stree);
+  206:       fclose(ftree);
+  207:       if (com.ndata_trees_opt == 3) {
+  208:          printf("\nPrinting trees for datasets into the file genetrees.trees\n\n");
+  209:          GenerateGtrees(fout, fseq, "genetrees.trees");
+  210:          fclose(fseq);   fclose(fout);
+  211:          exit(0);
+  212:       }
+  213:    }
+  214: 
+  215:    gnodes = (struct TREEN**)malloc(sizeof(struct TREEN*));
+  216:    for (com.idata = 0; com.idata < com.ndata; com.idata++) {
+  217:       if (com.ndata > 1) {
+  218:          printf("\nData set %4d\n", com.idata + 1);
+  219:          fprintf(fout, "\n\nData set %4d\n", com.idata + 1);
+  220: 
+  221:          fprintf(frst1, "%4d", com.idata + 1);
+  222:       }
+  223:       if (com.idata)  GetOptions(ctlf); /* com.cleandata is read from here again. */
+  224:       ReadSeq((com.verbose ? fout : NULL), fseq, com.cleandata, 0, 0);
+  225:       if (com.ngene > 1 && (com.fix_blength == 2 || com.fix_blength == 3))
+  226:          zerror("fix_blength = 2 or 3 does not work for partitioned data or Mgene models");
+  227:       if (com.fix_blength == 3) {
+
+----- baseml.c lines 175-244 -----
+  175:    printf("BASEML in %s\n", pamlVerStr);
+  176:    frub = zfopen("rub", "w");  frst = zfopen(rstf, "w"); frst1 = zfopen("rst1", "w");
+  177: 
+  178:    if (argc > 1)  strncpy(ctlf, argv[1], 4095);
+  179:    GetOptions(ctlf);
+  180:    if (com.runmode != -2) finitials = fopen("in.baseml", "r");
+  181:    if (com.getSE == 2)    frst2 = fopen("rst2", "w");
+  182: 
+  183:    fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+  184:       com.seqf, com.treef);
+  185:    fout = zfopen(com.outf, "w");
+  186:    fpair[0] = (FILE*)zfopen(pairfs[0], "w");
+  187: 
+  188:    /* for stepwise addition, com.sspace should be calculated using com.ns. */
+  189:    com.sspace = 1000000 * sizeof(double);
+  190:    if ((com.space = (double*)malloc(com.sspace)) == NULL)
+  191:       zerror("oom space");
+  192: 
+  193:    if (com.clock == 5 || com.clock == 6)
+  194:       DatingHeteroData(fout);
+  195: 
+  196:    if (com.seqf[0] == '\0' || (fseq = fopen(com.seqf, "r")) == NULL) {
+  197:       printf("\n\nSequence file %s not found!\n", com.seqf);
+  198:       exit(-1);
+  199:    }
+  200:    if ((ftree = fopen(com.treef, "r")) == NULL) {
+  201:       printf("\ntree file %s not found.\n", com.treef);
+  202:       exit(-1);
+  203:    }
+  204:    if (com.ndata_trees_opt >= 2) {
+  205:       ReadMainTree(ftree, &stree);
+  206:       fclose(ftree);
+  207:       if (com.ndata_trees_opt == 3) {
+  208:          printf("\nPrinting trees for datasets into the file genetrees.trees\n\n");
+  209:          GenerateGtrees(fout, fseq, "genetrees.trees");
+  210:          fclose(fseq);   fclose(fout);
+  211:          exit(0);
+  212:       }
+  213:    }
+  214: 
+  215:    gnodes = (struct TREEN**)malloc(sizeof(struct TREEN*));
+  216:    for (com.idata = 0; com.idata < com.ndata; com.idata++) {
+  217:       if (com.ndata > 1) {
+  218:          printf("\nData set %4d\n", com.idata + 1);
+  219:          fprintf(fout, "\n\nData set %4d\n", com.idata + 1);
+  220: 
+  221:          fprintf(frst1, "%4d", com.idata + 1);
+  222:       }
+  223:       if (com.idata)  GetOptions(ctlf); /* com.cleandata is read from here again. */
+  224:       ReadSeq((com.verbose ? fout : NULL), fseq, com.cleandata, 0, 0);
+  225:       if (com.ngene > 1 && (com.fix_blength == 2 || com.fix_blength == 3))
+  226:          zerror("fix_blength = 2 or 3 does not work for partitioned data or Mgene models");
+  227:       if (com.fix_blength == 3) {
+  228:          printf("\nRelative branch lengths in tree fixed; estimating a scale factor.\n");
+  229:          if ((com.blengths0 = (double*)malloc((com.ns * 2 - 2) * sizeof(double))) == NULL)
+  230:             zerror("oom blengths0");
+  231:       }
+  232: 
+  233:       SetMapAmbiguity(com.seqtype, 0);
+  234: 
+  235:       /* AllPatterns(fout); */
+  236: 
+  237:       if (com.rho && com.readpattern) zerror("rho doesn't work with readpattern.");
+  238:       if (com.ndata == 1) fclose(fseq);
+  239:       k = (com.ns * 2 - 1) * sizeof(struct TREEN);
+  240:       if ((nodes = (struct TREEN*)malloc(k)) == NULL) zerror("oom");
+  241:       gnodes[0] = nodes;
+  242: 
+  243:       if (com.coding) {
+  244:          if (com.ls % 3 != 0 || (com.ngene != 1 && com.ngene != 3))
+
+----- baseml.c lines 176-245 -----
+  176:    frub = zfopen("rub", "w");  frst = zfopen(rstf, "w"); frst1 = zfopen("rst1", "w");
+  177: 
+  178:    if (argc > 1)  strncpy(ctlf, argv[1], 4095);
+  179:    GetOptions(ctlf);
+  180:    if (com.runmode != -2) finitials = fopen("in.baseml", "r");
+  181:    if (com.getSE == 2)    frst2 = fopen("rst2", "w");
+  182: 
+  183:    fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+  184:       com.seqf, com.treef);
+  185:    fout = zfopen(com.outf, "w");
+  186:    fpair[0] = (FILE*)zfopen(pairfs[0], "w");
+  187: 
+  188:    /* for stepwise addition, com.sspace should be calculated using com.ns. */
+  189:    com.sspace = 1000000 * sizeof(double);
+  190:    if ((com.space = (double*)malloc(com.sspace)) == NULL)
+  191:       zerror("oom space");
+  192: 
+  193:    if (com.clock == 5 || com.clock == 6)
+  194:       DatingHeteroData(fout);
+  195: 
+  196:    if (com.seqf[0] == '\0' || (fseq = fopen(com.seqf, "r")) == NULL) {
+  197:       printf("\n\nSequence file %s not found!\n", com.seqf);
+  198:       exit(-1);
+  199:    }
+  200:    if ((ftree = fopen(com.treef, "r")) == NULL) {
+  201:       printf("\ntree file %s not found.\n", com.treef);
+  202:       exit(-1);
+  203:    }
+  204:    if (com.ndata_trees_opt >= 2) {
+  205:       ReadMainTree(ftree, &stree);
+  206:       fclose(ftree);
+  207:       if (com.ndata_trees_opt == 3) {
+  208:          printf("\nPrinting trees for datasets into the file genetrees.trees\n\n");
+  209:          GenerateGtrees(fout, fseq, "genetrees.trees");
+  210:          fclose(fseq);   fclose(fout);
+  211:          exit(0);
+  212:       }
+  213:    }
+  214: 
+  215:    gnodes = (struct TREEN**)malloc(sizeof(struct TREEN*));
+  216:    for (com.idata = 0; com.idata < com.ndata; com.idata++) {
+  217:       if (com.ndata > 1) {
+  218:          printf("\nData set %4d\n", com.idata + 1);
+  219:          fprintf(fout, "\n\nData set %4d\n", com.idata + 1);
+  220: 
+  221:          fprintf(frst1, "%4d", com.idata + 1);
+  222:       }
+  223:       if (com.idata)  GetOptions(ctlf); /* com.cleandata is read from here again. */
+  224:       ReadSeq((com.verbose ? fout : NULL), fseq, com.cleandata, 0, 0);
+  225:       if (com.ngene > 1 && (com.fix_blength == 2 || com.fix_blength == 3))
+  226:          zerror("fix_blength = 2 or 3 does not work for partitioned data or Mgene models");
+  227:       if (com.fix_blength == 3) {
+  228:          printf("\nRelative branch lengths in tree fixed; estimating a scale factor.\n");
+  229:          if ((com.blengths0 = (double*)malloc((com.ns * 2 - 2) * sizeof(double))) == NULL)
+  230:             zerror("oom blengths0");
+  231:       }
+  232: 
+  233:       SetMapAmbiguity(com.seqtype, 0);
+  234: 
+  235:       /* AllPatterns(fout); */
+  236: 
+  237:       if (com.rho && com.readpattern) zerror("rho doesn't work with readpattern.");
+  238:       if (com.ndata == 1) fclose(fseq);
+  239:       k = (com.ns * 2 - 1) * sizeof(struct TREEN);
+  240:       if ((nodes = (struct TREEN*)malloc(k)) == NULL) zerror("oom");
+  241:       gnodes[0] = nodes;
+  242: 
+  243:       if (com.coding) {
+  244:          if (com.ls % 3 != 0 || (com.ngene != 1 && com.ngene != 3))
+  245:             zerror("this is not a coding sequence.  Remove icode?");
+
+----- baseml.c lines 180-249 -----
+  180:    if (com.runmode != -2) finitials = fopen("in.baseml", "r");
+  181:    if (com.getSE == 2)    frst2 = fopen("rst2", "w");
+  182: 
+  183:    fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+  184:       com.seqf, com.treef);
+  185:    fout = zfopen(com.outf, "w");
+  186:    fpair[0] = (FILE*)zfopen(pairfs[0], "w");
+  187: 
+  188:    /* for stepwise addition, com.sspace should be calculated using com.ns. */
+  189:    com.sspace = 1000000 * sizeof(double);
+  190:    if ((com.space = (double*)malloc(com.sspace)) == NULL)
+  191:       zerror("oom space");
+  192: 
+  193:    if (com.clock == 5 || com.clock == 6)
+  194:       DatingHeteroData(fout);
+  195: 
+  196:    if (com.seqf[0] == '\0' || (fseq = fopen(com.seqf, "r")) == NULL) {
+  197:       printf("\n\nSequence file %s not found!\n", com.seqf);
+  198:       exit(-1);
+  199:    }
+  200:    if ((ftree = fopen(com.treef, "r")) == NULL) {
+  201:       printf("\ntree file %s not found.\n", com.treef);
+  202:       exit(-1);
+  203:    }
+  204:    if (com.ndata_trees_opt >= 2) {
+  205:       ReadMainTree(ftree, &stree);
+  206:       fclose(ftree);
+  207:       if (com.ndata_trees_opt == 3) {
+  208:          printf("\nPrinting trees for datasets into the file genetrees.trees\n\n");
+  209:          GenerateGtrees(fout, fseq, "genetrees.trees");
+  210:          fclose(fseq);   fclose(fout);
+  211:          exit(0);
+  212:       }
+  213:    }
+  214: 
+  215:    gnodes = (struct TREEN**)malloc(sizeof(struct TREEN*));
+  216:    for (com.idata = 0; com.idata < com.ndata; com.idata++) {
+  217:       if (com.ndata > 1) {
+  218:          printf("\nData set %4d\n", com.idata + 1);
+  219:          fprintf(fout, "\n\nData set %4d\n", com.idata + 1);
+  220: 
+  221:          fprintf(frst1, "%4d", com.idata + 1);
+  222:       }
+  223:       if (com.idata)  GetOptions(ctlf); /* com.cleandata is read from here again. */
+  224:       ReadSeq((com.verbose ? fout : NULL), fseq, com.cleandata, 0, 0);
+  225:       if (com.ngene > 1 && (com.fix_blength == 2 || com.fix_blength == 3))
+  226:          zerror("fix_blength = 2 or 3 does not work for partitioned data or Mgene models");
+  227:       if (com.fix_blength == 3) {
+  228:          printf("\nRelative branch lengths in tree fixed; estimating a scale factor.\n");
+  229:          if ((com.blengths0 = (double*)malloc((com.ns * 2 - 2) * sizeof(double))) == NULL)
+  230:             zerror("oom blengths0");
+  231:       }
+  232: 
+  233:       SetMapAmbiguity(com.seqtype, 0);
+  234: 
+  235:       /* AllPatterns(fout); */
+  236: 
+  237:       if (com.rho && com.readpattern) zerror("rho doesn't work with readpattern.");
+  238:       if (com.ndata == 1) fclose(fseq);
+  239:       k = (com.ns * 2 - 1) * sizeof(struct TREEN);
+  240:       if ((nodes = (struct TREEN*)malloc(k)) == NULL) zerror("oom");
+  241:       gnodes[0] = nodes;
+  242: 
+  243:       if (com.coding) {
+  244:          if (com.ls % 3 != 0 || (com.ngene != 1 && com.ngene != 3))
+  245:             zerror("this is not a coding sequence.  Remove icode?");
+  246:       }
+  247: 
+  248:       if (com.Mgene && com.ngene == 1)  zerror("option Mgene for 1 gene?");
+  249:       if (com.ngene > 1 && com.nhomo) zerror("nhomo for mutliple genes?");
+
+----- baseml.c lines 181-250 -----
+  181:    if (com.getSE == 2)    frst2 = fopen("rst2", "w");
+  182: 
+  183:    fprintf(frst, "Supplemental results for BASEML\n\nseqf:  %s\ntreef: %s\n",
+  184:       com.seqf, com.treef);
+  185:    fout = zfopen(com.outf, "w");
+  186:    fpair[0] = (FILE*)zfopen(pairfs[0], "w");
+  187: 
+  188:    /* for stepwise addition, com.sspace should be calculated using com.ns. */
+  189:    com.sspace = 1000000 * sizeof(double);
+  190:    if ((com.space = (double*)malloc(com.sspace)) == NULL)
+  191:       zerror("oom space");
+  192: 
+  193:    if (com.clock == 5 || com.clock == 6)
+  194:       DatingHeteroData(fout);
+  195: 
+  196:    if (com.seqf[0] == '\0' || (fseq = fopen(com.seqf, "r")) == NULL) {
+  197:       printf("\n\nSequence file %s not found!\n", com.seqf);
+  198:       exit(-1);
+  199:    }
+  200:    if ((ftree = fopen(com.treef, "r")) == NULL) {
+  201:       printf("\ntree file %s not found.\n", com.treef);
+  202:       exit(-1);
+  203:    }
+  204:    if (com.ndata_trees_opt >= 2) {
+  205:       ReadMainTree(ftree, &stree);
+  206:       fclose(ftree);
+  207:       if (com.ndata_trees_opt == 3) {
+  208:          printf("\nPrinting trees for datasets into the file genetrees.trees\n\n");
+  209:          GenerateGtrees(fout, fseq, "genetrees.trees");
+  210:          fclose(fseq);   fclose(fout);
+  211:          exit(0);
+  212:       }
+  213:    }
+  214: 
+  215:    gnodes = (struct TREEN**)malloc(sizeof(struct TREEN*));
+  216:    for (com.idata = 0; com.idata < com.ndata; com.idata++) {
+  217:       if (com.ndata > 1) {
+  218:          printf("\nData set %4d\n", com.idata + 1);
+  219:          fprintf(fout, "\n\nData set %4d\n", com.idata + 1);
+  220: 
+  221:          fprintf(frst1, "%4d", com.idata + 1);
+  222:       }
+  223:       if (com.idata)  GetOptions(ctlf); /* com.cleandata is read from here again. */
+  224:       ReadSeq((com.verbose ? fout : NULL), fseq, com.cleandata, 0, 0);
+  225:       if (com.ngene > 1 && (com.fix_blength == 2 || com.fix_blength == 3))
+  226:          zerror("fix_blength = 2 or 3 does not work for partitioned data or Mgene models");
+  227:       if (com.fix_blength == 3) {
+  228:          printf("\nRelative branch lengths in tree fixed; estimating a scale factor.\n");
+  229:          if ((com.blengths0 = (double*)malloc((com.ns * 2 - 2) * sizeof(double))) == NULL)
+  230:             zerror("oom blengths0");
+  231:       }
+  232: 
+  233:       SetMapAmbiguity(com.seqtype, 0);
+  234: 
+  235:       /* AllPatterns(fout); */
+  236: 
+  237:       if (com.rho && com.readpattern) zerror("rho doesn't work with readpattern.");
+  238:       if (com.ndata == 1) fclose(fseq);
+  239:       k = (com.ns * 2 - 1) * sizeof(struct TREEN);
+  240:       if ((nodes = (struct TREEN*)malloc(k)) == NULL) zerror("oom");
+  241:       gnodes[0] = nodes;
+  242: 
+  243:       if (com.coding) {
+  244:          if (com.ls % 3 != 0 || (com.ngene != 1 && com.ngene != 3))
+  245:             zerror("this is not a coding sequence.  Remove icode?");
+  246:       }
+  247: 
+  248:       if (com.Mgene && com.ngene == 1)  zerror("option Mgene for 1 gene?");
+  249:       if (com.ngene > 1 && com.nhomo) zerror("nhomo for mutliple genes?");
+  250:       if (com.nalpha && (!com.alpha || com.ngene == 1 || com.fix_alpha))
+
+----- baseml.c lines 367-436 -----
+  367:                   if (d > SeqDistance[i*(i - 1) / 2 + j]) d = SeqDistance[i*(i - 1) / 2 + j];
+  368:                }
+  369:                if (dminmax < d) {
+  370:                   dminmax = d;  isbest = is;
+  371:                }
+  372:             }
+  373:             keep[isbest] = 1;
+  374:             chosen[isk] = isbest;
+  375:             printf("selected seq %5d (dmin = %8.4f): %s\n", isbest + 1, dminmax, com.spname[isbest]);
+  376:          }
+  377: 
+  378:          fprintf(ftmp, "%6d %6d\n", nskeep, com.ls);
+  379:          for (j = 0; j < com.ns; j++) {
+  380:             if (keep[j] == 0) continue;
+  381:             fprintf(ftmp, "%-40s  ", com.spname[j]);
+  382:             print1seq(ftmp, com.z[j], com.ls, com.pose);
+  383:             fprintf(ftmp, "\n");
+  384:          }
+  385:          fclose(ftmp);
+  386:          return(0);
+  387: 
+  388:       }
+  389: 
+  390: #endif
+  391: 
+  392:       if (com.Mgene == 1)        MultipleGenes(fout, ftree, fpair, com.space);
+  393:       else if (com.runmode == 0) Forestry(fout, ftree);
+  394:       else if (com.runmode == 2) fprintf(frst, "%2d", StarDecomposition(fout, com.space));
+  395:       else if (com.runmode == 3) StepwiseAddition(fout, com.space);
+  396:       else if (com.runmode >= 4) Perturbation(fout, (com.runmode == 4), com.space);
+  397: 
+  398:       fprintf(frst, "\n"); 
+  399:       if ((com.idata + 1) % 10 == 0) fflush(frst);
+  400:       if (com.ndata > 1 && com.runmode) {
+  401:          fprintf(frst1, "\t");
+  402:          OutTreeN(frst1, 1, 0);
+  403:       }
+  404:       fprintf(frst1, "\n"); 
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+
+----- baseml.c lines 368-437 -----
+  368:                }
+  369:                if (dminmax < d) {
+  370:                   dminmax = d;  isbest = is;
+  371:                }
+  372:             }
+  373:             keep[isbest] = 1;
+  374:             chosen[isk] = isbest;
+  375:             printf("selected seq %5d (dmin = %8.4f): %s\n", isbest + 1, dminmax, com.spname[isbest]);
+  376:          }
+  377: 
+  378:          fprintf(ftmp, "%6d %6d\n", nskeep, com.ls);
+  379:          for (j = 0; j < com.ns; j++) {
+  380:             if (keep[j] == 0) continue;
+  381:             fprintf(ftmp, "%-40s  ", com.spname[j]);
+  382:             print1seq(ftmp, com.z[j], com.ls, com.pose);
+  383:             fprintf(ftmp, "\n");
+  384:          }
+  385:          fclose(ftmp);
+  386:          return(0);
+  387: 
+  388:       }
+  389: 
+  390: #endif
+  391: 
+  392:       if (com.Mgene == 1)        MultipleGenes(fout, ftree, fpair, com.space);
+  393:       else if (com.runmode == 0) Forestry(fout, ftree);
+  394:       else if (com.runmode == 2) fprintf(frst, "%2d", StarDecomposition(fout, com.space));
+  395:       else if (com.runmode == 3) StepwiseAddition(fout, com.space);
+  396:       else if (com.runmode >= 4) Perturbation(fout, (com.runmode == 4), com.space);
+  397: 
+  398:       fprintf(frst, "\n"); 
+  399:       if ((com.idata + 1) % 10 == 0) fflush(frst);
+  400:       if (com.ndata > 1 && com.runmode) {
+  401:          fprintf(frst1, "\t");
+  402:          OutTreeN(frst1, 1, 0);
+  403:       }
+  404:       fprintf(frst1, "\n"); 
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+
+----- baseml.c lines 389-458 -----
+  389: 
+  390: #endif
+  391: 
+  392:       if (com.Mgene == 1)        MultipleGenes(fout, ftree, fpair, com.space);
+  393:       else if (com.runmode == 0) Forestry(fout, ftree);
+  394:       else if (com.runmode == 2) fprintf(frst, "%2d", StarDecomposition(fout, com.space));
+  395:       else if (com.runmode == 3) StepwiseAddition(fout, com.space);
+  396:       else if (com.runmode >= 4) Perturbation(fout, (com.runmode == 4), com.space);
+  397: 
+  398:       fprintf(frst, "\n"); 
+  399:       if ((com.idata + 1) % 10 == 0) fflush(frst);
+  400:       if (com.ndata > 1 && com.runmode) {
+  401:          fprintf(frst1, "\t");
+  402:          OutTreeN(frst1, 1, 0);
+  403:       }
+  404:       fprintf(frst1, "\n"); 
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+
+----- baseml.c lines 390-459 -----
+  390: #endif
+  391: 
+  392:       if (com.Mgene == 1)        MultipleGenes(fout, ftree, fpair, com.space);
+  393:       else if (com.runmode == 0) Forestry(fout, ftree);
+  394:       else if (com.runmode == 2) fprintf(frst, "%2d", StarDecomposition(fout, com.space));
+  395:       else if (com.runmode == 3) StepwiseAddition(fout, com.space);
+  396:       else if (com.runmode >= 4) Perturbation(fout, (com.runmode == 4), com.space);
+  397: 
+  398:       fprintf(frst, "\n"); 
+  399:       if ((com.idata + 1) % 10 == 0) fflush(frst);
+  400:       if (com.ndata > 1 && com.runmode) {
+  401:          fprintf(frst1, "\t");
+  402:          OutTreeN(frst1, 1, 0);
+  403:       }
+  404:       fprintf(frst1, "\n"); 
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+
+----- baseml.c lines 403-472 -----
+  403:       }
+  404:       fprintf(frst1, "\n"); 
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+
+----- baseml.c lines 405-474 -----
+  405:       fflush(frst1);
+  406:       free(gnodes[0]);
+  407:       memset(com.spname, 0, NS * sizeof(char));
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+
+----- baseml.c lines 408-477 -----
+  408:       if (com.fix_blength == 3)  free(com.blengths0);
+  409: 
+  410:       printf("\nTime used: %s\n", printtime(timestr));
+  411:    }   /* for(com.idata) */
+  412:    free(gnodes);
+  413:    if (com.ndata > 1 && fseq) fclose(fseq);
+  414:    if (com.ndata_trees_opt <= 1 && ftree)
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+
+----- baseml.c lines 415-484 -----
+  415:       fclose(ftree);
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+  478:                   if ((x[nodes[i].ibranch] = nodes[i].branch) < 0)
+  479:                      x[nodes[i].ibranch] = 1e-5;
+  480:             }
+  481:          }
+  482:       }
+  483: 
+  484:       if (com.cleandata)
+
+----- baseml.c lines 416-485 -----
+  416:    free(com.space);
+  417:    fclose(fout);  fclose(frst);   fclose(fpair[0]);
+  418:    if (finitials) { fclose(finitials);  finitials = NULL; }
+  419: 
+  420:    return (0);
+  421: }
+  422: 
+  423: 
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+  478:                   if ((x[nodes[i].ibranch] = nodes[i].branch) < 0)
+  479:                      x[nodes[i].ibranch] = 1e-5;
+  480:             }
+  481:          }
+  482:       }
+  483: 
+  484:       if (com.cleandata)
+  485:          nchange = MPScore(com.space);
+
+----- baseml.c lines 424-493 -----
+  424: /* x[]: t[ntime], rgene[ngene-1], kappa[nbranch], pi[nnode*3],
+  425:         { alpha, rho || rK[], fK[] || rK[], MK[] }
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+  478:                   if ((x[nodes[i].ibranch] = nodes[i].branch) < 0)
+  479:                      x[nodes[i].ibranch] = 1e-5;
+  480:             }
+  481:          }
+  482:       }
+  483: 
+  484:       if (com.cleandata)
+  485:          nchange = MPScore(com.space);
+  486:       if (noisy&&com.ns < 99)  {
+  487:          OutTreeN(F0, 0, 0); printf(" MP score: %.2f\n", nchange);
+  488:       }
+  489:       OutTreeN(fout, 0, 0);  fprintf(fout, "  MP score: %.2f", nchange);
+  490:       if (!com.clock && com.model <= REV && com.nhomo <= 2
+  491:          && nodes[tree.root].nson <= 2 && com.ns > 2) {
+  492:          puts("\nThis is a rooted tree, without clock.  Check.");
+  493:          if (com.verbose) fputs("\nThis is a rooted tree.  Please check!", fout);
+
+----- baseml.c lines 426-495 -----
+  426: */
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+  478:                   if ((x[nodes[i].ibranch] = nodes[i].branch) < 0)
+  479:                      x[nodes[i].ibranch] = 1e-5;
+  480:             }
+  481:          }
+  482:       }
+  483: 
+  484:       if (com.cleandata)
+  485:          nchange = MPScore(com.space);
+  486:       if (noisy&&com.ns < 99)  {
+  487:          OutTreeN(F0, 0, 0); printf(" MP score: %.2f\n", nchange);
+  488:       }
+  489:       OutTreeN(fout, 0, 0);  fprintf(fout, "  MP score: %.2f", nchange);
+  490:       if (!com.clock && com.model <= REV && com.nhomo <= 2
+  491:          && nodes[tree.root].nson <= 2 && com.ns > 2) {
+  492:          puts("\nThis is a rooted tree, without clock.  Check.");
+  493:          if (com.verbose) fputs("\nThis is a rooted tree.  Please check!", fout);
+  494:       }
+  495: 
+
+----- baseml.c lines 427-496 -----
+  427: 
+  428: void PrintBestTree(FILE *fout, FILE *ftree, int btree);
+  429: 
+  430: int Forestry(FILE *fout, FILE *ftree)
+  431: {
+  432:    static int ages = 0;
+  433:    int status = 0, inbasemlg = 0, i, j = 0, itree = 0, ntree=1, np, iteration = 1;
+  434:    int pauptree = 0, btree = 0, haslength;
+  435:    double x[NP], xcom[NP - NBRANCH], lnL, lnL0 = 0, lnLbest = 0, e = 1e-7, nchange = -1;
+  436:    double xb[NP][2], tl = 0, *g = NULL, *H = NULL, det;
+  437:    FILE *finbasemlg = NULL, *frate = NULL;
+  438: 
+  439:    if (com.ndata_trees_opt <= 1) {
+  440:       if (com.ndata_trees_opt == 0) rewind(ftree);
+  441:       j = GetTreeFileType(ftree, &ntree, &pauptree, 0);
+  442:    }
+  443:    if (com.alpha)
+  444:       frate = zfopen(ratef, "w");
+  445:    if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+  446:       inbasemlg = 1;  finbasemlg = zfopen("in.basemlg", "w");
+  447:    }
+  448:    flnf = zfopen("lnf", "w+");
+  449:    fprintf(flnf, "%6d %6d %6d\n", ntree, com.ls, com.npatt);
+  450: 
+  451:    for (itree = 0; ntree == -1 || itree < ntree; itree++, iteration = 1) {
+  452:       if (com.ndata_trees_opt <= 1 && ReadTreeN(ftree, &haslength, 0, 1))
+  453:          zerror("end of tree file.");
+  454:       if (com.ndata_trees_opt>=2) {
+  455:          printf("\nExtracting gene tree for dataset #%2d from main tree...\n", com.idata + 1);
+  456:          GenerateGtree_locus(com.idata, com.ns, 0);
+  457:       }
+  458:       ProcessNodeAnnotation(&i);
+  459: 
+  460:       if (noisy) printf("\nTREE # %2d: ", itree + 1);
+  461:       fprintf(fout, "\nTREE # %2d:  ", itree + 1);
+  462:       fprintf(frub, "\n\nTREE # %2d\n", itree + 1);
+  463:       if (com.print) fprintf(frst, "\n\nTREE # %2d\n", itree + 1);
+  464:       fprintf(flnf, "\n\n%2d\n", itree + 1);
+  465: 
+  466:       LASTROUND = 0;
+  467:       if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+  468:          zerror("We need branch lengths in tree");
+  469:       if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+  470:       if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+  471:          if (com.clock) puts("\nBranch lengths in tree are ignored");
+  472:          else {
+  473:             if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+  474:             else if (com.fix_blength == 1)
+  475:                puts("\nBranch lengths in tree used as initials.");
+  476:             if (com.fix_blength == 1) {
+  477:                for (i = 0; i < tree.nnode; i++)
+  478:                   if ((x[nodes[i].ibranch] = nodes[i].branch) < 0)
+  479:                      x[nodes[i].ibranch] = 1e-5;
+  480:             }
+  481:          }
+  482:       }
+  483: 
+  484:       if (com.cleandata)
+  485:          nchange = MPScore(com.space);
+  486:       if (noisy&&com.ns < 99)  {
+  487:          OutTreeN(F0, 0, 0); printf(" MP score: %.2f\n", nchange);
+  488:       }
+  489:       OutTreeN(fout, 0, 0);  fprintf(fout, "  MP score: %.2f", nchange);
+  490:       if (!com.clock && com.model <= REV && com.nhomo <= 2
+  491:          && nodes[tree.root].nson <= 2 && com.ns > 2) {
+  492:          puts("\nThis is a rooted tree, without clock.  Check.");
+  493:          if (com.verbose) fputs("\nThis is a rooted tree.  Please check!", fout);
+  494:       }
+  495: 
+  496:       fflush(fout);  fflush(flnf);
+
+----- baseml.c lines 595-664 -----
+  595:             }
+  596:             fflush(frst2);
+  597:          }
+  598:          for (i = 0; i < np*np; i++)  H[i] *= -1;
+  599:          matinv(H, np, np, &det, H + np*np);
+  600:          fprintf(fout, "SEs for parameters:\n");
+  601:          for (i = 0; i < np; i++)
+  602:             fprintf(fout, " %8.6f", (H[i*np + i] > 0. ? sqrt(H[i*np + i]) : -1));
+  603:          fprintf(fout, "\n");
+  604:       }
+  605: 
+  606:       /* if(com.clock) SetBranch(x); */
+  607:       /* GroupDistances(); */
+  608: 
+  609:       if (com.nbtype > 1 && com.clock>1)
+  610:          fprintf(fout, "\nWarning: branch rates are not yet applied in tree length and branch lengths");
+  611:       if (AbsoluteRate) {
+  612:          fprintf(fout, "\nNote: mutation rate is not applied to tree length.  Tree has ages, for TreeView & FigTree\n");
+  613:          for (i = 0; i < tree.nnode; i++)
+  614:             nodes[i].branch *= tipdate.timeunit;
+  615:       }
+  616: 
+  617:       if (!AbsoluteRate) {
+  618:          for (i = 0, tl = 0; i < tree.nnode; i++)
+  619:             if (i != tree.root) tl += nodes[i].branch;
+  620:          fprintf(fout, "\ntree length = %9.5f%s\n", tl, (com.ngene > 1 ? " (1st gene)" : ""));
+  621:       }
+  622:       fprintf(fout, "\n"); 
+  623:       OutTreeN(fout, 1, 0); fprintf(fout, "\n\n");
+  624:       OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  625:       if (com.clock) {
+  626:          fprintf(fout, "\n"); 
+  627:          OutTreeN(fout, 1, PrNodeNum); 
+  628:          fprintf(fout, "\n");
+  629:       }
+  630: 
+  631:       if (tipdate.flag) {  /* scale back the ages in nodes[].branch */
+  632:          for (i = 0; i < tree.nnode; i++)  nodes[i].branch /= tipdate.timeunit;
+  633:       }
+  634:       if (com.np - com.ntime || com.clock)
+  635:          DetailOutput(fout, x, H);
+  636:       if (status) {
+  637:          printf("convergence?\n");
+  638:          fprintf(fout, "check convergence..\n");
+  639:       }
+  640:       if (itree == 0)
+  641:          for (i = 0; i < np - com.ntime; i++) xcom[i] = x[com.ntime + i];
+  642:       else if (!j)
+  643:          for (i = 0; i < np - com.ntime; i++) xcom[i] = xcom[i] * .8 + x[com.ntime + i] * 0.2;
+  644:       /*
+  645:             TestModel(fout,x,1,com.space);
+  646:             fprintf(fout,"\n\n# of lfun calls:%10d\n", NFunCall);
+  647:       */
+  648: 
+  649:       if (com.coding && com.Mgene != 1 && !AbsoluteRate) {
+  650:          fputs("\nTree with branch lengths for codon models:\n", fout);
+  651:          for (i = 0; i < tree.nnode; i++)
+  652:             nodes[i].branch *= (1 + com.rgene[1] + com.rgene[2]);
+  653:          fprintf(fout, "\n"); OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  654:          for (i = 0; i < tree.nnode; i++)
+  655:             nodes[i].branch /= (1 + com.rgene[1] + com.rgene[2]);
+  656:       }
+  657: 
+  658:       com.print -= 9;  com.plfun(x, np);  com.print += 9;
+  659:       if (com.print) {
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+
+----- baseml.c lines 645-714 -----
+  645:             TestModel(fout,x,1,com.space);
+  646:             fprintf(fout,"\n\n# of lfun calls:%10d\n", NFunCall);
+  647:       */
+  648: 
+  649:       if (com.coding && com.Mgene != 1 && !AbsoluteRate) {
+  650:          fputs("\nTree with branch lengths for codon models:\n", fout);
+  651:          for (i = 0; i < tree.nnode; i++)
+  652:             nodes[i].branch *= (1 + com.rgene[1] + com.rgene[2]);
+  653:          fprintf(fout, "\n"); OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  654:          for (i = 0; i < tree.nnode; i++)
+  655:             nodes[i].branch /= (1 + com.rgene[1] + com.rgene[2]);
+  656:       }
+  657: 
+  658:       com.print -= 9;  com.plfun(x, np);  com.print += 9;
+  659:       if (com.print) {
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+
+----- baseml.c lines 647-716 -----
+  647:       */
+  648: 
+  649:       if (com.coding && com.Mgene != 1 && !AbsoluteRate) {
+  650:          fputs("\nTree with branch lengths for codon models:\n", fout);
+  651:          for (i = 0; i < tree.nnode; i++)
+  652:             nodes[i].branch *= (1 + com.rgene[1] + com.rgene[2]);
+  653:          fprintf(fout, "\n"); OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  654:          for (i = 0; i < tree.nnode; i++)
+  655:             nodes[i].branch /= (1 + com.rgene[1] + com.rgene[2]);
+  656:       }
+  657: 
+  658:       com.print -= 9;  com.plfun(x, np);  com.print += 9;
+  659:       if (com.print) {
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+
+----- baseml.c lines 652-721 -----
+  652:             nodes[i].branch *= (1 + com.rgene[1] + com.rgene[2]);
+  653:          fprintf(fout, "\n"); OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  654:          for (i = 0; i < tree.nnode; i++)
+  655:             nodes[i].branch /= (1 + com.rgene[1] + com.rgene[2]);
+  656:       }
+  657: 
+  658:       com.print -= 9;  com.plfun(x, np);  com.print += 9;
+  659:       if (com.print) {
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+
+----- baseml.c lines 653-722 -----
+  653:          fprintf(fout, "\n"); OutTreeN(fout, 1, 1); fprintf(fout, "\n");
+  654:          for (i = 0; i < tree.nnode; i++)
+  655:             nodes[i].branch /= (1 + com.rgene[1] + com.rgene[2]);
+  656:       }
+  657: 
+  658:       com.print -= 9;  com.plfun(x, np);  com.print += 9;
+  659:       if (com.print) {
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+
+----- baseml.c lines 660-729 -----
+  660:          if (com.plfun != lfun)
+  661:             lfunRates(frate, x, np);
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+
+----- baseml.c lines 662-731 -----
+  662: 
+  663:          /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+  730:    double EXij[NCODE * NCODE] = { 0 }, * Q = PMat, p0[NCODE], c[NCODE], ya;
+  731:    double tnew, treelength;
+
+----- baseml.c lines 664-733 -----
+  664:          if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+  730:    double EXij[NCODE * NCODE] = { 0 }, * Q = PMat, p0[NCODE], c[NCODE], ya;
+  731:    double tnew, treelength;
+  732: 
+  733:    fprintf(fout, "\nDetailed output identifying parameters\n");
+
+----- baseml.c lines 665-734 -----
+  665:             || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+  730:    double EXij[NCODE * NCODE] = { 0 }, * Q = PMat, p0[NCODE], c[NCODE], ya;
+  731:    double tnew, treelength;
+  732: 
+  733:    fprintf(fout, "\nDetailed output identifying parameters\n");
+  734:    if (com.clock) OutputTimesRates(fout, x, var);
+
+----- baseml.c lines 666-735 -----
+  666:             AncestralSeqs(frst, x);
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+  730:    double EXij[NCODE * NCODE] = { 0 }, * Q = PMat, p0[NCODE], c[NCODE], ya;
+  731:    double tnew, treelength;
+  732: 
+  733:    fprintf(fout, "\nDetailed output identifying parameters\n");
+  734:    if (com.clock) OutputTimesRates(fout, x, var);
+  735:    k = com.ntime;
+
+----- baseml.c lines 667-736 -----
+  667:       }
+  668:    }         /* for (itree) */
+  669: 
+  670:    if (ntree > 1) {
+  671:       fprintf(frst1, "\t%d\t", btree + 1);
+  672:       PrintBestTree(frst1, ftree, btree);
+  673:    }
+  674:    if (finbasemlg) fclose(finbasemlg);
+  675:    if (frate) fclose(frate);
+  676: 
+  677:    if (ntree == -1)  ntree = itree;
+  678:    if (ntree > 1) { rewind(flnf);  rell(flnf, fout, ntree); }
+  679:    fclose(flnf);
+  680: 
+  681:    return(0);
+  682: }
+  683: 
+  684: 
+  685: void PrintBestTree(FILE *fout, FILE *ftree, int btree)
+  686: {
+  687:    int itree, ntree, i;
+  688: 
+  689:    rewind(ftree);
+  690:    GetTreeFileType(ftree, &ntree, &i, 0);
+  691:    for (itree = 0; ntree == -1 || itree < ntree; itree++) {
+  692:       if (ReadTreeN(ftree, &i, 0, 1)) {
+  693:          puts("\nend of tree file."); break;
+  694:       }
+  695:       if (itree == btree)
+  696:          OutTreeN(fout, 1, 0);
+  697:    }
+  698: }
+  699: 
+  700: 
+  701: int TransformxBack(double x[])
+  702: {
+  703:    /* transform variables x[] back to their original definition after iteration,
+  704:       for output and for calculating SEs.
+  705:    */
+  706:    int i, k, K = com.ncatG;
+  707: 
+  708:    k = com.ntime + com.nrgene + com.nrate;
+  709:    for (i = 0; i < com.npi; i++)
+  710:       f_and_x(x + k + 3 * i, x + k + 3 * i, 4, 0, 0);
+  711: 
+  712:    k += com.npi * 3 + K - 1;        /* K-1 for rK */
+  713:    if (com.nparK == 2)          /* rK & fK */
+  714:       f_and_x(x + k, x + k, K, 0, 0);
+  715:    else if (com.nparK == 3)     /* rK & MK (double stochastic matrix) */
+  716:       for (i = 0; i < K - 1; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  717:    else if (com.nparK == 4)     /* rK & MK */
+  718:       for (i = 0; i < K; k += K - 1, i++)  f_and_x(x + k, x + k, K, 0, 0);
+  719:    return(0);
+  720: }
+  721: 
+  722: 
+  723: void DetailOutput(FILE *fout, double x[], double var[])
+  724: {
+  725:    int n = com.ncode, i, j, k = com.ntime, nkappa[] = { 0, 1, 0, 1, 1, 1, 2, 5, 11 };
+  726:    int n31pi = (com.model == T92 ? 1 : 3);
+  727:    double *p = com.pi, t = 0, k1, k2, S, V, Y = p[0] + p[1], R = p[2] + p[3];
+  728:    int inode, a;
+  729:    double *Qrate = x + com.ntime + com.nrgene, *AncientFreqs = NULL;
+  730:    double EXij[NCODE * NCODE] = { 0 }, * Q = PMat, p0[NCODE], c[NCODE], ya;
+  731:    double tnew, treelength;
+  732: 
+  733:    fprintf(fout, "\nDetailed output identifying parameters\n");
+  734:    if (com.clock) OutputTimesRates(fout, x, var);
+  735:    k = com.ntime;
+  736: 
+
+----- baseml.c lines 801-870 -----
+  801:                   for (k = 0; k < n; k++)
+  802:                      c[i] += p0[k] * Cijk[k*n*n + i*n + a] * ya;
+  803:                }
+  804:                for (j = 0; j < n; j++)
+  805:                   EXij[i*n + j] = Q[i*n + j] * (nodes[inode].pi[i] * t + c[i]);
+  806:             }
+  807:             fprintf(fout, "Node #%2d  ", inode + 1);
+  808:             if (inode < com.ns) fprintf(fout, "%-10s  ", com.spname[inode]);
+  809:             tnew = sum(EXij, n * n);
+  810:             treelength += tnew;
+  811:             fprintf(fout, "(blength = %9.6f, %9.6f)", t, tnew);
+  812:             fprintf(fout, "\n%s:     ", (com.model <= TN93 ? "kappa" : "abcde"));
+  813:             for (j = 0; j < nkappa[com.model]; j++)  fprintf(fout, " %9.6f ", *(nodes[inode].pkappa + j));
+  814:             fprintf(fout, "\npi source: "); for (j = 0; j < n; j++) fprintf(fout, " %9.6f ", p0[j]);
+  815:             fprintf(fout, "\npi model : "); for (j = 0; j < n; j++) fprintf(fout, " %9.6f ", nodes[inode].pi[j]);
+  816:             fprintf(fout, "\nExij\n");
+  817:             for (i = 0; i < n; i++) {
+  818:                for (j = 0; j < n; j++)  fprintf(fout, " %9.6f", EXij[i*n + j]);
+  819:                fprintf(fout, "  ");
+  820:                for (j = 0; j < n; j++)  fprintf(fout, " %8.1f", EXij[i*n + j] * com.ls);
+  821:                fprintf(fout, "\n");
+  822:             }
+  823:             /* matout(fout, c, 1, n);  */
+  824:             fprintf(fout, "\n");
+  825:          }  /* for (inode) */
+  826:          fprintf(fout, "\ntree length (eq. 6 in Matsumoto et al. 2015) = %9.6f\n", treelength);
+  827:       }
+  828: 
+  829:       if (com.alpha == 0) free(AncientFreqs);
+  830:    }
+  831:    else if (!com.fix_kappa) {
+  832:       fprintf(fout, "\nParameters %s in the rate matrix", (com.model <= TN93 ? "(kappa)" : ""));
+  833:       fprintf(fout, " (%s) (Yang 1994 J Mol Evol 39:105-111):\n", models[com.model]);
+  834: 
+  835:       if (com.nhomo == 2) {
+  836:          fprintf(fout, "\nbranch         t    kappa      TS     TV\n");
+  837:          for (i = 0; i < tree.nbranch; i++) {
+  838:             if (com.model == F84) { k1 = 1 + x[k + i] / R;  k2 = 1 + x[k + i] / R; }
+  839:             else                   k1 = k2 = x[k + i];
+  840:             S = 2 * p[0] * p[1] * k1 + 2 * p[2] * p[3] * k2;
+  841:             V = 2 * Y*R;
+  842:             /* Qfactor = 1 / (S + V); */
+  843:             /* t=(com.clock ? nodes[tree.branches[i][1]].branch : x[i]); */
+  844:             t = nodes[tree.branches[i][1]].branch;
+  845:             fprintf(fout, "%2d..%-2d %9.5f %8.5f %9.5f %8.5f\n",
+  846:                tree.branches[i][0] + 1, tree.branches[i][1] + 1, t, x[k + i],
+  847:                t*S / (S + V), t*V / (S + V));
+  848:          }
+  849:       }
+  850:       /* Mgene = 0:rates, 1:separate; 2:diff pi, 3:diff kapa, 4:all diff*/
+  851:       else if (com.Mgene >= 2) {
+  852:          for (i = 0; i < com.ngene; i++) {
+  853:             fprintf(fout, "\nGene #%d: ", i + 1);
+  854:             p = (com.Mgene == 3 ? com.pi : com.piG[i]);
+  855:             Qrate = (com.Mgene == 2 ? x + k : x + k + i*nkappa[com.model]);
+  856:             if (com.model <= TN93)
+  857:                for (j = 0; j < nkappa[com.model]; j++)
+  858:                   fprintf(fout, " %8.5f", Qrate[j]);
+  859:             else if (com.model == REV || com.model == REVu)
+  860:                /* output Q matrix, no eigen calculation */
+  861:                eigenQREVbase(fout, Q, Qrate, p, &nR, Root, Cijk);
+  862:          }
+  863:          if (com.Mgene >= 3) k += com.ngene*nkappa[com.model];
+  864:          else              k += nkappa[com.model];
+  865:       }
+  866:       else {
+  867:          if (com.model < REV)
+  868:             for (i = 0; i < com.nrate; i++)
+  869:                fprintf(fout, " %8.5f", x[k++]);
+  870:          else
+
+----- baseml.c lines 973-1042 -----
+  973:       for (i = 0, t = 0, pline = line; i < lline && line[i]; i++) {
+  974:          if (isalnum(line[i])) {
+  975:             t = 1; break;
+  976:          }
+  977:          else if (strchr(comment, line[i]))
+  978:             break;
+  979:       }
+  980:       if (t == 0) continue;
+  981:       sscanf(line, "%s%*s%lf", opt, &t);
+  982:       if ((pline = strstr(line, "=")) == NULL)
+  983:          zerror("option file.");
+  984: 
+  985:       for (iopt = 0; iopt < nopt; iopt++) {
+  986:          if (strncmp(opt, optstr[iopt], 8) == 0) {
+  987:             if (noisy >= 9)
+  988:                printf("\n%3d %15s | %-20s %6.2f", iopt + 1, optstr[iopt], opt, t);
+  989:             switch (iopt) {
+  990:             case (0): sscanf(pline + 1, "%s", com.seqf);    break;
+  991:             case (1): sscanf(pline + 1, "%s", com.outf);    break;
+  992:             case (2): sscanf(pline + 1, "%s", com.treef);    break;
+  993:             case (3): noisy = (int)t;           break;
+  994:             case (4): 
+  995:                sscanf(pline + 1, "%d%s%d", &com.ndata, str, &it);
+  996:                if (strstr(str, "separate_trees"))
+  997:                   com.ndata_trees_opt = 1;               /* separate trees for ndata */
+  998:                else if (strstr(str, "maintree")) {
+  999:                   com.ndata_trees_opt = 2;               /* generate genetree.trees & run ML */
+ 1000:                   if (it == 0)  com.ndata_trees_opt = 3; /* dry run, no ML */
+ 1001:                }
+ 1002:                break;
+ 1003:             case (5): com.cleandata = (char)t;  break;
+ 1004:             case (6): com.verbose = (int)t;     break;
+ 1005:             case (7): com.runmode = (int)t;     break;
+ 1006:             case (8): com.method = (int)t;      break;
+ 1007:             case (9): com.clock = (int)t;       break;
+ 1008:             case (10):
+ 1009:                sscanf(pline + 1, "%d%lf", &tipdate.flag, &tipdate.timeunit);
+ 1010:                break;
+ 1011:             case (11): com.fix_rgene = (int)t;   break;
+ 1012:             case (12): com.Mgene = (int)t;       break;
+ 1013:             case (13): com.nhomo = (int)t;       break;
+ 1014:             case (14): com.getSE = (int)t;       break;
+ 1015:             case (15): com.print = (int)t;       break;
+ 1016:             case (16): com.model = (int)t;
+ 1017:                if (com.model > UNREST) GetStepMatrix(line);
+ 1018:                break;
+ 1019:             case (17): com.fix_kappa = (int)t;   break;
+ 1020:             case (18):
+ 1021:                com.kappa = t;
+ 1022:                if (com.fix_kappa && (com.clock == 5 || com.clock == 6)
+ 1023:                   && com.model != 0 && com.model != 2) {
+ 1024:                   ng = splitline(++pline, min2(ng, com.ndata), markgenes);
+ 1025:                   for (j = 0; j < min2(ng, com.ndata); j++)
+ 1026:                      if (!sscanf(pline + markgenes[j], "%lf", &data.kappa[j])) break;
+ 1027:                   /*
+ 1028:                   matout(F0, data.kappa, 1, min2(ng,com.ndata));
+ 1029:                   */
+ 1030:                }
+ 1031:                break;
+ 1032:             case (19): com.fix_alpha = (int)t;   break;
+ 1033:             case (20):
+ 1034:                com.alpha = t;
+ 1035:                if (com.fix_alpha && t && (com.clock == 5 || com.clock == 6)) {
+ 1036:                   ng = splitline(++pline, min2(ng, com.ndata), markgenes);
+ 1037:                   for (j = 0; j < min2(ng, com.ndata); j++)
+ 1038:                      if (!sscanf(pline + markgenes[j], "%lf", &data.alpha[j])) break;
+ 1039:                   /*
+ 1040:                   matout(F0, data.alpha, 1, min2(ng,com.ndata));
+ 1041:                   */
+ 1042:                }

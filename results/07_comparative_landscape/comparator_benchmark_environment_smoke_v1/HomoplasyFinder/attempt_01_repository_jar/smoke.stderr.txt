@@ -1,0 +1,2 @@
+[31mERROR!! The input argument: "-fasta" provided wasn't recognised!
+[0m

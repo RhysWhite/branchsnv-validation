@@ -1,0 +1,40 @@
+{
+  "candidate_record_rows": 116556,
+  "capability_classification_performed": false,
+  "deduplicated_record_rows": 79917,
+  "eligibility_decisions_made": false,
+  "experiment": "07_comparative_landscape_merged_search_universe",
+  "identity_rule": "frozen retrieval dedup_key implementation",
+  "inputs": {
+    "formal": {
+      "candidate_records_sha256": "152cade7f2529ac44ac7b84c783b8a2f9f91750b0467771ee2215a2172427a51",
+      "deduplicated_records_sha256": "93e75109b71fe58c21dc162d60b96d2adb35052aad8718a40d50c8df8bc715b0",
+      "repository_commit": "a8c8a65dc2e4d176c32d8dc1bdbfa13c194a86ef",
+      "retrieval_manifest_sha256": "3c7eff468897df439bfca3aed23d9903958f245616d272f38255c089603d725a",
+      "retrieval_script_sha256": "c14dfb01582c788839f37912c3989aa338de1626835e91346c067165d06cec14",
+      "search_counts_sha256": "aa340c01d7a80b2ed348492c6c6a2d51404da075b3e8f3759d9f7a098144e6b8",
+      "search_queries_sha256": "65618aa3e352767bb8e41d3d940a4e6b1d0c1fbb456b8a4e00261fcf68c7734e"
+    },
+    "high_recall": {
+      "candidate_records_sha256": "88e90b540008d79fee5033bc16c74b791a4719be65fca37a8556b9fc5f0c1b8a",
+      "deduplicated_records_sha256": "e1a902a1580f5fe0c0fffaaddf9c844909eee03be0ad01266f60c8c0d7378a69",
+      "repository_commit": "6b3e5338f97f79bcdf0ee51af89862986f1178b8",
+      "retrieval_manifest_sha256": "dc92a9d83334a4edeb06dbb81d0d1d2c61b3827b5bd1e1bdb9f02ec2c815efb1",
+      "retrieval_script_sha256": "92508561c30d03c5b30b035ac6da50657a4ebf68406437759fc57f6b5b9aa973",
+      "search_counts_sha256": "b1496a40cea5c9eef9c2b05feac09604828841ecf13fd2bf3deddbb89b8884e5",
+      "search_queries_sha256": "6f4752cb07e2897ecaca8ff4fcd2802df6d9a9166c3b252cab8fdcc0565ce7f1"
+    }
+  },
+  "merge_script_sha256": "8ada34700f74887bcf983fa44e065d95b3c7e838d65cccedc3959771d92ab1ae",
+  "merge_spec_sha256": "86d39bb58b64d0c091556ee80bd340f3f76b1dd06510efcfb54d2a37c25db499",
+  "metadata_conflict_keys": 23370,
+  "metadata_conflict_rows": 26456,
+  "schema_version": 1,
+  "screening_performed": false,
+  "search_count_rows": 69,
+  "search_stages": [
+    "formal",
+    "high_recall"
+  ],
+  "status": "COMPLETE"
+}

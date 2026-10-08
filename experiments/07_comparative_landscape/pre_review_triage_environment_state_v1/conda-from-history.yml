@@ -1,0 +1,10 @@
+name: branchsnv-triage-v1
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=1.26.4
+  - scipy=1.12.0
+  - scikit-learn=1.9.0
+prefix: /home/rwhite/.conda/envs/branchsnv-triage-v1

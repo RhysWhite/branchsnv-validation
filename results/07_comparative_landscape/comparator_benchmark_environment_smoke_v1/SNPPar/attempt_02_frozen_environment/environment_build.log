@@ -1,0 +1,148 @@
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/ffeee55f.json" was modified by another program
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/2a957770.json" was modified by another program
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/497deca9.json" was modified by another program
+error    libmamba Could not open lockfile '/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/cache.lock'
+warning  libmamba Cache file "/opt/admin/bioinf/miniforge/24.3.0-0/pkgs/cache/09cdf8bf.json" was modified by another program
+Transaction
+
+  Prefix: /home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38
+
+  Updating specs:
+
+   - python=3.8.20
+   - pip
+
+
+  Package               Version  Build                 Channel           Size
+───────────────────────────────────────────────────────────────────────────────
+  Install:
+───────────────────────────────────────────────────────────────────────────────
+
+  + libzlib               1.3.2  h25fd6f3_3            conda-forge     Cached
+  + libgomp              16.2.0  he0feb66_7            conda-forge     Cached
+  + zstd                  1.5.7  hb78ec9c_7            conda-forge     Cached
+  + _openmp_mutex           4.5  20_gnu                conda-forge     Cached
+  + ld_impl_linux-64     2.46.1  default_hbd61a6d_102  conda-forge     Cached
+  + libgcc               16.2.0  ha9f2e26_7            conda-forge     Cached
+  + tk                   8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + ncurses                 6.6  hdb14827_1            conda-forge     Cached
+  + libxcrypt            4.4.38  h280c20c_0            conda-forge     Cached
+  + libuuid              2.42.4  hcfc3c73_0            conda-forge     Cached
+  + libsqlite            3.53.4  h0737f62_102          conda-forge     Cached
+  + libnsl                2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + liblzma               5.8.3  hb03c661_1            conda-forge     Cached
+  + libffi                3.7.0  h81df57d_1            conda-forge     Cached
+  + bzip2                 1.0.8  hda65f42_10           conda-forge     Cached
+  + readline                8.3  hd6e31c0_1            conda-forge     Cached
+  + xz-tools              5.8.3  hb03c661_1            conda-forge     Cached
+  + xz-gpl-tools          5.8.3  ha02ee65_1            conda-forge     Cached
+  + liblzma-devel         5.8.3  hb03c661_1            conda-forge     Cached
+  + xz                    5.8.3  ha02ee65_1            conda-forge     Cached
+  + ca-certificates   2026.7.22  hbd8a1cb_0            conda-forge     Cached
+  + openssl               3.6.5  h781a0a9_0            conda-forge     Cached
+  + python               3.8.20  h4a871b0_2_cpython    conda-forge     Cached
+  + wheel                0.45.1  pyhd8ed1ab_0          conda-forge     Cached
+  + setuptools           75.3.0  pyhd8ed1ab_0          conda-forge     Cached
+  + pip                  24.3.1  pyh8b19718_0          conda-forge     Cached
+
+  Summary:
+
+  Install: 26 packages
+
+  Total download: 0 B
+
+───────────────────────────────────────────────────────────────────────────────
+
+
+
+Looking for: ['python=3.8.20', 'pip']
+
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+
+To activate this environment, use
+
+     $ mamba activate /home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38
+
+To deactivate an active environment, use
+
+     $ mamba deactivate
+
+Collecting biopython==1.76
+  Using cached biopython-1.76-cp38-cp38-manylinux1_x86_64.whl.metadata (13 kB)
+Collecting phylo-treetime==0.8.5
+  Using cached phylo_treetime-0.8.5-py3-none-any.whl.metadata (13 kB)
+Collecting ete3==3.1.3
+  Using cached ete3-3.1.3-py3-none-any.whl
+Collecting numpy (from biopython==1.76)
+  Using cached numpy-1.24.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.6 kB)
+Collecting pandas>=0.17.1 (from phylo-treetime==0.8.5)
+  Using cached pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)
+Collecting scipy>=0.16.1 (from phylo-treetime==0.8.5)
+  Using cached scipy-1.10.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (58 kB)
+Collecting matplotlib>=2.0 (from phylo-treetime==0.8.5)
+  Using cached matplotlib-3.7.5-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (5.7 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.9 kB)
+Collecting cycler>=0.10 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached fonttools-4.57.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (102 kB)
+Collecting kiwisolver>=1.0.1 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached kiwisolver-1.4.7-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl.metadata (6.3 kB)
+Collecting packaging>=20.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting pillow>=6.2.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached pillow-10.4.0-cp38-cp38-manylinux_2_28_x86_64.whl.metadata (9.2 kB)
+Collecting pyparsing>=2.3.1 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached pyparsing-3.1.4-py3-none-any.whl.metadata (5.1 kB)
+Collecting python-dateutil>=2.7 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting importlib-resources>=3.2.0 (from matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached importlib_resources-6.4.5-py3-none-any.whl.metadata (4.0 kB)
+Collecting pytz>=2020.1 (from pandas>=0.17.1->phylo-treetime==0.8.5)
+  Using cached pytz-2026.5-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.1 (from pandas>=0.17.1->phylo-treetime==0.8.5)
+  Using cached tzdata-2026.5-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting zipp>=3.1.0 (from importlib-resources>=3.2.0->matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached zipp-3.20.2-py3-none-any.whl.metadata (3.7 kB)
+Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib>=2.0->phylo-treetime==0.8.5)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Using cached biopython-1.76-cp38-cp38-manylinux1_x86_64.whl (2.3 MB)
+Using cached phylo_treetime-0.8.5-py3-none-any.whl (126 kB)
+Using cached matplotlib-3.7.5-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (9.2 MB)
+Using cached numpy-1.24.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
+Using cached pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.4 MB)
+Using cached scipy-1.10.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.5 MB)
+Using cached contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (301 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Using cached fonttools-4.57.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
+Using cached importlib_resources-6.4.5-py3-none-any.whl (36 kB)
+Using cached kiwisolver-1.4.7-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.2 MB)
+Using cached packaging-26.2-py3-none-any.whl (100 kB)
+Using cached pillow-10.4.0-cp38-cp38-manylinux_2_28_x86_64.whl (4.5 MB)
+Using cached pyparsing-3.1.4-py3-none-any.whl (104 kB)
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Using cached pytz-2026.5-py2.py3-none-any.whl (506 kB)
+Using cached tzdata-2026.5-py2.py3-none-any.whl (347 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached zipp-3.20.2-py3-none-any.whl (9.2 kB)
+Installing collected packages: pytz, ete3, zipp, tzdata, six, pyparsing, pillow, packaging, numpy, kiwisolver, fonttools, cycler, scipy, python-dateutil, importlib-resources, contourpy, biopython, pandas, matplotlib, phylo-treetime
+Successfully installed biopython-1.76 contourpy-1.1.1 cycler-0.12.1 ete3-3.1.3 fonttools-4.57.0 importlib-resources-6.4.5 kiwisolver-1.4.7 matplotlib-3.7.5 numpy-1.24.4 packaging-26.2 pandas-2.0.3 phylo-treetime-0.8.5 pillow-10.4.0 pyparsing-3.1.4 python-dateutil-2.9.0.post0 pytz-2026.5 scipy-1.10.1 six-1.17.0 tzdata-2026.5 zipp-3.20.2
+Processing /home/rwhite/branchsnv-comparator-src/snppar-v1.2-attempt02
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Building wheels for collected packages: snppar
+  Building wheel for snppar (setup.py): started
+  Building wheel for snppar (setup.py): finished with status 'done'
+  Created wheel for snppar: filename=snppar-1.0-py3-none-any.whl size=48923 sha256=28d0545e5d6479329cecb354b9d0509818e98bebda0c8348287ad424f88309e5
+  Stored in directory: /home/rwhite/.cache/pip/wheels/1c/0c/ca/01dcd8f088e075e8ff16de995da9f79651d6cde801ec6fd808
+Successfully built snppar
+Installing collected packages: snppar
+Successfully installed snppar-1.0

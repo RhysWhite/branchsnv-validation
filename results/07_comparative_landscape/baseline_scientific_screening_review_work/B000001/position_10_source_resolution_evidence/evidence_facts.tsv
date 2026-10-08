@@ -1,0 +1,5 @@
+evidence_id	fact_type	fact	source_files
+EV10R_001	crossref_registered_identity	Crossref exact-DOI metadata identifies DOI 10.1002/9780470015902.a0020859 as 'Selection against Amino Acid Replacements in Human Proteins', authored by Sankar Subramanian, published by Wiley in Encyclopedia of Life Sciences.	crossref.json
+EV10R_002	crossref_substantive_abstract	The registered Crossref record contains a substantive abstract (407 characters; SHA-256 8842550d42e78e8469661e6add180d83162a0fee3c0a4cdd360deb8901eca820).	crossref.json
+EV10R_003	doi_csl_corroboration	DOI content negotiation independently returns the same DOI and publication title.	doi_csl.json
+EV10R_004	publisher_resolution	Normal DOI resolution reaches the Wiley Online Library target URL while the automated request receives HTTP 403.	network_status.tsv; doi_resolution.headers; doi_resolution.body

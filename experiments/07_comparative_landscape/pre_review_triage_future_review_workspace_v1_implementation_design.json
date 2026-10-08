@@ -1,0 +1,90 @@
+{
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_IMPLEMENTATION",
+  "freeze_parent_commit": "6d90a4c0356509dbc8466563fc56c5ca57896f4e",
+  "generation_boundary": {
+    "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_001",
+    "authorization_required": true,
+    "confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-WORKSPACE-V1",
+    "generation_authorized": false,
+    "one_use_authorization_required": true,
+    "workspace_generated": false
+  },
+  "implementation_hashes": {
+    "experiments/07_comparative_landscape/pre_review_triage_future_review_workspace_v1.py": "b347de8b56325a56b5bb62d000d567c367b75270aed1566bdd907463992c05a0",
+    "experiments/07_comparative_landscape/test_pre_review_triage_future_review_workspace_hostile_v1.py": "df496ba45d66bbff61fb40f3f54d7ee2ed62b94262f581768da3b66eb439b82b",
+    "experiments/07_comparative_landscape/test_pre_review_triage_future_review_workspace_v1.py": "f7d46e8548f0592f2df5e1f5182f0044e273f67ae4493ae559a69a33295a456a"
+  },
+  "next_gate": "FREEZE_ONE_USE_PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_AUTHORIZATION",
+  "output_contract": {
+    "atomic_generation": true,
+    "manual_packet_count": 1,
+    "output_root_must_be_absent": true,
+    "packet_directory": "packets",
+    "priority_packet_count": 11,
+    "residual_packet_count": 13,
+    "root": "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1",
+    "root_files": [
+      "review_work_membership.tsv",
+      "prior_carry_forwards.tsv",
+      "packet_manifest.tsv",
+      "workspace_manifest.json",
+      "checksums.sha256"
+    ]
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_performed": false,
+    "cross_lane_priority_inferred": false,
+    "human_scientific_review_performed": false,
+    "live_event_authorization_created": false,
+    "new_scientific_batch_membership_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "raw_continuous_score_exposed": false,
+    "scientific_decision_made": false,
+    "selected_candidate_id_exposed": false
+  },
+  "source_contract": {
+    "workspace_design_checksum_manifest_sha256": "754288330069b576dff1e68c7c99c6fb57279c4860c3913818984bb6f57cb484"
+  },
+  "status": "FROZEN_IMPLEMENTATION_PRE_GENERATION_AUTHORIZATION",
+  "validation_evidence": {
+    "all_tests_passed": true,
+    "canonical_workspace_generated": false,
+    "deterministic_temporary_rebuild_validated": true,
+    "hostile_test_count": 14,
+    "human_entry_fields_blank": true,
+    "model_fields_absent_from_workspace": true,
+    "production_ledger_mutated": false,
+    "real_inputs_read_only_validated": true,
+    "scientific_decision_made": false,
+    "temporary_workspace_round_trip_validated": true,
+    "total_test_count": 26,
+    "unit_test_count": 12
+  },
+  "workspace_contract": {
+    "existing_b000xxx_membership_authoritative": true,
+    "frozen_triage_rows": 12162,
+    "global_cross_lane_order_defined": false,
+    "maximum_packet_size": 500,
+    "new_review_work_rows": 12156,
+    "packet_numbering": "lane_local",
+    "prior_carry_forward_rows": 6,
+    "prior_carry_forwards_reassessed": false,
+    "review_lanes": {
+      "manual": {
+        "packet_count": 1,
+        "rows": 257
+      },
+      "priority": {
+        "packet_count": 11,
+        "rows": 5477
+      },
+      "residual": {
+        "packet_count": 13,
+        "rows": 6422
+      }
+    },
+    "total_packet_count": 25
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "amended_human_entry_fields": [
+    "proposed_event_type",
+    "proposed_record_decision",
+    "proposed_exclusion_reason_code",
+    "proposed_candidate_method_flag",
+    "proposed_evidence_basis",
+    "proposed_evidence_source_locator",
+    "proposed_evidence_escalation_status",
+    "proposed_notes"
+  ],
+  "amended_review_packet_fields": [
+    "batch_id",
+    "position_in_batch",
+    "global_active_index",
+    "baseline_row_sha256",
+    "screening_entity_id",
+    "screening_entity_class",
+    "publication_reconciliation_key",
+    "database_dedup_keys",
+    "biotools_id",
+    "citation_provenance_ids",
+    "discovery_stages",
+    "citation_wave_provenance",
+    "title_or_software_name",
+    "title_variants",
+    "year",
+    "doi",
+    "pmid",
+    "openalex_id",
+    "omid",
+    "identity_attention_status",
+    "metadata_screenability",
+    "screening_state",
+    "record_decision",
+    "exclusion_reason_code",
+    "candidate_method_flag",
+    "evidence_escalation_status",
+    "operator",
+    "decision_batch",
+    "notes",
+    "proposed_event_type",
+    "proposed_record_decision",
+    "proposed_exclusion_reason_code",
+    "proposed_candidate_method_flag",
+    "proposed_evidence_basis",
+    "proposed_evidence_source_locator",
+    "proposed_evidence_escalation_status",
+    "proposed_notes"
+  ],
+  "amendment_id": "B000001_AUTHORIZATION_DESIGN_AMENDMENT_01",
+  "defect": {
+    "cause": "human-entry field names collided with immutable baseline-queue field names",
+    "discovered_during": "first_guard_implementation_hostile_tests",
+    "duplicate_fields": [
+      "evidence_escalation_status",
+      "notes"
+    ],
+    "implementation_frozen": false,
+    "production_mutation_occurred": false,
+    "type": "review_packet_duplicate_column_names"
+  },
+  "failed_guard_implementation_adopted": false,
+  "immutable_dependencies": {
+    "baseline_queue_sha256": "97575b71c4607c3dcad893d90210f9132a83d0ae2e299ac2f1aef7e94f527d58",
+    "batch_membership_sha256": "858da5437197b78898c1703318d2c9c9be23a8f0eaade31df7b0f2de81726a91",
+    "event_appender_implementation_freeze_sha256": "d499167e2e2dce77bcb4b924958cc02d7b050a9d0d074b96e2b12c00b8b37ace",
+    "event_entry_design_freeze_sha256": "73555f0c8aadc37caa3dbe2110be439b0cb13a48398e5d597168492a65ed82b9",
+    "event_ledger_genesis_json_sha256": "89486b47eb83f896259b84a5dd90b8ae3a41083637bd331261167e1165e113be",
+    "immutable_execution_checksums_sha256": "3ea3cc193f47da8a32e817579c31f4ca294de615e1e0e29e4eb37963e374f13c",
+    "parent_design_freeze_sha256": "c3d66ae36e4aa30bb38bcd872df2fd21ef94244c55512829d9b5c788381e47c8"
+  },
+  "next_gate": "IMPLEMENT_CONTROLLED_B000001_LIVE_AUTHORIZATION_GUARD_UNDER_AMENDMENT_01_WITHOUT_EVENTS",
+  "original_human_entry_fields": [
+    "proposed_event_type",
+    "proposed_record_decision",
+    "proposed_exclusion_reason_code",
+    "proposed_candidate_method_flag",
+    "evidence_basis",
+    "evidence_source_locator",
+    "evidence_escalation_status",
+    "notes"
+  ],
+  "parent_b000001_authorization_design_commit": "ffd85ad0860c7af5bf02e5d568638638cb8e94df",
+  "parent_b000001_authorization_design_sha256": "7f2ab941abb9b7e74dbac2ffde370f5303a7b6b1504bd6b6939d22f0091626f5",
+  "proposal_extraction_mapping": {
+    "proposed_candidate_method_flag": "candidate_method_flag",
+    "proposed_event_type": "event_type",
+    "proposed_evidence_basis": "evidence_basis",
+    "proposed_evidence_escalation_status": "evidence_escalation_status",
+    "proposed_evidence_source_locator": "evidence_source_locator",
+    "proposed_exclusion_reason_code": "exclusion_reason_code",
+    "proposed_notes": "notes",
+    "proposed_record_decision": "record_decision"
+  },
+  "schema_properties": {
+    "all_frozen_baseline_queue_fields_preserved": true,
+    "all_human_entry_fields_prefixed_proposed": true,
+    "all_review_packet_field_names_unique": true,
+    "human_fields_blank_at_packet_generation": true,
+    "positions_2_to_500_human_fields_blank": true
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "B000001_accepted_decisions": 0,
+    "B000001_source_escalation_events": 0,
+    "authoritatively_reviewed_B000001_positions": 0,
+    "canonical_publication_decisions": 0,
+    "method_assessments": 0,
+    "production_event_rows": 0,
+    "role_assignments": 0,
+    "wave1_promotions": 0
+  },
+  "scientific_contract_changed": false,
+  "status": "FROZEN_PRE_IMPLEMENTATION_AMENDMENT",
+  "unchanged_contract": {
+    "batch_entity_count": 500,
+    "batch_id": "B000001",
+    "canary_baseline_row_sha256": "bb8ef2c1e0fd980a70884709d3085b8e44b5b425500d390ae943f638f1d08048",
+    "canary_position": 1,
+    "canary_screening_entity_id": "publication_component:citation:publication:doi:10.1001/archdermatol.2012.1817",
+    "expected_pre_ledger_sha256": "d3ff9be1efe2b1237f616f25e702275ccc608577fa0ff8b301401a72900eb55f",
+    "live_authorized": false,
+    "max_live_events": 1,
+    "permitted_initial_event_types": [
+      "record_decision",
+      "source_escalation"
+    ],
+    "positions_2_to_500_authorized": false,
+    "transaction_id": "T000001"
+  }
+}

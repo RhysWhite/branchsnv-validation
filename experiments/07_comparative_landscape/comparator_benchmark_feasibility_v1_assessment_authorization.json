@@ -1,0 +1,45 @@
+{
+  "assessment_requirements": [
+    "Assess all 29 frozen direct/near-direct method families in one campaign.",
+    "Use primary method publications and official software/repository/documentation sources where available.",
+    "Record unresolved evidence explicitly rather than inferring terminal feasibility.",
+    "Preserve frozen direct/near-direct scientific comparator classes unchanged.",
+    "Separate scientific relevance from executable benchmark feasibility.",
+    "Do not install or execute comparator software under this authorization.",
+    "Do not create or mutate any production screening event or ledger."
+  ],
+  "authorization_confirmation": "AUTHORIZE-COMPARATOR-BENCHMARK-FEASIBILITY-ASSESSMENT-V1",
+  "authorization_id": "COMPARATOR_BENCHMARK_FEASIBILITY_ASSESSMENT_V1_EXECUTION_001",
+  "consumed": false,
+  "explicitly_not_authorized": {
+    "benchmark_dataset_execution": true,
+    "container_or_environment_build": true,
+    "expansion_beyond_frozen_29_method_universe": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "scientific_reclassification_of_frozen_comparator_status": true,
+    "software_execution": true,
+    "software_installation": true
+  },
+  "next_gate_after_assessment": "FREEZE_COMPARATOR_BENCHMARK_FEASIBILITY_RESULTS_V1",
+  "one_time_assessment_write": true,
+  "parent_design_freeze_commit": "e31ae97a8b230b4f94cf9bac17768168b639b528",
+  "required_outputs": [
+    "results/07_comparative_landscape/comparator_benchmark_feasibility_v1/comparator_benchmark_feasibility_v1.tsv",
+    "results/07_comparative_landscape/comparator_benchmark_feasibility_v1/comparator_benchmark_feasibility_v1_manifest.json",
+    "results/07_comparative_landscape/comparator_benchmark_feasibility_v1/comparator_benchmark_feasibility_v1_summary.md",
+    "results/07_comparative_landscape/comparator_benchmark_feasibility_v1/checksums.sha256"
+  ],
+  "rerun_authorized": false,
+  "scope": {
+    "assessment_artifact_generation_authorized": true,
+    "assessment_unit": "distinct_method_family",
+    "authoritative_source_retrieval_authorized": true,
+    "feasibility_classification_authorized": true,
+    "method_family_count": 29,
+    "official_repository_and_documentation_research_authorized": true,
+    "public_web_research_authorized": true,
+    "source_research_authorized": true
+  },
+  "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}

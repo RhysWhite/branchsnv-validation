@@ -1,0 +1,83 @@
+{
+  "design_binding": {
+    "design_amendment_001_checksum_manifest_sha256": "47288af83b2f7027fc2cc8051e72d3224047fd77cf37251db72b0f91d1775f5d",
+    "design_interpretation_includes_all_amendments": true,
+    "original_design_checksum_manifest_sha256": "79826c189788ac838175cfd45f76ba54d4f1625cb2dd20c39466a02b9e95ae08",
+    "workspace_terminology_amendment_001_checksum_manifest_sha256": "0063552d35fe2fe50f99b5a880befcc08247a4a145cd9e576d927e795ef1e8fb"
+  },
+  "event_semantics_dependencies": {
+    "event_appender_implementation_checksum_manifest_sha256": "d499167e2e2dce77bcb4b924958cc02d7b050a9d0d074b96e2b12c00b8b37ace",
+    "event_appender_path": "experiments/07_comparative_landscape/baseline_scientific_screening_event_appender.py",
+    "event_appender_sha256": "abf4c15e9c993bcb96c73ccb53ff3dae56e229c533e9df25056c37cfd5eda98b",
+    "event_entry_design_checksum_manifest_sha256": "73555f0c8aadc37caa3dbe2110be439b0cb13a48398e5d597168492a65ed82b9",
+    "event_entry_design_path": "experiments/07_comparative_landscape/baseline_scientific_screening_event_entry_design.json",
+    "event_entry_design_sha256": "98f73c921f371a60f959dc630b7028026a5983b41efbd11b911e6e73c0f5e09d"
+  },
+  "freeze_id": "PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1_IMPLEMENTATION",
+  "freeze_parent_commit": "0097bbc5c343f4e824bb56221d4fbb4a4b90df94",
+  "freeze_time_evidence": {
+    "all_hostile_tests_passed": true,
+    "all_unit_tests_passed": true,
+    "current_event_count": 2011,
+    "current_target_event_overlap": 0,
+    "observed_current_ledger_sha256": "f7175d03bb559a8996e7a2fb1aba3959abab87429b86adbd19df74f0f0cbf45e",
+    "observed_current_ledger_sha256_is_historical_evidence_only": true,
+    "real_review_artifacts_materialized": false,
+    "scientific_decisions_present": false
+  },
+  "implemented_capabilities": {
+    "approval_payload_persistence": false,
+    "approval_payload_revalidation": true,
+    "canonical_packet_identity_validation": true,
+    "complete_packet_approval_payload_construction": true,
+    "current_append_only_ledger_semantic_validation": true,
+    "deterministic_blank_working_copy_materialization": true,
+    "frozen_workspace_validation": true,
+    "immutable_execution_package_validation": true,
+    "live_production_authorization": false,
+    "production_proposal_persistence": false,
+    "production_transaction_shape_projection": false,
+    "reviewed_packet_identity_and_order_validation": true,
+    "row_wise_reuse_of_frozen_event_semantics": true,
+    "upstream_checksum_validation": true,
+    "working_copy_fail_closed_if_destination_exists": true
+  },
+  "next_gate": "MATERIALIZE_FIRST_FROZEN_FUTURE_REVIEW_WORKING_PACKET_FOR_HUMAN_REVIEW",
+  "review_universe": {
+    "frozen_queue_rows": 12162,
+    "manual_rows": 257,
+    "new_human_review_rows": 12156,
+    "packet_count": 25,
+    "prior_anchor_carry_forward_rows": 6,
+    "priority_rows": 5477,
+    "residual_rows": 6422
+  },
+  "runtime_integrity_contract": {
+    "authoritative_B_membership_remains_external_and_immutable": true,
+    "canonical_workspace_remains_immutable": true,
+    "current_ledger_must_validate_semantically": true,
+    "current_ledger_sha_is_permanent_protocol_identity": false,
+    "current_target_event_conflicts_rechecked_during_review_validation": true,
+    "production_transaction_shape_deferred_to_later_frozen_contract": true,
+    "unrelated_valid_ledger_advancement_invalidates_implementation": false
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "human_scientific_review_performed": false,
+    "live_event_authorization_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "production_proposal_generated": false,
+    "review_packet_approved": false,
+    "scientific_decision_made": false
+  },
+  "status": "FROZEN_IMPLEMENTATION_PRE_HUMAN_REVIEW",
+  "tested_implementation": {
+    "hostile_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_future_human_review_protocol_hostile_v1.py",
+    "hostile_test_sha256": "f117e4d654b72fcf50bcb7b9127d6deca30a3feb69279a9920c936c0ca86398e",
+    "implementation_path": "experiments/07_comparative_landscape/pre_review_triage_future_human_review_protocol_v1.py",
+    "implementation_sha256": "0318df533ae757d35408f50c4a4729c9ecfeed064aea687f8b5638f154f13222",
+    "unit_test_path": "experiments/07_comparative_landscape/test_pre_review_triage_future_human_review_protocol_v1.py",
+    "unit_test_sha256": "e10c0db7d66ea5790fe8f36253007eaf4e8bc2ad4c1209385cb70c99ad24a796"
+  }
+}

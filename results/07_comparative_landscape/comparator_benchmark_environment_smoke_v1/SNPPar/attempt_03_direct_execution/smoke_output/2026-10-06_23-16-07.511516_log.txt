@@ -1,0 +1,9 @@
+2026-10-06_23-16-07.511516: INFO : Log started: (results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/smoke_output/2026-10-06_23-16-07.511516_log.txt)
+2026-10-06_23:16:07.515966: INFO : SNPPar:	Parallel SNP Finder V1.0
+	(utilising TreeTime for ASR and intermediate sorting)
+2026-10-06_23:16:07.517573: INFO : User command: snppar -m results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/snps.fasta -l results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/positions.txt -t results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/tree.nwk -g results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/reference.gb -d results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/smoke_output -A -i
+2026-10-06_23:16:07.519138: INFO : Reading SNPs from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/snps.fasta and SNP positions from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/positions.txt
+2026-10-06_23:16:07.520814: INFO : Finished reading 1 SNPs in total
+...keeping 1 variable SNPs and ignoring 0 SNPs
+that are non-variable among the 4 isolates
+2026-10-06_23:16:07.521802: INFO : Reading Genbank file from results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/SNPPar/attempt_03_direct_execution/toy/reference.gb

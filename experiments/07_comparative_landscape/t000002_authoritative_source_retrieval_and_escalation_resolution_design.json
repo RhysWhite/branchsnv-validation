@@ -1,0 +1,401 @@
+{
+  "authoritative_source_classes": [
+    {
+      "authority": "terminal_capable",
+      "code": "primary_publication_full_text",
+      "description": "Official publisher full text or stable public full-text archive of the target publication."
+    },
+    {
+      "authority": "terminal_capable_if_substantive",
+      "code": "primary_publication_abstract",
+      "description": "PubMed or official publisher abstract when the abstract itself contains sufficient substantive evidence."
+    },
+    {
+      "authority": "terminal_capable",
+      "code": "official_supplementary_material",
+      "description": "Supplementary methods, software descriptions, data or other files supplied by the publication/publisher."
+    },
+    {
+      "authority": "terminal_capable",
+      "code": "official_software_repository",
+      "description": "Repository controlled by the method authors/project and linked from the publication or another stable authoritative source."
+    },
+    {
+      "authority": "terminal_capable",
+      "code": "official_software_documentation",
+      "description": "Stable project documentation controlled by the authors or project."
+    },
+    {
+      "authority": "supporting_or_terminal_capable",
+      "code": "official_registry_record",
+      "description": "Stable software/method registry record with substantive capability documentation and provenance."
+    }
+  ],
+  "design_id": "T000002_AUTHORITATIVE_SOURCE_RETRIEVAL_AND_ESCALATION_RESOLUTION",
+  "evidence_questions": [
+    {
+      "code": "Q_IMPLEMENTATION",
+      "question": "Does the source establish that an identifiable reusable analytical implementation exists or existed?"
+    },
+    {
+      "code": "Q_DATA_DOMAIN",
+      "question": "Does the implementation operate on sequence, SNP, genotype or phylogenetic data?"
+    },
+    {
+      "code": "Q_LANDSCAPE_ROLE",
+      "question": "Does it perform at least one frozen Experiment 07 landscape role?"
+    },
+    {
+      "code": "Q_DISTINCT_CAPABILITY",
+      "question": "If another record describes the same method, does this record document a distinct reusable capability?"
+    },
+    {
+      "code": "Q_PRIMARY_OR_AUTHORITATIVE_SUPPORT",
+      "question": "Is the scientific disposition supported by primary or stable authoritative evidence?"
+    }
+  ],
+  "frozen_parent_state": {
+    "additional_live_event_authority": false,
+    "authoritative_source_retrieval_started": false,
+    "awaiting_source_escalation": 10,
+    "blocked_metadata": 484,
+    "complete": 1,
+    "ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "production_event_count": 11,
+    "ready": 94611,
+    "review_packet_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6"
+  },
+  "identity_only_nonterminal_sources": [
+    "OpenAlex bibliographic metadata",
+    "Crossref bibliographic metadata",
+    "citation-list membership",
+    "search-result snippets",
+    "title alone",
+    "DOI alone",
+    "PMID alone",
+    "citation frequency",
+    "discovery route"
+  ],
+  "live_network_retrieval_permitted_by_this_design": false,
+  "next_gate": "IMPLEMENT_T000002_AUTHORITATIVE_SOURCE_RETRIEVAL_QUEUE_AND_RUNNER_WITHOUT_NETWORK_EXECUTION",
+  "parent_t000002_completion_commit": "8cfefe12c6c300c2f9b2ad70683274f5d2976a72",
+  "position_10_11_duplicate_specific_rule": {
+    "different_doi_detected": true,
+    "duplicate_exclusion_preselected": false,
+    "matching_title_detected": true,
+    "requires_authoritative_version_relationship_evidence": true,
+    "requires_distinct_capability_assessment": true
+  },
+  "post_retrieval_gate": {
+    "freeze_retrieval_completion_before_scientific_resolution": true,
+    "human_source_assessment_after_retrieval_freeze": true,
+    "reconcile_every_attempt": true,
+    "reconcile_every_payload_hash": true,
+    "terminal_resolution_authorization_after_human_review": true
+  },
+  "production_mutation_permitted_by_this_design": false,
+  "publication_and_software_separation": {
+    "genomic_analysis_is_not_automatically_reusable_method": true,
+    "method_relevance_must_be_source_backed": true,
+    "publication_is_not_automatically_implementation": true,
+    "software_use_is_not_automatically_method_introduction": true
+  },
+  "retrieval_execution_contract": {
+    "byte_identical_rebuild_or_equivalent_reproducibility_check_required": true,
+    "exact_target_queue_required": true,
+    "network_authorization_required_before_live_retrieval": true,
+    "no_event_ledger_mutation": true,
+    "no_records_outside_positions_2_to_11": true,
+    "no_review_packet_terminal_editing": true,
+    "no_superseding_events": true,
+    "separate_implementation_freeze_required": true
+  },
+  "retrieval_principles": {
+    "automatic_scientific_decisions": false,
+    "exact_target_scope_only": true,
+    "failure_to_retrieve_is_scientific_exclusion": false,
+    "human_scientific_review_required": true,
+    "identity_metadata_alone_terminally_sufficient": false,
+    "network_disabled_until_separate_implementation_gate": true,
+    "provider_not_found_is_scientific_exclusion": false,
+    "search_snippets_terminally_sufficient": false,
+    "source_unavailability_forces_terminal_resolution": false,
+    "terminal_decisions_during_retrieval": false,
+    "title_only_terminal_screening": false
+  },
+  "retrieval_route_priority": [
+    "PMCID or stable public full-text archive when available",
+    "PubMed authoritative bibliographic record and abstract",
+    "official publisher DOI landing page and article content",
+    "official supplementary material",
+    "publication-linked official software repository/documentation",
+    "stable official software registry record"
+  ],
+  "retrieval_route_rules": {
+    "all_attempts_logged": true,
+    "content_type_required_when_payload_obtained": true,
+    "multiple_sources_per_record_permitted": true,
+    "payload_hash_required_when_payload_obtained": true,
+    "raw_response_or_reproducible_evidence_preserved": true,
+    "redirect_target_recorded": true,
+    "retrieval_timestamp_utc_required": true,
+    "route_priority_is_evidence_priority_not_decision_priority": true,
+    "successful_and_failed_attempts_preserved": true
+  },
+  "schema_version": 1,
+  "scientific_decisions_permitted_by_this_design": false,
+  "status": "FROZEN_PRE_IMPLEMENTATION",
+  "storage_contract": {
+    "checksums_name": "checksums.sha256",
+    "copyright_or_access_restrictions_recorded": true,
+    "evidence_assessment_fields": [
+      "position_in_batch",
+      "current_event_id",
+      "screening_entity_id",
+      "source_id",
+      "evidence_question",
+      "evidence_present",
+      "evidence_locator",
+      "evidence_excerpt_or_summary",
+      "human_reviewer",
+      "assessment_status",
+      "notes"
+    ],
+    "evidence_assessment_name": "evidence_assessment.tsv",
+    "manifest_name": "retrieval_manifest.tsv",
+    "production_root": "results/07_comparative_landscape/t000002_authoritative_source_retrieval",
+    "raw_directory": "raw",
+    "restricted_content_not_committed": true,
+    "retrieval_manifest_fields": [
+      "position_in_batch",
+      "current_event_id",
+      "screening_entity_id",
+      "source_id",
+      "source_class",
+      "authority_class",
+      "locator",
+      "retrieval_route",
+      "retrieved_at_utc",
+      "retrieval_status",
+      "http_status",
+      "content_type",
+      "payload_sha256",
+      "payload_bytes",
+      "storage_mode",
+      "local_path",
+      "license_or_access_note",
+      "notes"
+    ],
+    "storage_modes": [
+      "archive_payload",
+      "metadata_and_hash",
+      "locator_only"
+    ],
+    "summary_name": "retrieval_summary.json",
+    "tracked": false
+  },
+  "target_scope": {
+    "batch_id": "B000001",
+    "canonical_target_identity_sha256": "5970e1ec739b5b01c546e526c402d2f3a6e06e8f43aef0bfcd375e692bc2ab5e",
+    "current_event_ids": [
+      "E000000002",
+      "E000000003",
+      "E000000004",
+      "E000000005",
+      "E000000006",
+      "E000000007",
+      "E000000008",
+      "E000000009",
+      "E000000010",
+      "E000000011"
+    ],
+    "entity_count": 10,
+    "positions": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "targets": [
+      {
+        "baseline_row_sha256": "95063f377c539af86ca0a0d5b2b5d06f4e223bc02a4ae96aaa3c91a77ae21d42",
+        "current_event_id": "E000000002",
+        "doi": "10.1001/jamanetworkopen.2018.7665",
+        "omid": "br/061401876932",
+        "openalex_id": "W2911761468",
+        "pmid": "30768189",
+        "position_in_batch": 2,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1001/jamanetworkopen.2018.7665",
+        "title_or_software_name": "Risk Assessment After a Severe Hospital-Acquired Infection Associated With Carbapenemase-Producing Pseudomonas aeruginosa",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "976cf5bbe47a5fe7f8d80ec10c8e93f8b0999f926b45a1324ad66ab145d40781",
+        "current_event_id": "E000000003",
+        "doi": "10.1001/jamanetworkopen.2020.24191",
+        "omid": "br/061201889863",
+        "openalex_id": "W3092546978",
+        "pmid": "33026453",
+        "position_in_batch": 3,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1001/jamanetworkopen.2020.24191",
+        "title_or_software_name": "Analysis of Genomic Characteristics and Transmission Routes of Patients With Confirmed SARS-CoV-2 in Southern California During the Early Stage of the US COVID-19 Pandemic",
+        "year": "2020"
+      },
+      {
+        "baseline_row_sha256": "18f92cc654af581b1bea5dff5dbe7c0580879707e0832e217242799f786f9d3b",
+        "current_event_id": "E000000004",
+        "doi": "10.1001/jamanetworkopen.2026.17898",
+        "omid": "",
+        "openalex_id": "W7164363869",
+        "pmid": "42275063",
+        "position_in_batch": 4,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1001/jamanetworkopen.2026.17898",
+        "title_or_software_name": "Hospital Environment\u2013Associated Sources of Mycobacterium abscessus Infection in Transplant Recipients",
+        "year": "2026"
+      },
+      {
+        "baseline_row_sha256": "e8ad05c3b5a50b298d65cd6de86217c4ba0836e10d7707d57ca8e1d01d42c837",
+        "current_event_id": "E000000005",
+        "doi": "10.1002/0471142727.mb1901s101",
+        "omid": "br/06302514300",
+        "openalex_id": "W1903257128",
+        "pmid": "23288462",
+        "position_in_batch": 5,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/0471142727.mb1901s101",
+        "title_or_software_name": "Detecting the Signatures of Adaptive Evolution in Protein\u2010Coding Genes",
+        "year": "2013"
+      },
+      {
+        "baseline_row_sha256": "ff97b6d665ffaf371fa83622d8ce3cf9409ac866a1d6e8fc403c4869c788fcf8",
+        "current_event_id": "E000000006",
+        "doi": "10.1002/1873-3468.13356",
+        "omid": "br/061701359450",
+        "openalex_id": "W2921764384",
+        "pmid": "30861107",
+        "position_in_batch": 6,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/1873-3468.13356",
+        "title_or_software_name": "Molecular evolution of proteins mediating mitochondrial fission\u2013fusion dynamics",
+        "year": "2019"
+      },
+      {
+        "baseline_row_sha256": "83380ff654ecbd316bf71ada12ebafdd32e963f7c79da7c44f52d4f8aee2ead9",
+        "current_event_id": "E000000007",
+        "doi": "10.1002/2211-5463.12843",
+        "omid": "br/061701925954",
+        "openalex_id": "W3012490043",
+        "pmid": "32189477",
+        "position_in_batch": 7,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/2211-5463.12843",
+        "title_or_software_name": "Origin and adaptation of green\u2010sensitive (RH2) pigments in vertebrates",
+        "year": "2020"
+      },
+      {
+        "baseline_row_sha256": "c396dd435735bf5a5935c3ea4a053ea145b5e0ca451c657e30e8cf71635c0c76",
+        "current_event_id": "E000000008",
+        "doi": "10.1002/2211-5463.13555",
+        "omid": "br/06470156769",
+        "openalex_id": "W4316810288",
+        "pmid": "36647789",
+        "position_in_batch": 8,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/2211-5463.13555",
+        "title_or_software_name": "Potentially reduced fusogenicity of syncytin\u20102 in New World monkeys",
+        "year": "2023"
+      },
+      {
+        "baseline_row_sha256": "0c2b6bc07cd3bd69ac2fb111bc5be0d5279f4be49a525ea66aea119c9cee4269",
+        "current_event_id": "E000000009",
+        "doi": "10.1002/2211-5463.13728",
+        "omid": "br/06011381404",
+        "openalex_id": "W4388033808",
+        "pmid": "37905308",
+        "position_in_batch": 9,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/2211-5463.13728",
+        "title_or_software_name": "Insights into the identification and evolutionary conservation of key genes in the transcriptional circuits of meiosis initiation and commitment in budding yeast",
+        "year": "2023"
+      },
+      {
+        "baseline_row_sha256": "af854acdd8f52ea2b34950e8ed56de90e87e5b78a34812cb8da98fdf8e49ec74",
+        "current_event_id": "E000000010",
+        "doi": "10.1002/9780470015902.a0020859",
+        "omid": "br/06402013810",
+        "openalex_id": "W1484643248",
+        "pmid": "",
+        "position_in_batch": 10,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859",
+        "title_or_software_name": "Selection against Amino Acid Replacements in Human Proteins",
+        "year": "2008"
+      },
+      {
+        "baseline_row_sha256": "3bc43d2f7176233cfa1e88af0134ab4352ffc2dc3877ba50d3abd5c0a4269709",
+        "current_event_id": "E000000011",
+        "doi": "10.1002/9780470015902.a0020859.pub2",
+        "omid": "br/062302944301",
+        "openalex_id": "W4229743056",
+        "pmid": "",
+        "position_in_batch": 11,
+        "screening_entity_id": "publication_component:citation:publication:doi:10.1002/9780470015902.a0020859.pub2",
+        "title_or_software_name": "Selection against Amino Acid Replacements in Human Proteins",
+        "year": "2013"
+      }
+    ]
+  },
+  "terminal_evidence_requirements": {
+    "exclude_application_only_no_reusable_method": {
+      "requires_source_backed_application_only_or_no_reusable_method": true,
+      "title_alone_sufficient": false
+    },
+    "exclude_duplicate_record_same_method_no_distinct_capability": {
+      "matching_author_alone_sufficient": false,
+      "matching_title_alone_sufficient": false,
+      "requires_no_distinct_capability_established": true,
+      "requires_same_method_identity_established": true
+    },
+    "exclude_unrelated_variant_or_data_type": {
+      "requires_source_backed_unrelated_data_domain": true,
+      "title_alone_sufficient": false
+    },
+    "exclude_unsupported_by_primary_or_stable_authoritative_source": {
+      "provider_not_found_sufficient": false,
+      "requires_documented_source_search": true,
+      "single_failed_fetch_sufficient": false
+    },
+    "retain_for_method_assessment": {
+      "requires_at_least_one_landscape_role": true,
+      "requires_identifiable_reusable_implementation": true,
+      "requires_primary_or_stable_authoritative_support": true,
+      "requires_relevant_data_domain": true
+    }
+  },
+  "terminal_resolution_contract": {
+    "allowed_exclusion_reason_codes": [
+      "application_only_no_reusable_method",
+      "unrelated_variant_or_data_type",
+      "duplicate_record_same_method_no_distinct_capability",
+      "unsupported_by_primary_or_stable_authoritative_source"
+    ],
+    "allowed_terminal_decisions": [
+      "exclude",
+      "retain_for_method_assessment"
+    ],
+    "current_source_escalation_event_must_be_superseded": true,
+    "exclude_candidate_method_flag": "false",
+    "resolution_event_type": "superseding_record_decision",
+    "resolution_evidence_escalation_status": "resolved",
+    "retain_candidate_method_flag": "true",
+    "separate_human_review_gate_required": true,
+    "separate_superseding_event_authorization_required": true,
+    "terminal_resolution_occurs_during_retrieval": false
+  },
+  "unresolved_after_retrieval_contract": {
+    "current_source_escalation_remains_current": true,
+    "forced_terminal_decision": false,
+    "no_superseding_event_without_terminal_evidence": true,
+    "retrieval_completion_can_be_frozen_without_terminal_resolution": true
+  }
+}

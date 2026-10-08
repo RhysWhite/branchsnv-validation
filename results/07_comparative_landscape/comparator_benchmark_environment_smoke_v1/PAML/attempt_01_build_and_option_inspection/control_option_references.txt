@@ -1,0 +1,246 @@
+28:extern int noisy, NFunCall, NEigenQ, NPMatUVRoot, *ancestor, GeneticCode[][64];
+38:int SetPGene(int igene, int _pi, int _UVRoot, int _alpha, double x[]);
+58:   char *spname[NS], seqf[2048], outf[2048], treef[2048], cleandata;
+61:   int np, ntime, nrgene, nrate, nalpha, npi, nhomo, ncatG, ncode, Mgene;
+63:   int fix_kappa, fix_rgene, fix_alpha, fix_rho, nparK, fix_blength;
+64:   int clock, model, getSE, runmode, print, verbose, ndata, idata, bootstrap;
+67:   double *fpatt, kappa, alpha, rho, rgene[NGENE], pi[4], piG[NGENE][4];
+106:      double label, age, pfossil[7];   /* lower and upper bounds or alpha & beta */
+115:   char *z[NGENE][NS], cleandata[NGENE];
+118:   double rgene[NGENE], kappa[NGENE], alpha[NGENE], omega[1];
+130:char *models[] = { "JC69","K80","F81","F84","HKY85","T92","TN93","REV","UNREST", "REVu","UNRESTu" };
+160:   com.cleandata = 0;  noisy = 0;  com.runmode = 0;
+167:   com.seqtype = 0;   com.model = 0;
+169:   com.fix_alpha = 1; com.alpha = 0.;  com.ncatG = 4;    /* alpha=0 := inf */
+172:   com.print = 0;     com.verbose = 1;  com.fix_blength = 0;
+180:   if (com.runmode != -2) finitials = fopen("in.baseml", "r");
+223:      if (com.idata)  GetOptions(ctlf); /* com.cleandata is read from here again. */
+224:      ReadSeq((com.verbose ? fout : NULL), fseq, com.cleandata, 0, 0);
+225:      if (com.ngene > 1 && (com.fix_blength == 2 || com.fix_blength == 3))
+226:         zerror("fix_blength = 2 or 3 does not work for partitioned data or Mgene models");
+227:      if (com.fix_blength == 3) {
+250:      if (com.nalpha && (!com.alpha || com.ngene == 1 || com.fix_alpha))
+251:         zerror("Malpha");
+252:      if (com.nalpha > 1 && com.rho) zerror("Malpha or rho");
+253:      if (com.alpha == 0)  com.nalpha = 0;
+254:      else                 com.nalpha = (com.nalpha ? com.ngene : !com.fix_alpha);
+255:      if (com.Mgene == 1)  com.nalpha = !com.fix_alpha;
+261:      if ((com.Mgene >= 2 && com.model == JC69) || (com.Mgene >= 3 && com.model == F81)
+262:         || ((com.Mgene == 2 || com.Mgene == 4) && com.model == K80)
+264:         || (com.Mgene >= 2 && (com.model == UNREST || com.model == UNRESTu)))
+265:         zerror("model || Mgene");
+266:      fprintf(fout, "\nBASEML (in %s)  %s  %s ", pamlVerStr, com.seqf, models[com.model]);
+268:      if (!com.nparK && com.alpha && com.rho) fprintf(fout, "  Auto-");
+269:      if (com.alpha) fprintf(fout, "dGamma (ncatG=%d)", com.ncatG);
+270:      if (com.nalpha > 1) fprintf(fout, "(%d gamma)", com.nalpha);
+276:         printf("\a\n%d rate categories for nonparametric model?\n", com.ncatG);
+290:      if (com.model == JC69 && com.ngene <= 1 && !com.readpattern && !com.print) {
+296:         if (com.verbose >= 2) {
+302:            fprintf(fout, "\n**** Alignment mutated for JC69-like models ****\n");
+314:      if (com.alpha || com.nparK) {
+326:         DistanceMatNuc(fout, fpair[0], com.model, com.alpha);
+338:         if (com.model == 0 && com.print == 0)
+339:            zerror("choose RateAncestor = 1 to print the seqs correctly.");
+393:      else if (com.runmode == 0) Forestry(fout, ftree);
+394:      else if (com.runmode == 2) fprintf(frst, "%2d", StarDecomposition(fout, com.space));
+395:      else if (com.runmode == 3) StepwiseAddition(fout, com.space);
+396:      else if (com.runmode >= 4) Perturbation(fout, (com.runmode == 4), com.space);
+400:      if (com.ndata > 1 && com.runmode) {
+408:      if (com.fix_blength == 3)  free(com.blengths0);
+425:        { alpha, rho || rK[], fK[] || rK[], MK[] }
+443:   if (com.alpha)
+445:   if (com.alpha && com.rho == 0 && com.nhomo == 0 && com.nparK == 0 && com.ns < 15) {
+460:      if (noisy) printf("\nTREE # %2d: ", itree + 1);
+467:      if ((com.fix_blength == 2 || com.fix_blength == 3) && !haslength)
+469:      if (com.fix_blength > 0 && !haslength) com.fix_blength = 0;
+470:      if (ages++ == 0 && com.fix_blength > 0 && haslength) {
+473:            if (com.fix_blength == 2) puts("\nBranch lengths in tree are fixed.");
+474:            else if (com.fix_blength == 1)
+476:            if (com.fix_blength == 1) {
+484:      if (com.cleandata)
+486:      if (noisy&&com.ns < 99)  {
+490:      if (!com.clock && com.model <= REV && com.nhomo <= 2
+493:         if (com.verbose) fputs("\nThis is a rooted tree.  Please check!", fout);
+516:      if (noisy) {
+518:         if (noisy > 2 && com.ns < 50) { 
+529:            j = minB(noisy > 2 ? frub : NULL, &lnL, x, xb, e, com.space);
+531:            j = minB2(noisy > 2 ? frub : NULL, &lnL, x, xb, e, com.space);
+533:            j = ming2(noisy > 2 ? frub : NULL, &lnL, com.plfun, NULL, x, xb, com.space, e, np);
+545:      if (noisy) printf("Out...\nlnL  = %12.6f\n", -lnL);
+548:      if (com.fix_blength < 2) { 
+553:         if ((com.npi && com.model != T92) || com.nparK >= 2) TransformxBack(x);
+650:         fputs("\nTree with branch lengths for codon models:\n", fout);
+663:         /** think about more-general models.  Check that this may not be working for the clock models clock>=2 **/
+664:         if ((com.nhomo <= 2 && com.nparK == 0 && com.model <= REV && com.rho == 0)
+665:            || (com.nhomo > 2 && com.alpha == 0 && com.Mgene == 0))
+726:   int n31pi = (com.model == T92 ? 1 : 3);
+745:      if (com.nrate) fprintf(fout, "rate (kappa or abcde) under %s:", models[com.model]);
+752:      if (com.model >= F84 && com.model <= REV )
+753:         fprintf(fout, "kappa or abcde or Qrates under %s:", models[com.model]);
+755:         if (i == 0 || i % nkappa[com.model] == 0) fprintf(fout, "\n");
+759:      if (com.alpha == 0) {
+769:         if (com.alpha == 0) {
+780:      if (com.alpha == 0) {
+787:            if (com.nhomo > 2 && com.model <= TN93) {
+788:               eigenTN93(com.model, *nodes[inode].pkappa, *(nodes[inode].pkappa + 1), nodes[inode].pi, &nR, Root, Cijk);
+789:               QTN93(com.model, Q, *nodes[inode].pkappa, *(nodes[inode].pkappa + 1), nodes[inode].pi);
+791:            else if (com.nhomo > 2 && com.model == REV)
+812:            fprintf(fout, "\n%s:     ", (com.model <= TN93 ? "kappa" : "abcde"));
+813:            for (j = 0; j < nkappa[com.model]; j++)  fprintf(fout, " %9.6f ", *(nodes[inode].pkappa + j));
+815:            fprintf(fout, "\npi model : "); for (j = 0; j < n; j++) fprintf(fout, " %9.6f ", nodes[inode].pi[j]);
+829:      if (com.alpha == 0) free(AncientFreqs);
+832:      fprintf(fout, "\nParameters %s in the rate matrix", (com.model <= TN93 ? "(kappa)" : ""));
+833:      fprintf(fout, " (%s) (Yang 1994 J Mol Evol 39:105-111):\n", models[com.model]);
+838:            if (com.model == F84) { k1 = 1 + x[k + i] / R;  k2 = 1 + x[k + i] / R; }
+855:            Qrate = (com.Mgene == 2 ? x + k : x + k + i*nkappa[com.model]);
+856:            if (com.model <= TN93)
+857:               for (j = 0; j < nkappa[com.model]; j++)
+859:            else if (com.model == REV || com.model == REVu)
+863:         if (com.Mgene >= 3) k += com.ngene*nkappa[com.model];
+864:         else              k += nkappa[com.model];
+867:         if (com.model < REV)
+877:      if ((com.model == REV || com.model == REVu) && com.nhomo <= 2) /* output Q, no eigen calculation */
+879:      else if (com.model == UNREST || com.model == UNRESTu)
+883:   for (j = 0; j < com.nalpha; j++) {
+884:      if (!com.fix_alpha)
+885:         fprintf(fout, "\nalpha (gamma, K=%d) = %8.5f", com.ncatG, (com.alpha = x[k++]));
+886:      if (com.nalpha > 1)
+887:         DiscreteGamma(com.freqK, com.rK, com.alpha, com.alpha, com.ncatG, DGammaUseMedian);
+893:      fprintf(fout, "rho for the auto-discrete-gamma model: %9.5f", x[k]);
+896:   if (com.nparK >= 1 && com.nalpha <= 1) {
+901:   if (com.rho || (com.nparK >= 3 && com.nalpha <= 1)) {
+914:   /* read user definitions of the REV and UNREST models
+922:   if (p == NULL) zerror("model specification.  Expecting '['.");
+924:   if (com.nrate < 0 || (com.model == REVu && com.nrate > 5) || (com.model == UNRESTu && com.nrate > 11))
+940:         if (com.model == REVu) StepMatrix[b1*n + b2] = StepMatrix[b2*n + b1] = i + 1;
+958:   char* optstr[] = { "seqfile","outfile","treefile","noisy", "ndata", "cleandata",
+959:        "verbose","runmode", "method", "clock", "TipDate", "fix_rgene","Mgene", "nhomo",
+960:        "getSE","RateAncestor", "model","fix_kappa","kappa",
+961:        "fix_alpha","alpha","Malpha","ncatG", "fix_rho","rho",
+962:        "nparK", "bootstrap", "Small_Diff","icode", "fix_blength", "seqtype" };
+968:   com.nalpha = 0;
+970:   if (noisy) printf("Reading options from %s..\n", ctlf);
+987:            if (noisy >= 9)
+993:            case (3): noisy = (int)t;           break;
+1003:            case (5): com.cleandata = (char)t;  break;
+1004:            case (6): com.verbose = (int)t;     break;
+1005:            case (7): com.runmode = (int)t;     break;
+1016:            case (16): com.model = (int)t;
+1017:               if (com.model > UNREST) GetStepMatrix(line);
+1023:                  && com.model != 0 && com.model != 2) {
+1032:            case (19): com.fix_alpha = (int)t;   break;
+1034:               com.alpha = t;
+1035:               if (com.fix_alpha && t && (com.clock == 5 || com.clock == 6)) {
+1038:                     if (!sscanf(pline + markgenes[j], "%lf", &data.alpha[j])) break;
+1040:                  matout(F0, data.alpha, 1, min2(ng,com.ndata));
+1044:            case (21): com.nalpha = (int)t;      break;
+1052:            case (29): com.fix_blength = (int)t; break;
+1069:   if ((com.fix_kappa || (com.fix_alpha&&com.alpha)) && (com.clock == 5 || com.clock == 6))
+1074:   if (com.fix_alpha == 1 && com.alpha == 0) {
+1075:      if (!com.fix_rho || com.rho) zerror("fix rho to 0 if alpha=0.");
+1078:      com.fix_alpha = com.fix_rho = 1;
+1079:      if (com.alpha == 0) com.alpha = 0.5;  /* used to generate rK as initial values */
+1085:   if (com.model != F84 && com.kappa <= 0)  zerror("init kappa..");
+1086:   if (!com.fix_alpha && com.alpha <= 0)  zerror("init alpha..");
+1089:   if (com.alpha)
+1099:   if (com.method && (com.model == UNREST || com.model == UNRESTu))
+1102:   if (com.model > UNREST && com.Mgene > 2)
+1103:      zerror("u models don't work with Mgene");
+1108:      if (com.model != K80 && com.model != F84 && com.model != HKY85) 
+1111:   else if (com.nhomo > 2 && !(com.model >= F84 && com.model <= REV)) zerror("nhomo & model");
+1114:      if (com.nhomo == 1 && !(com.model >= F81 && com.model <= REV) && com.model != REVu)
+1115:         zerror("nhomo=1 and model");
+1120:   if (com.clock >= 5 && com.model >= TN93) zerror("model & clock imcompatible");
+1122:   if (com.nhomo > 1 && com.runmode > 0)  zerror("nhomo incompatible with runmode");
+1123:   if (com.runmode == -2) zerror("runmode = -2 not implemented in baseml.");
+1124:   if (com.clock && com.runmode > 2)  zerror("runmode & clock?");
+1125:   if (com.runmode)  com.fix_blength = 0;
+1126:   if (com.runmode == 3 && (com.npi || com.nparK))
+1127:      zerror("runmode incompatible with nparK or nhomo.");
+1129:   if (com.model == JC69 || com.model == K80 || com.model == UNREST)
+1131:   if (com.model == JC69 || com.model == F81) { com.fix_kappa = 1; com.kappa = 1; }
+1132:   if ((com.model == TN93 || com.model == REV || com.model == REVu) && com.nhomo <= 2)
+1134:   if (com.seqtype == 5 && com.model != REVu)
+1135:      zerror("RNA-editing model requires REVu");
+1159:   int i, j, k, K = com.ncatG, n31pi = (com.model == T92 ? 1 : 3);
+1166:      zerror("Combined clock model requires mutliple genes.");
+1170:   if (com.alpha == 0 && com.nparK == 0)
+1172:   else if ((com.alpha && com.rho == 0) || com.nparK == 1 || com.nparK == 2)
+1175:   if (com.clock && com.fix_blength == -1)
+1176:      com.fix_blength = 0;
+1178:   if (com.method && com.fix_blength != 2 && com.plfun == lfundG) {
+1193:   if (com.model <= UNREST) {
+1196:         com.nrate = nkappa[com.model];
+1207:      com.nrate = nkappa[com.model] * (com.fix_kappa ? 1 : tree.nbranch);
+1232:      com.nrate = nkappa[com.model] * j;
+1236:   if (com.model <= TN93 && com.Mgene <= 1 && com.nhomo == 0)
+1237:      eigenTN93(com.model, com.kappa, com.kappa, com.pi, &nR, Root, Cijk);
+1238:   if (com.model == REV || com.model == UNREST)
+1240:         k = com.ntime + com.nrgene + j*(com.model == REV ? 5 : 11);
+1243:         if (com.model == UNREST)
+1245:         if (com.model == REV) {
+1259:   if (com.alpha || com.nparK) {
+1260:      for (i = 0; i < com.nalpha; i++)
+1261:         x[k++] = com.alpha = 0.01 + com.alpha*(.9 + 0.2*rndu());
+1266:         AutodGamma(com.MK, com.freqK, com.rK, &t, com.alpha, com.rho, K);
+1268:         DiscreteGamma(com.freqK, com.rK, com.alpha, com.alpha, K, DGammaUseMedian);
+1294:   if (com.fix_blength == -1)
+1310:      For nhomo models (nhomo=1,3,4)
+1313:   int i, j, k, K = com.ncatG, status = 0, n31pi = (com.model == T92 ? 1 : 3);
+1318:   if (com.fix_blength != 2) SetBranch(x);
+1324:   if (!com.fix_kappa && com.model <= TN93 && com.clock < 5) {
+1326:      if (com.model == TN93) k2 = x[com.ntime + com.nrgene + 1];
+1330:      if (com.model == T92) {  /* T=A, C=G */
+1338:      if (com.model <= TN93)
+1339:         eigenTN93(com.model, k1, k2, com.pi, &nR, Root, Cijk);
+1345:   if (com.model <= TN93 && com.nhomo == 0 && com.Mgene <= 1)
+1346:      RootTN93(com.model, k1, k2, com.pi, &t, Root);
+1350:            nodes[tree.branches[i][1]].pkappa = x + k + i*nkappa[com.model]; 
+1354:            nodes[tree.branches[i][1]].pkappa = x + k + (int)nodes[tree.branches[i][1]].label*nkappa[com.model];
+1360:         if (com.model == T92) {
+1372:   else if ((com.model == REV || com.model == REVu) && com.Mgene <= 1)
+1375:   else if ((com.model==UNREST || com.model==UNRESTu) && com.Mgene<=1)
+1379:   if (com.nparK == 0 && (com.alpha == 0 || com.fix_alpha*com.fix_rho == 1))
+1381:   if (com.nalpha > 1) return (status);
+1383:   if (!com.fix_alpha) {
+1384:      com.alpha = x[k++];
+1386:         DiscreteGamma(com.freqK, com.rK, com.alpha, com.alpha, K, DGammaUseMedian);
+1390:      AutodGamma(com.MK, com.freqK, com.rK, &t, com.alpha, com.rho, K);
+1394:   /* nparK models */
+1428:int SetPGene(int igene, int _pi, int _UVRoot, int _alpha, double x[])
+1434:   int k = com.nrgene + (com.Mgene >= 3)*igene*nr[com.model];
+1436:   double ka1 = xcom[k], ka2 = (com.model == TN93 ? xcom[k + 1] : -1);
+1444:      if (com.model == K80) com.kappa = ka1;
+1445:      else if (com.model <= TN93)
+1446:         eigenTN93(com.model, ka1, ka2, com.pi, &nR, Root, Cijk);
+1447:      else if (com.model == REV || com.model == REVu)
+1450:   if (_alpha) {
+1451:      com.alpha = xcom[com.nrgene + com.nrate + com.npi + igene]; /* check?? */
+1452:      DiscreteGamma(com.freqK, com.rK, com.alpha, com.alpha, com.ncatG, DGammaUseMedian);
+1462:   int i, j, k = 0, nf = 0, n31pi = (com.model == T92 ? 1 : 3);
+1464:   double alphab[] = { .005, 999 }, rhob[] = { -0.2, 0.99 }, pb[] = { .00001, .99999 };
+1477:      xb[k][0] = (com.model == T92 ? pb[0] : fb[0]);
+1478:      xb[k++][1] = (com.model == T92 ? pb[1] : fb[1]);
+1480:   for (i = 0; i < com.nalpha; i++, k++)  
+1482:         xb[k][j] = alphab[j];
+1492:   if (noisy > 2 && np < 50) {
+1532:   if (com.cleandata && inode < com.ns) /* young ancestor */
+1546:      if (nodes[ison].nson < 1 && com.cleandata) {        /* tip && clean */
+1551:      else if (nodes[ison].nson < 1 && !com.cleandata) {  /* tip & unclean */
+1644:   if (com.ngene > 1 || com.nhomo || com.alpha || com.nparK || com.model > REV)
+1671:   /* test of models, using com.
+1679:   fprintf(fout, "\n\nAppr. test of model.. ncat%6d  nsep%6d\n", ncat, nsep);
+1713:   /* reconstruct nucleotide frequencies at and down inode for nonhomogeneous models com.nhomo==3 or 4.
+1718:   if (com.alpha || com.model > REV) {
+1719:      puts("OldDistributions() does not run when alpha > 0 or model >= TN93");
+1725:      if (com.nhomo > 2 && com.model <= TN93)
+1726:         eigenTN93(com.model, *nodes[inode].pkappa, *(nodes[inode].pkappa + 1), nodes[inode].pi, &nR, Root, Cijk);
+1727:      else if (com.nhomo > 2 && com.model == REV)
+1744:   (1) AdG model: generation of com.MK[K*K] is not independent
+1745:       of com.alpha or DiscreteGamma().
+1747:non-homogeneous process models:
+1748:  nhomo            fix_kappa         models
+1765:space-time process models:
+1766:  nparK     fix_alpha       fix_rho        parameters
+1767:  0         (0,1)          (0,1)           alpha & rho for AdG
+1775:Local clock models

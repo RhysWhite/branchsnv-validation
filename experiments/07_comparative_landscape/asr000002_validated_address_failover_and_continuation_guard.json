@@ -1,0 +1,68 @@
+{
+  "address_failover": {
+    "attempted_address_recorded": true,
+    "connect_timeout_seconds": 10,
+    "deterministic_retry_rotation": true,
+    "https_policy_weakened": false,
+    "per_attempt_wall_time_limit_seconds": 60,
+    "read_timeout_seconds": 30,
+    "ssrf_policy_weakened": false,
+    "validated_public_addresses_only": true
+  },
+  "authority_boundary": {
+    "dynamic_child_route_execution_authorized": false,
+    "event_ledger_mutation_authorized": false,
+    "live_authorization_created": false,
+    "live_execution_authorized": false,
+    "review_packet_mutation_authorized": false,
+    "scientific_decisions_authorized": false
+  },
+  "continuation": {
+    "doi_tasks_included": 0,
+    "queue_sha256": "d0a50b1610f0dcc5f61412cb2285b23391c38dd527890e1542c1b25ade7b3ca2",
+    "route_codes": [
+      "pubmed_record",
+      "pubmed_pmc_link_discovery"
+    ],
+    "run_id": "ASR000002",
+    "source_final_status_required": "transient_transport_error",
+    "task_count": 16
+  },
+  "hostile_validation": {
+    "complete_fake_continuation": true,
+    "exact_continuation_reproduced": true,
+    "exception_identity_tested": true,
+    "fake_continuation_attempts": 32,
+    "fake_continuation_tasks": 16,
+    "first_address_failure_tested": true,
+    "module_identity_tested": true,
+    "post_asr000001_regression_state": true,
+    "real_dns_requests": 0,
+    "real_network_requests": 0,
+    "scientific_decisions_created": 0,
+    "second_address_retry_tested": true
+  },
+  "implementation": {
+    "continuation_guard_sha256": "e9682eed4f4a9413dcb342ff865f8fb2aa6aee532d1ece8248d86401d3742b02",
+    "continuation_guard_test_sha256": "a48c8e5f116cc7534e7fb79552518a1c47eaf2a0b2567878f81667c1ac393cff",
+    "exception_class_identity_stable": true,
+    "transport_module_singleton": true,
+    "transport_regression_test_sha256": "fb03f089d78e2cf43449c213201e2e89c7f0ff781a4b93ba04b32bb7e3246a29",
+    "transport_sha256": "cc68579ff66af7633b7dd79520f748cfbe09cf8f95eaaf5cc927b833c4a7d962"
+  },
+  "next_gate": "CREATE_ASR000002_ONE_USE_CONTINUATION_AUTHORIZATION",
+  "parent_completion_continuation_design_commit": "9d94a84647d83f164f581abf56ed74037622e44b",
+  "schema_version": 1,
+  "scientific_boundary": {
+    "all_ten_records_awaiting_source_escalation": true,
+    "ledger_sha256": "fb90d762d4fe9e81410816fe9403c735de138fe1614c11cb83993b40f2c63dff",
+    "review_packet_sha256": "09e08a25873e9a628a2c7900b82f384f7b5838bb166b89d412759fe92a9101d6"
+  },
+  "source_run": {
+    "authorization_sha256": "5e12f5eb15fbfa1dab5f826d8e174270bc395e089a01e2f311537267217aa1be",
+    "must_not_be_rerun": true,
+    "production_state": "COMPLETE",
+    "run_id": "ASR000001"
+  },
+  "status": "FROZEN_PRE_ASR000002_AUTHORIZATION"
+}

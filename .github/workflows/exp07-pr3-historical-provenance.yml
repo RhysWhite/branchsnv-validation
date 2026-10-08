@@ -1,0 +1,30 @@
+name: Experiment 07 historical freeze provenance (offline)
+
+on:
+  pull_request:
+  push:
+    branches:
+      - exp07-synthetic-v6-evidence
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-original-freeze-and-review-anchor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch complete immutable commit history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up standard-library Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Regression and negative integrity tests (synthetic Git history)
+        run: python experiments/07_comparative_landscape/publication_checks/test_verify_historical_implementation_freeze.py
+      - name: Verify original implementation freeze and reviewed branch anchor (no execution)
+        run: python experiments/07_comparative_landscape/publication_checks/verify_historical_implementation_freeze.py

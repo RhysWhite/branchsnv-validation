@@ -26,6 +26,12 @@ The committed publication snapshot was generated with **BRANCHSNV v0.1.0a1**. A 
 | [05 — Published focal branches](experiments/05_published_focal_branches/) | 46/46 published SNVs reproduced across MRSA AK3, MRSA ST97 and *E. coli* ST131/OXA-48 |
 | [06 — Complete-phylogeny empirical analysis](experiments/06_empirical_cross_classification/) | 31,644 informative comparisons across five phylogenies; 827 (2.61%) fell outside the fixed-exclusive/unambiguous-substitution intersection |
 
+## Experiment 07 — comparative landscape (in progress)
+
+Experiment 07 evaluates the feasibility of comparing external workflows for focal-edge substitution reconstruction and recurrent-site detection. Its records include source-backed method screening, frozen study contracts, and synthetic execution evidence for eight comparator workflows. The synthetic checks assess integration and isolation; they do not establish comparative accuracy or authorize execution on the canonical benchmark.
+
+The planned 150-scenario, eight-workflow benchmark has **not** been executed or scored. See the [Experiment 07 review status](experiments/07_comparative_landscape/PR3_PUBLICATION_READINESS.md) and [synthetic evidence and limitations](experiments/07_comparative_landscape/synthetic_execution_v6/README.md).
+
 ## Repository layout
 
 ```text
@@ -45,7 +51,7 @@ only when their prespecified checksums match.
 
 Requirements:
 
-- Python 3.10 or later;
+- Python 3.11–3.13 for the pinned analysis dependencies below; individual standard-library experiments and archived figure renders have their own recorded Python requirements;
 - a local checkout of the source-identical BRANCHSNV release being tested;
 - internet access only for retrieving the public SNPPar inputs in Experiment 03;
 - GNU `time` for Experiment 04;

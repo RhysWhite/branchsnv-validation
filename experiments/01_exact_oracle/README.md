@@ -44,7 +44,7 @@ it:
 ```bash
 python experiments/01_exact_oracle/run.py \
   --branchsnv-root ../branchsnv \
-  --output-dir results/01_exact_oracle
+  --output-dir reproduced_results/01_exact_oracle
 ```
 
 The script has no third-party runtime dependencies. A non-zero exit status is

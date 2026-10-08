@@ -1,0 +1,141 @@
+{
+  "baseline_mapping": {
+    "authoritative_membership": "existing_B000xxx_batch_membership",
+    "contiguous_future_position_sets": 3,
+    "distinct_baseline_batches": 155,
+    "each_review_task_maps_to_unique_existing_batch_position": true,
+    "first_baseline_batch": "B000010",
+    "future_only_full_500_batches": 0,
+    "last_baseline_batch": "B000188",
+    "new_scientific_batch_identity_created": false,
+    "noncontiguous_future_position_sets": 152
+  },
+  "canonical_workspace_contract": {
+    "canonical_pre_review_packets_are_immutable": true,
+    "canonical_workspace_may_be_edited_during_review": false,
+    "immutable_identity_field_mutation_allowed": false,
+    "reviewed_content_must_be_stored_separately": true,
+    "row_addition_allowed": false,
+    "row_removal_allowed": false,
+    "row_reordering_allowed": false,
+    "source_packet_identity_must_be_bound": true
+  },
+  "design_id": "PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1",
+  "design_parent_commit": "98670301bc7b88793af876d2e19bf4cbf689d4de",
+  "mutable_ledger_contract": {
+    "current_ledger_sha_pinned_as_permanent_review_protocol_identity": false,
+    "event_overlap_at_design_audit": 0,
+    "target_specific_event_overlap_must_be_checked_again_before_production": true,
+    "target_specific_event_overlap_must_be_checked_at_review_approval": true,
+    "unrelated_ledger_advancement_invalidates_protocol_design": false
+  },
+  "next_gate": "IMPLEMENT_PRE_REVIEW_TRIAGE_FUTURE_HUMAN_REVIEW_PROTOCOL_V1_WITHOUT_SCIENTIFIC_DECISIONS_OR_PRODUCTION_MUTATION",
+  "planned_review_artifact_contract": {
+    "approval_is_separate_from_live_production_authorization": true,
+    "approval_is_separate_from_packet_editing": true,
+    "planned_root": "results/07_comparative_landscape/pre_review_triage_future_human_review_v1",
+    "review_artifacts_generated_at_design_freeze": false,
+    "reviewed_packet_is_derived_working_artifact": true,
+    "reviewed_packet_preserves_existing_B_position_mapping": true,
+    "reviewed_packet_preserves_source_row_order": true,
+    "reviewed_packet_source_is_exact_frozen_packet": true
+  },
+  "production_bridge_contract": {
+    "direct_projection_of_noncontiguous_future_subset": false,
+    "direct_projection_of_triage_packet_to_production_transaction": false,
+    "existing_batch_membership_remains_authoritative": true,
+    "historical_noncontiguous_superseding_corrections_are_not_generalized": true,
+    "later_bridge_may_require_review_of_nontriage_positions": true,
+    "later_bridge_must_group_by_existing_batch_id": true,
+    "later_bridge_must_not_infer_missing_scientific_decisions": true,
+    "later_bridge_must_order_by_position_in_batch": true,
+    "later_bridge_must_preserve_baseline_row_sha256": true,
+    "later_bridge_must_satisfy_current_contiguous_transaction_contract": true,
+    "live_authorization_required_after_scientific_freeze": true,
+    "one_production_transaction_per_existing_batch_or_valid_contiguous_tranche": true,
+    "reviewed_packet_is_proposal_tsv": false,
+    "strict_ledger_prefix_semantics_preserved": true
+  },
+  "review_approval_contract": {
+    "approval_may_change_batch_membership": false,
+    "approval_may_create_production_proposal": false,
+    "approval_may_mutate_event_ledger": false,
+    "approval_must_revalidate_no_conflicting_current_event_for_target": true,
+    "approval_must_revalidate_target_identity": true,
+    "approval_of_one_packet_authorizes_other_packets": false,
+    "approved_packet_dispositions_are_frozen_before_production_authorization": true,
+    "review_may_be_completed_packet_by_packet": true
+  },
+  "review_order_contract": {
+    "global_cross_lane_order_defined": false,
+    "lane_or_queue_position_is_scientific_evidence": false,
+    "manual_lane_order_preserved": true,
+    "manual_vs_scored_priority_defined": false,
+    "priority_lane_order_preserved": true,
+    "residual_lane_order_preserved": true,
+    "triage_order_controls": "human_review_work_order_only",
+    "triage_order_controls_batch_membership": false,
+    "triage_order_controls_production_event_order": false
+  },
+  "review_universe": {
+    "carry_forwards_presented_for_review": false,
+    "frozen_triage_provenance_rows": 12162,
+    "manual_rows": 257,
+    "new_human_review_rows": 12156,
+    "prior_carry_forward_rows": 6,
+    "priority_rows": 5477,
+    "residual_rows": 6422,
+    "review_packet_count": 25
+  },
+  "schema_version": 1,
+  "scientific_boundary": {
+    "carry_forward_reassessment_performed": false,
+    "human_scientific_review_performed": false,
+    "live_event_authorization_created": false,
+    "new_scientific_batch_membership_created": false,
+    "production_event_created": false,
+    "production_ledger_mutated": false,
+    "proposal_generated": false,
+    "review_packet_approved": false,
+    "scientific_decision_made": false
+  },
+  "scientific_review_contract": {
+    "allowed_exclusion_reason_codes": [
+      "application_only_no_reusable_method",
+      "unrelated_variant_or_data_type",
+      "duplicate_record_same_method_no_distinct_capability",
+      "unsupported_by_primary_or_stable_authoritative_source"
+    ],
+    "allowed_initial_event_types": [
+      "record_decision",
+      "source_escalation"
+    ],
+    "allowed_terminal_record_decisions": [
+      "retain_for_method_assessment",
+      "exclude"
+    ],
+    "exclude_requires_exactly_one_frozen_exclusion_reason": true,
+    "high_recall_uncertainty_rule": "uncertainty_after_permitted_record_level_assessment_resolves_toward_retain_not_exclude",
+    "human_must_choose_review_fields": true,
+    "machine_score_may_be_used_as_decision_evidence": false,
+    "software_or_model_may_prepopulate_scientific_decision_fields": false,
+    "source_escalation_requires": {
+      "evidence_basis_explains_insufficient_evidence": true,
+      "evidence_escalation_status": "awaiting_source_escalation",
+      "proposed_candidate_method_flag_blank": true,
+      "proposed_exclusion_reason_code_blank": true,
+      "proposed_record_decision_blank": true
+    },
+    "terminal_decision_requires_authoritative_evidence_source_locator": true,
+    "triage_lane_may_be_used_as_decision_evidence": false
+  },
+  "source_contract": {
+    "baseline_execution_immutable_checksums_sha256": "3ea3cc193f47da8a32e817579c31f4ca294de615e1e0e29e4eb37963e374f13c",
+    "baseline_scientific_screening_tranche_guard_v3_sha256": "469273c1d2ed9f5ca7ca01efb636b5a045b7e785de6812814780f1c3d73a5aec",
+    "campaign_orchestration_v4_design_checksum_manifest_sha256": "24514c2c5acb3c85daed0556f54a83dad92b694ef4ccdd998efde035b9ee3652",
+    "future_review_workspace_results_amendment_001_checksum_manifest_sha256": "bfeac28b9557180014966feb56e7f70be7e4cc2ecedaa9890643f1d14f908abf",
+    "future_review_workspace_results_checksum_manifest_sha256": "305510cf32496327ff9637792d5d316072de2bf520666c18165bca43e7271c17",
+    "scientific_screening_design_checksum_manifest_sha256": "7514f7ca65d2b9df6aa13d3e38395d749c39fc1a3dc1df882efa822bc2c3fab8"
+  },
+  "status": "FROZEN_PRE_IMPLEMENTATION"
+}

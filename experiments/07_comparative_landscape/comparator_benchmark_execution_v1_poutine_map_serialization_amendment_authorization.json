@@ -1,0 +1,86 @@
+{
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_POUTINE_MAP_SERIALIZATION_AMENDMENT_001",
+  "authorized_change": {
+    "contract": [
+      "Accept the ordered genomic positions used by poutine_variant_fasta_text.",
+      "Emit exactly one tab-separated row per projected site.",
+      "Column 1 is the constant chromosome identifier 1.",
+      "Column 2 is markerN where N is the one-based projected-site index.",
+      "Column 3 is the constant genetic-distance value 0.",
+      "Column 4 is the genomic physical position.",
+      "Emit no header.",
+      "Terminate every row, including the final row, with a newline.",
+      "Preserve input position order so markerN remains aligned with projected FASTA column N.",
+      "Reject non-positive genomic positions.",
+      "Reject duplicate genomic positions."
+    ],
+    "function": "poutine_physical_positions_map_text",
+    "validation": [
+      "The positions [10,20,30,40] must reproduce the successful frozen smoke toy.map byte-for-byte.",
+      "Marker numbering must begin at marker1 and be contiguous.",
+      "Non-positive positions must fail closed.",
+      "Duplicate positions must fail closed.",
+      "Existing adapters and scientific normalization behavior must remain unchanged."
+    ]
+  },
+  "authorized_files": [
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/adapters.py",
+    "experiments/07_comparative_landscape/comparator_benchmark_execution_v1_impl/toy_validation.py"
+  ],
+  "baseline_sha256": {
+    "adapters": "8d9726c58663f6e80299ff14c9e0c04878473770a8d92d398b902d3f6ddf49c1",
+    "environment_recipes": "957ab67424610c774d2d863ef2e0ab0797cff715221232547dfcd49c53b58668",
+    "output_normalization_manifest": "6079a89301596166de129eae3c34665d28d6b6694620a69ff39776d99bf56ea7",
+    "poutine_run_contract_authorization": "b791be6d64319566f9776712ccc8feb03bf6d706ca36c21f0bae31e06b5767aa",
+    "runner_v2_authorization": "c34b58e0016f02a39133a2687d6cdcbbd1a64cc70080e3f2d92b1ae8fb33153c",
+    "toy_validation": "76d519a3476d690228136a38f430f0d6d474774623b533bffffe25fd4c3576de"
+  },
+  "explicitly_not_authorized": {
+    "benchmark_truth_access": true,
+    "benchmark_truth_debugging": true,
+    "canonical_benchmark_execution": true,
+    "comparator_parameter_change": true,
+    "comparator_version_change": true,
+    "environment_recipe_change": true,
+    "method_matrix_change": true,
+    "metric_change": true,
+    "production_bridge": true,
+    "production_ledger_mutation": true,
+    "runner_implementation": true,
+    "scenario_matrix_change": true,
+    "source_pin_change": true,
+    "third_party_comparator_execution": true
+  },
+  "next_gate": "IMPLEMENT_AND_FREEZE_POUTINE_MAP_SERIALIZATION_AMENDMENT_V1",
+  "one_time_amendment": true,
+  "parent_commit": "8c7c68715e2d2caa26e4115e9c4f315825d0932f",
+  "reason": "Runner-v2 preflight established that POUTINE's frozen physical_positions_map input is not serialized by the existing positions_text() adapter. The successful frozen smoke evidence uses a four-column PLINK-style map with chromosome, marker identifier, genetic distance and physical genomic position. This exact serialization must be frozen in the adapter layer before runner implementation.",
+  "rerun_authorized": false,
+  "runner_v2_authorization": {
+    "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V2_001",
+    "commit": "8c7c68715e2d2caa26e4115e9c4f315825d0932f",
+    "consumed": false,
+    "must_not_be_consumed_after_this_amendment_changes_frozen_hashes": true,
+    "required_followup": "REAUTHORIZE_COMPARATOR_BENCHMARK_RUNNER_IMPLEMENTATION_V3"
+  },
+  "status": "AUTHORIZED_NOT_YET_CONSUMED",
+  "successful_smoke_evidence": {
+    "exact_text": "1\tmarker1\t0\t10\n1\tmarker2\t0\t20\n1\tmarker3\t0\t30\n1\tmarker4\t0\t40\n",
+    "path": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/POUTINE/attempt_04_toy_smoke/input/toy.map",
+    "sha256": "d2c3ee9ad184a8523f6e6e505612a8c5f63730dc71a1806598a5df8a82ae358b"
+  },
+  "unchanged": {
+    "POUTINE_dummy_phenotype_policy": true,
+    "POUTINE_environment": true,
+    "POUTINE_output_parser": true,
+    "POUTINE_parameters": true,
+    "POUTINE_run_contract": true,
+    "POUTINE_scoring_contract": true,
+    "POUTINE_source_pin": true,
+    "POUTINE_variant_fasta_serialization": true,
+    "benchmark_dataset": true,
+    "metrics": true,
+    "scenario_definitions": true,
+    "truth_generator": true
+  }
+}

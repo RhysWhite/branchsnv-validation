@@ -1,0 +1,22 @@
+{
+    "authorization_id": "FASTML_CORRECTED_REBUILD_001",
+    "authorized_action": "perform exactly one corrected FastML rebuild from a fresh disposable build checkout using the frozen amended build recipe",
+    "authorized_attempt": "attempt_02_build_gnu98",
+    "environment_recipe_sha256": "13eb4a941f9022014261049b0e18cda54ec21fe9cbde33cc4b3024c9086dbdbd",
+    "failed_attempt": "results/07_comparative_landscape/comparator_benchmark_environment_smoke_v1/FastML/attempt_01_build",
+    "fastml_source_pin": "c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0",
+    "full_benchmark_authorized": false,
+    "next_gate": "FASTML_CORRECTED_REBUILD_001",
+    "not_authorized": [
+        "FastML source modification",
+        "FastML source pin change",
+        "benchmark parameter change",
+        "adapter change",
+        "toy smoke execution",
+        "full benchmark execution"
+    ],
+    "parent_commit": "e30aaa28f6faf1ce21076bfdc0b39d7c65650b5a",
+    "smoke_execution_authorized": false,
+    "source_modification_authorized": false,
+    "status": "AUTHORIZED_NOT_YET_CONSUMED"
+}

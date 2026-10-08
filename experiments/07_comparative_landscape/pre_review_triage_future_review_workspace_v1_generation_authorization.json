@@ -1,0 +1,19 @@
+{
+  "authorization_id": "PRE_REVIEW_TRIAGE_FUTURE_REVIEW_WORKSPACE_V1_GENERATION_001",
+  "carry_forward_reassessment_authorized": false,
+  "confirmation": "GENERATE-FROZEN-FUTURE-REVIEW-WORKSPACE-V1",
+  "cross_lane_priority_inference_authorized": false,
+  "expected_packet_count": 25,
+  "expected_prior_carry_forward_rows": 6,
+  "expected_review_work_rows": 12156,
+  "expected_triage_rows": 12162,
+  "generation_authorized": true,
+  "new_scientific_batch_membership_authorized": false,
+  "one_use": true,
+  "output_root": "results/07_comparative_landscape/pre_review_triage_future_review_workspace_v1",
+  "production_ledger_mutation_authorized": false,
+  "schema_version": 1,
+  "scientific_decision_authorized": false,
+  "status": "AUTHORIZED_ONE_USE",
+  "workspace_design_checksum_manifest_sha256": "754288330069b576dff1e68c7c99c6fb57279c4860c3913818984bb6f57cb484"
+}
