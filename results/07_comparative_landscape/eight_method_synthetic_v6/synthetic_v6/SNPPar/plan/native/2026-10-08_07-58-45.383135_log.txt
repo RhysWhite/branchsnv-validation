@@ -1,0 +1,94 @@
+2026-10-08_07-58-45.383135: INFO : Log started: (/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/2026-10-08_07-58-45.383135_log.txt)
+2026-10-08_07:58:45.386365: INFO : SNPPar:	Parallel SNP Finder V1.0
+	(utilising TreeTime for ASR and intermediate sorting)
+2026-10-08_07:58:45.387860: INFO : User command: snppar -m /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/generated/snps.fasta -l /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/generated/positions.txt -t /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/tree.nwk -g /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/reference.gb -d /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native -A -i
+2026-10-08_07:58:45.389013: INFO : Reading SNPs from /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/generated/snps.fasta and SNP positions from /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/generated/positions.txt
+2026-10-08_07:58:45.391216: INFO : Finished reading 2 SNPs in total
+...keeping 2 variable SNPs and ignoring 0 SNPs
+that are non-variable among the 4 isolates
+2026-10-08_07:58:45.392171: INFO : Reading Genbank file from /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/reference.gb
+2026-10-08_07:58:45.394806: INFO : Found 1 genes
+2026-10-08_07:58:45.395756: INFO : Reading tree from /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/tree.nwk...
+2026-10-08_07:58:45.401831: INFO : Tree and SNP table have same isolates
+2026-10-08_07:58:45.402808: INFO : Parsing SNPs to find bi-, tri- and quadallelic SNPs...
+Also testing if biallelic SNPs are homoplasic
+2026-10-08_07:58:45.405236: INFO : Biallelic SNPs (>1 one isolate): 2
+Biallelic SNPs (>1 one isolate, no missing calls): 2
+Biallelic SNP patterns tested (no missing calls): 2
+Paraphyletic SNPs found: 1
+Triallelic SNPs found: 0
+Quadallelic SNPs found: 0
+
+Total SNPs for mapping: 1
+2026-10-08_07:58:45.406302: INFO : Assigning monophyletic SNPs to genes
+2026-10-08_07:58:45.407246: INFO : Of the 1 monophyletic SNPs for testing, 1 are intergenic, and 0 are intragenic
+2026-10-08_07:58:45.408125: INFO : Assigning SNPs to map to genes
+2026-10-08_07:58:45.409054: INFO : Of the 1 SNPs to map for testing, 1 are intergenic, and 0 are intragenic
+2026-10-08_07:58:45.414275: INFO : Running TreeTime: treetime ancestral --aln /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/snps_to_map.mfasta --tree /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/input_tree_nodeNames.nwk --outdir /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/treetime_out/ --report-ambiguous --verbose 2
+2026-10-08_07:58:46.966297: INFO : stdout: 
+0.00	-TreeAnc: set-up
+
+0.00	WARNING: Previous versions of TreeTime (<0.7.0) RECONSTRUCTED sequences of
+    	tips at positions with AMBIGUOUS bases. This resulted in unexpected
+    	behavior is some cases and is no longer done by default. If you want to
+    	replace those ambiguous sites with their most likely state, rerun with
+    	`reconstruct_tip_states=True` or `--reconstruct-tip-states`.
+
+Inferred sequence evolution model (saved as /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/treetime_out//sequence_evolution_model.txt):
+Substitution rate (mu): 1.0
+
+Equilibrium frequencies (pi_i):
+  A: 0.2635
+  C: 0.2328
+  G: 0.2328
+  T: 0.2588
+  -: 0.0122
+
+Symmetrized rates from j->i (W_ij):
+	A	C	G	T	-
+  A	0	1.2804	1.2804	1.5322	1.2804
+  C	1.2804	0	1.2878	1.2853	1.2878
+  G	1.2804	1.2878	0	1.2853	1.2878
+  T	1.5322	1.2853	1.2853	0	1.2853
+  -	1.2804	1.2878	1.2878	1.2853	0
+
+Actual rates from j->i (Q_ij):
+	A	C	G	T	-
+  A	0	0.3374	0.3374	0.4038	0.3374
+  C	0.298	0	0.2997	0.2992	0.2997
+  G	0.298	0.2997	0	0.2992	0.2997
+  T	0.3965	0.3326	0.3326	0	0.3326
+  -	0.0156	0.0157	0.0157	0.0157	0
+
+
+--- alignment including ancestral nodes saved as  
+	 /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/treetime_out/ancestral_sequences.fasta
+
+--- tree saved in nexus format as  
+	 /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/treetime_out/annotated_tree.nexus
+
+2026-10-08_07:58:46.967597: INFO : Extracting mutation events from ASR results...
+2026-10-08_07:58:46.969426: INFO : Extracting internal node sequences from ASR results...
+2026-10-08_07:58:46.972403: INFO : Processing mapped mutation events...
+2026-10-08_07:58:46.973343: INFO : Processing monophyletic mutation events...
+2026-10-08_07:58:46.974760: INFO : Combining monophyletic and mapped mutation events
+Also combining monophyletic and mapped node sequences...
+2026-10-08_07:58:46.975546: INFO : Writing node sequences to /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/node_sequences.fasta
+2026-10-08_07:58:46.979259: INFO : Assigning coding consequenses to the mutation events...
+2026-10-08_07:58:46.980188: INFO : 0 non-synonymous changes, 0 synonymous changes, and 3 SNP events in non-coding regions
+2026-10-08_07:58:46.981086: INFO : Parsing all mutation events...
+2026-10-08_07:58:46.982494: INFO : Found 2 mutation events that are homoplasic
+2026-10-08_07:58:46.984015: INFO : Writing all calls at homoplasic event positions to /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/homoplasic_events_all_calls.tsv
+2026-10-08_07:58:46.988197: INFO : Found 2 mutation events that are parallel
+2026-10-08_07:58:46.989306: INFO : Writing all calls at parallel event positions to /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/parallel_events_all_calls.tsv
+2026-10-08_07:58:46.992659: INFO : Found 0 mutation events that are convergent
+2026-10-08_07:58:46.993494: INFO : Writing all calls at convergent event positions to /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/convergent_events_all_calls.tsv
+2026-10-08_07:58:46.996347: INFO : No output available... writing of file aborted!
+2026-10-08_07:58:46.998051: INFO : Found 0 mutation events that are revertant
+2026-10-08_07:58:46.999001: INFO : Writing all calls at revertant event positions to /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/revertant_events_all_calls.tsv
+2026-10-08_07:58:46.999916: INFO : No output available... writing of file aborted!
+2026-10-08_07:58:47.001095: INFO : Writing all mutation events to /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/all_mutation_events.tsv
+2026-10-08_07:58:47.005732: INFO : Mapping mutation events to NEXUS tree: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/node_labelled_nexus.tre
+2026-10-08_07:58:47.010007: INFO : Also mapping mutation events to Newick NHX tree: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native/node_labelled_newick.tre
+2026-10-08_07:58:47.013867: INFO : Cleaning up intermediate files...
+2026-10-08_07:58:47.017241: INFO : ...Finished

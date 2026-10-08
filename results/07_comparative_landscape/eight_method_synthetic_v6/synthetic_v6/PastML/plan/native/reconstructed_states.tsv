@@ -1,0 +1,11 @@
+node	site_200	site_40
+root	A	A
+root	T	T
+n0	A	T
+n0	T	
+n00	A	A
+n00	T	
+tipA	T	T
+tipB	A	T
+tipC	T	A
+tipD	A	A

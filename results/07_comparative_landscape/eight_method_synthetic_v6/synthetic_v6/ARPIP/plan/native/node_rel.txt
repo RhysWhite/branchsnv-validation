@@ -1,0 +1,8 @@
+Name 	 Parent 	 Child 
+tipA	V2
+tipB	V2
+V2	root	tipA	tipB
+tipC	V5
+tipD	V5
+V5	root	tipC	tipD
+root	--	V2	V5

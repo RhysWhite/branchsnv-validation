@@ -1,0 +1,45 @@
+poutine 1.0.0 session start time: 2026-October-08 Thursday 07h:58m:42s GMT
+
+Command line options used:
+genotype file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/generated/variants.fasta
+phenotype file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/generated/phenotypes.tsv
+tree file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/public_input/tree.nwk
+plink map file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/generated/positions.map
+# replicates: 10
+min # homoplasic mutations required at each segregating site: 0
+Is --use-precomputed-anc-recon in use?: false
+# threads used: 1
+ouput directory: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native
+     log file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/poutine.log
+     results file (sorted by physical position): /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/poutine.out
+     results file by major allele (sorted by maxT pvalue): /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/poutine.out.sorted_by_a1_maxT
+     results file by minor allele (sorted by maxT pvalue): /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/poutine.out.sorted_by_a2_maxT
+ancestral reconstruction output directory: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/ancestral_reconstruction
+     ancestral genotypes file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/ancestral_reconstruction/ancestral_sequences.fasta
+     ancestral tree file: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/ancestral_reconstruction/ancestral_tree.newick
+Is --timestamp option in use?: false
+Is --force-overwrite option in use?: true
+DEBUG MODE: false
+
+Warning: # replicates has been set to a potentially low value of 10.  Please consider a higher value (the default is 100000 replicates).
+
+treetime command: [treetime, ancestral, --aln, /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/generated/variants.fasta, --tree, /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/public_input/tree.nwk, --outdir, /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/POUTINE/plan/native/ancestral_reconstruction, --gtr, infer]
+
+tree file: # of leaves = 4
+
+genotype file: # segregating sites in each sample = 2
+
+plink map file: # segregating sites = 2
+
+phenotype file: cases = 2, controls = 2, samples missing phenotype = 0, total sample size (cases + controls) = 4
+
+# bi-allelic sites: 2
+# monomorphic sites: 0
+# tri-allelic sites: 0
+# quad-allelic sites: 0
+
+# segregating sites with at least 0 homoplasic mutations: 2
+
+Ending poutine session: 2026-October-08 Thursday 07h:58m:44s GMT
+Wall clock time elapsed = 0h 00m 01s
+CLEAN EXIT

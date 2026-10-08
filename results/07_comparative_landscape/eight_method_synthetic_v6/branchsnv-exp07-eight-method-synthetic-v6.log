@@ -1,0 +1,93 @@
+PASS | previously pinned PastML overlay resealed: 5a7f647a18cad657635c3ad79e2f44877138debf852861e6e4de3cace367f5fe
+PASS | previously pinned TreeTime SciPy overlay resealed: f0739f8ab8f28b6a907b8a8db5d67797c027626ed9a1713508a1e1ed60ef4d35
+PREPARING | pinned synthetic-only TreeTime matplotlib dependency wheels
+Collecting matplotlib==3.8.4 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 1))
+  Downloading matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+Collecting contourpy==1.2.1 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 2))
+  Downloading contourpy-1.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+Collecting cycler==0.12.1 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 3))
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools==4.53.1 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 4))
+  Downloading fonttools-4.53.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (162 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.6/162.6 kB 7.7 MB/s eta 0:00:00
+Collecting kiwisolver==1.4.5 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 5))
+  Downloading kiwisolver-1.4.5-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (6.4 kB)
+Collecting packaging==24.1 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 6))
+  Downloading packaging-24.1-py3-none-any.whl.metadata (3.2 kB)
+Collecting pillow==10.4.0 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 7))
+  Downloading pillow-10.4.0-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (9.2 kB)
+Collecting pyparsing==3.1.2 (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 8))
+  Downloading pyparsing-3.1.2-py3-none-any.whl.metadata (5.1 kB)
+Downloading matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.6/11.6 MB 15.5 MB/s eta 0:00:00
+Downloading contourpy-1.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (305 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 305.2/305.2 kB 13.1 MB/s eta 0:00:00
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.53.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 47.5 MB/s eta 0:00:00
+Downloading kiwisolver-1.4.5-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 32.8 MB/s eta 0:00:00
+Downloading packaging-24.1-py3-none-any.whl (53 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.0/54.0 kB 2.7 MB/s eta 0:00:00
+Downloading pillow-10.4.0-cp310-cp310-manylinux_2_28_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 41.9 MB/s eta 0:00:00
+Downloading pyparsing-3.1.2-py3-none-any.whl (103 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.2/103.2 kB 4.0 MB/s eta 0:00:00
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/contourpy-1.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/cycler-0.12.1-py3-none-any.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/fonttools-4.53.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/kiwisolver-1.4.5-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/packaging-24.1-py3-none-any.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/pillow-10.4.0-cp310-cp310-manylinux_2_28_x86_64.whl
+Saved ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/pyparsing-3.1.2-py3-none-any.whl
+Successfully downloaded matplotlib contourpy cycler fonttools kiwisolver packaging pillow pyparsing
+Looking in links: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 1))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/contourpy-1.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 2))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/cycler-0.12.1-py3-none-any.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 3))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/fonttools-4.53.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 4))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/kiwisolver-1.4.5-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 5))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/packaging-24.1-py3-none-any.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 6))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/pillow-10.4.0-cp310-cp310-manylinux_2_28_x86_64.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 7))
+Processing ./.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_wheels_v6/pyparsing-3.1.2-py3-none-any.whl (from -r /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/treetime_mpl_overlay_v6_requirements.txt (line 8))
+Installing collected packages: pyparsing, pillow, packaging, matplotlib, kiwisolver, fonttools, cycler, contourpy
+Successfully installed contourpy-1.2.1 cycler-0.12.1 fonttools-4.53.1 kiwisolver-1.4.5 matplotlib-3.8.4 packaging-24.1 pillow-10.4.0 pyparsing-3.1.2
+PASS | TreeTime plotting dependency overlay sealed: 5d1378d5561c17a82ed5d05caf7959182a8eb597cba6f17a7aabf7ae42bc8ecb
+REVALIDATING SNAPSHOT | POUTINE
+PASS | POUTINE independently resealed snapshot; no hardlinks
+REVALIDATING SNAPSHOT | PastML
+PASS | PastML independently resealed snapshot; no hardlinks
+REVALIDATING SNAPSHOT | SNPPar
+PASS | SNPPar independently resealed snapshot; no hardlinks
+REVALIDATING SNAPSHOT | TreeTime
+PASS | TreeTime independently resealed snapshot; no hardlinks
+SYNTHETIC | ARPIP
+PASS | ARPIP private root + synthetic truth denial
+PASS | ARPIP comparator SUCCESS | None
+SYNTHETIC | FastML
+PASS | FastML private root + synthetic truth denial
+PASS | FastML comparator SUCCESS | None
+SYNTHETIC | HomoplasyFinder
+PASS | HomoplasyFinder private root + synthetic truth denial
+PASS | HomoplasyFinder comparator SUCCESS | None
+SYNTHETIC | PAML
+PASS | PAML private root + synthetic truth denial
+PASS | PAML comparator SUCCESS | None
+SYNTHETIC | PastML
+PASS | PastML private root + synthetic truth denial
+PASS | PastML comparator SUCCESS | None
+SYNTHETIC | POUTINE
+PASS | POUTINE private root + synthetic truth denial
+PASS | POUTINE comparator SUCCESS | None
+SYNTHETIC | SNPPar
+PASS | SNPPar private root + synthetic truth denial
+PASS | SNPPar comparator SUCCESS | None
+SYNTHETIC | TreeTime
+PASS | TreeTime private root + synthetic truth denial
+PASS | TreeTime comparator SUCCESS | None
+EIGHT_METHOD_SYNTHETIC_GATE_V6=ALL_EIGHT_SYNTHETIC_RUNS_SUCCESSFUL
+CANONICAL_RUNS_STARTED=0
+CANONICAL_EXECUTION_AUTHORIZED=FALSE
+REPORT=/home/rwhite/branchsnv-exp07-eight-method-synthetic-gate-v6.json
+WORKSPACE=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x

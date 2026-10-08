@@ -1,0 +1,1 @@
+OpenJDK 64-Bit Server VM warning: No monotonic clock was available - timed services may be adversely affected if the time-of-day clock changes

@@ -1,0 +1,32 @@
+{
+  "branch_events": [
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "f17d3d8642f856d48fe38b09b351d642f2bb12a2a34bde6e094f087e407badb0",
+      "method": "PAML",
+      "position": "40",
+      "scenario_id": "SYNTHETIC_EXP07_PAML"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "ce149fa1c5179b5e569fb357c9633bfbcbebeebc7abf0890cf717fe7b1d8cd75",
+      "method": "PAML",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_PAML"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "dac8c4e1b434ba7a34cb835dcdce9e7d305c2e761bccf455001993f0a9d2aad7",
+      "method": "PAML",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_PAML"
+    }
+  ],
+  "method": "PAML",
+  "recurrent_sites": [],
+  "scenario_id": "SYNTHETIC_EXP07_PAML",
+  "schema_version": 1
+}

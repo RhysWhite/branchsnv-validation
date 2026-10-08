@@ -1,0 +1,516 @@
+Supplemental results for BASEML
+
+seqf:  /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/plan/generated/alignment.phy
+treef: /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/PAML/plan/generated/tree.nwk
+
+
+TREE #  1
+
+Ancestral reconstruction by BASEML.
+
+((tipA: 0.100000, tipB: 0.100000): 0.100000, (tipC: 0.100000, tipD: 0.100000): 0.100000);
+
+((1, 2), (3, 4));
+
+   5..6     6..1     6..2     5..7     7..3     7..4  
+
+tree with node labels for Rod Page's TreeView
+((1_tipA, 2_tipB) 6 , (3_tipC, 4_tipD) 7 ) 5 ;
+
+Nodes 5 to 7 are ancestral
+
+(1) Marginal reconstruction of ancestral sequences
+(eqn. 4 in Yang et al. 1995 Genetics 141:1641-1650).
+
+Prob of best state at each node, listed by site
+
+   site   Freq   Data: 
+
+   1     50   AAAA: A(0.996) A(1.000) A(1.000) 
+   2     50   CCCC: C(0.996) C(1.000) C(1.000) 
+   3     50   GGGG: G(0.996) G(1.000) G(1.000) 
+   4     48   TTTT: T(0.996) T(1.000) T(1.000) 
+   5     50   AAAA: A(0.996) A(1.000) A(1.000) 
+   6     50   CCCC: C(0.996) C(1.000) C(1.000) 
+   7     50   GGGG: G(0.996) G(1.000) G(1.000) 
+   8     48   TTTT: T(0.996) T(1.000) T(1.000) 
+   9     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  10     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  11     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  12     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  13     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  14     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  15     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  16     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  17     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  18     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  19     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  20     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  21     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  22     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  23     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  24     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  25     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  26     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  27     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  28     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  29     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  30     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  31     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  32     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  33     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  34     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  35     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  36     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  37     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  38     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  39     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  40      1   TTAA: T(0.483) T(0.982) A(0.982) 
+  41     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  42     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  43     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  44     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  45     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  46     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  47     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  48     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  49     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  50     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  51     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  52     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  53     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  54     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  55     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  56     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  57     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  58     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  59     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  60     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  61     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  62     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  63     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  64     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  65     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  66     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  67     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  68     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  69     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  70     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  71     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  72     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  73     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  74     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  75     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  76     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  77     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  78     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  79     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  80     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  81     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  82     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  83     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  84     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  85     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  86     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  87     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  88     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  89     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  90     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  91     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  92     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  93     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  94     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  95     50   GGGG: G(0.996) G(1.000) G(1.000) 
+  96     48   TTTT: T(0.996) T(1.000) T(1.000) 
+  97     50   AAAA: A(0.996) A(1.000) A(1.000) 
+  98     50   CCCC: C(0.996) C(1.000) C(1.000) 
+  99     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 100     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 101     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 102     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 103     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 104     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 105     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 106     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 107     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 108     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 109     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 110     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 111     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 112     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 113     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 114     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 115     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 116     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 117     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 118     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 119     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 120     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 121     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 122     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 123     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 124     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 125     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 126     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 127     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 128     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 129     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 130     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 131     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 132     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 133     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 134     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 135     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 136     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 137     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 138     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 139     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 140     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 141     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 142     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 143     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 144     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 145     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 146     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 147     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 148     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 149     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 150     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 151     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 152     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 153     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 154     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 155     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 156     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 157     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 158     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 159     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 160     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 161     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 162     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 163     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 164     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 165     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 166     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 167     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 168     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 169     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 170     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 171     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 172     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 173     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 174     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 175     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 176     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 177     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 178     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 179     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 180     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 181     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 182     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 183     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 184     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 185     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 186     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 187     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 188     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 189     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 190     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 191     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 192     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 193     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 194     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 195     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 196     48   TTTT: T(0.996) T(1.000) T(1.000) 
+ 197     50   AAAA: A(0.996) A(1.000) A(1.000) 
+ 198     50   CCCC: C(0.996) C(1.000) C(1.000) 
+ 199     50   GGGG: G(0.996) G(1.000) G(1.000) 
+ 200      1   TATA: T(0.495) T(0.497) T(0.497) 
+
+Summary of changes along branches.
+Check root of tree for directions of change.
+
+Branch 1:    5..6 
+
+
+
+Branch 2:    6..1  (tipA) 
+
+
+
+Branch 3:    6..2  (tipB) 
+
+	 200 T 0.497 -> A
+
+
+Branch 4:    5..7 
+
+	  40 T 0.483 -> A 0.982
+
+
+Branch 5:    7..3  (tipC) 
+
+
+
+Branch 6:    7..4  (tipD) 
+
+	 200 T 0.497 -> A
+
+
+
+
+List of extant and reconstructed sequences
+
+     7    200
+
+tipA              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+tipB              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA 
+tipC              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+tipD              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA 
+node #5           ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+node #6           ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+node #7           ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+
+
+Overall accuracy of the 3 ancestral sequences:
+  0.99112  0.99714  0.99714
+for a site.
+
+  0.11228  0.46377  0.46377
+for the sequence.
+
+
+Counts of changes at sites
+
+   1  (0)
+   2  (0)
+   3  (0)
+   4  (0)
+   5  (0)
+   6  (0)
+   7  (0)
+   8  (0)
+   9  (0)
+  10  (0)
+  11  (0)
+  12  (0)
+  13  (0)
+  14  (0)
+  15  (0)
+  16  (0)
+  17  (0)
+  18  (0)
+  19  (0)
+  20  (0)
+  21  (0)
+  22  (0)
+  23  (0)
+  24  (0)
+  25  (0)
+  26  (0)
+  27  (0)
+  28  (0)
+  29  (0)
+  30  (0)
+  31  (0)
+  32  (0)
+  33  (0)
+  34  (0)
+  35  (0)
+  36  (0)
+  37  (0)
+  38  (0)
+  39  (0)
+  40  TA (1)
+  41  (0)
+  42  (0)
+  43  (0)
+  44  (0)
+  45  (0)
+  46  (0)
+  47  (0)
+  48  (0)
+  49  (0)
+  50  (0)
+  51  (0)
+  52  (0)
+  53  (0)
+  54  (0)
+  55  (0)
+  56  (0)
+  57  (0)
+  58  (0)
+  59  (0)
+  60  (0)
+  61  (0)
+  62  (0)
+  63  (0)
+  64  (0)
+  65  (0)
+  66  (0)
+  67  (0)
+  68  (0)
+  69  (0)
+  70  (0)
+  71  (0)
+  72  (0)
+  73  (0)
+  74  (0)
+  75  (0)
+  76  (0)
+  77  (0)
+  78  (0)
+  79  (0)
+  80  (0)
+  81  (0)
+  82  (0)
+  83  (0)
+  84  (0)
+  85  (0)
+  86  (0)
+  87  (0)
+  88  (0)
+  89  (0)
+  90  (0)
+  91  (0)
+  92  (0)
+  93  (0)
+  94  (0)
+  95  (0)
+  96  (0)
+  97  (0)
+  98  (0)
+  99  (0)
+ 100  (0)
+ 101  (0)
+ 102  (0)
+ 103  (0)
+ 104  (0)
+ 105  (0)
+ 106  (0)
+ 107  (0)
+ 108  (0)
+ 109  (0)
+ 110  (0)
+ 111  (0)
+ 112  (0)
+ 113  (0)
+ 114  (0)
+ 115  (0)
+ 116  (0)
+ 117  (0)
+ 118  (0)
+ 119  (0)
+ 120  (0)
+ 121  (0)
+ 122  (0)
+ 123  (0)
+ 124  (0)
+ 125  (0)
+ 126  (0)
+ 127  (0)
+ 128  (0)
+ 129  (0)
+ 130  (0)
+ 131  (0)
+ 132  (0)
+ 133  (0)
+ 134  (0)
+ 135  (0)
+ 136  (0)
+ 137  (0)
+ 138  (0)
+ 139  (0)
+ 140  (0)
+ 141  (0)
+ 142  (0)
+ 143  (0)
+ 144  (0)
+ 145  (0)
+ 146  (0)
+ 147  (0)
+ 148  (0)
+ 149  (0)
+ 150  (0)
+ 151  (0)
+ 152  (0)
+ 153  (0)
+ 154  (0)
+ 155  (0)
+ 156  (0)
+ 157  (0)
+ 158  (0)
+ 159  (0)
+ 160  (0)
+ 161  (0)
+ 162  (0)
+ 163  (0)
+ 164  (0)
+ 165  (0)
+ 166  (0)
+ 167  (0)
+ 168  (0)
+ 169  (0)
+ 170  (0)
+ 171  (0)
+ 172  (0)
+ 173  (0)
+ 174  (0)
+ 175  (0)
+ 176  (0)
+ 177  (0)
+ 178  (0)
+ 179  (0)
+ 180  (0)
+ 181  (0)
+ 182  (0)
+ 183  (0)
+ 184  (0)
+ 185  (0)
+ 186  (0)
+ 187  (0)
+ 188  (0)
+ 189  (0)
+ 190  (0)
+ 191  (0)
+ 192  (0)
+ 193  (0)
+ 194  (0)
+ 195  (0)
+ 196  (0)
+ 197  (0)
+ 198  (0)
+ 199  (0)
+ 200  TA TA (2)
+
+
+(2) Joint reconstruction of ancestral sequences
+(eqn. 2 in Yang et al. 1995 Genetics 141:1641-1650), using the algorithm of Pupko et al. (2000 Mol Biol Evol 17:890-896),
+modified to generate sub-optimal reconstructions.
+
+Reconstruction (prob.), listed by pattern (use the observed data to find the right site).
+
+Pattern Freq   Data:
+
+   1      50  AAAA: AAA (0.996) TAA (0.001) CAA (0.001) GAA (0.001) TTA (0.000) TAT (0.000)  (total  1.000)
+   2      50  CCCC: CCC (0.996) TCC (0.001) ACC (0.001) GCC (0.001) TTC (0.000) TCT (0.000)  (total  1.000)
+   3      50  GGGG: GGG (0.996) TGG (0.001) CGG (0.001) AGG (0.001) TTG (0.000) TGT (0.000)  (total  1.000)
+   4       1  TATA: TTT (0.460) AAA (0.460) TAT (0.016) TTA (0.016) ATA (0.016) AAT (0.016) TAA (0.001)  (total  0.985)
+   5       1  TTAA: TTA (0.466) ATA (0.466) CTA (0.016) GTA (0.016) TTT (0.016) AAA (0.016) TTC (0.001)  (total  0.996)
+   6      48  TTTT: TTT (0.996) CTT (0.001) ATT (0.001) GTT (0.001) TCT (0.000) TAT (0.000)  (total  1.000)
+
+
+
+List of extant and reconstructed sequences
+
+     7    200
+
+tipA              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+tipB              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA 
+tipC              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+tipD              ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA 
+node #5           ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+node #6           ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+node #7           ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGA ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT ACGTACGTAC GTACGTACGT 
+
+

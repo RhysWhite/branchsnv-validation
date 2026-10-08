@@ -1,0 +1,77 @@
+{
+  "argv": [
+    "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+    "-jar",
+    "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+    "--fasta",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/public_input/alignment.fasta",
+    "--tree",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/public_input/tree.nwk"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/HomoplasyFinder/plan/native",
+  "elapsed_seconds": 0.19065076299011707,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "java -jar homoplasyFinder.jar --fasta {alignment_fasta} --tree {tree_newick}",
+  "method": "HomoplasyFinder",
+  "native_outputs": [
+    {
+      "path": "consistencyIndexReport_08-10-26.txt",
+      "sha256": "0964f1ef7edcede892ef533192c2f67b08498ec0ad470c654aedbec937e20b17",
+      "size_bytes": 82
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "e65c83462885888ff17e12790dc808f33e562b9571960450ec8851b1ad3cceea",
+  "required_output_patterns": [
+    "consistencyIndexReport_*.txt"
+  ],
+  "runtime": {
+    "jar": {
+      "path": "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+      "sha256": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b",
+      "size_bytes": 80499
+    },
+    "java": {
+      "path": "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+      "sha256": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96",
+      "size_bytes": 11552
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_HomoplasyFinder",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

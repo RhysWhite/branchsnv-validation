@@ -1,0 +1,32 @@
+{
+  "branch_events": [
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "9cbd897e3aa5f2b908ce6906122814e549c983ed0b4c88e581611454df8e8468",
+      "method": "FastML",
+      "position": "40",
+      "scenario_id": "SYNTHETIC_EXP07_FastML"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "ce149fa1c5179b5e569fb357c9633bfbcbebeebc7abf0890cf717fe7b1d8cd75",
+      "method": "FastML",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_FastML"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "dac8c4e1b434ba7a34cb835dcdce9e7d305c2e761bccf455001993f0a9d2aad7",
+      "method": "FastML",
+      "position": "200",
+      "scenario_id": "SYNTHETIC_EXP07_FastML"
+    }
+  ],
+  "method": "FastML",
+  "recurrent_sites": [],
+  "scenario_id": "SYNTHETIC_EXP07_FastML",
+  "schema_version": 1
+}

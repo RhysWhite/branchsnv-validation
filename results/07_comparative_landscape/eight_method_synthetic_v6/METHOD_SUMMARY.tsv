@@ -1,0 +1,9 @@
+method	synthetic_exit	sandbox_probe	finalized_predictions	frozen_argv_unmodified	native_file_count	limitations
+ARPIP	SUCCESS	PASS	true	true	5	synthetic fixture only
+FastML	SUCCESS	PASS	true	true	5	synthetic fixture only
+HomoplasyFinder	SUCCESS	PASS	true	true	1	synthetic fixture only
+PAML	SUCCESS	PASS	true	true	6	synthetic fixture only
+POUTINE	SUCCESS	PASS	true	false	8	POUTINE synthetic-only --force-overwrite; production command unresolved
+PastML	SUCCESS	PASS	true	true	7	synthetic-only dependency overlays; not approved production runtime
+SNPPar	SUCCESS	PASS	true	true	12	synthetic fixture only
+TreeTime	SUCCESS	PASS	true	true	4	synthetic-only dependency overlays; not approved production runtime

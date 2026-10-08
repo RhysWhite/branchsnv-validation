@@ -1,0 +1,7 @@
+sh: rm: command not found
+sh: rm: command not found
+/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/lib/python3.8/site-packages/Bio/GenBank/Scanner.py:1540: BiopythonParserWarning: Attempting to parse malformed locus line:
+'LOCUS       SYNTHETIC               200 bp    DNA     linear   BCT 01-JAN-2000\n'
+Found locus 'SYNTHETIC' size '200' residue_type 'DNA'
+Some fields may be wrong.
+  warnings.warn(

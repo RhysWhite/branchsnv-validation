@@ -1,0 +1,13 @@
+
+0.00	-TreeAnc: set-up
+GTR params are not specified. Creating GTR model with default parameters
+
+--- alignment including ancestral nodes saved as  
+	 /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/plan/native/ancestral_sequences.fasta
+
+--- tree saved in nexus format as  
+	 /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/plan/native/annotated_tree.nexus
+
+--- tree saved in auspice json format as  
+	 /home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/plan/native/auspice_tree.json
+

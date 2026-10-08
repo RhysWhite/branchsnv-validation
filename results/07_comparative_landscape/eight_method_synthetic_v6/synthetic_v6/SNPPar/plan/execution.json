@@ -1,0 +1,139 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+    "-m",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/generated/snps.fasta",
+    "-l",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/generated/positions.txt",
+    "-t",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/tree.nwk",
+    "-g",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/reference.gb",
+    "-d",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native",
+    "-A",
+    "-i"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/SNPPar/plan/native",
+  "elapsed_seconds": 2.4112377632409334,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "snppar -m {snp_mfasta} -l {snp_positions} -t {tree_newick} -g {reference_genbank} -d {out_dir} -A -i",
+  "method": "SNPPar",
+  "native_outputs": [
+    {
+      "path": "2026-10-08_07-58-45.383135_log.txt",
+      "sha256": "c9ecd02e452e78a2627f320b345ad39eb3fde369fb08008c29f2673390e3302d",
+      "size_bytes": 7249
+    },
+    {
+      "path": "all_mutation_events.tsv",
+      "sha256": "17e19107a3f6f8261d3d0b17799dc4ce6707d7e7080b86e14d37c0e0045a72c5",
+      "size_bytes": 497
+    },
+    {
+      "path": "homoplasic_events_all_calls.tsv",
+      "sha256": "57360d6b9658f3ed4d59d41ea2dde4571faf8c3d51ccfbe4d273ee0ea19c7892",
+      "size_bytes": 416
+    },
+    {
+      "path": "input_tree_nodeNames.nwk",
+      "sha256": "3850ee4b0975c0ea03cd9f036abb10a767a838a1db67b3357995c7981aa4a815",
+      "size_bytes": 46
+    },
+    {
+      "path": "node_labelled_newick.tre",
+      "sha256": "bfabd22b61fca40a61bf0e75d2bbcdbc0bf70ac0fe0d6d353763189d16107ddc",
+      "size_bytes": 329
+    },
+    {
+      "path": "node_labelled_nexus.tre",
+      "sha256": "3e34872caffd206589e30ea9a5260f30598348d32a11ddadd808351b0ad850d9",
+      "size_bytes": 461
+    },
+    {
+      "path": "node_sequences.fasta",
+      "sha256": "e772de2274eb157fcbcb2b2a13c2becb56144cbd0d136759ad51ff0a249eae24",
+      "size_bytes": 21
+    },
+    {
+      "path": "parallel_events_all_calls.tsv",
+      "sha256": "57360d6b9658f3ed4d59d41ea2dde4571faf8c3d51ccfbe4d273ee0ea19c7892",
+      "size_bytes": 416
+    },
+    {
+      "path": "snps_to_map.mfasta",
+      "sha256": "1d9f20e2103e40dc716f6a67492faba90cf395f0ed4ae17c71ba5557121c5be1",
+      "size_bytes": 32
+    },
+    {
+      "path": "treetime_out/ancestral_sequences.fasta",
+      "sha256": "d6a3de4526f31005a1feda07a6e553b8caee83296c938a26c6a62b62fce18501",
+      "size_bytes": 60
+    },
+    {
+      "path": "treetime_out/annotated_tree.nexus",
+      "sha256": "afe065fb1e37185ecea73c9e31696386742d158f67a0c13f45cda022308db878",
+      "size_bytes": 248
+    },
+    {
+      "path": "treetime_out/sequence_evolution_model.txt",
+      "sha256": "0123a6bd72d825691b52c66418d201e1dcef31bb40c95a6b16b90bac918c5fe4",
+      "size_bytes": 551
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "cff916a020003375379a82b4ac355d60f2aeb2cbd026cbda23e7d642f7cc7981",
+  "required_output_patterns": [
+    "all_mutation_events.tsv",
+    "homoplasic_events_all_calls.tsv",
+    "node_labelled_newick.tre"
+  ],
+  "runtime": {
+    "environment_dir": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38"
+    },
+    "executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+      "sha256": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c",
+      "size_bytes": 255
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_SNPPar",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

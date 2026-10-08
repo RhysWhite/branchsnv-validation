@@ -1,0 +1,12 @@
+{
+  "branch_events": [],
+  "method": "POUTINE",
+  "recurrent_sites": [
+    {
+      "position": "200",
+      "reported_recurrence_count_if_available": "2"
+    }
+  ],
+  "scenario_id": "SYNTHETIC_EXP07_POUTINE",
+  "schema_version": 1
+}

@@ -1,0 +1,98 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1/bin/treetime",
+    "ancestral",
+    "--aln",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/public_input/alignment.fasta",
+    "--tree",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/public_input/tree.nwk",
+    "--gtr",
+    "JC69",
+    "--method-anc",
+    "probabilistic",
+    "--rng-seed",
+    "271828182",
+    "--outdir",
+    "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/plan/native"
+  ],
+  "authorization_id": "COMPARATOR_BENCHMARK_EXECUTION_V1_RUNNER_IMPLEMENTATION_V3_001",
+  "comparator_inputs": {
+    "alignment.fasta": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/public_input/alignment.fasta",
+      "sha256": "e474ad09be9ee888198fed984d0fafc9073051005a88fc12415fc06e89665290",
+      "size_bytes": 836
+    },
+    "reference.gb": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/public_input/reference.gb",
+      "sha256": "66979db11c2c356d23aafaee9a1a0ab3146533c76aa5d1899dc391556a44cc86",
+      "size_bytes": 634
+    },
+    "tree.nwk": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/public_input/tree.nwk",
+      "sha256": "5d3625d5fe50d9d6399d59962e206fc89286e89824c3cfc26b7b57230fedb23d",
+      "size_bytes": 51
+    },
+    "variable_positions.txt": {
+      "path": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/public_input/variable_positions.txt",
+      "sha256": "0621d6403e142c1c1ec2424101279dd5a511476c62601484c50d63cab5eb590c",
+      "size_bytes": 7
+    }
+  },
+  "cwd": "/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/TreeTime/plan/native",
+  "elapsed_seconds": 2.707952163182199,
+  "exit_code": 0,
+  "failure_message": null,
+  "failure_type": null,
+  "frozen_run_contract": "treetime ancestral --aln {alignment_fasta} --tree {tree_newick} --gtr JC69 --method-anc probabilistic --rng-seed {scenario_seed} --outdir {out_dir}",
+  "method": "TreeTime",
+  "native_outputs": [
+    {
+      "path": "ancestral_sequences.fasta",
+      "sha256": "f359ef212b179ea2f722ab7a214bb8c6f772ed37aab76dda1e2fa696c1670abc",
+      "size_bytes": 1494
+    },
+    {
+      "path": "annotated_tree.nexus",
+      "sha256": "1acea7f43b27dcc6f136ee9088fb724b9187566c50cfc2aa5bcd2317df772876",
+      "size_bytes": 298
+    },
+    {
+      "path": "auspice_tree.json",
+      "sha256": "2ee0b076e0ad628c1364b6892b8e8c39ee82ecb6a3e5a5e7e798af010c2a14be",
+      "size_bytes": 1945
+    },
+    {
+      "path": "branch_mutations.txt",
+      "sha256": "1e5b3a0198333d35dcb8f638d29a567c8ba2df6860d5584ced457727424d47d8",
+      "size_bytes": 69
+    }
+  ],
+  "normalized_predictions_finalized": true,
+  "normalized_predictions_sha256": "6aa448ed2e89099d630f24164ecb467474472b3dea6688c39c75525f8fd27fcb",
+  "required_output_patterns": [
+    "ancestral_sequences.fasta",
+    "annotated_tree.nexus"
+  ],
+  "runtime": {
+    "environment_dir": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1"
+    },
+    "executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1/bin/treetime",
+      "sha256": "52dec5fdf74b7d17215ea5124ff5fd89199864d260cc1fcc8ba743825e348abb",
+      "size_bytes": 214
+    }
+  },
+  "scenario_id": "SYNTHETIC_EXP07_TreeTime",
+  "scenario_seed": 271828182,
+  "schema_version": 1,
+  "scoring_performed": false,
+  "status": "SUCCESS",
+  "subprocess_environment": {
+    "HOME": "/home/rwhite",
+    "LANG": "en_NZ.UTF-8",
+    "PATH": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/bioinf/esr/bin:/home/rwhite/.cargo/bin:/opt/bioinf/anaconda3/anaconda3-5.0.0.1/bin:/opt/admin/bioinf/miniforge/24.3.0-0/condabin:/usr/share/Modules/bin:/opt/bioinf/esr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/rwhite/.local/bin:/home/rwhite/bin:/home/rwhite/.local/bin:/home/rwhite/bin"
+  },
+  "timed_out": false,
+  "timeout_seconds": 150.0
+}

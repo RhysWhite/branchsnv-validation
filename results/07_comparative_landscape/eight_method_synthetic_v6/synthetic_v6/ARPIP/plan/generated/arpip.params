@@ -1,0 +1,17 @@
+analysis_name=BRANCHSNV_BENCH
+alphabet=DNA
+input.sequence.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/alignment.fasta
+input.sequence.sites_to_use=all
+init.tree=user
+input.tree.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/public_input/tree.nwk
+model=PIP(model=JC69,lambda=10,mu=0.01)
+opt.seed=271828182
+opt.likelihood=0
+opt.pip_param_estimate=0
+opt.tree.with_ans_node_names=1
+rate_distribution=Constant
+output.msa.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/msa.fasta
+output.tree.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/tree.nwk
+output.ancestral.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/anc.fasta
+output.node_rel.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/node_rel.txt
+output.mlindelpoints.file=/home/rwhite/.branchsnv_exp07_eightmethod_x2vkmv0x/synthetic_v6/ARPIP/plan/native/mlindelpoints.txt

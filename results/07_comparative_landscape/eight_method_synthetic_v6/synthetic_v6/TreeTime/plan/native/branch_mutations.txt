@@ -1,0 +1,4 @@
+node	state1	pos	state2
+NODE_0000001	A	40	T
+tipA	A	200	T
+tipC	A	200	T
