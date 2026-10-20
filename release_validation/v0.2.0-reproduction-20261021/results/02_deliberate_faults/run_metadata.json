@@ -1,0 +1,13 @@
+{
+  "branchsnv_root": "/home/rwhite/github/branchsnv/branchsnv",
+  "completed_utc": "2026-10-20T10:45:17.598678+00:00",
+  "elapsed_seconds": 9.610213,
+  "experiment": "02_deliberate_faults",
+  "machine": "x86_64",
+  "output_dir": "/home/rwhite/branchsnv-v020-full-validation-65eb791-r2/results/02_deliberate_faults",
+  "platform": "Linux-4.18.0-553.172.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "processor": "x86_64",
+  "python_implementation": "CPython",
+  "python_version": "3.12.15",
+  "started_utc": "2026-10-20T10:45:07.974066+00:00"
+}

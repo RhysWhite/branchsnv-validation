@@ -1,0 +1,13 @@
+{
+  "accelerated_event_table_sha256": "e63e8166b4f423e8eca25567fe24135c27a1b0bad453befc561ac5bc97ca4efd",
+  "branch_site_analyses": 64236,
+  "branchsnv_analysis_sha256": "4e233de80dbf6849df8fa8daa13c9dd9eaa1e86636e3fa51404714417522b240",
+  "branchsnv_parsimony_sha256": "e2f816f90adfa8bbf357d4770be509d6e91864def2545d050bc2f1a198f414fa",
+  "discrepancies": 0,
+  "exact_records": 1617,
+  "experiment": "06_empirical_cross_classification_production_qc",
+  "informative_records": 1617,
+  "passed": true,
+  "schema_version": 1,
+  "selected_branches": 8
+}

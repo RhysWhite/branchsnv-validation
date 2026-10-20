@@ -38,3 +38,20 @@ jobs:
             --results-dir release_validation/v0.1.0/results \
             --expected-version 0.1.0 \
             --benchmark-repetitions 3
+
+      - name: Verify original public v0.2.0 record
+        run: |
+          python verify_release_validation_record.py \
+            --record-dir release_validation/v0.2.0 \
+            --expected-version 0.2.0 \
+            --expected-production-commit b63b6dbdde46162570dd0d17902e619467771624 \
+            --expected-validation-framework-commit f48bd14048866820c7a252d935ed2d26cb9407e5
+      - name: Verify independent 21 October v0.2.0 reproduction
+        run: |
+          python verify_release_validation_record.py \
+            --record-dir release_validation/v0.2.0-reproduction-20261021 \
+            --expected-version 0.2.0 \
+            --expected-production-commit 65eb791d9f1a202c3ca8816332a58c036794bd1f \
+            --expected-validation-framework-commit 3c64a1d367253ddcaef06c2f07012f347606358e
+          python release_validation/v0.2.0-reproduction-20261021/verify_counts.py
+          (cd release_validation/v0.2.0-reproduction-20261021 && sha256sum -c supplementary_checksums.sha256)

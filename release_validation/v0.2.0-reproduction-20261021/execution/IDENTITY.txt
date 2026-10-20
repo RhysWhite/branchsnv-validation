@@ -1,0 +1,5 @@
+production_commit=65eb791d9f1a202c3ca8816332a58c036794bd1f
+validation_commit=3c64a1d367253ddcaef06c2f07012f347606358e
+expected_version=0.2.0
+output=/home/rwhite/branchsnv-v020-full-validation-65eb791-r2
+python=Python 3.12.15

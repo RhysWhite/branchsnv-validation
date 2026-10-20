@@ -1,0 +1,6 @@
+dataset	dataset_name	taxa	variable_sites	eligible_non_root_adjacent_branches	branch_site_comparisons	informative	both	unambiguous_not_fixed	placement_ambiguous	change_state_ambiguous	fixed_without_unambiguous
+ak3	MRSA AK3	396	10481	788	8259028	10584	10249	287	48	0	0
+st97	MRSA ST97	103	4651	202	939502	4604	4552	52	0	0	0
+oxa48	E. coli ST131/OXA-48	47	266	90	23940	257	252	1	4	0	0
+clade_a	E. coli ST131 Clade A	120	3911	236	922996	4003	3750	178	75	0	0
+clade_b	E. coli ST131 Clade B	246	12148	488	5928224	12196	12014	157	25	0	0
