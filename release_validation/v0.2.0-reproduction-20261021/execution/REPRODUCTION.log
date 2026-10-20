@@ -1,0 +1,104 @@
+Validation environment: Python 3.12.15; NumPy 2.3.5; pandas 2.2.3; Numba 0.65.1
+BRANCHSNV version: 0.2.0
+Topology cases: 7
+Comparisons: 128,881
+Mismatches: 0
+Elapsed: 9.486 s
+PASS
+Evaluated 10 deliberate faults across 280,216 challenges; detected 10/10 faults.
+  reverse_parent_child: 43,323/128,881 differentiating challenges
+  majority_instead_of_parsimony: 10,418/15,625 differentiating challenges
+  gap_as_fifth_state: 369/625 differentiating challenges
+  retain_one_optimum: 63,271/128,881 differentiating challenges
+  opposite_branch_side: 576/1,024 differentiating challenges
+  ignore_outgroup_rooting: 4/4 differentiating challenges
+  accept_mrca_superset: 3/3 differentiating challenges
+  match_taxa_by_column_order: 636/1,024 differentiating challenges
+  allow_missing_outside_exclusive: 148/3,125 differentiating challenges
+  equate_change_with_exclusive: 168/1,024 differentiating challenges
+verified elizabethkingia_snps.csv
+verified elizabethkingia_tree.nwk
+verified elizabethkingia_snppar_all_mutation_events.tsv
+verified elizabethkingia_snppar_node_labelled.nwk
+verified burkholderia_tree.nwk
+verified burkholderia_chr1_snps.csv
+verified burkholderia_chr1_snppar_all_mutation_events.tsv
+verified burkholderia_chr1_snppar_node_labelled.nwk
+verified burkholderia_chr2_snps.csv
+verified burkholderia_chr2_snppar_all_mutation_events.tsv
+verified burkholderia_chr2_snppar_node_labelled.nwk
+verified burkholderia_chr3_snps.csv
+verified burkholderia_chr3_snppar_all_mutation_events.tsv
+verified burkholderia_chr3_snppar_node_labelled.nwk
+BRANCHSNV version: 0.2.0
+Public branch-matrix comparisons: 816
+BRANCHSNV unambiguous events: 877
+Exact SNPPar matches: 877
+SNPPar-only, placement-ambiguous events: 66
+PASS
+[1/39] t500_s10000 mode=fixed-exclusive rep=3: 5.77s, 74.3 MiB
+[2/39] t250_s50000 mode=both rep=1: 13.71s, 159.0 MiB
+[3/39] t100_s10000 mode=both rep=1: 1.22s, 36.8 MiB
+[4/39] t50_s10000 mode=both rep=2: 1.08s, 31.1 MiB
+[5/39] t250_s25000 mode=both rep=1: 7.11s, 89.5 MiB
+[6/39] t500_s10000 mode=fixed-exclusive rep=1: 5.68s, 74.5 MiB
+[7/39] t250_s25000 mode=both rep=3: 6.76s, 89.9 MiB
+[8/39] t250_s10000 mode=both rep=2: 2.73s, 55.9 MiB
+[9/39] t250_s1000 mode=both rep=3: 0.34s, 24.3 MiB
+[10/39] t500_s10000 mode=both rep=1: 5.81s, 74.3 MiB
+[11/39] t2000_s10000 mode=both rep=1: 22.32s, 231.7 MiB
+[12/39] t100_s10000 mode=both rep=2: 1.25s, 36.9 MiB
+[13/39] t250_s50000 mode=both rep=3: 13.33s, 159.4 MiB
+[14/39] t500_s10000 mode=both rep=2: 5.64s, 74.2 MiB
+[15/39] t50_s10000 mode=both rep=3: 0.70s, 31.0 MiB
+[16/39] t500_s10000 mode=parsimony rep=3: 5.64s, 74.3 MiB
+[17/39] t250_s10000 mode=both rep=3: 2.80s, 55.6 MiB
+[18/39] t2000_s10000 mode=both rep=3: 22.21s, 231.9 MiB
+[19/39] t250_s1000 mode=both rep=2: 0.35s, 24.4 MiB
+[20/39] t1000_s10000 mode=both rep=3: 11.03s, 126.6 MiB
+[21/39] t100_s10000 mode=both rep=3: 1.21s, 37.1 MiB
+[22/39] t250_s25000 mode=both rep=2: 6.76s, 89.6 MiB
+[23/39] t500_s10000 mode=fixed-exclusive rep=2: 5.50s, 74.4 MiB
+[24/39] t250_s5000 mode=both rep=3: 1.43s, 38.2 MiB
+[25/39] t250_s100000 mode=both rep=2: 26.63s, 297.9 MiB
+[26/39] t250_s10000 mode=both rep=1: 2.76s, 55.5 MiB
+[27/39] t250_s5000 mode=both rep=1: 1.40s, 38.1 MiB
+[28/39] t1000_s10000 mode=both rep=1: 10.81s, 126.7 MiB
+[29/39] t250_s50000 mode=both rep=2: 13.64s, 159.3 MiB
+[30/39] t500_s10000 mode=both rep=3: 5.54s, 74.4 MiB
+[31/39] t500_s10000 mode=parsimony rep=2: 5.65s, 74.5 MiB
+[32/39] t250_s5000 mode=both rep=2: 1.40s, 38.0 MiB
+[33/39] t250_s1000 mode=both rep=1: 0.34s, 24.3 MiB
+[34/39] t50_s10000 mode=both rep=1: 0.70s, 31.0 MiB
+[35/39] t2000_s10000 mode=both rep=2: 21.82s, 231.8 MiB
+[36/39] t500_s10000 mode=parsimony rep=1: 5.64s, 74.2 MiB
+[37/39] t250_s100000 mode=both rep=1: 26.51s, 298.3 MiB
+[38/39] t250_s100000 mode=both rep=3: 26.49s, 298.3 MiB
+[39/39] t1000_s10000 mode=both rep=2: 10.93s, 126.8 MiB
+Matplotlib is unavailable; Experiment 04 figures were not regenerated.
+Published focal-branch SNVs: 46/46 exact
+  ak3: 23/23 exact; branch b_1a230667657c1c18 (360 descendants)
+  st97: 10/10 exact; branch b_1e8ab945aaeeae17 (2 descendants)
+  oxa48: 13/13 exact; branch b_a797967895347a3f (39 descendants)
+PASS
+Informative comparisons: 31,644; both=30,817; unambiguous-not-fixed=675; placement-ambiguous=152
+ANALYSIS PASS
+Production QC: 1617/1617 informative records exact across 8 branches
+QC PASS
+PASS
+REPRODUCED RESULTS: PASS
+- results directory: /home/rwhite/branchsnv-v020-full-validation-65eb791-r2/results
+- BRANCHSNV version: 0.2.0
+- production source identity: verified (13 Python files)
+- validation-script identity: verified
+- deterministic analytical outputs: exact match to canonical scientific snapshot
+- Experiments 01–06 headline and exact pass criteria: verified
+- Experiment 04 benchmark protocol: 3 repetitions, 39 measured runs
+REPRODUCED RESULTS: PASS
+- results directory: /home/rwhite/branchsnv-v020-full-validation-65eb791-r2/results
+- BRANCHSNV version: 0.2.0
+- production source identity: verified (13 Python files)
+- validation-script identity: verified
+- deterministic analytical outputs: exact match to canonical scientific snapshot
+- Experiments 01–06 headline and exact pass criteria: verified
+- Experiment 04 benchmark protocol: 3 repetitions, 39 measured runs

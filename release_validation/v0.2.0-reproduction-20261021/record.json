@@ -1,0 +1,61 @@
+{
+  "approval_status": "REPRODUCTION_PASS_SCIENTIFIC_AND_PUBLICATION_RELEASE_PENDING",
+  "archive_relocation": {
+    "archival_path": "release_validation/v0.2.0-reproduction-20261021",
+    "changes": "Documentation paths and derived checksum metadata only; all 47 original result files, execution evidence, scripts, inputs and environment files retained byte-identically.",
+    "date": "2026-10-21",
+    "original_document_copies": "archive_migration/source_human_metadata/",
+    "original_document_hashes_sha256": {
+      "MANUSCRIPT_CLAIM_CROSSWALK.tsv": "a412c645e48798bf02fffaa3b2cb6fe9dfaa1baa5b206182b6f3bd8af8869c66",
+      "MANUSCRIPT_REFERENCE_EXAMPLES.md": "05e721a2d637913035ba4e81feafa8da70601c1887e8ae838747f2e647f2212f",
+      "README.md": "5cfd079e30e032f2bd5d938331f48ee6b8a834498343d6adcca747f30762b19c",
+      "record.json": "24fe40c8fa668f6420017cd0ffd435079dd895dd622d0ea248f047dca7abb98f",
+      "supplementary_checksums.sha256": "c513910ab035a938f5f463e1fedc365b001215f71cba14d809ff49fc5bb7ad8b"
+    },
+    "original_path": "release_validation/v0.2.0",
+    "source_commit": "2979e984c2c8301b253c9df809c7d15fe02b4dcd"
+  },
+  "branchsnv_version": "0.2.0",
+  "environment": {
+    "gnu_time": "1.10",
+    "numba": "0.65.1",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "python": "3.12.15"
+  },
+  "experiment04_input_manifest_sha256": "ba8326e312321a46e4244703336662756b58ded8dc5244a8c6f82fffde026a67",
+  "limitations": "The tests concern their prespecified algorithms and datasets. Experiment 04 timings are machine-dependent. Input-representation equivalence does not establish independent evolutionary accuracy. Experiment 07 RC3 is excluded and remains unsigned.",
+  "orientation_equivalence": {
+    "analysis_modes": 3,
+    "cases": 30,
+    "cli_calls": 540,
+    "result_mismatches": 0,
+    "variants_per_case": 6
+  },
+  "original_capture": {
+    "external_manifest_sha256": "e48e264f6d231055ca8c76b1cafdbca84abaeaa264bb31996e04886fee29f9eb",
+    "notes": "The original external capture is BRANCHSNV_v020_candidate_evidence_65eb791.zip; the manifest inside that independently exported ZIP is SHA256SUMS.",
+    "zip_sha256": "7d5dfabe441134b23c14f0b954b87cecaf1b613ce15f602124f5f3583cab2c6c"
+  },
+  "overall_pass": true,
+  "production_commit_at_run": "65eb791d9f1a202c3ca8816332a58c036794bd1f",
+  "production_python_source_files": 13,
+  "production_repository": "RhysWhite/branchsnv",
+  "record_type": "BRANCHSNV stable release validation",
+  "result_file_count": 47,
+  "results_checksum_manifest_sha256": "9589c8b063540a40c3e570f75f5bbc035a2f504d4ac370ddcfcd719e2da47f2d",
+  "schema_version": 1,
+  "supplementary_checksum_manifest_sha256": "8508c94d5cfedfa9e325ce08646a22a8cf6d04aec2b9a3beb4a313038cf0d2cb",
+  "validation_date": "2026-10-21",
+  "validation_date_timezone": "Pacific/Auckland",
+  "validation_framework_commit": "3c64a1d367253ddcaef06c2f07012f347606358e",
+  "validation_repository": "RhysWhite/branchsnv-validation",
+  "verification": {
+    "deterministic_analytical_outputs": "exact match to canonical scientific snapshot",
+    "experiment_04_protocol": "3 repetitions; 39 measured runs",
+    "experiments_01_to_06_headline_and_exact_pass_criteria": "verified",
+    "production_source_identity": "verified (13 Python files)",
+    "validation_script_identity": "verified"
+  },
+  "zenodo_publication": "NOT_PERFORMED"
+}

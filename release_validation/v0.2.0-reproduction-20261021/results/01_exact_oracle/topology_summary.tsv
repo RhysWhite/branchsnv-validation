@@ -1,0 +1,8 @@
+case	topology_type	branch_type	tip_count	focal_descendants	canonical_exhaustive_patterns	ambiguity_exhaustive_patterns	generated_patterns	total_comparisons	mismatches	no_change	unambiguous_change	change_state_ambiguous	placement_ambiguous
+balanced5_internal	bifurcating	internal	5	A,B	1024	0	5000	6024	0	4005	127	19	1873
+balanced5_terminal	bifurcating	terminal	5	A	1024	0	5000	6024	0	4178	339	120	1387
+balanced5_root_adjacent	bifurcating	root-adjacent internal	5	A,B,C,D	1024	0	5000	6024	0	4217	0	0	1807
+pectinate6_internal	bifurcating pectinate	internal	6	C,D,E	4096	0	5000	9096	0	5960	414	18	2704
+multifurcating6_internal	multifurcating	internal	6	A,B,C	4096	0	5000	9096	0	5697	547	34	2818
+multifurcating6_terminal	multifurcating	terminal	6	C	4096	0	5000	9096	0	5246	1206	393	2251
+small4_ambiguity_exhaustive	bifurcating pectinate	internal	4	B,C	0	83521	0	83521	0	56255	972	230	26064

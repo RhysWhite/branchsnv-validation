@@ -1,0 +1,170 @@
+{
+  "datasets": [
+    {
+      "alignment": "inputs/t50_s10000/alignment.nex",
+      "alignment_bytes": 639846,
+      "alignment_sha256": "18a394b85a7832437f4d9089b5681b5ea39d7df48f3f72a99aac69cc17285849",
+      "dataset_id": "t50_s10000",
+      "focal_descendants": 12,
+      "focal_tips": "inputs/t50_s10000/focal_tips.txt",
+      "focal_tips_sha256": "c9bbd6403e85089df04fd2823324c08166e84178f9667513fe5a3d5ca64ae386",
+      "nchar": 10000,
+      "ntax": 50,
+      "tree": "inputs/t50_s10000/tree.nwk",
+      "tree_sha256": "354c6177ea62d546936197c288d9fda611bf228851af6072734cebcddb443f81"
+    },
+    {
+      "alignment": "inputs/t100_s10000/alignment.nex",
+      "alignment_bytes": 1140647,
+      "alignment_sha256": "3c28d377aa08147f7cd7264c354b259821d7bedc626e4d261248f5ba86bbda22",
+      "dataset_id": "t100_s10000",
+      "focal_descendants": 25,
+      "focal_tips": "inputs/t100_s10000/focal_tips.txt",
+      "focal_tips_sha256": "9726b0ae317a376a9fcbe3a4ca80945f22147176bae475aa298c94481c826ffa",
+      "nchar": 10000,
+      "ntax": 100,
+      "tree": "inputs/t100_s10000/tree.nwk",
+      "tree_sha256": "a1cd7ae63ac1981dcf7ce1dcffdc50de029c7f89513c337fd9061daa40182874"
+    },
+    {
+      "alignment": "inputs/t250_s1000/alignment.nex",
+      "alignment_bytes": 267045,
+      "alignment_sha256": "85475dc6a12113122839e62c81a665c14e721bc924c400760000f5b03c1b3196",
+      "dataset_id": "t250_s1000",
+      "focal_descendants": 62,
+      "focal_tips": "inputs/t250_s1000/focal_tips.txt",
+      "focal_tips_sha256": "69e5fa37b6b26cac3a1063945fb80ab87d713e95279e4955290af5a27dd30f19",
+      "nchar": 1000,
+      "ntax": 250,
+      "tree": "inputs/t250_s1000/tree.nwk",
+      "tree_sha256": "b3f52199064992e66592f5f38987292f1a6656955623741e22491475349c7567"
+    },
+    {
+      "alignment": "inputs/t250_s5000/alignment.nex",
+      "alignment_bytes": 1323045,
+      "alignment_sha256": "28d7e0271207f957a569bc859447c692847a1b5778abad9dab10e7b8720f3bb4",
+      "dataset_id": "t250_s5000",
+      "focal_descendants": 62,
+      "focal_tips": "inputs/t250_s5000/focal_tips.txt",
+      "focal_tips_sha256": "69e5fa37b6b26cac3a1063945fb80ab87d713e95279e4955290af5a27dd30f19",
+      "nchar": 5000,
+      "ntax": 250,
+      "tree": "inputs/t250_s5000/tree.nwk",
+      "tree_sha256": "b3f52199064992e66592f5f38987292f1a6656955623741e22491475349c7567"
+    },
+    {
+      "alignment": "inputs/t250_s10000/alignment.nex",
+      "alignment_bytes": 2643047,
+      "alignment_sha256": "fa78305632e6167a986d7788f1ea3c161055381d87a9458b82c8893b4135bddc",
+      "dataset_id": "t250_s10000",
+      "focal_descendants": 62,
+      "focal_tips": "inputs/t250_s10000/focal_tips.txt",
+      "focal_tips_sha256": "69e5fa37b6b26cac3a1063945fb80ab87d713e95279e4955290af5a27dd30f19",
+      "nchar": 10000,
+      "ntax": 250,
+      "tree": "inputs/t250_s10000/tree.nwk",
+      "tree_sha256": "b3f52199064992e66592f5f38987292f1a6656955623741e22491475349c7567"
+    },
+    {
+      "alignment": "inputs/t250_s25000/alignment.nex",
+      "alignment_bytes": 6618047,
+      "alignment_sha256": "0fd46df0c240a0efcf48390deb3baf5928eb7f5ec4bb202e58d3931a92ce821e",
+      "dataset_id": "t250_s25000",
+      "focal_descendants": 62,
+      "focal_tips": "inputs/t250_s25000/focal_tips.txt",
+      "focal_tips_sha256": "69e5fa37b6b26cac3a1063945fb80ab87d713e95279e4955290af5a27dd30f19",
+      "nchar": 25000,
+      "ntax": 250,
+      "tree": "inputs/t250_s25000/tree.nwk",
+      "tree_sha256": "b3f52199064992e66592f5f38987292f1a6656955623741e22491475349c7567"
+    },
+    {
+      "alignment": "inputs/t250_s50000/alignment.nex",
+      "alignment_bytes": 13243047,
+      "alignment_sha256": "6e5cadfc2bc52376236f6bbedf2eca1a891e3e853d3bc8f6f2c76f6e8092f6b8",
+      "dataset_id": "t250_s50000",
+      "focal_descendants": 62,
+      "focal_tips": "inputs/t250_s50000/focal_tips.txt",
+      "focal_tips_sha256": "69e5fa37b6b26cac3a1063945fb80ab87d713e95279e4955290af5a27dd30f19",
+      "nchar": 50000,
+      "ntax": 250,
+      "tree": "inputs/t250_s50000/tree.nwk",
+      "tree_sha256": "b3f52199064992e66592f5f38987292f1a6656955623741e22491475349c7567"
+    },
+    {
+      "alignment": "inputs/t250_s100000/alignment.nex",
+      "alignment_bytes": 26493049,
+      "alignment_sha256": "3688d6d191ffde5ba3a7b65a01b96f033f8e6b7da7500ff03e577b20d316e1f6",
+      "dataset_id": "t250_s100000",
+      "focal_descendants": 62,
+      "focal_tips": "inputs/t250_s100000/focal_tips.txt",
+      "focal_tips_sha256": "69e5fa37b6b26cac3a1063945fb80ab87d713e95279e4955290af5a27dd30f19",
+      "nchar": 100000,
+      "ntax": 250,
+      "tree": "inputs/t250_s100000/tree.nwk",
+      "tree_sha256": "b3f52199064992e66592f5f38987292f1a6656955623741e22491475349c7567"
+    },
+    {
+      "alignment": "inputs/t500_s10000/alignment.nex",
+      "alignment_bytes": 5147047,
+      "alignment_sha256": "1147d1b7ae52f6674e3a14b4a5d637daf4bb4a46bc23e5bbebe57871e6d2ff05",
+      "dataset_id": "t500_s10000",
+      "focal_descendants": 125,
+      "focal_tips": "inputs/t500_s10000/focal_tips.txt",
+      "focal_tips_sha256": "8d723906a76ff94f54657dd699cd4e73bfa4c32b3f88aed8a19237af2f4ea0d9",
+      "nchar": 10000,
+      "ntax": 500,
+      "tree": "inputs/t500_s10000/tree.nwk",
+      "tree_sha256": "843566f9ba0db6ee41cb35840fd2af8e79d46b7071c53ec2229b3192f3833cd9"
+    },
+    {
+      "alignment": "inputs/t1000_s10000/alignment.nex",
+      "alignment_bytes": 10155048,
+      "alignment_sha256": "0b9af1a84b04450a020268f8ded118753914d8ddcfcd3fb19264db4dd54544b6",
+      "dataset_id": "t1000_s10000",
+      "focal_descendants": 250,
+      "focal_tips": "inputs/t1000_s10000/focal_tips.txt",
+      "focal_tips_sha256": "3f11d09ab6d9d34a7aa761b4760e54056bceeef5b862a94651ea1ecaa9903465",
+      "nchar": 10000,
+      "ntax": 1000,
+      "tree": "inputs/t1000_s10000/tree.nwk",
+      "tree_sha256": "cb09105a24fadbe0e59d55e45e17eaa32bf5dffd72ef0e7bfed7014fbf9aecd4"
+    },
+    {
+      "alignment": "inputs/t2000_s10000/alignment.nex",
+      "alignment_bytes": 20171048,
+      "alignment_sha256": "f08662fff44f5e991a6368ea9dc86148ac99618ff930c3d5c7c4d502d5062906",
+      "dataset_id": "t2000_s10000",
+      "focal_descendants": 500,
+      "focal_tips": "inputs/t2000_s10000/focal_tips.txt",
+      "focal_tips_sha256": "3fcf29cbfafe13f228e3412426e6c578a0ec1cbc3385f40754239f59ea668873",
+      "nchar": 10000,
+      "ntax": 2000,
+      "tree": "inputs/t2000_s10000/tree.nwk",
+      "tree_sha256": "cd9ab48544d9b73d64bc29da0fe44eb3ac9e047111d637d452410837416e764b"
+    }
+  ],
+  "design": {
+    "focal_clade_fraction": "approximately one quarter of taxa",
+    "patterns": "deterministic 20-site cycle covering focal, recurrent, mixed, ambiguous, missing, and gap-containing states",
+    "site_counts": [
+      1000,
+      5000,
+      10000,
+      25000,
+      50000,
+      100000
+    ],
+    "site_scaling_ntax": 250,
+    "taxon_counts": [
+      50,
+      100,
+      250,
+      500,
+      1000,
+      2000
+    ],
+    "taxon_scaling_nchar": 10000
+  },
+  "generator": "experiments/04_scalability/generate_inputs.py"
+}
