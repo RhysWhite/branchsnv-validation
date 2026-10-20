@@ -15,6 +15,23 @@ The committed publication snapshot was generated with **BRANCHSNV v0.1.0a1**. A 
 
 **Validation archive:** [Zenodo](https://doi.org/10.5281/zenodo.21919067)
 
+## Versioned validation records (v0.2.0)
+
+The Zenodo links above identify the **historical v0.1.0** releases, not the
+v0.2.0 evidence. The two v0.2.0 executions are preserved separately:
+
+- **Original validation (6 October 2026):** [`release_validation/v0.2.0/`](release_validation/v0.2.0/), production commit `b63b6db`, validation-framework commit `f48bd14`.
+- **Independent reproduction (21 October 2026):** [`release_validation/v0.2.0-reproduction-20261021/`](release_validation/v0.2.0-reproduction-20261021/), production commit `65eb791`, validation-framework commit `3c64a1d`.
+
+The 47 checksummed result files in each execution were verified. Deterministic
+results and the tested scientific invariants agreed; Experiment 04 performance
+measurements are machine-dependent. For source identities, validation commands
+and manuscript file references, start at [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md)
+and the [manuscript claim crosswalk](release_validation/v0.2.0-reproduction-20261021/MANUSCRIPT_CLAIM_CROSSWALK.tsv).
+No v0.2.0 Zenodo DOI is assigned here pending a verified deposit.
+
+**Experiment 7:** The separately executed 30-history RC3 candidate has completed an automated evidence audit, but scientific approval remains **UNSIGNED/HOLD**. It is not part of the approved v0.2.0 validation conclusions.
+
 ## Validation summary
 
 | Experiment | Primary result |
