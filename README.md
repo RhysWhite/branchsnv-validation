@@ -4,6 +4,8 @@
 
 # BRANCHSNV publication validation
 
+**Published v0.2.0 archives:** [validation and reproducibility evidence (10.5281/zenodo.23518684)](https://doi.org/10.5281/zenodo.23518684) · [associated source release (10.5281/zenodo.23518619)](https://doi.org/10.5281/zenodo.23518619).
+
 Reproducible validation, empirical analyses and benchmarks supporting
 [BRANCHSNV](https://github.com/RhysWhite/branchsnv). This repository is kept
 separate from the production software so that independent or deliberately incorrect
@@ -28,7 +30,7 @@ results and the tested scientific invariants agreed; Experiment 04 performance
 measurements are machine-dependent. For source identities, validation commands
 and manuscript file references, start at [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md)
 and the [manuscript claim crosswalk](release_validation/v0.2.0-reproduction-20261021/MANUSCRIPT_CLAIM_CROSSWALK.tsv).
-No v0.2.0 Zenodo DOI is assigned here pending a verified deposit.
+The v0.2.0 software and validation version-specific DOIs are linked above.
 
 **Experiment 7:** The separately executed 30-history RC3 candidate has completed an automated evidence audit, but scientific approval remains **UNSIGNED/HOLD**. It is not part of the approved v0.2.0 validation conclusions.
 

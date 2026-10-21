@@ -1,5 +1,7 @@
 # Reproducibility and manuscript evidence
 
+**Published v0.2.0 archives:** [validation and reproducibility evidence (10.5281/zenodo.23518684)](https://doi.org/10.5281/zenodo.23518684) · [associated source release (10.5281/zenodo.23518619)](https://doi.org/10.5281/zenodo.23518619).
+
 The **v0.2.0 software version** has two separately preserved validation executions.
 They must not be treated as the same Git snapshot or the same scalability
 measurement.
