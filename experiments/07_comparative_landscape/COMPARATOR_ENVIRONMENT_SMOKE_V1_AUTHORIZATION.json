@@ -1,0 +1,29 @@
+{
+  "authorization_id": "COMPARATOR_ENVIRONMENT_SMOKE_V1_001",
+  "status": "OPERATOR_AUTHORIZED",
+  "authorized_at_utc": "2026-10-21T20:57:01.346543+00:00",
+  "parent_freeze": "COMPARATOR_BENCHMARK_EXECUTION_IMPLEMENTATION_V1",
+  "parent_manifest_sha256": "d5249be8aa0e751f1f1b564dbc1a6cd7f1345cb485c36b07d32a8ce0731a51d7",
+  "authorized_methods": [
+    "ARPIP",
+    "FastML",
+    "HomoplasyFinder",
+    "PAML",
+    "POUTINE",
+    "PastML",
+    "SNPPar",
+    "TreeTime"
+  ],
+  "authorized_scope": [
+    "exact_pinned_source_acquisition",
+    "isolated_environment_builds",
+    "noncanonical_toy_smoke_tests",
+    "adapter_contract_validation",
+    "dependency_and_execution_provenance_capture"
+  ],
+  "canonical_dataset_generation_authorized": false,
+  "canonical_benchmark_execution_authorized": false,
+  "canonical_truth_tuning_authorized": false,
+  "production_ledger_mutation_authorized": false,
+  "next_required_gate": "INDEPENDENT_SMOKE_EVIDENCE_REVIEW"
+}
