@@ -14,3 +14,6 @@ results/07_comparative_landscape/high_recall_search/corpus_checksums.sha256
 results/07_comparative_landscape/citation_wave_0/raw/
 results/07_comparative_landscape/citation_wave_0_failed_*/
 results/07_comparative_landscape/citation_wave_0_successful_*/
+
+# Experiment 07 preliminary figures
+manuscript/figure_3/experiment_07/_generated/
