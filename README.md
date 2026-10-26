@@ -156,3 +156,22 @@ https://doi.org/10.5281/zenodo.21919038.
 Citation metadata are provided in [`CITATION.cff`](CITATION.cff). Validation code is
 released under the [MIT License](LICENSE). Public third-party material retains its
 original attribution; see [`THIRD_PARTY.md`](THIRD_PARTY.md).
+
+## Completed 150-scenario comparator benchmark (Experiment 07 extension)
+
+The separately identified 26 October 2026 Experiment 07 publication extension
+compares BRANCHSNV against eight external workflows on 150 frozen simulated
+scenarios. Seven methods contribute exact branch-event scores and four external
+methods contribute a **different** recurrent-site endpoint. This is a scored
+**exploratory extension**, not a revision to the historical 0.1.0a1/0.1.0
+validation release. Branch lengths in the simulator were derived from realised
+events; results are conditional latent-history recovery, not an independent
+branch-length validation.
+
+See [accuracy benchmark methods and provenance](experiments/07_comparative_landscape/accuracy_benchmark_v1/),
+[verified result tables](results/07_comparative_landscape/accuracy_benchmark_v1/),
+[code-generated main and supplementary figures](manuscript/comparator_accuracy/), and
+[the machine-readable manuscript claim register](publication_claims.json).
+
+Verify with `python verify_experiment07_publication.py`. The original
+`verify_publication_snapshot.py` continues to govern Experiments 01–06.

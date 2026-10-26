@@ -20,3 +20,10 @@ Each figure directory contains:
 - a small directory tree and locked figure requirements.
 
 Run `python verify_publication_snapshot.py` from the repository root to verify the canonical result snapshot and confirm that the figure code walkthroughs remain line-for-line synchronized with their plotting scripts.
+
+## Additional comparative accuracy figures
+
+The completed Experiment 07 main and supplementary accuracy figures are in
+[`comparator_accuracy/`](comparator_accuracy/). The plotting source, checksum-gated
+inputs, editable SVGs, PDFs, PNGs, figure legends, and exact rendering requirements
+are committed together and validated by `verify_experiment07_publication.py`.

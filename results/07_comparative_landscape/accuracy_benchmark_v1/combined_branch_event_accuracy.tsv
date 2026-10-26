@@ -1,0 +1,8 @@
+method	endpoint	scenarios	TP	FP	FN	precision	recall	F1	evidence
+ARPIP	exact_latent_branch_event	150	7383	1203	2217	0.8598881900768693	0.7690625	0.8119432530517982	new_exploratory_extension_scoring
+BRANCHSNV	exact_latent_branch_event	150	5661	890	3939	0.8641428789497787	0.5896875	0.7010092254349576	original_frozen_independent_scoring
+FastML	exact_latent_branch_event	150	7375	1211	2225	0.858956440717447	0.7682291666666666	0.8110634554052568	original_frozen_independent_scoring
+PAML	exact_latent_branch_event	150	7314	1274	2286	0.851653469958081	0.761875	0.8042665493732131	new_exploratory_extension_scoring
+PastML	exact_latent_branch_event	150	5230	5197	4370	0.5015824302292127	0.5447916666666667	0.5222949018824586	new_exploratory_extension_scoring
+SNPPar	exact_latent_branch_event	150	6290	2294	3310	0.7327586206896551	0.6552083333333333	0.6918169819621646	new_exploratory_extension_scoring
+TreeTime	exact_latent_branch_event	150	7302	1284	2298	0.8504542278127184	0.760625	0.8030353018805675	original_frozen_independent_scoring
