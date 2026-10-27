@@ -1,0 +1,214 @@
+{
+  "collected_utc": "2026-10-27T03:24:12.819702+00:00",
+  "note": "Original and fresh receipts are unchanged, including original machine paths. Native output bytes not included.",
+  "original_repo_head": "14cc805c068edbf4e0923b7531a96cc1c35556f2",
+  "schema": "branchsnv-exp07-nine-replay-pilot-v1",
+  "scope": "nine successful same-host native replays, not full native rerun package",
+  "selections": [
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 40,
+      "canonical_alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+      "canonical_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+      "fresh_receipt_sha256": "12a62a0b036375820afe496df7da9b0201632a8021a39304833b163213fbf887",
+      "job_index_1based": 2,
+      "method": "ARPIP",
+      "original_receipt_sha256": "aa648d3d5498423f260eb3785f35dab498dc8cac663c080d58f0e43f792e0b2f",
+      "prediction_sha256": "41c5128820b19510523d5b58f1e92276a7222ad29e6ebd22707cd4b8fc020ef3",
+      "recurrent_sites": 0,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S002",
+      "source_runtime_sha256": {
+        "executable": "7e1ecc859ac862be9de5e31d71991d483f73840143fdae7ba367ae7d9fc62502"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 0,
+      "canonical_alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+      "canonical_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+      "fresh_receipt_sha256": "fc1ef0527e5146417a551c1806991dba7d87eccd1db0e4d01ee8fef579e489d6",
+      "job_index_1based": 152,
+      "method": "HomoplasyFinder",
+      "original_receipt_sha256": "75141150dff9795bd9b3a40d5c92259816da894ad3322698172a6b3d87136aef",
+      "prediction_sha256": "3f1893dd0c444aa739480ff62c1dfd578bed292736b600db4c620c5a7f69f4f6",
+      "recurrent_sites": 0,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S002",
+      "source_runtime_sha256": {
+        "jar": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b",
+        "java": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 40,
+      "canonical_alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+      "canonical_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+      "fresh_receipt_sha256": "40de58bc1422325891d1cf3e67c5b9d8d9cbb52df4a64fde19dbbc50a9840438",
+      "job_index_1based": 302,
+      "method": "PAML",
+      "original_receipt_sha256": "0d2531dab6745c1805d937676d771e00e1d1567f6287590f4fd764d9d0f3ac6d",
+      "prediction_sha256": "7c5db506028b7d97eaefd3d62c6f7c50770d986ec8e841e0e2885ff3eb837249",
+      "recurrent_sites": 0,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S002",
+      "source_runtime_sha256": {
+        "executable": "bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 46,
+      "canonical_alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+      "canonical_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+      "fresh_receipt_sha256": "e370d4ecf20ceacd5dd23d6014da08f6a10cc2b63b9bc79b5bee62f4d469cbd7",
+      "job_index_1based": 452,
+      "method": "PastML",
+      "original_receipt_sha256": "d1064e76b611ba0a8d87817ed55734fe06da6e5710bd74f234140400492a5eda",
+      "prediction_sha256": "26a2e42f05111fe2d52f803bab08fba0f9ea77bea72c9b64f5f652ccf0cf0dbf",
+      "recurrent_sites": 0,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S002",
+      "source_runtime_sha256": {
+        "executable": "57334fb47075a1b916f901af2ca6df3a8a98aacd8a80a335307dc4a86c1ad3e1"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 0,
+      "canonical_alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+      "canonical_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+      "fresh_receipt_sha256": "219ee52e3fd81d1196696790179a83babf2077e9c4f9baf564c77e95fb99c12f",
+      "job_index_1based": 602,
+      "method": "POUTINE",
+      "original_receipt_sha256": "8997ec3173c84ff58354a68bcff2d197a955767be822edf3e4b3ee6e1532b65f",
+      "prediction_sha256": "308aa5383a0c5830457804c62f6c196866a3bd8575077525d47acb1825b8facc",
+      "recurrent_sites": 0,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S002",
+      "source_runtime_sha256": {
+        "script": "a1b0991e4ad87bc6e4b3275b8c59d7636112172a2b8ac72322fd205ca2dc354c"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 40,
+      "canonical_alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+      "canonical_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+      "fresh_receipt_sha256": "90fcb651cece4e18f43098306b45e8698491c869a05659e5c3beed187ba35ae8",
+      "job_index_1based": 752,
+      "method": "SNPPar",
+      "original_receipt_sha256": "78441cdf8ba4ac203cf4b2f2e071c712704083551a6bbf767d3f4dbc4a18b2da",
+      "prediction_sha256": "1f432846ee4a637787d7256a42b46ed1c70583f3dad0ec65991cbff658738037",
+      "recurrent_sites": 0,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S002",
+      "source_runtime_sha256": {
+        "executable": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 0,
+      "canonical_alignment_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+      "canonical_tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+      "fresh_receipt_sha256": "dda0c6d9c515560411e371982e9da6ff35b7d2730dc2cfc657aebf19797baa48",
+      "job_index_1based": 161,
+      "method": "HomoplasyFinder",
+      "original_receipt_sha256": "d5ecc4b6a912ad18344765e39eaf4e90666f8aa1a9cf93fdd53c957e9acb73fe",
+      "prediction_sha256": "90346cec19314d09a4297afca3671e416e51fdad0d746212ca75eb35bdc4e1a3",
+      "recurrent_sites": 20,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S011",
+      "source_runtime_sha256": {
+        "jar": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b",
+        "java": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 0,
+      "canonical_alignment_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+      "canonical_tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+      "fresh_receipt_sha256": "01e0e84783d2388976b53653f39a89a2c149004241d586611f379696f5d87987",
+      "job_index_1based": 611,
+      "method": "POUTINE",
+      "original_receipt_sha256": "54003153eb57e4ae76ac7ec66ebc16c1afabde572ca27c645c0933533fa16c36",
+      "prediction_sha256": "7646d72dae13700933728a585e99b00e4e3ccb65b9f4e9ea9d8d8943eccdf080",
+      "recurrent_sites": 18,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S011",
+      "source_runtime_sha256": {
+        "script": "a1b0991e4ad87bc6e4b3275b8c59d7636112172a2b8ac72322fd205ca2dc354c"
+      }
+    },
+    {
+      "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+      "branch_events": 60,
+      "canonical_alignment_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+      "canonical_tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+      "fresh_receipt_sha256": "b3c17e9045172342580a7d1e97cee6dd4a0658f4a575daa169914af868c5d86a",
+      "job_index_1based": 761,
+      "method": "SNPPar",
+      "original_receipt_sha256": "2cf6c248315f48c0e965a570c9d839f0a54cf2096d0c0ed624a72337eaed6a81",
+      "prediction_sha256": "bffc43f289de67380ae3716d34303a52e19d119447dec6a1b0ef85d6431a4fcf",
+      "recurrent_sites": 20,
+      "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+      "scenario_id": "S011",
+      "source_runtime_sha256": {
+        "executable": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c"
+      }
+    }
+  ],
+  "source": {
+    "adapter_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+    "executor_sha256": "9d59e039875c9f3dd5ebf8e9be48a006fbbfb3155f3b2207e2eff6696985f305",
+    "job_manifest_sha256": "37b9acc7f91a702282781d38f74ea2ec14b20b8c60ad5847594989b54fd0b6a8",
+    "runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+    "runtime_paths_sha256": "8710e18296f1dc9b3bf5fea94238b52e5469d5082cb601aaac57818a28580335",
+    "runtime_reviewed_pins_sha256": "9474a03230532ba0896899bf826a17055087bf89ebca880a8f47982cb5560b19"
+  },
+  "verified_executable_pins": {
+    "ARPIP_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP",
+      "sha256": "7e1ecc859ac862be9de5e31d71991d483f73840143fdae7ba367ae7d9fc62502"
+    },
+    "HomoplasyFinder_jar": {
+      "path": "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+      "sha256": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b"
+    },
+    "HomoplasyFinder_java": {
+      "path": "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+      "sha256": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96"
+    },
+    "PAML_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml",
+      "sha256": "bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e"
+    },
+    "POUTINE_java": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke/bin/java",
+      "sha256": "9966bf6337aec59196f96f95cf5acd509139688bbe8cf1b81aad112ffca4aaf2"
+    },
+    "POUTINE_script": {
+      "path": "/home/rwhite/branchsnv-comparator-src/poutine-smoke/poutine.sh",
+      "sha256": "a1b0991e4ad87bc6e4b3275b8c59d7636112172a2b8ac72322fd205ca2dc354c"
+    },
+    "POUTINE_treetime": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke/bin/treetime",
+      "sha256": "6f6b0757772d89b897af9562a8ea85e8f39c0761f329b008c8d53d31b53aa3f2"
+    },
+    "PastML_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml",
+      "sha256": "57334fb47075a1b916f901af2ca6df3a8a98aacd8a80a335307dc4a86c1ad3e1"
+    },
+    "SNPPar_executable": {
+      "path": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+      "sha256": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c"
+    },
+    "python": {
+      "path": "/opt/admin/bioinf/miniforge/24.3.0-0/bin/python3.10",
+      "sha256": "0f26ba0f808081e7dc60c26e3e13ac00665e4d9076282de29f053f2a8f8ba4ee"
+    }
+  }
+}

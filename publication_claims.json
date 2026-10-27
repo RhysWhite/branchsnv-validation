@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-27",
+  "experimental_records": [
+    {
+      "claim_id": "E06_ALL_EDGE_CROSS_CLASSIFICATION",
+      "source": "results/06_empirical_cross_classification/summary.json",
+      "implementation": "experiments/06_empirical_cross_classification/run.py",
+      "datasets": 5,
+      "taxa": 912,
+      "variable_sites": 31457,
+      "non_root_adjacent_edges": 1804,
+      "branch_site_comparisons": 16073690,
+      "informative_comparisons": 31644,
+      "intersection": 30817,
+      "outside_intersection": 827,
+      "production_qc_exact": 1617,
+      "definition": "5 phylogenies, sum of matrix-variable columns, edge\u00d7site tests; equal-cost whole-tree rule, non-root-adjacent edges only",
+      "status": "historical_frozen_v0.1.0a1_and_stable_release_v0.1.0_verified"
+    },
+    {
+      "claim_id": "E07_EXACT_BRANCH_EVENTS",
+      "source": "results/07_comparative_landscape/accuracy_benchmark_v1/combined_branch_event_accuracy.tsv",
+      "implementation": "experiments/07_comparative_landscape/accuracy_benchmark_v1/exp07_score_archived.py",
+      "methods": [
+        "BRANCHSNV",
+        "ARPIP",
+        "FastML",
+        "PAML",
+        "PastML",
+        "SNPPar",
+        "TreeTime"
+      ],
+      "scenarios_per_method": 150,
+      "latent_truth_events_per_method": 9600,
+      "endpoint": "(canonical descendant-set edge, position, ancestral state, derived state)",
+      "status": "completed_20261026_exploratory_extension",
+      "interpretation_limit": "latent-history recovery conditional on supplied branch lengths derived from realised events"
+    },
+    {
+      "claim_id": "E07_RECURRENT_SITE_DETECTION",
+      "source": "results/07_comparative_landscape/accuracy_benchmark_v1/combined_recurrent_site_accuracy.tsv",
+      "methods": [
+        "HomoplasyFinder",
+        "POUTINE",
+        "SNPPar",
+        "TreeTime"
+      ],
+      "scenarios_per_method": 150,
+      "endpoint": "full recurrent-site presence/absence; separate from exact branch substitution",
+      "status": "completed_20261026_exploratory_extension",
+      "interpretation_limit": "unique-only truth-negative regimes have undefined F1; POUTINE biallelic eligibility has distinct denominator"
+    }
+  ],
+  "score_provenance": {
+    "archive_sha256": "cf9ef552a8849343a288f65a8dc07c2e6a359ec2e8b538f08ab6febe129075af",
+    "scorer_sha256": "38de8bd815738a83c0baf4f78fad36ce7b9e6719313108bdbb91c52cbee42cb0",
+    "new_external_scenario_executions": 900,
+    "original_fastml_treetime_executions": 300,
+    "original_branchsnv_scenarios_scored": 150,
+    "snapshot_source": "completed_2026-10-26_Jynx_export"
+  },
+  "caveats": [
+    "The current public snapshot contains scored predictions and archived scoring code, but the final Jynx-native corrected execution source/complete frozen comparator input archive still require public deposit for an end-to-end fresh run.",
+    "Do not overwrite/relabel old 0.1.0a1 and stable 0.1.0 validated records; separate exploratory extension.",
+    "Avoid F1=100% for truth-negative unique-only recurrent-site regimes; undefined rather than perfect.",
+    "Do not interpret small pooled precision advantage for BRANCHSNV as statistically certain.",
+    "A figure-only reproduction demonstrates plotting traceability, not regeneration of native comparator predictions."
+  ]
+}

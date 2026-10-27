@@ -1,0 +1,10 @@
+{
+  "study_id": "EXP07_150_SCENARIO_REMAINING6_EXPLORATORY_EXTENSION_20261026",
+  "new_comparator_executions": 900,
+  "new_scored_predictions": 1350,
+  "original_3_method_results_imported_from": "/home/rwhite/branchsnv-exp07-smoke-assets/validation/experiment07_branchsnv_independent_accuracy_scoring_v1/comparative_aggregate_scores.tsv",
+  "original_3_method_aggregate_sha256": "4119341ee6ebf5c1d574c8d23aaf2375b819f21e10b28e249226468372406c7e",
+  "interpretation": "latent-history recovery conditional on event-derived branch lengths; not independent branch-length validation",
+  "truth_read_stage": "after_all_900_predictions_finalized",
+  "source_score_script_sha256": "38de8bd815738a83c0baf4f78fad36ce7b9e6719313108bdbb91c52cbee42cb0"
+}

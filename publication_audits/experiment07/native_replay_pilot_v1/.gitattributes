@@ -1,0 +1,2 @@
+# Preserve byte-level identity across operating systems for checksum checks.
+* -text

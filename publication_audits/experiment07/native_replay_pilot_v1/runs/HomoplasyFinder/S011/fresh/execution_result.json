@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+    "-jar",
+    "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+    "--fasta",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/HomoplasyFinder/S011/comparator_inputs/alignment.fasta",
+    "--tree",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/HomoplasyFinder/S011/comparator_inputs/tree.nwk"
+  ],
+  "cwd": "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/HomoplasyFinder/S011/execution/native",
+  "exit_code": 0,
+  "job": {
+    "alignment_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+    "endpoints": "recurrent_site",
+    "event_regime": "parallel",
+    "execution_class": "core",
+    "input_alignment_relative": "canonical_datasets/experiment07_v1/S011/comparator_inputs/observed_tips.fasta",
+    "input_tree_relative": "canonical_datasets/experiment07_v1/S011/comparator_inputs/rooted_tree.nwk",
+    "method": "HomoplasyFinder",
+    "observation_condition": "complete",
+    "output_relative": "canonical_comparator_runs/experiment07_v1/HomoplasyFinder/S011",
+    "replicate": 1,
+    "rooted_tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+    "scenario_id": "S011",
+    "source_commit": "faed16f2ff1602a2a939663a942e0b8640b9bc50",
+    "status": "CANDIDATE_NOT_AUTHORIZED",
+    "timeout_seconds": 3600,
+    "tip_count": 32
+  },
+  "method": "HomoplasyFinder",
+  "n_branch_events": 0,
+  "n_recurrent_sites": 20,
+  "observation_projection": {
+    "fasta_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+    "observed_projected_positions": 40,
+    "reference": "lexicographically first observed ACGT allele per position; A for entirely missing",
+    "tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+    "variable_site_policy": "at least two observed unmasked ACGT states"
+  },
+  "original_repo_head": "14cc805c068edbf4e0923b7531a96cc1c35556f2",
+  "predictions_sha256": "90346cec19314d09a4297afca3671e416e51fdad0d746212ca75eb35bdc4e1a3",
+  "runtime_sha256": {
+    "jar": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b",
+    "java": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96"
+  },
+  "scenario_id": "S011",
+  "source_adapters_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+  "source_runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+  "start_utc": "2026-10-27T03:17:55.765219+00:00",
+  "status": "EXECUTION_PASS",
+  "study_id": "EXP07_150_SCENARIO_REMAINING6_EXPLORATORY_EXTENSION_20261026",
+  "timed_out": false,
+  "truth_read": false
+}

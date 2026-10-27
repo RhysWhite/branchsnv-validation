@@ -1,0 +1,569 @@
+{
+  "branch_events": [
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "c04469437a758f92656f033d0e9909be64f537cb99317d80d7ec9dfe3c59de36",
+      "method": "SNPPar",
+      "position": "301",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "G",
+      "edge_id": "2e8d5e0106e51286877a0011eb11e4a0df7817f867bb9ed205d7d4055d7d8265",
+      "method": "SNPPar",
+      "position": "556",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "00d9e19be3400da1cc8299c74ecf50d110ce7d251133f7fb0603c3273c2ffce7",
+      "method": "SNPPar",
+      "position": "877",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "845a1b34d368386335e0c0e4b6d5416890350cdbc76f7ba73800c772acdcee45",
+      "method": "SNPPar",
+      "position": "877",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "a11d5156a7537511344694f1afaf125d9b1cf8b382ad40e5aaacab7b3581ff53",
+      "method": "SNPPar",
+      "position": "993",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "aa3c8a68a7d372fe09c21fa08adf8d09a14c8e08d62b2e1d14669dc0d1d3ee9f",
+      "method": "SNPPar",
+      "position": "993",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "5f78aaef205ef84363036f8f11a4b721d0c349436f3f4c9fb3b081dfc61291bf",
+      "method": "SNPPar",
+      "position": "1054",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "50090e91c4b4405a54a0b5401260eefb99f19956203d9cbbb03bf7e5cf91c606",
+      "method": "SNPPar",
+      "position": "1178",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "ee3371c53d8dee2686c8b6c3810ed8d202057288b07f64c05112f69beaf08a54",
+      "method": "SNPPar",
+      "position": "1298",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "16fe342157752ccaa2993b1e060552bcc5f02b5d57dde9fb486a433ad54e2b5a",
+      "method": "SNPPar",
+      "position": "1554",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "50090e91c4b4405a54a0b5401260eefb99f19956203d9cbbb03bf7e5cf91c606",
+      "method": "SNPPar",
+      "position": "1554",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "044a7504dcf8431604e93cdae02c4171d9999eddbb99158ac3ef1684954406db",
+      "method": "SNPPar",
+      "position": "1717",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "9617e5388e5c3854cc46af64ae533a06e91bdacf5416a0d505e26d8d3522acac",
+      "method": "SNPPar",
+      "position": "1717",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "241cbd4dcf3a564c9a964e7b5bce10819deca5928915119f97e16d7cdfa5d07c",
+      "method": "SNPPar",
+      "position": "1816",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "845a1b34d368386335e0c0e4b6d5416890350cdbc76f7ba73800c772acdcee45",
+      "method": "SNPPar",
+      "position": "1816",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "03758bad8cae494390bcbbf2e51a68690a99c79e54d523c9c459fc74e5047ea6",
+      "method": "SNPPar",
+      "position": "1821",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "2b3876d3ef2d8cf33a4e93f27e615d6d31b0428bef618516a8a49f3828fd431f",
+      "method": "SNPPar",
+      "position": "2443",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "376cc1414506b02d0f6a2f7af5c705df7c785700bc544bbf55e410a63679d191",
+      "method": "SNPPar",
+      "position": "2643",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "776b4c363f99b5e51db727c5e2e0556894af7e0443220c57f289e01015c4cace",
+      "method": "SNPPar",
+      "position": "2643",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "ac18cf86fa669eb99cd3f17fdbb3856b443a24b45a9cb15209abefb8b910615e",
+      "method": "SNPPar",
+      "position": "3796",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "efd556ccaeaaeecd90ae4d38cbb6e23a876bcadcc7c77f9c3743499de593c45e",
+      "method": "SNPPar",
+      "position": "3796",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "G",
+      "edge_id": "b3ab56b537b2b5546c55150edec444d8191909034701874308188a61f87bfef8",
+      "method": "SNPPar",
+      "position": "3822",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "T",
+      "edge_id": "2e8d5e0106e51286877a0011eb11e4a0df7817f867bb9ed205d7d4055d7d8265",
+      "method": "SNPPar",
+      "position": "4075",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "d5e511659e1b0e8c5dedeeb9f919df9633295244580415fe64f68d83155a4a3b",
+      "method": "SNPPar",
+      "position": "4075",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "16fe342157752ccaa2993b1e060552bcc5f02b5d57dde9fb486a433ad54e2b5a",
+      "method": "SNPPar",
+      "position": "4125",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "36dc7d8f343bfbf2be4e050532a369b8405cff373c102f5465182974ce7b6d2d",
+      "method": "SNPPar",
+      "position": "4632",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "36dc7d8f343bfbf2be4e050532a369b8405cff373c102f5465182974ce7b6d2d",
+      "method": "SNPPar",
+      "position": "5070",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "6a48abf74e855e328322db557225ab92ea51dcbf1d93177039ce53980aab1448",
+      "method": "SNPPar",
+      "position": "5070",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "1eed92a0eb0252712680223686c95162becd2fb5929091453dfe099d21c6034a",
+      "method": "SNPPar",
+      "position": "5342",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "512348b45c6d6bc794aedfdb0022032409be809a30e4029e31101d3bf94a3693",
+      "method": "SNPPar",
+      "position": "5342",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "00d9e19be3400da1cc8299c74ecf50d110ce7d251133f7fb0603c3273c2ffce7",
+      "method": "SNPPar",
+      "position": "5476",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "f871f9411376ea8f9a476ed2a510adc5db6757d422ac27e4f7e55d97c369d1cd",
+      "method": "SNPPar",
+      "position": "5476",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "b95081a4855f8be87bc3722c562ae7c1d99ac92295d2720ffd6dc3155675f4ca",
+      "method": "SNPPar",
+      "position": "6083",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "16fe342157752ccaa2993b1e060552bcc5f02b5d57dde9fb486a433ad54e2b5a",
+      "method": "SNPPar",
+      "position": "6124",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "G",
+      "edge_id": "2f5d3efddbe146a6fb3df64373e49f17b764cb615f514708886c50754e4f116d",
+      "method": "SNPPar",
+      "position": "6146",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "C",
+      "edge_id": "eac176ca0a79a8db9917f7c0f75fe5ffcfdc50098b684cab29d0d586ea9b170c",
+      "method": "SNPPar",
+      "position": "6362",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "ccc40871f61b5672093f7f266f895b53d12e62799d4810bfd094cb803ff6a614",
+      "method": "SNPPar",
+      "position": "6900",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "4e8939cdd048aa47ff75a56e3d7fcaa64c82e880f3263d7c57a79bafab33bbed",
+      "method": "SNPPar",
+      "position": "6934",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "8f8feb8f52e6286f527d66d06d6ad2332497fa59e3fb71ce7b0fe28e7943c648",
+      "method": "SNPPar",
+      "position": "6934",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "C",
+      "edge_id": "5f78aaef205ef84363036f8f11a4b721d0c349436f3f4c9fb3b081dfc61291bf",
+      "method": "SNPPar",
+      "position": "7248",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "C",
+      "edge_id": "9d2e9c5ca02ad1d2865d2438abdd518b737e2a4f3f07d5483bb405e974804bf9",
+      "method": "SNPPar",
+      "position": "7248",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "G",
+      "edge_id": "1eed92a0eb0252712680223686c95162becd2fb5929091453dfe099d21c6034a",
+      "method": "SNPPar",
+      "position": "7461",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "G",
+      "edge_id": "9617e5388e5c3854cc46af64ae533a06e91bdacf5416a0d505e26d8d3522acac",
+      "method": "SNPPar",
+      "position": "7461",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "81bd86622123039c0adcaf6a03bf9b735d7aabea46bbe125918f4803fd41eb18",
+      "method": "SNPPar",
+      "position": "7659",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "f871f9411376ea8f9a476ed2a510adc5db6757d422ac27e4f7e55d97c369d1cd",
+      "method": "SNPPar",
+      "position": "7659",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "C",
+      "edge_id": "16fe342157752ccaa2993b1e060552bcc5f02b5d57dde9fb486a433ad54e2b5a",
+      "method": "SNPPar",
+      "position": "7725",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "C",
+      "edge_id": "efd556ccaeaaeecd90ae4d38cbb6e23a876bcadcc7c77f9c3743499de593c45e",
+      "method": "SNPPar",
+      "position": "7725",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "64d67a8ccc738a809b3b50b3450e7c91e262c6735e22afc30683ff328937fcf1",
+      "method": "SNPPar",
+      "position": "7728",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "f3996e800157244d03c5a6b4f45dbcdd324f531b60f459ef62311f0f674eaa7f",
+      "method": "SNPPar",
+      "position": "7728",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "494a97da2e06a867aed25ba9e184fd16a722e67d14c4044c539677b12d88d679",
+      "method": "SNPPar",
+      "position": "7913",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "d407e771ed1c3f6b740c0f50dc670cbdcafac3cfc0c7f6965e678d9133a3a8d1",
+      "method": "SNPPar",
+      "position": "7913",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "aa3c8a68a7d372fe09c21fa08adf8d09a14c8e08d62b2e1d14669dc0d1d3ee9f",
+      "method": "SNPPar",
+      "position": "8161",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "1eed92a0eb0252712680223686c95162becd2fb5929091453dfe099d21c6034a",
+      "method": "SNPPar",
+      "position": "8173",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "f65d4a37280cf86546be0e3ae8560b9a9426c2fefb15fc519e79b89dc6b4dfaf",
+      "method": "SNPPar",
+      "position": "8173",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "C",
+      "edge_id": "1eed92a0eb0252712680223686c95162becd2fb5929091453dfe099d21c6034a",
+      "method": "SNPPar",
+      "position": "8716",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "f3996e800157244d03c5a6b4f45dbcdd324f531b60f459ef62311f0f674eaa7f",
+      "method": "SNPPar",
+      "position": "9190",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "845a1b34d368386335e0c0e4b6d5416890350cdbc76f7ba73800c772acdcee45",
+      "method": "SNPPar",
+      "position": "9476",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "ee3371c53d8dee2686c8b6c3810ed8d202057288b07f64c05112f69beaf08a54",
+      "method": "SNPPar",
+      "position": "9476",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "ecb749cb22c186c349cb5a23315cec30e8a4e42a9992f1bac1495a5901248982",
+      "method": "SNPPar",
+      "position": "9697",
+      "scenario_id": "S011"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "T",
+      "edge_id": "f577cb55f49a4c3cff7393ac2829ceec9af9129ad94798fa87ed2f0b8ad6e721",
+      "method": "SNPPar",
+      "position": "9879",
+      "scenario_id": "S011"
+    }
+  ],
+  "method": "SNPPar",
+  "recurrent_sites": [
+    {
+      "position": "877",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "993",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "1554",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "1717",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "1816",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "2643",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "3796",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "4075",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "5070",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "5342",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "5476",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "6934",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7248",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7461",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7659",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7725",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7728",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7913",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "8173",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "9476",
+      "reported_recurrence_count_if_available": "2"
+    }
+  ],
+  "scenario_id": "S011",
+  "schema_version": 1
+}

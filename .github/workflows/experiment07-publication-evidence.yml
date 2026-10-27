@@ -1,0 +1,31 @@
+name: Experiment 07 publication evidence integrity
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Verify historical publication evidence
+        run: python verify_publication_snapshot.py
+      - name: Verify Experiment 06 and new Experiment 07 claim register
+        run: python verify_experiment07_publication.py
+      - name: Check Experiment 07 score reporting semantics
+        run: |
+          python publication_audits/experiment07/verify_reporting_semantics.py
+          (cd publication_audits/experiment07 && sha256sum -c SHA256SUMS)
+      - name: Verify native execution source provenance
+        run: python publication_audits/experiment07/native_execution_provenance_v1/verify_native_execution_provenance.py
+      - name: Verify nine same-host native replay evidence
+        run: python publication_audits/experiment07/native_replay_pilot_v1/verify_nine_native_replays.py
+      - name: Compile released plotting and scoring source
+        run: |
+          python -m py_compile manuscript/comparator_accuracy/plot_final_figures.py
+          python -m py_compile experiments/07_comparative_landscape/accuracy_benchmark_v1/exp07_score_archived.py

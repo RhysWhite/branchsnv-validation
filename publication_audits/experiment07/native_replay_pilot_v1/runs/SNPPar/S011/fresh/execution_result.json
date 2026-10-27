@@ -1,0 +1,63 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+    "-m",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/SNPPar/S011/execution/generated/snps.fasta",
+    "-l",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/SNPPar/S011/execution/generated/positions.txt",
+    "-t",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/SNPPar/S011/comparator_inputs/tree.nwk",
+    "-g",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/SNPPar/S011/comparator_inputs/reference.gb",
+    "-d",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/SNPPar/S011/execution/native",
+    "-A",
+    "-i",
+    "-E",
+    "simple"
+  ],
+  "cwd": "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_independent_native_pilot_20261027/runs/SNPPar/S011/execution/native",
+  "exit_code": 0,
+  "job": {
+    "alignment_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+    "endpoints": "branch_change|recurrent_site",
+    "event_regime": "parallel",
+    "execution_class": "core",
+    "input_alignment_relative": "canonical_datasets/experiment07_v1/S011/comparator_inputs/observed_tips.fasta",
+    "input_tree_relative": "canonical_datasets/experiment07_v1/S011/comparator_inputs/rooted_tree.nwk",
+    "method": "SNPPar",
+    "observation_condition": "complete",
+    "output_relative": "canonical_comparator_runs/experiment07_v1/SNPPar/S011",
+    "replicate": 1,
+    "rooted_tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+    "scenario_id": "S011",
+    "source_commit": "0386df8edcff26faf242bc268c5f8865b09c9de9",
+    "status": "CANDIDATE_NOT_AUTHORIZED",
+    "timeout_seconds": 3600,
+    "tip_count": 32
+  },
+  "method": "SNPPar",
+  "n_branch_events": 60,
+  "n_recurrent_sites": 20,
+  "observation_projection": {
+    "fasta_sha256": "fde993612b57afe0ae528dd3a7c410a415f36bb0c5c0e6aad30e439a3c828f13",
+    "observed_projected_positions": 40,
+    "reference": "lexicographically first observed ACGT allele per position; A for entirely missing",
+    "tree_sha256": "859799a58799c081689e13a3cf486deffc0f4df2601cd3fc579996254aa4fc07",
+    "variable_site_policy": "at least two observed unmasked ACGT states"
+  },
+  "original_repo_head": "14cc805c068edbf4e0923b7531a96cc1c35556f2",
+  "predictions_sha256": "bffc43f289de67380ae3716d34303a52e19d119447dec6a1b0ef85d6431a4fcf",
+  "runtime_sha256": {
+    "executable": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c"
+  },
+  "scenario_id": "S011",
+  "snppar_sorting": "simple; same policy for all 150 SNPPar scenarios",
+  "source_adapters_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+  "source_runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+  "start_utc": "2026-10-27T03:17:58.248080+00:00",
+  "status": "EXECUTION_PASS",
+  "study_id": "EXP07_150_SCENARIO_REMAINING6_EXPLORATORY_EXTENSION_20261026",
+  "timed_out": false,
+  "truth_read": false
+}

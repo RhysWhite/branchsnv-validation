@@ -1,0 +1,4 @@
+comparison,pooled_F1_difference_pp,CI_95_lower_pp,CI_95_upper_pp,resampling
+TreeTime – SNPPar,0.1620824026935197,0.05395501500624622,0.2961569595988034,"25,000 stratified 150-scenario bootstrap replicates; 30 scenarios per regime"
+TreeTime – HomoplasyFinder,0.6782274811143796,0.4062057404995212,0.9786289881081989,"25,000 stratified 150-scenario bootstrap replicates; 30 scenarios per regime"
+TreeTime – POUTINE,30.35158850983617,29.9452967806841,30.779326753074184,"25,000 stratified 150-scenario bootstrap replicates; 30 scenarios per regime"

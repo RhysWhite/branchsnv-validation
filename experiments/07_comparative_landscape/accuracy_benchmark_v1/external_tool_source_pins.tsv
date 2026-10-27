@@ -1,0 +1,9 @@
+canonical_name	pin_kind	selected_ref	selected_commit_sha	repository_url	capture_method
+ARPIP	head_snapshot	refs/heads/master	ee32c10b49407728b1ab00b5f98f792ca6dc2e1a	https://github.com/acg-team/bpp-ARPIP.git	read_only_git_ls_remote
+FastML	head_snapshot	refs/heads/master	c78ce0ccc1ace2855ae0449c15b8bd8e2d766ba0	https://github.com/AidanDelaney/fastml.git	read_only_git_ls_remote
+HomoplasyFinder	head_snapshot	refs/heads/master	faed16f2ff1602a2a939663a942e0b8640b9bc50	https://github.com/JosephCrispell/homoplasyFinder.git	read_only_git_ls_remote
+PAML	release_tag	refs/tags/v4.10.10	4c7902fe972737ef5e80bb18f159a6e6acace3d3	https://github.com/abacus-gene/paml.git	read_only_git_ls_remote
+POUTINE	head_snapshot	refs/heads/master	8faeeb243a0f3ddc6f8274c81ce5ee79e8845f7d	https://github.com/Peter-Two-Point-O/POUTINE.git	read_only_git_ls_remote
+PastML	release_tag	refs/tags/1.9.51	1654471801c8104b51ac45eda625c289d8e3f1ac	https://github.com/evolbioinfo/pastml.git	read_only_git_ls_remote
+SNPPar	release_tag	refs/tags/v1.2	0386df8edcff26faf242bc268c5f8865b09c9de9	https://github.com/d-j-e/SNPPar.git	read_only_git_ls_remote
+TreeTime	release_tag	refs/tags/v0.12.1	17da461f9299706b99a90e622183772f00c5076d	https://github.com/neherlab/treetime.git	read_only_git_ls_remote

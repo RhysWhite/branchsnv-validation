@@ -1,0 +1,5 @@
+method	endpoint	regime	TP	FP	FN	precision	recall	F1	scenarios
+HomoplasyFinder	recurrent_site_full	all	1749	0	951	1.0	0.6477777777777778	0.7862440997977074	150
+POUTINE	recurrent_site_full	all	875	0	1825	1.0	0.32407407407407407	0.48951048951048953	150
+SNPPar	recurrent_site_full	all	1768	0	932	1.0	0.6548148148148148	0.791405550581916	150
+TreeTime	recurrent_site_full	all	1774	0	926	1.0	0.6570370370370371	0.7930263746088512	150
