@@ -1,0 +1,328 @@
+{
+  "branch_events": [
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "1caf5f7040451b180ac4c4e4730ca4e873d0b2fd3a93dc40bc45a1ed312cbf8b",
+      "method": "ARPIP",
+      "position": "310",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "d784b47f464b7e6e0790c8f295059964d0670b214ab7c4800f45519ebf3e265a",
+      "method": "ARPIP",
+      "position": "456",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "2b1c9dd4a984bfb22c403033e2cf041f5ce2018262095be9cdba027cbc1cb520",
+      "method": "ARPIP",
+      "position": "543",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "932eb26fe8757c59608dc58d292f8e5499017e021b9ac729ce706c663346574b",
+      "method": "ARPIP",
+      "position": "678",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "T",
+      "edge_id": "d5910854d085b53f3d7967371dbd0fe9500466a4e0d9df13d7de688a32ffe33d",
+      "method": "ARPIP",
+      "position": "739",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "3e24c6c4e3a77d99c45aaf1a2942030225291d3fda2eb32b07995a368c5ae329",
+      "method": "ARPIP",
+      "position": "843",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "36dc7d8f343bfbf2be4e050532a369b8405cff373c102f5465182974ce7b6d2d",
+      "method": "ARPIP",
+      "position": "1019",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "C",
+      "edge_id": "a0634611d557bc18a5629889854cdf6648e8bc37b22b366fe967247d59cc7145",
+      "method": "ARPIP",
+      "position": "1195",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "8f8feb8f52e6286f527d66d06d6ad2332497fa59e3fb71ce7b0fe28e7943c648",
+      "method": "ARPIP",
+      "position": "1310",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "982a518c553785ddf1e303d48e70024a27f64e72c8528fe1f2856d98b55ce439",
+      "method": "ARPIP",
+      "position": "1368",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "C",
+      "edge_id": "f98c9410d7db3301a20f1ce149f09675ef73e7f88f6f8573eb6b1388db00ea31",
+      "method": "ARPIP",
+      "position": "1587",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "00d9e19be3400da1cc8299c74ecf50d110ce7d251133f7fb0603c3273c2ffce7",
+      "method": "ARPIP",
+      "position": "1729",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "f409536e95f1b60f013758cae42ef8c4e8d0d611ca07bac260874c558b8acd96",
+      "method": "ARPIP",
+      "position": "1910",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "C",
+      "edge_id": "d4f00017e5ddcc9a732fce0407402d372a6f0549560c1249cb1032fbbb4db1f1",
+      "method": "ARPIP",
+      "position": "2360",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "G",
+      "edge_id": "4fa8b083a1a484daeef86a4ada892c3b863038d1954ad3b8869ad2fa7fdea043",
+      "method": "ARPIP",
+      "position": "2494",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "5409ed0283d95eb3fc9525f4817bdfbd780149d6c5c3705a70266096869aa776",
+      "method": "ARPIP",
+      "position": "2672",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "A",
+      "edge_id": "b3ab56b537b2b5546c55150edec444d8191909034701874308188a61f87bfef8",
+      "method": "ARPIP",
+      "position": "3300",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "00d9e19be3400da1cc8299c74ecf50d110ce7d251133f7fb0603c3273c2ffce7",
+      "method": "ARPIP",
+      "position": "3457",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "G",
+      "edge_id": "2141da36c27ac06efae9fee5701860ae12486464239f7d90969f306915b3e17d",
+      "method": "ARPIP",
+      "position": "3740",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "d5e511659e1b0e8c5dedeeb9f919df9633295244580415fe64f68d83155a4a3b",
+      "method": "ARPIP",
+      "position": "4371",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "494a97da2e06a867aed25ba9e184fd16a722e67d14c4044c539677b12d88d679",
+      "method": "ARPIP",
+      "position": "4396",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "T",
+      "edge_id": "f9903c5e211140bda621c70a993f70bf5928aee832b0d45f53eb07a4c219b275",
+      "method": "ARPIP",
+      "position": "5168",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "d4f00017e5ddcc9a732fce0407402d372a6f0549560c1249cb1032fbbb4db1f1",
+      "method": "ARPIP",
+      "position": "5183",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "5989b858eedda12ee6be72bd931e65229ba718cc6f0cc1489fbc0e81d4762afe",
+      "method": "ARPIP",
+      "position": "5700",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "ee3371c53d8dee2686c8b6c3810ed8d202057288b07f64c05112f69beaf08a54",
+      "method": "ARPIP",
+      "position": "5746",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "1c1811fb75b1b91acbe7d490a753da6750741869828abeab8d6d9b03b2c8c4f6",
+      "method": "ARPIP",
+      "position": "6322",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "a6466d6e7d0a54e7a218eb4919ec0f8c31721f3502b2651d263a0386e715e144",
+      "method": "ARPIP",
+      "position": "6467",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "7ad527dfb40acd98934eff5294eb8ed62496a3587a710d124d6d61e60a389205",
+      "method": "ARPIP",
+      "position": "6634",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "T",
+      "edge_id": "b4e8020efb5ffbddd302acad6ee888c09f0be2ad8f5d41196e60d4643e076149",
+      "method": "ARPIP",
+      "position": "7254",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "f2bed38e4a5f0df8a14272b6e5cb4ea41fca24ce26f62148a7c5ce9d15c1c558",
+      "method": "ARPIP",
+      "position": "7592",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "148f7fc86187e38638348f37b098b262f794a661c2b232120092eb458aefbb84",
+      "method": "ARPIP",
+      "position": "8105",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "C",
+      "edge_id": "a6466d6e7d0a54e7a218eb4919ec0f8c31721f3502b2651d263a0386e715e144",
+      "method": "ARPIP",
+      "position": "8199",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "A",
+      "edge_id": "f409536e95f1b60f013758cae42ef8c4e8d0d611ca07bac260874c558b8acd96",
+      "method": "ARPIP",
+      "position": "8777",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "C",
+      "edge_id": "a6466d6e7d0a54e7a218eb4919ec0f8c31721f3502b2651d263a0386e715e144",
+      "method": "ARPIP",
+      "position": "8993",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "C",
+      "edge_id": "1ac1e6d18a5c3a93ee94eee26eb7ad0bd1173be351c4817afd61df8c0af419d9",
+      "method": "ARPIP",
+      "position": "9265",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "A",
+      "derived_state": "C",
+      "edge_id": "f409536e95f1b60f013758cae42ef8c4e8d0d611ca07bac260874c558b8acd96",
+      "method": "ARPIP",
+      "position": "9440",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "G",
+      "derived_state": "T",
+      "edge_id": "1ac1e6d18a5c3a93ee94eee26eb7ad0bd1173be351c4817afd61df8c0af419d9",
+      "method": "ARPIP",
+      "position": "9481",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "A",
+      "edge_id": "36dc7d8f343bfbf2be4e050532a369b8405cff373c102f5465182974ce7b6d2d",
+      "method": "ARPIP",
+      "position": "9591",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "C",
+      "derived_state": "T",
+      "edge_id": "a0634611d557bc18a5629889854cdf6648e8bc37b22b366fe967247d59cc7145",
+      "method": "ARPIP",
+      "position": "9767",
+      "scenario_id": "S002"
+    },
+    {
+      "ancestral_state": "T",
+      "derived_state": "G",
+      "edge_id": "ee895371b78eb037fac6884e856975964ab68dad0ee4817debb7490fc7d9adef",
+      "method": "ARPIP",
+      "position": "9970",
+      "scenario_id": "S002"
+    }
+  ],
+  "method": "ARPIP",
+  "recurrent_sites": [],
+  "scenario_id": "S002",
+  "schema_version": 1
+}

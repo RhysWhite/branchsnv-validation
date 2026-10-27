@@ -23,6 +23,8 @@ jobs:
           (cd publication_audits/experiment07 && sha256sum -c SHA256SUMS)
       - name: Verify native execution source provenance
         run: python publication_audits/experiment07/native_execution_provenance_v1/verify_native_execution_provenance.py
+      - name: Verify nine same-host native replay evidence
+        run: python publication_audits/experiment07/native_replay_pilot_v1/verify_nine_native_replays.py
       - name: Compile released plotting and scoring source
         run: |
           python -m py_compile manuscript/comparator_accuracy/plot_final_figures.py

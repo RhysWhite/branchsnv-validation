@@ -1,0 +1,57 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP",
+    "params=/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_eight_tool_extension_20261026/runs/ARPIP/S002/execution/generated/arpip.params"
+  ],
+  "arpip_parser_tree": {
+    "all_descendant_clades_unchanged": true,
+    "branch_length_tokens_unchanged": true,
+    "internal_labels_removed": 31,
+    "original_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+    "parser_sha256": "ed7465943e5d5b0998d077ca40af57876b20ef98fdb5173219b0e3a8452ee300",
+    "policy": "strip nonnumeric internal labels for ARPIP only"
+  },
+  "cwd": "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_eight_tool_extension_20261026/runs/ARPIP/S002/execution/native",
+  "exit_code": 0,
+  "job": {
+    "alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+    "endpoints": "branch_change",
+    "event_regime": "unique_only",
+    "execution_class": "core",
+    "input_alignment_relative": "canonical_datasets/experiment07_v1/S002/comparator_inputs/observed_tips.fasta",
+    "input_tree_relative": "canonical_datasets/experiment07_v1/S002/comparator_inputs/rooted_tree.nwk",
+    "method": "ARPIP",
+    "observation_condition": "complete",
+    "output_relative": "canonical_comparator_runs/experiment07_v1/ARPIP/S002",
+    "replicate": 2,
+    "rooted_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+    "scenario_id": "S002",
+    "source_commit": "ee32c10b49407728b1ab00b5f98f792ca6dc2e1a",
+    "status": "CANDIDATE_NOT_AUTHORIZED",
+    "timeout_seconds": 3600,
+    "tip_count": 32
+  },
+  "method": "ARPIP",
+  "n_branch_events": 40,
+  "n_recurrent_sites": 0,
+  "observation_projection": {
+    "fasta_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+    "observed_projected_positions": 40,
+    "reference": "lexicographically first observed ACGT allele per position; A for entirely missing",
+    "tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+    "variable_site_policy": "at least two observed unmasked ACGT states"
+  },
+  "original_repo_head": "14cc805c068edbf4e0923b7531a96cc1c35556f2",
+  "predictions_sha256": "41c5128820b19510523d5b58f1e92276a7222ad29e6ebd22707cd4b8fc020ef3",
+  "runtime_sha256": {
+    "executable": "7e1ecc859ac862be9de5e31d71991d483f73840143fdae7ba367ae7d9fc62502"
+  },
+  "scenario_id": "S002",
+  "source_adapters_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+  "source_runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+  "start_utc": "2026-10-26T17:44:05.809011+00:00",
+  "status": "EXECUTION_PASS",
+  "study_id": "EXP07_150_SCENARIO_REMAINING6_EXPLORATORY_EXTENSION_20261026",
+  "timed_out": false,
+  "truth_read": false
+}

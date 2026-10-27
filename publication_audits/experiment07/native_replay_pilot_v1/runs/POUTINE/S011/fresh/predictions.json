@@ -1,0 +1,80 @@
+{
+  "branch_events": [],
+  "method": "POUTINE",
+  "recurrent_sites": [
+    {
+      "position": "877",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "1554",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "1717",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "1816",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "2643",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "3796",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "5070",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "5342",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "5476",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "6934",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7248",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7461",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7659",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7725",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7728",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "7913",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "8173",
+      "reported_recurrence_count_if_available": "2"
+    },
+    {
+      "position": "9476",
+      "reported_recurrence_count_if_available": "2"
+    }
+  ],
+  "scenario_id": "S011",
+  "schema_version": 1
+}

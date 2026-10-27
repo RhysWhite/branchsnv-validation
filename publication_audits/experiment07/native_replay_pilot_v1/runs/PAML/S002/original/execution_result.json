@@ -1,0 +1,49 @@
+{
+  "argv": [
+    "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml",
+    "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_eight_tool_extension_20261026/runs/PAML/S002/execution/generated/baseml.ctl"
+  ],
+  "cwd": "/home/rwhite/branchsnv-exp07-smoke-assets/validation/exp07_eight_tool_extension_20261026/runs/PAML/S002/execution/native",
+  "exit_code": 0,
+  "job": {
+    "alignment_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+    "endpoints": "branch_change",
+    "event_regime": "unique_only",
+    "execution_class": "core",
+    "input_alignment_relative": "canonical_datasets/experiment07_v1/S002/comparator_inputs/observed_tips.fasta",
+    "input_tree_relative": "canonical_datasets/experiment07_v1/S002/comparator_inputs/rooted_tree.nwk",
+    "method": "PAML",
+    "observation_condition": "complete",
+    "output_relative": "canonical_comparator_runs/experiment07_v1/PAML/S002",
+    "replicate": 2,
+    "rooted_tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+    "scenario_id": "S002",
+    "source_commit": "4c7902fe972737ef5e80bb18f159a6e6acace3d3",
+    "status": "CANDIDATE_NOT_AUTHORIZED",
+    "timeout_seconds": 3600,
+    "tip_count": 32
+  },
+  "method": "PAML",
+  "n_branch_events": 40,
+  "n_recurrent_sites": 0,
+  "observation_projection": {
+    "fasta_sha256": "9dbd0667c2228325c287037f4a13a69501f1cd91e45c00a98cfb0b5f6a39bb18",
+    "observed_projected_positions": 40,
+    "reference": "lexicographically first observed ACGT allele per position; A for entirely missing",
+    "tree_sha256": "f61b92d55dd095a56a842532fc61363dceb3b10b488161a5a5ca946826b31df6",
+    "variable_site_policy": "at least two observed unmasked ACGT states"
+  },
+  "original_repo_head": "14cc805c068edbf4e0923b7531a96cc1c35556f2",
+  "predictions_sha256": "7c5db506028b7d97eaefd3d62c6f7c50770d986ec8e841e0e2885ff3eb837249",
+  "runtime_sha256": {
+    "executable": "bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e"
+  },
+  "scenario_id": "S002",
+  "source_adapters_sha256": "155e3e6f10ea558ef155236ae60a884439112c2b06da6c81dd78d43762b5193d",
+  "source_runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+  "start_utc": "2026-10-26T17:45:19.724452+00:00",
+  "status": "EXECUTION_PASS",
+  "study_id": "EXP07_150_SCENARIO_REMAINING6_EXPLORATORY_EXTENSION_20261026",
+  "timed_out": false,
+  "truth_read": false
+}

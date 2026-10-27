@@ -1,0 +1,54 @@
+{
+  "ARPIP_executable": {
+    "path": "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP",
+    "sha256": "7e1ecc859ac862be9de5e31d71991d483f73840143fdae7ba367ae7d9fc62502"
+  },
+  "FastML_executable": {
+    "path": "/home/rwhite/branchsnv-comparator-build/fastml-smoke/programs/fastml/fastml",
+    "sha256": "f5b7acaaabb77b9c39c6dcde5b602b019c60d1a1d569acd3e9450f72f6b9bee6"
+  },
+  "HomoplasyFinder_jar": {
+    "path": "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar",
+    "sha256": "20ce562eb8b518633bb014f5e7c0787308d1019f4bdb0042b77ce959de4c1a4b"
+  },
+  "HomoplasyFinder_java": {
+    "path": "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+    "sha256": "82420a675a5a5c718bb3ad99d0193cec946abd50fc9f900e292a2af4d5089f96"
+  },
+  "PAML_executable": {
+    "path": "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml",
+    "sha256": "bbdf747306a3566633f5e75197b4f884c955125201e3e04ed4dffc64f59a054e"
+  },
+  "POUTINE_java": {
+    "path": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke/bin/java",
+    "sha256": "9966bf6337aec59196f96f95cf5acd509139688bbe8cf1b81aad112ffca4aaf2"
+  },
+  "POUTINE_script": {
+    "path": "/home/rwhite/branchsnv-comparator-src/poutine-smoke/poutine.sh",
+    "sha256": "a1b0991e4ad87bc6e4b3275b8c59d7636112172a2b8ac72322fd205ca2dc354c"
+  },
+  "POUTINE_treetime": {
+    "path": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke/bin/treetime",
+    "sha256": "6f6b0757772d89b897af9562a8ea85e8f39c0761f329b008c8d53d31b53aa3f2"
+  },
+  "PastML_executable": {
+    "path": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml",
+    "sha256": "57334fb47075a1b916f901af2ca6df3a8a98aacd8a80a335307dc4a86c1ad3e1"
+  },
+  "SNPPar_executable": {
+    "path": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+    "sha256": "37c577457b4913fc21363a4cb97f79e6ff30b2e1892ff78254f769add4f8240c"
+  },
+  "TreeTime_executable": {
+    "path": "/home/rwhite/branchsnv-comparator-envs/treetime-v0.12.1/bin/treetime",
+    "sha256": "52dec5fdf74b7d17215ea5124ff5fd89199864d260cc1fcc8ba743825e348abb"
+  },
+  "bubblewrap": {
+    "path": "/usr/bin/bwrap",
+    "sha256": "eb767688b8224d8d3dbe1f8cb30ac3dff9ae8b02ff0452eaec9f94874d4e0011"
+  },
+  "python": {
+    "path": "/opt/admin/bioinf/miniforge/24.3.0-0/bin/python3.10",
+    "sha256": "0f26ba0f808081e7dc60c26e3e13ac00665e4d9076282de29f053f2a8f8ba4ee"
+  }
+}

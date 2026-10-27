@@ -1,0 +1,26 @@
+{
+  "methods": {
+    "ARPIP": {
+      "executable": "/home/rwhite/branchsnv-comparator-build/arpip-build-01/ARPIP"
+    },
+    "HomoplasyFinder": {
+      "java": "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.504.b01-1.1.el8_10.x86_64/jre/bin/java",
+      "jar": "/home/rwhite/branchsnv-comparator-src/homoplasyfinder-smoke/inst/java/HomoplasyFinder.jar"
+    },
+    "PAML": {
+      "executable": "/home/rwhite/branchsnv-comparator-build/paml-v4.10.10/src/baseml"
+    },
+    "PastML": {
+      "executable": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51/bin/pastml",
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/pastml-1.9.51"
+    },
+    "POUTINE": {
+      "script": "/home/rwhite/branchsnv-comparator-src/poutine-smoke/poutine.sh",
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/poutine-smoke"
+    },
+    "SNPPar": {
+      "executable": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38/bin/snppar",
+      "environment_dir": "/home/rwhite/branchsnv-comparator-envs/snppar-v1.2-py38"
+    }
+  }
+}
