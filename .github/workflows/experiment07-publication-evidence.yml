@@ -21,6 +21,8 @@ jobs:
         run: |
           python publication_audits/experiment07/verify_reporting_semantics.py
           (cd publication_audits/experiment07 && sha256sum -c SHA256SUMS)
+      - name: Verify native execution source provenance
+        run: python publication_audits/experiment07/native_execution_provenance_v1/verify_native_execution_provenance.py
       - name: Compile released plotting and scoring source
         run: |
           python -m py_compile manuscript/comparator_accuracy/plot_final_figures.py

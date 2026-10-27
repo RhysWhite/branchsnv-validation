@@ -1,0 +1,11 @@
+{
+  "kind": "truth_blind_saved_native_output_normalization_recovery",
+  "native_rerun": false,
+  "native_stdout_sha256": "c0f246a20db5c0fa1f19956b77204f8e9a70ab6b72a7df972f940dc5d89e3062",
+  "normalization_runner_sha256": "a1ec5c6899fcad9800fc2fdc07debf50ab0efe4a5d6120194039e362d0e94d29",
+  "normalized_predictions_sha256": "ceed1a65666682bfee85706f6c61ce53aa540a6ba7b610c76479b377254bee45",
+  "original_failed_record_sha256": "c42a2b1b2269706b8683e77847779cd9ecf4c22245d2aeadb00f0df5bea58a5d",
+  "original_source_runner_sha256": "8e9bbcc9821d7e1ed01966db4c3914d4833b1424664eec7e6d4407b4902b9207",
+  "reason": "SNPPar intentionally omitted homoplasy TSV for zero native homoplasic events; completion is verified by written native mutation and tree output rather than an inconsistent terminal phrase",
+  "simulator_truth_read": false
+}
