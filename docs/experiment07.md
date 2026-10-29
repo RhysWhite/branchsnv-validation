@@ -12,9 +12,10 @@ executed by `run_completed_experiments.sh` on `main`.
 | Publication snapshot | [Validation commit `2afa89f`](https://github.com/RhysWhite/branchsnv-validation/tree/2afa89f47815eac3b85b722c2fddd14d9c17f22e) |
 | 150 simulated scenarios | [Frozen scenario matrix](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/experiments/07_comparative_landscape/accuracy_benchmark_v1/scenario_matrix_150.tsv) |
 | Aggregate and scenario-level results | [Frozen results directory](https://github.com/RhysWhite/branchsnv-validation/tree/2afa89f47815eac3b85b722c2fddd14d9c17f22e/results/07_comparative_landscape/accuracy_benchmark_v1) |
-| Immutable archives | [Zenodo benchmark v0.3.0](https://doi.org/10.5281/zenodo.23684441) |
+| Original benchmark archives | [Zenodo v0.3.0](https://doi.org/10.5281/zenodo.23684441) |
+| Benchmark plus S8 reproducibility evidence | [Zenodo v0.3.1](https://doi.org/10.5281/zenodo.23752088) |
 | Interpretation and verification | [`verify_experiment07_publication.py` at frozen commit](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/verify_experiment07_publication.py) |
-| S8 post-hoc attribution and identifiability | Separate reproducibility supplement: candidate verified, **public DOI pending** |
+| S8 post-hoc attribution and identifiability | [Published reproducibility supplement, validation v0.3.1](https://doi.org/10.5281/zenodo.23752088) |
 
 **Why not just browse `main`?** The 150-scenario results are held on the
 publication integration branch, not the historical main-line `results/`
@@ -25,9 +26,10 @@ snapshot. A reader following `main` alone will not find those results.
 The 150 scenarios represent a controlled simulated evolutionary history with
 known truth events. A strict event match requires the specified genomic site,
 edge and nucleotide transition; matching only the observed tip pattern does
-not establish an exact historical event. The frozen results include seven
-methods and 1,050 method–scenario score records. These are **conditional
-comparisons** on simulated histories and the benchmark's event-derived branch
+not establish an exact historical event. The published archive contains BRANCHSNV and eight external workflows,
+giving 1,350 method–scenario outputs. The strict branch-event benchmark
+scores seven methods (1,050 method–scenario records). These are distinct
+analytical scopes, not different release versions. These are **conditional comparisons** on simulated histories and the benchmark's event-derived branch
 lengths, not a test of independently inferred branch lengths or clinical
 transmission accuracy.
 
@@ -84,13 +86,14 @@ outputs byte-for-byte. A second run started from a newly extracted release
 candidate and reconstructed all **1,800 canonical input/run files** from the
 public [Zenodo v0.3.0 benchmark](https://doi.org/10.5281/zenodo.23684441),
 fetched pinned public Git commits, and again produced byte-identical S8a/S8b
-results. This establishes candidate-level **computational repeatability**.
+results. This establishes **byte-identical computational repeatability** for the S8 analyses; it does not independently reproduce every external comparator execution.
 
-The extracted release candidate included additional validation records not
-present in Zenodo v0.3.0 (including the frozen scorer, edge-bridge audit and
-original scoring provenance). **The complete S8 supplement is not yet
-publicly deposited.** Do not claim that the S8 workflow can be rerun using
-only the existing v0.3.0 archive.
+The extracted supplement included additional validation records not present
+in the original Zenodo v0.3.0 files, including the frozen scorer, edge-bridge
+audit and original scoring provenance. These are now included in the
+supplementary archive published as part of
+[Zenodo v0.3.1](https://doi.org/10.5281/zenodo.23752088).
+The original v0.3.0 files alone remain insufficient for reproducing S8.
 
 ### Source revisions used in the successful S8 replay
 
@@ -106,9 +109,12 @@ hash verification belong in the separate S8 supplement's `REPRODUCE.md`.
 
 ## What to cite
 
-For Experiment 07 data, cite the [v0.3.0 Zenodo benchmark](https://doi.org/10.5281/zenodo.23684441)
-and the frozen Git commit. For S8, cite the supplementary archive **only once
-its own DOI exists and the deposited contents have been verified**. For
-Experiments 01–06, use the [v0.2.0 validation record](https://doi.org/10.5281/zenodo.23518684).
+For the original Experiment 07 benchmark, cite the
+[v0.3.0 Zenodo release](https://doi.org/10.5281/zenodo.23684441)
+and the frozen Git commit. For Supplementary Table S8 and its reproducibility
+evidence, cite [validation v0.3.1](https://doi.org/10.5281/zenodo.23752088),
+which retains the original 19 files and includes the corrected supplement.
+For Experiments 01–06, use the
+[v0.2.0 validation record](https://doi.org/10.5281/zenodo.23518684).
 
 Source code and the data release are not interchangeable citation targets.

@@ -1,0 +1,74 @@
+{
+  "comment": "Figure source data separate scientific populations; source manifest verifies archived summaries, not all original historical raw response archives.",
+  "comparability_example": {
+    "endpoint_difference": 0,
+    "node_states": [
+      "A",
+      "G",
+      "A"
+    ],
+    "purpose": "conceptual illustration, not an observed study result",
+    "substitution_events": 2,
+    "scope": "one branch, conceptual substitution history; intermediate G state is not an observed phylogenetic node",
+    "intermediate_state_observed": false
+  },
+  "later_request_level_audit": {
+    "candidate_entities": 77967,
+    "eligible_request_rows": 71009,
+    "metadata_initially_recovered": 66004,
+    "original_abstract_gaps": 168,
+    "original_missing_metadata": 5005,
+    "provisional_family_count": 48,
+    "recovery_tasks": 5173,
+    "scope": "SEPARATE_AND_NON_ADDITIVE",
+    "scope_screening_worklist": 1881
+  },
+  "original_database_search": {
+    "candidate_records": 116556,
+    "carried_prior_rows": 6,
+    "deduplicated_database_records": 79917,
+    "generic_high_recall_blocks": 5,
+    "initial_landscape_identities": 218,
+    "initial_method_identities": 247,
+    "latter_counts_verification": "POST_FREEZE_AUDIT_20261007_REVIEWED_WORKBOOK_ARCHIVAL_SIGNOFF_PENDING",
+    "new_review_rows": 12156,
+    "original_last_review_identity_count": 251,
+    "original_last_review_retained_count": 222,
+    "original_review_records": 12162,
+    "query_families": 18,
+    "wave0_source_verified_anchors": 8
+  },
+  "reconciliation_v09": {
+    "abstracts_promoted": 0,
+    "class_counts": {
+      "DIRECT_IDENTIFIER_MATCH": 388,
+      "DOI_EXACT_TITLE_DIFFERENT_REVIEW": 383,
+      "DOI_EXACT_TITLE_NEAR_REVIEW": 260,
+      "DOI_EXACT_TITLE_UNCOMPARABLE": 135,
+      "REGISTRY_DOI_AND_TITLE_EXACT_AGGREGATE_ABSTRACT_UNVERIFIED": 3777,
+      "REGISTRY_NOT_FOUND": 27,
+      "REGISTRY_RETURNED_DIFFERENT_DOI": 90,
+      "UNRECOVERED_OR_QUARANTINED": 113
+    },
+    "registry_status_counts": {
+      "REGISTRY_DOI_EXACT": 4555,
+      "REGISTRY_NOT_FOUND": 27,
+      "REGISTRY_RETURNED_DIFFERENT_DOI": 90
+    },
+    "registry_title_relation_counts": {
+      "NO_COMPARABLE_TITLE": 169,
+      "TITLE_DIFFERENT_REVIEW": 383,
+      "TITLE_EXACT": 3859,
+      "TITLE_NEAR_REVIEW": 261
+    },
+    "title_signals": 137,
+    "version_disagreement_software": 42
+  },
+  "schema": "EXP07_MANUSCRIPT_SUPPLEMENT_FIGURE_SOURCE_REVIEW_V0_2",
+  "source_sha256": {
+    "export_report.json": "f913483ef19fb7e205cd1c1175a8a9cce90b69ffdb349d2916b96b6f86de58c7",
+    "request_evidence.jsonl": "8687bf15c196c29760df573a919c43cefce227354ca98bb97a1cce44e0a856fd",
+    "screening_queue.tsv": "9c5fb263558ff50d1bec9c27fde6ab5644b8beb29a0d8e4d7bd1d374893e8fb0"
+  },
+  "status": "REVIEW_CANDIDATE_SOURCE_LINKED"
+}
