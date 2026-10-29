@@ -1,0 +1,70 @@
+# Evidence index: BRANCHSNV validation
+
+Use this index to locate an **experiment, result, source revision and archive**.
+The default `main` branch and the frozen Experiment 07 publication commit are
+different records. No result should be re-attributed to a different software
+version simply because that version is newest.
+
+## Versioned evidence at a glance
+
+| Scope | Code/results | Archive | Reproduction |
+|---|---|---|---|
+| Historical initial manuscript, v0.1.0a1, Experiments 01–06 | [`results/`](results/README.md) | Historic validation [v0.1.0 DOI](https://doi.org/10.5281/zenodo.21919067) includes a later stable run | `python verify_publication_snapshot.py` checks committed snapshot |
+| Stable release v0.1.0, Experiments 01–06 | [`release_validation/v0.1.0/`](release_validation/v0.1.0/) | [v0.1.0 validation](https://doi.org/10.5281/zenodo.21919067) | `verify_release_validation_record.py` |
+| v0.2.0 original and independent rerun, Experiments 01–06 | [`release_validation/v0.2.0/`](release_validation/v0.2.0/) and [`release_validation/v0.2.0-reproduction-20261021/`](release_validation/v0.2.0-reproduction-20261021/) | [v0.2.0 validation](https://doi.org/10.5281/zenodo.23518684) | [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) |
+| Experiment 07, 150 scenarios | [Frozen publication commit `2afa89f`](https://github.com/RhysWhite/branchsnv-validation/tree/2afa89f47815eac3b85b722c2fddd14d9c17f22e) | [v0.3.0 benchmark data](https://doi.org/10.5281/zenodo.23684441) | [Experiment 07 guide](docs/experiment07.md) |
+| Experiment 07 post-hoc Supplementary Table S8 | Verified original outputs in release candidate, not in `main/results/` | **Separate DOI pending** | Candidate replay was byte-identical; public access pending release approval |
+
+## Experiments 01–06: where to find the exact numbers
+
+| Experiment | Primary machine-readable result | Main claim |
+|---|---|---|
+| 01 | [`results/01_exact_oracle/summary.json`](results/01_exact_oracle/summary.json) | Exact exhaustive-oracle agreement |
+| 02 | [`results/02_deliberate_faults/summary.json`](results/02_deliberate_faults/summary.json) | Detection of deliberate faults |
+| 03 | [`results/03_published_datasets/summary.json`](results/03_published_datasets/summary.json) | SNPPar concordance and ambiguity |
+| 04 | [`results/04_scalability/summary.json`](results/04_scalability/summary.json) | End-to-end runs, environment-dependent timing |
+| 05 | [`results/05_published_focal_branches/summary.json`](results/05_published_focal_branches/summary.json) | Published branch contrasts |
+| 06 | [`results/06_empirical_cross_classification/summary.json`](results/06_empirical_cross_classification/summary.json) | Observed marker/substitution disagreement |
+
+These `results/` links identify **the historical v0.1.0a1 snapshot**. For
+v0.2.0 claim support, use the matching files under
+[`release_validation/v0.2.0-reproduction-20261021/results/`](release_validation/v0.2.0-reproduction-20261021/results/)
+and the [claim crosswalk](release_validation/v0.2.0-reproduction-20261021/MANUSCRIPT_CLAIM_CROSSWALK.tsv).
+
+To verify without recomputing:
+
+```bash
+python verify_publication_snapshot.py
+python verify_release_validation_record.py \
+  --record-dir release_validation/v0.2.0 \
+  --expected-version 0.2.0 \
+  --expected-production-commit b63b6dbdde46162570dd0d17902e619467771624 \
+  --expected-validation-framework-commit f48bd14048866820c7a252d935ed2d26cb9407e5
+```
+
+## Experiment 07: permanent branch-level evidence
+
+The frozen publication commit is
+[`2afa89f47815eac3b85b722c2fddd14d9c17f22e`](https://github.com/RhysWhite/branchsnv-validation/tree/2afa89f47815eac3b85b722c2fddd14d9c17f22e),
+**not** the default branch tip. Its core files include:
+
+- [150-scenario design](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/experiments/07_comparative_landscape/accuracy_benchmark_v1/scenario_matrix_150.tsv)
+- [aggregate scores](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/results/07_comparative_landscape/accuracy_benchmark_v1/aggregate_scores.tsv)
+- [per-scenario scores](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/results/07_comparative_landscape/accuracy_benchmark_v1/per_scenario_scores.tsv)
+- [combined branch-event accuracy](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/results/07_comparative_landscape/accuracy_benchmark_v1/combined_branch_event_accuracy.tsv)
+- [provenance JSON](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/results/07_comparative_landscape/accuracy_benchmark_v1/provenance.json)
+- [publication verification script](https://github.com/RhysWhite/branchsnv-validation/blob/2afa89f47815eac3b85b722c2fddd14d9c17f22e/verify_experiment07_publication.py)
+
+The [benchmark archive](https://doi.org/10.5281/zenodo.23684441)
+contains the canonical simulations and BRANCHSNV runs. It is separate from
+the v0.2.0 independent validation archive.
+
+The 30-history RC3 **UNSIGNED/HOLD** note relates to an earlier development
+candidate, not the frozen 150-scenario publication benchmark. It must not be
+used to describe the status of this publication evidence.
+
+The S8 post-hoc analyses were independently replayed from the frozen benchmark
+inputs and supplemental staged validation records, with regenerated outputs
+byte-identical to the original. The separately prepared S8 release candidate
+is **not yet public**; do not add a DOI until its deposit is verified. See the
+[Experiment 07 guide](docs/experiment07.md) for interpretation limits.
