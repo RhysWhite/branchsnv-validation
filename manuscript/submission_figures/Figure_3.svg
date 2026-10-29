@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="468pt" height="195.84pt" viewBox="0 0 468 195.84" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-11T10:00:51.788524</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 195.84
+L 468 195.84
+L 468 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 10.67976 93.12192
+L 160.79544 93.12192
+Q 169.1352 93.12192 169.1352 89.667302
+L 169.1352 7.33225
+Q 169.1352 3.877632 160.79544 3.877632
+L 10.67976 3.877632
+Q 2.34 3.877632 2.34 7.33225
+L 2.34 89.667302
+Q 2.34 93.12192 10.67976 93.12192
+z
+" style="fill: #ffffff; stroke: #0000ff; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 307.20456 93.12192
+L 457.32024 93.12192
+Q 465.66 93.12192 465.66 89.667302
+L 465.66 7.33225
+Q 465.66 3.877632 457.32024 3.877632
+L 307.20456 3.877632
+Q 298.8648 3.877632 298.8648 7.33225
+L 298.8648 89.667302
+Q 298.8648 93.12192 307.20456 93.12192
+z
+" style="fill: #ffffff; stroke: #e00000; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 10.67976 191.962368
+L 160.79544 191.962368
+Q 169.1352 191.962368 169.1352 188.50775
+L 169.1352 106.172698
+Q 169.1352 102.71808 160.79544 102.71808
+L 10.67976 102.71808
+Q 2.34 102.71808 2.34 106.172698
+L 2.34 188.50775
+Q 2.34 191.962368 10.67976 191.962368
+z
+" style="fill: #ffffff; stroke: #38a900; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 307.20456 191.962368
+L 457.32024 191.962368
+Q 465.66 191.962368 465.66 188.50775
+L 465.66 106.172698
+Q 465.66 102.71808 457.32024 102.71808
+L 307.20456 102.71808
+Q 298.8648 102.71808 298.8648 106.172698
+L 298.8648 188.50775
+Q 298.8648 191.962368 307.20456 191.962368
+z
+" style="fill: #ffffff; stroke: #f06a00; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 169.79141 49.73233
+Q 184.193057 66.252623 197.896758 81.972293
+" clip-path="url(#pc50c0fd561)" style="fill: none; stroke: #0000ff; stroke-width: 0.95; stroke-linecap: round"/>
+    <path d="M 196.775861 77.642907
+L 197.896758 81.972293
+L 193.76071 80.271379
+z
+" clip-path="url(#pc50c0fd561)" style="fill: #0000ff; stroke: #0000ff; stroke-width: 0.95; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 298.20859 49.73233
+Q 283.806943 66.252623 270.103242 81.972293
+" clip-path="url(#pc50c0fd561)" style="fill: none; stroke: #e00000; stroke-width: 0.95; stroke-linecap: round"/>
+    <path d="M 274.23929 80.271379
+L 270.103242 81.972293
+L 271.224139 77.642907
+z
+" clip-path="url(#pc50c0fd561)" style="fill: #e00000; stroke: #e00000; stroke-width: 0.95; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 169.780381 147.059379
+Q 184.192816 130.067471 197.918212 113.885564
+" clip-path="url(#pc50c0fd561)" style="fill: none; stroke: #38a900; stroke-width: 0.95; stroke-linecap: round"/>
+    <path d="M 193.805581 115.642341
+L 197.918212 113.885564
+L 196.856055 118.229735
+z
+" clip-path="url(#pc50c0fd561)" style="fill: #38a900; stroke: #38a900; stroke-width: 0.95; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 298.219619 147.059379
+Q 283.807184 130.067471 270.081788 113.885564
+" clip-path="url(#pc50c0fd561)" style="fill: none; stroke: #f06a00; stroke-width: 0.95; stroke-linecap: round"/>
+    <path d="M 271.143945 118.229735
+L 270.081788 113.885564
+L 274.194419 115.642341
+z
+" clip-path="url(#pc50c0fd561)" style="fill: #f06a00; stroke: #f06a00; stroke-width: 0.95; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 14.5px; font-family: 'Arimo'; text-anchor: start; fill: #0000ff" x="15.31296" y="20.102249" transform="rotate(-0 15.31296 20.102249)">Exact oracle</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 14.5px; font-family: 'Arimo'; text-anchor: start; fill: #e00000" x="311.83776" y="20.102249" transform="rotate(-0 311.83776 20.102249)">Deliberate faults</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 14.5px; font-family: 'Arimo'; text-anchor: start; fill: #38a900" x="15.31296" y="118.942697" transform="rotate(-0 15.31296 118.942697)">Published data</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 14.5px; font-family: 'Arimo'; text-anchor: start; fill: #f06a00" x="311.83776" y="118.942697" transform="rotate(-0 311.83776 118.942697)">Scalability</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #0000ff" x="11.6064" y="44.01789" transform="rotate(-0 11.6064 44.01789)">•</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="20.8728" y="43.112812" transform="rotate(-0 20.8728 43.112812)">128,881 comparisons</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #0000ff" x="11.6064" y="62.250594" transform="rotate(-0 11.6064 62.250594)">•</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="20.8728" y="61.345516" transform="rotate(-0 20.8728 61.345516)">7 topology-edge settings</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #0000ff" x="11.6064" y="80.483298" transform="rotate(-0 11.6064 80.483298)">•</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="20.8728" y="79.57822" transform="rotate(-0 20.8728 79.57822)">0 discrepancies</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #e00000" x="308.1312" y="44.01789" transform="rotate(-0 308.1312 44.01789)">•</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="317.3976" y="43.112812" transform="rotate(-0 317.3976 43.112812)">10/10 fault classes detected</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #e00000" x="308.1312" y="62.250594" transform="rotate(-0 308.1312 62.250594)">•</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="317.3976" y="61.345516" transform="rotate(-0 317.3976 61.345516)">280,216 fault-challenge comparisons</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #e00000" x="308.1312" y="80.483298" transform="rotate(-0 308.1312 80.483298)">•</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="317.3976" y="79.57822" transform="rotate(-0 317.3976 79.57822)">118,916 differentiating comparisons</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #38a900" x="11.6064" y="138.060258" transform="rotate(-0 11.6064 138.060258)">•</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 6.6px; font-family: 'Arimo'; fill: #111111" transform="translate(20.8728 134.095097)">877/877 BRANCHSNV unambiguous</text>
+    <text style="font-size: 6.6px; font-family: 'Arimo'; fill: #111111" transform="translate(20.8728 140.008388)">   calls matched SNPPar</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #38a900" x="11.6064" y="159.17181" transform="rotate(-0 11.6064 159.17181)">•</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 6.6px; font-family: 'Arimo'; fill: #111111" transform="translate(20.8728 155.206649)">46/46 published focal-branch SNVs</text>
+    <text style="font-size: 6.6px; font-family: 'Arimo'; fill: #111111" transform="translate(20.8728 161.11994)">   reproduced across 3 analyses</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #38a900" x="11.6064" y="180.283362" transform="rotate(-0 11.6064 180.283362)">•</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 6.6px; font-family: 'Arimo'; fill: #111111" transform="translate(20.8728 176.318201)">66 additional SNPPar events retained as</text>
+    <text style="font-size: 6.6px; font-family: 'Arimo'; fill: #111111" transform="translate(20.8728 182.231492)">   placement-ambiguous</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #f06a00" x="308.1312" y="147.656418" transform="rotate(-0 308.1312 147.656418)">•</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="317.3976" y="146.75134" transform="rotate(-0 317.3976 146.75134)">39/39 CLI runs completed</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #f06a00" x="308.1312" y="165.889122" transform="rotate(-0 308.1312 165.889122)">•</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="317.3976" y="164.984044" transform="rotate(-0 317.3976 164.984044)">2,000 taxa × 10,000 sites</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 10.5px; font-family: 'Arimo'; text-anchor: start; fill: #f06a00" x="308.1312" y="184.121826" transform="rotate(-0 308.1312 184.121826)">•</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 7px; font-family: 'Arimo'; text-anchor: start; fill: #111111" x="317.3976" y="183.216748" transform="rotate(-0 317.3976 183.216748)">250 taxa × 100,000 sites</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 13.8px; font-family: 'Arimo'; fill: #111111" transform="translate(198.330234 90.758454)">Convergent</text>
+    <text style="font-size: 13.8px; font-family: 'Arimo'; fill: #111111" transform="translate(206.381672 102.622573)">evidence</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 7.4px; font-family: 'Arimo'; fill: #111111" transform="translate(216.931438 121.958044)">Exactness</text>
+    <text style="font-size: 7.4px; font-family: 'Arimo'; fill: #111111" transform="translate(208.709922 128.319962)">Fault sensitivity</text>
+    <text style="font-size: 7.4px; font-family: 'Arimo'; fill: #111111" transform="translate(216.112813 134.681881)">Practicality</text>
+    <text style="font-size: 7.4px; font-family: 'Arimo'; fill: #111111" transform="translate(196.573922 141.0438)">Empirical concordance</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 7.5px; font-family: 'Arimo'; fill: #0000ff" transform="translate(205.850391 60.115748)">128,881/128,881</text>
+    <text style="font-size: 7.5px; font-family: 'Arimo'; fill: #0000ff" transform="translate(209.824219 66.672342)">exact matches</text>
+   </g>
+   <g id="line2d_1">
+    <path d="M 169.1352 48.979584
+" style="fill: none; stroke: #0000ff; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="me6bb84107a" d="M 0 2
+C 0.530406 2 1.03916 1.789267 1.414214 1.414214
+C 1.789267 1.03916 2 0.530406 2 0
+C 2 -0.530406 1.789267 -1.03916 1.414214 -1.414214
+C 1.03916 -1.789267 0.530406 -2 0 -2
+C -0.530406 -2 -1.03916 -1.789267 -1.414214 -1.414214
+C -1.789267 -1.03916 -2 -0.530406 -2 0
+C -2 0.530406 -1.789267 1.03916 -1.414214 1.414214
+C -1.03916 1.789267 -0.530406 2 0 2
+z
+" style="stroke: #0000ff"/>
+    </defs>
+    <g>
+     <use xlink:href="#me6bb84107a" x="169.1352" y="48.979584" style="fill: #0000ff; stroke: #0000ff"/>
+    </g>
+   </g>
+   <g id="line2d_2">
+    <path d="M 298.8648 48.979584
+" style="fill: none; stroke: #e00000; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="m3f0ce87046" d="M 0 2
+C 0.530406 2 1.03916 1.789267 1.414214 1.414214
+C 1.789267 1.03916 2 0.530406 2 0
+C 2 -0.530406 1.789267 -1.03916 1.414214 -1.414214
+C 1.03916 -1.789267 0.530406 -2 0 -2
+C -0.530406 -2 -1.03916 -1.789267 -1.414214 -1.414214
+C -1.789267 -1.03916 -2 -0.530406 -2 0
+C -2 0.530406 -1.789267 1.03916 -1.414214 1.414214
+C -1.03916 1.789267 -0.530406 2 0 2
+z
+" style="stroke: #e00000"/>
+    </defs>
+    <g>
+     <use xlink:href="#m3f0ce87046" x="298.8648" y="48.979584" style="fill: #e00000; stroke: #e00000"/>
+    </g>
+   </g>
+   <g id="line2d_3">
+    <path d="M 169.1352 147.820032
+" style="fill: none; stroke: #38a900; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="mf3601d52ce" d="M 0 2
+C 0.530406 2 1.03916 1.789267 1.414214 1.414214
+C 1.789267 1.03916 2 0.530406 2 0
+C 2 -0.530406 1.789267 -1.03916 1.414214 -1.414214
+C 1.03916 -1.789267 0.530406 -2 0 -2
+C -0.530406 -2 -1.03916 -1.789267 -1.414214 -1.414214
+C -1.789267 -1.03916 -2 -0.530406 -2 0
+C -2 0.530406 -1.789267 1.03916 -1.414214 1.414214
+C -1.03916 1.789267 -0.530406 2 0 2
+z
+" style="stroke: #38a900"/>
+    </defs>
+    <g>
+     <use xlink:href="#mf3601d52ce" x="169.1352" y="147.820032" style="fill: #38a900; stroke: #38a900"/>
+    </g>
+   </g>
+   <g id="line2d_4">
+    <path d="M 298.8648 147.820032
+" style="fill: none; stroke: #f06a00; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="m02eff75f16" d="M 0 2
+C 0.530406 2 1.03916 1.789267 1.414214 1.414214
+C 1.789267 1.03916 2 0.530406 2 0
+C 2 -0.530406 1.789267 -1.03916 1.414214 -1.414214
+C 1.03916 -1.789267 0.530406 -2 0 -2
+C -0.530406 -2 -1.03916 -1.789267 -1.414214 -1.414214
+C -1.789267 -1.03916 -2 -0.530406 -2 0
+C -2 0.530406 -1.789267 1.03916 -1.414214 1.414214
+C -1.03916 1.789267 -0.530406 2 0 2
+z
+" style="stroke: #f06a00"/>
+    </defs>
+    <g>
+     <use xlink:href="#m02eff75f16" x="298.8648" y="147.820032" style="fill: #f06a00; stroke: #f06a00"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc50c0fd561">
+   <rect x="2.34" y="1.9584" width="463.32" height="191.9232"/>
+  </clipPath>
+ </defs>
+</svg>

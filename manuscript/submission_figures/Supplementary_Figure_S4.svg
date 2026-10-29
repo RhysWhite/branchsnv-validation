@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1010" viewBox="0 0 1600 1010" role="img" aria-label="Supplementary Figure S4 DOI and abstract identity">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="54" y="77" fill="#087984" font-size="25" font-weight="800" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">S4</text>
+<text x="114" y="77" fill="#20364c" font-size="34" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Publication identity is not abstract identity</text>
+<text x="56" y="115" fill="#536679" font-size="21" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">5,173 exact-identifier recovery requests; mutually exclusive classification</text>
+<text x="56" y="171" fill="#087984" font-size="17" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif" letter-spacing="1.4px">RECONCILIATION OUTCOMES (NUMBER OF REQUESTS)</text>
+<text x="57" y="209" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Registered DOI + title exact; aggregate abstract unverified</text>
+<rect x="58" y="223" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="223" width="710.0" height="13" rx="7" fill="#087984" stroke="none" stroke-width="0"></rect>
+<text x="821" y="232" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">3,777</text>
+<text x="57" y="279" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Direct identifier match</text>
+<rect x="58" y="293" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="293" width="72.93619274556526" height="13" rx="7" fill="#3477a7" stroke="none" stroke-width="0"></rect>
+<text x="821" y="302" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">388</text>
+<text x="57" y="349" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">DOI exact; different title</text>
+<rect x="58" y="363" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="363" width="71.99629335451417" height="13" rx="7" fill="#b87431" stroke="none" stroke-width="0"></rect>
+<text x="821" y="372" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">383</text>
+<text x="57" y="419" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">DOI exact; near title</text>
+<rect x="58" y="433" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="433" width="48.87476833465713" height="13" rx="7" fill="#b87431" stroke="none" stroke-width="0"></rect>
+<text x="821" y="442" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">260</text>
+<text x="57" y="489" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">DOI exact; title not comparable</text>
+<rect x="58" y="503" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="503" width="25.377283558379666" height="13" rx="7" fill="#b87431" stroke="none" stroke-width="0"></rect>
+<text x="821" y="512" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">135</text>
+<text x="57" y="559" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Unrecovered or quarantined</text>
+<rect x="58" y="573" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="573" width="21.241726237754833" height="13" rx="7" fill="#a65348" stroke="none" stroke-width="0"></rect>
+<text x="821" y="582" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">113</text>
+<text x="57" y="629" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Registry returned a different DOI</text>
+<rect x="58" y="643" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="643" width="16.918189038919778" height="13" rx="7" fill="#a65348" stroke="none" stroke-width="0"></rect>
+<text x="821" y="652" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">90</text>
+<text x="57" y="699" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Registration not found</text>
+<rect x="58" y="713" width="710" height="13" rx="7" fill="#edf2f4" stroke="none" stroke-width="0"></rect>
+<rect x="58" y="713" width="5.075456711675933" height="13" rx="7" fill="#a65348" stroke="none" stroke-width="0"></rect>
+<text x="821" y="722" fill="#20364c" font-size="23" font-weight="700" text-anchor="end" font-family="Arial, Liberation Sans, sans-serif">27</text>
+<text x="59" y="807" fill="#536679" font-size="20" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Classified requests</text>
+<text x="59" y="856" fill="#20364c" font-size="44" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">5,173</text>
+<text x="59" y="891" fill="#536679" font-size="18" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">5,005 metadata gaps + 168 abstract gaps</text>
+<rect x="887" y="163" width="658" height="690" rx="18" fill="#f7f9fb" stroke="#d3dfe5" stroke-width="1.8"></rect>
+<text x="918" y="207" fill="#087984" font-size="17" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif" letter-spacing="1.4px">WHY VERIFICATION MATTERS</text>
+<text x="919" y="261" fill="#20364c" font-size="24" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Requested publication version</text>
+<rect x="918" y="278" width="595" height="74" rx="12" fill="#ffffff" stroke="#d3dfe5" stroke-width="1.8"></rect>
+<text x="937" y="309" fill="#23394d" font-size="20" font-weight="600" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">DOI A  ·  specific publication or release</text>
+<text x="937" y="333" fill="#536679" font-size="18" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">An exact-version question</text>
+<path d="M 1213 352 V 406 m -8 -11 l 8 11 l 8 -11" fill="none" stroke="#3477a7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<rect x="918" y="420" width="595" height="102" rx="12" fill="#ffffff" stroke="#d3dfe5" stroke-width="1.8"></rect>
+<text x="937" y="453" fill="#20364c" font-size="22" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">OpenAlex aggregated work</text>
+<text x="937" y="482" fill="#536679" font-size="18" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Preferred DOI may refer to a different version</text>
+<text x="937" y="505" fill="#536679" font-size="18" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">An abstract can be work-level rather than version-level</text>
+<path d="M 1213 523 V 570 m -8 -11 l 8 11 l 8 -11" fill="none" stroke="#3477a7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<rect x="918" y="584" width="595" height="107" rx="12" fill="#ffffff" stroke="#d3dfe5" stroke-width="1.8"></rect>
+<text x="937" y="616" fill="#20364c" font-size="22" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Crossref / DataCite lookup</text>
+<text x="937" y="645" fill="#536679" font-size="18" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Registered DOI and title can corroborate identity</text>
+<text x="937" y="670" fill="#a65348" font-size="18" font-weight="650" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">They do not authenticate the aggregated abstract</text>
+<rect x="918" y="714" width="595" height="105" rx="13" fill="#f8ebd9" stroke="#e6c699" stroke-width="1.8"></rect>
+<text x="938" y="751" fill="#20364c" font-size="25" font-weight="700" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">0 aggregate abstracts promoted</text>
+<text x="938" y="785" fill="#536679" font-size="18" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Unresolved title / version conflicts remain review-only</text>
+<line x1="55" y1="917" x2="1543" y2="917" stroke="#d3dfe5" stroke-width="2"></line>
+<text x="57" y="955" fill="#536679" font-size="19" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Reconciliation verified request identities, not scientific inclusion or abstract-version equivalence.</text>
+<text x="57" y="985" fill="#536679" font-size="17" font-weight="400" text-anchor="start" font-family="Arial, Liberation Sans, sans-serif">Source: committed request-level reconciliation ledger and v0.9 summary.</text>
+</svg>

@@ -1,0 +1,106 @@
+[
+  {
+    "manuscript_label": "Figure 1",
+    "source_svg": "manuscript/figure_1/Figure_1_editable.svg",
+    "source_svg_sha256": "5618db9b77c7189690fe511124977f466668f15d66ccf5433ec24690e9137ed1",
+    "source_png": "manuscript/figure_1/Figure_1_preview_600dpi.png",
+    "source_png_sha256": "d3c7a3ac525523a1beaefa50572f1f27c85d1de82a00d39987991c9e3b600420",
+    "rendering": "Original artwork copied without modification",
+    "outputs": {
+      "Figure_1.svg": "5618db9b77c7189690fe511124977f466668f15d66ccf5433ec24690e9137ed1",
+      "Figure_1.png": "d3c7a3ac525523a1beaefa50572f1f27c85d1de82a00d39987991c9e3b600420",
+      "Figure_1.pdf": "6d2bba357a464278823614d04881b6a094a0095a8ddad21936ce59acc3559de5"
+    }
+  },
+  {
+    "manuscript_label": "Figure 2",
+    "source_svg": "manuscript/figure_3/Figure_3_editable.svg",
+    "source_svg_sha256": "cdef0f2abf50b5de0ca5b92e4d7fdce93a063536c25b3f91807d960d808eed2b",
+    "source_png": "manuscript/figure_3/Figure_3_preview_600dpi.png",
+    "source_png_sha256": "0fc1ff4911c9ce694145a8e73c543757df30d733391c0dce1f678e5215858ba8",
+    "rendering": "Original artwork copied without modification",
+    "outputs": {
+      "Figure_2.svg": "cdef0f2abf50b5de0ca5b92e4d7fdce93a063536c25b3f91807d960d808eed2b",
+      "Figure_2.png": "0fc1ff4911c9ce694145a8e73c543757df30d733391c0dce1f678e5215858ba8",
+      "Figure_2.pdf": "0238bad35ee01112f29ec851fb6fce497719185cf61b9572b4db38ac267d54c9"
+    }
+  },
+  {
+    "manuscript_label": "Figure 3",
+    "source_svg": "manuscript/figure_2/Figure_2_editable.svg",
+    "source_svg_sha256": "429a7e8d68fff39b0f68ccd112eeb0148dcd84744e8b4b6af886e70e760ccc18",
+    "source_png": "manuscript/figure_2/Figure_2_preview_600dpi.png",
+    "source_png_sha256": "445c9c75912889df3012cf7ae6126e7f904c9237c1dbfdcc8464b292004b0b52",
+    "rendering": "Original artwork copied without modification",
+    "outputs": {
+      "Figure_3.svg": "429a7e8d68fff39b0f68ccd112eeb0148dcd84744e8b4b6af886e70e760ccc18",
+      "Figure_3.png": "445c9c75912889df3012cf7ae6126e7f904c9237c1dbfdcc8464b292004b0b52",
+      "Figure_3.pdf": "a7e99653f2e2365665ba35bb064d0b522ff3b96924d7116cc138c3161fec344a"
+    }
+  },
+  {
+    "manuscript_label": "Figure 4",
+    "source_svg": "manuscript/comparator_accuracy/figures/BRANCHSNV_Exp07_MAIN_FIGURE.svg",
+    "source_svg_sha256": "c7a59ec28707fcb536c29aec2651a7eae7d87b0a68405289d3e2f939485a10d7",
+    "source_png": "manuscript/comparator_accuracy/figures/BRANCHSNV_Exp07_MAIN_FIGURE.png",
+    "source_png_sha256": "4521a3d772c8eca6bd6fc6611528f364198a85ffd15a441430e4bb479b8e6930",
+    "rendering": "Original artwork copied without modification",
+    "outputs": {
+      "Figure_4.svg": "c7a59ec28707fcb536c29aec2651a7eae7d87b0a68405289d3e2f939485a10d7",
+      "Figure_4.png": "4521a3d772c8eca6bd6fc6611528f364198a85ffd15a441430e4bb479b8e6930",
+      "Figure_4.pdf": "93cd645dcc9d3d2cd195ae21f5c019003d8fb9f560a88e85c9e88c0da1b18bb3"
+    }
+  },
+  {
+    "manuscript_label": "Supplementary Figure S1",
+    "source_svg": "manuscript/figure_4/Figure_4_editable.svg",
+    "source_svg_sha256": "b9d633a06c1b14dba2b36ef02879c0ea6ea637b97531cb986b9c6092eef702a0",
+    "source_png": "manuscript/figure_4/Figure_4_preview_600dpi.png",
+    "source_png_sha256": "2192699bbd11641943800d65ee73dd6ea7b25ded8261a6e8fe649dd2347aed50",
+    "rendering": "Original artwork copied without modification",
+    "outputs": {
+      "Supplementary_Figure_S1.svg": "b9d633a06c1b14dba2b36ef02879c0ea6ea637b97531cb986b9c6092eef702a0",
+      "Supplementary_Figure_S1.png": "2192699bbd11641943800d65ee73dd6ea7b25ded8261a6e8fe649dd2347aed50",
+      "Supplementary_Figure_S1.pdf": "dd0a8d76525630270042cca21f29da78d8308fc9e6468fb4f1ce5d395d3ddd2f"
+    }
+  },
+  {
+    "manuscript_label": "Supplementary Figure S2",
+    "source_svg": "manuscript/supplementary/experiment_07/Figure_S3.svg",
+    "source_svg_sha256": "0123ad38b79e479c90fc5b76c2ba4308773dde2f3d401f1316d71cc59df39fb5",
+    "source_png": "manuscript/supplementary/experiment_07/Figure_S3.png",
+    "source_png_sha256": "662b56c2d0493a1735daae6579ccb10cd4f35bc3548c64716c4ad193a17f5a6e",
+    "rendering": "Corrected SVG heading; PNG/PDF rendered with CairoSVG",
+    "outputs": {
+      "Supplementary_Figure_S2.svg": "8df7944791abfc6482da1f6aac463f684f5eb08bad511a071ba4cc897803469f",
+      "Supplementary_Figure_S2.png": "9e57b19f877e3e560cf56beaa390608bbaf4fe0b13d21ce4ae05693b9b697d6b",
+      "Supplementary_Figure_S2.pdf": "bef93716ce0820d36b76bab4344ea97a829b0014d0ce5300ab5dce91b484302a"
+    }
+  },
+  {
+    "manuscript_label": "Supplementary Figure S3",
+    "source_svg": "manuscript/supplementary/experiment_07/Figure_S1.svg",
+    "source_svg_sha256": "88f1179defa3e462c0934e59e8301663afb919908fa334b2a9002dda896d2d7c",
+    "source_png": "manuscript/supplementary/experiment_07/Figure_S1.png",
+    "source_png_sha256": "b0f667b55f523c22ac2e1bd89542fef3a6cfcee303bdd873d3b8ee6103450f6b",
+    "rendering": "Corrected SVG heading; PNG/PDF rendered with CairoSVG",
+    "outputs": {
+      "Supplementary_Figure_S3.svg": "a84f13f3b38c3728d0952d4aa010a35731e3f96ada3f86b4bacbed377319d70a",
+      "Supplementary_Figure_S3.png": "bc33abea0405b2a985c1f98690f67b1703276b4235cebef25a5a05fe1da09ca0",
+      "Supplementary_Figure_S3.pdf": "97b495b7b9f2410ce7867a6241dcfabc7f30eab228e9d48b15386400ceb0bf27"
+    }
+  },
+  {
+    "manuscript_label": "Supplementary Figure S4",
+    "source_svg": "manuscript/supplementary/experiment_07/Figure_S2.svg",
+    "source_svg_sha256": "18904694d33064370af0c9bf62cb87fcf9200f499139e3ad2f4c6db46ee10914",
+    "source_png": "manuscript/supplementary/experiment_07/Figure_S2.png",
+    "source_png_sha256": "01a12980fdb0f7e544fc46704607fe5e4ec923cb4fa284250d905918d0cbcdb0",
+    "rendering": "Corrected SVG heading; PNG/PDF rendered with CairoSVG",
+    "outputs": {
+      "Supplementary_Figure_S4.svg": "6632a7b68d03555b928c04c2e1348aee6aecdad92f7e77ecf23f8655773d6d0a",
+      "Supplementary_Figure_S4.png": "5c187d7e163c05196fb4c624d5b2079088015404046950d35ae066bc5cc115d4",
+      "Supplementary_Figure_S4.pdf": "3132fcbc0b2e7a0a23980d1488d298d23ef2c81ac5dd0ebe22b5a8382d8687be"
+    }
+  }
+]

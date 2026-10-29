@@ -1,0 +1,3 @@
+# SVG path geometry contains generator-produced multiline whitespace.
+# Preserve source-identical artwork and manifest checksums.
+*.svg -whitespace
