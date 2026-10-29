@@ -28,5 +28,8 @@ For precise methods-to-result mappings, use the
 **Citation boundary:** cite a version-specific, independently verified Zenodo
 record only after that record actually exists. A Git commit is not a Zenodo DOI.
 The original software `v0.2.0` tag points to `b63b6db`; the October reproduction
-used documentation descendant `65eb791d9f1a202c3ca8816332a58c036794bd1f`. Experiment 7 RC3 remains
-**UNSIGNED/HOLD** and is not part of the validated Experiments 01–06.
+used documentation descendant `65eb791d9f1a202c3ca8816332a58c036794bd1f`.
+The separately [frozen 150-scenario Experiment 07 benchmark](docs/experiment07.md)
+([publication commit `2afa89f`](https://github.com/RhysWhite/branchsnv-validation/tree/2afa89f47815eac3b85b722c2fddd14d9c17f22e))
+is not part of the Experiments 01–06 protocol. Earlier 30-history RC3
+**UNSIGNED/HOLD** notes refer to a development candidate, not that frozen study.
